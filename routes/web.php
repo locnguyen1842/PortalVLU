@@ -18,3 +18,6 @@ Route::get('/', function () {
 //add personal information
 Route::get('/pi-add','PIController@getAdd')->name('pi.add');
 Route::post('/pi-add','PIController@postAdd')->name('pi.add');
+//update personal information
+Route::get('/{id}/pi-update','PIController@getupdate')->name('pi.update');
+Route::post('/{id}/pi-update','PIController@postupdate')->name('pi.update');

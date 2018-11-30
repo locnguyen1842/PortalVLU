@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\PI;
 use App\Employee;
 use Hash;
+use PhpParser\Node\Stmt\Return_;
+
 class PIController extends Controller
 {
     public function getAdd()
@@ -46,6 +48,37 @@ class PIController extends Controller
         $employee->password = Hash::make($pi->employee_code);
 
         $employee->save();
+
+        return redirect()->back();
+    }
+    //get data personal information
+    public function getupdate($id){
+        $pi = PI::Find($id);
+        Return view('pi.pi-update',compact('pi'));
+    }
+    //post date update information
+    public function postupdate(Request $request ,$id){
+        $pi = PI::Find($id);
+        $pi->id= $request->id;
+        $pi->full_name= $request->full_name;
+        $split = explode(" ", $request->full_name);
+        $pi->first_name =$split[sizeof($split)-1]; // get name
+        $pi->gender= $request->gender;
+        $pi->nation= $request->nation;
+        $pi->date_of_birth= $request->date_of_birth;
+        $pi->place_of_birth= $request->place_of_birth;
+        $pi->permanent_address= $request->permanent_address;
+        $pi->contact_address= $request->contact_address;
+        $pi->phone_number= $request->phone_number;
+        $pi->email_address= $request->email_address;
+        $pi->position= $request->position;
+        $pi->date_of_recruitment= $request->date_of_recruitment;
+        $pi->professional_title= $request->professional_title;
+        $pi->identity_card= $request->identity_card;
+        $pi->date_of_issue= $request->date_of_issue;
+        $pi->place_of_issue= $request->place_of_issue;
+        $pi->save();
+
 
         return redirect()->back();
     }
