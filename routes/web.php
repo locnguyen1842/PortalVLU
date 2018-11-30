@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('pi.pi-add');
 });
+Route::get('/list', function () {
+    return view('pi.pi-list');
+});
+
+Route::get('/pi-list','PIController@index')->name('pi.index');

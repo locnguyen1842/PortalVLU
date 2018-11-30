@@ -1,0 +1,44 @@
+.text-al{
+  text-align: left !important;
+}
+
+.text-ar{
+  text-align: right !important;
+}
+
+.custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.custom-file-input{
+  cursor: pointer;
+  border: 0;
+  text-indent: -9999em;
+  line-height:3000;
+  min-width: 40px;
+  height: 40px;
+}
+
+.excel-default{
+  background-image: url('../img/excel-default.png');
+  background-repeat: no-repeat;
+}
+.excel-after{
+  background-image: url('../img/excel-after.png');
+  background-repeat: no-repeat;
+}
+
+.badge-danger {
+  background-color: #e74c3c !important;
+}
+
+.badge-danger:hover {
+  background-color: #3498db !important;
+}
+
+.badge-primary {
+  background-color: #3498db !important;
+}
+
+.badge-primary:hover {
+  background-color: #e74c3c !important;
+}
