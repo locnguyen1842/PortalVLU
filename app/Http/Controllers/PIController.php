@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\PI;
+use App\Employee;
 class PIController extends Controller
 {
     public function index(){
