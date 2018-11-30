@@ -19,6 +19,7 @@ class CreatePersonalInformationsTable extends Migration
             $table->string('full_name');
             $table->string('first_name');
             $table->boolean('gender');
+            $table->string('nation');
             $table->date('date_of_birth');
             $table->string('place_of_birth');
             $table->string('permanent_address');
