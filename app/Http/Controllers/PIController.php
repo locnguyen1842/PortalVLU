@@ -6,10 +6,22 @@ use Illuminate\Http\Request;
 use App\PI;
 use App\Employee;
 use Hash;
-use PhpParser\Node\Stmt\Return_;
-
 class PIController extends Controller
 {
+    public function index(){
+
+      $search =  \Request::get('search');
+      $pis = PI::where(function($query) use ($search){
+            if($search != null){
+                $query->where(function($q) use ($search){
+                    $q->where('employee_code','like','%'.$search.'%');
+                });
+
+            }
+
+        })->orderBy('first_name','decs')->paginate(10)->appends(['search'=>$search]);
+      return view('pi.pi-list',compact('pis','search'));
+    }
     public function getAdd()
     {
         return view('pi.pi-add');
@@ -17,7 +29,7 @@ class PIController extends Controller
     public function postAdd(Request $request)
     {
 
-
+      
 
         $pi = new PI;
         $pi->id= $request->id;
@@ -136,4 +148,5 @@ class PIController extends Controller
 
         return redirect()->back()->with('message', 'Cập Nhật thành công');
     }
+
 }

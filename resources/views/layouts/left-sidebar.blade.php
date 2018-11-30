@@ -7,17 +7,12 @@
         <div id="cm-menu-items-wrapper">
             <div id="cm-menu-scroller">
                 <ul class="cm-menu-items">
-                    <li><a href="index.html" class="sf-house">Home</a></li>
-                    <li><a href="dashboard-sales.html" class="sf-dashboard">Dashboard</a></li>
-                    <li><a href="components-text.html" class="sf-brick">Components</a></li>
-                    <li class="cm-submenu pre-open">
-                        <a class="sf-window-layout">Navbar layouts <span class="caret"></span></a>
-                        <ul>
-                            <li><a href="layouts-breadcrumb1.html">1st nav breadcrumb</a></li>
-                            <li class="active"><a href="layouts-breadcrumb2.html">2nd nav breadcrumb</a></li>
-                            <li><a href="layouts-tabs.html">2nd nav tabs</a></li>
-                        </ul>
+
+                    <li class="{{url()->current() == route('pi.index') ? 'active':''}}">
+                      <a href="{{route('pi.index')}}" class="sf-profile-group">Quản lý thông tin cá nhân</a>
                     </li>
+                    <li><a href="components-text.html" class=" sf-cog ">Quản lý tài khoản</a></li>
+{{-- 
                     <li class="cm-submenu">
                         <a class="sf-cat">Icons <span class="caret"></span></a>
                         <ul>
@@ -26,8 +21,7 @@
                             <li><a href="ico-fa.html">Font Awesome</a></li>
                         </ul>
                     </li>
-                    <li><a href="notepad.html" class="sf-notepad">Text Editor</a></li>
-                    <li><a href="login.html" class="sf-lock-open">Login page</a></li>
+                   --}}
                 </ul>
             </div>
         </div>

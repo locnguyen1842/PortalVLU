@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('pi.pi-add');
-});
+
+
+Route::get('/pi-list','PIController@index')->name('pi.index');
 
 //add personal information
 Route::get('/pi-add','PIController@getAdd')->name('pi.add');
