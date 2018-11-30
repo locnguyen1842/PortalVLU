@@ -20,6 +20,7 @@ class CreateAdminsTable extends Migration
           $table->integer('personalinformation_id')->unsigned();
           $table->rememberToken();
           $table->timestamps();
+
           $table->foreign('personalinformation_id')->references('id')->on('personalinformations');
 
         });

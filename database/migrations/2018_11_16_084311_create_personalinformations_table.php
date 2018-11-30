@@ -28,6 +28,9 @@ class CreatePersonalInformationsTable extends Migration
             $table->string('place_of_issue');
             $table->string('phone_number',12);
             $table->string('email_address')->unique();
+            $table->date('date_of_recruitment');
+            $table->string('position');
+            $table->string('professional_title');
             $table->timestamps();
 
         });
