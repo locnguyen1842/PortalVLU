@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\PI;
 use App\Employee;
+use Hash;
 class PIController extends Controller
 {
     public function index(){
@@ -28,7 +29,7 @@ class PIController extends Controller
     public function postAdd(Request $request)
     {
 
-
+      
 
         $pi = new PI;
         $pi->id= $request->id;

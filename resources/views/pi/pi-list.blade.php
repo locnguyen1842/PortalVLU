@@ -1,11 +1,24 @@
 @extends('master')
-@section('title','Thêm mới thông tin nhân viên')
+@section('title','Danh sách thông tin cá nhân')
 @section('breadcrumb')
-@include('layouts.breadcrumb')
+  <nav class="cm-navbar cm-navbar-default cm-navbar-slideup">
+      <div class="cm-flex">
+          <div class="cm-breadcrumb-container">
+              <ol class="breadcrumb">
+                  <li><a href="#">Home</a></li>
+                  <li class="active">Quản lý thông tin cá nhân</li>
+              </ol>
+          </div>
+      </div>
+  </nav>
 @endsection
 @section('content')
 <div class="panel panel-default">
-    <div class="panel-heading">Danh sách thông tin cá nhân</div>
+    <div class="panel-heading">Danh sách thông tin cá nhân
+        <a href="{{route('pi.add')}}">
+          <button type="button" name="button" class="btn btn-xs btn-success">Thêm mới</button>
+        </a>
+    </div>
     <div class="panel-body">
 
             <div class="form-group">
