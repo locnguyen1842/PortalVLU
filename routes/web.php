@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('pi.pi-add');
 });
+
+//add personal information
+Route::get('/pi-add','PIController@getAdd')->name('pi.add');
+Route::post('/pi-add','PIController@postAdd')->name('pi.add');
