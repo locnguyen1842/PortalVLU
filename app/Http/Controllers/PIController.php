@@ -9,17 +9,21 @@ use Hash;
 
 class PIController extends Controller
 {
-    public function index()
-    {
-        $search =  \Request::get('search');
-        $pis = PI::where(function ($query) use ($search) {
-            if ($search != null) {
-                $query->where(function ($q) use ($search) {
-                    $q->where('employee_code', 'like', '%'.$search.'%');
+    public function index(){
+      //check if have any get request named 'search' then assign value to $search
+      $search =  \Request::get('search');
+
+      //query if $search have a value
+      $pis = PI::where(function($query) use ($search){
+            if($search != null){
+                $query->where(function($q) use ($search){
+                    $q->where('employee_code','like','%'.$search.'%');
                 });
             }
-        })->orderBy('first_name', 'decs')->paginate(10)->appends(['search'=>$search]);
-        return view('pi.pi-list', compact('pis', 'search'));
+
+        })->orderBy('first_name','decs')->paginate(10)->appends(['search'=>$search]);
+
+      return view('pi.pi-list',compact('pis','search'));
     }
     public function getAdd()
     {
