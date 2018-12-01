@@ -9,8 +9,10 @@ use Hash;
 class PIController extends Controller
 {
     public function index(){
-
+      //check if have any get request named 'search' then assign value to $search
       $search =  \Request::get('search');
+
+      //query if $search have a value
       $pis = PI::where(function($query) use ($search){
             if($search != null){
                 $query->where(function($q) use ($search){
@@ -20,6 +22,7 @@ class PIController extends Controller
             }
 
         })->orderBy('first_name','decs')->paginate(10)->appends(['search'=>$search]);
+        
       return view('pi.pi-list',compact('pis','search'));
     }
     public function getAdd()
@@ -28,9 +31,6 @@ class PIController extends Controller
     }
     public function postAdd(Request $request)
     {
-
-      
-
         $pi = new PI;
         $pi->id= $request->id;
         $pi->employee_code= $request->employee_code;
