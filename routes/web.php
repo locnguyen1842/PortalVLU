@@ -19,5 +19,5 @@ Route::get('/pi-list','PIController@index')->name('pi.index');
 Route::get('/pi-add','PIController@getAdd')->name('pi.add');
 Route::post('/pi-add','PIController@postAdd')->name('pi.add');
 //update personal information
-Route::get('/{id}/pi-update','PIController@getupdate')->name('pi.update');
-Route::post('/{id}/pi-update','PIController@postupdate')->name('pi.update');
+Route::get('/pi-update/{id}','PIController@getupdate')->name('pi.update');
+Route::post('/pi-update/{id}','PIController@postupdate')->name('pi.update');
