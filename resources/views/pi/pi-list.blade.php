@@ -14,13 +14,12 @@
 @endsection
 @section('content')
 <div class="panel panel-default">
-    <div class="panel-heading">Danh sách thông tin cá nhân
+    <div class="panel-heading">Danh sách thông tin cá nhân <br>
         <a href="{{route('pi.add')}}">
             <button type="button" name="button" class="btn btn-xs btn-success">Thêm mới</button>
         </a>
     </div>
     <div class="panel-body">
-
         <div class="form-group">
             <form class="form-horizontal" action="{{route('pi.index')}}" method="get">
                 <div class="col-sm-4">
@@ -49,25 +48,26 @@
                     </div>
                 </div>
             </form>
-        </div>
-        @if($search !="")
-        <div class="col-sm-4">
+            @if($search !="")
             <div class="col-sm-4">
-                <label class="control-label">Tìm theo </label>
-            </div>
-            <div class="col-sm-8">
-                <div class="">
-                    <a data-toggle="tooltip" data-placement="right" title="" data-original-title="Xóa" href="javascript:" class="search_tag tooltip-test">
-                        <span class="badge badge-primary">Mã nv : {{$search}}
-                            <span class="mdi mdi-close"></span>
-                        </span>
-                    </a>
+                <div class="col-sm-4">
+                    <label class="control-label">Tìm theo </label>
+                </div>
+                <div class="col-sm-8">
+                    <div class="">
+                        <a data-toggle="tooltip" data-placement="right" title="" data-original-title="Xóa" href="javascript:" class="search_tag tooltip-test">
+                            <span class="badge badge-primary">Mã nv : {{$search}}
+                                <span class="mdi mdi-close"></span>
+                            </span>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
 
+            @endif
+        </div>
     </div>
-    @endif
+
     <div class="table-responsive">
         <table class="table table-hover" style="margin-bottom:0">
             <thead>
@@ -84,7 +84,7 @@
                 <tr>
                     <th>{{$item->employee_code}}</th>
                     <td>{{$item->full_name}}</td>
-                    <td>{{$item->date_of_birth}}</td>
+                    <td>{{date('d-m-Y', strtotime($item->date_of_birth))}}</td>
                     <td> <a href="{{route('pi.update',$item->id)}}"> <i class="fa fa-lg fa-edit"></i></a></td>
 
                 </tr>
@@ -98,8 +98,7 @@
     $(document).ready(function() {
 
         $(".search_tag").on('click', function() {
-            var url = {!!json_encode(route('pi.index'), JSON_UNESCAPED_SLASHES) !!
-            };
+            var url = {!!json_encode(route('pi.index'), JSON_UNESCAPED_SLASHES) !!};
             var search = "";
             window.location.href = url;
         });
