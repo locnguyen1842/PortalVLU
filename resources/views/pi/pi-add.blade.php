@@ -18,11 +18,11 @@
             <div class="form-group">
                 <div class="col-sm-6">
                     <label>Mã nhân viên</label>
-                    <input type="text" class="form-control" name="employee_code" placeholder="Nhập mã nhân viên"  value="{{old('employee_code')}}">
+                    <input type="text"  class="form-control" name="employee_code" placeholder="Nhập mã nhân viên"  value="{{old('employee_code')}}">
                 </div>
                 <div class="col-sm-6">
                     <label>Họ và tên</label>
-                    <input type="text" class="form-control" name="full_name" placeholder="Nhập họ và tên"  value="{{old('full_name')}}">
+                    <input type="text" maxlength="60" class="form-control" name="full_name" placeholder="Nhập họ và tên"  value="{{old('full_name')}}">
                 </div>
             </div>
             <div class="form-group">
@@ -49,18 +49,18 @@
                 </div>
                 <div class="col-sm-6">
                     <label>Nơi sinh</label>
-                    <input type="text" class="form-control" name="place_of_birth" placeholder="Nhập nơi sinh" value="{{old('place_of_birth')}}">
+                    <input type="text" maxlength="100" class="form-control" name="place_of_birth" placeholder="Nhập nơi sinh" value="{{old('place_of_birth')}}">
                 </div>
 
             </div>
             <div class="form-group">
                 <div class="col-sm-6">
                     <label>Địa chỉ thường trú</label>
-                    <input type="text" class="form-control" name="permanent_address" placeholder="Nhập địa chỉ thường trú" value="{{old('permanent_address')}}">
+                    <input type="text" maxlength="100" class="form-control" name="permanent_address" placeholder="Nhập địa chỉ thường trú" value="{{old('permanent_address')}}">
                 </div>
                 <div class="col-sm-6">
                     <label>Địa chỉ liên lạc</label>
-                    <input type="text" class="form-control" name="contact_address" placeholder="Nhập địa chỉ liên lạc" value="{{old('contact_address')}}">
+                    <input type="text" maxlength="100" class="form-control" name="contact_address" placeholder="Nhập địa chỉ liên lạc" value="{{old('contact_address')}}">
                 </div>
 
             </div>
@@ -102,7 +102,7 @@
                 </div>
                 <div class="col-sm-6">
                     <label>Nơi cấp</label>
-                    <input type="text" class="form-control" name="place_of_issue" placeholder="Nhập nơi cấp"  value="{{old('place_of_issue')}}">
+                    <input type="text" maxlength="100" class="form-control" name="place_of_issue" placeholder="Nhập nơi cấp"  value="{{old('place_of_issue')}}">
                 </div>
             </div>
             <div class="form-group" style="margin-bottom:0">
