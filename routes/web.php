@@ -21,3 +21,5 @@ Route::post('/pi-add','PIController@postAdd')->name('pi.add');
 //update personal information
 Route::get('/pi-update/{id}','PIController@getupdate')->name('pi.update');
 Route::post('/pi-update/{id}','PIController@postupdate')->name('pi.update');
+//show detail a persional
+Route::get('/pi-detail/{id}','PIController@getdetail')->name('pi.detail');

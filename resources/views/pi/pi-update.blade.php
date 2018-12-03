@@ -108,7 +108,7 @@
                 <div class="form-group" style="margin-bottom:0">
                     <div class="col-sm-offset-2 col-sm-10 text-right">
                         <button type="reset" class="btn btn-default">Hủy Bỏ</button>
-                        <button type="submit" class="btn btn-primary">Cập Nhật</button>
+                        <button type="submit" class="btn btn-primary">Lưu</button>
                     </div>
                 </div>
             </form>

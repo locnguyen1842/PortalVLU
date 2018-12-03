@@ -209,4 +209,9 @@ class PIController extends Controller
 
         return redirect()->back()->with('message', 'Cập Nhật thành công');
     }
+    public function getdetail($id){
+        $employee = Employee::ALL();
+        $pi = PI::Find($id);
+        return view('pi.pi-detail',compact('pi','personalinformation_id'));
+    }
 }
