@@ -169,7 +169,9 @@
                                     {{csrf_field()}}
                                     <div class="form-group">
                                         <label for="inputEmail3" class="col-sm-4 control-label">Tên tài khoản</label>
-                                        <label for="" class="col-sm-8 control-label text-al"> {{$pi->employee_code}}</label>
+                                        <label for="" class="col-sm-8 control-label text-al">
+                                            {{$pi->employee_code}}
+                                        </label>
                                         
                                     </div>
                                     <div class="form-group">
