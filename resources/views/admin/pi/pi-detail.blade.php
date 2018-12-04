@@ -16,37 +16,41 @@
             <div class="col-sm-7">
                 <div class="col-sm-12">
                     <div class="panel panel-default">
-                        <div class="panel-heading">Thông tin cá nhân</div>
+                        <div class="panel-heading">Thông tin cá nhân <br>
+                          <a href="{{route('admin.pi.add')}}">
+                              <button type="button" name="button" class="btn btn-xs btn-primary">Cập nhật</button>
+                          </a>
+                        </div>
                         <div class="panel-body">
                             <form class="form-horizontal" action="{{route('admin.pi.detail',$pi->id)}}" method="get">
                                 {{csrf_field()}}
                                 <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-3 control-label ">Mã nhân viên</label>
-                                    <label for="" class="col-sm-9 control-label text-al">{{$pi->employee_code}}</label>
+                                    <label for="inputEmail3" class="col-sm-3  ">Mã nhân viên</label>
+                                    <span for="" class="col-sm-9 text-nowrap">{{$pi->employee_code}}</span>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-3 control-label ">Họ và tên</label>
-                                    <label for="" class="col-sm-9 control-label text-al">{{$pi->full_name}}</label>
+                                    <label for="inputPassword3" class="col-sm-3  ">Họ và tên</label>
+                                    <span for="" class="col-sm-9 text-nowrap">{{$pi->full_name}}</span>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-3 control-label ">Ngày sinh </label>
-                                    <label for="" class="col-sm-9 control-label text-al">{{date('d-m-Y', strtotime($pi->date_of_birth))}}</label>
+                                    <label for="inputPassword3" class="col-sm-3  ">Ngày sinh </label>
+                                    <span for="" class="col-sm-9 text-nowrap">{{date('d-m-Y', strtotime($pi->date_of_birth))}}</span>
                                 </div>
 
 
                                 <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-3  control-label">Nơi sinh </label>
-                                    <label for="" class="col-sm-9 control-label text-al">{{$pi->place_of_birth}}</label>
+                                    <label for="inputPassword3" class="col-sm-3  ">Nơi sinh </label>
+                                    <span for="" class="col-sm-9 text-nowrap">{{$pi->place_of_birth}}</span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-3 control-label ">Giới tính </label>
-                                    <label for="" class="col-sm-9 control-label text-al">{{$pi->gender ==0 ? "Nam":""}}{{$pi->gender ==1 ? "Nữ":""}}</label>
+                                    <label for="inputPassword3" class="col-sm-3  ">Giới tính </label>
+                                    <span for="" class="col-sm-9 text-nowrap">{{$pi->gender ==0 ? "Nam":""}}{{$pi->gender ==1 ? "Nữ":""}}</span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-3 control-label ">Dân tộc </label>
-                                    <label for="" class="col-sm-9 control-label text-al">{{$pi->nation}}</label>
+                                    <label for="inputPassword3" class="col-sm-3  ">Dân tộc </label>
+                                    <span for="" class="col-sm-9 text-nowrap">{{$pi->nation}}</span>
                                 </div>
 
 
@@ -61,20 +65,20 @@
                             <form class="form-horizontal" action="{{route('admin.pi.detail',$pi->id)}}" method="get">
                                 {{csrf_field()}}
                                 <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-3 control-label ">Địa chỉ Email </label>
-                                    <label for="" class="col-sm-9 control-label text-al">{{$pi->email_address}}</label>
+                                    <label for="inputPassword3" class="col-sm-3  ">Địa chỉ Email </label>
+                                    <span for="" class="col-sm-9 text-nowrap">{{$pi->email_address}}</span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-3  control-label">Số điện thoại </label>
-                                    <label for="" class="col-sm-9 control-label text-al">{{$pi->phone_number}}</label>
+                                    <label for="inputPassword3" class="col-sm-3  ">Số điện thoại </label>
+                                    <span for="" class="col-sm-9 text-nowrap">{{$pi->phone_number}}</span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-3 control-label ">Địa chỉ liên lạc </label>
-                                    <label for="" class="col-sm-9 control-label text-al">{{$pi->contact_address}}</label>
+                                    <label for="inputPassword3" class="col-sm-3  ">Địa chỉ liên lạc </label>
+                                    <span for="" class="col-sm-9 text-nowrap">{{$pi->contact_address}}</span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-3 control-label ">Địa chỉ thường trú </label>
-                                    <label for="" class="col-sm-9 control-label text-al">{{$pi->permanent_address}}</label>
+                                    <label for="inputPassword3" class="col-sm-3  ">Địa chỉ thường trú </label>
+                                    <span for="" class="col-sm-9 text-nowrap">{{$pi->permanent_address}}</span>
                                 </div>
 
 
@@ -82,33 +86,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Thông tin nghề nghiệp</div>
-                        <div class="panel-body">
-                            <form class="form-horizontal" action="{{route('admin.pi.detail',$pi->id)}}" method="get">
-                                {{csrf_field()}}
-                                <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-3 control-label ">Chức vụ </label>
-                                    <label for="" class="col-sm-9 control-label text-al">{{$pi->position}}</label>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-3 control-label ">Chức danh chuyên môn </label>
-                                    <label for="" class="col-sm-9 control-label text-al">{{$pi->professional_title}}</label>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-3 control-label ">Ngày tuyển dụng </label>
-                                    <label for="" class="col-sm-9 control-label text-al">{{date('d-m-Y', strtotime($pi->date_of_recruiment))}}</label>
-                                </div>
-
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="col-sm-5">
                 <div class="col-sm-12">
 
                     <div class="panel panel-default">
@@ -117,16 +94,16 @@
                             <form class="form-horizontal" action="{{route('admin.pi.detail',$pi->id)}}" method="get">
                                 {{csrf_field()}}
                                 <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-3 control-label ">CMND </label>
-                                    <label for="" class="col-sm-9 control-label text-al">{{$pi->identity_card}}</label>
+                                    <label for="inputEmail3" class="col-sm-3  ">CMND </label>
+                                    <span for="" class="col-sm-9 text-nowrap">{{$pi->identity_card}}</span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-3 control-label ">Ngày cấp </label>
-                                    <label for="" class="col-sm-9 control-label text-al">{{date('d-m-Y', strtotime($pi->date_of_issue))}}</label>
+                                    <label for="inputPassword3" class="col-sm-3  ">Ngày cấp </label>
+                                    <span for="" class="col-sm-9 text-nowrap">{{date('d-m-Y', strtotime($pi->date_of_issue))}}</span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-3 control-label ">Nơi cấp </label>
-                                    <label for="" class="col-sm-9 control-label text-al">{{$pi->place_of_issue}}</label>
+                                    <label for="inputPassword3" class="col-sm-3  ">Nơi cấp </label>
+                                    <span for="" class="col-sm-9 text-nowrap">{{$pi->place_of_issue}}</span>
                                 </div>
                                 {{-- <div class="form-group">
                                             <label for="inputPassword3" class="col-sm-3  ">Bằng Cấp </label>
@@ -138,23 +115,34 @@
                         </div>
                     </div>
                 </div>
+
+
+            </div>
+
+            <div class="col-sm-5">
+
                 <div class="col-sm-12">
                     <div class="panel panel-default">
-                        <div class="panel-heading">Thông tin bằng cấp</div>
+                        <div class="panel-heading">Thông tin bằng cấp <br>
+                          <a href="{{route('admin.pi.add')}}">
+                              <button type="button" name="button" class="btn btn-xs btn-success">Thêm mới</button>
+                          </a>
+                        </div>
                         <div class="panel-body">
                             <form class="form-horizontal">
                                 <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-4 control-label ">Số bằng đại học </label>
-                                    <label for="" class="col-sm-8 control-label text-al">T154725</label>
+                                    <label for="inputEmail3" class="col-sm-4  ">Số bằng đại học </label>
+                                    <span for="" class="col-sm-3 text-nowrap">2</span>
+                                    <span class="col-sm-5 text-nowrap"><a href="#"><small>Chi tiết</small></a> </span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-4 control-label">Số bằng thạc sĩ </label>
-                                    <label for="" class="col-sm-8 control-label text-al">T154725</label>
-
+                                    <label for="inputEmail3" class="col-sm-4 ">Số bằng thạc sĩ </label>
+                                    <span for="" class="col-sm-3 text-nowrap">2</span>
+                                    <span class="col-sm-5 text-nowrap"><a href="#"><small>Chi tiết</small></a> </span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-4 control-label ">Số bằng tiến sĩ </label>
-                                    <label for="" class="col-sm-8 control-label text-al">T154725</label>
+                                    <label for="inputEmail3" class="col-sm-4  ">Số bằng tiến sĩ </label>
+                                    <span for="" class="col-sm-3 text-nowrap">0</span>
 
                                 </div>
                             </form>
@@ -168,13 +156,13 @@
                             <form class="form-horizontal" action="{{route('admin.pi.detail',$pi->id)}}" method="get">
                                 {{csrf_field()}}
                                 <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-4 control-label">Tên tài khoản</label>
-                                    <label for="" class="col-sm-8 control-label text-al"> {{$pi->employee_code}}</label>
+                                    <label for="inputEmail3" class="col-sm-4 ">Tên tài khoản</label>
+                                    <span for="" class="col-sm-8 text-nowrap">{{$pi->employee_code}}</span>
 
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-4 control-label">Mật khẩu </label>
-                                    <label for="" class="col-sm-8 control-label text-al"><a href="#">Thay đổi</a></label>
+                                    <label for="inputEmail3" class="col-sm-4 ">Mật khẩu </label>
+                                    <span for="" class="col-sm-8 text-nowrap"><a href="#">Thay đổi</a></span>
 
 
                                 </div>
@@ -182,6 +170,30 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-sm-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Thông tin nghề nghiệp</div>
+                        <div class="panel-body">
+                            <form class="form-horizontal" action="{{route('admin.pi.detail',$pi->id)}}" method="get">
+                                {{csrf_field()}}
+                                <div class="form-group">
+                                    <label for="inputPassword3" class="col-sm-5  ">Chức vụ </label>
+                                    <span for="" class="col-sm-7 text-nowrap">{{$pi->position}}</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPassword3" class="col-sm-5  ">Chức danh chuyên môn </label>
+                                    <span for="" class="col-sm-7 text-nowrap">{{$pi->professional_title}}</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPassword3" class="col-sm-5  ">Ngày tuyển dụng </label>
+                                    <span for="" class="col-sm-7 text-nowrap">{{date('d-m-Y', strtotime($pi->date_of_recruiment))}}</span>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
         </div>
