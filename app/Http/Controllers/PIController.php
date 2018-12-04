@@ -23,11 +23,11 @@ class PIController extends Controller
 
         })->orderBy('first_name','decs')->paginate(10)->appends(['search'=>$search]);
 
-      return view('pi.pi-list',compact('pis','search'));
+      return view('admin.pi.pi-list',compact('pis','search'));
     }
     public function getAdd()
     {
-        return view('pi.pi-add');
+        return view('admin.pi.pi-add');
     }
     public function postAdd(Request $request)
     {
@@ -123,7 +123,7 @@ class PIController extends Controller
     public function getupdate($id)
     {
         $pi = PI::Find($id);
-        return view('pi.pi-update', compact('pi'));
+        return view('admin.pi.pi-update', compact('pi'));
     }
     //post date update information
     public function postupdate(Request $request, $id)

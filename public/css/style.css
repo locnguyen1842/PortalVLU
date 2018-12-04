@@ -42,3 +42,11 @@
 .badge-primary:hover {
   background-color: #e74c3c !important;
 }
+body.cm-login{
+    background-image: url('../img/cs-3.jpg');
+    position: relative;
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.9;
+
+}

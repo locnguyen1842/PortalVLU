@@ -1,4 +1,4 @@
-@extends('master')
+@extends('admin.master')
 @section('title','Danh sách thông tin cá nhân')
 @section('breadcrumb')
 <nav class="cm-navbar cm-navbar-default cm-navbar-slideup">
@@ -15,13 +15,13 @@
 @section('content')
 <div class="panel panel-default">
     <div class="panel-heading">Danh sách thông tin cá nhân <br>
-        <a href="{{route('pi.add')}}">
+        <a href="{{route('admin.pi.add')}}">
             <button type="button" name="button" class="btn btn-xs btn-success">Thêm mới</button>
         </a>
     </div>
     <div class="panel-body">
         <div class="form-group">
-            <form class="form-horizontal" action="{{route('pi.index')}}" method="get">
+            <form class="form-horizontal" action="{{route('admin.pi.index')}}" method="get">
                 <div class="col-sm-4">
                     <div class="col-sm-4">
                         <label class="control-label">Tìm kiếm</label>
@@ -85,7 +85,7 @@
                     <th>{{$item->employee_code}}</th>
                     <td>{{$item->full_name}}</td>
                     <td>{{date('d-m-Y', strtotime($item->date_of_birth))}}</td>
-                    <td> <a href="{{route('pi.update',$item->id)}}"> <i class="fa fa-lg fa-edit"></i></a></td>
+                    <td> <a href="{{route('admin.pi.update',$item->id)}}"> <i class="fa fa-lg fa-edit"></i></a></td>
 
                 </tr>
                 @endforeach
@@ -98,7 +98,7 @@
     $(document).ready(function() {
 
         $(".search_tag").on('click', function() {
-            var url = {!!json_encode(route('pi.index'), JSON_UNESCAPED_SLASHES) !!};
+            var url = {!!json_encode(route('admin.pi.index'), JSON_UNESCAPED_SLASHES) !!};
             var search = "";
             window.location.href = url;
         });

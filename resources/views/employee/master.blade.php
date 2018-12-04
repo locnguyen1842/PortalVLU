@@ -14,9 +14,9 @@
         <title>@yield('title') - Portal VLU</title>
     </head>
     <body class="cm-no-transition cm-2-navbar">
-        @include('layouts.left-sidebar')
+        @include('employee.layouts.left-sidebar')
         <header id="cm-header">
-            @include('layouts.header-menu')
+            @include('employee.layouts.header-menu')
             {{-- breadcrumb --}}
             @yield('breadcrumb')
         </header>
