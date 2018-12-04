@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+
 
 class EmployeeLoginController extends Controller
 {
-
+    use AuthenticatesUsers;
     public function __construct()
     {
         $this->middleware('guest:employee',['except' => ['logout']]);
@@ -18,22 +20,10 @@ class EmployeeLoginController extends Controller
         return view('employee.employee-login');
     }
     public function login(Request $request){
-        // $this->validate($request, [
-        //         'email' => 'email|required',
-        //         'password' => 'required',
-        //     ],
-        //     [
-        //         'email.required' => 'Vui lòng điền email.',
-        //         'email.email' => 'Không đúng định dạng email.',
-        //         'password.required' => 'Vui lòng điền mật khẩu.',
-        //     ]
-        // );
-
-        //login
-        if(Auth::guard('employee')->attempt(['username'=> $request->username,'password'=>$request->password],$request->remember)){
-            return redirect()->route('employee.pi.detail');
-        }
-        return redirect()->back()->with('message_error','Email hoặc mật khẩu không đúng.');
+      if (Auth::guard('employee')->attempt(['username'=> $request->username ,'password' => $request->password],$request->remember)) {
+        return redirect()->route('employee.pi.detail');
+      }
+      return redirect()->back()->with('error_message','Tài khoản hoặc mật khẩu không đúng.');
 
     }
 
@@ -41,9 +31,5 @@ class EmployeeLoginController extends Controller
     {
         Auth::guard('employee')->logout();
         return redirect()->route('employee.login');
-    }
-
-    public function username(){
-      return 'username';
     }
 }

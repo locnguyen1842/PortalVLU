@@ -8,11 +8,11 @@
             <div id="cm-menu-scroller">
                 <ul class="cm-menu-items">
 
-                    <li class="{{url()->current() == route('pi.index') ? 'active':''}}">
-                      <a href="{{route('pi.index')}}" class="sf-profile-group">Quản lý thông tin cá nhân</a>
+                    <li class="{{url()->current() == route('employee.pi.detail') ? 'active':''}}">
+                      <a href="{{route('employee.pi.detail')}}" class="sf-profile-group">Quản lý thông tin cá nhân</a>
                     </li>
                     <li><a href="components-text.html" class=" sf-cog ">Quản lý tài khoản</a></li>
-{{-- 
+{{--
                     <li class="cm-submenu">
                         <a class="sf-cat">Icons <span class="caret"></span></a>
                         <ul>

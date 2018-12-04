@@ -38,14 +38,14 @@ Route::prefix('admin')->group(function(){
 Route::prefix('')->group(function(){
   //authenticate admin login/logout
   Route::get('/login','Auth\EmployeeLoginController@showLoginForm')->name('employee.login');
-  Route::post('/login','Auth\EmployeeLoginController@login')->name('employee.login');
+  Route::post('/login','Auth\EmployeeLoginController@login')->name('employee.login.submit');
   Route::get('/logout','Auth\EmployeeLoginController@logout')->name('employee.logout');
   //authenicate admin route
   Route::group(['middleware'=>['auth:employee']],function(){
 
-    Route::get('/pi-detail/{id}','PIController@getupdate')->name('employee.pi.detail');
-    Route::get('/pi-update/{id}','PIController@getupdate')->name('employee.pi.update');
-    Route::post('/pi-update/{id}','PIController@postupdate')->name('employee.pi.update');
+    Route::get('/pi-detail','EmployeeController@getdetail')->name('employee.pi.detail');
+    Route::get('/pi-update','EmployeeController@getupdate')->name('employee.pi.update');
+    Route::post('/pi-update','EmployeeController@postupdate')->name('employee.pi.update');
   });
 });
 

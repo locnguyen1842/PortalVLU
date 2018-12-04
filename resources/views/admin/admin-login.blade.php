@@ -22,7 +22,7 @@
 
               <div class="panel">
                 <div class="panel-heading">
-                  <h4>  Admin Login</h4>
+                  <h4>Đăng Nhập - Admin</h4>
 
                 </div>
                 <div class="panel-body">
@@ -51,21 +51,21 @@
                       <div class="form-group">
                           <div class="input-group">
                               <div class="input-group-addon"><i class="fa fa-fw fa-user"></i></div>
-                              <input type="text" name="username" class="form-control" placeholder="Username">
+                              <input type="text" name="username" class="form-control" placeholder="Tên tài khoản">
                           </div>
                       </div>
                       <div class="form-group">
                           <div class="input-group">
                               <div class="input-group-addon"><i class="fa fa-fw fa-lock"></i></div>
-                              <input type="password" name="password" class="form-control" placeholder="Password">
+                              <input type="password" name="password" class="form-control" placeholder="Mật khẩu">
                           </div>
                       </div>
                   </div>
                   <div class="col-xs-6">
-                      <div class="checkbox"><label><input type="checkbox"> Remember me</label></div>
+                      <div class="checkbox"><label><input type="checkbox">Ghi nhớ</label></div>
                   </div>
                   <div class="col-xs-6">
-                      <button type="submit" class="btn btn-block btn-primary">Sign in</button>
+                      <button type="submit" class="btn btn-block btn-primary">Đăng nhập</button>
                   </div>
 
                 </div>

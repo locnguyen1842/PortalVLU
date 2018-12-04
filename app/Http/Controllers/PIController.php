@@ -89,7 +89,7 @@ class PIController extends Controller
         //add data
         $pi = new PI;
         $pi->id= $request->id;
-        $pi->employee_code= $request->employee_code;
+        $pi->employee_code= strtoupper($request->employee_code);
 
         // $full_name = " ".$request->full_name;
         $pi->full_name= $request->full_name;

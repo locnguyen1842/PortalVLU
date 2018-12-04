@@ -45,7 +45,7 @@
                 <a href="#"><i class="fa fa-fw fa-cog"></i> Settings</a>
             </li>
             <li>
-                <a href="login.html"><i class="fa fa-fw fa-sign-out"></i> Sign out</a>
+                <a href="{{route('employee.logout')}}"><i class="fa fa-fw fa-sign-out"></i> Sign out</a>
             </li>
         </ul>
     </div>

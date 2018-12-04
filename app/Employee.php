@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 class Employee extends Authenticatable
 {
+
+    protected $table = 'employees';
     protected $guard='employee';
 
     /**
