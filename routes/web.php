@@ -23,7 +23,8 @@ Route::prefix('admin')->group(function(){
   Route::group(['middleware'=>['auth:admin']],function(){
     Route::get('/dashboard','PIController@index')->name('admin.pi.dashboard');
     Route::get('/pi-list','PIController@index')->name('admin.pi.index');
-
+    //pi detail
+    Route::get('/pi-detail/{id}','PIController@getdetail')->name('pi.detail');
     //add personal information
     Route::get('/pi-add','PIController@getAdd')->name('admin.pi.add');
     Route::post('/pi-add','PIController@postAdd')->name('admin.pi.add');
@@ -48,6 +49,4 @@ Route::prefix('')->group(function(){
   });
 });
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+//show detail a persional
