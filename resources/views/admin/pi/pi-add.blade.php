@@ -1,10 +1,10 @@
-@extends('master')
+@extends('admin.master')
 @section('title','Thêm mới thông tin nhân viên')
 @section('breadcrumb')
-@include('layouts.breadcrumb')
+@include('admin.layouts.breadcrumb')
 @endsection
 @section('content')
-  @include('layouts.Error')
+  @include('admin.layouts.Error')
   @if(session()->has('message'))
       <div class="alert alert-success">
           {{ session()->get('message') }}
@@ -13,7 +13,7 @@
 <div class="panel panel-default">
     <div class="panel-heading">Thêm thông tin cá nhân</div>
     <div class="panel-body">
-        <form class="form-horizontal" action="{{route('pi.add')}}" method="post">
+        <form class="form-horizontal" action="{{route('admin.pi.add')}}" method="post">
           {{csrf_field()}}
             <div class="form-group">
                 <div class="col-sm-6">

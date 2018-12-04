@@ -1,6 +1,6 @@
 <div id="cm-menu">
     <nav class="cm-navbar cm-navbar-primary">
-        <div class="cm-flex"><a href="index.html" class="cm-logo"></a></div>
+        <div class="cm-flex"><a href="index.html" class="vlu-logo"></a></div>
         <div class="btn btn-primary md-menu-white" data-toggle="cm-menu"></div>
     </nav>
     <div id="cm-menu-content">
@@ -8,11 +8,11 @@
             <div id="cm-menu-scroller">
                 <ul class="cm-menu-items">
 
-                    <li class="{{url()->current() == route('pi.index') ? 'active':''}}">
-                      <a href="{{route('pi.index')}}" class="sf-profile-group">Quản lý thông tin cá nhân</a>
+                    <li class="{{url()->current() == route('admin.pi.index') ? 'active':''}}">
+                      <a href="{{route('admin.pi.index')}}" class="sf-profile-group">Quản lý thông tin cá nhân</a>
                     </li>
                     <li><a href="components-text.html" class=" sf-cog ">Quản lý tài khoản</a></li>
-{{-- 
+{{--
                     <li class="cm-submenu">
                         <a class="sf-cat">Icons <span class="caret"></span></a>
                         <ul>

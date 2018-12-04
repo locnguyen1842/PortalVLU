@@ -17,17 +17,19 @@ class PIController extends Controller
       $pis = PI::where(function($query) use ($search){
             if($search != null){
                 $query->where(function($q) use ($search){
-                    $q->where('employee_code','like','%'.$search.'%');
+                    $q->where('employee_code','like','%'.$search.'%')
+                      ->orWhere('full_name','like','%'.$search.'%')
+                      ->orWhere('identity_card','like','%'.$search.'%');
                 });
             }
 
-        })->orderBy('first_name','decs')->paginate(10)->appends(['search'=>$search]);
+        })->orderBy('first_name','asc')->paginate(10)->appends(['search'=>$search]);
 
-      return view('pi.pi-list',compact('pis','search'));
+      return view('admin.pi.pi-list',compact('pis','search'));
     }
     public function getAdd()
     {
-        return view('pi.pi-add');
+        return view('admin.pi.pi-add');
     }
     public function postAdd(Request $request)
     {
@@ -87,7 +89,7 @@ class PIController extends Controller
         //add data
         $pi = new PI;
         $pi->id= $request->id;
-        $pi->employee_code= $request->employee_code;
+        $pi->employee_code= strtoupper($request->employee_code);
 
         // $full_name = " ".$request->full_name;
         $pi->full_name= $request->full_name;
@@ -122,7 +124,7 @@ class PIController extends Controller
     public function getupdate($id)
     {
         $pi = PI::Find($id);
-        return view('pi.pi-update', compact('pi'));
+        return view('admin.pi.pi-update', compact('pi'));
     }
     //post date update information
     public function postupdate(Request $request, $id)
@@ -210,8 +212,8 @@ class PIController extends Controller
         return redirect()->back()->with('message', 'Cập Nhật thành công');
     }
     public function getdetail($id){
-        $employee = Employee::ALL();
-        $pi = PI::Find($id);
-        return view('pi.pi-detail',compact('pi','personalinformation_id'));
+        $employee = Employee::all();
+        $pi = PI::find($id);
+        return view('admin.pi.pi-detail',compact('pi','personalinformation_id'));
     }
 }
