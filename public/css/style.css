@@ -1,6 +1,6 @@
 .text-al{
   text-align: left !important;
-  
+
 }
 .text-ar{
   text-align: right !important;
@@ -48,5 +48,11 @@ body.cm-login{
     background-size: cover;
     background-repeat: no-repeat;
     opacity: 0.9;
+
+}
+#cm-menu .vlu-logo{
+  display: block;
+  height: 50px;
+  background: url('../img/logoVLU1.png') no-repeat 35px center transparent;
 
 }

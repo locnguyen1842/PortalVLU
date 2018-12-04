@@ -28,7 +28,7 @@
                     </div>
                     <div class="col-sm-8">
                         <div class="input-group">
-                            <input type="text" class="form-control" name="search" placeholder="Nhập mã nv">
+                            <input type="text" class="form-control" name="search" placeholder="">
                             <span class="input-group-btn">
                                 <button class="btn btn-primary" type="submit">Tìm</button>
                             </span>
@@ -56,7 +56,7 @@
                 <div class="col-sm-8">
                     <div class="">
                         <a data-toggle="tooltip" data-placement="right" title="" data-original-title="Xóa" href="javascript:" class="search_tag tooltip-test">
-                            <span class="badge badge-primary">Mã nv : {{$search}}
+                            <span class="badge badge-primary">{{$search}}
                                 <span class="mdi mdi-close"></span>
                             </span>
                         </a>
@@ -75,6 +75,7 @@
 
                     <th>Mã NV</th>
                     <th>Họ Tên</th>
+                    <th>CMND</th>
                     <th>Ngày Sinh</th>
                     <th></th>
                 </tr>
@@ -82,16 +83,21 @@
             <tbody>
                 @foreach ($pis as $item)
                 <tr>
-                    <th>{{$item->employee_code}}</th>
-                    <td>{{$item->full_name}}</td>
-                    <td>{{date('d-m-Y', strtotime($item->date_of_birth))}}</td>
-                    <td> <a href="{{route('admin.pi.update',$item->id)}}"> <i class="fa fa-lg fa-edit"></i></a></td>
+                    <th class="col-sm-2"> <a href="{{route('admin.pi.detail',$item->id)}}"> {{$item->employee_code}}</a></th>
+                    <td class="col-sm-3">{{$item->full_name}}</td>
+                    <td class="col-sm-2">{{$item->identity_card}}</td>
+                    <td class="col-sm-2">{{date('d-m-Y', strtotime($item->date_of_birth))}}</td>
+                    <td class="col-sm-3"> <a href="{{route('admin.pi.update',$item->id)}}"> <i class="fa fa-lg fa-edit"></i></a></td>
 
                 </tr>
                 @endforeach
 
             </tbody>
         </table>
+    </div>
+    <div class="panel-footer">
+
+      {{$pis->links()}}
     </div>
 </div>
 <script type="text/javascript">

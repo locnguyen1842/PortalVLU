@@ -17,11 +17,13 @@ class PIController extends Controller
       $pis = PI::where(function($query) use ($search){
             if($search != null){
                 $query->where(function($q) use ($search){
-                    $q->where('employee_code','like','%'.$search.'%');
+                    $q->where('employee_code','like','%'.$search.'%')
+                      ->orWhere('full_name','like','%'.$search.'%')
+                      ->orWhere('identity_card','like','%'.$search.'%');
                 });
             }
 
-        })->orderBy('first_name','decs')->paginate(10)->appends(['search'=>$search]);
+        })->orderBy('first_name','asc')->paginate(10)->appends(['search'=>$search]);
 
       return view('admin.pi.pi-list',compact('pis','search'));
     }

@@ -24,7 +24,7 @@ Route::prefix('admin')->group(function(){
     Route::get('/dashboard','PIController@index')->name('admin.pi.dashboard');
     Route::get('/pi-list','PIController@index')->name('admin.pi.index');
     //pi detail
-    Route::get('/pi-detail/{id}','PIController@getdetail')->name('pi.detail');
+    Route::get('/pi-detail/{id}','PIController@getdetail')->name('admin.pi.detail');
     //add personal information
     Route::get('/pi-add','PIController@getAdd')->name('admin.pi.add');
     Route::post('/pi-add','PIController@postAdd')->name('admin.pi.add');
