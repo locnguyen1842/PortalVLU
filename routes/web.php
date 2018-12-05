@@ -49,6 +49,9 @@ Route::prefix('')->group(function(){
     Route::get('/pi-detail','EmployeeController@getdetail')->name('employee.pi.detail');
     Route::get('/pi-update','EmployeeController@getupdate')->name('employee.pi.update');
     Route::post('/pi-update','EmployeeController@postupdate')->name('employee.pi.update');
+    //update degree
+      Route::get('/pi-updatedegree','EmployeeController@getupdatedegree')->name('employee.pi.updatedegree');
+      Route::post('/pi-updatedegree','EmployeeController@postupdatedegree')->name('employee.pi.updatedegree');
   });
 });
 
