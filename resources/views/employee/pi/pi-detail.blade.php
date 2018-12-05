@@ -4,7 +4,7 @@
     @include('employee.layouts.breadcrumb')
 @endsection
 @section('content')
-    @include('admin.layouts.Error')
+    @include('employee.layouts.Error')
     @if(session()->has('message'))
         <div class="alert alert-success">
             {{ session()->get('message') }}

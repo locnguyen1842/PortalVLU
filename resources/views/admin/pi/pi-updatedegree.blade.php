@@ -22,7 +22,7 @@
   <div class="panel panel-default">
       <div class="panel-heading">Cập nhật thông tin bằng cấp</div>
       <div class="panel-body">
-          <form class="form-horizontal" action="{{route('admin.pi.updatedegree',$pi->id)}}" method="post">
+          <form class="form-horizontal" action="{{route('admin.pi.update.degree',$pi->id)}}" method="post">
             {{csrf_field()}}
               <div class="form-group">
                   <div class="col-sm-6">
