@@ -141,4 +141,5 @@ class EmployeeController extends Controller
         return redirect()->back()->with('message', 'Thêm thành công');
     }
 
+
 }

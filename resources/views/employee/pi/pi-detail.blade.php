@@ -124,7 +124,7 @@
                     <div class="col-sm-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">Thông tin bằng cấp <br>
-                                <a href="{{route('employee.pi.updatedegree')}}">
+                                <a href="{{route('employee.pi.update.degree')}}">
                                     <button type="button" name="button" class="btn btn-xs btn-success">Thêm mới</button>
                                 </a>
                             </div>
@@ -162,7 +162,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="inputEmail3" class="col-sm-4 ">Mật khẩu </label>
-                                        <span for="" class="col-sm-8 text-nowrap"><a href="#">Thay đổi</a></span>
+                                        <span for="" class="col-sm-8 text-nowrap"><a href="{{route('employee.pi.change.pass')}}">Thay đổi</a></span>
 
 
                                     </div>

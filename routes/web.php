@@ -53,10 +53,8 @@ Route::prefix('')->group(function(){
     Route::get('/pi-update','EmployeeController@getupdate')->name('employee.pi.update');
     Route::post('/pi-update','EmployeeController@postupdate')->name('employee.pi.update');
     //update degree
-      Route::get('/pi-updatedegree','EmployeeController@getupdatedegree')->name('employee.pi.update.degree');//doi ten route lai vd: admin.pi.degree.update
-
+      Route::get('/pi-updatedegree','EmployeeController@getupdatedegree')->name('employee.pi.update.degree');
       Route::post('/pi-updatedegree','EmployeeController@postupdatedegree')->name('employee.pi.update.degree');
-
   });
 });
 
