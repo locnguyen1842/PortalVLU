@@ -31,6 +31,9 @@ Route::prefix('admin')->group(function(){
     //update personal information
     Route::get('/pi-update/{id}','PIController@getupdate')->name('admin.pi.update');
     Route::post('/pi-update/{id}','PIController@postupdate')->name('admin.pi.update');
+    //update certification information
+    Route::get('/pi-updatedegree/{id}','DegreeController@getupdatedegree')->name('admin.pi.updatedegree');
+    Route::post('/pi-updatedegree/{id}','DegreeController@postupdatedegree')->name('admin.pi.updatedegree');
   });
 });
 

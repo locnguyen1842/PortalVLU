@@ -1,7 +1,16 @@
 @extends('admin.master')
 @section('title','Cập nhật thông tin nhân viên')
 @section('breadcrumb')
-    @include('admin.layouts.breadcrumb')
+  <nav class="cm-navbar cm-navbar-default cm-navbar-slideup">
+      <div class="cm-flex">
+          <div class="cm-breadcrumb-container">
+              <ol class="breadcrumb">
+                  <li><a href="#">Home</a></li>
+                  <li class="active">Cập nhật thông tin cá nhân</li>
+              </ol>
+          </div>
+      </div>
+  </nav>
 @endsection
 @section('content')
     @include('admin.layouts.Error')

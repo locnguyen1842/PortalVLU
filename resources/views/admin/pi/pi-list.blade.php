@@ -40,11 +40,11 @@
             </div>
             <form class="form-horizontal" action="index.html" method="post">
                 <div class="col-sm-4">
-                    <label class="control-label col-sm-4">Import</label>
+                    <label class="control-label col-sm-4">Chọn tệp</label>
                     <div class="col-sm-8">
 
                         <input type="file" id="excel-import" class="custom-file-input excel-default col-sm-4">
-                        <button type="submit" name="button" class="btn btn-danger">Import</button>
+                        <button type="submit" name="button" class="btn btn-danger">Tải lên</button>
                     </div>
                 </div>
             </form>
