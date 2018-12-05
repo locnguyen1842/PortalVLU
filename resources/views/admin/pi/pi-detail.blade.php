@@ -124,7 +124,7 @@
                 <div class="col-sm-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">Thông tin bằng cấp <br>
-                          <a href="{{route('admin.pi.add')}}">
+                          <a href="{{route('admin.pi.updatedegree',$pi->id)}}">
                               <button type="button" name="button" class="btn btn-xs btn-success">Thêm mới</button>
                           </a>
                         </div>
