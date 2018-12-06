@@ -13,7 +13,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">Cập nhật thông tin cá nhân</div>
         <div class="panel-body">
-            <form class="form-horizontal" action="{{route('employee.pi.update',$pi->id)}}" method="post">
+            <form class="form-horizontal" action="{{route('employee.pi.update')}}" method="post">
                 {{csrf_field()}}
                 <div class="form-group">
                     <div class="col-sm-6">
@@ -78,17 +78,17 @@
                 <div class="form-group">
                     <div class="col-sm-6">
                         <label>Chức vụ</label>
-                        <input type="text" class="form-control" name="position" placeholder="Nhập chức vụ" value="{{$pi->position}}">
+                        <input readonly type="text" class="form-control" name="position" placeholder="Nhập chức vụ" value="{{$pi->position}}">
                     </div>
                     <div class="col-sm-6">
                         <label>Ngày tuyển dụng</label>
-                        <input type="date" class="form-control" name="date_of_recruitment" value="{{$pi->date_of_recruitment}}">
+                        <input readonly type="date" class="form-control" name="date_of_recruitment" value="{{$pi->date_of_recruitment}}">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-6">
                         <label>Chức danh chuyên môn</label>
-                        <input type="text" class="form-control" name="professional_title" placeholder="Nhập chức danh chuyên môn" value="{{$pi->professional_title}}">
+                        <input readonly type="text" class="form-control" name="professional_title" placeholder="Nhập chức danh chuyên môn" value="{{$pi->professional_title}}">
                     </div>
                     <div class="col-sm-6">
                         <label>Chứng minh nhân dân</label>

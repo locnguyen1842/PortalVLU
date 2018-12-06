@@ -212,8 +212,16 @@ class PIController extends Controller
         return redirect()->back()->with('message', 'Cập Nhật thành công');
     }
     public function getdetail($id){
-        $employee = Employee::all();
         $pi = PI::find($id);
-        return view('admin.pi.pi-detail',compact('pi','personalinformation_id'));
+        return view('admin.pi.pi-detail',compact('pi'));
+    }
+    public function recoverypassword($employee_id)
+    {
+        $employee = Employee::find($employee_id);
+        //strtoupper cho nó in hoa khi gõ pas
+        $employee->password = Hash::make(strtoupper($employee->pi->employee_code)); //chỉ cần thay đổi trường pwd la dc
+
+        $employee->save();
+        return redirect()->back()->with('message', 'Khôi phục mật khẩu thành công');//kêu thằng sơn làm đổi pass bên employee đi may làm recovery pasửod r
     }
 }

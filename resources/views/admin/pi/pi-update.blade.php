@@ -44,10 +44,10 @@
                         <label>Giới tính</label>
                         <div class="radio">
                             <label class="col-sm-4">
-                                <input type="radio" name="gender" value="0"{{$pi->gender ==0 ? "checked":""}}>Male
+                                <input type="radio" name="gender" value="0"{{$pi->gender ==0 ? "checked":""}}>Nam
                             </label>
                             <label class="col-sm-4">
-                                <input type="radio" name="gender" value="1"{{$pi->gender ==1 ? "checked":""}}>Female
+                                <input type="radio" name="gender" value="1"{{$pi->gender ==1 ? "checked":""}}>Nữ
                             </label>
                         </div>
                     </div>

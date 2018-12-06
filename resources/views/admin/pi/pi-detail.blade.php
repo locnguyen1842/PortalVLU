@@ -134,7 +134,7 @@
                 <div class="col-sm-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">Thông tin bằng cấp <br>
-                          <a href="{{route('admin.pi.updatedegree',$pi->id)}}">
+                          <a href="{{route('admin.pi.update.degree',$pi->id)}}">
                               <button type="button" name="button" class="btn btn-xs btn-success">Thêm mới</button>
                           </a>
                         </div>
@@ -163,7 +163,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">Thông tin tài khoản</div>
                         <div class="panel-body">
-                            <form class="form-horizontal" action="{{route('admin.pi.detail',$pi->id)}}" method="get">
+                            <form id="recovery_password" class="form-horizontal" action="{{route('admin.pi.password.recovery',$pi->employee->id)}}" method="get">
                                 {{csrf_field()}}
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-4 ">Tên tài khoản</label>
@@ -172,10 +172,29 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-4 ">Mật khẩu </label>
-                                    <span for="" class="col-sm-8 text-nowrap"><a href="#">Thay đổi</a></span>
+                                    <span for="" class="col-sm-8 text-nowrap">
+
+                                            <button id="submit_recovery_password" class="btn btn-danger">Khôi phục</button>
+
+                                    </span>
 
 
                                 </div>
+                                <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
+                                    <div class="modal-dialog modal-sm">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="myModalLabel">Bạn thực sự muốn khôi phục mật khẩu cho tài khoản này ?</h4>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger" id="modal-btn-si">Có</button>
+                                                <button type="button" class="btn btn-default" id="modal-btn-no">Không</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </form>
                         </div>
                     </div>
@@ -209,4 +228,34 @@
         </div>
     </div>
 </div>
+    <script>
+        $(document).ready(function(){
+            $("#submit_recovery_password").on('click',function (e) {
+
+                e.preventDefault();
+                $("#mi-modal").modal('show');
+                var form_recovery_password = $("#recovery_password");
+                var modalConfirm = function(callback){
+
+                    $("#modal-btn-si").on("click", function(){
+                        callback(true);
+                        $("#mi-modal").modal('hide');
+                    });
+
+                    $("#modal-btn-no").on("click", function(){
+                        callback(false);
+                        $("#mi-modal").modal('hide');
+                    });
+                };
+                modalConfirm(function(confirm){
+                    if(confirm){
+                        form_recovery_password.submit();
+                    }else{
+
+                    }
+                });
+            });
+        });
+
+    </script>
 @endsection
