@@ -12,13 +12,13 @@
       </div>
   </nav>
 @endsection
+@include('admin.layouts.Error')
+@if(session()->has('message'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div>
+@endif
 @section('content')
-  @include('admin.layouts.Error')
-  @if(session()->has('message'))
-      <div class="alert alert-success">
-          {{ session()->get('message') }}
-      </div>
-  @endif
   <div class="panel panel-default">
       <div class="panel-heading">Cập nhật thông tin bằng cấp</div>
       <div class="panel-body">
@@ -28,7 +28,6 @@
                   <div class="col-sm-6">
                       <label>Bằng cấp</label>
                       <select class="form-control" name="degree">
-                        <option value="">Chọn bằng cấp</option>
                             @foreach($degrees as $d)
                               <option value="{{$d->id}}">{{$d->name}}</option>
                               @endforeach
@@ -37,7 +36,6 @@
                   <div class="col-sm-6">
                       <label>Khối ngành</label>
                       <select class="form-control" name="industry">
-                          <option value="">Chọn khối ngành</option>
                       @foreach($industries as $i)
                         <option value="{{$i->id}}">{{$i->name}}</option>
                         @endforeach

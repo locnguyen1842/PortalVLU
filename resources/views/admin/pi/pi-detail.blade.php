@@ -1,7 +1,17 @@
 @extends('admin.master')
 @section('title','Xem chi tiết thông tin cá nhân')
-@section('breadcrumb')
-@include('admin.layouts.breadcrumb')
+  @section('breadcrumb')
+    <nav class="cm-navbar cm-navbar-default cm-navbar-slideup">
+        <div class="cm-flex">
+            <div class="cm-breadcrumb-container">
+                <ol class="breadcrumb">
+                    <li><a href="#">Home</a></li>
+                    <li class=""><a href="{{route('admin.pi.index')}}">Quản lý thông tin cá nhân</a></li>
+                    <li class="active">Thông tin chi tiết cá nhân</li>
+                </ol>
+            </div>
+        </div>
+    </nav>
 @endsection
 @section('content')
   @include('admin.layouts.Error')
