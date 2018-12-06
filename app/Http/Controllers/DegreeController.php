@@ -23,14 +23,14 @@ class DegreeController extends Controller
         [
           'date_of_issue'=> 'required|date',
           'place_of_issue'=> 'required',
-          'degree_id'=> 'required',
-          'industry_id'=> 'required'
+          'degree'=> 'required',
+          'industry'=> 'required'
         ],
         [
           'date_of_issue.required' => 'Ngày cấp không được bỏ trống',
           'date_of_issue.date' => 'Ngày cấp không đúng định dạng',
-          'degree_id.required' => 'Bằng cấp không được bỏ trống',
-          'industry_id.required' => 'Khối ngành không được bỏ trống',
+          'degree.required' => 'Bằng cấp không được bỏ trống',
+          'industry.required' => 'Khối ngành không được bỏ trống',
           'place_of_issue.required' => 'Nơi cấp không được bỏ trống'
         ]
       );
