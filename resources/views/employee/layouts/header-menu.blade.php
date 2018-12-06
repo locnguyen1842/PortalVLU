@@ -35,7 +35,7 @@
         <button class="btn btn-primary md-account-circle-white" data-toggle="dropdown"></button>
         <ul class="dropdown-menu">
             <li class="disabled text-center">
-                <a style="cursor:default;"><strong>John Smith</strong></a>
+                <a style="cursor:default;"><strong>{{Auth::guard('employee')->user()->pi->full_name}}</strong></a>
             </li>
             <li class="divider"></li>
             <li>

@@ -1,4 +1,4 @@
-@extends('admin.master')
+@extends('employee.master')
 @section('title','Xem chi tiết thông tin cá nhân')
 @section('breadcrumb')
     @include('employee.layouts.breadcrumb')
