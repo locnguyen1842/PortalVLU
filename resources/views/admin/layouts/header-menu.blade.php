@@ -3,7 +3,7 @@
     <div class="cm-flex">
     </div>
     <div class="dropdown pull-right">
-        <button class="btn btn-danger md-notifications-white" data-toggle="dropdown"> <span class="label label-danger">23</span> </button>
+        <button class="btn btn-danger md-notifications-white" data-toggle="dropdown"> <span class="label label-success">23</span> </button>
         <div class="popover cm-popover bottom">
             <div class="arrow"></div>
             <div class="popover-content">
