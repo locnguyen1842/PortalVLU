@@ -1,4 +1,4 @@
-@extends('admin.master')
+@extends('employee.master')
 @section('title','Cập nhật thông tin bằng cấp')
 @section('breadcrumb')
     <nav class="cm-navbar cm-navbar-default cm-navbar-slideup">

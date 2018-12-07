@@ -142,17 +142,17 @@
                             <form class="form-horizontal">
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-4  ">Số bằng đại học </label>
-                                    <span for="" class="col-sm-3 text-nowrap">2</span>
+                                    <span for="" class="col-sm-3 text-nowrap">{{$dh_count}}</span>
                                     <span class="col-sm-5 text-nowrap"><a href="#"><small>Chi tiết</small></a> </span>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-4 ">Số bằng thạc sĩ </label>
-                                    <span for="" class="col-sm-3 text-nowrap">2</span>
+                                    <span for="" class="col-sm-3 text-nowrap">{{$ths_count}}</span>
                                     <span class="col-sm-5 text-nowrap"><a href="#"><small>Chi tiết</small></a> </span>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-4  ">Số bằng tiến sĩ </label>
-                                    <span for="" class="col-sm-3 text-nowrap">0</span>
+                                    <span for="" class="col-sm-3 text-nowrap">{{$ts_count}}</span>
 
                                 </div>
                             </form>

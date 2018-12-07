@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\DegreeDetail;
+use App\Industry;
 use Illuminate\Http\Request;
 use App\PI;
 use App\Employee;
@@ -214,15 +216,22 @@ class PIController extends Controller
     }
     public function getdetail($id){
         $pi = PI::find($id);
-        return view('admin.pi.pi-detail',compact('pi'));
+        $dh_count = $pi->degreedetails->where('degree_id',1)->count();
+        $ths_count = $pi->degreedetails->where('degree_id',2)->count();
+        $ts_count = $pi->degreedetails->where('degree_id',3)->count();
+        return view('admin.pi.pi-detail',compact('pi','dh_count','ths_count','ts_count'));
     }
     public function recoverypassword($employee_id)
     {
         $employee = Employee::find($employee_id);
-        //strtoupper cho nó in hoa khi gõ pas
+        //strtoupper cho nó in hoa khi gõ pass
         $employee->password = Hash::make(strtoupper($employee->pi->employee_code)); //chỉ cần thay đổi trường pwd la dc
 
         $employee->save();
         return redirect()->back()->with('message', 'Khôi phục mật khẩu thành công');//kêu thằng sơn làm đổi pass bên employee đi may làm recovery pasửod r
     }
+//    public function getdegreedetail($id){
+//        $dedeatail = DegreeDetail::find($id);
+//        return view('admin.pi.pi-detail',compact('dedeatail'));
+//    }
 }
