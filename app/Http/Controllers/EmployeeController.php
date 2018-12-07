@@ -14,8 +14,8 @@ class EmployeeController extends Controller
 {
     public function getdetail(){
       $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
-
-      return view('employee.pi.pi-detail',compact('pi'));
+      $employee = Employee::find(Auth::guard('employee')->user()->id);
+      return view('employee.pi.pi-detail',compact('pi','employee'));
     }
     public function getupdate(){
         $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
