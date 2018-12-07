@@ -12,6 +12,7 @@ class PI extends Model
       'employee_code',
       'full_name',
       'first_name',
+      'nation',
       'gender',
       'date_of_birth',
       'place_of_birth',
@@ -22,6 +23,10 @@ class PI extends Model
       'identity_card',
       'date_of_issue',
       'place_of_issue',
+      'date_of_recruitment',
+      'show',
+      'position',
+      'professional_title',
     ];
 
     public function degreedetails()

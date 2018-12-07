@@ -56,3 +56,19 @@ body.cm-login{
   background: url('../img/logoVLU1.png') no-repeat 35px center transparent;
 
 }
+
+.mt-10{
+  margin-top: 10px;
+}
+.ml-10{
+  margin-left: 10px;
+
+}
+
+.mr-10{
+  margin-right: 10px;
+}
+
+.mb-10{
+  margin-bottom: 10px;
+}

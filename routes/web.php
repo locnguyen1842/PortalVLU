@@ -43,6 +43,12 @@ Route::prefix('admin')->group(function () {
         //change password
         Route::get('/pi-changepass/{employee_id}', 'PIController@recoverypassword')->name('admin.pi.password.recovery');
 
+        //import pi
+        Route::post('/pi-import', 'PIController@import')->name('admin.pi.import');
+
+        //delete pi
+        Route::get('/pi-delete/{id}', 'PIController@delete')->name('admin.pi.delete');
+
     });
 });
 

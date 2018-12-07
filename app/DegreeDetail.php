@@ -11,9 +11,9 @@ class DegreeDetail extends Model
     protected $fillable = [
         'date_of_issue',
         'place_of_issue',
-        'date_of_recruiment',
-        'position',
-        'professional_title',
+        'personalinformation_id',
+        'degree_id',
+        'industry_id'
     ];
 
     public function pi(){

@@ -23,7 +23,13 @@ class AdminLoginController extends Controller
     public function login(Request $request){
 
         if (Auth::guard('admin')->attempt(['username'=> $request->username ,'password' => $request->password],$request->remember)) {
-          return redirect()->route('admin.pi.index');
+          if(Auth::guard('admin')->user()->pi->show == 0){
+            Auth::guard('admin')->logout();
+            return redirect()->back()->with('error_message','Tài khoản hoặc mật khẩu không đúng.');
+          }else{
+            return redirect()->route('admin.pi.index');
+          }
+
         }
         return redirect()->back()->with('error_message','Tài khoản hoặc mật khẩu không đúng.');
     }

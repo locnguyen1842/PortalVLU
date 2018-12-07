@@ -9,6 +9,7 @@
         <link rel="stylesheet" type="text/css" href="{{asset('css/small-n-flat.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('css/font-awesome.min.css')}}">
+        <link rel="icon" href="{{asset('img/logoVL-notext2.png')}}">
 
         <script src="{{asset('js/lib/jquery-2.1.3.min.js')}}"></script>
         <title>@yield('title') - Portal VLU</title>
