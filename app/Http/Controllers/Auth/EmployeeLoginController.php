@@ -21,7 +21,13 @@ class EmployeeLoginController extends Controller
     }
     public function login(Request $request){
       if (Auth::guard('employee')->attempt(['username'=> $request->username ,'password' => $request->password],$request->remember)) {
-        return redirect()->route('employee.pi.detail');
+        if(Auth::guard('employee')->user()->pi->show == 0){
+          Auth::guard('employee')->logout();
+          return redirect()->back()->with('error_message','Tài khoản hoặc mật khẩu không đúng.');
+        }else{
+          return redirect()->route('employee.pi.detail');
+        }
+
       }
       return redirect()->back()->with('error_message','Tài khoản hoặc mật khẩu không đúng.');
 

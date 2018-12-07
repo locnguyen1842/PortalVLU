@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateAddColumnIsAdminToPersonalinformationsTable extends Migration
+class UpdateAddColumnShowToPiTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class UpdateAddColumnIsAdminToPersonalinformationsTable extends Migration
     public function up()
     {
         Schema::table('personalinformations', function (Blueprint $table) {
-            $table->boolean('isAdmin');
+            $table->boolean('show');
         });
     }
 
@@ -26,7 +26,7 @@ class UpdateAddColumnIsAdminToPersonalinformationsTable extends Migration
     public function down()
     {
         Schema::table('personalinformations', function (Blueprint $table) {
-
+            //
         });
     }
 }

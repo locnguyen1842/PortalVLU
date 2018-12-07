@@ -1,7 +1,16 @@
 @extends('employee.master')
 @section('title','Cập nhật thông tin nhân viên')
 @section('breadcrumb')
-    @include('employee.layouts.breadcrumb')
+    <nav class="cm-navbar cm-navbar-default cm-navbar-slideup">
+        <div class="cm-flex">
+            <div class="cm-breadcrumb-container">
+                <ol class="breadcrumb">
+                    <li><a href="{{route('employee.pi.detail')}}">Home</a></li>
+                    <li class="active">Cập nhật thông tin cá nhân</li>
+                </ol>
+            </div>
+        </div>
+    </nav>
 @endsection
 @section('content')
     @include('employee.layouts.Error')

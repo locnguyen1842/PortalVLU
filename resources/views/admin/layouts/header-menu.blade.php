@@ -1,9 +1,9 @@
-<nav class="cm-navbar cm-navbar-primary">
-    <div class="btn btn-primary md-menu-white hidden-md hidden-lg" data-toggle="cm-menu"></div>
+<nav class="cm-navbar cm-navbar-danger">
+    <div class="btn btn-danger md-menu-white hidden-md hidden-lg" data-toggle="cm-menu"></div>
     <div class="cm-flex">
     </div>
     <div class="dropdown pull-right">
-        <button class="btn btn-primary md-notifications-white" data-toggle="dropdown"> <span class="label label-danger">23</span> </button>
+        <button class="btn btn-danger md-notifications-white" data-toggle="dropdown"> <span class="label label-success">23</span> </button>
         <div class="popover cm-popover bottom">
             <div class="arrow"></div>
             <div class="popover-content">
@@ -32,7 +32,7 @@
         </div>
     </div>
     <div class="dropdown pull-right">
-        <button class="btn btn-primary md-account-circle-white" data-toggle="dropdown"></button>
+        <button class="btn btn-danger md-account-circle-white" data-toggle="dropdown"></button>
         <ul class="dropdown-menu">
             <li class="disabled text-center">
                 <a style="cursor:default;"><strong>{{Auth::guard('admin')->user()->pi->full_name}}</strong></a>

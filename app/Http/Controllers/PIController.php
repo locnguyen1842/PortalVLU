@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\DegreeDetail;
+use App\Industry;
 use Illuminate\Http\Request;
 use App\PI;
+use App\Imports\AdminPIImport;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Employee;
 use Hash;
 
@@ -135,7 +139,7 @@ class PIController extends Controller
         //post data
         $pi = PI::Find($id);
         $request->validate(
-            [
+          [
               'full_name'=> 'required|min:4|max:60',
               'nation'=> 'required',
               'date_of_birth'=>'required|date',
@@ -151,40 +155,40 @@ class PIController extends Controller
               'date_of_issue' => 'required|date',
               'place_of_issue'=> 'required|min:5|max:100'
           ],
-              [
-                  'employee_code.required'=> 'Mã giảng viên không được bỏ trống',
-                  'employee_code.unique'=> 'Mã giảng viên đã tồn tại',
-                  'full_name.required' =>'Họ và tên không được bỏ trống',
-                  'full_name.min' =>'Họ và tên phải lớn hơn 4 kí tự',
-                  'full_name.max' =>'Họ và tên phải nhỏ hơn 60 kí tự',
-                  'nation.required' =>'Dân tộc không được bỏ trống',
-                  'date_of_birth.required' =>'Ngày sinh không được bỏ trống',
-                  'date_of_birth.date' =>'Ngày sinh sai định dạng',
-                  'place_of_birth.min' =>'Nơi sinh phải lớn hơn 5 kí tự',
-                  'place_of_birth.max' =>'Nơi sinh phải nhỏ hơn 100 kí tự',
-                  'place_of_birth.required' =>'Nơi sinh không được bỏ trống',
-                  'permanent_address.min' =>'Địa chỉ thường trú phải lớn hơn 6 kí tự',
-                  'permanent_address.max' =>'Địa chỉ thường trú phải nhỏ hơn 100 kí tự',
-                  'permanent_address.required' =>'Địa chỉ thường trú không được bỏ trống',
-                  'contact_address.min' =>'Địa chỉ liên hệ phải lớn hơn 6 kí tự',
-                  'contact_address.max' =>'Địa chỉ liên hệ phải nhỏ hơn 100 kí tự',
-                  'contact_address.required' =>'Địa chỉ liên hệ không được bỏ trống',
-                  'phone_number.required' =>'Số điện thoại không được bỏ trống',
-                  'email_address.required' =>'Email không được bỏ trống',
-                  'email_address.email' =>'Email sai định dạng',
-                  'email_address.unique' =>'Email đã được sử dụng',
-                  'position.required' =>'Chức vụ không được bỏ trống',
-                  'date_of_recruitment.required' =>'Ngày tuyển dụng không được bỏ trống',
-                  'date_of_recruitment.date' =>'Ngày tuyển dụng sai định dạng',
-                  'professional_title.required' =>'Chức danh chuyên môn không được bỏ trống',
-                  'identity_card.unique' =>'Chứng minh nhân dân đã được sử dụng',
-                  'identity_card.required' =>'Chứng minh nhân dân không được bỏ trống',
-                  'date_of_issue.required' =>'Ngày cấp không được bỏ trống',
-                  'date_of_issue.date' =>'Ngày cấp sai định dạng',
-                  'place_of_issue.min' =>'Nơi cấp phải lớn hơn 5 kí tự',
-                  'place_of_issue.max' =>'Nơi cấp phải nhỏ hơn 100 kí tự',
-                  'place_of_issue.required' =>'Nơi cấp không được bỏ trống'
-              ]
+          [
+              'employee_code.required'=> 'Mã giảng viên không được bỏ trống',
+              'employee_code.unique'=> 'Mã giảng viên đã tồn tại',
+              'full_name.required' =>'Họ và tên không được bỏ trống',
+              'full_name.min' =>'Họ và tên phải lớn hơn 4 kí tự',
+              'full_name.max' =>'Họ và tên phải nhỏ hơn 60 kí tự',
+              'nation.required' =>'Dân tộc không được bỏ trống',
+              'date_of_birth.required' =>'Ngày sinh không được bỏ trống',
+              'date_of_birth.date' =>'Ngày sinh sai định dạng',
+              'place_of_birth.min' =>'Nơi sinh phải lớn hơn 5 kí tự',
+              'place_of_birth.max' =>'Nơi sinh phải nhỏ hơn 100 kí tự',
+              'place_of_birth.required' =>'Nơi sinh không được bỏ trống',
+              'permanent_address.min' =>'Địa chỉ thường trú phải lớn hơn 6 kí tự',
+              'permanent_address.max' =>'Địa chỉ thường trú phải nhỏ hơn 100 kí tự',
+              'permanent_address.required' =>'Địa chỉ thường trú không được bỏ trống',
+              'contact_address.min' =>'Địa chỉ liên hệ phải lớn hơn 6 kí tự',
+              'contact_address.max' =>'Địa chỉ liên hệ phải nhỏ hơn 100 kí tự',
+              'contact_address.required' =>'Địa chỉ liên hệ không được bỏ trống',
+              'phone_number.required' =>'Số điện thoại không được bỏ trống',
+              'email_address.required' =>'Email không được bỏ trống',
+              'email_address.email' =>'Email sai định dạng',
+              'email_address.unique' =>'Email đã được sử dụng',
+              'position.required' =>'Chức vụ không được bỏ trống',
+              'date_of_recruitment.required' =>'Ngày tuyển dụng không được bỏ trống',
+              'date_of_recruitment.date' =>'Ngày tuyển dụng sai định dạng',
+              'professional_title.required' =>'Chức danh chuyên môn không được bỏ trống',
+              'identity_card.unique' =>'Chứng minh nhân dân đã được sử dụng',
+              'identity_card.required' =>'Chứng minh nhân dân không được bỏ trống',
+              'date_of_issue.required' =>'Ngày cấp không được bỏ trống',
+              'date_of_issue.date' =>'Ngày cấp sai định dạng',
+              'place_of_issue.min' =>'Nơi cấp phải lớn hơn 5 kí tự',
+              'place_of_issue.max' =>'Nơi cấp phải nhỏ hơn 100 kí tự',
+              'place_of_issue.required' =>'Nơi cấp không được bỏ trống'
+          ]
         );
         //post data
         $pi->id= $request->id;
@@ -214,15 +218,48 @@ class PIController extends Controller
     }
     public function getdetail($id){
         $pi = PI::find($id);
-        return view('admin.pi.pi-detail',compact('pi'));
+        $dh_count = $pi->degreedetails->where('degree_id',1)->count();
+        $ths_count = $pi->degreedetails->where('degree_id',2)->count();
+        $ts_count = $pi->degreedetails->where('degree_id',3)->count();
+        return view('admin.pi.pi-detail',compact('pi','dh_count','ths_count','ts_count'));
     }
     public function recoverypassword($employee_id)
     {
         $employee = Employee::find($employee_id);
-        //strtoupper cho nó in hoa khi gõ pas
+        //strtoupper cho nó in hoa khi gõ pass
         $employee->password = Hash::make(strtoupper($employee->pi->employee_code)); //chỉ cần thay đổi trường pwd la dc
 
         $employee->save();
         return redirect()->back()->with('message', 'Khôi phục mật khẩu thành công');//kêu thằng sơn làm đổi pass bên employee đi may làm recovery pasửod r
     }
+
+    public function import(Request $request){
+      $request->validate(
+        [
+          'import_file' => 'required|mimetypes:application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|file'
+        ],
+        [
+          'import_file.requied'=> 'Vui lòng chọn file để import.',
+          'import_file.mimetypes'=> 'File tải lên không đúng định dạng excel (xls,xlsx).',
+          'import_file.file'=> 'Không tìm thấy file tải lên.',
+        ]
+      );
+      if($request->has('import_file')){
+          $file = $request->file('import_file');
+          Excel::import(new AdminPIImport,$file);
+          return redirect()->back()->with('message','Import thành công');
+      }
+
+    }
+
+    public function delete($id){
+      $pi = PI::find($id);
+      $pi->show = 0;
+      $pi->save();
+      return redirect()->back()->with('message', 'Xóa thông tin nhân viên thành công');
+    }
+//    public function getdegreedetail($id){
+//        $dedeatail = DegreeDetail::find($id);
+//        return view('admin.pi.pi-detail',compact('dedeatail'));
+//    }
 }

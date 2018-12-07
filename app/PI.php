@@ -12,6 +12,7 @@ class PI extends Model
       'employee_code',
       'full_name',
       'first_name',
+      'nation',
       'gender',
       'date_of_birth',
       'place_of_birth',
@@ -22,11 +23,15 @@ class PI extends Model
       'identity_card',
       'date_of_issue',
       'place_of_issue',
+      'date_of_recruitment',
+      'show',
+      'position',
+      'professional_title',
     ];
 
     public function degreedetails()
     {
-      return $this->hasMany('App\Degree','personalinformation_id','id');
+      return $this->hasMany('App\DegreeDetail','personalinformation_id','id');
     }
 
     public function employee(){
@@ -37,8 +42,5 @@ class PI extends Model
       return $this->hasOne('App\Admin','personalinformation_id','id');
     }
 
-    public function industry(){
-      return $this->belongsToMany('App\Industry','industry_pi','personalinformation_id','industry_id');
-    }
 
 }
