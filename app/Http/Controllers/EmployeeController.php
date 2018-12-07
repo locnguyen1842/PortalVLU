@@ -140,6 +140,6 @@ class EmployeeController extends Controller
         $degree_detail->save();
         return redirect()->back()->with('message', 'Thêm thành công');
     }
-
+      
 
 }

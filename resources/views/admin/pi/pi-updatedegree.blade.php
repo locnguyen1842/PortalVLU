@@ -12,13 +12,14 @@
       </div>
   </nav>
 @endsection
-@include('admin.layouts.Error')
-@if(session()->has('message'))
-    <div class="alert alert-success">
-        {{ session()->get('message') }}
-    </div>
-@endif
+
 @section('content')
+  @include('admin.layouts.Error')
+  @if(session()->has('message'))
+      <div class="alert alert-success">
+          {{ session()->get('message') }}
+      </div>
+  @endif
   <div class="panel panel-default">
       <div class="panel-heading">Cập nhật thông tin bằng cấp</div>
       <div class="panel-body">

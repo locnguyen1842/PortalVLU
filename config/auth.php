@@ -131,7 +131,7 @@ return [
             'provider' => 'employees',
             'table' => 'password_resets',
             'expire' => 60,
-        ]
+        ],
     ],
 
 ];

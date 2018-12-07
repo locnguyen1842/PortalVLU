@@ -1,12 +1,12 @@
 <?php
 
 namespace App;
-
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
+use App\Notifications\AdminResetPasswordNotification;
 class Admin extends Authenticatable
 {
-
+    use Notifiable;
     protected $table= 'admins';
     protected $guard= 'admin';
 
@@ -30,5 +30,9 @@ class Admin extends Authenticatable
 
     public function pi(){
       return $this->belongsTo('App\PI','personalinformation_id','id');
+    }
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new AdminResetPasswordNotification($token));
     }
 }
