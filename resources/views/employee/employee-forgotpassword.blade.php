@@ -17,12 +17,12 @@
       </div>
 
       <div class="col-sm-6 col-md-4 col-lg-3" style="margin:40px auto; float:none;">
-          <form method="post" action="{{route('admin.password.email')}}">
+          <form method="post" action="{{route('employee.password.email')}}">
               {{ csrf_field() }}
 
               <div class="panel">
                 <div class="panel-heading">
-                  <h4>Quên mật khẩu - Admin</h4>
+                  <h4>Quên mật khẩu</h4>
 
                 </div>
                 <div class="panel-body">

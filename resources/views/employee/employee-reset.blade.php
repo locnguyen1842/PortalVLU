@@ -17,13 +17,13 @@
     </div>
 
     <div class="col-sm-6 col-md-4 col-lg-3" style="margin:40px auto; float:none;">
-        <form method="post" action="{{route('admin.password.request',$token)}}">
+        <form method="post" action="{{route('employee.password.request',$token)}}">
             {{ csrf_field() }}
 
             <input type="hidden" name="token" value="{{ $token }}">
             <div class="panel">
                 <div class="panel-heading">
-                    <h4>Khôi phục mật khẩu - Admin</h4>
+                    <h4>Khôi phục mật khẩu</h4>
 
                 </div>
                 <div class="panel-body">

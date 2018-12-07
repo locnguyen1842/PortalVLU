@@ -28,7 +28,7 @@ class AdminResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin';
+    protected $redirectTo = '/admin/login';
 
     /**
      * Create a new controller instance.
@@ -51,11 +51,8 @@ class AdminResetPasswordController extends Controller
 
     public function showResetForm(Request $request, $token = null)
     {
-        
         return view('admin.admin-reset')->with(
             ['token' => $token, 'email' => $request->email]
         );
       }
     }
-
-}

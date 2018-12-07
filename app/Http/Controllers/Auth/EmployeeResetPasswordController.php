@@ -28,7 +28,7 @@ class EmployeeResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/employee';
+    protected $redirectTo = '/login';
 
     /**
      * Create a new controller instance.
@@ -45,14 +45,15 @@ class EmployeeResetPasswordController extends Controller
         return Auth::guard('employee');
     }
 
-    protected function broker(){
+    protected function broker()
+    {
         return Password::broker('employees');
     }
 
     public function showResetForm(Request $request, $token = null)
     {
         return view('employee.employee-reset')->with(
-            ['token' => $token, 'email' => $request->email]
-        );
+              ['token' => $token, 'email' => $request->email]
+          );
     }
 }

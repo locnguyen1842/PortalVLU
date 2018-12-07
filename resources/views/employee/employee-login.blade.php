@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <title>CLEARMIN / LESS</title>
+    <title>Đăng nhập</title>
     <style></style>
 </head>
 
@@ -70,7 +70,7 @@
 
                 </div>
                 <div class="panel-footer text-center">
-                      <a href="#">Quên mật khẩu?</a>
+                      <a href="{{route('employee.password.request')}}">Quên mật khẩu?</a>
                 </div>
               </div>
 

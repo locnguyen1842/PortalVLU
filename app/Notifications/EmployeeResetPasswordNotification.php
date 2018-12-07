@@ -4,7 +4,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-class AdminResetPasswordNotification extends Notification
+class EmployeeResetPasswordNotification extends Notification
 {
     use Queueable;
     public $token;
@@ -38,7 +38,7 @@ class AdminResetPasswordNotification extends Notification
         return (new MailMessage)
         ->from('phongtonghop@gmail.com', 'Phòng tổng hợp')
         ->subject('Yêu cầu đổi mật khẩu.')
-        ->markdown('vendor.admin-index',['token' => $this->token]);
+        ->markdown('vendor.employee-index',['token' => $this->token]);
     }
     /**
      * Get the array representation of the notification.

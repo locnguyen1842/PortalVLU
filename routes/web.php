@@ -20,10 +20,10 @@ Route::prefix('admin')->group(function () {
     Route::post('/login/submit', 'Auth\AdminLoginController@login')->name('admin.login.submit');
     Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
     //reset password
-    Route::post('/password/email', 'Auth\AdminForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
     Route::get('/password/reset', 'Auth\AdminForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
-    Route::post('/password/reset', 'Auth\AdminResetPasswordController@reset');
+    Route::post('/password/email', 'Auth\AdminForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
     Route::get('/password/reset/{token}', 'Auth\AdminResetPasswordController@showResetForm')->name('admin.password.reset');
+    Route::post('/password/reset', 'Auth\AdminResetPasswordController@reset');
     //authenicate admin route
     Route::group(['middleware'=>['auth:admin']], function () {
         Route::get('/dashboard', 'PIController@index')->name('admin.pi.dashboard');
@@ -52,6 +52,11 @@ Route::prefix('')->group(function(){
   Route::get('/login','Auth\EmployeeLoginController@showLoginForm')->name('employee.login');
   Route::post('/login','Auth\EmployeeLoginController@login')->name('employee.login.submit');
   Route::get('/logout','Auth\EmployeeLoginController@logout')->name('employee.logout');
+  //reset password
+  Route::get('/password/reset', 'Auth\EmployeeForgotPasswordController@showLinkRequestForm')->name('employee.password.request');
+  Route::post('/password/email', 'Auth\EmployeeForgotPasswordController@sendResetLinkEmail')->name('employee.password.email');
+  Route::get('/password/reset/{token}', 'Auth\EmployeeResetPasswordController@showResetForm')->name('employee.password.reset');
+  Route::post('/password/reset', 'Auth\EmployeeResetPasswordController@reset');
   //authenicate admin route
   Route::group(['middleware'=>['auth:employee']],function(){
 
