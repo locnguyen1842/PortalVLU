@@ -31,7 +31,7 @@ class PI extends Model
 
     public function degreedetails()
     {
-      return $this->hasMany('App\Degree','personalinformation_id','id');
+      return $this->hasMany('App\DegreeDetail','personalinformation_id','id');
     }
 
     public function employee(){
@@ -42,8 +42,5 @@ class PI extends Model
       return $this->hasOne('App\Admin','personalinformation_id','id');
     }
 
-    public function industry(){
-      return $this->belongsToMany('App\Industry','industry_pi','personalinformation_id','industry_id');
-    }
 
 }

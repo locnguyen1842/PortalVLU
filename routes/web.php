@@ -42,6 +42,8 @@ Route::prefix('admin')->group(function () {
         Route::post('/pi-updatedegree/{id}', 'DegreeController@postupdatedegree')->name('admin.pi.update.degree');
         //change password
         Route::get('/pi-changepass/{employee_id}', 'PIController@recoverypassword')->name('admin.pi.password.recovery');
+        //change chi tiet bang cap
+        //Route::get('/pi-degreedetail', 'PIController@getdegreedetail')->name('admin.pi.degree.detail');
 
         //import pi
         Route::post('/pi-import', 'PIController@import')->name('admin.pi.import');

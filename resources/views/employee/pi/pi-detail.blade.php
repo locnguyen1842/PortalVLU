@@ -1,7 +1,15 @@
 @extends('employee.master')
 @section('title','Xem chi tiết thông tin cá nhân')
 @section('breadcrumb')
-    @include('employee.layouts.breadcrumb')
+    <nav class="cm-navbar cm-navbar-default cm-navbar-slideup">
+        <div class="cm-flex">
+            <div class="cm-breadcrumb-container">
+                <ol class="breadcrumb">
+                    <li><a href="{{route('employee.pi.detail')}}"></a></li>
+                </ol>
+            </div>
+        </div>
+    </nav>
 @endsection
 @section('content')
     @include('employee.layouts.Error')
@@ -132,17 +140,17 @@
                                 <form class="form-horizontal">
                                     <div class="form-group">
                                         <label for="inputEmail3" class="col-sm-4  ">Số bằng đại học </label>
-                                        <span for="" class="col-sm-3 text-nowrap">2</span>
+                                        <span for="" class="col-sm-3 text-nowrap">{{$dh_count}}</span>
                                         <span class="col-sm-5 text-nowrap"><a href="#"><small>Chi tiết</small></a> </span>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputEmail3" class="col-sm-4 ">Số bằng thạc sĩ </label>
-                                        <span for="" class="col-sm-3 text-nowrap">2</span>
+                                        <span for="" class="col-sm-3 text-nowrap">{{$ths_count}}</span>
                                         <span class="col-sm-5 text-nowrap"><a href="#"><small>Chi tiết</small></a> </span>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputEmail3" class="col-sm-4  ">Số bằng tiến sĩ </label>
-                                        <span for="" class="col-sm-3 text-nowrap">0</span>
+                                        <span for="" class="col-sm-3 text-nowrap">{{$ts_count}}</span>
 
                                     </div>
                                 </form>
@@ -153,11 +161,11 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">Thông tin tài khoản</div>
                             <div class="panel-body">
-                                <form class="form-horizontal" action="{{route('employee.pi.detail')}}" method="get">
+                                <form class="form-horizontal" action="{{route('employee.pi.detail',$employee->id)}}" method="get">
                                     {{csrf_field()}}
                                     <div class="form-group">
                                         <label for="inputEmail3" class="col-sm-4 ">Tên tài khoản</label>
-                                        <span for="" class="col-sm-8 text-nowrap">{{$pi->employee_code}}</span>
+                                        <span for="" class="col-sm-8 text-nowrap">{{$employee->username}}</span>
 
                                     </div>
                                     <div class="form-group">
