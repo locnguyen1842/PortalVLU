@@ -14,30 +14,36 @@
 
 
 
-Route::prefix('admin')->group(function(){
-  //authenticate admin login
-  Route::get('/login','Auth\AdminLoginController@showLoginForm')->name('admin.login');
-  Route::post('/login/submit','Auth\AdminLoginController@login')->name('admin.login.submit');
-  Route::get('/logout','Auth\AdminLoginController@logout')->name('admin.logout');
-  //authenicate admin route
-  Route::group(['middleware'=>['auth:admin']],function(){
-    Route::get('/dashboard','PIController@index')->name('admin.pi.dashboard');
-    Route::get('/pi-list','PIController@index')->name('admin.pi.index');
-    //pi detail
-    Route::get('/pi-detail/{id}','PIController@getdetail')->name('admin.pi.detail');
-    //add personal information
-    Route::get('/pi-add','PIController@getAdd')->name('admin.pi.add');
-    Route::post('/pi-add','PIController@postAdd')->name('admin.pi.add');
-    //update personal information
-    Route::get('/pi-update/{id}','PIController@getupdate')->name('admin.pi.update');
-    Route::post('/pi-update/{id}','PIController@postupdate')->name('admin.pi.update');
-    //update certification information
-    Route::get('/pi-updatedegree/{id}','DegreeController@getupdatedegree')->name('admin.pi.update.degree');
-      // doi ten route lai vd: admin.pi.degree.update
-    Route::post('/pi-updatedegree/{id}','DegreeController@postupdatedegree')->name('admin.pi.update.degree');
-      //change password
-      Route::get('/pi-changepass/{employee_id}','PIController@recoverypassword')->name('admin.pi.password.recovery');
-  });
+Route::prefix('admin')->group(function () {
+    //authenticate admin login
+    Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
+    Route::post('/login/submit', 'Auth\AdminLoginController@login')->name('admin.login.submit');
+    Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
+    //reset password
+    Route::post('/password/email', 'Auth\AdminForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
+    Route::get('/password/reset', 'Auth\AdminForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
+    Route::post('/password/reset', 'Auth\AdminResetPasswordController@reset');
+    Route::get('/password/reset/{token}', 'Auth\AdminResetPasswordController@showResetForm')->name('admin.password.reset');
+    //authenicate admin route
+    Route::group(['middleware'=>['auth:admin']], function () {
+        Route::get('/dashboard', 'PIController@index')->name('admin.pi.dashboard');
+        Route::get('/pi-list', 'PIController@index')->name('admin.pi.index');
+        //pi detail
+        Route::get('/pi-detail/{id}', 'PIController@getdetail')->name('admin.pi.detail');
+        //add personal information
+        Route::get('/pi-add', 'PIController@getAdd')->name('admin.pi.add');
+        Route::post('/pi-add', 'PIController@postAdd')->name('admin.pi.add');
+        //update personal information
+        Route::get('/pi-update/{id}', 'PIController@getupdate')->name('admin.pi.update');
+        Route::post('/pi-update/{id}', 'PIController@postupdate')->name('admin.pi.update');
+        //update certification information
+        Route::get('/pi-updatedegree/{id}', 'DegreeController@getupdatedegree')->name('admin.pi.update.degree');
+        // doi ten route lai vd: admin.pi.degree.update
+        Route::post('/pi-updatedegree/{id}', 'DegreeController@postupdatedegree')->name('admin.pi.update.degree');
+        //change password
+        Route::get('/pi-changepass/{employee_id}', 'PIController@recoverypassword')->name('admin.pi.password.recovery');
+
+    });
 });
 
 

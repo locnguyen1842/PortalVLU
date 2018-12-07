@@ -70,7 +70,7 @@
 
                 </div>
                 <div class="panel-footer text-center">
-                      <a href="#">Quên mật khẩu?</a>
+                      <a href="{{route('admin.password.request')}}">Quên mật khẩu?</a>
                 </div>
               </div>
 

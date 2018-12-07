@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
-use Auth;
 use Password;
-
+use Auth;
+use Admin;
 class AdminResetPasswordController extends Controller
 {
     /*
@@ -51,8 +51,11 @@ class AdminResetPasswordController extends Controller
 
     public function showResetForm(Request $request, $token = null)
     {
+        
         return view('admin.admin-reset')->with(
             ['token' => $token, 'email' => $request->email]
         );
+      }
     }
+
 }
