@@ -9,6 +9,7 @@ use App\PI;
 use App\Degree;
 use App\DegreeDetail;
 Use App\Industry;
+use Hash;
 class EmployeeController extends Controller
 {
     public function getdetail(){
@@ -140,6 +141,46 @@ class EmployeeController extends Controller
         $degree_detail->save();
         return redirect()->back()->with('message', 'Thêm thành công');
     }
-      
+    public function getchangepass()
+    {
+        //$employee = Employee::all();
+        $employee = Employee::find(Auth::guard('employee')->user()->id);
+
+        $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
+
+        return view('employee.pi.pi-changepass',compact('employee','pi'));
+    }
+    public function postchangepass(Request $request)
+    {
+        $employee = Employee::find(Auth::guard('employee')->user()->id);
+        $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
+        $request->validate(
+            [
+                'password'=> 'required',
+                'newpassword'=> 'required|max:15',
+                'comfirmpassword'=> 'required'
+            ],
+            [
+                'password.required' => 'chưa xác nhận Mật khẩu cũ',
+                'newpassword.required' => 'Mật khẩu mới không được bỏ trống',
+                'newpassword.max' => 'Mật khẩu mới không được lớn hơn 15 kí tự',
+                'comfirmpassword.required' => 'chưa xác nhận mật khẩu mới không được bỏ trống',
+
+            ]
+        );
+        $PASS = Hash::make(strtoupper($request->newpassword));
+        if(Hash::check($request->password,$employee->password)) {
+            if(Hash::check($request->comfirmpassword,$PASS)) {
+                $employee->password = Hash::make(strtoupper($request->comfirmpassword));
+                $employee->save();
+                return redirect()->back()->with('message', 'Đổi mật khẩu thành công');
+            } else {
+                return redirect()->back()->with('message', 'xác nhận mật khẩu mới không chính xác');
+            }
+        } else {
+            return redirect()->back()->with('message', 'xác nhận mật khẩu cũ không chính xác');
+        }
+    }
+
 
 }
