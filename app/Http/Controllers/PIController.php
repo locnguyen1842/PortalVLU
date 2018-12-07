@@ -115,6 +115,7 @@ class PIController extends Controller
         $employee->personalinformation_id = $pi->id;
         $employee->username= $pi->employee_code;
         $employee->password = Hash::make($pi->employee_code);
+        $employee->email = $pi->email;
 
         $employee->save();
 
