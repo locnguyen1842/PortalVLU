@@ -164,22 +164,29 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">Thông tin tài khoản</div>
-                            <div class="panel-body">
-                                <form id="recovery_password" class="form-horizontal" action="{{route('admin.pi.password.recovery',$pi->employee->id)}}" method="get">
-                                    {{csrf_field()}}
-                                    <div class="form-group">
-                                        <label for="inputEmail3" class="col-sm-4 ">Tên tài khoản</label>
-                                        <span for="" class="col-sm-8 text-nowrap">{{$pi->employee_code}}</span>
+                </div>
+                <div class="col-sm-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Thông tin tài khoản</div>
+                        <div class="panel-body">
+                            <form id="recovery_password" class="form-horizontal" action="{{route('admin.pi.password.recovery',$pi->id)}}" method="get">
+                                {{csrf_field()}}
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-4  ">Tài khoản </label>
+                                    <span for="" class="col-sm-3 text-nowrap">{{$pi->employee_code}}</span>
 
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputEmail3" class="col-sm-4 ">Mật khẩu </label>
-                                        <span for="" class="col-sm-8 text-nowrap">
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-4 ">Vai trò</label>
+                                    <span for="" class="col-sm-3 text-nowrap">{{$pi->admin =='' ? 'Người dùng':'Quản trị viên' }} </span>
+                                    <span class="col-sm-5 text-nowrap"><a href="#"><small>Thay đổi</small></a></span>
+                                </div>
 
-                                            <button id="submit_recovery_password" class="btn btn-danger">Khôi phục</button>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-4 ">Mật khẩu </label>
+                                    <span for="" class="col-sm-8 text-nowrap">
+
+                                            <button id="submit_recovery_password" class="btn btn-xs btn-danger">Khôi phục</button>
 
                                         </span>
 

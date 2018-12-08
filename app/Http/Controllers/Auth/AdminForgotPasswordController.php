@@ -38,9 +38,16 @@ class AdminForgotPasswordController extends Controller
     }
 
     public function showLinkRequestForm()
-      {
+    {
 
-            return view('admin.admin-forgotpassword');
-      }
-
+          return view('admin.admin-forgotpassword');
+    }
+    protected function sendResetLinkResponse($response)
+    {
+        return back()->with('status', 'Yêu cầu khôi phục mật khẩu thành công. Vui lòng kiểm tra email!');
+    }
+    protected function sendResetLinkFailedResponse($response)
+    {
+        return back()->with('error', 'Email không tồn tại.');
+    }
 }

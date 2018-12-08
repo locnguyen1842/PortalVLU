@@ -17,44 +17,21 @@
 @if(session()->has('message'))<div class="alert alert-success">
         {{ session()->get('message') }}
     </div>
-    @endif
-    <div class="panel panel-default">
-        <div class="panel-heading">Danh sách thông tin cá nhân <br>
-            <a href="{{route('admin.pi.add')}}">
-                <button type="button" name="button" class="btn btn-xs btn-success">Thêm mới</button>
-            </a>
-        </div>
-        <div class="panel-body">
-            <div class="form-group">
-                <form class="form-horizontal" action="{{route('admin.pi.index')}}" method="get">
-                    <div class="col-sm-6">
-                        <div class="col-sm-3">
-                            <label class="control-label">Tìm kiếm</label>
-                        </div>
-                        <div class="col-sm-9">
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="search" placeholder="Nhập mã nv, tên hoặc cmnd">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-primary" type="submit">Tìm</button>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-                <div class="col-sm-2">
-                </div>
-                <form class="form-horizontal" action="{{route('admin.pi.import')}}" method="post" enctype="multipart/form-data">
-                    {{ csrf_field() }}
-                    <div class="col-sm-4">
-                        <label class="control-label col-sm-4">Chọn tệp</label>
-                        <div class="col-sm-8">
-
-                            <input type="file" id="excel-import" name="import_file" class="custom-file-input excel-default col-sm-4">
-                            <button type="submit" name="button" class="btn btn-danger">Tải lên</button>
-                        </div>
-                    </div>
-                </form>
-                @if($search !="")
+@endif
+@if (session('status'))
+    <div class="alert alert-success" role="alert">
+        {{ session('status') }}
+    </div>
+@endif
+<div class="panel panel-default">
+    <div class="panel-heading">Danh sách thông tin cá nhân <br>
+        <a href="{{route('admin.pi.add')}}">
+            <button type="button" name="button" class="btn btn-xs btn-success">Thêm mới</button>
+        </a>
+    </div>
+    <div class="panel-body">
+        <div class="form-group">
+            <form class="form-horizontal" action="{{route('admin.pi.index')}}" method="get">
                 <div class="col-sm-6">
                     <div class="col-sm-3">
                         <label class="control-label">Tìm theo </label>
