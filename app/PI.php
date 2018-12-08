@@ -33,14 +33,14 @@ class PI extends Model
     {
       return $this->hasMany('App\DegreeDetail','personalinformation_id','id');
     }
-
+    public function admin(){
+      return $this->hasOne('App\Admin','personalinformation_id','id');
+    }
     public function employee(){
       return $this->hasOne('App\Employee','personalinformation_id','id');
     }
 
-    public function admin(){
-      return $this->hasOne('App\Admin','personalinformation_id','id');
-    }
+
 
 
 }

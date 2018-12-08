@@ -41,7 +41,7 @@ Route::prefix('admin')->group(function () {
         // doi ten route lai vd: admin.pi.degree.update
         Route::post('/pi-updatedegree/{id}', 'DegreeController@postupdatedegree')->name('admin.pi.update.degree');
         //change password
-        Route::get('/pi-changepass/{employee_id}', 'PIController@recoverypassword')->name('admin.pi.password.recovery');
+        Route::get('/pi-recovery/{pi_id}', 'PIController@recoverypassword')->name('admin.pi.password.recovery');
         //change chi tiet bang cap
         //Route::get('/pi-degreedetail', 'PIController@getdegreedetail')->name('admin.pi.degree.detail');
 

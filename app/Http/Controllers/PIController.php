@@ -223,14 +223,20 @@ class PIController extends Controller
         $ts_count = $pi->degreedetails->where('degree_id',3)->count();
         return view('admin.pi.pi-detail',compact('pi','dh_count','ths_count','ts_count'));
     }
-    public function recoverypassword($employee_id)
+    public function recoverypassword($pi_id)
     {
-        $employee = Employee::find($employee_id);
+        $pi = PI::find($pi_id);
         //strtoupper cho nó in hoa khi gõ pass
-        $employee->password = Hash::make(strtoupper($employee->pi->employee_code)); //chỉ cần thay đổi trường pwd la dc
-
-        $employee->save();
-        return redirect()->back()->with('message', 'Khôi phục mật khẩu thành công');//kêu thằng sơn làm đổi pass bên employee đi may làm recovery pasửod r
+         //chỉ cần thay đổi trường pwd la dc
+        if($pi->admin != ''){
+          $pi->employee->password = Hash::make(strtoupper($pi->employee_code));
+          $pi->admin->password = Hash::make(strtoupper($pi->employee_code));
+        }else{
+          $pi->employee->password = Hash::make(strtoupper($pi->employee_code));
+        }
+        $pi->employee->save();
+        $pi->admin->save();
+        return redirect()->back()->with('message', 'Khôi phục mật khẩu thành công');
     }
 
     public function import(Request $request){
