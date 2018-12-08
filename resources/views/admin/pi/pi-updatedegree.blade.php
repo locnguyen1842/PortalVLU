@@ -1,12 +1,13 @@
 @extends('admin.master')
-@section('title','Cập nhật thông tin bằng cấp')
+@section('title','Thêm bằng cấp')
 @section('breadcrumb')
 <nav class="cm-navbar cm-navbar-default cm-navbar-slideup">
     <div class="cm-flex">
         <div class="cm-breadcrumb-container">
             <ol class="breadcrumb">
                 <li><a href="#">Home</a></li>
-                <li class="active">Cập nhật thông tin bằng cấp</li>
+                <li class=""><a href="{{route('admin.pi.index')}}">Quản lý thông tin nhân viên</a></li>
+                <li class="active">Thêm bằng cấp</li>
             </ol>
         </div>
     </div>

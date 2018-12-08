@@ -6,7 +6,7 @@
         <div class="cm-breadcrumb-container">
             <ol class="breadcrumb">
                 <li><a href="#">Home</a></li>
-                <li class="active">Quản lý thông tin cá nhân</li>
+                <li class="active">Quản lý thông tin nhân viên</li>
             </ol>
         </div>
     </div>
@@ -20,7 +20,7 @@
     </div>
 @endif
 <div class="panel panel-default">
-    <div class="panel-heading">Danh sách thông tin cá nhân <br>
+    <div class="panel-heading">Danh sách thông tin nhân viên<br>
         <a href="{{route('admin.pi.add')}}">
             <button type="button" name="button" class="btn btn-xs btn-success">Thêm mới</button>
         </a>
@@ -104,7 +104,7 @@
                     <td class="col-sm-2">{{$item->identity_card}}</td>
                     <td class="col-sm-2">{{date('d-m-Y', strtotime($item->date_of_birth))}}</td>
                     <td class="col-sm-3">
-                      <a href="{{route('admin.pi.update',$item->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sửa" href="javascript:" class="tooltip-test">
+                      <a href="{{route('admin.pi.update',$item->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Cập nhật" href="javascript:" class="tooltip-test">
                           <span class=""><i class="fa fa-lg fa-edit text-primary"></i>
                               <span class="mdi mdi-close"></span>
                           </span>
@@ -126,7 +126,7 @@
 
             </tbody>
         </table>
-        
+
     </div>
     <div class="panel-footer">
 

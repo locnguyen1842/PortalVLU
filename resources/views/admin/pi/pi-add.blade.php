@@ -6,8 +6,8 @@
         <div class="cm-breadcrumb-container">
             <ol class="breadcrumb">
                 <li><a href="#">Home</a></li>
-                <li class=""><a href="{{route('admin.pi.index')}}">Quản lý thông tin cá nhân</a></li>
-                <li class="active">Thêm thông tin cá nhân</li>
+                <li class=""><a href="{{route('admin.pi.index')}}">Quản lý thông tin nhân viên</a></li>
+                <li class="active">Thêm thông tin nhân viên</li>
             </ol>
         </div>
     </div>

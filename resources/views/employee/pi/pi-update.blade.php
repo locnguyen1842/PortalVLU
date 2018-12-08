@@ -5,7 +5,8 @@
         <div class="cm-flex">
             <div class="cm-breadcrumb-container">
                 <ol class="breadcrumb">
-                    <li><a href="{{route('employee.pi.detail')}}">Home</a></li>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="{{route('employee.pi.detail')}}">Thông tin cá nhân</a></li>
                     <li class="active">Cập nhật thông tin cá nhân</li>
                 </ol>
             </div>

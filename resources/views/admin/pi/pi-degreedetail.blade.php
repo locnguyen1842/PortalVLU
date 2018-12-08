@@ -6,7 +6,7 @@
         <div class="cm-breadcrumb-container">
             <ol class="breadcrumb">
                 <li><a href="#">Home</a></li>
-                <li class="active">Quản lý thông tin cá nhân</li>
+                <li class="active">Quản lý thông tin nhân viên</li>
             </ol>
         </div>
     </div>

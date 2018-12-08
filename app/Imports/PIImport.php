@@ -42,12 +42,17 @@ class PIImport implements ToCollection,WithStartRow
             'show' => 1,
           ]);
 
-          $employee = Employee::updateOrCreate([
-            'username' => $pi->employee_code,
-            'personalinformation_id'=> $pi->id,
-            'email' => $pi->email_address,
-            'password' => Hash::make($pi->password),
-          ]);
+          $employee = Employee::updateOrCreate(
+            [
+              'username' => $pi->employee_code,
+            ],
+            [
+              'username' => $pi->employee_code,
+              'personalinformation_id'=> $pi->id,
+              'email' => $pi->email_address,
+              'password' => Hash::make($pi->password),
+            ]
+          );
         }
 
     }

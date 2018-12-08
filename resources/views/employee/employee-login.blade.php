@@ -62,7 +62,7 @@
                       </div>
                   </div>
                   <div class="col-xs-6">
-                      <div class="checkbox"><label><input type="checkbox">Ghi nhớ</label></div>
+                      <div class="checkbox"><label><input type="checkbox" name="remember">Ghi nhớ</label></div>
                   </div>
                   <div class="col-xs-6">
                       <button type="submit" class="btn btn-block btn-primary">Đăng nhập</button>
