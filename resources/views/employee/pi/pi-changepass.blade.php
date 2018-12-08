@@ -40,7 +40,7 @@
                         <input type="password" maxlength="15" class="form-control" name="newpassword" placeholder="nhập mật khẩu mới" >
                     </div>
                     <div class="col-sm-6">
-                        <label>xác nhập mật khẩu mới</label>
+                        <label>Xác nhận mật khẩu mới</label>
                         <input type="password" maxlength="15" class="form-control" name="comfirmpassword" placeholder="nhập lại mật khẩu mới" >
                     </div>
                 </div>

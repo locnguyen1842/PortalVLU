@@ -152,10 +152,7 @@ class EmployeeController extends Controller
     {
         //$employee = Employee::all();
         $employee = Employee::find(Auth::guard('employee')->user()->id);
-
-        $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
-
-        return view('employee.pi.pi-changepass', compact('employee', 'pi'));
+        return view('employee.pi.pi-changepass', compact('employee'));
     }
     public function postchangepass(Request $request)
     {
@@ -164,28 +161,27 @@ class EmployeeController extends Controller
         $request->validate(
             [
                 'password'=> 'required',
-                'newpassword'=> 'required|max:15',
-                'comfirmpassword'=> 'required'
+                'newpassword'=> 'required|min:5|max:50',
+                'comfirmpassword'=> 'required|same:newpassword'
             ],
             [
                 'password.required' => 'chưa xác nhận Mật khẩu cũ',
                 'newpassword.required' => 'Mật khẩu mới không được bỏ trống',
-                'newpassword.max' => 'Mật khẩu mới không được lớn hơn 15 kí tự',
-                'comfirmpassword.required' => 'chưa xác nhận mật khẩu mới không được bỏ trống',
+                'newpassword.min' => 'Mật khẩu mới phải có độ dài từ 5-50 kí tự',
+                'newpassword.max' => 'Mật khẩu mới phải có độ dài từ 5-50 kí tự',
+                'comfirmpassword.required' => 'Xác nhận mật khẩu mới không được bỏ trống',
+                'confirmpassword.same' =>'Xác nhận mật khẩu mới không chính xác',
 
             ]
         );
-        $PASS = Hash::make(strtoupper($request->newpassword));
         if (Hash::check($request->password, $employee->password)) {
-            if (Hash::check($request->comfirmpassword, $PASS)) {
-                $employee->password = Hash::make(strtoupper($request->comfirmpassword));
+
+                $employee->password = Hash::make(($request->newpassword));
                 $employee->save();
                 return redirect()->back()->with('message', 'Đổi mật khẩu thành công');
-            } else {
-                return redirect()->back()->with('message', 'xác nhận mật khẩu mới không chính xác');
-            }
+
         } else {
-            return redirect()->back()->with('message', 'xác nhận mật khẩu cũ không chính xác');
+            return redirect()->back()->with('error_message', 'Mật khẩu cũ không chính xác');
         }
     }
 }
