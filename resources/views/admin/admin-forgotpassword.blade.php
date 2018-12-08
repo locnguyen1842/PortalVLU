@@ -31,6 +31,11 @@
                           {{ session('status') }}
                       </div>
                   @endif
+                  @if (session('error'))
+                      <div class="alert alert-danger" role="alert">
+                          {{ session('error') }}
+                      </div>
+                  @endif
                   @if (count($errors) > 0)
                       <div class="alert alert-danger">
 

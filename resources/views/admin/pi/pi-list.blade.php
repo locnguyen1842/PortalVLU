@@ -19,6 +19,11 @@
         {{ session()->get('message') }}
     </div>
 @endif
+@if (session('status'))
+    <div class="alert alert-success" role="alert">
+        {{ session('status') }}
+    </div>
+@endif
 <div class="panel panel-default">
     <div class="panel-heading">Danh sách thông tin cá nhân <br>
         <a href="{{route('admin.pi.add')}}">

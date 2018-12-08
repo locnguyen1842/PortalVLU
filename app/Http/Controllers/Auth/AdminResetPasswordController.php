@@ -49,6 +49,31 @@ class AdminResetPasswordController extends Controller
         return Password::broker('admins');
     }
 
+    protected function validationErrorMessages()
+    {
+       return [
+         'token.required'    => 'Yêu cầu khôi phục mật khẩu không hợp lệ',
+         'email.required'    => 'Email không được bỏ trống',
+         'email.email'       => 'Email không đúng định dạng',
+         'password.required' => 'Mật khẩu không được để trống',
+         'password.confirmed' => 'Mật khẩu nhập lại không trùng khớp với mật khẩu mới',
+         'password.min' => 'Mật khẩu phải có độ dài từ 5-50 ký tự',
+         'password.max' => 'Mật khẩu phải có độ dài từ 5-50 ký tự',
+       ];
+    }
+    protected function sendResetResponse(Request $request, $response)
+    {
+        return redirect($this->redirectPath())
+                            ->with('status', trans('Đổi mật khẩu thành công'));
+
+    }
+    protected function sendResetFailedResponse(Request $request, $response)
+    {
+        return redirect()->back()
+                    ->withInput($request->only('email'))
+                    ->withErrors(['email' => 'Email không hợp lệ']);
+    }
+
     public function showResetForm(Request $request, $token = null)
     {
         return view('admin.admin-reset')->with(
