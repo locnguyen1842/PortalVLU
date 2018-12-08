@@ -1,17 +1,17 @@
 @extends('admin.master')
 @section('title','Xem chi tiết thông tin cá nhân')
-  @section('breadcrumb')
-    <nav class="cm-navbar cm-navbar-default cm-navbar-slideup">
-        <div class="cm-flex">
-            <div class="cm-breadcrumb-container">
-                <ol class="breadcrumb">
-                    <li><a href="#">Home</a></li>
-                    <li class=""><a href="{{route('admin.pi.index')}}">Quản lý thông tin cá nhân</a></li>
-                    <li class="active">Thông tin chi tiết cá nhân</li>
-                </ol>
-            </div>
+@section('breadcrumb')
+<nav class="cm-navbar cm-navbar-default cm-navbar-slideup">
+    <div class="cm-flex">
+        <div class="cm-breadcrumb-container">
+            <ol class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li class=""><a href="{{route('admin.pi.index')}}">Quản lý thông tin cá nhân</a></li>
+                <li class="active">Thông tin chi tiết cá nhân</li>
+            </ol>
         </div>
-    </nav>
+    </div>
+</nav>
 @endsection
 @section('content')
   @include('admin.layouts.Error')
@@ -39,97 +39,97 @@
                                     <span for="" class="col-sm-9 text-nowrap">{{$pi->employee_code}}</span>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-3  ">Họ và tên</label>
-                                    <span for="" class="col-sm-9 text-nowrap">{{$pi->full_name}}</span>
-                                </div>
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-3  ">Họ và tên</label>
+                                        <span for="" class="col-sm-9 text-nowrap">{{$pi->full_name}}</span>
+                                    </div>
 
-                                <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-3  ">Ngày sinh </label>
-                                    <span for="" class="col-sm-9 text-nowrap">{{date('d-m-Y', strtotime($pi->date_of_birth))}}</span>
-                                </div>
-
-
-                                <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-3  ">Nơi sinh </label>
-                                    <span for="" class="col-sm-9 text-nowrap">{{$pi->place_of_birth}}</span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-3  ">Giới tính </label>
-                                    <span for="" class="col-sm-9 text-nowrap">{{$pi->gender ==0 ? "Nam":""}}{{$pi->gender ==1 ? "Nữ":""}}</span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-3  ">Dân tộc </label>
-                                    <span for="" class="col-sm-9 text-nowrap">{{$pi->nation}}</span>
-                                </div>
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-3  ">Ngày sinh </label>
+                                        <span for="" class="col-sm-9 text-nowrap">{{date('d-m-Y', strtotime($pi->date_of_birth))}}</span>
+                                    </div>
 
 
-                            </form>
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-3  ">Nơi sinh </label>
+                                        <span for="" class="col-sm-9 text-nowrap">{{$pi->place_of_birth}}</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-3  ">Giới tính </label>
+                                        <span for="" class="col-sm-9 text-nowrap">{{$pi->gender ==0 ? "Nam":""}}{{$pi->gender ==1 ? "Nữ":""}}</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-3  ">Dân tộc </label>
+                                        <span for="" class="col-sm-9 text-nowrap">{{$pi->nation}}</span>
+                                    </div>
+
+
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Thông tin liên hệ</div>
-                        <div class="panel-body">
-                            <form class="form-horizontal" action="{{route('admin.pi.detail',$pi->id)}}" method="get">
-                                {{csrf_field()}}
-                                <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-3  ">Địa chỉ Email </label>
-                                    <span for="" class="col-sm-9 text-nowrap">{{$pi->email_address}}</span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-3  ">Số điện thoại </label>
-                                    <span for="" class="col-sm-9 text-nowrap">{{$pi->phone_number}}</span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-3  ">Địa chỉ liên lạc </label>
-                                    <span for="" class="col-sm-9 text-nowrap">{{$pi->contact_address}}</span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-3  ">Địa chỉ thường trú </label>
-                                    <span for="" class="col-sm-9 text-nowrap">{{$pi->permanent_address}}</span>
-                                </div>
+                    <div class="col-sm-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Thông tin liên hệ</div>
+                            <div class="panel-body">
+                                <form class="form-horizontal" action="{{route('admin.pi.detail',$pi->id)}}" method="get">
+                                    {{csrf_field()}}
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-3  ">Địa chỉ Email </label>
+                                        <span for="" class="col-sm-9 text-nowrap">{{$pi->email_address}}</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-3  ">Số điện thoại </label>
+                                        <span for="" class="col-sm-9 text-nowrap">{{$pi->phone_number}}</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-3  ">Địa chỉ liên lạc </label>
+                                        <span for="" class="col-sm-9 text-nowrap">{{$pi->contact_address}}</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-3  ">Địa chỉ thường trú </label>
+                                        <span for="" class="col-sm-9 text-nowrap">{{$pi->permanent_address}}</span>
+                                    </div>
 
 
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm-12">
+                    <div class="col-sm-12">
 
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Thông tin xác thực</div>
-                        <div class="panel-body">
-                            <form class="form-horizontal" action="{{route('admin.pi.detail',$pi->id)}}" method="get">
-                                {{csrf_field()}}
-                                <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-3  ">CMND </label>
-                                    <span for="" class="col-sm-9 text-nowrap">{{$pi->identity_card}}</span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-3  ">Ngày cấp </label>
-                                    <span for="" class="col-sm-9 text-nowrap">{{date('d-m-Y', strtotime($pi->date_of_issue))}}</span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-3  ">Nơi cấp </label>
-                                    <span for="" class="col-sm-9 text-nowrap">{{$pi->place_of_issue}}</span>
-                                </div>
-                                {{-- <div class="form-group">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Thông tin xác thực</div>
+                            <div class="panel-body">
+                                <form class="form-horizontal" action="{{route('admin.pi.detail',$pi->id)}}" method="get">
+                                    {{csrf_field()}}
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-3  ">CMND </label>
+                                        <span for="" class="col-sm-9 text-nowrap">{{$pi->identity_card}}</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-3  ">Ngày cấp </label>
+                                        <span for="" class="col-sm-9 text-nowrap">{{date('d-m-Y', strtotime($pi->date_of_issue))}}</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-3  ">Nơi cấp </label>
+                                        <span for="" class="col-sm-9 text-nowrap">{{$pi->place_of_issue}}</span>
+                                    </div>
+                                    {{-- <div class="form-group">
                                             <label for="inputPassword3" class="col-sm-3  ">Bằng Cấp </label>
 
 
                                             </div>
                                         </div> --}}
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
+
+
                 </div>
 
-
-            </div>
-
-            <div class="col-sm-5">
+                <div class="col-sm-5">
 
                 <div class="col-sm-12">
                     <div class="panel panel-default">
@@ -154,8 +154,9 @@
                                     <label for="inputEmail3" class="col-sm-4  ">Số bằng tiến sĩ </label>
                                     <span for="" class="col-sm-3 text-nowrap">{{$ts_count}}</span>
 
-                                </div>
-                            </form>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -183,7 +184,7 @@
 
                                         <button id="submit_recovery_password" class="btn btn-xs btn-danger">Khôi phục</button>
 
-                                    </span>
+                                        </span>
 
 
                                 </div>
@@ -280,13 +281,13 @@
         </div>
     </div>
     <script>
-        $(document).ready(function(){
-            $("#submit_recovery_password").on('click',function (e) {
+        $(document).ready(function() {
+            $("#submit_recovery_password").on('click', function(e) {
 
                 e.preventDefault();
                 $("#pwd-recovery-modal").modal('show');
                 var form_recovery_password = $("#recovery_password");
-                var modalConfirm = function(callback){
+                var modalConfirm = function(callback) {
 
                     $("#btn-pr-yes").on("click", function(){
                         callback(true);
@@ -298,10 +299,10 @@
                         $("#pwd-recovery-modal").modal('hide');
                     });
                 };
-                modalConfirm(function(confirm){
-                    if(confirm){
+                modalConfirm(function(confirm) {
+                    if (confirm) {
                         form_recovery_password.submit();
-                    }else{
+                    } else {
 
                     }
                 });
@@ -333,6 +334,5 @@
                 });
             });
         });
-
     </script>
-@endsection
+    @endsection

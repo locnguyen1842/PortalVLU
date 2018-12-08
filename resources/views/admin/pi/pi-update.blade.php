@@ -1,24 +1,24 @@
 @extends('admin.master')
 @section('title','Cập nhật thông tin nhân viên')
 @section('breadcrumb')
-  <nav class="cm-navbar cm-navbar-default cm-navbar-slideup">
-      <div class="cm-flex">
-          <div class="cm-breadcrumb-container">
-              <ol class="breadcrumb">
-                  <li><a href="#">Home</a></li>
-                  <li class=""><a href="{{route('admin.pi.index')}}">Quản lý thông tin cá nhân</a></li>
-                  <li class="active">Cập nhật thông tin cá nhân</li>
-              </ol>
-          </div>
-      </div>
-  </nav>
+<nav class="cm-navbar cm-navbar-default cm-navbar-slideup">
+    <div class="cm-flex">
+        <div class="cm-breadcrumb-container">
+            <ol class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li class=""><a href="{{route('admin.pi.index')}}">Quản lý thông tin cá nhân</a></li>
+                <li class="active">Cập nhật thông tin cá nhân</li>
+            </ol>
+        </div>
+    </div>
+</nav>
 @endsection
 @section('content')
-    @include('admin.layouts.Error')
-    @if(session()->has('message'))
-        <div class="alert alert-success">
-            {{ session()->get('message') }}
-        </div>
+@include('admin.layouts.Error')
+@if(session()->has('message'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div>
     @endif
     <div class="panel panel-default">
         <div class="panel-heading">Cập nhật thông tin cá nhân</div>
@@ -44,10 +44,10 @@
                         <label>Giới tính</label>
                         <div class="radio">
                             <label class="col-sm-4">
-                                <input type="radio" name="gender" value="0"{{$pi->gender ==0 ? "checked":""}}>Nam
+                                <input type="radio" name="gender" value="0" {{$pi->gender ==0 ? "checked":""}}>Nam
                             </label>
                             <label class="col-sm-4">
-                                <input type="radio" name="gender" value="1"{{$pi->gender ==1 ? "checked":""}}>Nữ
+                                <input type="radio" name="gender" value="1" {{$pi->gender ==1 ? "checked":""}}>Nữ
                             </label>
                         </div>
                     </div>
@@ -124,28 +124,28 @@
             </form>
         </div>
     </div>
-@endsection
-{{--@section('script')--}}
+    @endsection
+    {{--@section('script')--}}
     {{--<script src="{{asset('js/backend-js/ckeditor5-build-classic/ckeditor.js')}}" charset="utf-8"></script>--}}
     {{--<script type="text/javascript">--}}
-        {{--if('{{Session::has('success_message')}}' == 1){--}}
-            {{--var success_message = $.gritter.add({--}}
-                {{--// (string | mandatory) the heading of the notification--}}
-                {{--title: 'Success!',--}}
-                {{--// (string | mandatory) the text inside the notification--}}
-                {{--text: '{{ session()->get('message') }}.<a href="{{route()}}">Click here to view.</a>',--}}
-                {{--// (string | optional) the image to display on the left--}}
-                {{--// image: '{{asset('img/backend-img')}}//ui-sam.jpg',--}}
-                {{--// (bool | optional) if you want it to fade out on its own or just sit there--}}
-                {{--sticky: false,--}}
-                {{--// (int | optional) the time you want it to be alive for before fading out--}}
-                {{--time: '2000',--}}
-                {{--// (string | optional) the class name you want to apply to that specific message--}}
-                {{--class_name: 'my-sticky-class'--}}
-            {{--});--}}
-        {{--};--}}
+    {{--if('{{Session::has('success_message')}}' == 1){--}}
+    {{--var success_message = $.gritter.add({--}}
+    {{--// (string | mandatory) the heading of the notification--}}
+    {{--title: 'Success!',--}}
+    {{--// (string | mandatory) the text inside the notification--}}
+    {{--text: '{{ session()->get('message') }}.<a href="{{route()}}">Click here to view.</a>',--}}
+    {{--// (string | optional) the image to display on the left--}}
+    {{--// image: '{{asset('img/backend-img')}}//ui-sam.jpg',--}}
+    {{--// (bool | optional) if you want it to fade out on its own or just sit there--}}
+    {{--sticky: false,--}}
+    {{--// (int | optional) the time you want it to be alive for before fading out--}}
+    {{--time: '2000',--}}
+    {{--// (string | optional) the class name you want to apply to that specific message--}}
+    {{--class_name: 'my-sticky-class'--}}
+    {{--});--}}
+    {{--};--}}
 
     {{--</script>--}}
 
 
-{{--@endsection--}}
+    {{--@endsection--}}

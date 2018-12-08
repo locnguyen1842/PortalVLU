@@ -8,22 +8,25 @@ use Auth;
 use App\PI;
 use App\Degree;
 use App\DegreeDetail;
-Use App\Industry;
+use App\Industry;
 use Hash;
+
 class EmployeeController extends Controller
 {
-    public function getdetail(){
-      $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
-      $employee = Employee::find(Auth::guard('employee')->user()->id);
-
-        $dh_count = $pi->degreedetails->where('degree_id',1)->count();
-        $ths_count = $pi->degreedetails->where('degree_id',2)->count();
-        $ts_count = $pi->degreedetails->where('degree_id',3)->count();
-      return view('employee.pi.pi-detail',compact('pi','employee','dh_count','ths_count','ts_count'));
-    }
-    public function getupdate(){
+    public function getdetail()
+    {
         $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
-        return view('employee.pi.pi-update',compact('pi'));
+        $employee = Employee::find(Auth::guard('employee')->user()->id);
+
+        $dh_count = $pi->degreedetails->where('degree_id', 1)->count();
+        $ths_count = $pi->degreedetails->where('degree_id', 2)->count();
+        $ts_count = $pi->degreedetails->where('degree_id', 3)->count();
+        return view('employee.pi.pi-detail', compact('pi', 'employee', 'dh_count', 'ths_count', 'ts_count'));
+    }
+    public function getupdate()
+    {
+        $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
+        return view('employee.pi.pi-update', compact('pi'));
     }
     public function postupdate(Request $request)
     {
@@ -115,7 +118,7 @@ class EmployeeController extends Controller
         $industries = Industry::all();
         $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
 
-        return view('employee.pi.pi-updatedegree',compact('degrees','industries','pi'));
+        return view('employee.pi.pi-updatedegree', compact('degrees', 'industries', 'pi'));
     }
     public function postupdatedegree(Request $request)
     {
@@ -152,7 +155,7 @@ class EmployeeController extends Controller
 
         $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
 
-        return view('employee.pi.pi-changepass',compact('employee','pi'));
+        return view('employee.pi.pi-changepass', compact('employee', 'pi'));
     }
     public function postchangepass(Request $request)
     {
@@ -173,8 +176,8 @@ class EmployeeController extends Controller
             ]
         );
         $PASS = Hash::make(strtoupper($request->newpassword));
-        if(Hash::check($request->password,$employee->password)) {
-            if(Hash::check($request->comfirmpassword,$PASS)) {
+        if (Hash::check($request->password, $employee->password)) {
+            if (Hash::check($request->comfirmpassword, $PASS)) {
                 $employee->password = Hash::make(strtoupper($request->comfirmpassword));
                 $employee->save();
                 return redirect()->back()->with('message', 'Đổi mật khẩu thành công');
@@ -185,6 +188,4 @@ class EmployeeController extends Controller
             return redirect()->back()->with('message', 'xác nhận mật khẩu cũ không chính xác');
         }
     }
-
-
 }

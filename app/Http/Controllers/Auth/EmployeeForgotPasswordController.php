@@ -31,7 +31,8 @@ class EmployeeForgotPasswordController extends Controller
         $this->middleware('guest:employee');
     }
 
-    protected function broker(){
+    protected function broker()
+    {
         return Password::broker('employees');
     }
 
@@ -39,6 +40,12 @@ class EmployeeForgotPasswordController extends Controller
     {
         return view('employee.employee-forgotpassword');
     }
-
-
+    protected function sendResetLinkResponse($response)
+    {
+        return back()->with('status', 'Yêu cầu khôi phục mật khẩu thành công. Vui lòng kiểm tra email!');
+    }
+    protected function sendResetLinkFailedResponse($response)
+    {
+        return back()->with('error', 'Email không tồn tại.');
+    }
 }
