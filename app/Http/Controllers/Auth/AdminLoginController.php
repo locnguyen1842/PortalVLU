@@ -7,31 +7,29 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
-
 class AdminLoginController extends Controller
 {
-
     use AuthenticatesUsers;
 
     public function __construct()
     {
-        $this->middleware('guest:admin',['except' => ['logout']]);
+        $this->middleware('guest:admin', ['except' => ['logout']]);
     }
-    public function showLoginForm(){
+    public function showLoginForm()
+    {
         return view('admin.admin-login');
     }
-    public function login(Request $request){
-
-        if (Auth::guard('admin')->attempt(['username'=> $request->username ,'password' => $request->password],$request->remember)) {
-          if(Auth::guard('admin')->user()->pi->show == 0){
-            Auth::guard('admin')->logout();
-            return redirect()->back()->with('error_message','Tài khoản hoặc mật khẩu không đúng.');
-          }else{
-            return redirect()->route('admin.pi.index');
-          }
-
+    public function login(Request $request)
+    {
+        if (Auth::guard('admin')->attempt(['username'=> $request->username ,'password' => $request->password], $request->remember)) {
+            if (Auth::guard('admin')->user()->pi->show == 0) {
+                Auth::guard('admin')->logout();
+                return redirect()->back()->with('error_message', 'Tài khoản hoặc mật khẩu không đúng.');
+            } else {
+                return redirect()->route('admin.pi.index');
+            }
         }
-        return redirect()->back()->with('error_message','Tài khoản hoặc mật khẩu không đúng.');
+        return redirect()->back()->with('error_message', 'Tài khoản hoặc mật khẩu không đúng.');
     }
 
 
@@ -40,7 +38,4 @@ class AdminLoginController extends Controller
         Auth::guard('admin')->logout();
         return redirect()->route('admin.login');
     }
-
-
-
 }

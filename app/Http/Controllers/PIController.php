@@ -13,23 +13,23 @@ use Hash;
 
 class PIController extends Controller
 {
-    public function index(){
-      //check if have any get request named 'search' then assign value to $search
-      $search =  \Request::get('search');
+    public function index()
+    {
+        //check if have any get request named 'search' then assign value to $search
+        $search =  \Request::get('search');
 
-      //query if $search have a value
-      $pis = PI::where(function($query) use ($search){
-            if($search != null){
-                $query->where(function($q) use ($search){
-                    $q->where('employee_code','like','%'.$search.'%')
-                      ->orWhere('full_name','like','%'.$search.'%')
-                      ->orWhere('identity_card','like','%'.$search.'%');
+        //query if $search have a value
+        $pis = PI::where(function ($query) use ($search) {
+            if ($search != null) {
+                $query->where(function ($q) use ($search) {
+                    $q->where('employee_code', 'like', '%'.$search.'%')
+                      ->orWhere('full_name', 'like', '%'.$search.'%')
+                      ->orWhere('identity_card', 'like', '%'.$search.'%');
                 });
             }
+        })->orderBy('first_name', 'asc')->paginate(10)->appends(['search'=>$search]);
 
-        })->orderBy('first_name','asc')->paginate(10)->appends(['search'=>$search]);
-
-      return view('admin.pi.pi-list',compact('pis','search'));
+        return view('admin.pi.pi-list', compact('pis', 'search'));
     }
     public function getAdd()
     {
@@ -216,12 +216,13 @@ class PIController extends Controller
 
         return redirect()->back()->with('message', 'Cập Nhật thành công');
     }
-    public function getdetail($id){
+    public function getdetail($id)
+    {
         $pi = PI::find($id);
-        $dh_count = $pi->degreedetails->where('degree_id',1)->count();
-        $ths_count = $pi->degreedetails->where('degree_id',2)->count();
-        $ts_count = $pi->degreedetails->where('degree_id',3)->count();
-        return view('admin.pi.pi-detail',compact('pi','dh_count','ths_count','ts_count'));
+        $dh_count = $pi->degreedetails->where('degree_id', 1)->count();
+        $ths_count = $pi->degreedetails->where('degree_id', 2)->count();
+        $ts_count = $pi->degreedetails->where('degree_id', 3)->count();
+        return view('admin.pi.pi-detail', compact('pi', 'dh_count', 'ths_count', 'ts_count'));
     }
     public function recoverypassword($employee_id)
     {
@@ -233,8 +234,9 @@ class PIController extends Controller
         return redirect()->back()->with('message', 'Khôi phục mật khẩu thành công');//kêu thằng sơn làm đổi pass bên employee đi may làm recovery pasửod r
     }
 
-    public function import(Request $request){
-      $request->validate(
+    public function import(Request $request)
+    {
+        $request->validate(
         [
           'import_file' => 'required|mimetypes:application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|file'
         ],
@@ -244,19 +246,19 @@ class PIController extends Controller
           'import_file.file'=> 'Không tìm thấy file tải lên.',
         ]
       );
-      if($request->has('import_file')){
-          $file = $request->file('import_file');
-          Excel::import(new AdminPIImport,$file);
-          return redirect()->back()->with('message','Import thành công');
-      }
-
+        if ($request->has('import_file')) {
+            $file = $request->file('import_file');
+            Excel::import(new AdminPIImport, $file);
+            return redirect()->back()->with('message', 'Import thành công');
+        }
     }
 
-    public function delete($id){
-      $pi = PI::find($id);
-      $pi->show = 0;
-      $pi->save();
-      return redirect()->back()->with('message', 'Xóa thông tin nhân viên thành công');
+    public function delete($id)
+    {
+        $pi = PI::find($id);
+        $pi->show = 0;
+        $pi->save();
+        return redirect()->back()->with('message', 'Xóa thông tin nhân viên thành công');
     }
 //    public function getdegreedetail($id){
 //        $dedeatail = DegreeDetail::find($id);

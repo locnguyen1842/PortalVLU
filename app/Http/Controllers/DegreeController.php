@@ -7,19 +7,20 @@ use App\Degree;
 use App\DegreeDetail;
 use App\Industry;
 use App\PI;
+
 class DegreeController extends Controller
 {
-  public function getupdatedegree($id)
-  {
-      $degrees = Degree::all();
-      $industries = Industry::all();
-      $pi = PI::find($id);
+    public function getupdatedegree($id)
+    {
+        $degrees = Degree::all();
+        $industries = Industry::all();
+        $pi = PI::find($id);
 
-      return view('admin.pi.pi-updatedegree',compact('degrees','industries','pi'));
-  }
-  public function postupdatedegree(Request $request, $id)
-  {
-    $request->validate(
+        return view('admin.pi.pi-updatedegree', compact('degrees', 'industries', 'pi'));
+    }
+    public function postupdatedegree(Request $request, $id)
+    {
+        $request->validate(
         [
           'date_of_issue'=> 'required|date',
           'place_of_issue'=> 'required',
@@ -34,16 +35,15 @@ class DegreeController extends Controller
           'place_of_issue.required' => 'Nơi cấp không được bỏ trống'
         ]
       );
-      $pi = PI::find($id);
-      $degree_detail = new DegreeDetail;
-      $degree_detail->personalinformation_id = $pi->id;
-      $degree_detail->date_of_issue = $request->date_of_issue;
-      $degree_detail->place_of_issue = $request->place_of_issue;
-      $degree_detail->degree_id = $request->degree;
-      $degree_detail->industry_id = $request->industry;
+        $pi = PI::find($id);
+        $degree_detail = new DegreeDetail;
+        $degree_detail->personalinformation_id = $pi->id;
+        $degree_detail->date_of_issue = $request->date_of_issue;
+        $degree_detail->place_of_issue = $request->place_of_issue;
+        $degree_detail->degree_id = $request->degree;
+        $degree_detail->industry_id = $request->industry;
 
-      $degree_detail->save();
-       return redirect()->back()->with('message', 'Thêm thành công');
-  }
-
+        $degree_detail->save();
+        return redirect()->back()->with('message', 'Thêm thành công');
+    }
 }

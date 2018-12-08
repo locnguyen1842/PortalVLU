@@ -50,35 +50,32 @@ Route::prefix('admin')->group(function () {
 
         //delete pi
         Route::get('/pi-delete/{id}', 'PIController@delete')->name('admin.pi.delete');
-
     });
 });
 
 
-Route::prefix('')->group(function(){
-  //authenticate admin login/logout
-  Route::get('/login','Auth\EmployeeLoginController@showLoginForm')->name('employee.login');
-  Route::post('/login','Auth\EmployeeLoginController@login')->name('employee.login.submit');
-  Route::get('/logout','Auth\EmployeeLoginController@logout')->name('employee.logout');
-  //reset password
-  Route::get('/password/reset', 'Auth\EmployeeForgotPasswordController@showLinkRequestForm')->name('employee.password.request');
-  Route::post('/password/email', 'Auth\EmployeeForgotPasswordController@sendResetLinkEmail')->name('employee.password.email');
-  Route::get('/password/reset/{token}', 'Auth\EmployeeResetPasswordController@showResetForm')->name('employee.password.reset');
-  Route::post('/password/reset', 'Auth\EmployeeResetPasswordController@reset');
-  //authenicate admin route
-  Route::group(['middleware'=>['auth:employee']],function(){
-
-    Route::get('/pi-detail','EmployeeController@getdetail')->name('employee.pi.detail');
-    Route::get('/pi-update','EmployeeController@getupdate')->name('employee.pi.update');
-    Route::post('/pi-update','EmployeeController@postupdate')->name('employee.pi.update');
-    //update degree
-      Route::get('/pi-updatedegree','EmployeeController@getupdatedegree')->name('employee.pi.update.degree');
-      Route::post('/pi-updatedegree','EmployeeController@postupdatedegree')->name('employee.pi.update.degree');
-      //update degree
-      Route::get('/pi-changepass','EmployeeController@getchangepass')->name('employee.pi.change.pass');
-      Route::post('/pi-changepass','EmployeeController@postchangepass')->name('employee.pi.change.pass');
-  });
-
+Route::prefix('')->group(function () {
+    //authenticate admin login/logout
+    Route::get('/login', 'Auth\EmployeeLoginController@showLoginForm')->name('employee.login');
+    Route::post('/login', 'Auth\EmployeeLoginController@login')->name('employee.login.submit');
+    Route::get('/logout', 'Auth\EmployeeLoginController@logout')->name('employee.logout');
+    //reset password
+    Route::get('/password/reset', 'Auth\EmployeeForgotPasswordController@showLinkRequestForm')->name('employee.password.request');
+    Route::post('/password/email', 'Auth\EmployeeForgotPasswordController@sendResetLinkEmail')->name('employee.password.email');
+    Route::get('/password/reset/{token}', 'Auth\EmployeeResetPasswordController@showResetForm')->name('employee.password.reset');
+    Route::post('/password/reset', 'Auth\EmployeeResetPasswordController@reset');
+    //authenicate admin route
+    Route::group(['middleware'=>['auth:employee']], function () {
+        Route::get('/pi-detail', 'EmployeeController@getdetail')->name('employee.pi.detail');
+        Route::get('/pi-update', 'EmployeeController@getupdate')->name('employee.pi.update');
+        Route::post('/pi-update', 'EmployeeController@postupdate')->name('employee.pi.update');
+        //update degree
+        Route::get('/pi-updatedegree', 'EmployeeController@getupdatedegree')->name('employee.pi.update.degree');
+        Route::post('/pi-updatedegree', 'EmployeeController@postupdatedegree')->name('employee.pi.update.degree');
+        //update degree
+        Route::get('/pi-changepass', 'EmployeeController@getchangepass')->name('employee.pi.change.pass');
+        Route::post('/pi-changepass', 'EmployeeController@postchangepass')->name('employee.pi.change.pass');
+    });
 });
 
 //show detail a persional

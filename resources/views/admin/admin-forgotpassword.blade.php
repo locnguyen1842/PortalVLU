@@ -12,54 +12,54 @@
 </head>
 
 <body class="cm-login">
-      <div class="text-center" style="padding-top:30px;">
-          <img src="{{asset('img/logoVL.png')}}" width="300" height="100">
-      </div>
+    <div class="text-center" style="padding-top:30px;">
+        <img src="{{asset('img/logoVL.png')}}" width="300" height="100">
+    </div>
 
-      <div class="col-sm-6 col-md-4 col-lg-3" style="margin:40px auto; float:none;">
-          <form method="post" action="{{route('admin.password.email')}}">
-              {{ csrf_field() }}
+    <div class="col-sm-6 col-md-4 col-lg-3" style="margin:40px auto; float:none;">
+        <form method="post" action="{{route('admin.password.email')}}">
+            {{ csrf_field() }}
 
-              <div class="panel">
+            <div class="panel">
                 <div class="panel-heading">
-                  <h4>Quên mật khẩu - Admin</h4>
+                    <h4>Quên mật khẩu - Admin</h4>
 
                 </div>
                 <div class="panel-body">
-                  @if (session('status'))
-                      <div class="alert alert-success" role="alert">
-                          {{ session('status') }}
-                      </div>
-                  @endif
-                  @if (count($errors) > 0)
-                      <div class="alert alert-danger">
+                    @if (session('status'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
+                    @endif
+                    @if (count($errors) > 0)
+                    <div class="alert alert-danger">
 
-                              @foreach ($errors->all() as $error)
-                                  {{ $error }}
-                              @endforeach
+                        @foreach ($errors->all() as $error)
+                        {{ $error }}
+                        @endforeach
 
-                      </div>
-                  @endif
+                    </div>
+                    @endif
 
 
-                  <div class="form-group">
-                      <div class="input-group">
-                        <div class="input-group-addon"><i class="fa fa-fw fa-user"></i></div>
-                          <input id="email" type="email" placeholder="Nhập mail khôi phục" class="form-control" name="email" value="{{ old('email') }}" required>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-fw fa-user"></i></div>
+                            <input id="email" type="email" placeholder="Nhập mail khôi phục" class="form-control" name="email" value="{{ old('email') }}" required>
 
-                      </div>
-                  </div>
-                  <div style="margin-top:20px" class="col-xs-12">
-                      <button type="submit" class="btn btn-block btn-primary">Gửi mail khôi phục mật khẩu</button>
-                  </div>
+                        </div>
+                    </div>
+                    <div style="margin-top:20px" class="col-xs-12">
+                        <button type="submit" class="btn btn-block btn-primary">Gửi mail khôi phục mật khẩu</button>
+                    </div>
 
                 </div>
 
-              </div>
+            </div>
 
 
-          </form>
-      </div>
+        </form>
+    </div>
     </div>
 
 
