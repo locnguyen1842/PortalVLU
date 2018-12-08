@@ -250,7 +250,7 @@ class PIController extends Controller
           'import_file' => 'required|mimetypes:application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|file'
         ],
         [
-          'import_file.requied'=> 'Vui lòng chọn file để import.',
+          'import_file.required'=> 'Vui lòng chọn file để import.',
           'import_file.mimetypes'=> 'File tải lên không đúng định dạng excel (xls,xlsx).',
           'import_file.file'=> 'Không tìm thấy file tải lên.',
         ]

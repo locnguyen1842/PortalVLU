@@ -61,18 +61,6 @@
                                         <label for="inputPassword3" class="col-sm-3  ">Dân tộc </label>
                                         <span for="" class="col-sm-9 text-nowrap">{{$pi->nation}}</span>
                                     </div>
-
-
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">Thông tin liên hệ</div>
-                            <div class="panel-body">
-                                <form class="form-horizontal" action="{{route('employee.pi.detail')}}" method="get">
-                                    {{csrf_field()}}
                                     <div class="form-group">
                                         <label for="inputPassword3" class="col-sm-3  ">Địa chỉ Email </label>
                                         <span for="" class="col-sm-9 text-nowrap">{{$pi->email_address}}</span>
@@ -89,19 +77,6 @@
                                         <label for="inputPassword3" class="col-sm-3  ">Địa chỉ thường trú </label>
                                         <span for="" class="col-sm-9 text-nowrap">{{$pi->permanent_address}}</span>
                                     </div>
-
-
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-
-                        <div class="panel panel-default">
-                            <div class="panel-heading">Thông tin xác thực</div>
-                            <div class="panel-body">
-                                <form class="form-horizontal" action="{{route('employee.pi.detail')}}" method="get">
-                                    {{csrf_field()}}
                                     <div class="form-group">
                                         <label for="inputEmail3" class="col-sm-3  ">CMND </label>
                                         <span for="" class="col-sm-9 text-nowrap">{{$pi->identity_card}}</span>
@@ -114,18 +89,12 @@
                                         <label for="inputPassword3" class="col-sm-3  ">Nơi cấp </label>
                                         <span for="" class="col-sm-9 text-nowrap">{{$pi->place_of_issue}}</span>
                                     </div>
-                                    {{-- <div class="form-group">
-                                                <label for="inputPassword3" class="col-sm-3  ">Bằng Cấp </label>
 
-
-                                                </div>
-                                            </div> --}}
                                 </form>
                             </div>
                         </div>
                     </div>
-
-
+                
                 </div>
 
                 <div class="col-sm-5">
