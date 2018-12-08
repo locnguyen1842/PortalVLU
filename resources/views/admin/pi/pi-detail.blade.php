@@ -27,7 +27,7 @@
                 <div class="col-sm-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">Thông tin cá nhân <br>
-                            <a href="{{route('admin.pi.add')}}">
+                            <a href="{{route('admin.pi.update',$pi->id)}}">
                                 <button type="button" name="button" class="btn btn-xs btn-primary">Cập nhật</button>
                             </a>
                         </div>
