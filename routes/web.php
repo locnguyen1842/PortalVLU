@@ -51,6 +51,9 @@ Route::prefix('admin')->group(function () {
         //delete pi
         Route::get('/pi-delete/{id}', 'PIController@delete')->name('admin.pi.delete');
 
+        //change roles
+        Route::post('/pi-role/{pi_id}', 'PIController@rolechange')->name('admin.pi.role.change');
+
     });
 });
 

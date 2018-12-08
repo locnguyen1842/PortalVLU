@@ -10,6 +10,7 @@ use App\Imports\AdminPIImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Employee;
 use Hash;
+use App\Admin;
 
 class PIController extends Controller
 {
@@ -231,11 +232,13 @@ class PIController extends Controller
         if($pi->admin != ''){
           $pi->employee->password = Hash::make(strtoupper($pi->employee_code));
           $pi->admin->password = Hash::make(strtoupper($pi->employee_code));
+          $pi->employee->save();
+          $pi->admin->save();
         }else{
           $pi->employee->password = Hash::make(strtoupper($pi->employee_code));
+          $pi->employee->save();
         }
-        $pi->employee->save();
-        $pi->admin->save();
+
         return redirect()->back()->with('message', 'Khôi phục mật khẩu thành công');
     }
 
@@ -258,7 +261,7 @@ class PIController extends Controller
 
     }
 
-    public function delete($id){
+    public function delete($pi_id){
       $pi = PI::find($id);
       $pi->show = 0;
       $pi->save();
@@ -268,4 +271,33 @@ class PIController extends Controller
 //        $dedeatail = DegreeDetail::find($id);
 //        return view('admin.pi.pi-detail',compact('dedeatail'));
 //    }
+
+    public function rolechange(Request $request,$pi_id){
+      $pi = PI::find($pi_id);
+      if($request->role == 0){
+        //check if is admin
+        if($pi->admin !=''){
+          $admin = $pi->admin;
+          $admin->delete();
+          return redirect()->back()->with('message', 'Thay đổi vai trò tài khoản thành công');
+        }else if($pi->admin ==''){
+          return redirect()->back()->with('message', 'Thay đổi vai trò tài khoản thành công');
+        }
+      }else if($request->role == 1){
+        //check if isn't admin
+        if($pi->admin ==''){
+          $admin = new Admin;
+          $admin->username = $pi->employee_code;
+          $admin->password = Hash::make($pi->employee_code);
+          $admin->email = $pi->email_address;
+          $admin->personalinformation_id = $pi->id;
+          $admin->save();
+          return redirect()->back()->with('message', 'Thay đổi vai trò tài khoản thành công');
+        }
+        //check if is admin
+        else if($pi->admin !=''){
+          return redirect()->back()->with('message', 'Thay đổi vai trò tài khoản thành công');
+        }
+      }
+    }
 }
