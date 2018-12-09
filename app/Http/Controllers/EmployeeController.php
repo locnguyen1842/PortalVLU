@@ -184,4 +184,63 @@ class EmployeeController extends Controller
             return redirect()->back()->with('error_message', 'Mật khẩu cũ không chính xác');
         }
     }
+    //get degree
+    public function getdegreedetail($b)
+    {
+
+        $pi = Auth::guard('employee')->user()->pi;
+
+        $degrees = DegreeDetail::where('personalinformation_id',$pi->id)->where('degree_id',$b)->get();
+
+
+        $degree = Degree::where('id',$b);
+        $industries = Industry::all();
+        //$degreede = DegreeDetail::all();
+
+
+        return view('employee.pi.pi-degreedetail', compact('degrees', 'industries','pi'));
+    }
+    public function getupdatedegreedetail( $b)
+    {
+
+        $pi = Auth::guard('employee')->user()->pi;
+
+        $degree = DegreeDetail::find($b);//where('personalinformation_id',$id)->where('degree_id',$b)->get();
+
+
+        $degrees = Degree::all();
+        $industries = Industry::all();
+        //$degreede = DegreeDetail::all();
+
+
+        return view('employee.pi.pi-updatedetaildegree', compact('degrees','degree', 'industries','pi'));
+    }
+    public function postupdatedegreedetail(Request $request,$b)
+    {
+        $request->validate(
+            [
+                'date_of_issue'=> 'required|date',
+                'place_of_issue'=> 'required',
+                'degree'=> 'required',
+                'industry'=> 'required'
+            ],
+            [
+                'date_of_issue.required' => 'Ngày cấp không được bỏ trống',
+                'date_of_issue.date' => 'Ngày cấp không đúng định dạng',
+                'degree.required' => 'Bằng cấp không được bỏ trống',
+                'industry.required' => 'Khối ngành không được bỏ trống',
+                'place_of_issue.required' => 'Nơi cấp không được bỏ trống'
+            ]
+        );
+        $pi = Auth::guard('employee')->user()->pi;
+
+        $degree = DegreeDetail::find($b);
+        $degree->date_of_issue = $request->date_of_issue;
+        $degree->place_of_issue = $request->place_of_issue;
+        $degree->degree_id = $request->degree;
+        $degree->industry_id = $request->industry;
+
+        $degree->save();
+        return redirect()->back()->with('message', 'Thêm thành công');
+    }
 }

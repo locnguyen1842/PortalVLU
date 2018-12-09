@@ -1,4 +1,4 @@
-@extends('admin.master')
+@extends('employee.master')
 @section('title','Chi tiết bằng cấp')
 @section('breadcrumb')
 <nav class="cm-navbar cm-navbar-default cm-navbar-slideup">
@@ -15,12 +15,12 @@
 @section('content')
 <div class="panel panel-default">
     <div class="panel-heading">Chi tiết bằng cấp<br>
-        <a href="{{route('admin.pi.update.degree',$pi->id)}}">
+        <a href="{{route('employee.pi.update.degree',$pi->id)}}">
             <button type="button" name="button" class="btn btn-xs btn-success">Thêm mới</button>
         </a>
     </div>
     <div class="table-responsive">
-        <table class="table table-hover" action="{{route('admin.pi.degreedetail',[$pi->id,1])}}" method="get" style="margin-bottom:0">
+        <table class="table table-hover" action="{{route('employee.pi.degreedetail',1)}}" method="get" style="margin-bottom:0">
             <thead>
                 <tr>
                     <th>Loại</th>
@@ -39,7 +39,7 @@
                         {{--{{date('d-m-Y',($degree->date_of_issue))}}--}}
                     <td class="col-sm-2">{{$degree->place_of_issue}}</td>
                         <td class="col-sm-3">
-                            <a href="{{route('admin.pi.update.detail.degree',[$pi->id, $degree->id])}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Cập nhật" href="javascript:" class="tooltip-test">
+                            <a href="{{route('employee.pi.update.detail.degree', $degree->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Cập nhật" href="javascript:" class="tooltip-test">
                           <span class=""><i class="fa fa-lg fa-edit text-primary"></i>
                               <span class="mdi mdi-close"></span>
                           </span>

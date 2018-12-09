@@ -112,7 +112,7 @@
                                         <label for="inputEmail3" class="col-sm-4  ">Số bằng đại học </label>
                                         <span for="" class="col-sm-3 text-nowrap">{{$dh_count}}</span>
                                         @if ($dh_count > 0)
-                                        <span class="col-sm-5 text-nowrap"><a href="#"><small>Chi tiết</small></a> </span>
+                                        <span class="col-sm-5 text-nowrap"><a href="{{route('employee.pi.degreedetail',1)}}"><small>Chi tiết</small></a> </span>
                                         @endif
 
                                     </div>
@@ -120,7 +120,7 @@
                                         <label for="inputEmail3" class="col-sm-4 ">Số bằng thạc sĩ </label>
                                         <span for="" class="col-sm-3 text-nowrap">{{$ths_count}}</span>
                                         @if ($ths_count > 0)
-                                        <span class="col-sm-5 text-nowrap"><a href="#"><small>Chi tiết</small></a> </span>
+                                        <span class="col-sm-5 text-nowrap"><a href="{{route('employee.pi.degreedetail',2)}}"><small>Chi tiết</small></a> </span>
                                         @endif
 
                                     </div>
@@ -128,7 +128,7 @@
                                         <label for="inputEmail3" class="col-sm-4  ">Số bằng tiến sĩ </label>
                                         <span for="" class="col-sm-3 text-nowrap">{{$ts_count}}</span>
                                         @if ($ts_count > 0)
-                                        <span class="col-sm-5 text-nowrap"><a href="#"><small>Chi tiết</small></a> </span>
+                                        <span class="col-sm-5 text-nowrap"><a href="{{route('employee.pi.degreedetail',3)}}"><small>Chi tiết</small></a> </span>
                                         @endif
 
                                     </div>

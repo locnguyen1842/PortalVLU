@@ -24,4 +24,8 @@ class DegreeDetail extends Model
       return $this->belongsTo('App\Degree','degree_id','id');
     }
 
+    public function industry(){
+        return $this->belongsTo('App\Industry','industry_id','id');
+    }
+
 }

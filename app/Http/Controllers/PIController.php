@@ -263,7 +263,7 @@ class PIController extends Controller
     }
 
     public function delete($pi_id){
-      $pi = PI::find($id);
+      $pi = PI::find($pi_id);
       $pi->show = 0;
       $pi->save();
       return redirect()->back()->with('message', 'Xóa thông tin nhân viên thành công');
@@ -301,4 +301,5 @@ class PIController extends Controller
         }
       }
     }
+
 }

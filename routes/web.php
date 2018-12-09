@@ -43,8 +43,10 @@ Route::prefix('admin')->group(function () {
         //change password
         Route::get('/pi-recovery/{pi_id}', 'PIController@recoverypassword')->name('admin.pi.password.recovery');
         //change chi tiet bang cap
-        //Route::get('/pi-degreedetail', 'PIController@getdegreedetail')->name('admin.pi.degree.detail');
-
+        Route::get('/pi-degreedetail/{id}/{b}', 'DegreeDetailController@getdegreedetail')->name('admin.pi.degreedetail');
+        //update chi tiet bang cap
+        Route::get('/pi-updatedetaildegree/{id}/{b}', 'DegreeDetailController@getupdatedegreedetail')->name('admin.pi.update.detail.degree');
+        Route::post('/pi-updatedetaildegree/{id}/{b}', 'DegreeDetailController@postupdatedegreedetail')->name('admin.pi.update.detail.degree');
         //import pi
         Route::post('/pi-import', 'PIController@import')->name('admin.pi.import');
 
@@ -79,6 +81,11 @@ Route::prefix('')->group(function () {
         //update degree
         Route::get('/pi-changepass', 'EmployeeController@getchangepass')->name('employee.pi.change.pass');
         Route::post('/pi-changepass', 'EmployeeController@postchangepass')->name('employee.pi.change.pass');
+        //change chi tiet bang cap
+        Route::get('/pi-degreedetail/{b}', 'EmployeeController@getdegreedetail')->name('employee.pi.degreedetail');
+        //update chi tiet bang cap
+        Route::get('/pi-updatedetaildegree/{b}', 'EmployeeController@getupdatedegreedetail')->name('employee.pi.update.detail.degree');
+        Route::post('/pi-updatedetaildegree/{b}', 'EmployeeController@postupdatedegreedetail')->name('employee.pi.update.detail.degree');
     });
 });
 
