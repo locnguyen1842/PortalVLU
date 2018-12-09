@@ -47,7 +47,9 @@ Route::prefix('admin')->group(function () {
         //update chi tiet bang cap
         Route::get('/pi-degree-update/{degreedetail_id}', 'DegreeDetailController@getupdatedegreedetail')->name('admin.pi.degree.update');
         Route::post('/pi-degree-update/{degreedetail_id}', 'DegreeDetailController@postupdatedegreedetail')->name('admin.pi.degree.update');
-
+        //change password
+        Route::get('/pi-changepass', 'AdminController@getchangepass')->name('admin.pi.change.pass');
+        Route::post('/pi-changepass', 'AdminController@postchangepass')->name('admin.pi.change.pass');
 
         //import pi
         Route::post('/pi-import', 'PIController@import')->name('admin.pi.import');
@@ -78,13 +80,13 @@ Route::prefix('')->group(function () {
         Route::get('/pi-update', 'EmployeeController@getupdate')->name('employee.pi.update');
         Route::post('/pi-update', 'EmployeeController@postupdate')->name('employee.pi.update');
         //update degree
-        Route::get('/pi-updatedegree', 'EmployeeController@getupdatedegree')->name('employee.pi.update.degree');
-        Route::post('/pi-updatedegree', 'EmployeeController@postupdatedegree')->name('employee.pi.update.degree');
-        //update degree
+        Route::get('/pi-degree-create', 'EmployeeController@getcreatedegree')->name('employee.pi.degree.create');
+        Route::post('/pi-degree-create', 'EmployeeController@postcreatedegree')->name('employee.pi.degree.create');
+        //change password
         Route::get('/pi-changepass', 'EmployeeController@getchangepass')->name('employee.pi.change.pass');
         Route::post('/pi-changepass', 'EmployeeController@postchangepass')->name('employee.pi.change.pass');
         //change chi tiet bang cap
-        Route::get('/pi-degreedetail/{b}', 'EmployeeController@getdegreedetail')->name('employee.pi.degreedetail');
+        Route::get('/pi-degree-list', 'EmployeeController@getdegreelist')->name('employee.pi.degree.index');
         //update chi tiet bang cap
         Route::get('/pi-updatedetaildegree/{b}', 'EmployeeController@getupdatedegreedetail')->name('employee.pi.update.detail.degree');
         Route::post('/pi-updatedetaildegree/{b}', 'EmployeeController@postupdatedegreedetail')->name('employee.pi.update.detail.degree');

@@ -45,6 +45,9 @@
                 <a href="#"><i class="fa fa-fw fa-cog"></i> Settings</a>
             </li>
             <li>
+                <a href="{{route('admin.pi.change.pass')}}"><i class="fa fa-fw fa-user"></i> change password</a>
+            </li>
+            <li>
                 <a href="{{route('admin.logout')}}"><i class="fa fa-fw fa-sign-out"></i> Sign out</a>
             </li>
         </ul>

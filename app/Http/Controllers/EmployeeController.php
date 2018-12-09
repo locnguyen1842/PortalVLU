@@ -111,15 +111,15 @@ class EmployeeController extends Controller
 
         return redirect()->back()->with('message', 'Cập Nhật thành công');
     }
-    public function getupdatedegree()
+    public function getcreatedegree()
     {
         $degrees = Degree::all();
         $industries = Industry::all();
         $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
 
-        return view('employee.pi.pi-updatedegree', compact('degrees', 'industries', 'pi'));
+        return view('employee.pi.pi-createdegreedetail', compact('degrees', 'industries', 'pi'));
     }
-    public function postupdatedegree(Request $request)
+    public function postcreatedegree(Request $request)
     {
         $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
         $request->validate(
@@ -184,20 +184,20 @@ class EmployeeController extends Controller
         }
     }
     //get degree
-    public function getdegreedetail($b)
+    public function getdegreelist()
     {
 
         $pi = Auth::guard('employee')->user()->pi;
 
-        $degrees = DegreeDetail::where('personalinformation_id',$pi->id)->where('degree_id',$b)->get();
+        $degrees = DegreeDetail::where('personalinformation_id',$pi->id)->get();
 
 
-        $degree = Degree::where('id',$b);
+        $degree = Degree::where('id');
         $industries = Industry::all();
         //$degreede = DegreeDetail::all();
 
 
-        return view('employee.pi.pi-degreedetail', compact('degrees', 'industries','pi'));
+        return view('employee.pi.pi-degree-list', compact('degrees', 'industries','pi'));
     }
     public function getupdatedegreedetail( $b)
     {

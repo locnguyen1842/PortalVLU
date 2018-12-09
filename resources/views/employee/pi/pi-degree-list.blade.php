@@ -5,8 +5,8 @@
     <div class="cm-flex">
         <div class="cm-breadcrumb-container">
             <ol class="breadcrumb">
-                <li><a href="#">Home</a></li>
-                <li class="active">Chi tiết bằng cấp</li>
+                <li><a href="{{route('employee.pi.detail')}}">Thông tin cá nhân</a></li>
+                <li >Danh sách bằng cấp</li>
             </ol>
         </div>
     </div>
@@ -15,12 +15,12 @@
 @section('content')
 <div class="panel panel-default">
     <div class="panel-heading">Chi tiết bằng cấp<br>
-        <a href="{{route('employee.pi.update.degree',$pi->id)}}">
+        <a href="{{route('employee.pi.degree.create',$pi->id)}}">
             <button type="button" name="button" class="btn btn-xs btn-success">Thêm mới</button>
         </a>
     </div>
     <div class="table-responsive">
-        <table class="table table-hover" action="{{route('employee.pi.degreedetail',1)}}" method="get" style="margin-bottom:0">
+        <table class="table table-hover" action="{{route('employee.pi.degree.index')}}" method="get" style="margin-bottom:0">
             <thead>
                 <tr>
                     <th>Loại</th>
