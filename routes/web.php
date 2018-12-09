@@ -36,17 +36,19 @@ Route::prefix('admin')->group(function () {
         //update personal information
         Route::get('/pi-update/{id}', 'PIController@getupdate')->name('admin.pi.update');
         Route::post('/pi-update/{id}', 'PIController@postupdate')->name('admin.pi.update');
-        //update certification information
-        Route::get('/pi-updatedegree/{id}', 'DegreeController@getupdatedegree')->name('admin.pi.update.degree');
-        // doi ten route lai vd: admin.pi.degree.update
-        Route::post('/pi-updatedegree/{id}', 'DegreeController@postupdatedegree')->name('admin.pi.update.degree');
+
         //change password
         Route::get('/pi-recovery/{pi_id}', 'PIController@recoverypassword')->name('admin.pi.password.recovery');
         //change chi tiet bang cap
-        Route::get('/pi-degreedetail/{id}/{b}', 'DegreeDetailController@getdegreedetail')->name('admin.pi.degreedetail');
+        Route::get('/pi-degree-list/{pi_id}', 'DegreeDetailController@getdegreelist')->name('admin.pi.degree.index');
+        //create degree information
+        Route::get('/pi-degree-create/{pi_id}', 'DegreeDetailController@getcreatedegree')->name('admin.pi.degree.create');
+        Route::post('/pi-degree-create/{pi_id}', 'DegreeDetailController@postcreatedegree')->name('admin.pi.degree.create');
         //update chi tiet bang cap
-        Route::get('/pi-updatedetaildegree/{id}/{b}', 'DegreeDetailController@getupdatedegreedetail')->name('admin.pi.update.detail.degree');
-        Route::post('/pi-updatedetaildegree/{id}/{b}', 'DegreeDetailController@postupdatedegreedetail')->name('admin.pi.update.detail.degree');
+        Route::get('/pi-degree-update/{degreedetail_id}', 'DegreeDetailController@getupdatedegreedetail')->name('admin.pi.degree.update');
+        Route::post('/pi-degree-update/{degreedetail_id}', 'DegreeDetailController@postupdatedegreedetail')->name('admin.pi.degree.update');
+
+
         //import pi
         Route::post('/pi-import', 'PIController@import')->name('admin.pi.import');
 

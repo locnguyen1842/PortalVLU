@@ -101,7 +101,7 @@
                 <div class="col-sm-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">Thông tin bằng cấp <br>
-                            <a href="{{route('admin.pi.update.degree',$pi->id)}}">
+                            <a href="{{route('admin.pi.degree.create',$pi->id)}}">
                                 <button type="button" name="button" class="btn btn-xs btn-success">Thêm mới</button>
                             </a>
                         </div>
@@ -110,26 +110,21 @@
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-4  ">Số bằng đại học </label>
                                     <span for="" class="col-sm-3 text-nowrap">{{$dh_count}}</span>
-                                    @if($dh_count >0)
-                                    <span class="col-sm-5 text-nowrap"><a href="{{route('admin.pi.degreedetail',[$pi->id,1])}}"><small>Chi tiết</small></a> </span>
-                                    @endif
                                 </div>
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-4 ">Số bằng thạc sĩ </label>
                                     <span for="" class="col-sm-3 text-nowrap">{{$ths_count}}</span>
-                                    @if($ths_count >0)
-                                    <span class="col-sm-5 text-nowrap"><a href="{{route('admin.pi.degreedetail',[$pi->id,2])}}"><small>Chi tiết</small></a> </span>
-                                    @endif
                                 </div>
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-4  ">Số bằng tiến sĩ </label>
                                     <span for="" class="col-sm-3 text-nowrap">{{$ts_count}}</span>
-                                    @if($ts_count >0)
-                                    <span class="col-sm-5 text-nowrap"><a href="{{route('admin.pi.degreedetail',[$pi->id,3])}}"><small>Chi tiết</small></a> </span>
-                                    @endif
 
                                 </div>
                             </form>
+                        </div>
+                        <div class="panel-footer text-center">
+                          <label><a href="{{route('admin.pi.degree.index',$pi->id)}}">Chi tiết</a> </label>
+
                         </div>
                     </div>
                 </div>
