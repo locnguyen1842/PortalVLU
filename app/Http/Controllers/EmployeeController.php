@@ -51,8 +51,7 @@ class EmployeeController extends Controller
                 'place_of_issue'=> 'required|min:5|max:100'
             ],
             [
-                'employee_code.required'=> 'Mã giảng viên không được bỏ trống',
-                'employee_code.unique'=> 'Mã giảng viên đã tồn tại',
+              
                 'full_name.required' =>'Họ và tên không được bỏ trống',
                 'full_name.min' =>'Họ và tên phải lớn hơn 4 kí tự',
                 'full_name.max' =>'Họ và tên phải nhỏ hơn 60 kí tự',
