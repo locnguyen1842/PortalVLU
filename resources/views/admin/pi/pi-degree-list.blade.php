@@ -89,18 +89,34 @@
                         {{--{{date('d-m-Y',($degree->date_of_issue))}}--}}
                     <td class="col-sm-2">{{$degree->place_of_issue}}</td>
                         <td class="col-sm-3">
-                            <a href="{{route('admin.pi.degree.update',$degree->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Cập nhật" href="javascript:" class="tooltip-test">
+                            <a href="{{route('admin.pi.degree.update',$degree->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Cập nhật" class="tooltip-test">
                           <span class=""><i class="fa fa-lg fa-edit text-primary"></i>
                               <span class="mdi mdi-close"></span>
                           </span>
                             </a>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa" href="javascript:" class="delete_pi tooltip-test ml-10">
+                            <a href="{{route('admin.pi.degree.delete',$degree->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa"  class="delete_degree tooltip-test ml-10">
                           <span class=""><i class="fa fa-lg fa-trash text-danger"></i>
                               <span class="mdi mdi-close"></span>
                           </span>
                             </a>
                         </td>
                     </tr>
+
+                    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="degree-delete-modal">
+
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Bạn thực sự muốn khôi phục mật khẩu cho tài khoản này ?</h4>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" id="btn-pd-yes">Có</button>
+                                    <button type="button" class="btn btn-default" id="btn-pd-no">Không</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
             @endforeach
             </tbody>
         </table>
@@ -110,25 +126,35 @@
       {{$degrees->links()}}
     </div>
 </div>
-{{--<script type="text/javascript">--}}
-    {{--$(document).ready(function() {--}}
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".delete_degree").on('click',function (e) {
+            e.preventDefault(); //huy bo thao tac mac dinh.
+            $("#degree-delete-modal").modal('show'); //show cai div co id pi-delete-modal
+            var delete_pi_form = $(this).attr('href'); //lay gia tri href cua class delete_degree
+            var modalConfirm = function(callback){
+                //khi nhan nut yes
+                $("#btn-pd-yes").on("click", function(){
+                    callback(true);
+                    $("#degree-delete-modal").modal('hide');
+                });
+                //khi nhan nut no
+                $("#btn-pd-no").on("click", function(){
+                    callback(false);
+                    $("#degree-delete-modal").modal('hide');
+                });
+            };
+            modalConfirm(function(confirm){
+                if(confirm){
+                    //khi nhan nut yes
+                    //thuc hien chuyen tiep den url delete_pi_form = $(this).attr('href');
+                    window.location.href = delete_pi_form;
 
-        {{--$(".search_tag").on('click', function() {--}}
-            {{--var url = {!!json_encode(route('admin.pi.index'), JSON_UNESCAPED_SLASHES) !!--}}
-            {{--};--}}
-            {{--var search = "";--}}
-            {{--window.location.href = url;--}}
-        {{--});--}}
-        {{--$('#excel-import').on('change', function(e) {--}}
-            {{--var val = $('#excel-import').val();--}}
-            {{--if (val == '') {--}}
-                {{--$('#excel-import').removeClass('excel-after');--}}
-                {{--$('#excel-import').addClass('excel-default');--}}
-            {{--} else {--}}
-                {{--$('#excel-import').removeClass('excel-default');--}}
-                {{--$('#excel-import').addClass('excel-after');--}}
-            {{--}--}}
-        {{--});--}}
-    {{--});--}}
-{{--</script>--}}
+                }else{
+
+                }
+            });
+        });
+    });
+</script>
 @endsection

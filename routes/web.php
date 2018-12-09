@@ -60,6 +60,9 @@ Route::prefix('admin')->group(function () {
         //change roles
         Route::post('/pi-role/{pi_id}', 'PIController@rolechange')->name('admin.pi.role.change');
 
+        //delete degree
+        Route::get('/pi-degree-delete/{degreedetail_id}', 'DegreeDetailController@delete')->name('admin.pi.degree.delete');
+
     });
 });
 
