@@ -22,7 +22,7 @@
 
             <div class="panel">
                 <div class="panel-heading">
-                    <h4>Đăng Nhập - Admin</h4>
+                    <h4>Đăng Nhập - Quản trị viên</h4>
 
                 </div>
                 <div class="panel-body">

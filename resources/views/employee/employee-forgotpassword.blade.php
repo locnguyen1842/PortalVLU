@@ -50,7 +50,7 @@
                   <div class="form-group">
                       <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-fw fa-user"></i></div>
-                          <input id="email" type="email" placeholder="Nhập mail khôi phục" class="form-control" name="email" value="{{ old('email') }}" required>
+                          <input id="employee_code" type="text" placeholder="Nhập mã nhân viên" class="form-control" name="employee_code" value="{{ old('employee_code') }}" required>
 
                       </div>
                   </div>
@@ -58,6 +58,9 @@
                       <button type="submit" class="btn btn-block btn-primary">Gửi mail khôi phục mật khẩu</button>
                   </div>
 
+                </div>
+                <div class="panel-footer text-center">
+                    <a href="{{route('employee.login')}}">Quay về trang đăng nhập</a>
                 </div>
 
               </div>
