@@ -109,7 +109,7 @@
                               <span class="mdi mdi-close"></span>
                           </span>
                       </a>
-                      <a href="{{route('admin.pi.delete',$item->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa" href="javascript:" class="delete_pi tooltip-test ml-10">
+                      <a href="{{route('admin.pi.delete',$item->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa" class="delete_pi tooltip-test ml-10">
                           <span class=""><i class="fa fa-lg fa-trash text-danger"></i>
                               <span class="mdi mdi-close"></span>
                           </span>
@@ -117,6 +117,24 @@
                      </td>
 
                 </tr>
+                {{--modal delete pi--}}
+
+                    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="pi-delete-modal">
+
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Bạn thực sự muốn khôi phục mật khẩu cho tài khoản này ?</h4>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" id="btn-pd-yes">Có</button>
+                                    <button type="button" class="btn btn-default" id="btn-pd-no">Không</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 @endforeach
               @else
               <tr>
@@ -137,7 +155,7 @@
     $(document).ready(function() {
 
         $(".search_tag").on('click', function() {
-            var url = {!!json_encode(route('admin.pi.index'), JSON_UNESCAPED_SLASHES) !!};
+            var url = '{!!json_encode(route('admin.pi.index'), JSON_UNESCAPED_SLASHES) !!}';
             var search = "";
             window.location.href = url;
         });
@@ -153,25 +171,25 @@
         });
 
         $(".delete_pi").on('click',function (e) {
-
             e.preventDefault();
-            $("#mi-modal").modal('show');
-            var delete_pi_url = $(this).attr('href');
+            $("#pi-delete-modal").modal('show');
+            var delete_pi_form = $(this).attr('href');
             var modalConfirm = function(callback){
 
-                $("#modal-btn-si").on("click", function(){
+                $("#btn-pd-yes").on("click", function(){
                     callback(true);
-                    $("#mi-modal").modal('hide');
+                    $("#pi-delete-modal").modal('hide');
                 });
 
-                $("#modal-btn-no").on("click", function(){
+                $("#btn-pd-no").on("click", function(){
                     callback(false);
-                    $("#mi-modal").modal('hide');
+                    $("#pi-delete-modal").modal('hide');
                 });
             };
             modalConfirm(function(confirm){
                 if(confirm){
-                    window.location.href = delete_pi_url;
+                    window.location.href = delete_pi_form;
+
                 }else{
 
                 }

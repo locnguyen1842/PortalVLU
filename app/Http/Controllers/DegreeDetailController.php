@@ -93,4 +93,9 @@ class DegreeDetailController extends Controller
         $degree_detail->save();
         return redirect()->back()->with('message', 'Thêm thành công');
     }
+    public function delete($degreedetail_id){
+        $degree = DegreeDetail::find($degreedetail_id);
+        $degree->delete();
+        return redirect()->back()->with('message', 'Xóa thông tin nhân viên thành công');
+    }
 }

@@ -5,9 +5,8 @@
         <div class="cm-flex">
             <div class="cm-breadcrumb-container">
                 <ol class="breadcrumb">
-                    <li><a href="#">Home</a></li>
                     <li><a href="{{route('employee.pi.detail')}}">Thông tin cá nhân</a></li>
-                    <li class="active">Thêm mới bằng cấp</li>
+                    <li>Thêm mới bằng cấp</li>
                 </ol>
             </div>
         </div>
@@ -23,7 +22,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">Cập nhật thông tin bằng cấp</div>
         <div class="panel-body">
-            <form class="form-horizontal" action="{{route('employee.pi.update.degree')}}" method="post">
+            <form class="form-horizontal" action="{{route('employee.pi.degree.create')}}" method="post">
                 {{csrf_field()}}
                 <div class="form-group">
                     <div class="col-sm-6">
