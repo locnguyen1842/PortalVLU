@@ -39,13 +39,13 @@
             </li>
             <li class="divider"></li>
             <li>
-                <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+                <a href="#"><i class="fa fa-fw fa-user"></i>Thông tin</a>
             </li>
             <li>
-                <a href="#"><i class="fa fa-fw fa-cog"></i> Settings</a>
+                <a href="{{route('employee.pi.change.pass')}}"><i class="fa fa-fw fa-cog"></i> Đổi mật khẩu</a>
             </li>
             <li>
-                <a href="{{route('employee.logout')}}"><i class="fa fa-fw fa-sign-out"></i> Sign out</a>
+                <a href="{{route('employee.logout')}}"><i class="fa fa-fw fa-sign-out"></i>Đăng xuất</a>
             </li>
         </ul>
     </div>

@@ -1,6 +1,6 @@
 <div id="cm-menu">
     <nav class="cm-navbar cm-navbar-danger">
-        <div class="cm-flex"><a href="index.html" class="vlu-logo"></a></div>
+        <div class="cm-flex"><a href="{{route('admin.pi.index')}}" class="vlu-logo"></a></div>
         <div class="btn btn-danger md-menu-white" data-toggle="cm-menu"></div>
     </nav>
     <div id="cm-menu-content">
