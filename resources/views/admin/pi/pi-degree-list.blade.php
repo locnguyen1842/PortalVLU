@@ -81,6 +81,7 @@
                 </tr>
             </thead>
             <tbody>
+              @if($degrees->count() > 0)
             @foreach($degrees as $degree)
                     <tr>
                     <td class="col-sm-2">{{$degree->degree->name}}</td>
@@ -118,6 +119,11 @@
                         </div>
                     </div>
             @endforeach
+          @else
+            <tr>
+              <td colspan="5" class="text-center">Không có bất kỳ dữ liệu nào được tìm thấy</td>
+            </tr>
+          @endif
             </tbody>
         </table>
     </div>

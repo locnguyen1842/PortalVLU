@@ -47,7 +47,7 @@
             <form class="form-horizontal" action="{{route('admin.pi.import')}}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="col-sm-4">
-                    <label class="control-label col-sm-4">Chọn tệp</label>
+                    <label for="import_file" class="control-label col-sm-4">Chọn tệp</label>
                     <div class="col-sm-8">
 
                         <input type="file" id="excel-import"  name="import_file" class="custom-file-input excel-default col-sm-4">
