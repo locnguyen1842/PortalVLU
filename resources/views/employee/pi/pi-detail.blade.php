@@ -94,7 +94,7 @@
                             </div>
                         </div>
                     </div>
-                
+
                 </div>
 
                 <div class="col-sm-5">
@@ -108,29 +108,24 @@
                             </div>
                             <div class="panel-body">
                                 <form class="form-horizontal">
-                                    <div class="panel-body">
-                                        <form class="form-horizontal">
-                                            <div class="form-group">
-                                                <label for="inputEmail3" class="col-sm-4  ">Số bằng đại học </label>
-                                                <span for="" class="col-sm-3 text-nowrap">{{$dh_count}}</span>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="inputEmail3" class="col-sm-4 ">Số bằng thạc sĩ </label>
-                                                <span for="" class="col-sm-3 text-nowrap">{{$ths_count}}</span>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="inputEmail3" class="col-sm-4  ">Số bằng tiến sĩ </label>
-                                                <span for="" class="col-sm-3 text-nowrap">{{$ts_count}}</span>
-
-                                            </div>
-                                        </form>
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-4  ">Số bằng đại học </label>
+                                        <span for="" class="col-sm-3 text-nowrap">{{$dh_count}}</span>
                                     </div>
-                                    <div class="panel-footer text-center">
-                                        <label><a href="{{route('employee.pi.degree.index',$pi->id)}}">Chi tiết</a> </label>
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-4 ">Số bằng thạc sĩ </label>
+                                        <span for="" class="col-sm-3 text-nowrap">{{$ths_count}}</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-4  ">Số bằng tiến sĩ </label>
+                                        <span for="" class="col-sm-3 text-nowrap">{{$ts_count}}</span>
 
                                     </div>
-
                                 </form>
+                            </div>
+                            <div class="panel-footer text-center">
+                              <label><a href="{{route('employee.pi.degree.index',$pi->id)}}">Chi tiết</a> </label>
+
                             </div>
 
                         </div>

@@ -19,7 +19,7 @@ class AdminController extends Controller
     {
         //$admin = admin::all();
         $admin = admin::find(Auth::guard('admin')->user()->id);
-        return view('admin.pi.pi-changepass', compact('admin'));
+        return view('admin.admin-changepass', compact('admin'));
     }
     public function postchangepass(Request $request)
     {
@@ -32,12 +32,12 @@ class AdminController extends Controller
                 'comfirmpassword'=> 'required|same:newpassword'
             ],
             [
-                'password.required' => 'chưa xác nhận Mật khẩu cũ',
+                'password.required' => 'Chưa xác nhận mật khẩu cũ',
                 'newpassword.required' => 'Mật khẩu mới không được bỏ trống',
                 'newpassword.min' => 'Mật khẩu mới phải có độ dài từ 5-50 kí tự',
                 'newpassword.max' => 'Mật khẩu mới phải có độ dài từ 5-50 kí tự',
                 'comfirmpassword.required' => 'Xác nhận mật khẩu mới không được bỏ trống',
-                'confirmpassword.same' =>'Xác nhận mật khẩu mới không chính xác',
+                'comfirmpassword.same' =>'Xác nhận mật khẩu mới không chính xác',
 
             ]
         );

@@ -38,17 +38,14 @@
                 <a style="cursor:default;"><strong>{{Auth::guard('admin')->user()->pi->full_name}}</strong></a>
             </li>
             <li class="divider"></li>
-            <li>
+            {{-- <li>
                 <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+            </li> --}}
+            <li>
+                <a href="{{route('admin.pi.change.pass')}}"><i class="fa fa-fw fa-cog"></i> Đổi mật khẩu</a>
             </li>
             <li>
-                <a href="#"><i class="fa fa-fw fa-cog"></i> Settings</a>
-            </li>
-            <li>
-                <a href="{{route('admin.pi.change.pass')}}"><i class="fa fa-fw fa-user"></i> change password</a>
-            </li>
-            <li>
-                <a href="{{route('admin.logout')}}"><i class="fa fa-fw fa-sign-out"></i> Sign out</a>
+                <a href="{{route('admin.logout')}}"><i class="fa fa-fw fa-sign-out"></i> Đăng xuất</a>
             </li>
         </ul>
     </div>
