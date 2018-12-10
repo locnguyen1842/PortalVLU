@@ -93,6 +93,9 @@ Route::prefix('')->group(function () {
         //update chi tiet bang cap
         Route::get('/pi-updatedetaildegree/{b}', 'EmployeeController@getupdatedegreedetail')->name('employee.pi.update.detail.degree');
         Route::post('/pi-updatedetaildegree/{b}', 'EmployeeController@postupdatedegreedetail')->name('employee.pi.update.detail.degree');
+        //
+        //delete degree employee
+        Route::get('/pi-degree-delete/{degreedetail_id}', 'EmployeeController@delete')->name('employee.pi.degree.delete');
     });
 });
 
