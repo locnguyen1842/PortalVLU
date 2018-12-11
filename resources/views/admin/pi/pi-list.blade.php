@@ -57,14 +57,15 @@
             <form class="form-horizontal" action="{{route('admin.pi.import')}}" id="pi-import-form" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="col-sm-4">
-                    <label for="import_file" class="control-label col-sm-4">Chọn tệp</label>
+                    <label for="import_file" class="control-label col-sm-4">
+                      <a href="{{route('admin.pi.template.download')}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tải file mẫu" class="tooltip-test">
+                          Chọn tệp
+                      </a>
+                    </label>
                     <div class="col-sm-8">
 
-                        <input type="file" id="excel-import"  name="import_file" class="custom-file-input excel-default col-sm-4">
-                        <button type="submit" id="btn-import-submit" class="btn btn-danger">Xác nhận</button>
-                    </div>
-                    <div class="col-sm-12 mt-10">
-                      <small> <a href="{{route('admin.pi.template.download')}}">Nhấn vào đây để tải file mẫu</a></small>
+                        <input required type="file" id="excel-import"  name="import_file" class="custom-file-input excel-default col-sm-4">
+                          <button type="submit" id="btn-import-submit" class="btn btn-danger col-sm-6">Xác nhận</button>
                     </div>
                 </div>
             </form>
@@ -222,9 +223,6 @@
     <div class="panel-footer">
 
       {{$pis->links()}}
-    </div>
-    <div class="test-text">
-
     </div>
 </div>
 <script type="text/javascript">
