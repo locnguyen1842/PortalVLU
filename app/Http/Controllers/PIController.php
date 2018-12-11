@@ -114,6 +114,7 @@ class PIController extends Controller
         $pi->identity_card= $request->identity_card;
         $pi->date_of_issue= $request->date_of_issue;
         $pi->place_of_issue= $request->place_of_issue;
+        $pi->show = 1;
         $pi->save();
         //create account
         $employee = new Employee;
