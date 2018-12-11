@@ -7,18 +7,69 @@ use App\Industry;
 use Illuminate\Http\Request;
 use App\PI;
 use App\Imports\AdminPIImport;
+use App\Imports\GetPIImport;
 use Maatwebsite\Excel\Facades\Excel;
+use Validator;
 use App\Employee;
+use Illuminate\Support\Facades\Storage;
 use Hash;
 use App\Admin;
 
 class PIController extends Controller
 {
+
+    public function getdataimport(Request $request){
+      // dd('a');
+      $validator = Validator::make($request->all(),
+        [
+          'import_file' => 'required|mimetypes:application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|file'
+        ],
+        [
+          'import_file.required'=> 'Vui lòng chọn file để import.',
+          'import_file.mimetypes'=> 'File tải lên không đúng định dạng excel (xls,xlsx).',
+          'import_file.file'=> 'Không tìm thấy file tải lên.',
+        ]
+      );
+      if ($validator->passes()) {
+           if($request->has('import_file')){
+             $import_file = $request->file('import_file');
+             $arr_pi  = (new GetPIImport)->toArray($import_file);
+             //handle date time from excel to array for sheet 1
+             foreach ($arr_pi[0] as $key => $value) {
+               if($key != 0){
+                 $date_of_birth = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[4]);
+                 $date_of_issue = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[9]);
+                 $date_of_recruitment = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[13]);
+                 $arr_pi[0][$key][4] = $date_of_birth->format('d-m-Y');
+                 $arr_pi[0][$key][9] = $date_of_issue->format('d-m-Y');
+                 $arr_pi[0][$key][13] = $date_of_recruitment->format('d-m-Y');
+
+               }
+             }
+             //handle date time from excel to array for sheet 2
+             foreach ($arr_pi[1] as $key => $value) {
+               if($key != 0){
+                 $date_of_issue = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[2]);
+                 $arr_pi[1][$key][2] = $date_of_issue->format('d-m-Y');
+               }
+             }
+             return response()->json($arr_pi);
+           }
+      }
+    	return response()->json(['error'=>$validator->errors()->all()]);
+
+    }
+    public function downloadtemplate(){
+      $file = public_path('template-personalinformation.xlsx');
+      $headers = array(
+        'Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      );
+      return response()->download($file,'Template Personal Information.xlsx',$headers);
+    }
     public function index()
     {
         //check if have any get request named 'search' then assign value to $search
         $search =  \Request::get('search');
-
         //query if $search have a value
         $pis = PI::where(function ($query) use ($search) {
             if ($search != null) {
@@ -29,6 +80,7 @@ class PIController extends Controller
                 });
             }
         })->orderBy('first_name', 'asc')->paginate(10)->appends(['search'=>$search]);
+
 
         return view('admin.pi.pi-list', compact('pis', 'search'));
     }

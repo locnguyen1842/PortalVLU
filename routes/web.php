@@ -51,7 +51,13 @@ Route::prefix('admin')->group(function () {
         Route::get('/pi-changepass', 'AdminController@getchangepass')->name('admin.pi.change.pass');
         Route::post('/pi-changepass', 'AdminController@postchangepass')->name('admin.pi.change.pass');
 
+        //get download template pi
+        Route::get('/pi-download-template', 'PIController@downloadtemplate')->name('admin.pi.template.download');
+
+        //get data file import
+        Route::post('/pi-get-data-import', 'PIController@getdataimport')->name('admin.pi.import.data');
         //import pi
+
         Route::post('/pi-import', 'PIController@import')->name('admin.pi.import');
 
         //delete pi
