@@ -3,31 +3,20 @@
     <div class="cm-flex">
     </div>
     <div class="dropdown pull-right">
-        <button class="btn btn-primary md-notifications-white" data-toggle="dropdown"> <span class="label label-danger">23</span> </button>
+        <button class="btn btn-primary md-notifications-white" data-toggle="dropdown"> <span class="label label-danger"></span> </button>
         <div class="popover cm-popover bottom">
             <div class="arrow"></div>
             <div class="popover-content">
-                <div class="list-group">
-                    <a href="#" class="list-group-item">
-                        <h4 class="list-group-item-heading text-overflow">
-                            <i class="fa fa-fw fa-envelope"></i> Nunc volutpat aliquet magna.
-                        </h4>
-                        <p class="list-group-item-text text-overflow">Pellentesque tincidunt mollis scelerisque. Praesent vel blandit quam.</p>
-                    </a>
-                    <a href="#" class="list-group-item">
-                        <h4 class="list-group-item-heading">
-                            <i class="fa fa-fw fa-envelope"></i> Aliquam orci lectus
-                        </h4>
-                        <p class="list-group-item-text">Donec quis arcu non risus sagittis</p>
-                    </a>
-                    <a href="#" class="list-group-item">
-                        <h4 class="list-group-item-heading">
-                            <i class="fa fa-fw fa-warning"></i> Holy guacamole !
-                        </h4>
-                        <p class="list-group-item-text">Best check yo self, you're not looking too good.</p>
-                    </a>
-                </div>
-                <div style="padding:10px"><a class="btn btn-success btn-block" href="#">Show me more...</a></div>
+              <div class="list-group">
+                  <a href="#" class="list-group-item">
+                      <h4 class="list-group-item-heading text-overflow">
+                          <i class="fa fa-fw fa-envelope"></i> Thông báo
+                      </h4>
+                      <p class="list-group-item-text text-overflow">Chức năng sẽ được phát triển trong tương lai</p>
+                  </a>
+
+              </div>
+              <div style="padding:10px"><a class="btn btn-success btn-block" href="#">Xem thêm</a></div>
             </div>
         </div>
     </div>

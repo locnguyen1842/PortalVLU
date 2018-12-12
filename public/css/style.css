@@ -60,6 +60,9 @@ body.cm-login{
 .mt-10{
   margin-top: 10px;
 }
+.mt-20{
+  margin-top: 20px;
+}
 .ml-10{
   margin-left: 10px;
 
@@ -71,4 +74,16 @@ body.cm-login{
 
 .mb-10{
   margin-bottom: 10px;
+}
+.table-wrapper-scroll-y {
+  display: block;
+  max-height: 350px;
+  overflow-y: auto;
+}
+.waiting{
+  position: absolute;
+  display: none;
+  top: 50%;
+  left : 50%;
+
 }

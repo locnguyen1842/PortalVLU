@@ -6,6 +6,8 @@ use App\PI;
 use App\Employee;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 use Hash;
 use Carbon\Carbon;
@@ -14,8 +16,82 @@ class PIImport implements ToCollection,WithStartRow
     public function startRow():int {
       return 2;
     }
+
     public function collection(Collection $rows)
     {
+
+        //xu ly thay doi index cho array
+        $data = $rows->toArray();
+        $change_index_data = array();
+        $changed_index_data = array();
+        foreach ($data as $key => $value) {
+          $change_index_data = array_combine(range(1, count($data[$key])), $data[$key]);
+          array_push($changed_index_data,$change_index_data);
+        }
+
+        $data_to_validate=array_combine(range(2, count($changed_index_data)+1), $changed_index_data);
+        foreach ($data_to_validate as &$item) {
+
+              $item[5] = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($item[5]);
+              $item[10] = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($item[10]);
+              $item[14] = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($item[14]);
+        }
+        //validate data da thay doi index
+        Validator::make($data_to_validate, [
+          '*.1' => 'required',
+          '*.2'=>'required|min:4|max:60',
+          '*.3' => 'required',
+          '*.4'=>[
+                  'required',
+                  Rule::in(['Nam','Nữ']),
+                ],
+          '*.5' => 'required|date',
+          '*.6'=>'required',
+          '*.7' => 'required',
+          '*.8'=>'required',
+          '*.9' => 'required',
+          '*.10'=>'required|date',
+          '*.11' => 'required',
+          '*.12'=>'required',
+          '*.13' => 'email|required',
+          '*.14'=>'required|date',
+          '*.15' => 'required',
+          '*.16'=>'required',
+          '*.17' => 'required',
+
+        ],[
+
+          '*.1.required' => 'Mã nhân viên không được bỏ trống ( vị trí: :attribute|sheet :1 )',
+          '*.2.required'=>'Họ tên không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
+          '*.2.min' => 'Họ tên phải có độ dài từ 4-60 ký tự ( vị trí: :attribute|sheet :1 ) ',
+          '*.2.max' => 'Họ tên phải có độ dài từ 4-60 ký tự ( vị trí: :attribute|sheet :1 ) ',
+
+          '*.3.required' => 'Dân tộc không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
+          '*.4.required'=>'Giới tính không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
+          '*.4.in'=>'Giới tính không hợp lệ. Chỉ được nhập : Nam , Nữ ( vị trí: :attribute|sheet :1 ) ',
+
+          '*.5.required' => 'Ngày sinh không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
+          '*.5.date' => 'Ngày sinh không đúng định dạng ngày tháng ( vị trí: :attribute|sheet :1 ) ',
+
+          '*.6.required'=>'Nơi sinh không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
+          '*.7.required' => 'Địa chỉ thường trú không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
+          '*.8.required'=>'Địa chỉ liên lạc không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
+          '*.9.required' => 'CMND không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
+          '*.10.required'=>'Ngày cấp không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
+          '*.10.date' => 'Ngày cấp không đúng định dạng ngày tháng ( vị trí: :attribute|sheet :1 ) ',
+
+          '*.11.required' => 'Nơi cấp không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
+          '*.12.required'=>'Số điện thoại không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
+          '*.13.required' => 'Email không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
+          '*.13.email' => 'Email không đúng định dạng ( vị trí: :attribute|sheet :1 ) ',
+          '*.14.required'=>'Ngày tuyển dụng không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
+          '*.14.date' => 'Ngày tuyển dụng không đúng định dạng ngày tháng ( vị trí: :attribute|sheet :1 ) ',
+
+          '*.15.required' => 'Chức vụ không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
+          '*.16.required'=>'Chức danh chuyên môn không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
+          '*.17.required' => 'Mật khẩu không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
+        ]
+        )->validate();
 
         foreach ($rows as $row)
         {
@@ -38,7 +114,7 @@ class PIImport implements ToCollection,WithStartRow
               'identity_card' => $row[8],
               'date_of_issue' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[9]),
               'place_of_issue' => $row[10],
-              'phone_number' => $row[11],
+              'phone_number' =>$row[11],
               'email_address' => $row[12],
               'date_of_recruitment' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[13]),
               'position' =>$row[14],
@@ -55,7 +131,7 @@ class PIImport implements ToCollection,WithStartRow
               'username' => $pi->employee_code,
               'personalinformation_id'=> $pi->id,
               'email' => $pi->email_address,
-              'password' => Hash::make($pi->password),
+              'password' => Hash::make($row[16]),
             ]
           );
         }
