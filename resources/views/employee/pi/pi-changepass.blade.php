@@ -16,7 +16,7 @@
 @section('content')
     @include('employee.layouts.Error')
     @if(session()->has('message'))
-        <div class="alert alert-success">
+        <div class="alert alert-success mt-10">
             {{ session()->get('message') }}
         </div>
     @endif
@@ -48,7 +48,7 @@
                 <div class="form-group" style="margin-bottom:0">
                     <div class="col-sm-offset-2 col-sm-10 text-right">
                         <button type="reset" class="btn btn-default">quay lại</button>
-                        <button type="submit" class="btn btn-primary">Lưu</button>
+                        <button type="submit" class="btn btn-primary">Xác nhận</button>
                     </div>
                 </div>
             </form>

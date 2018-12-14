@@ -290,6 +290,8 @@ class PIController extends Controller
     public function getdetail($id)
     {
         $pi = PI::find($id);
+        $pi->new = 0;
+        $pi->save();
         $dh_count = $pi->degreedetails->where('degree_id', 1)->count();
         $ths_count = $pi->degreedetails->where('degree_id', 2)->count();
         $ts_count = $pi->degreedetails->where('degree_id', 3)->count();
