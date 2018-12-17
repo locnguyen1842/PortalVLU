@@ -15,12 +15,12 @@
 @section('content')
     @include('employee.layouts.Error')
     @if(session()->has('message'))
-        <div class="alert alert-success">
+        <div class="alert alert-success mt-10">
             {{ session()->get('message') }}
         </div>
     @endif
     <div class="panel panel-default">
-        <div class="panel-heading">Cập nhật thông tin bằng cấp</div>
+        <div class="panel-heading">Thêm thông tin bằng cấp</div>
         <div class="panel-body">
             <form class="form-horizontal" action="{{route('employee.pi.degree.create')}}" method="post">
                 {{csrf_field()}}
@@ -57,7 +57,7 @@
                 <div class="form-group" style="margin-bottom:0">
                     <div class="col-sm-offset-2 col-sm-10 text-right">
                         <button type="reset" class="btn btn-default">Hủy Bỏ</button>
-                        <button type="submit" class="btn btn-primary">Cập nhật</button>
+                        <button type="submit" class="btn btn-primary">Xác Nhận</button>
                     </div>
                 </div>
             </form>

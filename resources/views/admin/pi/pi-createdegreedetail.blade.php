@@ -19,7 +19,7 @@
 @section('content')
 @include('admin.layouts.Error')
 @if(session()->has('message'))
-    <div class="alert alert-success">
+    <div class="alert alert-success mt-10">
         {{ session()->get('message') }}
     </div>
     @endif

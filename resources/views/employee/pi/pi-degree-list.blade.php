@@ -13,8 +13,13 @@
 </nav>
 @endsection
 @section('content')
+  @if(session()->has('message'))
+      <div class="alert alert-success mt-10">
+          {{ session()->get('message') }}
+      </div>
+  @endif
 <div class="panel panel-default">
-    <div class="panel-heading">Chi tiết bằng cấp<br>
+    <div class="panel-heading">Danh sách bằng cấp<br>
         <a href="{{route('employee.pi.degree.create',$pi->id)}}">
             <button type="button" name="button" class="btn btn-xs btn-success">Thêm mới</button>
         </a>

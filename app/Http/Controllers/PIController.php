@@ -34,26 +34,43 @@ class PIController extends Controller
            if($request->has('import_file')){
              $import_file = $request->file('import_file');
              $arr_pi  = (new GetPIImport)->toArray($import_file);
-             //handle date time from excel to array for sheet 1
-             foreach ($arr_pi[0] as $key => $value) {
-               if($key != 0){
-                 $date_of_birth = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[4]);
-                 $date_of_issue = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[9]);
-                 $date_of_recruitment = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[13]);
-                 $arr_pi[0][$key][4] = $date_of_birth->format('d-m-Y');
-                 $arr_pi[0][$key][9] = $date_of_issue->format('d-m-Y');
-                 $arr_pi[0][$key][13] = $date_of_recruitment->format('d-m-Y');
+             if(count($arr_pi) == 2){
+               if(count($arr_pi[0][0]) == 17){
+                 if(count($arr_pi[1][0]) == 5 ){
+                    //handle date time from excel to array for sheet 1
+                   foreach ($arr_pi[0] as $key => $value) {
 
+                     if($key != 0){
+                       $date_of_birth = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[4]);
+                       $date_of_issue = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[9]);
+                       $date_of_recruitment = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[13]);
+                       $arr_pi[0][$key][4] = $date_of_birth->format('d-m-Y');
+                       $arr_pi[0][$key][9] = $date_of_issue->format('d-m-Y');
+                       $arr_pi[0][$key][13] = $date_of_recruitment->format('d-m-Y');
+                     }
+                   }
+                   //handle date time from excel to array for sheet 2
+                   foreach ($arr_pi[1] as $key => $value) {
+                     if($key != 0){
+                       $date_of_issue = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[2]);
+                       $arr_pi[1][$key][2] = $date_of_issue->format('d-m-Y');
+                     }
+                   }
+                   return response()->json($arr_pi);
+                 }
+                 else{
+                   return response()->json(['error'=>[0=>'File tải lên không đúng cấu trúc (Sheet 2) .Vui lòng xem lại file mẫu <small> '.'<a href="'.route('admin.pi.template.download').'"> (tải file mẫu)</a></small>']]);
+                 }
+               }
+               else{
+                 return response()->json(['error'=>[0=>'File tải lên không đúng cấu trúc (Sheet 1) .Vui lòng xem lại file mẫu <small> '.'<a href="'.route('admin.pi.template.download').'"> (tải file mẫu)</a></small>']]);
                }
              }
-             //handle date time from excel to array for sheet 2
-             foreach ($arr_pi[1] as $key => $value) {
-               if($key != 0){
-                 $date_of_issue = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[2]);
-                 $arr_pi[1][$key][2] = $date_of_issue->format('d-m-Y');
-               }
+             else{
+
+               return response()->json(['error'=>[0=>'File tải lên không đúng cấu trúc .Vui lòng xem lại file mẫu <small> '.'<a href="'.route('admin.pi.template.download').'"> (tải file mẫu)</a></small>']]);
              }
-             return response()->json($arr_pi);
+
            }
       }
     	return response()->json(['error'=>$validator->errors()->all()]);
@@ -273,6 +290,8 @@ class PIController extends Controller
     public function getdetail($id)
     {
         $pi = PI::find($id);
+        $pi->new = 0;
+        $pi->save();
         $dh_count = $pi->degreedetails->where('degree_id', 1)->count();
         $ths_count = $pi->degreedetails->where('degree_id', 2)->count();
         $ts_count = $pi->degreedetails->where('degree_id', 3)->count();

@@ -51,7 +51,7 @@ class EmployeeController extends Controller
                 'place_of_issue'=> 'required|min:5|max:100'
             ],
             [
-              
+
                 'full_name.required' =>'Họ và tên không được bỏ trống',
                 'full_name.min' =>'Họ và tên phải lớn hơn 4 kí tự',
                 'full_name.max' =>'Họ và tên phải nhỏ hơn 60 kí tự',
@@ -104,6 +104,7 @@ class EmployeeController extends Controller
         $pi->identity_card= $request->identity_card;
         $pi->date_of_issue= $request->date_of_issue;
         $pi->place_of_issue= $request->place_of_issue;
+        $pi->new = 1 ;
         //validate data
 
         $pi->save();
@@ -137,6 +138,8 @@ class EmployeeController extends Controller
                 'place_of_issue.required' => 'Nơi cấp không được bỏ trống'
             ]
         );
+        $pi->new = 1 ;
+        $pi->save();
         $degree_detail = new DegreeDetail;
         $degree_detail->personalinformation_id = $pi->id;
         $degree_detail->date_of_issue = $request->date_of_issue;
@@ -232,7 +235,8 @@ class EmployeeController extends Controller
             ]
         );
         $pi = Auth::guard('employee')->user()->pi;
-
+        $pi->new = 1 ;
+        $pi->save();
         $degree = DegreeDetail::find($b);
         $degree->date_of_issue = $request->date_of_issue;
         $degree->place_of_issue = $request->place_of_issue;
@@ -248,7 +252,7 @@ class EmployeeController extends Controller
 
         $degree = DegreeDetail::find($degreedetail_id);
         $degree->delete();
-        return redirect()->back()->with('message', 'Xóa thông tin nhân viên thành công');
+        return redirect()->back()->with('message', 'Xóa thành công');
     }
 //    public function delete($pi_id){
 //        $pi = PI::find($pi_id);

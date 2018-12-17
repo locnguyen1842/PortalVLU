@@ -14,7 +14,10 @@ use Hash;
 
 class AdminController extends Controller
 {
-    //
+    public function __construct()
+    {
+        $this->middleware('permission:admin');
+    }
     public function getchangepass()
     {
         //$admin = admin::all();

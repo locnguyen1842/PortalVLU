@@ -25,7 +25,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/password/reset/{token}', 'Auth\AdminResetPasswordController@showResetForm')->name('admin.password.reset');
     Route::post('/password/reset', 'Auth\AdminResetPasswordController@reset');
     //authenicate admin route
-    Route::group(['middleware'=>['auth:admin']], function () {
+    Route::group(['middleware'=>['auth:admin','permission:admin']], function () {
         Route::get('/dashboard', 'PIController@index')->name('admin.pi.dashboard');
         Route::get('/pi-list', 'PIController@index')->name('admin.pi.index');
         //pi detail
@@ -84,7 +84,7 @@ Route::prefix('')->group(function () {
     Route::get('/password/reset/{token}', 'Auth\EmployeeResetPasswordController@showResetForm')->name('employee.password.reset');
     Route::post('/password/reset', 'Auth\EmployeeResetPasswordController@reset');
     //authenicate admin route
-    Route::group(['middleware'=>['auth:employee']], function () {
+    Route::group(['middleware'=>['auth:employee','permission:employee']], function () {
         Route::get('/pi-detail', 'EmployeeController@getdetail')->name('employee.pi.detail');
         Route::get('/pi-update', 'EmployeeController@getupdate')->name('employee.pi.update');
         Route::post('/pi-update', 'EmployeeController@postupdate')->name('employee.pi.update');
