@@ -28,6 +28,11 @@ class Viewtest extends TestCase
         $admin = $this->create_user_for_login();
         $this->actingAs($admin,'admin');
     }
+    //
+    public function login_employee(){
+        $employee = $this->create_user_for_login();
+        $this->actingAs($employee,'');
+    }
     public function create_user_for_login()
     {
         $actual = $this->data();
@@ -72,6 +77,14 @@ class Viewtest extends TestCase
         $response = $this->get('/admin/pi-list');
         $this->assertEquals(200, $response->status()); // kiem tra co truy cap duoc web k
         $response->assertViewHas('pis'); //kiem tra xem view co' bien' $pis k . doi voi view create khoi can assertViewHas
-
+    }
+    public function test_view_Detail_Admin_PI()
+    {
+        $this->login_admin();
+        $actual = $this->data();
+        $pi = PI::where('employee_code', $actual['employee_code'])->first();
+        $response = $this->get('/admin/pi-detail/'.$pi->id);
+        $this->assertEquals(200, $response->status());
+        $response->assertViewHas('pi');
     }
 }
