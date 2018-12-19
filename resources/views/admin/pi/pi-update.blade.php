@@ -37,8 +37,13 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-6">
-                        <label>Dân tộc</label>
-                        <input type="text" class="form-control" name="nation" placeholder="Nhập dân tộc" value="{{$pi->nation}}">
+                      <label>Dân tộc</label>
+                      <select class="form-control" name="nation">
+                          <option value="">Chọn dân tộc</option>
+                          @foreach($nations as $nation)
+                          <option {{$pi->nation_id == $nation->id ? 'selected' : ''}} value="{{$nation->id}}">{{$nation->name}}</option>
+                          @endforeach
+                      </select>
                     </div>
                     <div class="col-sm-6">
                         <label>Giới tính</label>
@@ -101,15 +106,23 @@
                         <input type="text" class="form-control" name="professional_title" placeholder="Nhập chức danh chuyên môn" value="{{$pi->professional_title}}">
                     </div>
                     <div class="col-sm-6">
-                        <label>Chứng minh nhân dân</label>
-                        <input type="text" class="form-control" name="identity_card" placeholder="Nhập chứng minh nhân dân" value="{{$pi->identity_card}}">
+                        <label>Đơn vị</label>
+                        <input type="text" class="form-control" name="unit" placeholder="Nhập đơn vị" value="{{$pi->unit}}">
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-6">
-                        <label>Ngày cấp</label>
-                        <input type="date" class="form-control" name="date_of_issue" value="{{$pi->date_of_issue}}">
-                    </div>
+                  <div class="col-sm-6">
+                      <label>Chứng minh nhân dân</label>
+                      <input type="text" class="form-control" name="identity_card" placeholder="Nhập chứng minh nhân dân" value="{{$pi->identity_card}}">
+                  </div>
+                  <div class="col-sm-6">
+                      <label>Ngày cấp</label>
+                      <input type="date" class="form-control" name="date_of_issue" value="{{$pi->date_of_issue}}">
+                  </div>
+
+                </div>
+                <div class="form-group">
+
                     <div class="col-sm-6">
                         <label>Nơi cấp</label>
                         <input type="text" maxlength="100" class="form-control" name="place_of_issue" placeholder="Nhập nơi cấp" value="{{$pi->place_of_issue   }}">

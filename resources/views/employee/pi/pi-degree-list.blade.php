@@ -20,7 +20,7 @@
   @endif
 <div class="panel panel-default">
     <div class="panel-heading">Danh sách bằng cấp<br>
-        <a href="{{route('employee.pi.degree.create',$pi->id)}}">
+        <a href="{{route('employee.pi.degree.create')}}">
             <button type="button" name="button" class="btn btn-xs btn-success">Thêm mới</button>
         </a>
     </div>
@@ -29,7 +29,7 @@
             <thead>
                 <tr>
                     <th>Loại</th>
-                    <th>Khối ngành</th>
+                    <th>Chuyên ngành</th>
                     <th>Ngày Cấp </th>
                     <th>Nơi Cấp</th>
                     <th></th>
@@ -40,22 +40,22 @@
             @foreach($degrees as $degree)
                     <tr>
                     <td class="col-sm-2">{{$degree->degree->name}}</td>
-                    <td class="col-sm-2">{{$degree->industry->name}}</td>
+                    <td class="col-sm-2">{{$degree->specialized->name}}</td>
                     <td class="col-sm-2">{{date('d-m-Y', strtotime($degree->date_of_issue))}}</td>
                         {{--{{date('d-m-Y',($degree->date_of_issue))}}--}}
                     <td class="col-sm-2">{{$degree->place_of_issue}}</td>
-                        <td class="col-sm-3">
-                            <a href="{{route('employee.pi.update.detail.degree', $degree->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Cập nhật" class="tooltip-test">
-                          <span class=""><i class="fa fa-lg fa-edit text-primary"></i>
-                              <span class="mdi mdi-close"></span>
-                          </span>
-                            </a>
-                            <a href="{{route('employee.pi.degree.delete', $degree->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa"  class="delete_degree tooltip-test ml-10">
-                          <span class=""><i class="fa fa-lg fa-trash text-danger"></i>
-                              <span class="mdi mdi-close"></span>
-                          </span>
-                            </a>
-                        </td>
+                    <td class="col-sm-2">
+                        <a href="{{route('employee.pi.update.detail.degree', $degree->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Cập nhật" class="tooltip-test">
+                      <span class=""><i class="fa fa-lg fa-edit text-primary"></i>
+                          <span class="mdi mdi-close"></span>
+                      </span>
+                        </a>
+                        <a href="{{route('employee.pi.degree.delete', $degree->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa"  class="delete_degree tooltip-test ml-10">
+                      <span class=""><i class="fa fa-lg fa-trash text-danger"></i>
+                          <span class="mdi mdi-close"></span>
+                      </span>
+                        </a>
+                    </td>
                     </tr>
                     <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="degree-delete-modal">
 

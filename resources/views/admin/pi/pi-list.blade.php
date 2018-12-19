@@ -59,7 +59,7 @@
                 <div class="col-sm-4">
                     <label for="import_file" class="control-label col-sm-4">
                       <a href="{{route('admin.pi.template.download')}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tải file mẫu" class="tooltip-test">
-                          Chọn tệp
+                          Import
                       </a>
                     </label>
                     <div class="col-sm-8">
@@ -154,7 +154,7 @@
 
                     <th>Mã NV</th>
                     <th>Họ Tên</th>
-                    <th>CMND</th>
+                    <th>Đơn vị</th>
                     <th>Ngày Sinh</th>
                     <th></th>
                 </tr>
@@ -172,7 +172,7 @@
                         </a>
                     </td>
                     <td class="col-sm-3">{{$item->full_name}}</td>
-                    <td class="col-sm-2">{{$item->identity_card}}</td>
+                    <td class="col-sm-2">{{$item->unit}}</td>
                     <td class="col-sm-2">{{date('d-m-Y', strtotime($item->date_of_birth))}}</td>
                     <td class="col-sm-3">
                       <a href="{{route('admin.pi.update',$item->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Cập nhật" href="javascript:" class="tooltip-test">

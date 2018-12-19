@@ -59,7 +59,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="inputPassword3" class="col-sm-3  ">Dân tộc </label>
-                                        <span for="" class="col-sm-9 text-nowrap">{{$pi->nation}}</span>
+                                        <span for="" class="col-sm-9 text-nowrap">{{$pi->nation->name}}</span>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputPassword3" class="col-sm-3  ">Địa chỉ Email </label>
@@ -164,6 +164,10 @@
                                     <div class="form-group">
                                         <label for="inputPassword3" class="col-sm-5  ">Chức danh chuyên môn </label>
                                         <span for="" class="col-sm-7 text-nowrap">{{$pi->professional_title}}</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-5  ">Đơn vị </label>
+                                        <span for="" class="col-sm-7 text-nowrap">{{$pi->unit}}</span>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputPassword3" class="col-sm-5  ">Ngày tuyển dụng </label>

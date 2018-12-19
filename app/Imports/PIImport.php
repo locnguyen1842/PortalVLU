@@ -125,6 +125,8 @@ class PIImport implements ToCollection,WithStartRow
               'position' =>$row[14],
               'professional_title' => $row[15],
               'show' => 1,
+              'new' =>0,
+              'unit' => $row[17]
             ]
           );
 

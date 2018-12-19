@@ -27,6 +27,8 @@ class PI extends Model
       'show',
       'position',
       'professional_title',
+      'unit',
+      'new',
     ];
 
     public function degreedetails()
@@ -38,6 +40,9 @@ class PI extends Model
     }
     public function employee(){
       return $this->hasOne('App\Employee','personalinformation_id','id');
+    }
+    public function nation(){
+      return $this->belongsTo('App\Nation','nation_id','id');
     }
 
 

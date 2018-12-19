@@ -10,4 +10,9 @@ class Nation extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function pis()
+    {
+      return $this->hasMany('App\PI','nation_id','id');
+    }
 }
