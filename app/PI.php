@@ -12,7 +12,7 @@ class PI extends Model
       'employee_code',
       'full_name',
       'first_name',
-      'nation',
+      'nation_id',
       'gender',
       'date_of_birth',
       'place_of_birth',

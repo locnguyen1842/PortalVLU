@@ -19,7 +19,7 @@ class CreatePersonalInformationsTable extends Migration
             $table->string('full_name');
             $table->string('first_name');
             $table->boolean('gender');
-            $table->string('nation');
+            $table->integer('nation_id')->unsigned();
             $table->date('date_of_birth');
             $table->string('place_of_birth');
             $table->string('permanent_address');
@@ -33,6 +33,9 @@ class CreatePersonalInformationsTable extends Migration
             $table->string('position');
             $table->string('professional_title');
             $table->timestamps();
+
+
+            $table->foreign('nation_id')->references('id')->on('nations');
 
         });
     }

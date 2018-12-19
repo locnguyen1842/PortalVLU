@@ -13,9 +13,14 @@ class UpdateAddColumnNewToPiTable extends Migration
      */
     public function up()
     {
-        Schema::table('personalinformations', function (Blueprint $table) {
-            $table->boolean('new')->nullable();
-        });
+        if (Schema::hasColumn('personalinformations', 'new')) {
+
+        }else{
+
+          Schema::table('personalinformations', function (Blueprint $table) {
+              $table->boolean('new')->nullable();
+          });
+        }
     }
 
     /**
