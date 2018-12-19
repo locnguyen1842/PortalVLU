@@ -6,6 +6,7 @@ use App\DegreeDetail;
 use App\Degree;
 use App\Industry;
 use App\PI;
+use App\Specialized;
 use Illuminate\Http\Request;
 
 class DegreeDetailController extends Controller
@@ -22,14 +23,14 @@ class DegreeDetailController extends Controller
 
 
         $degree = DegreeDetail::find($degreedetail_id);//where('personalinformation_id',$id)->where('degree_id',$b)->get();
-
+        $specializes = Specialized::all();
         $pi = PI::find($degree->pi->id);
         $degrees = Degree::all();
         $industries = Industry::all();
         //$degreede = DegreeDetail::all();
 
 
-        return view('admin.pi.pi-updatedegreedetail', compact('degrees','degree', 'industries','pi'));
+        return view('admin.pi.pi-updatedegreedetail', compact('degrees','degree', 'industries','pi','specializes'));
     }
     public function postupdatedegreedetail(Request $request, $degreedetail_id)
     {
@@ -38,14 +39,16 @@ class DegreeDetailController extends Controller
                 'date_of_issue'=> 'required|date',
                 'place_of_issue'=> 'required',
                 'degree'=> 'required',
-                'industry'=> 'required'
+                'industry'=> 'required',
+                'specialized' =>'required'
             ],
             [
                 'date_of_issue.required' => 'Ngày cấp không được bỏ trống',
                 'date_of_issue.date' => 'Ngày cấp không đúng định dạng',
                 'degree.required' => 'Bằng cấp không được bỏ trống',
                 'industry.required' => 'Khối ngành không được bỏ trống',
-                'place_of_issue.required' => 'Nơi cấp không được bỏ trống'
+                'place_of_issue.required' => 'Nơi cấp không được bỏ trống',
+                'specialized.required' => 'Chuyên ngành không được bỏ trống'
             ]
         );
         $degree = DegreeDetail::find($degreedetail_id);
@@ -53,17 +56,18 @@ class DegreeDetailController extends Controller
         $degree->place_of_issue = $request->place_of_issue;
         $degree->degree_id = $request->degree;
         $degree->industry_id = $request->industry;
-
+        $degree->specialized_id = $request->specialized;
         $degree->save();
         return redirect()->back()->with('message', 'Thêm thành công');
     }
     public function getcreatedegree($id)
     {
+        $specializes = Specialized::all();
         $degrees = Degree::all();
         $industries = Industry::all();
         $pi = PI::find($id);
 
-        return view('admin.pi.pi-createdegreedetail', compact('degrees', 'industries', 'pi'));
+        return view('admin.pi.pi-createdegreedetail', compact('degrees', 'industries', 'pi','specializes'));
     }
     public function postcreatedegree(Request $request, $id)
     {
@@ -72,14 +76,18 @@ class DegreeDetailController extends Controller
           'date_of_issue'=> 'required|date',
           'place_of_issue'=> 'required',
           'degree'=> 'required',
-          'industry'=> 'required'
+          'industry'=> 'required',
+          'specialized' =>'required'
+
         ],
         [
           'date_of_issue.required' => 'Ngày cấp không được bỏ trống',
           'date_of_issue.date' => 'Ngày cấp không đúng định dạng',
           'degree.required' => 'Bằng cấp không được bỏ trống',
           'industry.required' => 'Khối ngành không được bỏ trống',
-          'place_of_issue.required' => 'Nơi cấp không được bỏ trống'
+          'place_of_issue.required' => 'Nơi cấp không được bỏ trống',
+          'specialized.required' => 'Chuyên ngành không được bỏ trống'
+
         ]
       );
         $pi = PI::find($id);
@@ -89,7 +97,7 @@ class DegreeDetailController extends Controller
         $degree_detail->place_of_issue = $request->place_of_issue;
         $degree_detail->degree_id = $request->degree;
         $degree_detail->industry_id = $request->industry;
-
+        $degree_detail->specialized_id = $request->specialized;
         $degree_detail->save();
         return redirect()->back()->with('message', 'Thêm thành công');
     }

@@ -33,8 +33,6 @@
                         <label>Mã nhân viên</label>
                         <input type="text" readonly class="form-control" name="Mã nhân viên" value="{{$pi->employee_code}}">
                     </div>
-                </div>
-                <div class="form-group">
                     <div class="col-sm-6">
                         <label>Bằng cấp</label>
                         <select class="form-control" name="degree">
@@ -44,6 +42,18 @@
                             @endforeach
                         </select>
                     </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-6">
+                      <label>Chuyên ngành</label>
+                      <select class="form-control" name="specialized">
+                        <option value="">Chọn chuyên ngành</option>
+                          @foreach($specializes as $s)
+                            <option value="{{$s->id}}">{{$s->name}}</option>
+                          @endforeach
+                      </select>
+
+                  </div>
                     <div class="col-sm-6">
                         <label>Khối ngành</label>
                         <select class="form-control" name="industry">

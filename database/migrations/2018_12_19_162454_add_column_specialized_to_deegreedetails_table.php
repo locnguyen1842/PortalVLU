@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateAddColumnNewToPiTable extends Migration
+class AddColumnSpecializedToDeegreedetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class UpdateAddColumnNewToPiTable extends Migration
      */
     public function up()
     {
-        if (Schema::hasColumn('personalinformations', 'new')) {
+        Schema::table('degreedetails', function (Blueprint $table) {
+            $table->integer('specialized_id')->unsigned()->nullable();
 
-        }else{
-
-          Schema::table('personalinformations', function (Blueprint $table) {
-              $table->boolean('new')->nullable();
-          });
-        }
+            $table->foreign('specialized_id')->references('id')->on('specializes');
+        });
     }
 
     /**
@@ -30,7 +27,7 @@ class UpdateAddColumnNewToPiTable extends Migration
      */
     public function down()
     {
-        Schema::table('personalinformations', function (Blueprint $table) {
+        Schema::table('degreedetails', function (Blueprint $table) {
             //
         });
     }
