@@ -27,7 +27,7 @@ class PIEmployeeTest extends TestCase
         $data = $this->data();
         $data['full_name']= 'Le Le Le';
         $updatePI = $this->post('/pi-update', $data);
-        $pi = PI::where('employee_code',Auth::guard('employee')->user()->username)->first();
+        $pi = PI::where('employee_code', Auth::guard('employee')->user()->username)->first();
         $this->assertEquals($pi->full_name, $data['full_name']);
         $this->assertEquals($pi->identity_card, $data['identity_card']);
         $this->assertEquals($pi->email_address, $data['email_address']);
@@ -35,45 +35,41 @@ class PIEmployeeTest extends TestCase
 
     public function test_update_PI_with_incorrect_format_email()
     {
-      $this->login_employee();
-      $data = $this->data();
-      $data['email_address']= 'lethanhson2910';
-      $updatePI = $this->post('/pi-update', $data);
-      $pi = PI::where('employee_code',Auth::guard('employee')->user()->username)->first();
-      $updatePI->assertSessionHasErrors([
+        $this->login_employee();
+        $data = $this->data();
+        $data['email_address']= 'lethanhson2910';
+        $updatePI = $this->post('/pi-update', $data);
+        $pi = PI::where('employee_code', Auth::guard('employee')->user()->username)->first();
+        $updatePI->assertSessionHasErrors([
              'email_address'=> 'Email sai định dạng'
          ]);
     }
     public function test_update_PI_with_duplicate_email()
     {
-      $this->login_employee();
-      $data = $this->data();
-      $data['email_address']= 'caigivay5@gmail.com';
-      $updatePI = $this->post('/pi-update', $data);
-      $pi = PI::where('employee_code',Auth::guard('employee')->user()->username)->first();
-      $updatePI->assertSessionHasErrors([
+        $this->login_employee();
+        $data = $this->data();
+        $data['email_address']= 'caigivay5@gmail.com';
+        $updatePI = $this->post('/pi-update', $data);
+        $pi = PI::where('employee_code', Auth::guard('employee')->user()->username)->first();
+        $updatePI->assertSessionHasErrors([
              'email_address'=> 'Email đã được sử dụng'
          ]);
     }
 
     public function test_update_PI_with_incorrect_format_date()
     {
-      $this->login_employee();
-      $data = $this->data();
-      $data['date_of_birth']= 'lethanhson2910';
-      $updatePI = $this->post('/pi-update', $data);
-      $pi = PI::where('employee_code',Auth::guard('employee')->user()->username)->first();
-      $updatePI->assertSessionHasErrors([
+        $this->login_employee();
+        $data = $this->data();
+        $data['date_of_birth']= 'lethanhson2910';
+        $updatePI = $this->post('/pi-update', $data);
+        $pi = PI::where('employee_code', Auth::guard('employee')->user()->username)->first();
+        $updatePI->assertSessionHasErrors([
              'date_of_birth'=> 'Ngày sinh sai định dạng'
          ]);
     }
-
-
-
     public function data()
     {
         $actual = [
-
          'full_name' =>'Le Thanh Son',
          'nation' =>1,
          'gender'=> 1,
@@ -89,9 +85,9 @@ class PIEmployeeTest extends TestCase
        ];
         return $actual;
     }
-    public function login_employee(){
-        $employee = Employee::where('username','T155444')->first();
-        $this->actingAs($employee,'employee');
+    public function login_employee()
+    {
+        $employee = Employee::where('username', 'T155444')->first();
+        $this->actingAs($employee, 'employee');
     }
-
 }

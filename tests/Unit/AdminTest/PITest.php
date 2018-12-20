@@ -10,7 +10,8 @@ use Auth;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Session;
 use App\PI;
-
+use App\Admin;
+use Hash;
 class PITest extends TestCase
 {
     use DatabaseTransactions;
@@ -85,7 +86,6 @@ class PITest extends TestCase
         $actual = $this->data();
         $addPI = $this->post('/admin/pi-add', $actual);
         $actual1 = $this->data();
-
         $actual1['email_address']= 'lethanhson2910@gmail.com';
         $actual1['employee_code']= 'T155477';
         $duplicate_emailaddress = $this->post('/admin/pi-add', $actual1);
@@ -141,6 +141,7 @@ class PITest extends TestCase
             'date_of_birth'=> 'Ngày sinh sai định dạng'
         ]);
     }
+
 
     public function data()
     {

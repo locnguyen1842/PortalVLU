@@ -11,9 +11,6 @@
 |
 */
 
-
-
-
 Route::prefix('admin')->group(function () {
     //authenticate admin login
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
@@ -36,7 +33,6 @@ Route::prefix('admin')->group(function () {
         //update personal information
         Route::get('/pi-update/{id}', 'PIController@getupdate')->name('admin.pi.update');
         Route::post('/pi-update/{id}', 'PIController@postupdate')->name('admin.pi.update');
-
         //change password
         Route::get('/pi-recovery/{pi_id}', 'PIController@recoverypassword')->name('admin.pi.password.recovery');
         //change chi tiet bang cap
@@ -50,25 +46,18 @@ Route::prefix('admin')->group(function () {
         //change password
         Route::get('/pi-changepass', 'AdminController@getchangepass')->name('admin.pi.change.pass');
         Route::post('/pi-changepass', 'AdminController@postchangepass')->name('admin.pi.change.pass');
-
         //get download template pi
         Route::get('/pi-download-template', 'PIController@downloadtemplate')->name('admin.pi.template.download');
-
         //get data file import
         Route::post('/pi-get-data-import', 'PIController@getdataimport')->name('admin.pi.import.data');
         //import pi
-
         Route::post('/pi-import', 'PIController@import')->name('admin.pi.import');
-
         //delete pi
         Route::get('/pi-delete/{id}', 'PIController@delete')->name('admin.pi.delete');
-
         //change roles
         Route::post('/pi-role/{pi_id}', 'PIController@rolechange')->name('admin.pi.role.change');
-
         //delete degree
         Route::get('/pi-degree-delete/{degreedetail_id}', 'DegreeDetailController@delete')->name('admin.pi.degree.delete');
-
     });
 });
 
