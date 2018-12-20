@@ -28,14 +28,8 @@
                 {{csrf_field()}}
                 <div class="form-group">
                     <div class="col-sm-6">
-                        <label>Mã nhân viên</label>
-                        <input type="text" readonly class="form-control" name="Mã nhân viên" value="{{$pi->employee_code}}">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-6">
                         <label>Bằng cấp</label>
-                        <select class="form-control" name="degree">
+                        <select required class="form-control" name="degree">
                           <option value="">Chọn bằng cấp</option>
                             @foreach($degrees as $d)
                                 @if($d->id == $degree->degree_id)
@@ -48,7 +42,7 @@
                     </div>
                     <div class="col-sm-6">
                         <label>Chuyên ngành</label>
-                        <select class="form-control" name="specialized">
+                        <select required class="form-control" name="specialized">
                           <option value="">Chọn chuyên ngành</option>
                             @foreach($specializes as $s)
                               <option {{$degree->specialized_id == $s->id ? 'selected':''}} value="{{$s->id}}">{{$s->name}}</option>
@@ -60,11 +54,11 @@
                 <div class="form-group">
                     <div class="col-sm-6">
                         <label>Ngày cấp</label>
-                        <input type="date" class="form-control" name="date_of_issue" value="{{$degree->date_of_issue}}">
+                        <input required type="date" min="1900-01-01" class="form-control" name="date_of_issue" value="{{$degree->date_of_issue}}">
                     </div>
                     <div class="col-sm-6">
                         <label>Nơi cấp</label>
-                        <input type="text" maxlength="100" class="form-control" name="place_of_issue" placeholder="Nhập nơi cấp" value="{{$degree->place_of_issue}}">
+                        <input required type="text" maxlength="100" class="form-control" name="place_of_issue" placeholder="Nhập nơi cấp" value="{{$degree->place_of_issue}}">
                     </div>
                 </div>
                 <div class="form-group" style="margin-bottom:0">

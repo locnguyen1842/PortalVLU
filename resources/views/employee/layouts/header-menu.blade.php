@@ -28,7 +28,7 @@
             </li>
             <li class="divider"></li>
             <li>
-                <a href="#"><i class="fa fa-fw fa-user"></i>Thông tin</a>
+                <a href="{{route('employee.pi.detail')}}"><i class="fa fa-fw fa-user"></i>Thông tin</a>
             </li>
             <li>
                 <a href="{{route('employee.pi.change.pass')}}"><i class="fa fa-fw fa-cog"></i> Đổi mật khẩu</a>

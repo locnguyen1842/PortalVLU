@@ -51,13 +51,13 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <div class="input-group-addon"><i class="fa fa-fw fa-user"></i></div>
-                                <input type="text" name="username" class="form-control" placeholder="Tên tài khoản">
+                                <input required type="text" name="username" class="form-control" placeholder="Tên tài khoản">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="input-group">
                                 <div class="input-group-addon"><i class="fa fa-fw fa-lock"></i></div>
-                                <input type="password" name="password" class="form-control" placeholder="Mật khẩu">
+                                <input required type="password" name="password" class="form-control" placeholder="Mật khẩu">
                             </div>
                         </div>
                     </div>

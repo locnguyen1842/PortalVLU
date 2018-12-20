@@ -50,7 +50,7 @@
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-addon"><i class="fa fa-fw fa-user"></i></div>
-                            <input id="employee_code" type="text" placeholder="Nhập mã nhân viên" class="form-control" name="employee_code" value="{{ old('employee_code') }}" required>
+                            <input required id="employee_code" type="text" placeholder="Nhập mã nhân viên" class="form-control" name="employee_code" value="{{ old('employee_code') }}" required>
 
                         </div>
                     </div>

@@ -46,7 +46,7 @@
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-addon"><i class="fa fa-fw fa-user"></i></div>
-                            <input id="email" type="email" placeholder="Vui lòng nhập email" class="form-control" name="email" value="{{ $email ?? old('email') }}" required autofocus>
+                            <input required id="email" type="email" placeholder="Vui lòng nhập email" class="form-control" name="email" value="{{ $email ?? old('email') }}" required autofocus>
 
                             @if ($errors->has('email'))
                             <span class="invalid-feedback" role="alert">
@@ -58,7 +58,7 @@
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-addon"><i class="fa fa-fw fa-lock"></i></div>
-                            <input id="password" placeholder="Nhập mật khẩu mới" type="password" class="form-control" name="password" required>
+                            <input required id="password" placeholder="Nhập mật khẩu mới" type="password" class="form-control" name="password" required>
 
                             @if ($errors->has('password'))
                             <span class="invalid-feedback" role="alert">
@@ -70,7 +70,7 @@
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-addon"><i class="fa fa-fw fa-lock"></i></div>
-                            <input id="password-confirm" placeholder="Xác nhận mật khẩu" type="password" class="form-control" name="password_confirmation" required>
+                            <input required id="password-confirm" placeholder="Xác nhận mật khẩu" type="password" class="form-control" name="password_confirmation" required>
                         </div>
 
                         <div style="margin-top:20px" class="col-xs-12">

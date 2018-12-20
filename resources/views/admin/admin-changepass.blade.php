@@ -36,17 +36,17 @@
                     </div>
                     <div class="col-sm-6">
                         <label>Mật khẩu hiện tại</label>
-                        <input type="password" maxlength="50" class="form-control" name="password" placeholder="nhập mật khẩu hiện tại" >
+                        <input required type="password" maxlength="50" class="form-control" name="password" placeholder="nhập mật khẩu hiện tại" >
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-6">
                         <label>Mật khẩu mới</label>
-                        <input type="password" maxlength="50" class="form-control" name="newpassword" placeholder="nhập mật khẩu mới" >
+                        <input required type="password" maxlength="50" class="form-control" name="newpassword" placeholder="nhập mật khẩu mới" >
                     </div>
                     <div class="col-sm-6">
                         <label>Xác nhận mật khẩu mới</label>
-                        <input type="password" maxlength="50" class="form-control" name="comfirmpassword" placeholder="nhập lại mật khẩu mới" >
+                        <input required type="password" maxlength="50" class="form-control" name="comfirmpassword" placeholder="nhập lại mật khẩu mới" >
                     </div>
                 </div>
                 <div class="form-group" style="margin-bottom:0">

@@ -154,14 +154,15 @@ class EmployeeController extends Controller
         $request->validate(
             [
                 'password'=> 'required',
-                'newpassword'=> 'required|min:5|max:50',
+                'newpassword'=> 'required|min:5|max:50|alpha_num',
                 'comfirmpassword'=> 'required|same:newpassword'
             ],
             [
                 'password.required' => 'chưa xác nhận Mật khẩu cũ',
                 'newpassword.required' => 'Mật khẩu mới không được bỏ trống',
                 'newpassword.min' => 'Mật khẩu mới phải có độ dài từ 5-50 kí tự',
-                'newpassword.max' => 'Mật khẩu mới phải có độ dài từ 5-50 kí tự',
+                'newpassword.min' => 'Mật khẩu mới phải có độ dài từ 5-50 kí tự',
+                'newpassword.alpha_num' => 'Mật khẩu mới chỉ được chứa kí tự và số',
                 'comfirmpassword.required' => 'Xác nhận mật khẩu mới không được bỏ trống',
                 'confirmpassword.same' =>'Xác nhận mật khẩu mới không chính xác',
 
