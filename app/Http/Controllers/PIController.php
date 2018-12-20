@@ -18,14 +18,13 @@ use App\Nation;
 
 class PIController extends Controller
 {
-
-
-    public function downloadtemplate(){
-      $file = public_path('template-personalinformation.xlsx');
-      $headers = array(
+    public function downloadtemplate()
+    {
+        $file = public_path('template-personalinformation.xlsx');
+        $headers = array(
         'Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
       );
-      return response()->download($file,'Template Personal Information.xlsx',$headers);
+        return response()->download($file, 'Template Personal Information.xlsx', $headers);
     }
     public function index()
     {
@@ -48,7 +47,7 @@ class PIController extends Controller
     public function getAdd()
     {
         $nations = Nation::all();
-        return view('admin.pi.pi-add',compact('nations'));
+        return view('admin.pi.pi-add', compact('nations'));
     }
     public function postAdd(Request $request)
     {
@@ -139,17 +138,15 @@ class PIController extends Controller
         $employee->email = $pi->email_address;
         $employee->save();
 
-        if($request->role == 1){
+        if ($request->role == 1) {
 
           //add account for admin role
-          $admin = new Admin;
-          $admin->personalinformation_id = $pi->id;
-          $admin->username= $pi->employee_code;
-          $admin->password = Hash::make($pi->employee_code);
-          $admin->email = $pi->email_address;
-          $admin->save();
-
-
+            $admin = new Admin;
+            $admin->personalinformation_id = $pi->id;
+            $admin->username= $pi->employee_code;
+            $admin->password = Hash::make($pi->employee_code);
+            $admin->email = $pi->email_address;
+            $admin->save();
         }
 
 
@@ -160,7 +157,7 @@ class PIController extends Controller
     {
         $pi = PI::Find($id);
         $nations = Nation::all();
-        return view('admin.pi.pi-update', compact('pi','nations'));
+        return view('admin.pi.pi-update', compact('pi', 'nations'));
     }
     //post date update information
     public function postupdate(Request $request, $id)
@@ -260,15 +257,15 @@ class PIController extends Controller
     {
         $pi = PI::find($pi_id);
         //strtoupper cho nó in hoa khi gõ pass
-         //chỉ cần thay đổi trường pwd la dc
-        if($pi->admin != ''){
-          $pi->employee->password = Hash::make(strtoupper($pi->employee_code));
-          $pi->admin->password = Hash::make(strtoupper($pi->employee_code));
-          $pi->employee->save();
-          $pi->admin->save();
-        }else{
-          $pi->employee->password = Hash::make(strtoupper($pi->employee_code));
-          $pi->employee->save();
+        //chỉ cần thay đổi trường pwd la dc
+        if ($pi->admin != '') {
+            $pi->employee->password = Hash::make(strtoupper($pi->employee_code));
+            $pi->admin->password = Hash::make(strtoupper($pi->employee_code));
+            $pi->employee->save();
+            $pi->admin->save();
+        } else {
+            $pi->employee->password = Hash::make(strtoupper($pi->employee_code));
+            $pi->employee->save();
         }
 
         return redirect()->back()->with('message', 'Khôi phục mật khẩu thành công');
@@ -293,48 +290,52 @@ class PIController extends Controller
         }
     }
 
-    public function delete($pi_id){
-      $pi = PI::find($pi_id);
-      $pi->show = 0;
-      $pi->save();
-      return redirect()->back()->with('message', 'Xóa thông tin nhân viên thành công');
+    public function delete($pi_id)
+    {
+        $pi = PI::find($pi_id);
+        $pi->show = 0;
+        $pi->save();
+        return redirect()->back()->with('message', 'Xóa thông tin nhân viên thành công');
     }
 //    public function getdegreedetail($id){
 //        $dedeatail = DegreeDetail::find($id);
 //        return view('admin.pi.pi-detail',compact('dedeatail'));
 //    }
 
-    public function rolechange(Request $request,$pi_id){
-      $pi = PI::find($pi_id);
-      if($request->role == 0){
-        //check if is admin
-        if($pi->admin !=''){
-          $admin = $pi->admin;
-          $admin->delete();
-          return redirect()->back()->with('message', 'Thay đổi vai trò tài khoản thành công');
-        }else if($pi->admin ==''){
-          return redirect()->back()->with('message', 'Thay đổi vai trò tài khoản thành công');
+    public function rolechange(Request $request, $pi_id)
+    {
+        $pi = PI::find($pi_id);
+        if ($request->role == 0) {
+            //check if is admin
+            if ($pi->admin !='') {
+                $admin = $pi->admin;
+                $admin->delete();
+                return redirect()->back()->with('message', 'Thay đổi vai trò tài khoản thành công');
+            } elseif ($pi->admin =='') {
+                return redirect()->back()->with('message', 'Thay đổi vai trò tài khoản thành công');
+            }
+        } elseif ($request->role == 1) {
+            //check if isn't admin
+            if ($pi->admin =='') {
+                $admin = new Admin;
+                $admin->username = $pi->employee_code;
+                $admin->password = Hash::make($pi->employee_code);
+                $admin->email = $pi->email_address;
+                $admin->personalinformation_id = $pi->id;
+                $admin->save();
+                return redirect()->back()->with('message', 'Thay đổi vai trò tài khoản thành công');
+            }
+            //check if is admin
+            elseif ($pi->admin !='') {
+                return redirect()->back()->with('message', 'Thay đổi vai trò tài khoản thành công');
+            }
         }
-      }else if($request->role == 1){
-        //check if isn't admin
-        if($pi->admin ==''){
-          $admin = new Admin;
-          $admin->username = $pi->employee_code;
-          $admin->password = Hash::make($pi->employee_code);
-          $admin->email = $pi->email_address;
-          $admin->personalinformation_id = $pi->id;
-          $admin->save();
-          return redirect()->back()->with('message', 'Thay đổi vai trò tài khoản thành công');
-        }
-        //check if is admin
-        else if($pi->admin !=''){
-          return redirect()->back()->with('message', 'Thay đổi vai trò tài khoản thành công');
-        }
-      }
     }
-    public function getdataimport(Request $request){
-      // dd('a');
-      $validator = Validator::make($request->all(),
+    public function getdataimport(Request $request)
+    {
+        // dd('a');
+        $validator = Validator::make(
+          $request->all(),
         [
           'import_file' => 'required|mimetypes:application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|file'
         ],
@@ -344,51 +345,43 @@ class PIController extends Controller
           'import_file.file'=> 'Không tìm thấy file tải lên.',
         ]
       );
-      if ($validator->passes()) {
-           if($request->has('import_file')){
-             $import_file = $request->file('import_file');
-             $arr_pi  = (new GetPIImport)->toArray($import_file);
-             if(count($arr_pi) == 2){
-               if(count($arr_pi[0][0]) == 18){
-                 if(count($arr_pi[1][0]) == 5 ){
-                    //handle date time from excel to array for sheet 1
-                   foreach ($arr_pi[0] as $key => $value) {
-
-                     if($key != 0){
-                       $date_of_birth = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[4]);
-                       $date_of_issue = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[9]);
-                       $date_of_recruitment = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[13]);
-                       $arr_pi[0][$key][4] = $date_of_birth->format('d-m-Y');
-                       $arr_pi[0][$key][9] = $date_of_issue->format('d-m-Y');
-                       $arr_pi[0][$key][13] = $date_of_recruitment->format('d-m-Y');
-                     }
-                   }
-                   //handle date time from excel to array for sheet 2
-                   foreach ($arr_pi[1] as $key => $value) {
-                     if($key != 0){
-                       $date_of_issue = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[2]);
-                       $arr_pi[1][$key][2] = $date_of_issue->format('d-m-Y');
-                     }
-                   }
-                   return response()->json($arr_pi);
-                 }
-                 else{
-                   return response()->json(['error'=>[0=>'File tải lên không đúng cấu trúc (Sheet 2) .Vui lòng xem lại file mẫu <small> '.'<a href="'.route('admin.pi.template.download').'"> (tải file mẫu)</a></small>']]);
-                 }
-               }
-               else{
-                 return response()->json(['error'=>[0=>'File tải lên không đúng cấu trúc (Sheet 1) .Vui lòng xem lại file mẫu <small> '.'<a href="'.route('admin.pi.template.download').'"> (tải file mẫu)</a></small>']]);
-               }
-             }
-             else{
-
-               return response()->json(['error'=>[0=>'File tải lên không đúng cấu trúc .Vui lòng xem lại file mẫu <small> '.'<a href="'.route('admin.pi.template.download').'"> (tải file mẫu)</a></small>']]);
-             }
-
-           }
-      }
-    	return response()->json(['error'=>$validator->errors()->all()]);
-
+        if ($validator->passes()) {
+            if ($request->has('import_file')) {
+                $import_file = $request->file('import_file');
+                $arr_pi  = (new GetPIImport)->toArray($import_file);
+                if (count($arr_pi) == 2) {
+                    if (count($arr_pi[0][0]) == 18) {
+                        if (count($arr_pi[1][0]) == 5) {
+                            //handle date time from excel to array for sheet 1
+                            foreach ($arr_pi[0] as $key => $value) {
+                                if ($key != 0) {
+                                    $date_of_birth = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[4]);
+                                    $date_of_issue = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[9]);
+                                    $date_of_recruitment = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[13]);
+                                    $arr_pi[0][$key][4] = $date_of_birth->format('d-m-Y');
+                                    $arr_pi[0][$key][9] = $date_of_issue->format('d-m-Y');
+                                    $arr_pi[0][$key][13] = $date_of_recruitment->format('d-m-Y');
+                                }
+                            }
+                            //handle date time from excel to array for sheet 2
+                            foreach ($arr_pi[1] as $key => $value) {
+                                if ($key != 0) {
+                                    $date_of_issue = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[2]);
+                                    $arr_pi[1][$key][2] = $date_of_issue->format('d-m-Y');
+                                }
+                            }
+                            return response()->json($arr_pi);
+                        } else {
+                            return response()->json(['error'=>[0=>'File tải lên không đúng cấu trúc (Sheet 2) .Vui lòng xem lại file mẫu <small> '.'<a href="'.route('admin.pi.template.download').'"> (tải file mẫu)</a></small>']]);
+                        }
+                    } else {
+                        return response()->json(['error'=>[0=>'File tải lên không đúng cấu trúc (Sheet 1) .Vui lòng xem lại file mẫu <small> '.'<a href="'.route('admin.pi.template.download').'"> (tải file mẫu)</a></small>']]);
+                    }
+                } else {
+                    return response()->json(['error'=>[0=>'File tải lên không đúng cấu trúc .Vui lòng xem lại file mẫu <small> '.'<a href="'.route('admin.pi.template.download').'"> (tải file mẫu)</a></small>']]);
+                }
+            }
+        }
+        return response()->json(['error'=>$validator->errors()->all()]);
     }
-
 }

@@ -85,7 +85,6 @@ class PITest extends TestCase
         $actual = $this->data();
         $addPI = $this->post('/admin/pi-add', $actual);
         $actual1 = $this->data();
-
         $actual1['email_address']= 'lethanhson2910@gmail.com';
         $actual1['employee_code']= 'T155477';
         $duplicate_emailaddress = $this->post('/admin/pi-add', $actual1);
