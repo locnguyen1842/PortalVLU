@@ -124,7 +124,7 @@
                                 </form>
                             </div>
                             <div class="panel-footer text-center">
-                              <label><a href="{{route('employee.pi.degree.index',$pi->id)}}">Chi tiết</a> </label>
+                              <label><a href="{{route('employee.pi.degree.index')}}">Chi tiết</a> </label>
 
                             </div>
 
