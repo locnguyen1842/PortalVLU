@@ -23,24 +23,25 @@ class ImportTest extends TestCase
      *
      * @return void
      */
-     // public function setUp()
-     //  {
-     //      parent::setUp();
-     //      Notification::fake();
-     //  }
+     public function setUp()
+      {
+          parent::setUp();
+          $origional_file_path = public_path('template-personalinformation.xlsx');
+          copy($origional_file_path,public_path('test_data.xlsx'));
 
-     public function est_send_correct_file_import_template()
+      }
+
+     public function test_send_correct_file_import_template()
      {
 
         //file to test
-         $filePath = public_path('template-personalinformation.xlsx');
-
+         $test_file_path = public_path('test_data.xlsx');
          $uploadedFile = new UploadedFile(
-              $filePath,
+              $test_file_path,
               'template-personalinformation.xlsx',
               'application/vnd.ms-excel',
-              600,
-              0,
+              null,
+              null,
               true
 
           );
@@ -48,8 +49,26 @@ class ImportTest extends TestCase
          $response = $this->post('/admin/pi-import',[
            'import_file' => $uploadedFile
          ]);
-
          $response->assertSessionHas('message','Import thành công');
+     }
+
+     public function test_get_data_preview_success_after_import(){
+       //file to test
+        $test_file_path = public_path('test_data.xlsx');
+
+        $uploadedFile =UploadedFile::fake(
+             $test_file_path,
+             'template-personalinformation.xlsx',
+             'application/vnd.ms-excel',
+             null,
+             null,
+             true
+
+         );
+        $response = $this->post('/admin/pi-get-data-import',[
+          'import_file' => $uploadedFile
+        ]);
+        $response->assertStatus(200);
      }
 
 
