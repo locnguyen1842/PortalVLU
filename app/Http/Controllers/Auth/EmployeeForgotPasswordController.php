@@ -35,8 +35,9 @@ class EmployeeForgotPasswordController extends Controller
     public function sendResetLinkEmail(Request $request)
     {
         $pi = PI::where('employee_code',$request->employee_code)->first();
-        $email = ['email'=>$pi->email_address];
-        if($pi->show == 1 ){
+
+        if($pi!=null && $pi->show == 1 ){
+          $email = ['email'=>$pi->email_address];
           $response = $this->broker()->sendResetLink($email);
 
           return $response == Password::RESET_LINK_SENT
@@ -66,6 +67,6 @@ class EmployeeForgotPasswordController extends Controller
     }
     protected function sendResetLinkFailedResponse($response)
     {
-        return back()->with('error', 'Email không tồn tại.');
+        return back()->with('error', 'Tài khoản không tồn tại.');
     }
 }
