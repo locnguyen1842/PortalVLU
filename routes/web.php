@@ -86,6 +86,7 @@ Route::prefix('')->group(function () {
     //authenicate admin route
     Route::group(['middleware'=>['auth:employee','permission:employee']], function () {
         Route::get('/pi-detail', 'EmployeeController@getdetail')->name('employee.pi.detail');
+        //update personal information
         Route::get('/pi-update', 'EmployeeController@getupdate')->name('employee.pi.update');
         Route::post('/pi-update', 'EmployeeController@postupdate')->name('employee.pi.update');
         //update degree

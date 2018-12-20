@@ -46,12 +46,9 @@ class EmployeeController extends Controller
                 'contact_address'=> 'required|min:6|max:100',
                 'phone_number'=> 'required',
                 'email_address'=> 'required|email|unique:personalinformations,email_address,'.$pi->id,
-                'position'=> 'required',
-                'date_of_recruitment' => 'required|date',
-                'professional_title'=> 'required',
                 'identity_card'=> 'required|unique:personalinformations,identity_card,'.$pi->id,
                 'date_of_issue' => 'required|date',
-                'place_of_issue'=> 'required'
+                'place_of_issue'=> 'required',
             ],
             [
 
@@ -72,10 +69,7 @@ class EmployeeController extends Controller
                 'email_address.required' =>'Email không được bỏ trống',
                 'email_address.email' =>'Email sai định dạng',
                 'email_address.unique' =>'Email đã được sử dụng',
-                'position.required' =>'Chức vụ không được bỏ trống',
-                'date_of_recruitment.required' =>'Ngày tuyển dụng không được bỏ trống',
-                'date_of_recruitment.date' =>'Ngày tuyển dụng sai định dạng',
-                'professional_title.required' =>'Chức danh chuyên môn không được bỏ trống',
+
                 'identity_card.unique' =>'Chứng minh nhân dân đã được sử dụng',
                 'identity_card.required' =>'Chứng minh nhân dân không được bỏ trống',
                 'date_of_issue.required' =>'Ngày cấp không được bỏ trống',

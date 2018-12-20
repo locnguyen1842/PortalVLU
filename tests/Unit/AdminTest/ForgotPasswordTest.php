@@ -24,7 +24,7 @@ class ForgotPasswordTest extends TestCase
           Notification::fake();
       }
 
-     public function test_View_Forgot_Password_Admin()
+     public function test_get_Forgot_Password_Form_Admin()
      {
          $response = $this->get('/admin/password/reset');
          $this->assertEquals(200, $response->status());
@@ -41,7 +41,7 @@ class ForgotPasswordTest extends TestCase
        ]);
      }
 
-     public function test_get_reset_password_form_admin(){
+     public function test_get_Reset_Password_Form_Admin(){
        $admin  = Admin::where('username','T154725')->first();
        $data = [
          'email' => $admin->email,
@@ -57,7 +57,7 @@ class ForgotPasswordTest extends TestCase
 
      }
 
-     public function test_reset_password_admin(){
+     public function test_Reset_Password_Admin(){
        $admin  = Admin::where('username','T154725')->first();
        $token = Password::broker('admins')->createToken($admin);
        $data = [
@@ -73,6 +73,17 @@ class ForgotPasswordTest extends TestCase
        // dd($admin->password);
        $this->assertTrue(Hash::check( $data['password'],$admin->password));
      }
+     // public function test_Incorrect_Forgot_Password_Admin()
+     // {
+     //   $data = [
+     //     'employee_code' => 'T154725'
+     //   ];
+     //   $admin = Admin::where('username',$data['employee_code'])->first();
+     //   $forgot_password = $this->post('/admin/password/email',$data);
+     //   $forgot_password->assertSessionHas([
+     //     'status'=> 'Yêu cầu khôi phục mật khẩu thành công. Vui lòng kiểm tra email!',
+     //   ]);
+     // }
 
 
 
