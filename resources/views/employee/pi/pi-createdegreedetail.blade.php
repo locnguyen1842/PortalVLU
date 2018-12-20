@@ -6,6 +6,7 @@
             <div class="cm-breadcrumb-container">
                 <ol class="breadcrumb">
                     <li><a href="{{route('employee.pi.detail')}}">Thông tin cá nhân</a></li>
+                    <li class="active"><a href="{{route('employee.pi.degree.index')}}">Danh sách bằng cấp</a></li>
                     <li>Thêm mới bằng cấp</li>
                 </ol>
             </div>
@@ -35,13 +36,14 @@
                         </select>
                     </div>
                     <div class="col-sm-6">
-                        <label>Khối ngành</label>
-                        <select class="form-control" name="industry">
-                            <option value="">Chọn khối ngành</option>
-                            @foreach($industries as $i)
-                                <option value="{{$i->id}}">{{$i->name}}</option>
+                        <label>Chuyên ngành</label>
+                        <select class="form-control" name="specialized">
+                          <option value="">Chọn chuyên ngành</option>
+                            @foreach($specializes as $s)
+                              <option value="{{$s->id}}">{{$s->name}}</option>
                             @endforeach
                         </select>
+
                     </div>
                 </div>
                 <div class="form-group">

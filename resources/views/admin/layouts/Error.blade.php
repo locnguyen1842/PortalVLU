@@ -1,3 +1,4 @@
+@if(isset($errors))
 @if (count($errors) > 0)
     <div class="alert alert-danger mt-10">
         <ul>
@@ -6,4 +7,5 @@
             @endforeach
         </ul>
     </div>
+@endif
 @endif

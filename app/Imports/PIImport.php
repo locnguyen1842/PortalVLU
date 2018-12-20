@@ -4,6 +4,7 @@ namespace App\Imports;
 
 use App\PI;
 use App\Employee;
+use App\Nation;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Illuminate\Support\Facades\Validator;
@@ -19,6 +20,12 @@ class PIImport implements ToCollection,WithStartRow
 
     public function collection(Collection $rows)
     {
+        //get nation
+        $nations = Nation::all();
+        $nations_name = [];
+        foreach ($nations as $nation) {
+          array_push($nations_name,$nation->name );
+        }
 
         //xu ly thay doi index cho array
         $data = $rows->toArray();
@@ -39,8 +46,12 @@ class PIImport implements ToCollection,WithStartRow
         //validate data da thay doi index
         Validator::make($data_to_validate, [
           '*.1' => 'required',
-          '*.2'=>'required|min:4|max:60',
-          '*.3' => 'required',
+          '*.2' => 'required',
+          '*.3'=>[
+                  'required',
+                  Rule::in($nations_name),
+                ],
+
           '*.4'=>[
                   'required',
                   Rule::in(['Nam','Nữ']),
@@ -62,31 +73,25 @@ class PIImport implements ToCollection,WithStartRow
         ],[
 
           '*.1.required' => 'Mã nhân viên không được bỏ trống ( vị trí: :attribute|sheet :1 )',
-          '*.2.required'=>'Họ tên không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
-          '*.2.min' => 'Họ tên phải có độ dài từ 4-60 ký tự ( vị trí: :attribute|sheet :1 ) ',
-          '*.2.max' => 'Họ tên phải có độ dài từ 4-60 ký tự ( vị trí: :attribute|sheet :1 ) ',
-
-          '*.3.required' => 'Dân tộc không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
+          '*.2.required' => 'Họ tên không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
+          '*.3.required'=>'Dân tộc không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
+          '*.3.in'=>'Dân tộc không hợp lệ. ( vị trí: :attribute|sheet :1 ) ',
           '*.4.required'=>'Giới tính không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
           '*.4.in'=>'Giới tính không hợp lệ. Chỉ được nhập : Nam , Nữ ( vị trí: :attribute|sheet :1 ) ',
-
           '*.5.required' => 'Ngày sinh không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
           '*.5.date' => 'Ngày sinh không đúng định dạng ngày tháng ( vị trí: :attribute|sheet :1 ) ',
-
           '*.6.required'=>'Nơi sinh không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
           '*.7.required' => 'Địa chỉ thường trú không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
           '*.8.required'=>'Địa chỉ liên lạc không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
           '*.9.required' => 'CMND không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
           '*.10.required'=>'Ngày cấp không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
           '*.10.date' => 'Ngày cấp không đúng định dạng ngày tháng ( vị trí: :attribute|sheet :1 ) ',
-
           '*.11.required' => 'Nơi cấp không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
           '*.12.required'=>'Số điện thoại không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
           '*.13.required' => 'Email không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
           '*.13.email' => 'Email không đúng định dạng ( vị trí: :attribute|sheet :1 ) ',
           '*.14.required'=>'Ngày tuyển dụng không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
           '*.14.date' => 'Ngày tuyển dụng không đúng định dạng ngày tháng ( vị trí: :attribute|sheet :1 ) ',
-
           '*.15.required' => 'Chức vụ không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
           '*.16.required'=>'Chức danh chuyên môn không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
           '*.17.required' => 'Mật khẩu không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
@@ -105,7 +110,7 @@ class PIImport implements ToCollection,WithStartRow
               'employee_code' => $row[0],
               'full_name' => $row[1],
               'first_name' => $first_name,
-              'nation' => $row[2],
+              'nation_id' => Nation::where('name','like','%'.$row[2].'%')->first()->id,
               'gender' => $row[3] == 'Nam' ? 0:1,
               'date_of_birth' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[4]),
               'place_of_birth' => $row[5],
@@ -120,6 +125,8 @@ class PIImport implements ToCollection,WithStartRow
               'position' =>$row[14],
               'professional_title' => $row[15],
               'show' => 1,
+              'new' =>0,
+              'unit' => $row[17]
             ]
           );
 

@@ -38,7 +38,12 @@
                 <div class="form-group">
                     <div class="col-sm-6">
                         <label>Dân tộc</label>
-                        <input type="text" class="form-control" name="nation" placeholder="Nhập dân tộc" value="{{old('nation')}}">
+                        <select class="form-control" name="nation">
+                            <option value="">Chọn dân tộc</option>
+                            @foreach($nations as $nation)
+                            <option value="{{$nation->id}}">{{$nation->name}}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="col-sm-6">
                         <label>Giới tính</label>
@@ -101,19 +106,39 @@
                         <input type="text" class="form-control" name="professional_title" placeholder="Nhập chức danh chuyên môn" value="{{old('professional_title')}}">
                     </div>
                     <div class="col-sm-6">
-                        <label>Chứng minh nhân dân</label>
-                        <input type="text" class="form-control" name="identity_card" placeholder="Nhập chứng minh nhân dân" value="{{old('identity_card')}}">
+                        <label>Đơn vị</label>
+                        <input type="text" class="form-control" name="unit" placeholder="Nhập đơn vị" value="{{old('unit')}}">
                     </div>
                 </div>
                 <div class="form-group">
+                  <div class="col-sm-6">
+                      <label>Chứng minh nhân dân</label>
+                      <input type="text" class="form-control" name="identity_card" placeholder="Nhập chứng minh nhân dân" value="{{old('identity_card')}}">
+                  </div>
                     <div class="col-sm-6">
                         <label>Ngày cấp</label>
                         <input type="date" class="form-control" name="date_of_issue" value="{{old('date_of_issue')}}">
                     </div>
+
+                </div>
+                <div class="form-group">
                     <div class="col-sm-6">
                         <label>Nơi cấp</label>
                         <input type="text" maxlength="100" class="form-control" name="place_of_issue" placeholder="Nhập nơi cấp" value="{{old('place_of_issue')}}">
                     </div>
+                    <div class="col-sm-6">
+                        <label>Vai trò</label>
+                        <div class="radio">
+                            <label class="col-sm-4">
+                                <input type="radio" name="role" value="0" checked>Nhân viên
+                            </label>
+                            <label class="col-sm-4">
+                                <input type="radio" name="role" value="1">Quản trị viên
+                            </label>
+                        </div>
+
+                    </div>
+
                 </div>
                 <div class="form-group" style="margin-bottom:0">
                     <div class="col-sm-offset-2 col-sm-10 text-right">

@@ -38,7 +38,12 @@
                 <div class="form-group">
                     <div class="col-sm-6">
                         <label>Dân tộc</label>
-                        <input type="text" class="form-control" name="nation" placeholder="Nhập dân tộc" value="{{$pi->nation}}">
+                        <select class="form-control" name="nation">
+                            <option value="">Chọn dân tộc</option>
+                            @foreach($nations as $nation)
+                            <option {{$pi->nation_id == $nation->id ? 'selected' : ''}} value="{{$nation->id}}">{{$nation->name}}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="col-sm-6">
                         <label>Giới tính</label>
@@ -101,18 +106,24 @@
                         <input readonly type="text" class="form-control" name="professional_title" placeholder="Nhập chức danh chuyên môn" value="{{$pi->professional_title}}">
                     </div>
                     <div class="col-sm-6">
+                        <label>Đơn vị</label>
+                        <input readonly type="text" class="form-control" name="unit" value="{{$pi->unit}}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
                         <label>Chứng minh nhân dân</label>
                         <input type="text" class="form-control" name="identity_card" placeholder="Nhập chứng minh nhân dân" value="{{$pi->identity_card}}">
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Nơi cấp</label>
+                        <input type="text" class="form-control" name="place_of_issue" placeholder="Nhập nơi cấp" value="{{$pi->place_of_issue   }}">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-6">
                         <label>Ngày cấp</label>
                         <input type="date" class="form-control" name="date_of_issue" value="{{$pi->date_of_issue}}">
-                    </div>
-                    <div class="col-sm-6">
-                        <label>Nơi cấp</label>
-                        <input type="text" class="form-control" name="place_of_issue" placeholder="Nhập nơi cấp" value="{{$pi->place_of_issue   }}">
                     </div>
                 </div>
                 <div class="form-group" style="margin-bottom:0">
@@ -125,27 +136,3 @@
         </div>
     </div>
 @endsection
-{{--@section('script')--}}
-    {{--<script src="{{asset('js/backend-js/ckeditor5-build-classic/ckeditor.js')}}" charset="utf-8"></script>--}}
-    {{--<script type="text/javascript">--}}
-        {{--if('{{Session::has('success_message')}}' == 1){--}}
-            {{--var success_message = $.gritter.add({--}}
-                {{--// (string | mandatory) the heading of the notification--}}
-                {{--title: 'Success!',--}}
-                {{--// (string | mandatory) the text inside the notification--}}
-                {{--text: '{{ session()->get('message') }}.<a href="{{route()}}">Click here to view.</a>',--}}
-                {{--// (string | optional) the image to display on the left--}}
-                {{--// image: '{{asset('img/backend-img')}}//ui-sam.jpg',--}}
-                {{--// (bool | optional) if you want it to fade out on its own or just sit there--}}
-                {{--sticky: false,--}}
-                {{--// (int | optional) the time you want it to be alive for before fading out--}}
-                {{--time: '2000',--}}
-                {{--// (string | optional) the class name you want to apply to that specific message--}}
-                {{--class_name: 'my-sticky-class'--}}
-            {{--});--}}
-        {{--};--}}
-
-    {{--</script>--}}
-
-
-{{--@endsection--}}

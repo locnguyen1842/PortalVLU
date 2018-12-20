@@ -14,68 +14,12 @@ use App\Employee;
 use Illuminate\Support\Facades\Storage;
 use Hash;
 use App\Admin;
+use App\Nation;
 
 class PIController extends Controller
 {
 
-    public function getdataimport(Request $request){
-      // dd('a');
-      $validator = Validator::make($request->all(),
-        [
-          'import_file' => 'required|mimetypes:application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|file'
-        ],
-        [
-          'import_file.required'=> 'Vui lòng chọn file để import.',
-          'import_file.mimetypes'=> 'File tải lên không đúng định dạng excel (xls,xlsx).',
-          'import_file.file'=> 'Không tìm thấy file tải lên.',
-        ]
-      );
-      if ($validator->passes()) {
-           if($request->has('import_file')){
-             $import_file = $request->file('import_file');
-             $arr_pi  = (new GetPIImport)->toArray($import_file);
-             if(count($arr_pi) == 2){
-               if(count($arr_pi[0][0]) == 17){
-                 if(count($arr_pi[1][0]) == 5 ){
-                    //handle date time from excel to array for sheet 1
-                   foreach ($arr_pi[0] as $key => $value) {
 
-                     if($key != 0){
-                       $date_of_birth = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[4]);
-                       $date_of_issue = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[9]);
-                       $date_of_recruitment = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[13]);
-                       $arr_pi[0][$key][4] = $date_of_birth->format('d-m-Y');
-                       $arr_pi[0][$key][9] = $date_of_issue->format('d-m-Y');
-                       $arr_pi[0][$key][13] = $date_of_recruitment->format('d-m-Y');
-                     }
-                   }
-                   //handle date time from excel to array for sheet 2
-                   foreach ($arr_pi[1] as $key => $value) {
-                     if($key != 0){
-                       $date_of_issue = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[2]);
-                       $arr_pi[1][$key][2] = $date_of_issue->format('d-m-Y');
-                     }
-                   }
-                   return response()->json($arr_pi);
-                 }
-                 else{
-                   return response()->json(['error'=>[0=>'File tải lên không đúng cấu trúc (Sheet 2) .Vui lòng xem lại file mẫu <small> '.'<a href="'.route('admin.pi.template.download').'"> (tải file mẫu)</a></small>']]);
-                 }
-               }
-               else{
-                 return response()->json(['error'=>[0=>'File tải lên không đúng cấu trúc (Sheet 1) .Vui lòng xem lại file mẫu <small> '.'<a href="'.route('admin.pi.template.download').'"> (tải file mẫu)</a></small>']]);
-               }
-             }
-             else{
-
-               return response()->json(['error'=>[0=>'File tải lên không đúng cấu trúc .Vui lòng xem lại file mẫu <small> '.'<a href="'.route('admin.pi.template.download').'"> (tải file mẫu)</a></small>']]);
-             }
-
-           }
-      }
-    	return response()->json(['error'=>$validator->errors()->all()]);
-
-    }
     public function downloadtemplate(){
       $file = public_path('template-personalinformation.xlsx');
       $headers = array(
@@ -103,7 +47,8 @@ class PIController extends Controller
     }
     public function getAdd()
     {
-        return view('admin.pi.pi-add');
+        $nations = Nation::all();
+        return view('admin.pi.pi-add',compact('nations'));
     }
     public function postAdd(Request $request)
     {
@@ -113,7 +58,7 @@ class PIController extends Controller
             'full_name'=> 'required|min:4|max:60',
             'nation'=> 'required',
             'date_of_birth'=>'required|date',
-            'place_of_birth'=> 'required|min:5|max:100',
+            'place_of_birth'=> 'required',
             'permanent_address'=> 'required|min:6|max:100',
             'contact_address'=> 'required|min:6|max:100',
             'phone_number'=> 'required',
@@ -123,7 +68,8 @@ class PIController extends Controller
             'professional_title'=> 'required',
             'identity_card'=> 'required|unique:personalinformations,identity_card',
             'date_of_issue' => 'required|date',
-            'place_of_issue'=> 'required|min:5|max:100'
+            'place_of_issue'=> 'required',
+            'unit'=> 'required',
           ],
           [
             'employee_code.required'=> 'Mã giảng viên không được bỏ trống',
@@ -134,8 +80,6 @@ class PIController extends Controller
             'nation.required' =>'Dân tộc không được bỏ trống',
             'date_of_birth.required' =>'Ngày sinh không được bỏ trống',
             'date_of_birth.date' =>'Ngày sinh sai định dạng',
-            'place_of_birth.min' =>'Nơi sinh phải lớn hơn 5 kí tự',
-            'place_of_birth.max' =>'Nơi sinh phải nhỏ hơn 100 kí tự',
             'place_of_birth.required' =>'Nơi sinh không được bỏ trống',
             'permanent_address.min' =>'Địa chỉ thường trú phải lớn hơn 6 kí tự',
             'permanent_address.max' =>'Địa chỉ thường trú phải nhỏ hơn 100 kí tự',
@@ -155,9 +99,8 @@ class PIController extends Controller
             'identity_card.required' =>'Chứng minh nhân dân không được bỏ trống',
             'date_of_issue.required' =>'Ngày cấp không được bỏ trống',
             'date_of_issue.date' =>'Ngày cấp sai định dạng',
-            'place_of_issue.min' =>'Nơi cấp phải lớn hơn 5 kí tự',
-            'place_of_issue.max' =>'Nơi cấp phải nhỏ hơn 100 kí tự',
-            'place_of_issue.required' =>'Nơi cấp không được bỏ trống'
+            'place_of_issue.required' =>'Nơi cấp không được bỏ trống',
+            'unit.required' =>'Đơn vị không được bỏ trống',
           ]
       );
         //add data
@@ -170,7 +113,7 @@ class PIController extends Controller
         $split = explode(" ", $request->full_name);
         $pi->first_name =$split[sizeof($split)-1]; // get name
         $pi->gender= $request->gender;
-        $pi->nation= $request->nation;
+        $pi->nation_id= $request->nation;
         $pi->date_of_birth= $request->date_of_birth;
         $pi->place_of_birth= $request->place_of_birth;
         $pi->permanent_address= $request->permanent_address;
@@ -184,15 +127,31 @@ class PIController extends Controller
         $pi->date_of_issue= $request->date_of_issue;
         $pi->place_of_issue= $request->place_of_issue;
         $pi->show = 1;
+        $pi->new = 0;
+        $pi->unit = $request->unit;
         $pi->save();
-        //create account
+        //check is Admin ?
+        //add acoount for employee role
         $employee = new Employee;
         $employee->personalinformation_id = $pi->id;
         $employee->username= $pi->employee_code;
         $employee->password = Hash::make($pi->employee_code);
         $employee->email = $pi->email_address;
-
         $employee->save();
+
+        if($request->role == 1){
+
+          //add account for admin role
+          $admin = new Admin;
+          $admin->personalinformation_id = $pi->id;
+          $admin->username= $pi->employee_code;
+          $admin->password = Hash::make($pi->employee_code);
+          $admin->email = $pi->email_address;
+          $admin->save();
+
+
+        }
+
 
         return redirect()->back()->with('message', 'Thêm thành công');
     }
@@ -200,7 +159,8 @@ class PIController extends Controller
     public function getupdate($id)
     {
         $pi = PI::Find($id);
-        return view('admin.pi.pi-update', compact('pi'));
+        $nations = Nation::all();
+        return view('admin.pi.pi-update', compact('pi','nations'));
     }
     //post date update information
     public function postupdate(Request $request, $id)
@@ -214,7 +174,7 @@ class PIController extends Controller
               'full_name'=> 'required|min:4|max:60',
               'nation'=> 'required',
               'date_of_birth'=>'required|date',
-              'place_of_birth'=> 'required|min:5|max:100',
+              'place_of_birth'=> 'required',
               'permanent_address'=> 'required|min:6|max:100',
               'contact_address'=> 'required|min:6|max:100',
               'phone_number'=> 'required',
@@ -224,7 +184,8 @@ class PIController extends Controller
               'professional_title'=> 'required',
               'identity_card'=> 'required|unique:personalinformations,identity_card,'.$pi->id,
               'date_of_issue' => 'required|date',
-              'place_of_issue'=> 'required|min:5|max:100'
+              'place_of_issue'=> 'required',
+              'unit' => 'required'
           ],
           [
               'employee_code.required'=> 'Mã giảng viên không được bỏ trống',
@@ -235,8 +196,6 @@ class PIController extends Controller
               'nation.required' =>'Dân tộc không được bỏ trống',
               'date_of_birth.required' =>'Ngày sinh không được bỏ trống',
               'date_of_birth.date' =>'Ngày sinh sai định dạng',
-              'place_of_birth.min' =>'Nơi sinh phải lớn hơn 5 kí tự',
-              'place_of_birth.max' =>'Nơi sinh phải nhỏ hơn 100 kí tự',
               'place_of_birth.required' =>'Nơi sinh không được bỏ trống',
               'permanent_address.min' =>'Địa chỉ thường trú phải lớn hơn 6 kí tự',
               'permanent_address.max' =>'Địa chỉ thường trú phải nhỏ hơn 100 kí tự',
@@ -256,9 +215,8 @@ class PIController extends Controller
               'identity_card.required' =>'Chứng minh nhân dân không được bỏ trống',
               'date_of_issue.required' =>'Ngày cấp không được bỏ trống',
               'date_of_issue.date' =>'Ngày cấp sai định dạng',
-              'place_of_issue.min' =>'Nơi cấp phải lớn hơn 5 kí tự',
-              'place_of_issue.max' =>'Nơi cấp phải nhỏ hơn 100 kí tự',
-              'place_of_issue.required' =>'Nơi cấp không được bỏ trống'
+              'place_of_issue.required' =>'Nơi cấp không được bỏ trống',
+              'unit.required' =>'Đơn vị không được bỏ trống',
           ]
         );
         //post data
@@ -267,7 +225,7 @@ class PIController extends Controller
         $split = explode(" ", $request->full_name);
         $pi->first_name =$split[sizeof($split)-1]; // get name
         $pi->gender= $request->gender;
-        $pi->nation= $request->nation;
+        $pi->nation_id= $request->nation;
         $pi->date_of_birth= $request->date_of_birth;
         $pi->place_of_birth= $request->place_of_birth;
         $pi->permanent_address= $request->permanent_address;
@@ -280,7 +238,8 @@ class PIController extends Controller
         $pi->identity_card= $request->identity_card;
         $pi->date_of_issue= $request->date_of_issue;
         $pi->place_of_issue= $request->place_of_issue;
-        //validate data
+        $pi->unit = $request->unit;
+
 
         $pi->save();
 
@@ -372,6 +331,64 @@ class PIController extends Controller
           return redirect()->back()->with('message', 'Thay đổi vai trò tài khoản thành công');
         }
       }
+    }
+    public function getdataimport(Request $request){
+      // dd('a');
+      $validator = Validator::make($request->all(),
+        [
+          'import_file' => 'required|mimetypes:application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|file'
+        ],
+        [
+          'import_file.required'=> 'Vui lòng chọn file để import.',
+          'import_file.mimetypes'=> 'File tải lên không đúng định dạng excel (xls,xlsx).',
+          'import_file.file'=> 'Không tìm thấy file tải lên.',
+        ]
+      );
+      if ($validator->passes()) {
+           if($request->has('import_file')){
+             $import_file = $request->file('import_file');
+             $arr_pi  = (new GetPIImport)->toArray($import_file);
+             if(count($arr_pi) == 2){
+               if(count($arr_pi[0][0]) == 18){
+                 if(count($arr_pi[1][0]) == 5 ){
+                    //handle date time from excel to array for sheet 1
+                   foreach ($arr_pi[0] as $key => $value) {
+
+                     if($key != 0){
+                       $date_of_birth = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[4]);
+                       $date_of_issue = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[9]);
+                       $date_of_recruitment = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[13]);
+                       $arr_pi[0][$key][4] = $date_of_birth->format('d-m-Y');
+                       $arr_pi[0][$key][9] = $date_of_issue->format('d-m-Y');
+                       $arr_pi[0][$key][13] = $date_of_recruitment->format('d-m-Y');
+                     }
+                   }
+                   //handle date time from excel to array for sheet 2
+                   foreach ($arr_pi[1] as $key => $value) {
+                     if($key != 0){
+                       $date_of_issue = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[2]);
+                       $arr_pi[1][$key][2] = $date_of_issue->format('d-m-Y');
+                     }
+                   }
+                   return response()->json($arr_pi);
+                 }
+                 else{
+                   return response()->json(['error'=>[0=>'File tải lên không đúng cấu trúc (Sheet 2) .Vui lòng xem lại file mẫu <small> '.'<a href="'.route('admin.pi.template.download').'"> (tải file mẫu)</a></small>']]);
+                 }
+               }
+               else{
+                 return response()->json(['error'=>[0=>'File tải lên không đúng cấu trúc (Sheet 1) .Vui lòng xem lại file mẫu <small> '.'<a href="'.route('admin.pi.template.download').'"> (tải file mẫu)</a></small>']]);
+               }
+             }
+             else{
+
+               return response()->json(['error'=>[0=>'File tải lên không đúng cấu trúc .Vui lòng xem lại file mẫu <small> '.'<a href="'.route('admin.pi.template.download').'"> (tải file mẫu)</a></small>']]);
+             }
+
+           }
+      }
+    	return response()->json(['error'=>$validator->errors()->all()]);
+
     }
 
 }

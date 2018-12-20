@@ -36,6 +36,7 @@
                     <div class="col-sm-6">
                         <label>Bằng cấp</label>
                         <select class="form-control" name="degree">
+                          <option value="">Chọn bằng cấp</option>
                             @foreach($degrees as $d)
                                 @if($d->id == $degree->degree_id)
                                     <option selected value="{{$d->id}}">{{$d->name}}</option>
@@ -46,20 +47,19 @@
                         </select>
                     </div>
                     <div class="col-sm-6">
-                        <label>Khối ngành</label>
-                        <select class="form-control" name="industry">
-                            @foreach($industries as $i)
-                                <option value="{{$i->id}}">{{$i->name}}</option>
+                        <label>Chuyên ngành</label>
+                        <select class="form-control" name="specialized">
+                          <option value="">Chọn chuyên ngành</option>
+                            @foreach($specializes as $s)
+                              <option {{$degree->specialized_id == $s->id ? 'selected':''}} value="{{$s->id}}">{{$s->name}}</option>
                             @endforeach
                         </select>
+
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-6">
                         <label>Ngày cấp</label>
-                        {{--@foreach($degrees as $i)--}}
-                           {{--<option value="{{$i->id}}">{{$i->date_of_issue}}</option>--}}
-                        {{--@endforeach--}}
                         <input type="date" class="form-control" name="date_of_issue" value="{{$degree->date_of_issue}}">
                     </div>
                     <div class="col-sm-6">

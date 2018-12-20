@@ -13,7 +13,8 @@ class DegreeDetail extends Model
         'place_of_issue',
         'personalinformation_id',
         'degree_id',
-        'industry_id'
+        'industry_id',
+        'specialized_id'
     ];
 
     public function pi(){
@@ -22,6 +23,10 @@ class DegreeDetail extends Model
 
     public function degree(){
       return $this->belongsTo('App\Degree','degree_id','id');
+    }
+
+    public function specialized(){
+      return $this->belongsTo('App\Specialized','specialized_id','id');
     }
 
     public function industry(){

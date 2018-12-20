@@ -6,8 +6,10 @@ use App\Employee;
 use Illuminate\Http\Request;
 use Auth;
 use App\PI;
+use App\Nation;
 use App\Degree;
 use App\DegreeDetail;
+use App\Specialized;
 use App\Industry;
 use Hash;
 
@@ -25,8 +27,9 @@ class EmployeeController extends Controller
     }
     public function getupdate()
     {
+        $nations = Nation::all();
         $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
-        return view('employee.pi.pi-update', compact('pi'));
+        return view('employee.pi.pi-update', compact('pi','nations'));
     }
     public function postupdate(Request $request)
     {
@@ -38,7 +41,7 @@ class EmployeeController extends Controller
                 'full_name'=> 'required|min:4|max:60',
                 'nation'=> 'required',
                 'date_of_birth'=>'required|date',
-                'place_of_birth'=> 'required|min:5|max:100',
+                'place_of_birth'=> 'required',
                 'permanent_address'=> 'required|min:6|max:100',
                 'contact_address'=> 'required|min:6|max:100',
                 'phone_number'=> 'required',
@@ -48,7 +51,7 @@ class EmployeeController extends Controller
                 'professional_title'=> 'required',
                 'identity_card'=> 'required|unique:personalinformations,identity_card,'.$pi->id,
                 'date_of_issue' => 'required|date',
-                'place_of_issue'=> 'required|min:5|max:100'
+                'place_of_issue'=> 'required'
             ],
             [
 
@@ -58,8 +61,6 @@ class EmployeeController extends Controller
                 'nation.required' =>'Dân tộc không được bỏ trống',
                 'date_of_birth.required' =>'Ngày sinh không được bỏ trống',
                 'date_of_birth.date' =>'Ngày sinh sai định dạng',
-                'place_of_birth.min' =>'Nơi sinh phải lớn hơn 5 kí tự',
-                'place_of_birth.max' =>'Nơi sinh phải nhỏ hơn 100 kí tự',
                 'place_of_birth.required' =>'Nơi sinh không được bỏ trống',
                 'permanent_address.min' =>'Địa chỉ thường trú phải lớn hơn 6 kí tự',
                 'permanent_address.max' =>'Địa chỉ thường trú phải nhỏ hơn 100 kí tự',
@@ -79,8 +80,6 @@ class EmployeeController extends Controller
                 'identity_card.required' =>'Chứng minh nhân dân không được bỏ trống',
                 'date_of_issue.required' =>'Ngày cấp không được bỏ trống',
                 'date_of_issue.date' =>'Ngày cấp sai định dạng',
-                'place_of_issue.min' =>'Nơi cấp phải lớn hơn 5 kí tự',
-                'place_of_issue.max' =>'Nơi cấp phải nhỏ hơn 100 kí tự',
                 'place_of_issue.required' =>'Nơi cấp không được bỏ trống'
             ]
         );
@@ -91,16 +90,13 @@ class EmployeeController extends Controller
         $split = explode(" ", $request->full_name);
         $pi->first_name =$split[sizeof($split)-1]; // get name
         $pi->gender= $request->gender;
-        $pi->nation= $request->nation;
+        $pi->nation_id= $request->nation;
         $pi->date_of_birth= $request->date_of_birth;
         $pi->place_of_birth= $request->place_of_birth;
         $pi->permanent_address= $request->permanent_address;
         $pi->contact_address= $request->contact_address;
         $pi->phone_number= $request->phone_number;
         $pi->email_address= $request->email_address;
-        $pi->position= $request->position;
-        $pi->date_of_recruitment= $request->date_of_recruitment;
-        $pi->professional_title= $request->professional_title;
         $pi->identity_card= $request->identity_card;
         $pi->date_of_issue= $request->date_of_issue;
         $pi->place_of_issue= $request->place_of_issue;
@@ -114,11 +110,12 @@ class EmployeeController extends Controller
     }
     public function getcreatedegree()
     {
+        $specializes = Specialized::all();
         $degrees = Degree::all();
         $industries = Industry::all();
         $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
 
-        return view('employee.pi.pi-createdegreedetail', compact('degrees', 'industries', 'pi'));
+        return view('employee.pi.pi-createdegreedetail', compact('degrees', 'industries', 'pi','specializes'));
     }
     public function postcreatedegree(Request $request)
     {
@@ -128,14 +125,14 @@ class EmployeeController extends Controller
                 'date_of_issue'=> 'required|date',
                 'place_of_issue'=> 'required',
                 'degree'=> 'required',
-                'industry'=> 'required'
+                'specialized'=> 'required'
             ],
             [
                 'date_of_issue.required' => 'Ngày cấp không được bỏ trống',
                 'date_of_issue.date' => 'Ngày cấp không đúng định dạng',
                 'degree.required' => 'Bằng cấp không được bỏ trống',
-                'industry.required' => 'Khối ngành không được bỏ trống',
-                'place_of_issue.required' => 'Nơi cấp không được bỏ trống'
+                'place_of_issue.required' => 'Nơi cấp không được bỏ trống',
+                'specialized.required' => 'Chuyên ngành không được bỏ trống',
             ]
         );
         $pi->new = 1 ;
@@ -145,8 +142,8 @@ class EmployeeController extends Controller
         $degree_detail->date_of_issue = $request->date_of_issue;
         $degree_detail->place_of_issue = $request->place_of_issue;
         $degree_detail->degree_id = $request->degree;
-        $degree_detail->industry_id = $request->industry;
-
+        $degree_detail->specialized_id = $request->specialized;
+        $degree_detail->industry_id = 8;
         $degree_detail->save();
         return redirect()->back()->with('message', 'Thêm thành công');
     }
@@ -206,6 +203,7 @@ class EmployeeController extends Controller
     {
 
         $pi = Auth::guard('employee')->user()->pi;
+        $specializes = Specialized::all();
 
         $degree = DegreeDetail::find($b);//where('personalinformation_id',$id)->where('degree_id',$b)->get();
 
@@ -215,7 +213,7 @@ class EmployeeController extends Controller
         //$degreede = DegreeDetail::all();
 
 
-        return view('employee.pi.pi-updatedetaildegree', compact('degrees','degree', 'industries','pi'));
+        return view('employee.pi.pi-updatedetaildegree', compact('degrees','degree', 'industries','pi','specializes'));
     }
     public function postupdatedegreedetail(Request $request,$b)
     {
@@ -224,14 +222,14 @@ class EmployeeController extends Controller
                 'date_of_issue'=> 'required|date',
                 'place_of_issue'=> 'required',
                 'degree'=> 'required',
-                'industry'=> 'required'
+                'specialized'=> 'required'
             ],
             [
                 'date_of_issue.required' => 'Ngày cấp không được bỏ trống',
                 'date_of_issue.date' => 'Ngày cấp không đúng định dạng',
                 'degree.required' => 'Bằng cấp không được bỏ trống',
-                'industry.required' => 'Khối ngành không được bỏ trống',
-                'place_of_issue.required' => 'Nơi cấp không được bỏ trống'
+                'place_of_issue.required' => 'Nơi cấp không được bỏ trống',
+                'specialized.required' => 'Chuyên ngành không được bỏ trống',
             ]
         );
         $pi = Auth::guard('employee')->user()->pi;
@@ -241,10 +239,10 @@ class EmployeeController extends Controller
         $degree->date_of_issue = $request->date_of_issue;
         $degree->place_of_issue = $request->place_of_issue;
         $degree->degree_id = $request->degree;
-        $degree->industry_id = $request->industry;
+        $degree->specialized_id = $request->specialized;
 
         $degree->save();
-        return redirect()->back()->with('message', 'Thêm thành công');
+        return redirect()->back()->with('message', 'Cập nhật thành công');
     }
     public function delete($degreedetail_id){
 
