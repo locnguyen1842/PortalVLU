@@ -19,6 +19,11 @@
             {{ session()->get('message') }}
         </div>
     @endif
+    @if(session()->has('error_message'))
+        <div class="alert alert-danger mt-10">
+            {{ session()->get('error_message') }}
+        </div>
+    @endif
     <div class="panel panel-default">
         <div class="panel-heading">Đổi mật khẩu Admin</div>
         <div class="panel-body">

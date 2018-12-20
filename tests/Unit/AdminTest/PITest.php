@@ -10,7 +10,8 @@ use Auth;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Session;
 use App\PI;
-
+use App\Admin;
+use Hash;
 class PITest extends TestCase
 {
     use DatabaseTransactions;
@@ -140,6 +141,7 @@ class PITest extends TestCase
             'date_of_birth'=> 'Ngày sinh sai định dạng'
         ]);
     }
+
 
     public function data()
     {

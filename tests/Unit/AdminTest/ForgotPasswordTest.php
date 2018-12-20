@@ -66,15 +66,15 @@ class ForgotPasswordTest extends TestCase
         $admin  = Admin::where('username', 'T154725')->first();
         $this->assertTrue(Hash::check($data['password'], $admin->password));
     }
-    // public function test_Incorrect_Forgot_Password_Admin()
-     // {
-     //   $data = [
-     //     'employee_code' => 'T154725'
-     //   ];
-     //   $admin = Admin::where('username',$data['employee_code'])->first();
-     //   $forgot_password = $this->post('/admin/password/email',$data);
-     //   $forgot_password->assertSessionHas([
-     //     'status'=> 'Yêu cầu khôi phục mật khẩu thành công. Vui lòng kiểm tra email!',
-     //   ]);
-     // }
+    public function test_Incorrect_Forgot_Password_Admin()
+     {
+       $data = [
+         'employee_code' => 'T15555'
+       ];
+       $admin = Admin::where('username',$data['employee_code'])->first();
+       $forgot_password = $this->post('/admin/password/email',$data);
+       $forgot_password->assertSessionHas([
+         'error' => 'Tài khoản không tồn tại.'
+       ]);
+     }
 }
