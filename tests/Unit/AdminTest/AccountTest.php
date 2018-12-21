@@ -62,7 +62,37 @@ class AccountTest extends TestCase
            'password' => 'Chưa xác nhận mật khẩu cũ'
          ]);
     }
-    public function test_Length_NewPassword_Change_My_Password()
+    public function test_Empty_NewPassword_Change_My_Password()
+    {
+        $user = Admin::where('username', 'T154725')->first();
+        $user->password = Hash::make('T154725');
+        $user->save();
+        $this->actingAs($user, 'admin');
+        $changepassword= $this->post('/admin/pi-changepass', [
+             'password' => 'T154725',
+             'newpassword' =>'',
+             'comfirmpassword' =>'t123457',
+         ]);
+        $changepassword->assertSessionHasErrors([
+           'newpassword' => 'Mật khẩu mới không được bỏ trống'
+         ]);
+    }
+    public function test_Empty_ConfirmPassword_Change_My_Password()
+    {
+        $user = Admin::where('username', 'T154725')->first();
+        $user->password = Hash::make('T154725');
+        $user->save();
+        $this->actingAs($user, 'admin');
+        $changepassword= $this->post('/admin/pi-changepass', [
+             'password' => 'T154725',
+             'newpassword' =>'T154725',
+             'comfirmpassword' =>'',
+         ]);
+        $changepassword->assertSessionHasErrors([
+           'comfirmpassword' => 'Xác nhận mật khẩu mới không được bỏ trống'
+         ]);
+    }
+    public function test_Min_Length_NewPassword_Change_My_Password()
     {
         $user = Admin::where('username', 'T154725')->first();
         $user->password = Hash::make('T154725');
@@ -76,6 +106,21 @@ class AccountTest extends TestCase
         $changepassword->assertSessionHasErrors([
            'newpassword' => 'Mật khẩu mới phải có độ dài từ 5-50 kí tự'
          ]);
+    }
+    public function test_Max_Length_NewPassword_Change_My_Password()
+    {
+        $user = Admin::where('username', 'T154725')->first();
+        $user->password = Hash::make('T154725');
+        $user->save();
+        $this->actingAs($user, 'admin');
+        $changepassword= $this->post('/admin/pi-changepass', [
+           'password' => 'T154725',
+           'newpassword' =>'t1212313213213213211231311111111111111111121231321321321321123131111111111111111112123132132132132112313111111111111111111',
+           'comfirmpassword' =>'t1212313213213213211231311111111111111111121231321321321321123131111111111111111112123132132132132112313111111111111111111',
+       ]);
+        $changepassword->assertSessionHasErrors([
+         'newpassword' => 'Mật khẩu mới phải có độ dài từ 5-50 kí tự'
+       ]);
     }
     public function test_Incorrect_ConfirmPassword_Change_My_Password()
     {
