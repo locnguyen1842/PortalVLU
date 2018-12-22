@@ -60,7 +60,6 @@ class ViewTest extends TestCase
         $degreedetail_id = DegreeDetail::first()->id;
         $response = $this->get('/admin/pi-degree-create/'.$degreedetail_id);
         $this->assertEquals(200, $response->status());
-
     }
     public function test_view_Degree_List()
     {
@@ -95,7 +94,16 @@ class ViewTest extends TestCase
         $this->assertEquals(200, $response->status());
         $response->assertViewHas('nations');
     }
-    
+    public function test_view_Login()
+    {
+        $response = $this->get('/admin/login');
+        $this->assertEquals(200, $response->status());
+    }
+    public function test_view_Logout()
+    {
+        $response = $this->get('/admin/login');
+        $this->assertEquals(200, $response->status());
+    }
     // public function data()
     // {
     //     $actual = [

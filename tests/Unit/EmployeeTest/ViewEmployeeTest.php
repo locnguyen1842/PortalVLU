@@ -73,6 +73,17 @@ class ViewEmployeeTest extends TestCase
         $this->assertEquals(200, $response->status());
         $response->assertViewHas('employee');
     }
+    public function test_view_Login_Employee()
+    {
+        $response = $this->get('/login');
+        $this->assertEquals(200, $response->status());
+    }
+    public function test_view_Logout_Employee()
+    {
+        $response = $this->get('/login');
+        $this->assertEquals(200, $response->status());
+    }
+
     // public function data()
     // {
     //     $data = [
