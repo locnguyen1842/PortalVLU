@@ -68,7 +68,8 @@ class ImportTest extends TestCase
         $response = $this->post('/admin/pi-get-data-import',[
           'import_file' => $uploadedFile
         ]);
-        $response->assertStatus(200);
+        $response->assertSuccessful();
+        $response->assertJsonCount(1);
      }
 
 
