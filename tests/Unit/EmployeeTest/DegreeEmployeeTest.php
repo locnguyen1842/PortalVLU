@@ -14,7 +14,7 @@ use App\DegreeDetail;
 use App\Admin;
 use Hash;
 use App\Employee;
-class DegreeTest extends TestCase
+class DegreeEmployeeTest extends TestCase
 {
     use DatabaseTransactions;
     /**
