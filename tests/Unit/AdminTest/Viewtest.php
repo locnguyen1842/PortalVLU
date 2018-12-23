@@ -104,39 +104,6 @@ class ViewTest extends TestCase
         $response = $this->get('/admin/login');
         $this->assertEquals(200, $response->status());
     }
-    // public function data()
-    // {
-    //     $actual = [
-    //         'employee_code' => 'T153772',
-    //         'full_name' => 'Le Thanh Son',
-    //         'nation' => 'Kinh',
-    //         'gender' => 1,
-    //         'date_of_birth' => '1997-04-10',
-    //         'place_of_birth' => 'TPHCM',
-    //         'permanent_address' => 'An Giang',
-    //         'contact_address' => 'An Giang',
-    //         'phone_number' => '0123456789',
-    //         'email_address' => 'lethanhson2910@gmail.com',
-    //         'position' => 'Quan ly',
-    //         'date_of_recruitment' => '2018-04-10',
-    //         'professional_title' => 'Lao cong',
-    //         'identity_card' => '321368999',
-    //         'date_of_issue' => '2015-04-10',
-    //         'place_of_issue' => 'TPHCM',
-    //
-    //     ];
-    //     return $actual;
-    // }
-    // public function data_Degree_Details()
-    // {
-    //     $data = [
-    //     'date_of_issue' => '2018-04-10',
-    //     'place_of_issue' => 'TPHCM',
-    //     'degree' => 1,
-    //     'industry'=> 1,
-    //     'specialized'=> 1 ,
-    //
-    //   ];
-    //     return $data;
-    // }
+
+
 }

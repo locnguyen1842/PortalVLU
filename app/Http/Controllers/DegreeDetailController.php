@@ -58,7 +58,7 @@ class DegreeDetailController extends Controller
         $degree->industry_id = $request->industry;
         $degree->specialized_id = $request->specialized;
         $degree->save();
-        return redirect()->back()->with('message', 'Thêm thành công');
+        return redirect()->back()->with('message', 'Cập nhật thành công');
     }
     public function getcreatedegree($id)
     {

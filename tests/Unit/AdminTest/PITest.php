@@ -10,6 +10,7 @@ use Auth;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Session;
 use App\PI;
+use App\DegreeDetail;
 use App\Admin;
 use Hash;
 class PITest extends TestCase
@@ -166,4 +167,7 @@ class PITest extends TestCase
       ];
         return $actual;
     }
+    //
+
+
 }

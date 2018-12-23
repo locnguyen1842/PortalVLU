@@ -66,6 +66,16 @@ class ViewEmployeeTest extends TestCase
         $response->assertViewHas('industries');
         $response->assertViewHas('pi');
     }
+    //
+    public function test_view_Delete_Degree_Employee()
+    {
+        $this->login_employee();
+        $degreedetail_id = DegreeDetail::first()->id;
+       // $degreedetail_id = 9;
+        $response = $this->get('/pi-degree-delete/'.$degreedetail_id);
+        $this->assertEquals(200, $response->status());
+        $response->actionTrue();
+    }
     public function test_view_Change_Password_Employee()
     {
         $this->login_employee();
