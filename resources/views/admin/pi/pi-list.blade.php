@@ -270,7 +270,9 @@
                {
                  if($.isEmptyObject(datas.error)){
                      $('#header-modal').text('Xem trước');
+                     console.log(datas);
                      $.each(datas[0],function(index,value){
+
                         if(index == 0){
                           $.each(datas[0][0],function(index1, value1) {
                               $('.heading-table').append($('<th>',{'text':value1,'class':'heading-table-import-tr text-nowrap'}));
@@ -300,6 +302,7 @@
                         }
                      });
                      datas[1].shift();
+                     console.log(datas[1]);
                      $.each(datas[1],function(index2, value2) {
                          $('.row-table-2').append($('<tr>',{'class':'row-table-import-tr-1 text-nowrap'}));
                          $.each(datas[1][index2],function(index3, value3) {
@@ -347,6 +350,7 @@
 
                },
                error :function(er){
+                 console.log(er);
                    $(".print-error-msg").find("ul").html('');
                    $(".print-error-msg").css('display','block');
                   $(".print-error-msg").find("ul").append('<li>'+'File tải lên không đúng cấu trúc .Vui lòng xem lại file mẫu <small> <a href="{{route('admin.pi.template.download')}}"> (tải file mẫu)</a></small>'+'</li>');
