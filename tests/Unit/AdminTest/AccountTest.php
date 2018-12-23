@@ -137,4 +137,26 @@ class AccountTest extends TestCase
            'comfirmpassword' => 'Xác nhận mật khẩu mới không chính xác'
          ]);
     }
+
+    public function test_successful_login_admin(){
+      $user = Admin::where('username', 'T154725')->first();
+      $user->password = Hash::make('T154725');
+      $user->save();
+      $credential = [
+        'username' => 'T154725',
+        'password' => 'T154725'
+      ];
+      $response = $this->post('/admin/login',$credential);
+      $response->assertRedirect('/admin/pi-list'); // see pi detail when login successful
+
+    }
+
+    public function test_logout_admin(){
+      $user = Admin::where('username', 'T154725')->first();
+      $this->actingAs($user,'admin');//login before logout
+      $response = $this->get('/admin/logout');
+      $this->assertFalse(Auth::guard('admin')->check());
+      $response->assertRedirect('/admin/login');
+    }
+
 }

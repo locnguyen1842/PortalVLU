@@ -31,6 +31,17 @@ class PITest extends TestCase
         $this->assertEquals($pi->identity_card, $actual['identity_card']);
         $this->assertEquals($pi->email_address, $actual['email_address']);
     }
+    public function test_add_PI_with_admin_role()
+    {
+        $actual = $this->data();
+        $actual['role'] = 1;
+        $addPI = $this->post('/admin/pi-add', $actual);
+        $pi = PI::where('employee_code', $actual['employee_code'])->first();//
+        $this->assertEquals($pi->employee_code, $actual['employee_code']);
+        $this->assertEquals($pi->identity_card, $actual['identity_card']);
+        $this->assertEquals($pi->email_address, $actual['email_address']);
+        $this->assertTrue($pi->admin != '');
+    }
     public function test_add_PI_with_empty_employee_code()
     {
         $actual = $this->data();
@@ -141,8 +152,75 @@ class PITest extends TestCase
         $format_date->assertSessionHasErrors([
             'date_of_birth'=> 'Ngày sinh sai định dạng'
         ]);
+
     }
 
+    public function test_search_PI(){
+      $admin = Admin::first();
+      $this->actingAs($admin,'admin');
+      $response = $this->get('/admin/pi-list?search=T154725');
+      $response->assertSuccessful();
+      $response->assertSee('Loc Nguyen'); // see name of T154725 code when search successful
+
+    }
+    public function test_delete_a_PI(){
+
+      $admin = Admin::first();
+      $this->actingAs($admin,'admin');
+      $pi = PI::where('employee_code','T155444')->first();
+      $response = $this->get('/admin/pi-delete/'.$pi->id);
+      $list = $this->get('/admin/pi-list');
+      $response->assertSessionHas('message','Xóa thông tin nhân viên thành công');
+      $list->assertDontSee('T155444');
+    }
+
+    public function test_pi_recovery_password_for_only_employee_role(){
+      $pi = PI::where('employee_code','T155444')->first(); //role employee only
+      $pi->employee->password = Hash::make('T123456'); //set new password before recovery password
+      $pi->save();
+      $response = $this->get('/admin/pi-recovery/'.$pi->id);
+      $pi =PI::where('employee_code','T155444')->first();//get pi after recovery Password
+      $this->assertTrue(Hash::check('T155444',$pi->employee->password));  //check if password recoveried match with in db?
+      $response->assertSessionHas('message','Khôi phục mật khẩu thành công');
+
+
+    }
+
+    public function test_pi_recovery_password_for_admin_role(){
+      $pi = PI::where('employee_code','T154725')->first(); //role admin
+      $pi->employee->password = Hash::make('T123456'); //set new password before recovery password
+      $pi->admin->password = Hash::make('T123456');
+      $pi->save();
+      $response = $this->get('/admin/pi-recovery/'.$pi->id);
+      $pi =PI::where('employee_code','T154725')->first();//get pi after recovery Password
+      $this->assertTrue(Hash::check('T154725',$pi->employee->password));  //check if password recoveried match with in db?
+      $this->assertTrue(Hash::check('T154725',$pi->admin->password));  //check if password recoveried match with in db?
+      $response->assertSessionHas('message','Khôi phục mật khẩu thành công');
+    }
+
+    public function test_change_role_from_employee_to_admin(){
+      $pi = PI::where('employee_code','T155444')->first(); //role employee
+      //role = 1 is admin
+      $response = $this->post('/admin/pi-role/'.$pi->id,[
+        'role' => 1
+      ]);
+      $pi = PI::where('employee_code','T155444')->first();//get pi after change roles
+      $response->assertSessionHas('message','Thay đổi vai trò tài khoản thành công');
+      $this->assertTrue($pi->admin !=''); //check in admin table on db as added record
+
+    }
+
+    public function test_change_role_from_admin_to_employee(){
+      $pi = PI::where('employee_code','T155555')->first(); //role admin
+      //role = 0 is employee
+      $response = $this->post('/admin/pi-role/'.$pi->id,[
+        'role' => 0
+      ]);
+      $pi = PI::where('employee_code','T155555')->first();//get pi after change roles
+      $response->assertSessionHas('message','Thay đổi vai trò tài khoản thành công');
+      $this->assertTrue($pi->admin ==''); //check in admin table on db hasnt any record of this pi
+
+    }
 
     public function data()
     {
@@ -164,6 +242,7 @@ class PITest extends TestCase
         'date_of_issue' =>'2015-04-10',
         'place_of_issue' =>'TPHCM',
         'unit'=>1,
+        'role'=>0,
       ];
         return $actual;
     }

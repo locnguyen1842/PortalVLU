@@ -351,7 +351,7 @@ class PIController extends Controller
                 $arr_pi  = (new GetPIImport)->toArray($import_file);
                 if (count($arr_pi) == 2) {
                     if (count($arr_pi[0][0]) == 18) {
-                        if (count($arr_pi[1][0]) == 5) {
+                        if (count($arr_pi[1][0]) == 6) {
                             //handle date time from excel to array for sheet 1
                             foreach ($arr_pi[0] as $key => $value) {
                                 if ($key != 0) {
@@ -366,8 +366,8 @@ class PIController extends Controller
                             //handle date time from excel to array for sheet 2
                             foreach ($arr_pi[1] as $key => $value) {
                                 if ($key != 0) {
-                                    $date_of_issue = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[2]);
-                                    $arr_pi[1][$key][2] = $date_of_issue->format('d-m-Y');
+                                    $date_of_issue = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[3]);
+                                    $arr_pi[1][$key][3] = $date_of_issue->format('d-m-Y');
                                 }
                             }
                             return response()->json($arr_pi);

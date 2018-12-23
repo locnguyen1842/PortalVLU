@@ -151,4 +151,26 @@ class AccountEmployeeTest extends TestCase
             'comfirmpassword' => 'Xác nhận mật khẩu mới không chính xác'
           ]);
     }
+
+
+        public function test_successful_login_employee(){
+          $user = Employee::where('username', 'T154725')->first();
+          $user->password = Hash::make('T154725'); //make sure password to test is correct
+          $user->save();
+          $credential = [
+            'username' => 'T154725',
+            'password' => 'T154725'
+          ];
+          $response = $this->post('/login',$credential);
+          $response->assertRedirect('/pi-detail'); // see pi detail when login successful
+
+        }
+
+        public function test_logout_admin(){
+          $user = Employee::where('username', 'T154725')->first();
+          $this->actingAs($user,'employee');//login before logout
+          $response = $this->get('/logout');
+          $this->assertFalse(Auth::guard('employee')->check());
+          $response->assertRedirect('/login');
+        }
 }

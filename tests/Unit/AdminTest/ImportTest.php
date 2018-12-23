@@ -53,12 +53,13 @@ class ImportTest extends TestCase
      }
 
      public function test_get_data_preview_success_after_import(){
+
        //file to test
         $test_file_path = public_path('test_data.xlsx');
 
-        $uploadedFile =UploadedFile::fake(
+        $uploadedFile =new UploadedFile(
              $test_file_path,
-             'template-personalinformation.xlsx',
+             'test_data.xlsx',
              'application/vnd.ms-excel',
              null,
              null,
@@ -69,7 +70,6 @@ class ImportTest extends TestCase
           'import_file' => $uploadedFile
         ]);
         $response->assertSuccessful();
-        $response->assertJsonCount(1);
      }
 
 
