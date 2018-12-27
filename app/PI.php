@@ -44,6 +44,9 @@ class PI extends Model
     public function nation(){
       return $this->belongsTo('App\Nation','nation_id','id');
     }
+    public function unit(){
+      return $this->belongsTo('App\Unit','unit_id','id');
+    }
 
 
 

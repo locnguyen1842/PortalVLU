@@ -11,6 +11,7 @@ use App\Degree;
 use App\DegreeDetail;
 use App\Specialized;
 use App\Industry;
+use App\Unit;
 use Hash;
 
 class EmployeeController extends Controller
@@ -19,7 +20,7 @@ class EmployeeController extends Controller
     {
         $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
         $employee = Employee::find(Auth::guard('employee')->user()->id);
-
+        $units = Unit::all();
         $dh_count = $pi->degreedetails->where('degree_id', 1)->count();
         $ths_count = $pi->degreedetails->where('degree_id', 2)->count();
         $ts_count = $pi->degreedetails->where('degree_id', 3)->count();

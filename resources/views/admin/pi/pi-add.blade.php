@@ -107,7 +107,12 @@
                     </div>
                     <div class="col-sm-6">
                         <label>Đơn vị</label>
-                        <input required type="text" class="form-control" name="unit" placeholder="Nhập đơn vị" value="{{old('unit')}}">
+                        <select required class="form-control" name="unit">
+                            <option value="">Chọn đơn vị</option>
+                            @foreach($units as $unit)
+                            <option value="{{$unit->id}}">{{$unit->name}}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <div class="form-group">

@@ -172,7 +172,7 @@
                         </a>
                     </td>
                     <td class="col-sm-3">{{$item->full_name}}</td>
-                    <td class="col-sm-2">{{$item->unit}}</td>
+                    <td class="col-sm-2">{{$item->unit->name}}</td>
                     <td class="col-sm-2">{{date('d-m-Y', strtotime($item->date_of_birth))}}</td>
                     <td class="col-sm-3">
                       <a href="{{route('admin.pi.update',$item->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Cập nhật" href="javascript:" class="tooltip-test">
@@ -196,7 +196,7 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel">Bạn thực sự muốn khôi phục mật khẩu cho tài khoản này ?</h4>
+                                    <h4 class="modal-title" id="myModalLabel">Bạn thực sự muốn xóa tài khoản này ?</h4>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-danger" id="btn-pd-yes">Có</button>

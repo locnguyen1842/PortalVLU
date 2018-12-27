@@ -63,8 +63,9 @@
                     <div class="col-sm-6">
                         <label>Khối ngành</label>
                         <select required class="form-control" name="industry">
+                            <option value="">Chọn khối ngành</option>
                             @foreach($industries as $i)
-                                <option value="{{$i->id}}">{{$i->name}}</option>
+                                <option {{$degree->industry_id == $i->id ? 'selected':''}} value="{{$i->id}}">{{$i->name}}</option>
                             @endforeach
                         </select>
                     </div>

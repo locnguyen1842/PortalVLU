@@ -107,7 +107,7 @@
                     </div>
                     <div class="col-sm-6">
                         <label>Đơn vị</label>
-                        <input required readonly type="text" class="form-control" name="unit" value="{{$pi->unit}}">
+                        <input required readonly type="text" class="form-control" name="unit" value="{{$pi->unit->name}}">
                     </div>
                 </div>
                 <div class="form-group">

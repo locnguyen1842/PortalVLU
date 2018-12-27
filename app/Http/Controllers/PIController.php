@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Storage;
 use Hash;
 use App\Admin;
 use App\Nation;
+use App\Unit;
 
 class PIController extends Controller
 {
@@ -47,7 +48,9 @@ class PIController extends Controller
     public function getAdd()
     {
         $nations = Nation::all();
-        return view('admin.pi.pi-add', compact('nations'));
+        $units = Unit::all();
+
+        return view('admin.pi.pi-add', compact('nations','units'));
     }
     public function postAdd(Request $request)
     {
@@ -127,7 +130,7 @@ class PIController extends Controller
         $pi->place_of_issue= $request->place_of_issue;
         $pi->show = 1;
         $pi->new = 0;
-        $pi->unit = $request->unit;
+        $pi->unit_id = $request->unit;
         $pi->save();
         //check is Admin ?
         //add acoount for employee role
@@ -157,7 +160,8 @@ class PIController extends Controller
     {
         $pi = PI::Find($id);
         $nations = Nation::all();
-        return view('admin.pi.pi-update', compact('pi', 'nations'));
+        $units = Unit::all();
+        return view('admin.pi.pi-update', compact('pi', 'nations','units'));
     }
     //post date update information
     public function postupdate(Request $request, $id)
@@ -235,7 +239,7 @@ class PIController extends Controller
         $pi->identity_card= $request->identity_card;
         $pi->date_of_issue= $request->date_of_issue;
         $pi->place_of_issue= $request->place_of_issue;
-        $pi->unit = $request->unit;
+        $pi->unit_id = $request->unit;
 
 
         $pi->save();
