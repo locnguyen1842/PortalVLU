@@ -17,14 +17,14 @@ class CreateWorkloadsTable extends Migration
             $table->increments('id');
             $table->integer('personalinformation_id')->unsigned();
             $table->string('subject_code',10);
-            $table->string('subject');
+            $table->string('subject_name');
             $table->integer('number_of_lessons');
             $table->string('class_code',10);
             $table->integer('number_of_students');
             $table->float('total_workload');
             $table->float('theoretical_hours');
             $table->float('practice_hours');
-            $table->string('note');
+            $table->string('note')->nullable();
             $table->string('faculty',10);
             $table->tinyInteger('semester');
 
