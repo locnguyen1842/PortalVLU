@@ -25,6 +25,9 @@ class Workload extends Model
 
     public function workloadsession()
     {
-        return $this->hasMany('App\WorkloadSession','session_id','id');
+        return $this->belongsTo('App\WorkloadSession','session_id','id');
     }
+    public function unit(){
+        return $this->belongsTo('App\Unit','unit_id','id');
+      }
 }

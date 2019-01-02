@@ -15,4 +15,8 @@ class Unit extends Model
   {
     return $this->hasMany('App\PI','unit_id','id');
   }
+  public function workloads()
+  {
+    return $this->hasMany('App\Workload','unit_id','id');
+  }
 }
