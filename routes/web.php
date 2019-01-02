@@ -61,6 +61,10 @@ Route::prefix('admin')->group(function () {
 
         //workload
         Route::get('/workload-list', 'WorkloadController@index')->name('admin.workload.index');
+        //
+        //add workload
+        Route::get('/workload-list/{id}', 'WorkloadController@getadd')->name('admin.workload.add');
+        Route::post('/workload-list/{id}', 'WorkloadController@postadd')->name('admin.workload.add');
 
     });
 });
