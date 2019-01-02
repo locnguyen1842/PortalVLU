@@ -58,6 +58,10 @@ Route::prefix('admin')->group(function () {
         Route::post('/pi-role/{pi_id}', 'PIController@rolechange')->name('admin.pi.role.change');
         //delete degree
         Route::get('/pi-degree-delete/{degreedetail_id}', 'DegreeDetailController@delete')->name('admin.pi.degree.delete');
+
+        //workload
+        Route::get('/workload-list', 'WorkloadController@index')->name('admin.workload.index');
+
     });
 });
 

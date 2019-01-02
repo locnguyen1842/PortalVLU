@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Employee;
 use Auth;
 use App\PI;
-Use App\Admin;
+use App\Admin;
 use App\Degree;
 use App\DegreeDetail;
 use App\Industry;
@@ -46,11 +46,9 @@ class AdminController extends Controller
             ]
         );
         if (Hash::check($request->password, $admin->password)) {
-
             $admin->password = Hash::make(($request->newpassword));
             $admin->save();
             return redirect()->back()->with('message', 'Đổi mật khẩu thành công');
-
         } else {
             return redirect()->back()->with('error_message', 'Mật khẩu cũ không chính xác');
         }
