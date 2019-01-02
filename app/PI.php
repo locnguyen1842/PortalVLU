@@ -27,25 +27,28 @@ class PI extends Model
       'show',
       'position',
       'professional_title',
-      'unit',
+      'unit_id',
       'new',
     ];
 
     public function degreedetails()
     {
-      return $this->hasMany('App\DegreeDetail','personalinformation_id','id');
+        return $this->hasMany('App\DegreeDetail','personalinformation_id','id');
     }
     public function admin(){
-      return $this->hasOne('App\Admin','personalinformation_id','id');
+        return $this->hasOne('App\Admin','personalinformation_id','id');
     }
     public function employee(){
-      return $this->hasOne('App\Employee','personalinformation_id','id');
+        return $this->hasOne('App\Employee','personalinformation_id','id');
+    }
+    public function workloads(){
+        return $this->hasMany('App\Workload','personalinformation_id','id');
     }
     public function nation(){
-      return $this->belongsTo('App\Nation','nation_id','id');
+        return $this->belongsTo('App\Nation','nation_id','id');
     }
     public function unit(){
-      return $this->belongsTo('App\Unit','unit_id','id');
+        return $this->belongsTo('App\Unit','unit_id','id');
     }
 
 

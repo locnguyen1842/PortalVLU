@@ -29,5 +29,8 @@ class Workload extends Model
     }
     public function unit(){
         return $this->belongsTo('App\Unit','unit_id','id');
-      }
+    }
+    public function pi(){
+        return $this->belongsTo('App\PI','personalinformation_id','id');
+    }
 }
