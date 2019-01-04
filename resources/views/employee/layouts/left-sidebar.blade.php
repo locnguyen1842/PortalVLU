@@ -11,6 +11,9 @@
                     <li class="{{url()->current() == route('employee.pi.detail') ? 'active':''}}">
                       <a href="{{route('employee.pi.detail')}}" class="sf-profile-group">Thông tin cá nhân</a>
                     </li>
+                    <li class="{{url()->current() == route('employee.pi.detail') ? 'active':''}}">
+                        <a href="#" class="sf-profile-group">Thông tin khối lượng công việc</a>
+                    </li>
                     {{-- <li><a href="components-text.html" class=" sf-cog ">Quản lý tài khoản</a></li> --}}
 {{--
                     <li class="cm-submenu">

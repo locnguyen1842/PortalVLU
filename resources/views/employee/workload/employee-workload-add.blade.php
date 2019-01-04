@@ -100,11 +100,11 @@
                         </select>
                     </div>
                     <div class="col-sm-6">
-                        <label>session</label>
+                        <label>Niên Khoá</label>
                         <select required class="form-control" name="session_id">
-                            <option value="">Chọn Session</option>
+                            <option value="">Chọn Niên Khoá</option>
                             @foreach($ws as $session)
-                            <option value="{{$session->id}}">{{$session->id}}</option>
+                            <option value="{{$session->id}}">{{$session->start_year}}-{{$session->end_year}}</option>
                             @endforeach
                         </select>
                     </div>
