@@ -100,6 +100,9 @@ Route::prefix('')->group(function () {
         //
         //delete degree employee
         Route::get('/pi-degree-delete/{degreedetail_id}', 'EmployeeController@delete')->name('employee.pi.degree.delete');
+        //add workload
+        Route::get('/workload-list', 'WorkloadController@getaddEmployee')->name('employee.workload.add');
+        Route::post('/workload-list', 'WorkloadController@postaddEmployee')->name('employee.workload.add');
     });
 });
 

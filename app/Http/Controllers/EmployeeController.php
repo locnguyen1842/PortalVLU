@@ -248,10 +248,5 @@ class EmployeeController extends Controller
         $degree->delete();
         return redirect()->back()->with('message', 'Xóa thành công');
     }
-//    public function delete($pi_id){
-//        $pi = PI::find($pi_id);
-//        $pi->show = 0;
-//        $pi->save();
-//        return redirect()->back()->with('message', 'Xóa thông tin nhân viên thành công');
-//    }
+
 }
