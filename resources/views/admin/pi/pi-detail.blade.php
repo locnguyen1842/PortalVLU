@@ -30,9 +30,6 @@
                             <a href="{{route('admin.pi.update',$pi->id)}}">
                                 <button type="button" name="button" class="btn btn-xs btn-primary">Cập nhật</button>
                             </a>
-                            <a href="{{route('admin.workload.add',$pi->id)}}" >
-                                <button  type="button" name="button" class="btn btn-xs btn-primary">Thêm Khối Lượng Công việc</button>
-                            </a>
                         </div>
                         <div class="panel-body">
                             <form class="form-horizontal" action="{{route('admin.pi.detail',$pi->id)}}" method="get">

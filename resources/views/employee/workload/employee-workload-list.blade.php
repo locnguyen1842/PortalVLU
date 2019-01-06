@@ -1,4 +1,4 @@
-@extends('admin.master')
+@extends('employee.master')
 @section('title','Danh sách khối lượng công việc')
 @section('breadcrumb')
 <nav class="cm-navbar cm-navbar-default cm-navbar-slideup">
@@ -6,7 +6,7 @@
         <div class="cm-breadcrumb-container">
             <ol class="breadcrumb">
                 <li><a href="#">Home</a></li>
-                <li class="active">Quản lý khối lượng công việc</li>
+                <li class="active">Khối lượng công việc</li>
             </ol>
         </div>
     </div>
@@ -31,11 +31,10 @@
         <img src="{{asset('img/loader.gif')}}" alt="Đang tải">
     </div>
     <div class="panel-heading">Danh sách khối lượng công việc<br>
-      {{-- <a href="{{route('admin.workload.add')}}"> --}}
-          {{-- <button type="button" name="button" class="btn btn-xs btn-success">Cập nhật</button> --}}
+       <a href="{{route('employee.workload.add')}}">
+          <button type="button" name="button" class="btn btn-xs btn-success">Thêm mới</button>
       </a>
     </div>
-
     <div class="panel-body">
         <div class="form-group col-sm-6">
             <form class="form-horizontal" action="{{route('admin.workload.index')}}" method="get">

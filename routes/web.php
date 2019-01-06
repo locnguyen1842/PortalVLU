@@ -65,7 +65,11 @@ Route::prefix('admin')->group(function () {
         //add workload
         Route::get('/workload-list/{id}', 'WorkloadController@getadd')->name('admin.workload.add');
         Route::post('/workload-list/{id}', 'WorkloadController@postadd')->name('admin.workload.add');
-
+        //update workload
+        Route::get('/workload-update/{id}', 'WorkloadController@getUpdateWorkload')->name('admin.workload.update');
+        Route::post('/workload-update/{id}', 'WorkloadController@postUpdateWorkload')->name('admin.workload.update');
+        //workload details
+        Route::get('/workload-details-list/{id}', 'WorkloadController@getWorkloadPIList')->name('admin.workload.list');
     });
 });
 
@@ -100,9 +104,15 @@ Route::prefix('')->group(function () {
         //
         //delete degree employee
         Route::get('/pi-degree-delete/{degreedetail_id}', 'EmployeeController@delete')->name('employee.pi.degree.delete');
+        //workload
+        Route::get('/workload', 'WorkloadController@indexEmployee')->name('employee.workload.index');
         //add workload
         Route::get('/workload-list', 'WorkloadController@getaddEmployee')->name('employee.workload.add');
         Route::post('/workload-list', 'WorkloadController@postaddEmployee')->name('employee.workload.add');
+        //update workload
+        Route::get('/workload-update', 'WorkloadController@getaddEmployee')->name('employee.workload.add');
+        // Route::post('/workload-update', 'WorkloadController@postaddEmployee')->name('employee.workload.add');
+
     });
 });
 

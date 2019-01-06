@@ -1,12 +1,12 @@
 @extends('employee.master')
-@section('title','Thêm mới thông tin nhân viên')
+@section('title','Thêm mới khối lượng công việc')
 @section('breadcrumb')
 <nav class="cm-navbar cm-navbar-default cm-navbar-slideup">
     <div class="cm-flex">
         <div class="cm-breadcrumb-container">
             <ol class="breadcrumb">
                 <li><a href="#">Home</a></li>
-                <li class=""><a href="#">Quản lý thông tin nhân viên</a></li>
+                <li class=""><a href="#">Quản lý khối lượng công việc</a></li>
                 <li class="active">Thêm khối lượng công việc</li>
             </ol>
         </div>
@@ -21,7 +21,7 @@
     </div>
     @endif
     <div class="panel panel-default">
-        <div class="panel-heading">Thêm Workload</div>
+        <div class="panel-heading">Thêm khối lượng công việc</div>
         <div class="panel-body">
             <form class="form-horizontal" action="{{route('employee.workload.add',$pi->id)}}" method="post">
                 {{csrf_field()}}
