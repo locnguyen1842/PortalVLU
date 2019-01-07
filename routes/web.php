@@ -110,8 +110,8 @@ Route::prefix('')->group(function () {
         Route::get('/workload-add', 'WorkloadController@getaddEmployee')->name('employee.workload.add');
         Route::post('/workload-add', 'WorkloadController@postaddEmployee')->name('employee.workload.add');
         //update workload
-        Route::get('/workload-update', 'WorkloadController@getaddEmployee')->name('employee.workload.update');
-        // Route::post('/workload-update', 'WorkloadController@postaddEmployee')->name('employee.workload.add');
+        Route::get('/workload-update/{b}', 'WorkloadController@getUpdateWorkloadEmployee')->name('employee.workload.update');
+        Route::post('/workload-update/{b}', 'WorkloadController@postUpdateWorkloadEmployee')->name('employee.workload.update');
 
         //workload details
         Route::get('/workload-details/{id}', 'WorkloadController@getWorkloadPIDetail')->name('employee.workload.detail');

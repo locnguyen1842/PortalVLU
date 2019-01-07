@@ -169,15 +169,44 @@ class WorkloadController extends Controller
 
         return view('employee.workload.employee-workload-list', compact('workload_session', 'workload_session_current', 'workloads', 'search', 'year_workload','workload','pi'));
     }
-    public function getWorkloadPIDetail()
+    public function getWorkloadPIDetail($id)
     {
       $pi = Auth::guard('employee')->user()->pi;
-      $units = Unit::all();
-      $dh_count = $pi->degreedetails->where('degree_id', 1)->count();
-      $ths_count = $pi->degreedetails->where('degree_id', 2)->count();
-      $ts_count = $pi->degreedetails->where('degree_id', 3)->count();
-      return view('employee.pi.pi-detail', compact('pi', 'employee', 'dh_count', 'ths_count', 'ts_count'));
+      $workload = Workload::find($id);
+
+      return view('employee.workload.employee-workload-details-list', compact('workload', 'pi'));
     }
 
+    public function getUpdateWorkloadEmployee($b)
+    {
+
+        $pi = Auth::guard('employee')->user()->pi;
+        $workload = Workload::find($b);//where('personalinformation_id',$id)->where('degree_id',$b)->get();
+        $ws = WorkloadSession::all();
+        $unit = Unit::all();
+        //$degreede = DegreeDetail::all();
+        return view('employee.workload.employee-workload-update', compact('workload','ws', 'unit','pi'));
+     }
+
+     public function postUpdateWorkloadEmployee(Request $request,$b)
+     {
+       $pi = Auth::guard('employee')->user()->pi;
+       $workload = Workload::find($b);
+       $workload->subject_code= strtoupper($request->subject_code);
+       $workload->subject_name= $request->subject_name;
+       $workload->number_of_lessons= $request->number_of_lessons;
+       $workload->class_code= $request->class_code;
+       $workload->number_of_students= $request->number_of_students;
+       $workload->total_workload= $request->total_workload;
+       $workload->theoretical_hours= $request->theoretical_hours;
+       $workload->practice_hours= $request->practice_hours;
+       $workload->note= $request->note;
+       $workload->unit_id= $request->unit_id;
+       $workload->semester= $request->semester;
+       $workload->session_id= $request->session_id;
+       $workload->save();
+
+       return redirect()->back()->with('message', 'Cập nhật thành công');
+}
 
 }

@@ -37,7 +37,7 @@
     </div>
     <div class="panel-body">
         <div class="form-group col-sm-6">
-            <form class="form-horizontal" action="{{route('admin.workload.index')}}" method="get">
+            <form class="form-horizontal" action="{{route('employee.workload.index')}}" method="get">
                 <div class="col-sm-12">
                     <div class="col-sm-3">
                         <label class="control-label">Tìm kiếm</label>
