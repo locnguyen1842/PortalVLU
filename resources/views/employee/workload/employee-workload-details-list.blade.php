@@ -1,4 +1,4 @@
-@extends('admin.master')
+@extends('employee.master')
 @section('title','Danh sách công việc')
 @section('breadcrumb')
 <nav class="cm-navbar cm-navbar-default cm-navbar-slideup">
@@ -6,7 +6,7 @@
         <div class="cm-breadcrumb-container">
             <ol class="breadcrumb">
                 <li><a href="#">Home</a></li>
-                <li class=""><a href="{{route('admin.workload.index')}}">Quản lý khối lượng công việc</a></li>
+                <li class=""><a href="{{route('employee.workload.index')}}">Quản lý khối lượng công việc</a></li>
                 <li class="active">Danh sách khối lượng công việc</li>
             </ol>
         </div>
@@ -21,12 +21,12 @@
                 <div class="col-sm-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">Thông tin môn học <br>
-                            <a href="{{route('admin.workload.update',$workload->id)}}">
+                            <a href="{{route('employee.workload.update',$workload->id)}}">
                                 <button type="button" name="button" class="btn btn-xs btn-primary">Cập nhật</button>
                             </a>
                         </div>
                         <div class="panel-body">
-                            <form class="form-horizontal" action="{{route('admin.pi.detail',$pi->id)}}" method="get">
+                            <form class="form-horizontal" action="{{route('employee.workload.detail',$workload->id)}}" method="get">
                                 {{csrf_field()}}
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-3  ">Mã môn học</label>
