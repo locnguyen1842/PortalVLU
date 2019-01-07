@@ -219,26 +219,30 @@
                             <td class="col-sm-2">{{$workloads->unit->name}}</td>
                             <td class="col-sm-3">{{$workloads->subject_code}} - {{$workloads->subject_name }}</td>
                             <td class="col-sm-2">{{$workloads->total_workload}}</td>
-                          {{-- <td class="col-sm-2">
-                              <a href="{{route('employee.pi.update.detail.degree', $degree->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Cập nhật" class="tooltip-test">
-                            <span class=""><i class="fa fa-lg fa-edit text-primary"></i>
-                                <span class="mdi mdi-close"></span>
-                            </span>
-                              </a>
-                              <a href="{{route('employee.pi.degree.delete', $degree->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa"  class="delete_degree tooltip-test ml-10">
+                           <td class="col-sm-2">
+                              {{--<a href="{{route('employee.pi.update.detail.degree', $degree->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Cập nhật" class="tooltip-test">--}}
+                            {{--<span class=""><i class="fa fa-lg fa-edit text-primary"></i>--}}
+                                {{--<span class="mdi mdi-close"></span>--}}
+                            {{--</span>--}}
+                              {{--</a>--}}
+                              <a href="{{route('employee.workload.delete', $workloads->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa"  class="delete_workload tooltip-test ml-10">
                             <span class=""><i class="fa fa-lg fa-trash text-danger"></i>
                                 <span class="mdi mdi-close"></span>
                             </span>
                               </a>
-                          </td> --}}
+                          </td>
                           </tr>
-                          <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="degree-delete-modal">
+                          {{--modal delete workload--}}
+
+                          <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"
+                               id="pi-delete-modal">
 
                               <div class="modal-dialog modal-sm">
                                   <div class="modal-content">
                                       <div class="modal-header">
-                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                          <h4 class="modal-title" id="myModalLabel">Bạn thực sự muốn xoá bằng cấp này ?</h4>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                                  aria-hidden="true">&times;</span></button>
+                                          <h4 class="modal-title" id="myModalLabel">Bạn thực sự muốn xóa workload này ?</h4>
                                       </div>
                                       <div class="modal-footer">
                                           <button type="button" class="btn btn-danger" id="btn-pd-yes">Có</button>
@@ -403,10 +407,10 @@
         });
 
 
-        $(".delete_pi").on('click',function (e) {
+        $(".delete_workload").on('click',function (e) {
             e.preventDefault();
             $("#pi-delete-modal").modal('show');
-            var delete_pi_form = $(this).attr('href');
+            var delete_workload_form = $(this).attr('href');
             var modalConfirm = function(callback){
 
                 $("#btn-pd-yes").on("click", function(){
@@ -421,7 +425,7 @@
             };
             modalConfirm(function(confirm){
                 if(confirm){
-                    window.location.href = delete_pi_form;
+                    window.location.href = delete_workload_form;
 
                 }else{
 
