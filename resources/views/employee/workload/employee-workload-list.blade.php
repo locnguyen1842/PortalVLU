@@ -13,7 +13,7 @@
 </nav>
 @endsection
 @section('content')
-@include('admin.layouts.Error')
+@include('employee.layouts.Error')
 @if(session()->has('message'))
     <div class="alert alert-success mt-10">
         {{ session()->get('message') }}
@@ -273,7 +273,7 @@
     $(document).ready(function() {
 
         $(".search_tag").on('click', function() {
-            var url = {!!json_encode(route('admin.workload.index'), JSON_UNESCAPED_SLASHES) !!};
+            var url = {!!json_encode(route('employee.workload.index'), JSON_UNESCAPED_SLASHES) !!};
             var search = "";
             window.location.href = url;
         });
