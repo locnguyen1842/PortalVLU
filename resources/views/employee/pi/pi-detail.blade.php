@@ -29,9 +29,6 @@
                                 <a href="{{route('employee.pi.update')}}">
                                     <button type="button" name="button" class="btn btn-xs btn-primary">Cập nhật</button>
                                 </a>
-                                <a href="{{route('employee.workload.add')}}">
-                                    <button type="button" name="button" class="btn btn-xs btn-primary">Thêm khối lượng công việc</button>
-                                </a>
                             </div>
                             <div class="panel-body">
                                 <form class="form-horizontal" action="{{route('employee.pi.detail')}}" method="get">
