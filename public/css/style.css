@@ -17,7 +17,9 @@
   min-width: 40px;
   height: 40px;
 }
-
+.form-horizontal-none-pl{
+    padding-left: 0px;
+}
 .excel-default{
   background-image: url('../img/excel-default.png');
   background-repeat: no-repeat;

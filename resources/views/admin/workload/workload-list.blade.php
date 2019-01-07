@@ -44,12 +44,9 @@
                         <label class="control-label">Tìm kiếm</label>
                     </div>
                     <div class="col-sm-9">
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="search" placeholder="Nhập mã nv, tên hoặc cmnd">
-                            <span class="input-group-btn">
-                                <button class="btn btn-primary" type="submit">Tìm</button>
-                            </span>
-                        </div>
+                            <input type="text" class="form-control" name="search" placeholder="Nhập mã hoặc tên nv/khoa/môn.">
+
+
                     </div>
                 </div>
                 @if($search !="")
@@ -76,6 +73,7 @@
                         <label class="control-label">Năm học</label>
                     </div>
                     <div class="col-sm-9">
+                            <div class="input-group">
                         <select class="form-control year_workload" name="year_workload">
                             @foreach($workload_session as $item)
                                 @if($year_workload == null)
@@ -101,6 +99,10 @@
 
                             @endforeach
                         </select>
+                        <span class="input-group-btn">
+                                <button class="btn btn-primary" type="submit">Tìm</button>
+                            </span>
+                            </div>
                     </div>
                 </div>
 
@@ -197,9 +199,9 @@
 
                     <th>Mã NV</th>
                     <th>Họ Tên</th>
-                    <th>Đơn vị</th>
+                    <th>Mã - Tên Khoa</th>
                     <th>Mã - Tên môn học</th>
-                    <th>Số tiết</th>
+                    <th>Tổng số giờ</th>
                     <th></th>
                 </tr>
             </thead>
@@ -217,10 +219,10 @@
                         </a>
                     </td>
                     <td class="col-sm-2">{{$item->pi->full_name}}</td>
-                    <td class="col-sm-2">{{$item->unit->name}}</td>
+                    <td class="col-sm-3">{{$item->unit->unit_code}} - {{$item->unit->name}}</td>
                     <td class="col-sm-3">{{$item->subject_code}} - {{$item->subject_name }}</td>
-                    <td class="col-sm-2">{{$item->total_workload}}</td>
-                    <td class="col-sm-3">
+                    <td class="col-sm-1">{{$item->total_workload}}</td>
+                    <td class="col-sm-2">
                         <a href="{{route('admin.workload.update',$item->id)}}" data-toggle="tooltip" data-placement="top"
                             title="" data-original-title="Cập nhật" href="javascript:" class="tooltip-test">
                             <span class=""><i class="fa fa-lg fa-edit text-primary"></i>
@@ -278,9 +280,10 @@
     $(document).ready(function() {
 
         $(".search_tag").on('click', function() {
-            var url = {!!json_encode(route('employee.workload.index'), JSON_UNESCAPED_SLASHES) !!};
+            var url = {!!json_encode(route('admin.workload.index'), JSON_UNESCAPED_SLASHES) !!};
+            var session_id = $('.year_workload').val();
             var search = "";
-            window.location.href = url;
+            window.location.href = url+'?year_workload='+session_id;
         });
 
         $('#excel-import').on('change', function(e) {
