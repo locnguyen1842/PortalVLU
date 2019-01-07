@@ -38,22 +38,23 @@ class WorkloadController extends Controller
         return view('admin.workload.workload-list', compact('workload_session', 'workload_session_current', 'workloads', 'search', 'year_workload'));
     }
     //get
-    public function getadd($id)
+    public function getadd()
     {
         $workload = Workload::all();
         $ws = WorkloadSession::all();
         $unit = Unit::all();
-        $pi = PI::find($id);
+        $pi = PI::all();
         return view('admin.workload.workload-add', compact('workload', 'pi', 'ws', 'unit'));
     }
     //post workload
-    public function postadd(Request $request, $id)
+    public function postadd(Request $request)
     {
-        //
-        $pi = PI::find($id);
+        //get id employee
+        $pp = strtoupper($request->employee_code);
+        $pi = PI::where('employee_code',$pp)->first()->id;
         //add data
         $workload = new Workload();
-        $workload->personalinformation_id = $pi->id;
+        $workload->personalinformation_id = $pi;
         $workload->subject_code= strtoupper($request->subject_code);
         $workload->subject_name= $request->subject_name;
         $workload->number_of_lessons= $request->number_of_lessons;
