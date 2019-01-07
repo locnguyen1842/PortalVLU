@@ -31,9 +31,9 @@
         <img src="{{asset('img/loader.gif')}}" alt="Đang tải">
     </div>
     <div class="panel-heading">Danh sách khối lượng công việc<br>
-       {{--<a href="{{route('admin.workload.add',$pi->id)}}">--}}
-           {{--<button type="button" name="button" class="btn btn-xs btn-success">Thêm Mới</button>--}}
-      {{--</a>--}}
+       <a href="{{route('admin.workload.add')}}">
+           <button type="button" name="button" class="btn btn-xs btn-success">Thêm Mới</button>
+      </a>
     </div>
 
     <div class="panel-body">

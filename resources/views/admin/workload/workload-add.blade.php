@@ -23,8 +23,14 @@
     <div class="panel panel-default">
         <div class="panel-heading">Thêm Workload</div>
         <div class="panel-body">
-            <form class="form-horizontal" action="{{route('admin.workload.add',$pi->id)}}" method="post">
+            <form class="form-horizontal" action="{{route('admin.workload.add')}}" method="post">
                 {{csrf_field()}}
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label>Mã nhân viên</label>
+                        <input type="text"  class="form-control" name="employee_code" placeholder="Nhập mã nhân viên" value="{{old('employee_code')}}">
+                    </div>
+                </div>
                 <div class="form-group">
                     <div class="col-sm-6">
                         <label>Mã Môn Học</label>
@@ -104,7 +110,7 @@
                         <select required class="form-control" name="session_id">
                             <option value="">Chọn niên khóa</option>
                             @foreach($ws as $session)
-                            <option value="{{$session->id}}">{{$session->id}}</option>
+                            <option value="{{$session->id}}">{{$session->start_year}}-{{$session->end_year}}</option>
                             @endforeach
                         </select>
                     </div>
