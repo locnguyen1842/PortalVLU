@@ -70,6 +70,8 @@ Route::prefix('admin')->group(function () {
         Route::post('/workload-update/{id}', 'WorkloadController@postUpdateWorkload')->name('admin.workload.update');
         //workload details
         Route::get('/workload-details-list/{id}', 'WorkloadController@getWorkloadPIList')->name('admin.workload.list');
+        //delete workload
+        Route::get('/workload-delete/{workload_id}', 'WorkloadController@delete')->name('admin.workload.delete');
     });
 });
 
@@ -112,6 +114,8 @@ Route::prefix('')->group(function () {
         //update workload
         Route::get('/workload-update', 'WorkloadController@getaddEmployee')->name('employee.workload.update');
         // Route::post('/workload-update', 'WorkloadController@postaddEmployee')->name('employee.workload.add');
+        //delete workload
+        Route::get('/workload-delete/{workload_id}', 'WorkloadController@delete')->name('employee.workload.delete');
 
     });
 });

@@ -167,6 +167,17 @@ class WorkloadController extends Controller
 
         return view('employee.workload.employee-workload-list', compact('workload_session', 'workload_session_current', 'workloads', 'search', 'year_workload'));
     }
+    public function delete($workload_id){
+        $workload = Workload::find($workload_id);
+        $workload->delete();
+        return redirect()->back()->with('message', 'Xóa thông tin nhân viên thành công');
+    }
+
+    public function deleteEmployeeworkload($workload_id){
+        $workload = Workload::find($workload_id);
+        $workload->delete();
+        return redirect()->back()->with('message', 'Xóa thông tin nhân viên thành công');
+    }
 
 
 

@@ -227,11 +227,11 @@
                                 <span class="mdi mdi-close"></span>
                             </span>
                         </a>
-                        {{-- <a href="{{route('admin.workload.delete',$item->id)}}" data-toggle="tooltip" data-placement="top"
+                         <a href="{{route('admin.workload.delete',$item->id)}}" data-toggle="tooltip" data-placement="top"
                             title="" data-original-title="Xóa" class="delete_pi tooltip-test ml-10">
                             <span class=""><i class="fa fa-lg fa-trash text-danger"></i>
                                 <span class="mdi mdi-close"></span>
-                            </span> --}}
+                            </span>
                         </a>
                     </td>
 
@@ -246,7 +246,7 @@
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                         aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="myModalLabel">Bạn thực sự muốn xóa tài khoản này ?</h4>
+                                <h4 class="modal-title" id="myModalLabel">Bạn thực sự muốn xóa workload này ?</h4>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" id="btn-pd-yes">Có</button>
