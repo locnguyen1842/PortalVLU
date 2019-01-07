@@ -184,7 +184,7 @@ class WorkloadController extends Controller
         return redirect()->back()->with('message', 'Xóa thông tin nhân viên thành công');
     }
 
-    public function deleteEmployeeworkload($workload_id){
+    public function deleteEmployeeWorkload($workload_id){
         $workload = Workload::find($workload_id);
         $workload->delete();
         return redirect()->back()->with('message', 'Xóa thông tin nhân viên thành công');
