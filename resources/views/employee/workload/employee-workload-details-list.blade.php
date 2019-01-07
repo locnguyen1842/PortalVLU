@@ -1,20 +1,20 @@
-@extends('employee.master')
-@section('title','Chi tiết công việc')
+@extends('admin.master')
+@section('title','Danh sách công việc')
 @section('breadcrumb')
 <nav class="cm-navbar cm-navbar-default cm-navbar-slideup">
     <div class="cm-flex">
         <div class="cm-breadcrumb-container">
             <ol class="breadcrumb">
                 <li><a href="#">Home</a></li>
-                <li class=""><a href="{{route('employee.workload.index')}}">Quản lý khối lượng công việc</a></li>
-                <li class="active">Chi tiết công việc công việc</li>
+                <li class=""><a href="{{route('admin.workload.index')}}">Quản lý khối lượng công việc</a></li>
+                <li class="active">Danh sách khối lượng công việc</li>
             </ol>
         </div>
     </div>
 </nav>
 @endsection
 @section('content')
-{{-- <div id="" style="padding-top: 20px">
+<div id="" style="padding-top: 20px">
     <div class="">
         <div class=" cm-fix-height">
             <div class="col-sm-7">
@@ -93,7 +93,7 @@
             </div>
         </div>
     </div>
-{{-- </div> --}} --}}
+</div>
 <script type="text/javascript">
     $(document).ready(function() {
         $(".delete_degree").on('click', function(e) {

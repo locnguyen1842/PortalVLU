@@ -203,61 +203,55 @@
                 </tr>
             </thead>
             <tbody>
-                @if($workloads->count() >0)
-                @foreach ($workloads as $item)
-                <tr>
-                    <td class="col-sm-1">
+                @if($workload->count() >0)
+                  @foreach($workload as $workloads)
+                          <tr>
+                            <td class="col-sm-1">
 
-                        <a href="{{route('admin.workload.list',$item->id)}}" data-toggle="tooltip" data-placement="right"
-                            title="" data-original-title="Chi tiết" href="javascript:" class="search_tag tooltip-test">
-                            <span class="badge badge-danger">{{$item->pi->employee_code}}
-                                <span class="mdi mdi-close"></span>
-                            </span>
-                        </a>
-                    </td>
-                    <td class="col-sm-2">{{$item->pi->full_name}}</td>
-                    <td class="col-sm-2">{{$item->unit->name}}</td>
-                    <td class="col-sm-3">{{$item->subject_code}} - {{$item->subject_name }}</td>
-                    <td class="col-sm-2">{{$item->total_workload}}</td>
-                    <td class="col-sm-3">
-                        <a href="{{route('admin.workload.update',$item->id)}}" data-toggle="tooltip" data-placement="top"
-                            title="" data-original-title="Cập nhật" href="javascript:" class="tooltip-test">
+                                <a href="{{route('employee.workload.detail',$workloads->id)}}" data-toggle="tooltip" data-placement="right"
+                                    title="" data-original-title="Chi tiết" href="javascript:" class="search_tag tooltip-test">
+                                    <span class="badge badge-danger">{{$workloads->pi->employee_code}}
+                                        <span class="mdi mdi-close"></span>
+                                    </span>
+                                </a>
+                            </td>
+                            <td class="col-sm-2">{{$workloads->pi->full_name}}</td>
+                            <td class="col-sm-2">{{$workloads->unit->name}}</td>
+                            <td class="col-sm-3">{{$workloads->subject_code}} - {{$workloads->subject_name }}</td>
+                            <td class="col-sm-2">{{$workloads->total_workload}}</td>
+                          {{-- <td class="col-sm-2">
+                              <a href="{{route('employee.pi.update.detail.degree', $degree->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Cập nhật" class="tooltip-test">
                             <span class=""><i class="fa fa-lg fa-edit text-primary"></i>
                                 <span class="mdi mdi-close"></span>
                             </span>
-                        </a>
-                        {{-- <a href="{{route('admin.workload.delete',$item->id)}}" data-toggle="tooltip" data-placement="top"
-                            title="" data-original-title="Xóa" class="delete_pi tooltip-test ml-10">
+                              </a>
+                              <a href="{{route('employee.pi.degree.delete', $degree->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa"  class="delete_degree tooltip-test ml-10">
                             <span class=""><i class="fa fa-lg fa-trash text-danger"></i>
                                 <span class="mdi mdi-close"></span>
-                            </span> --}}
-                        </a>
-                    </td>
+                            </span>
+                              </a>
+                          </td> --}}
+                          </tr>
+                          <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="degree-delete-modal">
 
-                </tr>
-                {{--modal delete pi--}}
-
-                <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"
-                    id="pi-delete-modal">
-
-                    <div class="modal-dialog modal-sm">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                        aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="myModalLabel">Bạn thực sự muốn xóa tài khoản này ?</h4>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" id="btn-pd-yes">Có</button>
-                                <button type="button" class="btn btn-default" id="btn-pd-no">Không</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                              <div class="modal-dialog modal-sm">
+                                  <div class="modal-content">
+                                      <div class="modal-header">
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                          <h4 class="modal-title" id="myModalLabel">Bạn thực sự muốn xoá bằng cấp này ?</h4>
+                                      </div>
+                                      <div class="modal-footer">
+                                          <button type="button" class="btn btn-danger" id="btn-pd-yes">Có</button>
+                                          <button type="button" class="btn btn-default" id="btn-pd-no">Không</button>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                  @endforeach
 
 
 
-                @endforeach
+
                 @else
                 <tr>
                     <td colspan="5" class="text-center">Không có bất kỳ dữ liệu nào được tìm thấy</td>
@@ -269,8 +263,6 @@
 
     </div>
     <div class="panel-footer">
-
-        {{$workloads->links()}}
     </div>
 </div>
 <script type="text/javascript">

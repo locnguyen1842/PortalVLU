@@ -143,6 +143,8 @@ class WorkloadController extends Controller
     public function indexEmployee()
     {
 
+        $pi = Auth::guard('employee')->user()->pi;
+        $workload = Workload::where('personalinformation_id',$pi->id)->get();
         $max_year = WorkloadSession::max('end_year');
         $workload_session = WorkloadSession::all();
         $workload_session_current = WorkloadSession::where('end_year', $max_year)->first();//get current workload year study
@@ -164,9 +166,17 @@ class WorkloadController extends Controller
             }
         })->orderBy('updated_at', 'asc')->paginate(10)->appends(['search'=>$search,'year_workload'=>$year_workload]);
 
-        return view('employee.workload.employee-workload-list', compact('workload_session', 'workload_session_current', 'workloads', 'search', 'year_workload'));
+        return view('employee.workload.employee-workload-list', compact('workload_session', 'workload_session_current', 'workloads', 'search', 'year_workload','workload','pi'));
     }
-
+    public function getWorkloadPIDetail()
+    {
+      $pi = Auth::guard('employee')->user()->pi;
+      $units = Unit::all();
+      $dh_count = $pi->degreedetails->where('degree_id', 1)->count();
+      $ths_count = $pi->degreedetails->where('degree_id', 2)->count();
+      $ts_count = $pi->degreedetails->where('degree_id', 3)->count();
+      return view('employee.pi.pi-detail', compact('pi', 'employee', 'dh_count', 'ths_count', 'ts_count'));
+    }
 
 
 }
