@@ -15,23 +15,35 @@ class WorkloadController extends Controller
     public function index()
     {
         $max_year = WorkloadSession::max('end_year');
-        $workload_session = WorkloadSession::all();
+        $workload_session = WorkloadSession::orderBy('start_year','desc')->get();
         $workload_session_current = WorkloadSession::where('end_year', $max_year)->first();//get current workload year study
         $year_workload = \Request::get('year_workload');
         $search =  \Request::get('search');
-        $workloads_collection = Workload::where('session_id', $workload_session_current->id);
+        $workload_session_current_id = $workload_session_current->id;
         //query if $search have a value
-        $workloads = $workloads_collection->where(function ($query) use ($search,$year_workload) {
+        $workloads = Workload::where(function ($query) use ($search,$year_workload,$workload_session_current_id) {
             if ($search != null) {
-                $query->whereHas('pi', function ($q) use ($search) {
-                    $q->where('employee_code', 'like', '%'.$search.'%')
-                      ->orWhere('full_name', 'like', '%'.$search.'%');
+                $query->where(function ($q) use ($search) {
+                    $q->whereHas('pi',function ($q1) use ($search){
+                        $q1->where('employee_code', 'like', '%'.$search.'%');
+                    })
+                        ->orWhere(function($q2) use ($search){
+                            $q2->whereHas('unit',function ($q3) use ($search){
+                                $q3->where('name', 'like', '%'.$search.'%')
+                                    ->orWhere('unit_code','like', '%'.$search.'%');
+                            });
+                        })
+                        ->orWhere('subject_code','like', '%'.$search.'%');
                 });
+
             }
             if ($year_workload != null) {
                 $query->where(function ($q) use ($year_workload) {
                     $q->where('session_id', $year_workload);
                 });
+            }
+            else if ($search ==null && $year_workload==null){
+                $query->where('session_id',$workload_session_current_id);
             }
         })->orderBy('updated_at', 'asc')->paginate(10)->appends(['search'=>$search,'year_workload'=>$year_workload]);
 
@@ -41,7 +53,7 @@ class WorkloadController extends Controller
     public function getadd()
     {
         $workload = Workload::all();
-        $ws = WorkloadSession::all();
+        $ws = WorkloadSession::orderBy('start_year','desc')->get();
         $unit = Unit::all();
         $pi = PI::all();
         return view('admin.workload.workload-add', compact('workload', 'pi', 'ws', 'unit'));
@@ -66,7 +78,16 @@ class WorkloadController extends Controller
         $workload->note= $request->note;
         $workload->unit_id= $request->unit_id;
         $workload->semester= $request->semester;
-        $workload->session_id= $request->session_id;
+        if($request->session_new == 0){
+            $workload->session_id= $request->session_id;
+        }else{
+            $workload_session = new WorkloadSession();
+            $workload_session->start_year = $request->start_year;
+            $workload_session->end_year = $request->end_year;
+            $workload_session->save();
+            $workload->session_id = $workload_session->id;
+        }
+
         $workload->save();
 
         return redirect()->back()->with('message', 'Thêm thành công');
@@ -76,7 +97,7 @@ class WorkloadController extends Controller
     {
         $workload = Workload::find($workload_id);
         $pi = PI::find($workload->pi->id);
-        $ws = WorkloadSession::all();
+        $ws = WorkloadSession::orderBy('start_year','desc')->get();
         $unit = Unit::all();
 
         return view('admin.workload.workload-update', compact('workload', 'pi', 'ws', 'unit'));
@@ -96,7 +117,15 @@ class WorkloadController extends Controller
         $workload->note= $request->note;
         $workload->unit_id= $request->unit_id;
         $workload->semester= $request->semester;
-        $workload->session_id= $request->session_id;
+        if($request->session_new == 0){
+            $workload->session_id= $request->session_id;
+        }else{
+            $workload_session = new WorkloadSession();
+            $workload_session->start_year = $request->start_year;
+            $workload_session->end_year = $request->end_year;
+            $workload_session->save();
+            $workload->session_id = $workload_session->id;
+        }
         $workload->save();
         return redirect()->back()->with('message', 'Cập nhật thành công');
     }
@@ -138,32 +167,42 @@ class WorkloadController extends Controller
     {
         $workload = Workload::find($id);
         $pi = PI::find($workload->personalinformation_id);
-        return view('admin.workload.workload-details-list', compact('workload', 'pi'));
+        return view('admin.workload.workload-details', compact('workload', 'pi'));
     }
 
     public function indexEmployee()
     {
 
         $pi = Auth::guard('employee')->user()->pi;
-        $workload = Workload::where('personalinformation_id',$pi->id)->get();
+        $workloads_own_user = Workload::where('personalinformation_id',$pi->id);
         $max_year = WorkloadSession::max('end_year');
         $workload_session = WorkloadSession::all();
         $workload_session_current = WorkloadSession::where('end_year', $max_year)->first();//get current workload year study
         $year_workload = \Request::get('year_workload');
+        $workload_session_current_id = $workload_session_current->id;
         $search =  \Request::get('search');
-        $workloads_collection = Workload::where('session_id', $workload_session_current->id);
+
         //query if $search have a value
-        $workloads = $workloads_collection->where(function ($query) use ($search,$year_workload) {
+        $workloads = $workloads_own_user->where(function ($query) use ($search,$year_workload,$workload_session_current_id) {
             if ($search != null) {
-                $query->whereHas('pi', function ($q) use ($search) {
-                    $q->where('employee_code', 'like', '%'.$search.'%')
-                      ->orWhere('full_name', 'like', '%'.$search.'%');
+                $query->where(function ($q) use ($search) {
+                    $q->where('subject_code','like', '%'.$search.'%')
+                        ->orWhere(function($q2) use ($search){
+                            $q2->whereHas('unit',function ($q3) use ($search){
+                                $q3->where('name', 'like', '%'.$search.'%')
+                                    ->orWhere('unit_code','like', '%'.$search.'%');
+                            });
+                        });
                 });
+
             }
             if ($year_workload != null) {
                 $query->where(function ($q) use ($year_workload) {
                     $q->where('session_id', $year_workload);
                 });
+            }
+            else if ($search ==null && $year_workload==null){
+                $query->where('session_id',$workload_session_current_id);
             }
         })->orderBy('updated_at', 'asc')->paginate(10)->appends(['search'=>$search,'year_workload'=>$year_workload]);
 
