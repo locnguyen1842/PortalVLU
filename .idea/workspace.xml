@@ -36,7 +36,7 @@
         <counts>
           <entry key="env" value="2" />
           <entry key="example" value="1" />
-          <entry key="php" value="311" />
+          <entry key="php" value="313" />
           <entry key="phpunit" value="3" />
           <entry key="xml" value="1" />
         </counts>
@@ -45,7 +45,7 @@
         <counts>
           <entry key=".env file" value="3" />
           <entry key="Bash" value="3" />
-          <entry key="Blade" value="170" />
+          <entry key="Blade" value="172" />
           <entry key="PHP" value="141" />
           <entry key="XML" value="1" />
         </counts>
@@ -53,14 +53,14 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="env" value="1" />
-          <entry key="php" value="13802" />
+          <entry key="php" value="13827" />
           <entry key="txt" value="10" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key=".env file" value="1" />
-          <entry key="Blade" value="5869" />
+          <entry key="Blade" value="5894" />
           <entry key="PHP" value="7933" />
           <entry key="PLAIN_TEXT" value="10" />
         </counts>
@@ -72,17 +72,38 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="503">
-              <caret line="117" column="97" selection-start-line="117" selection-start-column="97" selection-end-line="117" selection-end-column="97" />
+            <state relative-caret-position="383">
+              <caret line="117" column="95" selection-start-line="117" selection-start-column="95" selection-end-line="117" selection-end-column="95" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/employee/workload/employee-workload-list.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="4198">
+              <caret line="427" column="58" selection-start-line="427" selection-start-column="58" selection-end-line="427" selection-end-column="58" />
+              <folding>
+                <element signature="e#12037#12044#1#HTML" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/admin/workload/workload-list.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="523">
+              <caret line="256" column="22" lean-forward="true" selection-start-line="238" selection-start-column="16" selection-end-line="256" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/WorkloadController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="463">
-              <caret line="175" column="42" selection-start-line="175" selection-start-column="42" selection-end-line="175" selection-end-column="42" />
+            <state relative-caret-position="357">
+              <caret line="186" column="20" selection-start-line="186" selection-start-column="20" selection-end-line="186" selection-end-column="42" />
               <folding>
                 <element signature="e#40#51#0#PHP" expanded="true" />
               </folding>
@@ -91,37 +112,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/admin/pi/pi-detail.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="617">
-              <caret line="32" column="30" lean-forward="true" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/admin/pi/pi-degree-list.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="283">
-              <caret line="104" column="28" lean-forward="true" selection-start-line="100" selection-start-column="24" selection-end-line="104" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/admin/workload/workload-list.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="248" column="103" selection-start-line="248" selection-start-column="103" selection-end-line="248" selection-end-column="103" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DegreeDetailController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2140">
-              <caret line="107" column="5" lean-forward="true" selection-start-line="103" selection-start-column="4" selection-end-line="107" selection-end-column="5" />
+            <state relative-caret-position="783">
+              <caret line="98" column="57" lean-forward="true" selection-start-line="98" selection-start-column="57" selection-end-line="98" selection-end-column="57" />
               <folding>
                 <element signature="e#40#61#0#PHP" expanded="true" />
               </folding>
@@ -132,8 +126,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/EmployeeController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4437">
-              <caret line="4" selection-start-line="4" selection-end-line="4" />
+            <state relative-caret-position="417">
+              <caret line="246" column="55" lean-forward="true" selection-start-line="246" selection-start-column="55" selection-end-line="246" selection-end-column="55" />
               <folding>
                 <element signature="e#40#57#0#PHP" expanded="true" />
               </folding>
@@ -176,11 +170,14 @@
       <find>errors</find>
       <find>số</find>
       <find>admin</find>
+      <find>delete_degree</find>
+      <find>delete_pi</find>
     </findStrings>
     <replaceStrings>
       <replace>{{route('employee.pi.detail')}}</replace>
       <replace>admin</replace>
       <replace>employee</replace>
+      <replace>delete_workload</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -238,9 +235,10 @@
         <option value="$PROJECT_DIR$/resources/views/employee/layouts/left-sidebar.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/employee/pi/pi-detail.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/workload/workload-add.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/admin/workload/workload-list.blade.php" />
-        <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/WorkloadController.php" />
+        <option value="$PROJECT_DIR$/routes/web.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/workload/workload-list.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/employee/workload/employee-workload-list.blade.php" />
       </list>
     </option>
   </component>
@@ -538,12 +536,12 @@
       <workItem from="1546600288641" duration="2358000" />
       <workItem from="1546791685667" duration="599000" />
       <workItem from="1546819928552" duration="2741000" />
-      <workItem from="1546825004870" duration="8998000" />
+      <workItem from="1546825004870" duration="10950000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="129789000" />
+    <option name="totallyTimeSpent" value="131741000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -781,13 +779,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/employee/workload/employee-workload-list.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/workload/workload-details-list.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-120" />
@@ -826,27 +817,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/EmployeeController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4437">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
-          <folding>
-            <element signature="e#40#57#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PIController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="303">
           <caret line="110" column="28" selection-start-line="110" selection-start-column="28" selection-end-line="110" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/pi/pi-detail.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="617">
-          <caret line="32" column="30" lean-forward="true" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
         </state>
       </provider>
     </entry>
@@ -864,43 +838,70 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="383">
+          <caret line="117" column="95" selection-start-line="117" selection-start-column="95" selection-end-line="117" selection-end-column="95" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/pi/pi-detail.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="617">
+          <caret line="32" column="30" lean-forward="true" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/pi/pi-degree-list.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
+        <state relative-caret-position="163">
           <caret line="104" column="28" lean-forward="true" selection-start-line="100" selection-start-column="24" selection-end-line="104" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/WorkloadController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="186" column="20" selection-start-line="186" selection-start-column="20" selection-end-line="186" selection-end-column="42" />
+          <folding>
+            <element signature="e#40#51#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DegreeDetailController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2140">
-          <caret line="107" column="5" lean-forward="true" selection-start-line="103" selection-start-column="4" selection-end-line="107" selection-end-column="5" />
+        <state relative-caret-position="783">
+          <caret line="98" column="57" lean-forward="true" selection-start-line="98" selection-start-column="57" selection-end-line="98" selection-end-column="57" />
           <folding>
             <element signature="e#40#61#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/EmployeeController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="417">
+          <caret line="246" column="55" lean-forward="true" selection-start-line="246" selection-start-column="55" selection-end-line="246" selection-end-column="55" />
+          <folding>
+            <element signature="e#40#57#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/workload/workload-list.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="248" column="103" selection-start-line="248" selection-start-column="103" selection-end-line="248" selection-end-column="103" />
+        <state relative-caret-position="523">
+          <caret line="256" column="22" lean-forward="true" selection-start-line="238" selection-start-column="16" selection-end-line="256" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/web.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/employee/workload/employee-workload-list.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="503">
-          <caret line="117" column="97" selection-start-line="117" selection-start-column="97" selection-end-line="117" selection-end-column="97" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/WorkloadController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="463">
-          <caret line="175" column="42" selection-start-line="175" selection-start-column="42" selection-end-line="175" selection-end-column="42" />
+        <state relative-caret-position="4198">
+          <caret line="427" column="58" selection-start-line="427" selection-start-column="58" selection-end-line="427" selection-end-column="58" />
           <folding>
-            <element signature="e#40#51#0#PHP" expanded="true" />
+            <element signature="e#12037#12044#1#HTML" expanded="true" />
           </folding>
         </state>
       </provider>
