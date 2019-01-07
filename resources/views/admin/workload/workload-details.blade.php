@@ -6,8 +6,8 @@
         <div class="cm-breadcrumb-container">
             <ol class="breadcrumb">
                 <li><a href="#">Home</a></li>
-                <li class=""><a href="{{route('employee.workload.index')}}">Quản lý khối lượng công việc</a></li>
-                <li class="active">Chi tiết công việc công việc</li>
+                <li class=""><a href="{{route('admin.workload.index')}}">Quản lý khối lượng công việc</a></li>
+                <li class="active">Chi tiết</li>
             </ol>
         </div>
     </div>
@@ -29,38 +29,38 @@
                             <form class="form-horizontal" action="{{route('admin.pi.detail',$pi->id)}}" method="get">
                                 {{csrf_field()}}
                                 <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-3  ">Mã môn học</label>
-                                    <span for="" class="col-sm-9 text-nowrap">{{$workload->subject_code}}</span>
+                                    <label for="inputEmail3" class="col-sm-5">Mã môn học</label>
+                                    <span for="" class="col-sm-7 text-nowrap">{{$workload->subject_code}}</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPassword3" class="col-sm-5  ">Mã lớp học</label>
+                                    <span for="" class="col-sm-7 text-nowrap">{{$workload->class_code}}</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPassword3" class="col-sm-5  ">Tên môn học</label>
+                                    <span for="" class="col-sm-7 text-nowrap">{{$workload->subject_name}}</span>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-3  ">Tên môn học</label>
-                                    <span for="" class="col-sm-9 text-nowrap">{{$workload->subject_name}}</span>
+                                    <label for="inputPassword3" class="col-sm-5  ">Số tiết học</label>
+                                    <span for="" class="col-sm-7 text-nowrap">{{$workload->number_of_lessons}}</span>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-3  ">Số tiết học</label>
-                                    <span for="" class="col-sm-9 text-nowrap">{{$workload->number_of_lessons}}</span>
+                                    <label for="inputPassword3" class="col-sm-5  ">Số sinh viên</label>
+                                    <span for="" class="col-sm-7 text-nowrap">{{$workload->number_of_students}}</span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-3  ">Mã lớp học</label>
-                                    <span for="" class="col-sm-9 text-nowrap">{{$workload->class_code}}</span>
+                                    <label for="inputPassword3" class="col-sm-5  ">Tổng số giờ</label>
+                                    <span for="" class="col-sm-7 text-nowrap">{{$workload->total_workload}}</span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-3  ">Số lượng sinh viên</label>
-                                    <span for="" class="col-sm-9 text-nowrap">{{$workload->number_of_students}}</span>
+                                    <label for="inputPassword3" class="col-sm-5  ">Số giờ lý thuyết</label>
+                                    <span for="" class="col-sm-7 text-nowrap">{{$workload->theoretical_hours}}</span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-3  ">Tổng khối lượng công việc</label>
-                                    <span for="" class="col-sm-9 text-nowrap">{{$workload->total_workload}}</span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-3  ">Số giờ lý thuyết</label>
-                                    <span for="" class="col-sm-9 text-nowrap">{{$workload->theoretical_hours}}</span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-3  ">Số giờ thực hành</label>
-                                    <span for="" class="col-sm-9 text-nowrap">{{$workload->practice_hours}}</span>
+                                    <label for="inputPassword3" class="col-sm-5  ">Số giờ thực hành</label>
+                                    <span for="" class="col-sm-7 text-nowrap">{{$workload->practice_hours}}</span>
                                 </div>
                             </form>
                         </div>
@@ -75,16 +75,16 @@
                         <div class="panel-body">
                             <form class="form-horizontal">
                               <div class="form-group">
-                                  <label for="inputPassword3" class="col-sm-3  ">Học kỳ</label>
-                                  <span for="" class="col-sm-9 text-nowrap">{{$workload->semester}}</span>
+                                  <label for="inputPassword3" class="col-sm-5  ">Học kỳ</label>
+                                  <span for="" class="col-sm-7 text-nowrap">{{$workload->semester}}</span>
                               </div>
                               <div class="form-group">
-                                  <label for="inputPassword3" class="col-sm-3  ">Niên khóa</label>
-                                  <span for="" class="col-sm-9 text-nowrap">{{$workload->workloadsession->start_year}}-{{$workload->workloadsession->end_year}}</span>
+                                  <label for="inputPassword3" class="col-sm-5  ">Niên khóa</label>
+                                  <span for="" class="col-sm-7 text-nowrap">{{$workload->workloadsession->start_year}}-{{$workload->workloadsession->end_year}}</span>
                               </div>
                               <div class="form-group">
-                                  <label for="inputPassword3" class="col-sm-3  ">Đơn vị</label>
-                                  <span for="" class="col-sm-9 text-nowrap">{{$workload->unit->name}}</span>
+                                  <label for="inputPassword3" class="col-sm-5  ">Đơn vị</label>
+                                  <span for="" class="col-sm-7 text-nowrap">{{$workload->unit->name}}</span>
                               </div>
                             </form>
                         </div>
