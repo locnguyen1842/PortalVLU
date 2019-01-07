@@ -1,13 +1,13 @@
 @extends('admin.master')
-@section('title','Chi tiết công việc')
+@section('title','Danh sách công việc')
 @section('breadcrumb')
 <nav class="cm-navbar cm-navbar-default cm-navbar-slideup">
     <div class="cm-flex">
         <div class="cm-breadcrumb-container">
             <ol class="breadcrumb">
                 <li><a href="#">Home</a></li>
-                <li class=""><a href="{{route('employee.workload.index')}}">Quản lý khối lượng công việc</a></li>
-                <li class="active">Chi tiết công việc công việc</li>
+                <li class=""><a href="{{route('admin.workload.index')}}">Quản lý khối lượng công việc</a></li>
+                <li class="active">Danh sách khối lượng công việc</li>
             </ol>
         </div>
     </div>

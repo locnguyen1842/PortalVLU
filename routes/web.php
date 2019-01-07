@@ -117,6 +117,9 @@ Route::prefix('')->group(function () {
         //delete workload
         Route::get('/workload-delete/{workload_id}', 'WorkloadController@delete')->name('employee.workload.delete');
 
+        //workload details
+        Route::get('/workload-details/{id}', 'WorkloadController@getWorkloadPIDetail')->name('employee.workload.detail');
+
     });
 });
 
