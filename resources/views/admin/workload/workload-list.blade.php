@@ -1,7 +1,6 @@
 @extends('admin.master')
 @section('title','Danh sách khối lượng công việc')
 @section('breadcrumb')
-<nav class="cm-navbar cm-navbar-default cm-navbar-slideup">
     <div class="cm-flex">
         <div class="cm-breadcrumb-container">
             <ol class="breadcrumb">
@@ -10,7 +9,6 @@
             </ol>
         </div>
     </div>
-</nav>
 @endsection
 @section('content')
 @include('admin.layouts.Error')
@@ -199,9 +197,10 @@
 
                     <th>Mã NV</th>
                     <th>Họ Tên</th>
-                    <th>Mã - Tên Khoa</th>
+                    <th>Khoa</th>
                     <th>Mã - Tên môn học</th>
-                    <th>Tổng số giờ</th>
+                    <th>Số tiết</th>
+                    <th>Học kỳ</th>
                     <th></th>
                 </tr>
             </thead>
@@ -219,9 +218,10 @@
                         </a>
                     </td>
                     <td class="col-sm-2">{{$item->pi->full_name}}</td>
-                    <td class="col-sm-3">{{$item->unit->unit_code}} - {{$item->unit->name}}</td>
+                    <td class="col-sm-1">{{$item->unit->unit_code}}</td>
                     <td class="col-sm-3">{{$item->subject_code}} - {{$item->subject_name }}</td>
-                    <td class="col-sm-1">{{$item->total_workload}}</td>
+                    <td class="col-sm-2">{{$item->number_of_lessons}}</td>
+                    <td class="col-sm-2">{{$item->semester}}</td>
                     <td class="col-sm-2">
                         <a href="{{route('admin.workload.update',$item->id)}}" data-toggle="tooltip" data-placement="top"
                             title="" data-original-title="Cập nhật" href="javascript:" class="tooltip-test">

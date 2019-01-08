@@ -92,3 +92,16 @@ body.cm-login{
 .font-weight-bold{
   font-weight: bold;
 }
+
+ol.breadcrumb > li > a {
+    color: #ffffff;
+    text-decoration: none;
+}
+ol.breadcrumb > li > a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+ol.breadcrumb >.active {
+    color: #ff9f9f;
+}
+

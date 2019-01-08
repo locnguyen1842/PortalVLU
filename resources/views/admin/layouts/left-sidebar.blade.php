@@ -9,7 +9,7 @@
                 <ul class="cm-menu-items">
 
                     <li class="{{url()->current() == route('admin.pi.index') ? 'active':''}}">
-                      <a href="{{route('admin.pi.index')}}" class="sf-profile-group">Quản lý thông tin cá nhân</a>
+                      <a href="{{route('admin.pi.index')}}" class="sf-profile-group">Quản lý nhân viên</a>
                     </li>
                     <li class="{{url()->current() == route('admin.workload.index') ? 'active':''}}">
                         <a href="{{route('admin.workload.index')}}" class="sf-dashboard-alt">Quản lý khối lượng công việc</a>

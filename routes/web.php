@@ -60,6 +60,9 @@ Route::prefix('admin')->group(function () {
         Route::get('/pi-degree-delete/{degreedetail_id}', 'DegreeDetailController@delete')->name('admin.pi.degree.delete');
 
         //workload
+        Route::get('/pi-detail/{pi_id}/workload', 'WorkloadController@getlistworkloadbypi')->name('admin.pi.workload.index');
+
+
         Route::get('/workload-list', 'WorkloadController@index')->name('admin.workload.index');
         //
         //add workload

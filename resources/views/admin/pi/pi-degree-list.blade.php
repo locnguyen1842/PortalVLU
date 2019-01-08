@@ -1,7 +1,6 @@
 @extends('admin.master')
 @section('title','Danh sách bằng cấp')
 @section('breadcrumb')
-<nav class="cm-navbar cm-navbar-default cm-navbar-slideup">
     <div class="cm-flex">
         <div class="cm-breadcrumb-container">
             <ol class="breadcrumb">
@@ -12,7 +11,6 @@
             </ol>
         </div>
     </div>
-</nav>
 @endsection
 @section('content')
 <div class="panel panel-default">

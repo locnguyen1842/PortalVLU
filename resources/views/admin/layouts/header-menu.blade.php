@@ -1,7 +1,8 @@
 <nav class="cm-navbar cm-navbar-danger">
     <div class="btn btn-danger md-menu-white hidden-md hidden-lg" data-toggle="cm-menu"></div>
+
     <div class="cm-flex">
-        <h1>{{Auth::guard('admin')->user()->pi->full_name}} - {{Auth::guard('admin')->user()->pi->employee_code}}</h1>
+        @yield('breadcumb')
     </div>
     <div class="dropdown pull-right">
         <button class="btn btn-danger md-notifications-white" data-toggle="dropdown"> <span class="label label-success"></span> </button>

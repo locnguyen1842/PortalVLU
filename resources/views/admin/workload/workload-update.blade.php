@@ -1,17 +1,15 @@
 @extends('admin.master')
 @section('title','Cập nhật khối lượng công việc')
 @section('breadcrumb')
-<nav class="cm-navbar cm-navbar-default cm-navbar-slideup">
     <div class="cm-flex">
         <div class="cm-breadcrumb-container">
             <ol class="breadcrumb">
                 <li><a href="#">Home</a></li>
                 <li class=""><a href="{{route('admin.workload.index')}}">Quản lý khối lượng công việc</a></li>
-                <li class="active">Cập nhật khối lượng công việc</li>
+                 <li class="active">Cập nhật khối lượng công việc - {{$workload->pi->employee_code}}</li>
             </ol>
         </div>
     </div>
-</nav>
 @endsection
 @section('content')
 @include('admin.layouts.Error')
