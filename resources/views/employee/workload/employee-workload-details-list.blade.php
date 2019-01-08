@@ -21,9 +21,9 @@
                 <div class="col-sm-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">Thông tin môn học <br>
-                            <a href="{{route('employee.workload.update',$workload->id)}}">
+                            {{-- <a href="{{route('employee.workload.update',$workload->id)}}">
                                 <button type="button" name="button" class="btn btn-xs btn-primary">Cập nhật</button>
-                            </a>
+                            </a> --}}
                         </div>
                         <div class="panel-body">
                             <form class="form-horizontal" action="{{route('employee.workload.detail',$workload->id)}}" method="get">

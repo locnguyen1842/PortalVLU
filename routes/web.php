@@ -111,15 +111,6 @@ Route::prefix('')->group(function () {
         Route::get('/pi-degree-delete/{degreedetail_id}', 'EmployeeController@delete')->name('employee.pi.degree.delete');
         //workload
         Route::get('/workload', 'WorkloadController@indexEmployee')->name('employee.workload.index');
-        //add workload
-        Route::get('/workload-add', 'WorkloadController@getaddEmployee')->name('employee.workload.add');
-        Route::post('/workload-add', 'WorkloadController@postaddEmployee')->name('employee.workload.add');
-        //update workload
-        Route::get('/workload-update/{b}', 'WorkloadController@getUpdateWorkloadEmployee')->name('employee.workload.update');
-        Route::post('/workload-update/{b}', 'WorkloadController@postUpdateWorkloadEmployee')->name('employee.workload.update');
-        //delete workload
-        Route::get('/workload-delete/{workload_id}', 'WorkloadController@deleteEmployeeWorkload')->name('employee.workload.delete');
-
         //workload details
         Route::get('/workload-details/{id}', 'WorkloadController@getWorkloadPIDetail')->name('employee.workload.detail');
 
