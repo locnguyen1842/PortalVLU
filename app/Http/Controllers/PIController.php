@@ -13,6 +13,8 @@ use Validator;
 use App\Employee;
 use Illuminate\Support\Facades\Storage;
 use Hash;
+use App\Workload;
+use App\WorkloadSession;
 use App\Admin;
 use App\Nation;
 use App\Unit;
@@ -255,8 +257,11 @@ class PIController extends Controller
         $dh_count = $pi->degreedetails->where('degree_id', 1)->count();
         $ths_count = $pi->degreedetails->where('degree_id', 2)->count();
         $ts_count = $pi->degreedetails->where('degree_id', 3)->count();
+
+
         return view('admin.pi.pi-detail', compact('pi', 'dh_count', 'ths_count', 'ts_count'));
     }
+
     public function recoverypassword($pi_id)
     {
         $pi = PI::find($pi_id);

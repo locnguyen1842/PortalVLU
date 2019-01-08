@@ -49,6 +49,43 @@ class WorkloadController extends Controller
 
         return view('admin.workload.workload-list', compact('workload_session', 'workload_session_current', 'workloads', 'search', 'year_workload'));
     }
+    public function getlistworkloadbypi($pi_id){
+        //workload of own detail
+        $workloads_own_user = Workload::where('personalinformation_id',$pi_id);
+        $max_year = WorkloadSession::max('end_year');
+        $workload_session = WorkloadSession::all();
+        $workload_session_current = WorkloadSession::where('end_year', $max_year)->first();//get current workload year study
+        $year_workload = \Request::get('year_workload');
+        $workload_session_current_id = $workload_session_current->id;
+        $search =  \Request::get('search');
+
+        //query if $search have a value
+        $workloads = $workloads_own_user->where(function ($query) use ($search,$year_workload,$workload_session_current_id) {
+            if ($search != null) {
+                $query->where(function ($q) use ($search) {
+                    $q->where('subject_code','like', '%'.$search.'%')
+                        ->orWhere(function($q2) use ($search){
+                            $q2->whereHas('unit',function ($q3) use ($search){
+                                $q3->where('name', 'like', '%'.$search.'%')
+                                    ->orWhere('unit_code','like', '%'.$search.'%');
+                            });
+                        });
+                });
+
+            }
+            if ($year_workload != null) {
+                $query->where(function ($q) use ($year_workload) {
+                    $q->where('session_id', $year_workload);
+                });
+            }
+            else if ($search ==null && $year_workload==null){
+                $query->where('session_id',$workload_session_current_id);
+            }
+        })->orderBy('updated_at', 'asc')->paginate(10)->appends(['search'=>$search,'year_workload'=>$year_workload]);
+
+        return view('admin.pi.pi-workload-list', compact('pi_id','workload_session', 'workload_session_current', 'workloads', 'search', 'year_workload'));
+
+    }
     //get
     public function getadd()
     {
