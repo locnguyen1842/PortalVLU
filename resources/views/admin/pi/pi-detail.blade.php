@@ -1,26 +1,37 @@
 @extends('admin.master')
 @section('title','Xem chi tiết thông tin cá nhân')
 @section('breadcrumb')
-<nav class="cm-navbar cm-navbar-default cm-navbar-slideup">
-    <div class="cm-flex">
-        <div class="cm-breadcrumb-container">
-            <ol class="breadcrumb">
-                <li><a href="#">Home</a></li>
-                <li class=""><a href="{{route('admin.pi.index')}}">Quản lý thông tin nhân viên</a></li>
-                <li class="active">Chi tiết thông tin nhân viên</li>
-            </ol>
-        </div>
+<div class="cm-flex">
+    <div class="cm-breadcrumb-container">
+        <ol class="breadcrumb">
+            <li><a href="#">Home</a></li>
+            <li class=""><a href="{{route('admin.pi.index')}}">Quản lý thông tin nhân viên</a></li>
+        <li class="active">Chi tiết nhân viên - {{$pi->employee_code}}</li>
+        </ol>
     </div>
+</div>
+
+@endsection
+@section('menu-tabs')
+<nav class="cm-navbar cm-navbar-default cm-navbar-slideup">
+        <div class="cm-flex">
+            <div class="nav-tabs-container">
+                <ul class="nav nav-tabs">
+                    <li class="{{url()->current() == route('admin.pi.detail',$pi->id) ? 'active':''}}"><a href="{{route('admin.pi.detail',$pi->id)}}">Thông tin cá nhân</a></li>
+                    <li class="{{url()->current() == route('admin.pi.workload.index',$pi->id) ? 'active':''}}"><a href="{{route('admin.pi.workload.index',$pi->id)}}">Khối lượng công việc</a></li>
+                </ul>
+            </div>
+        </div>
 </nav>
 @endsection
 @section('content')
-  @include('admin.layouts.Error')
-  @if(session()->has('message'))
-      <div class="alert alert-success mt-10">
-          {{ session()->get('message') }}
-      </div>
-  @endif
-<div id="" style="padding-top: 20px">
+@include('admin.layouts.Error')
+@if(session()->has('message'))
+    <div class="alert alert-success mt-10">
+        {{ session()->get('message') }}
+    </div>
+@endif
+<div style="padding-top: 71px">
     <div class="">
         <div class=" cm-fix-height">
             <div class="col-sm-7">
@@ -46,7 +57,8 @@
 
                                 <div class="form-group">
                                     <label for="inputPassword3" class="col-sm-3  ">Ngày sinh </label>
-                                    <span for="" class="col-sm-9 text-nowrap">{{date('d-m-Y', strtotime($pi->date_of_birth))}}</span>
+                                    <span for="" class="col-sm-9 text-nowrap">{{date('d-m-Y',
+                                        strtotime($pi->date_of_birth))}}</span>
                                 </div>
 
 
@@ -56,7 +68,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="inputPassword3" class="col-sm-3  ">Giới tính </label>
-                                    <span for="" class="col-sm-9 text-nowrap">{{$pi->gender ==0 ? "Nam":""}}{{$pi->gender ==1 ? "Nữ":""}}</span>
+                                    <span for="" class="col-sm-9 text-nowrap">{{$pi->gender ==0 ?
+                                        "Nam":""}}{{$pi->gender ==1 ? "Nữ":""}}</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputPassword3" class="col-sm-3  ">Dân tộc </label>
@@ -84,7 +97,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="inputPassword3" class="col-sm-3  ">Ngày cấp </label>
-                                    <span for="" class="col-sm-9 text-nowrap">{{date('d-m-Y', strtotime($pi->date_of_issue))}}</span>
+                                    <span for="" class="col-sm-9 text-nowrap">{{date('d-m-Y',
+                                        strtotime($pi->date_of_issue))}}</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputPassword3" class="col-sm-3  ">Nơi cấp </label>
@@ -123,7 +137,7 @@
                             </form>
                         </div>
                         <div class="panel-footer text-center">
-                          <label><a href="{{route('admin.pi.degree.index',$pi->id)}}">Chi tiết</a> </label>
+                            <label><a href="{{route('admin.pi.degree.index',$pi->id)}}">Chi tiết</a> </label>
 
                         </div>
                     </div>
@@ -142,15 +156,18 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-4 ">Vai trò</label>
-                                    <span for="" class="col-sm-3 text-nowrap">{{$pi->admin =='' ? 'Người dùng':'Quản trị viên' }} </span>
-                                    <span class="col-sm-5 text-nowrap"><a id="change_role_show" href="#"><small>Thay đổi</small></a></span>
+                                    <span for="" class="col-sm-3 text-nowrap">{{$pi->admin =='' ? 'Người
+                                        dùng':'Quản trị viên' }} </span>
+                                    <span class="col-sm-5 text-nowrap"><a id="change_role_show" href="#"><small>Thay
+                                                đổi</small></a></span>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-4 ">Mật khẩu </label>
                                     <span for="" class="col-sm-8 text-nowrap">
 
-                                        <button id="submit_recovery_password" class="btn btn-xs btn-danger">Khôi phục</button>
+                                        <button id="submit_recovery_password" class="btn btn-xs btn-danger">Khôi
+                                            phục</button>
 
                                     </span>
 
@@ -158,18 +175,21 @@
                                 {{-- Modal Change ROles Account --}}
                                 <form action="{{route('admin.pi.role.change',$pi->id)}}" method="post" id="change_role">
                                     {{csrf_field()}}
-                                    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="role-change-modal">
+                                    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+                                        aria-hidden="true" id="role-change-modal">
                                         <div class="modal-dialog modal-sm">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                                            aria-hidden="true">&times;</span></button>
                                                     <h4 class="modal-title" id="myModalLabel">Phân quyền tài khoản</h4>
                                                 </div>
 
                                                 <div class="modal-body">
 
                                                     <div class="form-group">
-                                                        <label for="inputEmail3" class="col-sm-4  ">Tài khoản </label>
+                                                        <label for="inputEmail3" class="col-sm-4  ">Tài khoản
+                                                        </label>
                                                         <span for="" class="col-sm-3 text-nowrap">{{$pi->employee_code}}</span>
                                                     </div>
 
@@ -177,8 +197,10 @@
                                                         <label for="inputEmail3" class="col-sm-4">Vai trò </label>
                                                         <div class="col-sm-8">
                                                             <select class="form-control" name="role">
-                                                                <option {{$pi->admin !='' ? '':'selected'}} value="0">Người dùng</option>
-                                                                <option {{$pi->admin !='' ? 'selected':''}} value="1">Quản trị viên</option>
+                                                                <option {{$pi->admin !='' ? '':'selected'}} value="0">Người
+                                                                    dùng</option>
+                                                                <option {{$pi->admin !='' ? 'selected':''}} value="1">Quản
+                                                                    trị viên</option>
                                                             </select>
                                                         </div>
 
@@ -197,16 +219,20 @@
                                     </div>
                                 </form>
                                 {{-- Modal Reset Password --}}
-                                <form id="recovery_password" action="{{route('admin.pi.password.recovery',$pi->id)}}" method="get">
+                                <form id="recovery_password" action="{{route('admin.pi.password.recovery',$pi->id)}}"
+                                    method="get">
                                     {{csrf_field()}}
 
-                                    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="pwd-recovery-modal">
+                                    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+                                        aria-hidden="true" id="pwd-recovery-modal">
 
                                         <div class="modal-dialog modal-sm">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                    <h4 class="modal-title" id="myModalLabel">Bạn thực sự muốn khôi phục mật khẩu cho tài khoản này ?</h4>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                                            aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title" id="myModalLabel">Bạn thực sự muốn khôi
+                                                        phục mật khẩu cho tài khoản này ?</h4>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-danger" id="btn-pr-yes">Có</button>
@@ -242,7 +268,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="inputPassword3" class="col-sm-5  ">Ngày tuyển dụng </label>
-                                    <span for="" class="col-sm-7 text-nowrap">{{date('d-m-Y', strtotime($pi->date_of_recruitment))}}</span>
+                                    <span for="" class="col-sm-7 text-nowrap">{{date('d-m-Y',
+                                        strtotime($pi->date_of_recruitment))}}</span>
                                 </div>
 
                             </form>
@@ -256,57 +283,59 @@
         </div>
     </div>
 </div>
-    <script>
-        $(document).ready(function() {
-            $("#submit_recovery_password").on('click', function(e) {
 
-                e.preventDefault();
-                $("#pwd-recovery-modal").modal('show');
-                var form_recovery_password = $("#recovery_password");
-                var modalConfirm = function(callback) {
-                    $("#btn-pr-yes").on("click", function(){
-                        callback(true);
-                        $("#pwd-recovery-modal").modal('hide');
-                    });
-                    $("#btn-pr-no").on("click", function(){
-                        callback(false);
-                        $("#pwd-recovery-modal").modal('hide');
-                    });
-                };
-                modalConfirm(function(confirm) {
-                    if (confirm) {
-                        form_recovery_password.submit();
-                    } else {
 
-                    }
+<script>
+    $(document).ready(function() {
+        $("#submit_recovery_password").on('click', function(e) {
+
+            e.preventDefault();
+            $("#pwd-recovery-modal").modal('show');
+            var form_recovery_password = $("#recovery_password");
+            var modalConfirm = function(callback) {
+                $("#btn-pr-yes").on("click", function(){
+                    callback(true);
+                    $("#pwd-recovery-modal").modal('hide');
                 });
-            });
-
-            $("#change_role_show").on('click',function (e) {
-
-                e.preventDefault();
-                $("#role-change-modal").modal('show');
-                var form_change_role = $("#change_role");
-                var roleConfirm = function(callback){
-
-                    $("#btn-rc-yes").on("click", function(){
-                        callback(true);
-                        $("#role-change-modal").modal('hide');
-                    });
-
-                    $("#btn-rc-no").on("click", function(){
-                        callback(false);
-                        $("#role-change-modal").modal('hide');
-                    });
-                };
-                roleConfirm(function(confirm){
-                    if(confirm){
-                        form_change_role.submit();
-                    }else{
-
-                    }
+                $("#btn-pr-no").on("click", function(){
+                    callback(false);
+                    $("#pwd-recovery-modal").modal('hide');
                 });
+            };
+            modalConfirm(function(confirm) {
+                if (confirm) {
+                    form_recovery_password.submit();
+                } else {
+
+                }
             });
         });
-    </script>
-    @endsection
+
+        $("#change_role_show").on('click',function (e) {
+
+            e.preventDefault();
+            $("#role-change-modal").modal('show');
+            var form_change_role = $("#change_role");
+            var roleConfirm = function(callback){
+
+                $("#btn-rc-yes").on("click", function(){
+                    callback(true);
+                    $("#role-change-modal").modal('hide');
+                });
+
+                $("#btn-rc-no").on("click", function(){
+                    callback(false);
+                    $("#role-change-modal").modal('hide');
+                });
+            };
+            roleConfirm(function(confirm){
+                if(confirm){
+                    form_change_role.submit();
+                }else{
+
+                }
+            });
+        });
+    });
+</script>
+@endsection
