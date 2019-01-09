@@ -17,6 +17,11 @@
         {{ session()->get('message') }}
     </div>
 @endif
+@if(session()->has('error_message'))
+    <div class="alert alert-danger mt-10">
+        {{ session()->get('error_message') }}
+    </div>
+@endif
 <div class="alert alert-danger print-error-msg mt-10" style="display:none">
     <ul>
 
@@ -109,7 +114,7 @@
         <div class="col-sm-2"></div>
         <div class="form-group col-sm-4">
 
-            <form class="form-horizontal" action="{{route('admin.pi.import')}}" id="pi-import-form" method="post" enctype="multipart/form-data">
+            <form class="form-horizontal" action="{{route('admin.workload.import')}}" id="pi-import-form" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="col-sm-12">
                     <label for="import_file" class="control-label col-sm-4">
@@ -297,122 +302,124 @@
             }
         });
 
-        $(document).ajaxStart(function(){
-            $(".waiting").css("display", "block");
-        });
-        $(document).ajaxComplete(function(){
-            $(".waiting").css("display", "none");
-        });
-        $("#btn-import-submit").on('click',function(e){
-            e.preventDefault();
-            var form = $("#pi-import-form");
-            var url_getdata = '{{route('admin.pi.import.data')}}';
 
-            var token = $("input[name='_token']").val();
-            $.ajaxSetup({
-              headers: {
-                    'X-CSRF-TOKEN': token
-                }
-            });
-            $.ajax({
-               type: 'post',
-               url: url_getdata,
-               processData: false,
-               contentType:  false,
-               data: new FormData($('#pi-import-form')[0]), // serializes the form's elements.
-               success: function(datas)
-               {
-                 if($.isEmptyObject(datas.error)){
-                     $('#header-modal').text('Xem trước');
-                     console.log(datas);
-                     $.each(datas[0],function(index,value){
+        //import preview
+        // $(document).ajaxStart(function(){
+        //     $(".waiting").css("display", "block");
+        // });
+        // $(document).ajaxComplete(function(){
+        //     $(".waiting").css("display", "none");
+        // });
+        // $("#btn-import-submit").on('click',function(e){
+        //     e.preventDefault();
+        //     var form = $("#pi-import-form");
+        //     var url_getdata = '{{route('admin.pi.import.data')}}';
 
-                        if(index == 0){
-                          $.each(datas[0][0],function(index1, value1) {
-                              $('.heading-table').append($('<th>',{'text':value1,'class':'heading-table-import-tr text-nowrap'}));
+        //     var token = $("input[name='_token']").val();
+        //     $.ajaxSetup({
+        //       headers: {
+        //             'X-CSRF-TOKEN': token
+        //         }
+        //     });
+        //     $.ajax({
+        //        type: 'post',
+        //        url: url_getdata,
+        //        processData: false,
+        //        contentType:  false,
+        //        data: new FormData($('#pi-import-form')[0]), // serializes the form's elements.
+        //        success: function(datas)
+        //        {
+        //          if($.isEmptyObject(datas.error)){
+        //              $('#header-modal').text('Xem trước');
+        //              console.log(datas);
+        //              $.each(datas[0],function(index,value){
 
-                          });
+        //                 if(index == 0){
+        //                   $.each(datas[0][0],function(index1, value1) {
+        //                       $('.heading-table').append($('<th>',{'text':value1,'class':'heading-table-import-tr text-nowrap'}));
 
-
-                        }
-                     });
-                     datas[0].shift();
-                     $.each(datas[0],function(index2, value2) {
-                         $('.row-table').append($('<tr>',{'class':'row-table-import-tr text-nowrap'}));
-                         $.each(datas[0][index2],function(index3, value3) {
-                           $('.row-table').children('tr:last').append($('<td>',{'text':value3}));
-                         });
-                     });
-
-                     // handle sheet 2
-                     $.each(datas[1],function(index,value){
-                        if(index == 0){
-                          $.each(datas[1][0],function(index1, value1) {
-                              $('.heading-table-2').append($('<th>',{'text':value1,'class':'heading-table-import-tr-1 text-nowrap'}));
-
-                          });
+        //                   });
 
 
-                        }
-                     });
-                     datas[1].shift();
-                     console.log(datas[1]);
-                     $.each(datas[1],function(index2, value2) {
-                         $('.row-table-2').append($('<tr>',{'class':'row-table-import-tr-1 text-nowrap'}));
-                         $.each(datas[1][index2],function(index3, value3) {
-                           $('.row-table-2').children('tr:last').append($('<td>',{'text':value3}));
-                         });
-                     });
-                     $("#pi-import-modal").modal('show');
+        //                 }
+        //              });
+        //              datas[0].shift();
+        //              $.each(datas[0],function(index2, value2) {
+        //                  $('.row-table').append($('<tr>',{'class':'row-table-import-tr text-nowrap'}));
+        //                  $.each(datas[0][index2],function(index3, value3) {
+        //                    $('.row-table').children('tr:last').append($('<td>',{'text':value3}));
+        //                  });
+        //              });
 
-                     var modalConfirm = function(callback){
+        //              // handle sheet 2
+        //              $.each(datas[1],function(index,value){
+        //                 if(index == 0){
+        //                   $.each(datas[1][0],function(index1, value1) {
+        //                       $('.heading-table-2').append($('<th>',{'text':value1,'class':'heading-table-import-tr-1 text-nowrap'}));
 
-                         $("#btn-pi-yes").on("click", function(){
-                             callback(true);
-                             $("#pi-import-modal").modal('hide');
-                         });
-
-                         $("#btn-pi-no").on("click", function(){
-                             callback(false);
-                             $("#pi-import-modal").modal('hide');
-                         });
-                     };
-                     modalConfirm(function(confirm){
-                         if(confirm){
-                           form.submit();
-                           $('#header-modal').empty();
-                           $('.row-table-import-tr').remove();
-                           $('.heading-table-import-tr').remove();
-                           $('.row-table-import-tr-1').remove();
-                           $('.heading-table-import-tr-1').remove();
-                         }else{
-
-                           $('#header-modal').empty();
-                           $('.row-table-import-tr').remove();
-                           $('.heading-table-import-tr').remove();
-                           $('.row-table-import-tr-1').remove();
-                           $('.heading-table-import-tr-1').remove();
-                         }
-                     });
-	                }else{
-                    $(".print-error-msg").find("ul").html('');
-              			$(".print-error-msg").css('display','block');
-              			$.each( datas.error, function( key, value ) {
-              				$(".print-error-msg").find("ul").append('<li>'+value+'</li>');
-              			});
-	                }
-
-               },
-               error :function(er){
-                 console.log(er);
-                   $(".print-error-msg").find("ul").html('');
-                   $(".print-error-msg").css('display','block');
-                  $(".print-error-msg").find("ul").append('<li>'+'File tải lên không đúng cấu trúc .Vui lòng xem lại file mẫu <small> <a href="{{route('admin.pi.template.download')}}"> (tải file mẫu)</a></small>'+'</li>');
-               },
-            });
+        //                   });
 
 
-        });
+        //                 }
+        //              });
+        //              datas[1].shift();
+        //              console.log(datas[1]);
+        //              $.each(datas[1],function(index2, value2) {
+        //                  $('.row-table-2').append($('<tr>',{'class':'row-table-import-tr-1 text-nowrap'}));
+        //                  $.each(datas[1][index2],function(index3, value3) {
+        //                    $('.row-table-2').children('tr:last').append($('<td>',{'text':value3}));
+        //                  });
+        //              });
+        //              $("#pi-import-modal").modal('show');
+
+        //              var modalConfirm = function(callback){
+
+        //                  $("#btn-pi-yes").on("click", function(){
+        //                      callback(true);
+        //                      $("#pi-import-modal").modal('hide');
+        //                  });
+
+        //                  $("#btn-pi-no").on("click", function(){
+        //                      callback(false);
+        //                      $("#pi-import-modal").modal('hide');
+        //                  });
+        //              };
+        //              modalConfirm(function(confirm){
+        //                  if(confirm){
+        //                    form.submit();
+        //                    $('#header-modal').empty();
+        //                    $('.row-table-import-tr').remove();
+        //                    $('.heading-table-import-tr').remove();
+        //                    $('.row-table-import-tr-1').remove();
+        //                    $('.heading-table-import-tr-1').remove();
+        //                  }else{
+
+        //                    $('#header-modal').empty();
+        //                    $('.row-table-import-tr').remove();
+        //                    $('.heading-table-import-tr').remove();
+        //                    $('.row-table-import-tr-1').remove();
+        //                    $('.heading-table-import-tr-1').remove();
+        //                  }
+        //              });
+	    //             }else{
+        //             $(".print-error-msg").find("ul").html('');
+        //       			$(".print-error-msg").css('display','block');
+        //       			$.each( datas.error, function( key, value ) {
+        //       				$(".print-error-msg").find("ul").append('<li>'+value+'</li>');
+        //       			});
+	    //             }
+
+        //        },
+        //        error :function(er){
+        //          console.log(er);
+        //            $(".print-error-msg").find("ul").html('');
+        //            $(".print-error-msg").css('display','block');
+        //           $(".print-error-msg").find("ul").append('<li>'+'File tải lên không đúng cấu trúc .Vui lòng xem lại file mẫu <small> <a href="{{route('admin.pi.template.download')}}"> (tải file mẫu)</a></small>'+'</li>');
+        //        },
+        //     });
+
+
+        // });
 
 
         $(".delete_workload").on('click',function (e) {

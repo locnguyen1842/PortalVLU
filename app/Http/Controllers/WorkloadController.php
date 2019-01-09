@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\PI;
 use App\Unit;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Workload;
 use App\WorkloadSession;
 use App\Employee;
 use Auth;
+use App\Imports\WorkloadImport;
 use Illuminate\Http\Request;
 
 class WorkloadController extends Controller
@@ -219,5 +221,23 @@ class WorkloadController extends Controller
         $workload = Workload::find($workload_id);
         $workload->delete();
         return redirect()->back()->with('message', 'Xóa thông tin nhân viên thành công');
+    }
+
+    public function import(Request $request){
+        $request->validate(
+            [
+              'import_file' => 'required|mimetypes:application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|file'
+            ],
+            [
+              'import_file.required'=> 'Vui lòng chọn file để import.',
+              'import_file.mimetypes'=> 'File tải lên không đúng định dạng excel (xls,xlsx).',
+              'import_file.file'=> 'Không tìm thấy file tải lên.',
+            ]
+        );
+        if ($request->has('import_file')) {
+            $file = $request->file('import_file');
+            Excel::import(new WorkloadImport, $file);
+            return redirect()->back()->with('message', 'Import thành công');
+        }
     }
 }

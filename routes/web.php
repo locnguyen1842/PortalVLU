@@ -75,6 +75,10 @@ Route::prefix('admin')->group(function () {
         Route::get('/workload-details-list/{id}', 'WorkloadController@getWorkloadPIList')->name('admin.workload.list');
         //delete workload
         Route::get('/workload-delete/{workload_id}', 'WorkloadController@delete')->name('admin.workload.delete');
+
+        //import workload
+        Route::post('/workload-import', 'WorkloadController@import')->name('admin.workload.import');
+
     });
 });
 
