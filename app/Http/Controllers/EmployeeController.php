@@ -10,12 +10,14 @@ use App\Nation;
 use App\Degree;
 use App\DegreeDetail;
 use App\Specialized;
+use Illuminate\Support\Facades\Gate;
 use App\Industry;
 use App\Unit;
 use Hash;
 
 class EmployeeController extends Controller
 {
+
     public function getdetail()
     {
         $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
@@ -28,6 +30,7 @@ class EmployeeController extends Controller
     }
     public function getupdate()
     {
+
         $nations = Nation::all();
         $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
         return view('employee.pi.pi-update', compact('pi','nations'));
@@ -195,58 +198,69 @@ class EmployeeController extends Controller
 
         return view('employee.pi.pi-degree-list', compact('degrees', 'industries','pi'));
     }
-    public function getupdatedegreedetail( $b)
+    public function getupdatedegreedetail($b)
     {
+        $degree = DegreeDetail::find($b);
+        $employee = Auth::guard('employee')->user();
+        if($this->checkIsOwnerCanUpdate($employee,$degree)){
+            $pi = Auth::guard('employee')->user()->pi;
+            $specializes = Specialized::all();
+            $degrees = Degree::all();
+            $industries = Industry::all();
+            return view('employee.pi.pi-updatedetaildegree', compact('degrees','degree', 'industries','pi','specializes'));
+        }
 
-        $pi = Auth::guard('employee')->user()->pi;
-        $specializes = Specialized::all();
-
-        $degree = DegreeDetail::find($b);//where('personalinformation_id',$id)->where('degree_id',$b)->get();
-
-
-        $degrees = Degree::all();
-        $industries = Industry::all();
-        //$degreede = DegreeDetail::all();
-
-
-        return view('employee.pi.pi-updatedetaildegree', compact('degrees','degree', 'industries','pi','specializes'));
     }
     public function postupdatedegreedetail(Request $request,$b)
     {
-        $request->validate(
-            [
-                'date_of_issue'=> 'required|date',
-                'place_of_issue'=> 'required',
-                'degree'=> 'required',
-                'specialized'=> 'required'
-            ],
-            [
-                'date_of_issue.required' => 'Ngày cấp không được bỏ trống',
-                'date_of_issue.date' => 'Ngày cấp không đúng định dạng',
-                'degree.required' => 'Bằng cấp không được bỏ trống',
-                'place_of_issue.required' => 'Nơi cấp không được bỏ trống',
-                'specialized.required' => 'Chuyên ngành không được bỏ trống',
-            ]
-        );
-        $pi = Auth::guard('employee')->user()->pi;
-        $pi->new = 1 ;
-        $pi->save();
         $degree = DegreeDetail::find($b);
-        $degree->date_of_issue = $request->date_of_issue;
-        $degree->place_of_issue = $request->place_of_issue;
-        $degree->degree_id = $request->degree;
-        $degree->specialized_id = $request->specialized;
+        $employee = Auth::guard('employee')->user();
+        if($this->checkIsOwnerCanUpdate($employee,$degree)){
+            $request->validate(
+                [
+                    'date_of_issue'=> 'required|date',
+                    'place_of_issue'=> 'required',
+                    'degree'=> 'required',
+                    'specialized'=> 'required'
+                ],
+                [
+                    'date_of_issue.required' => 'Ngày cấp không được bỏ trống',
+                    'date_of_issue.date' => 'Ngày cấp không đúng định dạng',
+                    'degree.required' => 'Bằng cấp không được bỏ trống',
+                    'place_of_issue.required' => 'Nơi cấp không được bỏ trống',
+                    'specialized.required' => 'Chuyên ngành không được bỏ trống',
+                ]
+            );
+            $pi = Auth::guard('employee')->user()->pi;
+            $pi->new = 1 ;
+            $pi->save();
+            $degree->date_of_issue = $request->date_of_issue;
+            $degree->place_of_issue = $request->place_of_issue;
+            $degree->degree_id = $request->degree;
+            $degree->specialized_id = $request->specialized;
 
-        $degree->save();
-        return redirect()->back()->with('message', 'Cập nhật thành công');
+            $degree->save();
+            return redirect()->back()->with('message', 'Cập nhật thành công');
+        }
+
     }
     public function delete($degreedetail_id){
 
-        $pi = Auth::guard('employee')->user()->pi;
+        $degree = DegreeDetail::find($b);
+        $employee = Auth::guard('employee')->user();
+        if($this->checkIsOwnerCanUpdate($employee,$degree)){
+            $degree = DegreeDetail::find($degreedetail_id);
+            $degree->delete();
+            return redirect()->back()->with('message', 'Xóa thành công');
+        }
+    }
 
-        $degree = DegreeDetail::find($degreedetail_id);
-        $degree->delete();
-        return redirect()->back()->with('message', 'Xóa thành công');
+    public function checkIsOwnerCanUpdate($current_user,$degree_detail){
+        if ($current_user->can('update', $degree_detail)) {
+            return true;
+        } else {
+            return abort('403','Bạn không có quyền thực hiện thao tác này');
+        }
     }
 
 }

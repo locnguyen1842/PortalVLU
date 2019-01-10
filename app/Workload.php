@@ -19,13 +19,17 @@ class Workload extends Model
         'practice_hours',
         'note',
         'unit_id',
-        'semester',
+        'semester_id',
         'session_id',
     ];
 
     public function workloadsession()
     {
         return $this->belongsTo('App\WorkloadSession','session_id','id');
+    }
+    public function semester()
+    {
+        return $this->belongsTo('App\Semester','semester_id','id');
     }
     public function unit(){
         return $this->belongsTo('App\Unit','unit_id','id');

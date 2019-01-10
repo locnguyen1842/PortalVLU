@@ -1,36 +1,34 @@
-@extends('admin.master')
-@section('title','Xem chi tiết thông tin cá nhân')
+@extends('employee.master')
+@section('title','Danh sách khối lượng công việc')
 @section('breadcrumb')
-<div class="cm-flex">
-    <div class="cm-breadcrumb-container">
-        <ol class="breadcrumb">
-            <li><a href="#">Home</a></li>
-            <li class=""><a href="{{route('admin.pi.index')}}">Quản lý thông tin nhân viên</a></li>
-             <li class=""><a href="{{route('admin.pi.detail',$pi_id)}}">Chi tiết nhân viên - {{App\PI::find($pi_id)->employee_code}}</a></li>
-            <li class="active">Danh sách khối lượng công việc</li>
-        </ol>
-    </div>
-</div>
-
-@endsection
-@section('menu-tabs')
-<nav class="cm-navbar cm-navbar-default cm-navbar-slideup" >
     <div class="cm-flex">
-        <div class="nav-tabs-container">
-            <ul class="nav nav-tabs">
-                <li class="{{url()->current() == route('admin.pi.detail',$pi_id) ? 'active':''}}"><a href="{{route('admin.pi.detail',$pi_id)}}">Thông tin cá nhân</a></li>
-                <li class="{{url()->current() == route('admin.pi.workload.index',$pi_id) ? 'active':''}}"><a href="{{route('admin.pi.workload.index',$pi_id)}}">Khối lượng công việc</a></li>
-            </ul>
+        <div class="cm-breadcrumb-container">
+            <ol class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li><a href="{{route('employee.pi.detail')}}">Thông tin cá nhân</a></li>
+                <li class="active">Khối lượng công việc</li>
+            </ol>
         </div>
     </div>
+@endsection
+@section('menu-tabs')
+<nav class="cm-navbar cm-navbar-default cm-navbar-slideup">
+        <div class="cm-flex">
+            <div class="nav-tabs-container">
+                <ul class="nav nav-tabs">
+                    <li class="{{url()->current() == route('employee.pi.detail') ? 'active':''}}"><a href="{{route('employee.pi.detail')}}">Thông tin cá nhân</a></li>
+                    <li class="{{url()->current() == route('employee.workload.index') ? 'active':''}}"><a href="{{route('employee.workload.index')}}">Khối lượng công việc</a></li>
+                </ul>
+            </div>
+        </div>
 </nav>
 @endsection
 @section('content')
-@include('admin.layouts.Error')
+@include('employee.layouts.Error')
 @if(session()->has('message'))
-    <div class="alert alert-success mt-10">
-        {{ session()->get('message') }}
-    </div>
+<div class="alert alert-success mt-10">
+    {{ session()->get('message') }}
+</div>
 @endif
 <div style="padding-top: 71px">
     <div class="">
@@ -38,12 +36,9 @@
             <div class="col-sm-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">Khối lượng công việc<br>
-                        <a href="{{route('admin.pi.update',$pi_id)}}">
-                            <button type="button" name="button" class="btn btn-xs btn-success">Thêm</button>
-                        </a>
                     </div>
                     <div class="panel-body">
-                            <form class="form-horizontal" action="{{route('admin.pi.workload.index',$pi_id)}}" method="get">
+                    <form class="form-horizontal" action="{{route('employee.workload.index',$pi->id)}}" method="get">
                         <div class="form-group col-sm-6">
 
                                 <div class="col-sm-12">
@@ -122,36 +117,32 @@
                         </div>
                         <div class="form-group col-sm-6">
                                 <div class="col-sm-12">
-                                        <label class="control-label col-sm-4">Học kỳ
-                                        </label>
-                                        <div class="col-sm-8">
-                                                <select class="form-control semester" name="semester">
-                                                    <option value="4" selected>Cả năm</option>
-                                                    @foreach($semester as $item)
-                                                    <option {{$semester_filter == $item->alias ? 'selected':''}} value="{{$item->id}}">{{$item->name}}</option>
+                                    <label class="control-label col-sm-4">Học kỳ
+                                    </label>
+                                    <div class="col-sm-8">
+                                            <select class="form-control semester" name="semester">
+                                                <option value="4" selected>Cả năm</option>
+                                                @foreach($semester as $item)
+                                                <option {{$semester_filter == $item->alias ? 'selected':''}} value="{{$item->id}}">{{$item->name}}</option>
 
-                                                    @endforeach
-                                                </select>
-                                        </div>
+                                                @endforeach
+                                            </select>
                                     </div>
+                                </div>
                         </div>
-                    </form>
-                        {{-- Loading Div --}}
-
-
                     </div>
+                </form>
                     <div class="table-responsive">
                         <table class="table table-hover" style="margin-bottom:0">
                             <thead>
                                 <tr>
 
-                                    <th>Mã NV</th>
-                                    <th>Họ Tên</th>
+                                    <th></th>
                                     <th>Khoa</th>
                                     <th>Mã - Tên môn học</th>
+                                    <th>Khối lớp</th>
                                     <th>Số tiết</th>
                                     <th>Học kỳ</th>
-                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -160,63 +151,31 @@
                                 <tr>
                                     <td class="col-sm-1">
 
-                                        <a href="{{route('admin.workload.detail',$item->id)}}" data-toggle="tooltip"
+                                        <a href="{{route('employee.workload.detail',$item->id)}}" data-toggle="tooltip"
                                             data-placement="right" title="" data-original-title="Chi tiết" href="javascript:"
                                             class="search_tag tooltip-test">
-                                            <span class="badge badge-danger">{{$item->pi->employee_code}}
+                                            <span class="badge badge-danger">Chi tiết
                                                 <span class="mdi mdi-close"></span>
                                             </span>
                                         </a>
                                     </td>
-                                    <td class="col-sm-2">{{$item->pi->full_name}}</td>
                                     <td class="col-sm-1">{{$item->unit->unit_code}}</td>
                                     <td class="col-sm-3">{{$item->subject_code}} - {{$item->subject_name }}</td>
-                                    <td class="col-sm-2">{{$item->number_of_lessons}}</td>
+                                    <td class="col-sm-1">{{$item->class_code}}</td>
+
+                                    <td class="col-sm-1">{{$item->number_of_lessons}}</td>
                                     <td class="col-sm-1">{{$item->semester->alias}}</td>
-                                    <td class="col-sm-1">
-                                        <a href="{{route('admin.workload.update',$item->id)}}" data-toggle="tooltip"
-                                            data-placement="top" title="" data-original-title="Cập nhật" href="javascript:"
-                                            class="tooltip-test">
-                                            <span class=""><i class="fa fa-lg fa-edit text-primary"></i>
-                                                <span class="mdi mdi-close"></span>
-                                            </span>
-                                        </a>
-                                        <a href="{{route('admin.workload.delete',$item->id)}}" data-toggle="tooltip"
-                                            data-placement="top" title="" data-original-title="Xóa" class="delete_workload tooltip-test ml-10">
-                                            <span class=""><i class="fa fa-lg fa-trash text-danger"></i>
-                                                <span class="mdi mdi-close"></span>
-                                            </span>
-                                        </a>
-                                    </td>
+
 
                                 </tr>
-                                {{--modal delete workload--}}
-
-                                <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
-                                    aria-hidden="true" id="pi-delete-modal">
-
-                                    <div class="modal-dialog modal-sm">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                                        aria-hidden="true">&times;</span></button>
-                                                <h4 class="modal-title" id="myModalLabel">Bạn thực sự muốn xóa workload
-                                                    này ?</h4>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-danger" id="btn-pd-yes">Có</button>
-                                                <button type="button" class="btn btn-default" id="btn-pd-no">Không</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
 
 
                                 @endforeach
                                 @else
                                 <tr>
-                                    <td colspan="5" class="text-center">Không có bất kỳ dữ liệu nào được tìm thấy</td>
+                                    <td colspan="5" class="text-center">Không có bất kỳ dữ liệu nào được tìm
+                                        thấy</td>
                                 </tr>
                                 @endif
 
@@ -233,16 +192,16 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    $(document).ready(function() {
+    <script type="text/javascript">
+        $(document).ready(function() {
 
-        $(".search_tag").on('click', function() {
-            var url = {!!json_encode(route('admin.pi.workload.index',$pi_id), JSON_UNESCAPED_SLASHES) !!};
-            var session_id = $('.year_workload').val();
-            var semester = $('.semester').val();
-            var search = "";
-            window.location.href = url + '?year_workload=' + session_id+'&semester='+semester;
+            $(".search_tag").on('click', function() {
+                var url = {!!json_encode(route('employee.workload.index'), JSON_UNESCAPED_SLASHES) !!};
+                var session_id = $('.year_workload').val();
+                var semester = $('.semester').val();
+                var search = "";
+                window.location.href = url + '?year_workload=' + session_id+'&semester='+semester;
+            });
         });
-    });
-</script>
-@endsection
+    </script>
+    @endsection

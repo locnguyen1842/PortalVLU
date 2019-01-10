@@ -215,7 +215,7 @@
                 <tr>
                     <td class="col-sm-1">
 
-                        <a href="{{route('admin.workload.list',$item->id)}}" data-toggle="tooltip" data-placement="right"
+                        <a href="{{route('admin.workload.detail',$item->id)}}" data-toggle="tooltip" data-placement="right"
                             title="" data-original-title="Chi tiết" href="javascript:" class="search_tag tooltip-test">
                             <span class="badge badge-danger">{{$item->pi->employee_code}}
                                 <span class="mdi mdi-close"></span>
@@ -226,7 +226,7 @@
                     <td class="col-sm-1">{{$item->unit->unit_code}}</td>
                     <td class="col-sm-3">{{$item->subject_code}} - {{$item->subject_name }}</td>
                     <td class="col-sm-2">{{$item->number_of_lessons}}</td>
-                    <td class="col-sm-2">{{$item->semester}}</td>
+                    <td class="col-sm-2">{{$item->semester->alias}}</td>
                     <td class="col-sm-2">
                         <a href="{{route('admin.workload.update',$item->id)}}" data-toggle="tooltip" data-placement="top"
                             title="" data-original-title="Cập nhật" href="javascript:" class="tooltip-test">

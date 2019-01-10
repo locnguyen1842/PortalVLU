@@ -8,6 +8,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Workload;
 use App\WorkloadSession;
 use App\Employee;
+use App\Semester;
 use Auth;
 use App\Imports\WorkloadImport;
 use Illuminate\Http\Request;
@@ -35,7 +36,8 @@ class WorkloadController extends Controller
                                     ->orWhere('unit_code', 'like', '%'.$search.'%');
                             });
                         })
-                        ->orWhere('subject_code', 'like', '%'.$search.'%');
+                        ->orWhere('subject_code', 'like', '%'.$search.'%')
+                        ->orWhere('subject_name', 'like', '%'.$search.'%');
                 });
             }
             if ($year_workload != null) {
@@ -54,16 +56,19 @@ class WorkloadController extends Controller
         $workloads_own_user = Workload::where('personalinformation_id',$pi_id);
         $max_year = WorkloadSession::max('end_year');
         $workload_session = WorkloadSession::all();
+        $semester = Semester::all();
         $workload_session_current = WorkloadSession::where('end_year', $max_year)->first();//get current workload year study
         $year_workload = \Request::get('year_workload');
         $workload_session_current_id = $workload_session_current->id;
         $search =  \Request::get('search');
+        $semester_filter = \Request::get('semester');
 
         //query if $search have a value
-        $workloads = $workloads_own_user->where(function ($query) use ($search,$year_workload,$workload_session_current_id) {
+        $workloads = $workloads_own_user->where(function ($query) use ($semester_filter,$search,$year_workload,$workload_session_current_id) {
             if ($search != null) {
                 $query->where(function ($q) use ($search) {
                     $q->where('subject_code','like', '%'.$search.'%')
+                        ->orWhere('subject_name','like', '%'.$search.'%')
                         ->orWhere(function($q2) use ($search){
                             $q2->whereHas('unit',function ($q3) use ($search){
                                 $q3->where('name', 'like', '%'.$search.'%')
@@ -71,6 +76,14 @@ class WorkloadController extends Controller
                             });
                         });
                 });
+
+            }
+            if ($semester_filter != null) {
+                if($semester_filter !=4){
+                    $query->whereHas('semester',function ($q) use ($semester_filter) {
+                        $q->where('alias', $semester_filter);
+                    });
+                }
 
             }
             if ($year_workload != null) {
@@ -83,7 +96,7 @@ class WorkloadController extends Controller
             }
         })->orderBy('updated_at', 'asc')->paginate(10)->appends(['search'=>$search,'year_workload'=>$year_workload]);
 
-        return view('admin.pi.pi-workload-list', compact('pi_id','workload_session', 'workload_session_current', 'workloads', 'search', 'year_workload'));
+        return view('admin.pi.pi-workload-list', compact('semester_filter','semester','pi_id','workload_session', 'workload_session_current', 'workloads', 'search', 'year_workload'));
 
     }
     //get
@@ -167,54 +180,67 @@ class WorkloadController extends Controller
         $workload->save();
         return redirect()->back()->with('message', 'Cập nhật thành công');
     }
-    public function getWorkloadPIList($id)
+    public function getWorkloadDetail($id_workload)
     {
-        $workload = Workload::find($id);
+        $workload = Workload::find($id_workload);
         $pi = PI::find($workload->personalinformation_id);
         return view('admin.workload.workload-details', compact('workload', 'pi'));
     }
 
-    public function indexEmployee()
+    public function getWorkloadList_Employee()
     {
-        $pi = Auth::guard('employee')->user()->pi;
-        $workloads_own_user = Workload::where('personalinformation_id', $pi->id);
+        $pi = Auth::guard('employee')->user();
+        $workloads_own_user = Workload::where('personalinformation_id',$pi->personalinformation_id);
         $max_year = WorkloadSession::max('end_year');
         $workload_session = WorkloadSession::all();
+        $semester = Semester::all();
         $workload_session_current = WorkloadSession::where('end_year', $max_year)->first();//get current workload year study
         $year_workload = \Request::get('year_workload');
         $workload_session_current_id = $workload_session_current->id;
         $search =  \Request::get('search');
+        $semester_filter = \Request::get('semester');
 
         //query if $search have a value
-        $workloads = $workloads_own_user->where(function ($query) use ($search,$year_workload,$workload_session_current_id) {
+        $workloads = $workloads_own_user->where(function ($query) use ($search,$year_workload,$workload_session_current_id,$semester_filter) {
             if ($search != null) {
                 $query->where(function ($q) use ($search) {
-                    $q->where('subject_code', 'like', '%'.$search.'%')
-                        ->orWhere(function ($q2) use ($search) {
-                            $q2->whereHas('unit', function ($q3) use ($search) {
+                    $q->where('subject_code','like', '%'.$search.'%')
+                        ->orWhere('subject_name','like', '%'.$search.'%')
+                        ->orWhere(function($q2) use ($search){
+                            $q2->whereHas('unit',function ($q3) use ($search){
                                 $q3->where('name', 'like', '%'.$search.'%')
-                                    ->orWhere('unit_code', 'like', '%'.$search.'%');
+                                    ->orWhere('unit_code','like', '%'.$search.'%');
                             });
                         });
                 });
+
+            }
+            if ($semester_filter != null) {
+                if($semester_filter !=4){
+                    $query->whereHas('semester',function ($q) use ($semester_filter) {
+                        $q->where('alias', $semester_filter);
+                    });
+                }
+
             }
             if ($year_workload != null) {
                 $query->where(function ($q) use ($year_workload) {
                     $q->where('session_id', $year_workload);
                 });
-            } elseif ($search ==null && $year_workload==null) {
-                $query->where('session_id', $workload_session_current_id);
+            }
+            else if ($search ==null && $year_workload==null && $semester_filter ==null){
+                $query->where('session_id',$workload_session_current_id);
             }
         })->orderBy('updated_at', 'asc')->paginate(10)->appends(['search'=>$search,'year_workload'=>$year_workload]);
 
-        return view('employee.workload.employee-workload-list', compact('workload_session', 'workload_session_current', 'workloads', 'search', 'year_workload', 'workload', 'pi'));
+        return view('employee.workload.workload-list', compact('semester_filter','semester','workload_session', 'workload_session_current', 'workloads', 'search', 'year_workload', 'workload', 'pi'));
     }
     public function getWorkloadPIDetail($id)
     {
         $pi = Auth::guard('employee')->user()->pi;
         $workload = Workload::find($id);
 
-        return view('employee.workload.employee-workload-details-list', compact('workload', 'pi'));
+        return view('employee.workload.workload-details-list', compact('workload', 'pi'));
     }
     public function delete($workload_id)
     {
@@ -238,6 +264,24 @@ class WorkloadController extends Controller
             $file = $request->file('import_file');
             Excel::import(new WorkloadImport, $file);
             return redirect()->back()->with('message', 'Import thành công');
+        }
+
+
+    }
+
+    public function getWorkloadDetail_Employee($id_workload){
+        $pi = Auth::guard('employee')->user();
+        $workload = Workload::find($id_workload);
+        if($this->checkIsOwnerPermisson($pi,$workload)){
+            return view('employee.workload.workload-details', compact('workload', 'pi'));
+        }
+    }
+
+    public function checkIsOwnerPermisson($current_user,$workload){
+        if ($current_user->can('access', $workload)) {
+            return true;
+        } else {
+            return abort('403','Bạn không có quyền thực hiện thao tác này');
         }
     }
 }

@@ -1,7 +1,6 @@
 @extends('employee.master')
 @section('title','Đổi mật khẩu')
 @section('breadcrumb')
-    <nav class="cm-navbar cm-navbar-default cm-navbar-slideup">
         <div class="cm-flex">
             <div class="cm-breadcrumb-container">
                 <ol class="breadcrumb">
@@ -11,7 +10,6 @@
                 </ol>
             </div>
         </div>
-    </nav>
 @endsection
 @section('content')
     @include('employee.layouts.Error')

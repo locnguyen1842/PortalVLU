@@ -94,7 +94,7 @@
                                 <form class="form-horizontal">
                                         <div class="form-group">
                                             <label for="inputPassword3" class="col-sm-5  ">Học kỳ</label>
-                                            <span for="" class="col-sm-7 text-nowrap">{{$workload->semester}}</span>
+                                            <span for="" class="col-sm-7 text-nowrap">{{$workload->semester->alias}}</span>
                                         </div>
                                         <div class="form-group">
                                             <label for="inputPassword3" class="col-sm-5  ">Niên khóa</label>

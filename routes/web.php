@@ -59,10 +59,10 @@ Route::prefix('admin')->group(function () {
         //delete degree
         Route::get('/pi-degree-delete/{degreedetail_id}', 'DegreeDetailController@delete')->name('admin.pi.degree.delete');
 
-        //workload
+        //workload details of one user
         Route::get('/pi-detail/{pi_id}/workload', 'WorkloadController@getlistworkloadbypi')->name('admin.pi.workload.index');
 
-
+        //workload all user
         Route::get('/workload-list', 'WorkloadController@index')->name('admin.workload.index');
         //
         //add workload
@@ -71,8 +71,8 @@ Route::prefix('admin')->group(function () {
         //update workload
         Route::get('/workload-update/{id}', 'WorkloadController@getUpdateWorkload')->name('admin.workload.update');
         Route::post('/workload-update/{id}', 'WorkloadController@postUpdateWorkload')->name('admin.workload.update');
-        //workload details
-        Route::get('/workload-details-list/{id}', 'WorkloadController@getWorkloadPIList')->name('admin.workload.list');
+        //get detail workload
+        Route::get('/workload-details/{id_workload}', 'WorkloadController@getWorkloadDetail')->name('admin.workload.detail');
         //delete workload
         Route::get('/workload-delete/{workload_id}', 'WorkloadController@delete')->name('admin.workload.delete');
 
@@ -108,15 +108,15 @@ Route::prefix('')->group(function () {
         //change chi tiet bang cap
         Route::get('/pi-degree-list', 'EmployeeController@getdegreelist')->name('employee.pi.degree.index');
         //update chi tiet bang cap
-        Route::get('/pi-updatedetaildegree/{b}', 'EmployeeController@getupdatedegreedetail')->name('employee.pi.update.detail.degree');
-        Route::post('/pi-updatedetaildegree/{b}', 'EmployeeController@postupdatedegreedetail')->name('employee.pi.update.detail.degree');
+        Route::get('/pi-update-degree-detail/{b}', 'EmployeeController@getupdatedegreedetail')->name('employee.pi.update.detail.degree');
+        Route::post('/pi-update-degree-detail/{b}', 'EmployeeController@postupdatedegreedetail')->name('employee.pi.update.detail.degree');
         //
         //delete degree employee
         Route::get('/pi-degree-delete/{degreedetail_id}', 'EmployeeController@delete')->name('employee.pi.degree.delete');
         //workload
-        Route::get('/workload', 'WorkloadController@indexEmployee')->name('employee.workload.index');
+        Route::get('/workload-list', 'WorkloadController@getWorkloadList_Employee')->name('employee.workload.index');
         //workload details
-        Route::get('/workload-details/{id}', 'WorkloadController@getWorkloadPIDetail')->name('employee.workload.detail');
+        Route::get('/workload-details/{id_workload}', 'WorkloadController@getWorkloadDetail_Employee')->name('employee.workload.detail');
 
     });
 });
