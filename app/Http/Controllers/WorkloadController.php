@@ -103,10 +103,11 @@ class WorkloadController extends Controller
     public function getadd()
     {
         $workload = Workload::all();
+        $se = Semester::all();
         $ws = WorkloadSession::orderBy('start_year', 'desc')->get();
         $unit = Unit::all();
         $pi = PI::all();
-        return view('admin.workload.workload-add', compact('workload', 'pi', 'ws', 'unit'));
+        return view('admin.workload.workload-add', compact('workload', 'pi', 'ws', 'se', 'unit'));
     }
     //post workload
     public function postadd(Request $request)
@@ -128,7 +129,7 @@ class WorkloadController extends Controller
         $workload->practice_hours= $request->practice_hours;
         $workload->note= $request->note;
         $workload->unit_id= $request->unit_id;
-        $workload->semester= $request->semester;
+        $workload->semester_id= $request->semester;
         if ($request->session_new == 0) {
             $workload->session_id= $request->session_id;
         } else {
@@ -146,12 +147,13 @@ class WorkloadController extends Controller
     //
     public function getUpdateWorkload($workload_id)
     {
+        $se = Semester::all();
         $workload = Workload::find($workload_id);
         $pi = PI::find($workload->pi->id);
         $ws = WorkloadSession::orderBy('start_year', 'desc')->get();
         $unit = Unit::all();
 
-        return view('admin.workload.workload-update', compact('workload', 'pi', 'ws', 'unit'));
+        return view('admin.workload.workload-update', compact('workload', 'pi', 'ws', 'se', 'unit'));
     }
 
     public function postUpdateWorkload(Request $request, $workload_id)
@@ -167,7 +169,7 @@ class WorkloadController extends Controller
         $workload->practice_hours= $request->practice_hours;
         $workload->note= $request->note;
         $workload->unit_id= $request->unit_id;
-        $workload->semester= $request->semester;
+        $workload->semester_id= $request->semester;
         if ($request->session_new == 0) {
             $workload->session_id= $request->session_id;
         } else {
