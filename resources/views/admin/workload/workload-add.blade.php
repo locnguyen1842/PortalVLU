@@ -33,16 +33,11 @@
                     <div class="col-sm-6">
                         <label>Học kỳ </label>
                         <select name="semester" class="form-control">
-                            <option value="">Chọn Học Kỳ</option>
-                            <option value="1">
-                                Học kỳ 1
-                            </option>
-                            <option value="2">
-                                Học kỳ 2
-                            </option>
-                            <option value="3">
-                                Học Kỳ 3
-                            </option>
+                            <div class="session_list col-sm-6">
+                                    <option value="">Chọn Học Kì</option>
+                                    @foreach($se as $semester)
+                                        <option value="{{$semester->id}}">{{$semester->name}}</option>
+                                    @endforeach
                         </select>
                     </div>
 
@@ -69,6 +64,7 @@
                         @endforeach
                     </select>
                 </div>
+
                 <div class="session_new col-sm-6 hide">
                     <label>Tạo mới năm học</label>
                     <div class="form-horizontal">

@@ -31,10 +31,10 @@
                 <div class="col-sm-6">
                     <label>Học kỳ </label>
                     <select required name="semester" class="form-control">
-                        <option value="">Chọn Học Kỳ</option>
-                        <option value="1" {{$workload->semester ==1 ? "selected":""}}>1</option>
-                        <option value="2" {{$workload->semester ==2 ? "selected":""}}>2</option>
-                        <option value="3" {{$workload->semester ==3 ? "selected":""}}>3</option>
+                        <option value="">Chọn Học Kì</option>
+                        @foreach($se as $semester)
+                            <option {{$workload->semester_id == $semester->id ? 'selected' : ''}} value="{{$semester->id}}">{{$semester->name}}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
