@@ -20,6 +20,7 @@ class PIImport implements ToCollection,WithStartRow
 
     public function collection(Collection $rows)
     {
+        set_time_limit(200);
         //get nation
         $nations = Nation::all();
         $nations_name = [];
