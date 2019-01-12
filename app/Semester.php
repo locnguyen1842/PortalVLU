@@ -8,7 +8,7 @@ class Semester extends Model
 {
     protected $table = 'semesters';
     protected $fillable = [
-        'name',
+        'name','alias'
     ];
 
     public function workloads()

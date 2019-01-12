@@ -8,79 +8,54 @@ use App\Workload;
 use App\WorkloadSession;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
-use Maatwebsite\Excel\Concerns\WithStartRow;
-use Maatwebsite\Excel\Concerns\WithMappedCells;
+use Maatwebsite\Excel\Concerns\Importable;
+use Maatwebsite\Excel\Concerns\WithChunkReading;
+use Maatwebsite\Excel\Concerns\WithBatchInserts;
+use Illuminate\Support\Facades\DB;
 use App\PI;
 use App\Unit;
+use App\Semester;
+use Carbon\Carbon;
 
 class WorkloadImport implements ToCollection
 {
-
-
-    // public function startRow():int {
-    //     return 8;
-    // }
-
-    // public function mapping(): array
-    // {
-    //     return [
-    //         'personalinformation_id' => 'B6',
-    //         'subject_code' => 'F6',
-    //         'subject_name' => 'G6',
-    //         'number_of_lessons' => 'H6',
-    //         'class_code' => 'I6',
-    //         'number_of_students' => 'J6',
-    //         'total_workload' => 'K6',
-    //         'theoretical_hours' => 'L6',
-    //         'practice_hours' => 'M6',
-    //         'note' => 'N6',
-    //         'unit_id' => 'O6',
-    //         'semester' => 'P6',
-    //         'session_year' => 'B3'
-    //     ];
-    // }
-
+    use Importable;
+    protected $append= null;
+    protected $session_id= null;
+    public function __construct($append, $session_id)
+    {
+        $this->append = $append;
+        $this->session_id = $session_id;
+    }
     /**
     * @param Collection $collection
     */
-
     public function collection(Collection $rows)
     {
-        // dd($rows);
+        $start =Carbon::now();
+        set_time_limit(0);
         // handle session of workload : rows[2][1] contain value for workload session
-        $session_string = $rows[2][1];
-        $session_year = preg_replace('/[^0-9]/', '', $session_string);
-        $session_year_array = str_split($session_year,4);
-
-        $workload_session = WorkloadSession::where('start_year',$session_year_array[0])->where('end_year',$session_year_array[1])->first();
-        if($workload_session->exists()){
-            $session_id = $workload_session->id;
-        }else{
-            $session = WorkloadSession::create([
-                'start_year' => $session_year_array[0],
-                'end_year' => $session_year_array[1]
-            ]);
-
-            $session_id = $session->id;
-        }
         //validate rule:in unit_code
         $units = Unit::all();
         $units_code = [];
         foreach ($units as $unit) {
-          array_push($units_code,$unit->unit_code );
+            array_push($units_code, $unit->unit_code);
         }
         //skip to row have required value in excel file
-        $array = array_slice($rows->toArray(),7);
+        $array = array_slice($rows->toArray(), 7);
         $change_index_data = array();
         $changed_index_data = array();
         foreach ($array as $key => $value) {
-          $change_index_data = array_combine(range(1, count($array[$key])), $array[$key]);
-          array_push($changed_index_data,$change_index_data);
+            $change_index_data = array_combine(range(1, count($array[$key])), $array[$key]);
+            array_push($changed_index_data, $change_index_data);
         }
 
         $data_to_validate=array_combine(range(8, count($changed_index_data)+7), $changed_index_data);
         //validate
-        Validator::make($data_to_validate, [
+
+        Validator::make(
+            $data_to_validate,
+            [
             '*.2'=>'required|exists:personalinformations,employee_code',
             '*.6'=>'required',
             '*.7' => 'required',
@@ -96,7 +71,8 @@ class WorkloadImport implements ToCollection
                         ],
             '*.16'=>'required|integer',
 
-          ],[
+          ],
+            [
 
 
             '*.2.required' => 'Mã GV không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
@@ -123,54 +99,28 @@ class WorkloadImport implements ToCollection
           ]
           )->validate();
 
-        foreach($array as $row){
-            if($this->isExistsPI($row[1])){
-                $pi = $this->getPIbyEmployeeCode($row[1]);
+        if ($this->append == 0) {
+            Workload::where('session_id', $this->session_id)->delete();
+        }
+            $workloads = DB::table('workloads');
+            foreach ($array as $row) {
+                $workloads->insert(
+                    [
+                        'personalinformation_id' => PI::where('employee_code', $row[1])->first()->id,
+                        'subject_code'           => $row[5],
+                        'subject_name'           => $row[6],
+                        'number_of_lessons'      => $row[7],
+                        'class_code'             => $row[8],
+                        'number_of_students'     => $row[9],
+                        'total_workload'         => $row[10],
+                        'theoretical_hours'      => $row[11],
+                        'practice_hours'         => $row[12],
+                        'note'                   => $row[13],
+                        'unit_id'                => Unit::where('unit_code', $row[14])->first()->id,
+                        'semester_id'            => Semester::where('alias', $row[15])->first()->id,
+                        'session_id'             => $this->session_id,
+                    ]
+                );
             }
-            if($this->isExistsUnit($row[14])){
-                $unit = $this->getUnitbyUnitCode($row[14]);
-            }
-            $workloads = Workload::create(
-                [
-                    'personalinformation_id' => $pi->id,
-                    'subject_code'           => $row[5],
-                    'subject_name'           => $row[6],
-                    'number_of_lessons'      => $row[7],
-                    'class_code'             => $row[8],
-                    'number_of_students'     => $row[9],
-                    'total_workload'         => $row[10],
-                    'theoretical_hours'      => $row[11],
-                    'practice_hours'         => $row[12],
-                    'note'                   => $row[13],
-                    'unit_id'                => $unit->id,
-                    'semester'               => $row[15],
-                    'session_id'             => $session_id,
-                ]
-            );
-        }
-    }
-
-    public function isExistsPI($employee_code){
-        if(PI::where('employee_code',$employee_code)->exists()){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    public function getPIbyEmployeeCode($employee_code){
-        return PI::where('employee_code',$employee_code)->first();
-    }
-
-    public function isExistsUnit($unit_code){
-        if(Unit::where('unit_code',$unit_code)->exists()){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    public function getUnitbyUnitCode($unit_code){
-        return Unit::where('unit_code',$unit_code)->first();
     }
 }

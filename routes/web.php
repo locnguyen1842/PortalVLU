@@ -78,6 +78,8 @@ Route::prefix('admin')->group(function () {
 
         //import workload
         Route::post('/workload-import', 'WorkloadController@import')->name('admin.workload.import');
+        Route::post('/workload-get-data-import', 'WorkloadController@getdataimport')->name('admin.workload.import.data');
+        Route::get('/workload-download-template', 'WorkloadController@downloadtemplate')->name('admin.workload.template.download');
 
     });
 });
@@ -93,7 +95,7 @@ Route::prefix('')->group(function () {
     Route::post('/password/email', 'Auth\EmployeeForgotPasswordController@sendResetLinkEmail')->name('employee.password.email');
     Route::get('/password/reset/{token}', 'Auth\EmployeeResetPasswordController@showResetForm')->name('employee.password.reset');
     Route::post('/password/reset', 'Auth\EmployeeResetPasswordController@reset');
-    //authenicate admin route
+    //authenicate employee route
     Route::group(['middleware'=>['auth:employee','permission:employee']], function () {
         Route::get('/pi-detail', 'EmployeeController@getdetail')->name('employee.pi.detail');
         //update personal information

@@ -7,6 +7,7 @@ use App\Unit;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Workload;
 use App\WorkloadSession;
+use Validator;
 use App\Employee;
 use App\Semester;
 use Auth;
@@ -260,10 +261,24 @@ class WorkloadController extends Controller
               'import_file.file'=> 'Không tìm thấy file tải lên.',
             ]
         );
+
         if ($request->has('import_file')) {
             $file = $request->file('import_file');
-            Excel::import(new WorkloadImport, $file);
+            $session_year = explode('-',$request->session_year);
+            $workload_session = WorkloadSession::where('start_year',$session_year[0])->where('end_year',$session_year[1])->first();
+            if($workload_session->exists()){
+                $session_id = $workload_session->id;
+            }else{
+                $session = WorkloadSession::create([
+                    'start_year' => $session_year[0],
+                    'end_year' => $session_year[1]
+                ]);
+
+                $session_id = $session->id;
+            }
+            Excel::import(new WorkloadImport($request->append,$session_id), $file);
             return redirect()->back()->with('message', 'Import thành công');
+
         }
 
 
@@ -275,6 +290,49 @@ class WorkloadController extends Controller
         if($this->checkIsOwnerPermisson($pi,$workload)){
             return view('employee.workload.workload-details', compact('workload', 'pi'));
         }
+    }
+
+    public function getdataimport(Request $request)
+    {
+        // dd('a');
+        $validator = Validator::make($request->all(),
+            [
+                'import_file' => 'required|mimetypes:application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|file'
+            ],
+            [
+                'import_file.required'=> 'Vui lòng chọn file để import.',
+                'import_file.mimetypes'=> 'File tải lên không đúng định dạng excel (xls,xlsx).',
+                'import_file.file'=> 'Không tìm thấy file tải lên.',
+            ]
+        );
+        if ($validator->passes()) {
+            if ($request->has('import_file')) {
+                $import_file = $request->file('import_file');
+                $arr_workload  = (new WorkloadImport(5,5))->toArray($import_file);
+                //[0][5] length of excel columns = 16 [0-15]
+                if(count($arr_workload[0]) < 6 ){
+                    return response()->json(['error'=>[0=>'File tải lên không đúng cấu trúc. Vui lòng xem lại file mẫu <small> '.'<a href="'.route('admin.workload.template.download').'"> (tải file mẫu)</a></small>']]);
+                }else{
+
+                    if(count($arr_workload[0][5]) == 16){
+                        return response()->json($arr_workload[0]);
+                    }else{
+                        return response()->json(['error'=>[0=>'File tải lên không đúng cấu trúc. Vui lòng xem lại file mẫu <small> '.'<a href="'.route('admin.workload.template.download').'"> (tải file mẫu)</a></small>']]);
+                    }
+                }
+
+            }
+        }
+        return response()->json(['error'=>$validator->errors()->all()]);
+    }
+
+    public function downloadtemplate()
+    {
+        $file = public_path('Workload.xlsx');
+        $headers = array(
+            'Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        );
+        return response()->download($file, 'Template Job Workload.xlsx', $headers);
     }
 
     public function checkIsOwnerPermisson($current_user,$workload){

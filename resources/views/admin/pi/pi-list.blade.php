@@ -78,7 +78,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="header-modal"></h4>
+                            <h4 class="modal-title text-uppercase" id="header-modal"></h4>
                             <br>
                             <ul id="myTab" class="nav nav-tabs" role="tablist">
                                 <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="false">Sheet1</a></li>
@@ -268,8 +268,14 @@
                data: new FormData($('#pi-import-form')[0]), // serializes the form's elements.
                success: function(datas)
                {
+
+                $('#header-modal').empty();
+                $('.row-table-import-tr').remove();
+                $('.heading-table-import-tr').remove();
+                $('.row-table-import-tr-1').remove();
+                $('.heading-table-import-tr-1').remove();
                  if($.isEmptyObject(datas.error)){
-                     $('#header-modal').text('Xem trước');
+                     $('#header-modal').text('Thông tin nhân viên');
                      console.log(datas);
                      $.each(datas[0],function(index,value){
 

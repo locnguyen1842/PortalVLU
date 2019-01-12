@@ -34,9 +34,9 @@
         <img src="{{asset('img/loader.gif')}}" alt="Đang tải">
     </div>
     <div class="panel-heading">Danh sách khối lượng công việc<br>
-       <a href="{{route('admin.workload.add')}}">
-           <button type="button" name="button" class="btn btn-xs btn-success">Thêm Mới</button>
-      </a>
+        <a href="{{route('admin.workload.add')}}">
+            <button type="button" name="button" class="btn btn-xs btn-success">Thêm Mới</button>
+        </a>
     </div>
 
     <div class="panel-body">
@@ -47,7 +47,7 @@
                         <label class="control-label">Tìm kiếm</label>
                     </div>
                     <div class="col-sm-9">
-                            <input type="text" class="form-control" name="search" placeholder="Nhập mã hoặc tên nv/khoa/môn.">
+                        <input type="text" class="form-control" name="search" placeholder="Nhập mã hoặc tên nv/khoa/môn.">
 
 
                     </div>
@@ -76,36 +76,38 @@
                         <label class="control-label">Năm học</label>
                     </div>
                     <div class="col-sm-9">
-                            <div class="input-group">
-                        <select class="form-control year_workload" name="year_workload">
-                            @foreach($workload_session as $item)
+                        <div class="input-group">
+                            <select class="form-control year_workload" name="year_workload">
+                                @foreach($workload_session as $item)
                                 @if($year_workload == null)
-                                    @if($item->id == $workload_session_current->id)
-                                    <option selected value="{{$item->id}}">{{$item->start_year}} - {{$item->end_year}} ( Hiện tại ) </option>
+                                @if($item->id == $workload_session_current->id)
+                                <option selected value="{{$item->id}}">{{$item->start_year}} - {{$item->end_year}} (
+                                    Hiện tại ) </option>
 
-                                    @else
-                                    <option value="{{$item->id}}">{{$item->start_year}} - {{$item->end_year}}</option>
-                                    @endif
                                 @else
-                                    @if($item->id == $workload_session_current->id)
-                                    <option selected value="{{$item->id}}">{{$item->start_year}} - {{$item->end_year}} ( Hiện tại ) </option>
+                                <option value="{{$item->id}}">{{$item->start_year}} - {{$item->end_year}}</option>
+                                @endif
+                                @else
+                                @if($item->id == $workload_session_current->id)
+                                <option selected value="{{$item->id}}">{{$item->start_year}} - {{$item->end_year}} (
+                                    Hiện tại ) </option>
 
-                                    @else
-                                        @if($item->id == $year_workload)
-                                        <option selected value="{{$item->id}}">{{$item->start_year}} - {{$item->end_year}}</option>
-                                        @else
-                                        <option value="{{$item->id}}">{{$item->start_year}} - {{$item->end_year}}</option>
+                                @else
+                                @if($item->id == $year_workload)
+                                <option selected value="{{$item->id}}">{{$item->start_year}} - {{$item->end_year}}</option>
+                                @else
+                                <option value="{{$item->id}}">{{$item->start_year}} - {{$item->end_year}}</option>
 
-                                        @endif
-                                    @endif
+                                @endif
+                                @endif
                                 @endif
 
-                            @endforeach
-                        </select>
-                        <span class="input-group-btn">
+                                @endforeach
+                            </select>
+                            <span class="input-group-btn">
                                 <button class="btn btn-primary" type="submit">Tìm</button>
                             </span>
-                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -114,12 +116,13 @@
         <div class="col-sm-2"></div>
         <div class="form-group col-sm-4">
 
-            <form class="form-horizontal" action="{{route('admin.workload.import')}}" id="pi-import-form" method="post" enctype="multipart/form-data">
+            <form class="form-horizontal" action="{{route('admin.workload.import')}}" id="workload-import-form"
+                method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="col-sm-12">
                     <label for="import_file" class="control-label col-sm-4">
-                        <a href="{{route('admin.pi.template.download')}}" data-toggle="tooltip" data-placement="top" title=""
-                            data-original-title="Tải file mẫu" class="tooltip-test">
+                        <a href="{{route('admin.pi.template.download')}}" data-toggle="tooltip" data-placement="top"
+                            title="" data-original-title="Tải file mẫu" class="tooltip-test">
                             Import
                         </a>
                     </label>
@@ -130,25 +133,27 @@
                     </div>
                 </div>
             </form>
-         </div>
+        </div>
         {{-- Loading Div --}}
 
         {{-- Modal Import --}}
-        <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="pi-import-modal">
+        <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="workload-import-modal">
 
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="header-modal"></h4>
+                        <h4 class="modal-title text-uppercase" id="header-modal">
+                            <span class="header-import-label"></span>
+                            Năm Học : <span class="session-import-label font-weight-bold"></span>
+                        </h4>
                         <br>
                         <ul id="myTab" class="nav nav-tabs" role="tablist">
                             <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab"
                                     aria-controls="home" aria-expanded="false">Sheet1</a></li>
-                            <li role="presentation" class=""><a href="#profile" role="tab" id="profile-tab" data-toggle="tab"
-                                    aria-controls="profile" aria-expanded="true">Sheet2</a></li>
 
                         </ul>
+
                     </div>
                     <div class="modal-body">
                         <div id="myTabContent" class="tab-content">
@@ -185,8 +190,27 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" id="btn-pi-yes">Tải lên</button>
-                        <button type="button" class="btn btn-default" id="btn-pi-no">Hủy bỏ</button>
+                            <div class="form-group form-horizontal">
+                                <div class="col-sm-8 text-al mb-10">
+                                    <div class="col-sm-4">
+                                        <label class="control-label">Phương thức nhập</label>
+                                    </div>
+
+                                    <div class="radio col-sm-8">
+                                        <label class="col-sm-6">
+                                            <input required type="radio" checked name="append" value="0">Tạo mới
+                                        </label>
+                                        <label class="col-sm-6">
+                                            <input required type="radio" name="append" value="1">Thêm mới
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <button type="button" class="btn btn-danger" id="btn-workload-yes">Tải lên</button>
+                                    <button type="button" class="btn btn-default" id="btn-workload-no">Hủy bỏ</button>
+                                </div>
+                            </div>
+
                     </div>
                 </div>
             </div>
@@ -234,7 +258,7 @@
                                 <span class="mdi mdi-close"></span>
                             </span>
                         </a>
-                         <a href="{{route('admin.workload.delete',$item->id)}}" data-toggle="tooltip" data-placement="top"
+                        <a href="{{route('admin.workload.delete',$item->id)}}" data-toggle="tooltip" data-placement="top"
                             title="" data-original-title="Xóa" class="delete_workload tooltip-test ml-10">
                             <span class=""><i class="fa fa-lg fa-trash text-danger"></i>
                                 <span class="mdi mdi-close"></span>
@@ -303,124 +327,129 @@
         });
 
 
-        //import preview
-        // $(document).ajaxStart(function(){
-        //     $(".waiting").css("display", "block");
-        // });
-        // $(document).ajaxComplete(function(){
-        //     $(".waiting").css("display", "none");
-        // });
-        // $("#btn-import-submit").on('click',function(e){
-        //     e.preventDefault();
-        //     var form = $("#pi-import-form");
-        //     var url_getdata = '{{route('admin.pi.import.data')}}';
+        // import preview
+        $(document).ajaxStart(function(){
+            $(".waiting").css("display", "block");
+        });
+        $(document).ajaxComplete(function(){
+            $(".waiting").css("display", "none");
+        });
+        $("#btn-import-submit").on('click',function(e){
+            e.preventDefault();
+            var form = $("#workload-import-form");
+            var url_getdata = '{{route('admin.workload.import.data')}}';
+            var session = '';
+            var token = $("input[name='_token']").val();
+            $.ajaxSetup({
+              headers: {
+                    'X-CSRF-TOKEN': token
+                }
+            });
+            $.ajax({
+               type: 'post',
+               url: url_getdata,
+               processData: false,
+               contentType:  false,
+               data: new FormData($('#workload-import-form')[0]), // serializes the form's elements.
+               success: function(datas)
+               {
+                $('.row-table-import-tr').remove();
+                $('.heading-table-import-tr').remove();
+                 if($.isEmptyObject(datas.error)){
+                     $.each(datas,function(index,value){
+                        if(index == 0){
+                            $('.header-import-label').text(datas[index][0]);
+                        }
+                        if(index == 2){
+                            session = datas[index][1];
+                            $('.session-import-label').text(datas[index][1]);
+                        }
+                        if(index==5){
 
-        //     var token = $("input[name='_token']").val();
-        //     $.ajaxSetup({
-        //       headers: {
-        //             'X-CSRF-TOKEN': token
-        //         }
-        //     });
-        //     $.ajax({
-        //        type: 'post',
-        //        url: url_getdata,
-        //        processData: false,
-        //        contentType:  false,
-        //        data: new FormData($('#pi-import-form')[0]), // serializes the form's elements.
-        //        success: function(datas)
-        //        {
-        //          if($.isEmptyObject(datas.error)){
-        //              $('#header-modal').text('Xem trước');
-        //              console.log(datas);
-        //              $.each(datas[0],function(index,value){
+                            $.each(datas[5],function(index1, value1) {
+                                $('.heading-table').append($('<th>',{'text':value1,'class':'heading-table-import-tr text-nowrap'}));
 
-        //                 if(index == 0){
-        //                   $.each(datas[0][0],function(index1, value1) {
-        //                       $('.heading-table').append($('<th>',{'text':value1,'class':'heading-table-import-tr text-nowrap'}));
+                            });
+                        }
 
-        //                   });
+                        if(index >5){
 
-
-        //                 }
-        //              });
-        //              datas[0].shift();
-        //              $.each(datas[0],function(index2, value2) {
-        //                  $('.row-table').append($('<tr>',{'class':'row-table-import-tr text-nowrap'}));
-        //                  $.each(datas[0][index2],function(index3, value3) {
-        //                    $('.row-table').children('tr:last').append($('<td>',{'text':value3}));
-        //                  });
-        //              });
-
-        //              // handle sheet 2
-        //              $.each(datas[1],function(index,value){
-        //                 if(index == 0){
-        //                   $.each(datas[1][0],function(index1, value1) {
-        //                       $('.heading-table-2').append($('<th>',{'text':value1,'class':'heading-table-import-tr-1 text-nowrap'}));
-
-        //                   });
+                            $('.row-table').append($('<tr>',{'class':'row-table-import-tr text-nowrap'}));
+                            $.each(datas[index],function(index2, value2) {
+                                $('.row-table').children('tr:last').append($('<td>',{'text':value2}));
+                            });
+                        }
 
 
-        //                 }
-        //              });
-        //              datas[1].shift();
-        //              console.log(datas[1]);
-        //              $.each(datas[1],function(index2, value2) {
-        //                  $('.row-table-2').append($('<tr>',{'class':'row-table-import-tr-1 text-nowrap'}));
-        //                  $.each(datas[1][index2],function(index3, value3) {
-        //                    $('.row-table-2').children('tr:last').append($('<td>',{'text':value3}));
-        //                  });
-        //              });
-        //              $("#pi-import-modal").modal('show');
+                     });
 
-        //              var modalConfirm = function(callback){
+                     $("#workload-import-modal").modal('show');
 
-        //                  $("#btn-pi-yes").on("click", function(){
-        //                      callback(true);
-        //                      $("#pi-import-modal").modal('hide');
-        //                  });
+                     var modalConfirm = function(callback){
 
-        //                  $("#btn-pi-no").on("click", function(){
-        //                      callback(false);
-        //                      $("#pi-import-modal").modal('hide');
-        //                  });
-        //              };
-        //              modalConfirm(function(confirm){
-        //                  if(confirm){
-        //                    form.submit();
-        //                    $('#header-modal').empty();
-        //                    $('.row-table-import-tr').remove();
-        //                    $('.heading-table-import-tr').remove();
-        //                    $('.row-table-import-tr-1').remove();
-        //                    $('.heading-table-import-tr-1').remove();
-        //                  }else{
+                         $("#btn-workload-yes").on("click", function(){
+                             callback(true);
+                             $("#workload-import-modal").modal('hide');
+                         });
 
-        //                    $('#header-modal').empty();
-        //                    $('.row-table-import-tr').remove();
-        //                    $('.heading-table-import-tr').remove();
-        //                    $('.row-table-import-tr-1').remove();
-        //                    $('.heading-table-import-tr-1').remove();
-        //                  }
-        //              });
-	    //             }else{
-        //             $(".print-error-msg").find("ul").html('');
-        //       			$(".print-error-msg").css('display','block');
-        //       			$.each( datas.error, function( key, value ) {
-        //       				$(".print-error-msg").find("ul").append('<li>'+value+'</li>');
-        //       			});
-	    //             }
+                         $("#btn-workload-no").on("click", function(){
+                             callback(false);
+                             $("#workload-import-modal").modal('hide');
+                         });
+                     };
+                     modalConfirm(function(confirm){
 
-        //        },
-        //        error :function(er){
-        //          console.log(er);
-        //            $(".print-error-msg").find("ul").html('');
-        //            $(".print-error-msg").css('display','block');
-        //           $(".print-error-msg").find("ul").append('<li>'+'File tải lên không đúng cấu trúc .Vui lòng xem lại file mẫu <small> <a href="{{route('admin.pi.template.download')}}"> (tải file mẫu)</a></small>'+'</li>');
-        //        },
-        //     });
+                         if(confirm){
+                            var append_value = $('input[name="append"]:checked').val();
+
+                            var append_input =  $("<input>")
+                                                .attr("type", "hidden")
+                                                .attr("name", "append").val(append_value);
+                            var session_input =  $("<input>")
+                                                .attr("type", "hidden")
+                                                .attr("name", "session_year").val(session);
+                            form.append(append_input);
+                            form.append(session_input);
+                            form.submit();
+
+                           $('.row-table-import-tr').remove();
+                           $('.heading-table-import-tr').remove();
+                         }else{
+                           $('.row-table-import-tr').remove();
+                           $('.heading-table-import-tr').remove();
+                         }
+                     });
+	                }else{
+                    $(".print-error-msg").find("ul").html('');
+              			$(".print-error-msg").css('display','block');
+              			$.each( datas.error, function( key, value ) {
+              				$(".print-error-msg").find("ul").append('<li>'+value+'</li>');
+              			});
+	                }
+
+               },
+               error :function(er){
+                 console.log(er);
+                   $(".print-error-msg").find("ul").html('');
+                   $(".print-error-msg").css('display','block');
+                  $(".print-error-msg").find("ul").append('<li>'+'File tải lên không đúng cấu trúc .Vui lòng xem lại file mẫu <small> <a href="{{route('admin.workload.template.download')}}"> (tải file mẫu)</a></small>'+'</li>');
+               },
+            });
 
 
-        // });
+        });
 
+        $('input[type=radio][name=session_new]').change(function() {
+            alert(this.value);
+            if (this.value == 0) {
+                $('.session_list').removeClass('hide');
+                $('.session_new').addClass('hide');
+            }
+            else if (this.value == 1) {
+                $('.session_list').addClass('hide');
+                $('.session_new').removeClass('hide');
+            }
+        });
 
         $(".delete_workload").on('click',function (e) {
             e.preventDefault();
