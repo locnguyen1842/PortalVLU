@@ -105,3 +105,12 @@ ol.breadcrumb >.active {
     color: #ff9f9f;
 }
 
+.sticky-panel {
+    position: fixed;
+    right:0;
+}
+
+/* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
+.sticky-panel + .content {
+    padding-top: 60px;
+}

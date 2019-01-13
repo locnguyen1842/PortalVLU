@@ -56,7 +56,7 @@ class WorkloadController extends Controller
         //workload of own detail
         $workloads_own_user = Workload::where('personalinformation_id',$pi_id);
         $max_year = WorkloadSession::max('end_year');
-        $workload_session = WorkloadSession::all();
+        $workload_session = WorkloadSession::orderBy('start_year', 'desc')->get();
         $semester = Semester::all();
         $workload_session_current = WorkloadSession::where('end_year', $max_year)->first();//get current workload year study
         $year_workload = \Request::get('year_workload');
@@ -104,10 +104,18 @@ class WorkloadController extends Controller
     public function getadd()
     {
         $workload = Workload::all();
+        $id = \Request::get('pi_id');
         $se = Semester::all();
         $ws = WorkloadSession::orderBy('start_year', 'desc')->get();
         $unit = Unit::all();
-        $pi = PI::all();
+
+        if($id != null){
+            $pi = PI::find($id);
+        }else{
+            $pi = null;
+        }
+
+
         return view('admin.workload.workload-add', compact('workload', 'pi', 'ws', 'se', 'unit'));
     }
     //post workload
@@ -116,32 +124,43 @@ class WorkloadController extends Controller
         //get id employee
 
         $pp = strtoupper($request->employee_code);
-        $pi = PI::where('employee_code', $pp)->first()->id;
+        $pi = PI::where('employee_code', $pp)->first();
         //add data
-        $workload = new Workload();
-        $workload->personalinformation_id = $pi;
-        $workload->subject_code= strtoupper($request->subject_code);
-        $workload->subject_name= $request->subject_name;
-        $workload->number_of_lessons= $request->number_of_lessons;
-        $workload->class_code= $request->class_code;
-        $workload->number_of_students= $request->number_of_students;
-        $workload->total_workload= $request->total_workload;
-        $workload->theoretical_hours= $request->theoretical_hours;
-        $workload->practice_hours= $request->practice_hours;
-        $workload->note= $request->note;
-        $workload->unit_id= $request->unit_id;
-        $workload->semester_id= $request->semester;
-        if ($request->session_new == 0) {
-            $workload->session_id= $request->session_id;
-        } else {
-            $workload_session = new WorkloadSession();
-            $workload_session->start_year = $request->start_year;
-            $workload_session->end_year = $request->end_year;
-            $workload_session->save();
-            $workload->session_id = $workload_session->id;
+
+        //
+        for($i = 0 ; $i< count($request->subject_code);$i++){
+            //dynamic data
+            $workload = new Workload();
+            $workload->personalinformation_id = $pi->id;
+            $workload->unit_id= $pi->unit->id;
+            if ($request->session_new == 0) {
+                $workload->session_id= $request->session_id;
+            } else {
+                $workload_session = new WorkloadSession();
+                $workload_session->start_year = $request->start_year;
+                $workload_session->end_year = $request->end_year;
+                $workload_session->save();
+                $workload->session_id = $workload_session->id;
+            }
+
+            //array data
+            $workload->subject_code= strtoupper(($request->subject_code)[$i]);
+            $workload->subject_name= ($request->subject_name)[$i];
+            $workload->number_of_lessons= ($request->number_of_lessons)[$i];
+            $workload->class_code= ($request->class_code)[$i];
+            $workload->number_of_students= ($request->number_of_students)[$i];
+            $workload->total_workload= ($request->total_workload)[$i];
+            $workload->theoretical_hours= ($request->theoretical_hours)[$i];
+            $workload->practice_hours= ($request->practice_hours)[$i];
+
+            $workload->note= ($request->note)[$i];
+            $workload->semester_id= ($request->semester)[$i];
+            $workload->save();
         }
 
-        $workload->save();
+
+
+
 
         return redirect()->back()->with('message', 'Thêm thành công');
     }
@@ -195,7 +214,7 @@ class WorkloadController extends Controller
         $pi = Auth::guard('employee')->user();
         $workloads_own_user = Workload::where('personalinformation_id',$pi->personalinformation_id);
         $max_year = WorkloadSession::max('end_year');
-        $workload_session = WorkloadSession::all();
+        $workload_session = WorkloadSession::orderBy('start_year', 'desc')->get();
         $semester = Semester::all();
         $workload_session_current = WorkloadSession::where('end_year', $max_year)->first();//get current workload year study
         $year_workload = \Request::get('year_workload');

@@ -38,7 +38,7 @@
             <div class="col-sm-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">Khối lượng công việc<br>
-                        <a href="{{route('admin.pi.update',$pi_id)}}">
+                        <a href="{{route('admin.workload.add','pi_id='.$pi_id)}}">
                             <button type="button" name="button" class="btn btn-xs btn-success">Thêm</button>
                         </a>
                     </div>

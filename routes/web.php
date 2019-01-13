@@ -68,6 +68,7 @@ Route::prefix('admin')->group(function () {
         //add workload
         Route::get('/workload-add', 'WorkloadController@getadd')->name('admin.workload.add');
         Route::post('/workload-add', 'WorkloadController@postadd')->name('admin.workload.add');
+
         //update workload
         Route::get('/workload-update/{id}', 'WorkloadController@getUpdateWorkload')->name('admin.workload.update');
         Route::post('/workload-update/{id}', 'WorkloadController@postUpdateWorkload')->name('admin.workload.update');
