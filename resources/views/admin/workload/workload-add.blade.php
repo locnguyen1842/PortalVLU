@@ -12,6 +12,7 @@
     </div>
 @endsection
 @section('content')
+
     @include('admin.layouts.Error')
     @if(session()->has('message'))
         <div class="alert alert-success mt-10">
@@ -19,7 +20,7 @@
         </div>
     @endif
     <div style="padding-top:20px">
-        <div class="cm-fix-height">
+        <div class="cm-fix-height"  id="parent_content">
             <form id="add-workload" class="form-horizontal" action="{{route('admin.workload.add')}}" method="post">
                 <div class=" col-sm-9">
 
@@ -183,8 +184,8 @@
                         </div>
                     </div>
                 </div>
-                <div class=" col-sm-3">
-                    <div class="panel panel-default">
+                <div class=" col-sm-3 " id="sticky">
+                    <div class="panel panel-default"  >
                         <div class="panel-heading">Thao tác</div>
                         <div class="panel-body">
                             <div class="form-group col-sm-12">
@@ -202,10 +203,14 @@
 
 
 
+    <script src="{{asset('js/scrollfix.js')}}"></script>
 
 
     <script>
+        $("#sticky").scrollFix({
+            topPosition: 71,
 
+        });
         $(document).ready(function(){
             $('input[type=radio][name=session_new]').change(function() {
                 if (this.value == 0) {
