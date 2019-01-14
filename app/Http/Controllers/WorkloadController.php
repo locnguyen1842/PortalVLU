@@ -121,6 +121,67 @@ class WorkloadController extends Controller
     //post workload
     public function postadd(Request $request)
     {
+        $value_start_year = \Request::get('start_year');
+        $request->validate(
+            [
+                'employee_code'=> 'required|min:4|max:60',
+                'session_id'=> 'required_if:session_new,==,0',
+                'session_new'=> 'required',
+                'start_year'=> 'required_if:session_new,==,1|integer|nullable|unique:workloadsessions,start_year',
+                'end_year'=>    [
+                                    'required_if:session_new,==,1',
+                                    'integer',
+                                    'nullable',
+                                    function($attribute , $value,$fail) use ($value_start_year){
+                                        if($value - $value_start_year != 1){
+                                            $fail('Năm kết thúc chỉ được lớn hơn năm bắt đầu 1 năm');
+                                        }
+                                    }
+                                ],
+
+                'subject_code.*'=>'required|string|alpha_num',
+                'subject_name.*'=> 'required|string',
+                'number_of_lessons.*'=> 'required|integer',
+                'number_of_students.*'=> 'required|integer',
+                'class_code.*'=> 'required|string',
+                'total_workload.*'=> 'required|numeric',
+                'theoretical_hours.*'=> 'required|numeric',
+                'semester.*' => 'required',
+                'practice_hours.*'=> 'required|numeric',
+                'unit_id' => 'required'
+            ],
+            [
+                'employee_code.required'=> 'Mã giảng viên không được bỏ trống',
+                'session_id.required' =>'Năm học không được bỏ trống',
+                'session_new.required' =>'Năm học không được bỏ trống',
+                'start_year.required' =>'Năm học bắt đầu không được bỏ trống',
+                'end_year.required' =>'Năm học kết thúc không được bỏ trống',
+                'start_year.integer' =>'Năm học phải là số nguyên',
+                'start_year.unique' =>'Năm học phải duy nhất',
+                'end_year.integer' =>'Năm học phải là số nguyên',
+                'number_of_lessons.*.integer' =>'Số tiết học phải là số nguyên',
+                'number_of_students.*.integer' =>'Số sinh viên phải là số nguyên',
+                'total_workload.*.numeric' =>'Tổng khối lượng công việc phải là số',
+                'practice_hours.*.numeric' =>'Số giờ thực hành phải là số',
+                'theoretical_hours.*.numeric' =>'Số giờ lý thuyết phải là số',
+                'employee_code.min' =>'Họ và tên phải lớn hơn 4 kí tự',
+                'employee_code.max' =>'Họ và tên phải nhỏ hơn 60 kí tự',
+                'subject_code.*.required' =>'Mã môn học không được bỏ trống',
+                'subject_code.*.string' =>'Mã môn học phải là ký tự',
+                'subject_code.*.alpha_num' =>'Mã môn học không có ký tự đặc biệt',
+                'subject_name.*.string' =>'Tên môn học phải là ký tự',
+                'class_code.*.string' =>'Mã lớp học phải là ký tự',
+                'subject_name.*.required' =>'Tên môn học không được bỏ trống',
+                'number_of_lessons.*.required' =>'Số tiết học không được bỏ trống',
+                'number_of_students.*.required' =>'Số sinh viên không được bỏ trống',
+                'class_code.*.required' =>'Mã lớp học không được bỏ trống',
+                'total_workload.*.required' =>'Tổng khối lượng công việc không được bỏ trống',
+                'theoretical_hours.*.required' =>'Số giờ lý thuyết không được bỏ trống',
+                'semester.*.required' =>'Học kỳ không được bỏ trống',
+                'practice_hours.*.required' =>'Số giờ thực hành không được bỏ trống',
+                'unit.*.required' =>'Đơn vị không được bỏ trống',
+            ]
+        );
         //get id employee
 
         $pp = strtoupper($request->employee_code);

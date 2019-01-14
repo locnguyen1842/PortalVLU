@@ -41,7 +41,7 @@
                                         <input readonly type="text" class="form-control" name="unit_id"  value="{{$pi != null ? $pi->unit->name : ''}}">
                                     @else
 
-                                        <select required class="form-control" selected name="unit_id">
+                                        <select  class="form-control" selected name="unit_id">
                                             <option value="">Chọn Khoa</option>
                                             @foreach($unit as $uni)
                                                 <option  value="{{$uni->id}}">{{$uni->name}}</option>
@@ -56,7 +56,7 @@
                                     <label>Năm học</label>
                                     <div class="radio">
                                         <label class="col-sm-6">
-                                            <input required type="radio" checked name="session_new" value="0">Chọn từ danh sách
+                                            <input  type="radio" checked name="session_new" value="0">Chọn từ danh sách
                                         </label>
                                         <label class="col-sm-6">
                                             <input required type="radio" name="session_new" value="1">Tạo mới năm học
@@ -78,13 +78,13 @@
                                     <div class="form-horizontal">
                                         <div class="col-sm-6 form-horizontal-none-pl">
                                             <input type="text" class="form-control" name="start_year" placeholder="Nhập năm bắt đầu"
-                                                   value="{{old('start_year')}}">
+                                                   value="">
 
                                         </div>
 
                                         <div class="col-sm-6 form-horizontal-none-pl">
                                             <input type="text" class="form-control" name="end_year" placeholder="Nhập năm Kết thúc"
-                                                   value="{{old('start_year')}}">
+                                                   value="">
 
                                         </div>
 
@@ -111,38 +111,38 @@
                                         <div class="form-group">
                                             <div class="col-sm-6">
                                                 <label>Mã Môn Học</label>
-                                                <input required type="text" class="form-control" name="subject_code[]" placeholder="Nhập mã môn học"
-                                                       value="{{old('subject_code')}}">
+                                                <input  type="text" class="form-control" name="subject_code[]" placeholder="Nhập mã môn học"
+                                                       value="">
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Tên Môn Học</label>
                                                 <input required type="text" maxlength="60" class="form-control" name="subject_name[]" placeholder="Nhập Tên môn học"
-                                                       value="{{old('subject_name')}}">
+                                                       value="">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-sm-6">
                                                 <label>Số tiết học</label>
-                                                <input required type="text" class="form-control" name="number_of_lessons[]" placeholder="Nhập số tiết học trong năm"
-                                                       value="{{old('number_of_lessons')}}">
+                                                <input type="text" class="form-control" name="number_of_lessons[]" placeholder="Nhập số tiết học trong năm"
+                                                       value="">
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Mã Lớp</label>
-                                                <input required type="text" maxlength="100" class="form-control" name="class_code[]" placeholder="Nhập mã Lớp"
-                                                       value="{{old('class_code')}}">
+                                                <input type="text" maxlength="100" class="form-control" name="class_code[]" placeholder="Nhập mã Lớp"
+                                                       value="">
                                             </div>
 
                                         </div>
                                         <div class="form-group">
                                             <div class="col-sm-6">
                                                 <label>Số Sinh Viên</label>
-                                                <input required type="text" maxlength="100" class="form-control" name="number_of_students[]"
-                                                       placeholder="Nhập số sinh viên" value="{{old('number_of_students')}}">
+                                                <input  type="text" maxlength="100" class="form-control" name="number_of_students[]"
+                                                       placeholder="Nhập số sinh viên" value="">
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Tổng Khối Lượng công việc</label>
-                                                <input required type="text" maxlength="100" class="form-control" name="total_workload[]" placeholder="Nhập địa chỉ liên lạc"
-                                                       value="{{old('total_workload')}}">
+                                                <input type="text" maxlength="100" class="form-control" name="total_workload[]" placeholder="Nhập địa chỉ liên lạc"
+                                                       value="">
                                             </div>
 
                                         </div>
@@ -150,12 +150,12 @@
                                             <div class="col-sm-6">
                                                 <label>Số Giờ Lý Thuyết</label>
                                                 <input required type="text" class="form-control" name="theoretical_hours[]" placeholder="Nhập số giờ lý thuyết"
-                                                       value="{{old('theoretical_hours')}}">
+                                                       value="">
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Số Giờ Thực Hành</label>
-                                                <input required type="text" class="form-control" name="practice_hours[]" placeholder="Nhập số giờ thực hành"
-                                                       value="{{old('practice_hours')}}">
+                                                <input type="text" class="form-control" name="practice_hours[]" placeholder="Nhập số giờ thực hành"
+                                                       value="">
                                             </div>
 
                                         </div>
@@ -173,7 +173,7 @@
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Ghi Chú</label>
-                                                <input type="text" class="form-control" name="note[]" placeholder="Nhập Ghi chú nếu có" value="{{old('note')}}">
+                                                <input type="text" class="form-control" name="note[]" placeholder="Nhập Ghi chú nếu có" value="">
                                             </div>
                                         </div>
                                     </div>
@@ -219,6 +219,8 @@
                 }
                 else if (this.value == 1) {
                     $('.session_list').addClass('hide');
+                    $('.session_list select').val('');
+
                     $('.session_new').removeClass('hide');
                 }
             });
