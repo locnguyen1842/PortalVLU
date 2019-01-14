@@ -164,6 +164,7 @@
                     }
                     else if (this.value == 1) {
                         $('.session_list').addClass('hide');
+                        $('.session_list ').val('');
                         $('.session_new').removeClass('hide');
                     }
                 });
