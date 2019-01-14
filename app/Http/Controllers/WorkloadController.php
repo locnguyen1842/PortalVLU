@@ -103,6 +103,7 @@ class WorkloadController extends Controller
     {
         $workload = Workload::all();
         $id = \Request::get('pi_id');
+        $data_append = \Request::get('data_html');
         $se = Semester::all();
         $ws = WorkloadSession::orderBy('start_year', 'desc')->get();
         $unit = Unit::all();
@@ -114,13 +115,18 @@ class WorkloadController extends Controller
         }
 
 
+        if ($data_append !=null) {
+            return json_encode($data_append);
+            // return view('admin.workload.workload-add', compact('workload', 'pi', 'ws', 'se', 'unit','data_append'));
+        }
+
         return view('admin.workload.workload-add', compact('workload', 'pi', 'ws', 'se', 'unit'));
     }
     //post workload
     public function postadd(Request $request)
     {
         $value_start_year = \Request::get('start_year');
-        $request->validate(
+        $validator=Validator::make($request->all(),
             [
                 'employee_code'=> 'required|min:4|max:60',
                 'session_id'=> 'required_if:session_new,==,0',
@@ -130,8 +136,8 @@ class WorkloadController extends Controller
                                     'required_if:session_new,==,1',
                                     'integer',
                                     'nullable',
-                                    function($attribute , $value,$fail) use ($value_start_year){
-                                        if($value - $value_start_year != 1){
+                                    function ($attribute, $value, $fail) use ($value_start_year) {
+                                        if ($value - $value_start_year != 1) {
                                             $fail('Năm kết thúc chỉ được lớn hơn năm bắt đầu 1 năm');
                                         }
                                     }
@@ -150,12 +156,12 @@ class WorkloadController extends Controller
             ],
             [
                 'employee_code.required'=> 'Mã giảng viên không được bỏ trống',
-                'session_id.required' =>'Năm học không được bỏ trống',
+                'session_id.required_if' =>'Năm học không được bỏ trống',
                 'session_new.required' =>'Năm học không được bỏ trống',
-                'start_year.required' =>'Năm học bắt đầu không được bỏ trống',
-                'end_year.required' =>'Năm học kết thúc không được bỏ trống',
+                'start_year.required_if' =>'Năm học bắt đầu không được bỏ trống',
+                'end_year.required_if' =>'Năm học kết thúc không được bỏ trống',
                 'start_year.integer' =>'Năm học phải là số nguyên',
-                'start_year.unique' =>'Năm học phải duy nhất',
+                'start_year.unique' =>'Năm học đã tồn tại trong danh sách',
                 'end_year.integer' =>'Năm học phải là số nguyên',
                 'number_of_lessons.*.integer' =>'Số tiết học phải là số nguyên',
                 'number_of_students.*.integer' =>'Số sinh viên phải là số nguyên',
@@ -180,48 +186,49 @@ class WorkloadController extends Controller
                 'unit.*.required' =>'Đơn vị không được bỏ trống',
             ]
         );
-        //get id employee
+        if($validator->passes()){
+            //get id employee
 
-        $pp = strtoupper($request->employee_code);
-        $pi = PI::where('employee_code', $pp)->first();
-        //add data
+            $pp = strtoupper($request->employee_code);
+            $pi = PI::where('employee_code', $pp)->first();
+            //add data
 
-        //
-        for ($i = 0 ; $i< count($request->subject_code);$i++) {
-            //dynamic data
-            $workload = new Workload();
-            $workload->personalinformation_id = $pi->id;
-            $workload->unit_id= $pi->unit->id;
-            if ($request->session_new == 0) {
-                $workload->session_id= $request->session_id;
-            } else {
-                $workload_session = new WorkloadSession();
-                $workload_session->start_year = $request->start_year;
-                $workload_session->end_year = $request->end_year;
-                $workload_session->save();
-                $workload->session_id = $workload_session->id;
+            //
+            for ($i = 0 ; $i< count($request->subject_code);$i++) {
+                //dynamic data
+                $workload = new Workload();
+                $workload->personalinformation_id = $pi->id;
+                $workload->unit_id= $pi->unit->id;
+                if ($request->session_new == 0) {
+                    $workload->session_id= $request->session_id;
+                } else {
+                    $workload_session = new WorkloadSession();
+                    $workload_session->start_year = $request->start_year;
+                    $workload_session->end_year = $request->end_year;
+                    $workload_session->save();
+                    $workload->session_id = $workload_session->id;
+                }
+
+                //array data
+                $workload->subject_code= strtoupper(($request->subject_code)[$i]);
+                $workload->subject_name= ($request->subject_name)[$i];
+                $workload->number_of_lessons= ($request->number_of_lessons)[$i];
+                $workload->class_code= ($request->class_code)[$i];
+                $workload->number_of_students= ($request->number_of_students)[$i];
+                $workload->total_workload= ($request->total_workload)[$i];
+                $workload->theoretical_hours= ($request->theoretical_hours)[$i];
+                $workload->practice_hours= ($request->practice_hours)[$i];
+
+                $workload->note= ($request->note)[$i];
+                $workload->semester_id= ($request->semester)[$i];
+                $workload->save();
             }
+            return redirect()->back()->with('message', 'Thêm thành công');
+        }else{
 
-            //array data
-            $workload->subject_code= strtoupper(($request->subject_code)[$i]);
-            $workload->subject_name= ($request->subject_name)[$i];
-            $workload->number_of_lessons= ($request->number_of_lessons)[$i];
-            $workload->class_code= ($request->class_code)[$i];
-            $workload->number_of_students= ($request->number_of_students)[$i];
-            $workload->total_workload= ($request->total_workload)[$i];
-            $workload->theoretical_hours= ($request->theoretical_hours)[$i];
-            $workload->practice_hours= ($request->practice_hours)[$i];
-
-            $workload->note= ($request->note)[$i];
-            $workload->semester_id= ($request->semester)[$i];
-            $workload->save();
+            return redirect()->route('admin.workload.add',['pi_id' => 4])->withErrors($validator)->withInput();
         }
 
-
-
-
-
-        return redirect()->back()->with('message', 'Thêm thành công');
     }
     //
     public function getUpdateWorkload($workload_id)
@@ -283,7 +290,7 @@ class WorkloadController extends Controller
           'semester.required'=> 'Học kì không được bỏ trống',
           'session_id.required'=> 'Năm học không được bỏ trống',
           'start_year.required_if'=> 'Năm học bắt đầu không được bỏ trống',
-          'start_year.unique'=> 'Năm học đã tồn tại',
+          'start_year.unique'=> 'Năm học đã tồn tại trong danh sách',
           'end_year.required_if'=> 'Năm học kết thúc không được bỏ trống',
           'end_year.gt'=> 'Năm học kết thúc phải lớn hơn năm bắt đầu',
 
@@ -397,7 +404,7 @@ class WorkloadController extends Controller
             $file = $request->file('import_file');
             $session_year = explode('-', $request->session_year);
             $workload_session = WorkloadSession::where('start_year', $session_year[0])->where('end_year', $session_year[1])->first();
-            if ($workload_session->exists()) {
+            if ($workload_session!=null) {
                 $session_id = $workload_session->id;
             } else {
                 $session = WorkloadSession::create([
