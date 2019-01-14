@@ -121,7 +121,7 @@
                 {{ csrf_field() }}
                 <div class="col-sm-12">
                     <label for="import_file" class="control-label col-sm-4">
-                        <a href="{{route('admin.pi.template.download')}}" data-toggle="tooltip" data-placement="top"
+                        <a href="{{route('admin.workload.template.download')}}" data-toggle="tooltip" data-placement="top"
                             title="" data-original-title="Tải file mẫu" class="tooltip-test">
                             Import
                         </a>
