@@ -7,13 +7,14 @@
     <link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="icon" href="{{asset('img/logoVL-notext2.png')}}">
     <title>Khôi phục tài khoản</title>
     <style></style>
 </head>
 
-<body class="cm-login">
+<body class="cm-admin-login">
     <div class="text-center" style="padding-top:30px;">
-        <img src="{{asset('img/logoVL.png')}}" width="300" height="100">
+        <img src="{{asset('img/logoVL1-admin.png')}}" width="300" height="100">
     </div>
 
     <div class="col-sm-6 col-md-4 col-lg-3" style="margin:40px auto; float:none;">

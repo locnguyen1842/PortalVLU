@@ -1,10 +1,10 @@
 @extends('employee.master')
-@section('title','Danh sách công việc')
+@section('title','Chi tiết công việc')
 @section('breadcrumb')
     <div class="cm-flex">
         <div class="cm-breadcrumb-container">
             <ol class="breadcrumb">
-                <li><a href="#">Home</a></li>
+                {{-- <li><a href="#">Home</a></li> --}}
                 <li><a href="{{route('employee.pi.detail')}}">Thông tin cá nhân</a></li>
                 <li class=""><a href="{{route('employee.workload.index')}}">Khối lượng công việc</a></li>
                 <li class="active">Chi tiết</li>

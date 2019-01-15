@@ -4,7 +4,7 @@
         <div class="cm-flex">
             <div class="cm-breadcrumb-container">
                 <ol class="breadcrumb">
-                    <li><a href="{{route('admin.pi.index')}}">Home</a></li>
+                    {{-- <li><a href="{{route('admin.pi.index')}}">Home</a></li> --}}
                     <li class="active">Thay đổi mật khẩu</li>
                 </ol>
             </div>

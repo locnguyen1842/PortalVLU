@@ -1,10 +1,10 @@
 @extends('admin.master')
-@section('title','Xem chi tiết thông tin cá nhân')
+@section('title','Danh sách khối lượng công việc')
 @section('breadcrumb')
 <div class="cm-flex">
     <div class="cm-breadcrumb-container">
         <ol class="breadcrumb">
-            <li><a href="#">Home</a></li>
+            {{-- <li><a href="#">Home</a></li> --}}
             <li class=""><a href="{{route('admin.pi.index')}}">Quản lý thông tin nhân viên</a></li>
              <li class=""><a href="{{route('admin.pi.detail',$pi_id)}}">Chi tiết nhân viên - {{App\PI::find($pi_id)->employee_code}}</a></li>
             <li class="active">Danh sách khối lượng công việc</li>

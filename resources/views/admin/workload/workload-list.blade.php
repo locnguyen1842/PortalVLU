@@ -4,7 +4,7 @@
     <div class="cm-flex">
         <div class="cm-breadcrumb-container">
             <ol class="breadcrumb">
-                <li><a href="#">Home</a></li>
+                {{-- <li><a href="#">Home</a></li> --}}
                 <li class="active">Quản lý khối lượng công việc</li>
             </ol>
         </div>
@@ -113,23 +113,29 @@
 
             </form>
         </div>
-        <div class="col-sm-2"></div>
-        <div class="form-group col-sm-4">
+        <div class="form-group col-sm-6">
 
             <form class="form-horizontal" action="{{route('admin.workload.import')}}" id="workload-import-form"
                 method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="col-sm-12">
                     <label for="import_file" class="control-label col-sm-4">
+                        Import (
                         <a href="{{route('admin.workload.template.download')}}" data-toggle="tooltip" data-placement="top"
-                            title="" data-original-title="Tải file mẫu" class="tooltip-test">
-                            Import
+                            title="" data-original-title="Tải tệp mẫu" class="tooltip-test">
+                            tải tệp mẫu
                         </a>
+                        )
                     </label>
                     <div class="col-sm-8">
+                        <div class="input-group">
+                                <input required type="file" id="excel-import" name="import_file" class="form-control col-sm-4">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" id="btn-import-submit" type="submit">Xem</button>
+                                </span>
+                        </div>
 
-                        <input required type="file" id="excel-import" name="import_file" class="custom-file-input excel-default col-sm-4">
-                        <button type="submit" id="btn-import-submit" class="btn btn-danger col-sm-6">Xác nhận</button>
+                        {{-- <button type="submit" id="btn-import-submit" class="btn btn-danger col-sm-6">Xác nhận</button> --}}
                     </div>
                 </div>
             </form>
@@ -145,7 +151,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title text-uppercase" id="header-modal">
                             <span class="header-import-label"></span>
-                            Năm Học : <span class="session-import-label font-weight-bold"></span>
+                            Năm Học <span class="session-import-label font-weight-bold"></span>
                         </h4>
                         <br>
                         <ul id="myTab" class="nav nav-tabs" role="tablist">
@@ -301,8 +307,8 @@
 
     </div>
     <div class="panel-footer">
+            {{$workloads->links()}}
 
-        {{$workloads->links()}}
     </div>
 </div>
 <script type="text/javascript">
@@ -313,17 +319,6 @@
             var session_id = $('.year_workload').val();
             var search = "";
             window.location.href = url+'?year_workload='+session_id;
-        });
-
-        $('#excel-import').on('change', function(e) {
-            var val = $('#excel-import').val();
-            if (val == '') {
-                $('#excel-import').removeClass('excel-after');
-                $('#excel-import').addClass('excel-default');
-            } else {
-                $('#excel-import').removeClass('excel-default');
-                $('#excel-import').addClass('excel-after');
-            }
         });
 
 
@@ -358,7 +353,7 @@
                  if($.isEmptyObject(datas.error)){
                      $.each(datas,function(index,value){
                         if(index == 0){
-                            $('.header-import-label').text(datas[index][0]);
+                            $('.header-import-label').text('XEM TRƯỚC : '+datas[index][0]);
                         }
                         if(index == 2){
                             session = datas[index][1];
@@ -389,7 +384,6 @@
 
                          $("#btn-workload-yes").on("click", function(){
                              callback(true);
-                             $("#workload-import-modal").modal('hide');
                          });
 
                          $("#btn-workload-no").on("click", function(){
@@ -400,6 +394,8 @@
                      modalConfirm(function(confirm){
 
                          if(confirm){
+                            var test = '<img width="40px" height="40px" src="{{asset('img/loader.gif')}}" alt="Đang tải">';
+                            $('#header-modal').append(test);
                             var append_value = $('input[name="append"]:checked').val();
 
                             var append_input =  $("<input>")
@@ -411,9 +407,6 @@
                             form.append(append_input);
                             form.append(session_input);
                             form.submit();
-
-                           $('.row-table-import-tr').remove();
-                           $('.heading-table-import-tr').remove();
                          }else{
                            $('.row-table-import-tr').remove();
                            $('.heading-table-import-tr').remove();
@@ -437,6 +430,7 @@
             });
 
 
+            // $(this).val('');
         });
 
         $('input[type=radio][name=session_new]').change(function() {

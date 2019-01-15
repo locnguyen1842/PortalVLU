@@ -4,7 +4,7 @@
     <div class="cm-flex">
         <div class="cm-breadcrumb-container">
             <ol class="breadcrumb">
-                <li><a href="#">Home</a></li>
+                {{-- <li><a href="#">Home</a></li> --}}
                 <li><a href="{{route('employee.pi.detail')}}">Thông tin cá nhân</a></li>
                 <li class="active">Khối lượng công việc</li>
             </ol>
