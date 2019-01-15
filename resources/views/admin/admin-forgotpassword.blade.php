@@ -14,7 +14,7 @@
 
 <body class="cm-admin-login">
     <div class="text-center" style="padding-top:30px;">
-        <img src="{{asset('img/logoVL1-admin.png')}}" width="300" height="100">
+        <img src="{{asset('img/logoVL2.png')}}" width="300" height="100">
     </div>
 
     <div class="col-sm-6 col-md-4 col-lg-3" style="margin:40px auto; float:none;">
