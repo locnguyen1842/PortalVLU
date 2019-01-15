@@ -1,11 +1,10 @@
 @extends('admin.master')
 @section('title','Cập nhật bằng cấp')
 @section('breadcrumb')
-    <nav class="cm-navbar cm-navbar-default cm-navbar-slideup">
         <div class="cm-flex">
             <div class="cm-breadcrumb-container">
                 <ol class="breadcrumb">
-                    <li><a href="#">Home</a></li>
+                    {{-- <li><a href="#">Home</a></li> --}}
                     <li class=""><a href="{{route('admin.pi.index')}}">Quản lý thông tin nhân viên</a></li>
                     <li class=""><a href="{{route('admin.pi.detail',$pi->id)}}">Chi tiết thông tin nhân viên</a></li>
                     <li class=""><a href="{{route('admin.pi.degree.index',$pi->id)}}">Danh sách bằng cấp</a></li>
@@ -13,7 +12,6 @@
                 </ol>
             </div>
         </div>
-    </nav>
 @endsection
 
 @section('content')

@@ -1,5 +1,5 @@
 @extends('employee.master')
-@section('title','Cập nhật thông tin bằng cấp')
+@section('title','Thêm thông tin bằng cấp')
 @section('breadcrumb')
         <div class="cm-flex">
             <div class="cm-breadcrumb-container">

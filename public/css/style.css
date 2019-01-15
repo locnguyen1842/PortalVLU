@@ -7,7 +7,7 @@
 }
 
 .custom-file-input::-webkit-file-upload-button {
-  visibility: hidden;
+
 }
 .custom-file-input{
   cursor: pointer;
@@ -50,6 +50,15 @@ body.cm-login{
     background-size: cover;
     background-repeat: no-repeat;
     opacity: 0.9;
+
+}
+
+body.cm-admin-login{
+    background-image: linear-gradient(to bottom, rgba(225, 217, 217, 0.4) 0%,rgba(225, 217, 217, 0.4) 100%),url('../img/cs-3-2.jpg');
+    position: relative;
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 1;
 
 }
 #cm-menu .vlu-logo{
@@ -109,4 +118,8 @@ ol.breadcrumb >.active {
     position: -webkit-sticky;
     position: fixed;
     top: 0;
+}
+.cm-menu-items li.active a {
+    -webkit-box-shadow:inset 8px 0px 0px 0px #d51c28;
+    box-shadow: inset 8px 0px 0px 0px #d51c28;
 }

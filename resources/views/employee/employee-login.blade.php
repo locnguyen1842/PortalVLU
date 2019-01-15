@@ -5,6 +5,8 @@
     <link rel="stylesheet" type="text/css" href="{{asset('css/roboto.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/font-awesome.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
+    <link rel="icon" href="{{asset('img/logoVL-notext2.png')}}">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>Đăng nhập</title>
@@ -13,7 +15,7 @@
 
 <body class="cm-login">
       <div class="text-center" style="padding-top:30px;">
-          <img src="{{asset('img/logoVL.png')}}" width="300" height="100">
+          <img src="{{asset('img/logoVL1.png')}}" width="300" height="100">
       </div>
 
       <div class="col-sm-6 col-md-4 col-lg-3" style="margin:40px auto; float:none;">
@@ -22,7 +24,7 @@
 
               <div class="panel">
                 <div class="panel-heading">
-                  <h4> Đăng nhập</h4>
+                  <h4>CBGV - Đăng nhập</h4>
 
                 </div>
                 <div class="panel-body">

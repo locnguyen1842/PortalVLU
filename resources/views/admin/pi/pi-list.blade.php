@@ -5,7 +5,7 @@
     <div class="cm-flex">
         <div class="cm-breadcrumb-container">
             <ol class="breadcrumb">
-                <li><a href="#">Home</a></li>
+                {{-- <li><a href="#">Home</a></li> --}}
                 <li class="active">Quản lý thông tin nhân viên</li>
             </ol>
         </div>
@@ -52,20 +52,26 @@
                     </div>
                 </div>
             </form>
-            <div class="col-sm-2">
-            </div>
             <form class="form-horizontal" action="{{route('admin.pi.import')}}" id="pi-import-form" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
-                <div class="col-sm-4">
+                <div class="col-sm-6">
                     <label for="import_file" class="control-label col-sm-4">
-                      <a href="{{route('admin.pi.template.download')}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tải file mẫu" class="tooltip-test">
-                          Import
+                            Import (
+                      <a href="{{route('admin.pi.template.download')}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tải tệp mẫu" class="tooltip-test">
+                            tải tệp mẫu
                       </a>
+                            )
                     </label>
                     <div class="col-sm-8">
+                            <div class="input-group">
+                                    <input required type="file" id="excel-import"  name="import_file" class="form-control col-sm-4">
+                                    <span class="input-group-btn">
+                                            <button class="btn btn-primary" id="btn-import-submit" type="submit">Xem</button>
+                                        </span>
 
-                        <input required type="file" id="excel-import"  name="import_file" class="custom-file-input excel-default col-sm-4">
-                          <button type="submit" id="btn-import-submit" class="btn btn-danger col-sm-6">Xác nhận</button>
+                            </div>
+
+
                     </div>
                 </div>
             </form>
@@ -232,16 +238,6 @@
             var search = "";
             window.location.href = url;
         });
-        $('#excel-import').on('change', function(e) {
-            var val = $('#excel-import').val();
-            if (val == '') {
-                $('#excel-import').removeClass('excel-after');
-                $('#excel-import').addClass('excel-default');
-            } else {
-                $('#excel-import').removeClass('excel-default');
-                $('#excel-import').addClass('excel-after');
-            }
-        });
 
         $(document).ajaxStart(function(){
             $(".waiting").css("display", "block");
@@ -275,7 +271,8 @@
                 $('.row-table-import-tr-1').remove();
                 $('.heading-table-import-tr-1').remove();
                  if($.isEmptyObject(datas.error)){
-                     $('#header-modal').text('Thông tin nhân viên');
+                     $('#header-modal').text('Xem Trước : Thông tin nhân viên');
+
                      console.log(datas);
                      $.each(datas[0],function(index,value){
 
@@ -321,7 +318,6 @@
 
                          $("#btn-pi-yes").on("click", function(){
                              callback(true);
-                             $("#pi-import-modal").modal('hide');
                          });
 
                          $("#btn-pi-no").on("click", function(){
@@ -331,12 +327,10 @@
                      };
                      modalConfirm(function(confirm){
                          if(confirm){
-                           form.submit();
-                           $('#header-modal').empty();
-                           $('.row-table-import-tr').remove();
-                           $('.heading-table-import-tr').remove();
-                           $('.row-table-import-tr-1').remove();
-                           $('.heading-table-import-tr-1').remove();
+                            var test = '<img width="40px" height="40px" src="{{asset('img/loader.gif')}}" alt="Đang tải">';
+                            $('#header-modal').append(test);
+
+                            form.submit();
                          }else{
 
                            $('#header-modal').empty();
