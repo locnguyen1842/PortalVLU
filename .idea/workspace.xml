@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/app/Http/Controllers/WorkloadController.php" line="207" mnemonic="9" />
+    <bookmark url="file://$PROJECT_DIR$/app/Http/Controllers/WorkloadController.php" line="144" mnemonic="9" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5d9a63d6-5181-4929-8b97-d8be4833b406" name="Default Changelist" comment="" />
@@ -18,8 +18,8 @@
     <session id="-326970809">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="30" />
-          <entry key="project.open.time.10" value="4" />
+          <entry key="project.closed" value="31" />
+          <entry key="project.open.time.10" value="5" />
           <entry key="project.open.time.11" value="2" />
           <entry key="project.open.time.12" value="2" />
           <entry key="project.open.time.13" value="2" />
@@ -34,17 +34,17 @@
           <entry key="project.open.time.7" value="1" />
           <entry key="project.open.time.8" value="5" />
           <entry key="project.open.time.9" value="3" />
-          <entry key="project.opened" value="31" />
+          <entry key="project.opened" value="32" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="css" value="1" />
+          <entry key="css" value="9" />
           <entry key="env" value="2" />
           <entry key="example" value="1" />
-          <entry key="php" value="333" />
+          <entry key="php" value="335" />
           <entry key="phpunit" value="3" />
-          <entry key="rnc" value="1" />
+          <entry key="rnc" value="2" />
           <entry key="xml" value="1" />
         </counts>
       </usages-collector>
@@ -52,26 +52,26 @@
         <counts>
           <entry key=".env file" value="3" />
           <entry key="Bash" value="3" />
-          <entry key="Blade" value="185" />
-          <entry key="CSS" value="1" />
-          <entry key="PHP" value="148" />
-          <entry key="RNG Compact" value="1" />
+          <entry key="Blade" value="186" />
+          <entry key="CSS" value="9" />
+          <entry key="PHP" value="149" />
+          <entry key="RNG Compact" value="2" />
           <entry key="XML" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="css" value="28" />
+          <entry key="css" value="29" />
           <entry key="env" value="1" />
-          <entry key="php" value="17279" />
+          <entry key="php" value="17401" />
           <entry key="txt" value="10" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key=".env file" value="1" />
-          <entry key="Blade" value="7622" />
-          <entry key="CSS" value="28" />
+          <entry key="Blade" value="7744" />
+          <entry key="CSS" value="29" />
           <entry key="PHP" value="9657" />
           <entry key="PLAIN_TEXT" value="10" />
         </counts>
@@ -81,37 +81,57 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/WorkloadController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="173" column="77" selection-start-line="173" selection-start-column="77" selection-end-line="173" selection-end-column="77" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PIController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="620">
-              <caret line="191" column="12" lean-forward="true" selection-start-line="191" selection-start-column="12" selection-end-line="191" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/admin/workload/workload-add.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="188">
-              <caret line="58" column="90" selection-start-line="58" selection-start-column="79" selection-end-line="58" selection-end-column="90" />
+            <state relative-caret-position="617">
+              <caret line="212" column="42" selection-start-line="212" selection-start-column="42" selection-end-line="212" selection-end-column="42" />
               <folding>
-                <element signature="e#700#724#0#HTML" expanded="true" />
-                <element signature="e#5522#5529#1#HTML" expanded="true" />
+                <element signature="e#1299#1317#0#HTML" expanded="true" />
+                <element signature="e#1839#1857#0#HTML" expanded="true" />
+                <element signature="e#3605#3623#0#HTML" expanded="true" />
+                <element signature="e#4298#4316#0#HTML" expanded="true" />
+                <element signature="e#5330#11839#0#HTML" />
+                <element signature="e#6260#6278#0#HTML" expanded="true" />
+                <element signature="e#6745#6763#0#HTML" expanded="true" />
+                <element signature="e#7332#7350#0#HTML" expanded="true" />
+                <element signature="e#7867#7885#0#HTML" expanded="true" />
+                <element signature="e#8482#8500#0#HTML" expanded="true" />
+                <element signature="e#9011#9029#0#HTML" expanded="true" />
+                <element signature="e#9648#9666#0#HTML" expanded="true" />
+                <element signature="e#10154#10172#0#HTML" expanded="true" />
+                <element signature="e#10765#10783#0#HTML" expanded="true" />
+                <element signature="e#12209#12227#0#HTML" expanded="true" />
+                <element signature="e#13059#13077#0#HTML" expanded="true" />
+                <element signature="e#13078#13096#0#HTML" expanded="true" />
+                <element signature="e#13496#13514#0#HTML" expanded="true" />
+                <element signature="e#14034#14052#0#HTML" expanded="true" />
+                <element signature="e#14463#14481#0#HTML" expanded="true" />
+                <element signature="e#14997#15015#0#HTML" expanded="true" />
+                <element signature="e#15453#15471#0#HTML" expanded="true" />
+                <element signature="e#16005#16023#0#HTML" expanded="true" />
+                <element signature="e#16439#16457#0#HTML" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/WorkloadController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="520">
+              <caret line="179" column="77" selection-start-line="179" selection-start-column="77" selection-end-line="179" selection-end-column="77" />
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+      </list>
+    </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -156,7 +176,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/resources/views/layouts/Error.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/pi/pi-update.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/pi/pi-detail.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/pi/pi-update.blade.php" />
@@ -201,12 +220,13 @@
         <option value="$PROJECT_DIR$/resources/views/admin/workload/workload-list.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/employee/workload/employee-workload-list.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/workload/workload-update.blade.php" />
-        <option value="$PROJECT_DIR$/public/css/style.css" />
         <option value="$PROJECT_DIR$/resources/views/admin/workload/workload-add-detail.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/pi/pi-workload-list.blade.php" />
         <option value="$PROJECT_DIR$/routes/web.php" />
-        <option value="$PROJECT_DIR$/resources/views/admin/workload/workload-add.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/WorkloadController.php" />
+        <option value="$PROJECT_DIR$/public/css/required.css" />
+        <option value="$PROJECT_DIR$/public/css/style.css" />
+        <option value="$PROJECT_DIR$/resources/views/admin/workload/workload-add.blade.php" />
       </list>
     </option>
   </component>
@@ -341,6 +361,17 @@
             <path>
               <item name="PortalVLU" type="b2602c69:ProjectViewProjectNode" />
               <item name="PortalVLU" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PortalVLU" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PortalVLU" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PortalVLU" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PortalVLU" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -417,6 +448,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
@@ -511,18 +543,19 @@
       <workItem from="1547357135651" duration="17039000" />
       <workItem from="1547397078935" duration="44000" />
       <workItem from="1547398586372" duration="7000" />
-      <workItem from="1547452313824" duration="8764000" />
+      <workItem from="1547452313824" duration="9966000" />
+      <workItem from="1547544605524" duration="2871000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="160901000" />
+    <option name="totallyTimeSpent" value="164974000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21006711" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21275167" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -571,35 +604,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/layouts/left-sidebar.blade.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/layouts/header-menu.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="423">
-          <caret line="47" column="55" selection-start-line="47" selection-start-column="55" selection-end-line="47" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/AdminController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/pi/pi-changepass.blade.php" />
-    <entry file="file://$PROJECT_DIR$/tests/Unit/updatetest.php" />
-    <entry file="file://$PROJECT_DIR$/config/database.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-840" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/phpunit.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-143" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -791,13 +795,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="109" column="12" selection-start-line="109" selection-start-column="12" selection-end-line="109" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/workload/workload-update.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="500">
@@ -840,17 +837,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/workload/workload-add.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="58" column="90" selection-start-line="58" selection-start-column="79" selection-end-line="58" selection-end-column="90" />
-          <folding>
-            <element signature="e#700#724#0#HTML" expanded="true" />
-            <element signature="e#5522#5529#1#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PIController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="620">
@@ -858,10 +844,81 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/phpstorm.jar!/resources/html5-schema/html5/web-forms.rnc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="24" column="18" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/app.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/c3.min.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/WorkloadController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="173" column="77" selection-start-line="173" selection-start-column="77" selection-end-line="173" selection-end-column="77" />
+        <state relative-caret-position="520">
+          <caret line="179" column="77" selection-start-line="179" selection-start-column="77" selection-end-line="179" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/roboto.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/small-n-flat.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/bootstrap-clearmin.min.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7080" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/required.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="557">
+          <caret line="113" column="16" lean-forward="true" selection-start-line="113" selection-start-column="16" selection-end-line="113" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/workload/workload-add.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="617">
+          <caret line="212" column="42" selection-start-line="212" selection-start-column="42" selection-end-line="212" selection-end-column="42" />
+          <folding>
+            <element signature="e#1299#1317#0#HTML" expanded="true" />
+            <element signature="e#1839#1857#0#HTML" expanded="true" />
+            <element signature="e#3605#3623#0#HTML" expanded="true" />
+            <element signature="e#4298#4316#0#HTML" expanded="true" />
+            <element signature="e#5330#11839#0#HTML" />
+            <element signature="e#6260#6278#0#HTML" expanded="true" />
+            <element signature="e#6745#6763#0#HTML" expanded="true" />
+            <element signature="e#7332#7350#0#HTML" expanded="true" />
+            <element signature="e#7867#7885#0#HTML" expanded="true" />
+            <element signature="e#8482#8500#0#HTML" expanded="true" />
+            <element signature="e#9011#9029#0#HTML" expanded="true" />
+            <element signature="e#9648#9666#0#HTML" expanded="true" />
+            <element signature="e#10154#10172#0#HTML" expanded="true" />
+            <element signature="e#10765#10783#0#HTML" expanded="true" />
+            <element signature="e#12209#12227#0#HTML" expanded="true" />
+            <element signature="e#13059#13077#0#HTML" expanded="true" />
+            <element signature="e#13078#13096#0#HTML" expanded="true" />
+            <element signature="e#13496#13514#0#HTML" expanded="true" />
+            <element signature="e#14034#14052#0#HTML" expanded="true" />
+            <element signature="e#14463#14481#0#HTML" expanded="true" />
+            <element signature="e#14997#15015#0#HTML" expanded="true" />
+            <element signature="e#15453#15471#0#HTML" expanded="true" />
+            <element signature="e#16005#16023#0#HTML" expanded="true" />
+            <element signature="e#16439#16457#0#HTML" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
