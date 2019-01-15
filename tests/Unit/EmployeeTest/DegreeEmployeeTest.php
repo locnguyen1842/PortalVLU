@@ -14,6 +14,7 @@ use App\DegreeDetail;
 use App\Admin;
 use Hash;
 use App\Employee;
+
 class DegreeEmployeeTest extends TestCase
 {
     use DatabaseTransactions;
@@ -36,37 +37,33 @@ class DegreeEmployeeTest extends TestCase
         ];
         //
         $pi_id = 1;
-        $addde = $this->post('/pi-degree-create',$degree);
+        $addde = $this->post('/pi-degree-create', $degree);
 
-        $addde->assertSessionHas('message','Thêm thành công');
-
+        $addde->assertSessionHas('message', 'Thêm thành công');
     }
     public function test_Degree_Update_Admin()
     {
         $employee = Employee::where('username', 'T155444')->first();
         $this->actingAs($employee, 'employee');
-
         $degree = [
             'date_of_issue' => '1999-02-03',
             'place_of_issue' =>'Mot noi rat xa xoi',
             'degree' =>1,
-            'specialized'=> 1,
-
+            'specialized'=> 2,
         ];
         //
-
-        $addde = $this->post('/pi-updatedetaildegree/'.$employee->pi->degreedetails->first()->id,$degree);
-        $addde->assertSessionHas('message','Cập nhật thành công');
-
+        $addde = $this->post('/pi-update-degree-detail/'.$employee->pi->degreedetails->first()->id, $degree);
+        $addde->assertSessionHas('message', 'Cập nhật thành công');
     }
 
-    public function test_delete_degreedetail(){
+    public function test_delete_degreedetail()
+    {
         $employee = Employee::where('username', 'T155444')->first();
         $this->actingAs($employee, 'employee');
-        $pi = PI::find(1);
+        $pi = $employee->pi;
+        $degreedetail_id = $pi->degreedetails->first()->id;
+        $response = $this->get('/pi-degree-delete/'.$degreedetail_id);
+        $response->assertSessionHas('message', 'Xóa thành công');
 
-        $response = $this->get('/pi-degree-delete/'.$pi->degreedetails->first()->id);
-        $response->assertSessionHas('message','Xóa thành công');
     }
-
 }

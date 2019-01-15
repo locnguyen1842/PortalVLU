@@ -246,7 +246,7 @@ class EmployeeController extends Controller
     }
     public function delete($degreedetail_id){
 
-        $degree = DegreeDetail::find($b);
+        $degree = DegreeDetail::find($degreedetail_id);
         $employee = Auth::guard('employee')->user();
         if($this->checkIsOwnerCanUpdate($employee,$degree)){
             $degree = DegreeDetail::find($degreedetail_id);

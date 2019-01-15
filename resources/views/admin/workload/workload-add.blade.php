@@ -33,29 +33,16 @@
 
                         <div class="form-group">
                             <div class="col-sm-6">
-                                <label>Mã nhân viên</label>
+                                <label>Mã nhân viên <span style="color: red">*</span> </label>
                                 <input  required {{$pi != null ? 'readonly' : ''}} type="text" class="form-control" name="employee_code"
                                     placeholder="Nhập mã nhân viên" value="{{$pi != null ? $pi->employee_code : old('employee_code')}}">
                             </div>
-                            <div class="col-sm-6">
-                                <label>Khoa</label>
-                                @if($pi != null)
-                                <input  required readonly type="text" class="form-control" name="unit_id" value="{{$pi != null ? $pi->unit->name : ''}}">
-                                @else
 
-                                <select  required class="form-control" name="unit_id">
-                                    <option value="">Chọn Khoa</option>
-                                    @foreach($unit as $uni)
-                                    <option {{old('unit_id') == $uni->id ? 'selected' : ''}} value="{{$uni->id}}">{{$uni->name}}</option>
-                                    @endforeach
-                                </select>
-                                @endif
-                            </div>
 
                         </div>
                         <div class="form-group">
                             <div class="col-sm-6">
-                                <label>Năm học</label>
+                                <label>Năm học <span style="color: red">*</span></label>
                                 <div class="radio">
                                     <label class="col-sm-6">
                                         <input {{old('session_new') == '0' ? 'checked' : ''}} checked required type="radio"
@@ -68,7 +55,7 @@
                                 </div>
                             </div>
                             <div class="session_list col-sm-6">
-                                <label>Năm học</label>
+                                <label>Năm học <span style="color: red">*</span></label>
                                 <select class="form-control" name="session_id">
                                     <option value="">Chọn Năm Học</option>
                                     @foreach($ws as $session)
@@ -78,7 +65,7 @@
                             </div>
 
                             <div class="session_new col-sm-6 hide">
-                                <label>Tạo mới năm học</label>
+                                <label>Tạo mới năm học <span style="color: red">*</span></label>
                                 <div class="form-horizontal">
                                     <div class="col-sm-6 form-horizontal-none-pl">
                                         <input type="text" class="form-control" name="start_year" placeholder="Nhập năm bắt đầu"
@@ -117,24 +104,24 @@
                                         <div class="panel-body">
                                             <div class="form-group">
                                                 <div class="col-sm-6">
-                                                    <label>Mã Môn Học</label>
+                                                    <label>Mã Môn Học <span style="color: red">*</span></label>
                                                     <input required type="text" class="form-control" name="subject_code[]" placeholder="Nhập mã môn học"
                                                         value="{{old('subject_code.'.$i)}}">
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <label>Tên Môn Học</label>
+                                                    <label>Tên Môn Học <span style="color: red">*</span></label>
                                                     <input required type="text" maxlength="60" class="form-control" name="subject_name[]"
                                                         placeholder="Nhập Tên môn học" value="{{old('subject_name.'.$i)}}">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-sm-6">
-                                                    <label>Số tiết học</label>
+                                                    <label>Số tiết học <span style="color: red">*</span></label>
                                                     <input required type="text" class="form-control" name="number_of_lessons[]"
                                                         placeholder="Nhập số tiết học trong năm" value="{{old('number_of_lessons.'.$i)}}">
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <label>Mã Lớp</label>
+                                                    <label>Mã Lớp <span style="color: red">*</span></label>
                                                     <input required type="text" maxlength="100" class="form-control" name="class_code[]"
                                                         placeholder="Nhập mã Lớp" value="{{old('class_code.'.$i)}}">
                                                 </div>
@@ -142,12 +129,12 @@
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-sm-6">
-                                                    <label>Số Sinh Viên</label>
+                                                    <label>Số Sinh Viên <span style="color: red">*</span></label>
                                                     <input required type="text" maxlength="100" class="form-control" name="number_of_students[]"
                                                         placeholder="Nhập số sinh viên" value="{{old('number_of_students.'.$i)}}">
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <label>Tổng Khối Lượng công việc</label>
+                                                    <label>Tổng Khối Lượng công việc <span style="color: red">*</span></label>
                                                     <input required type="text" maxlength="100" class="form-control" name="total_workload[]"
                                                         placeholder="Nhập địa chỉ liên lạc" value="{{old('total_workload.'.$i)}}">
                                                 </div>
@@ -155,12 +142,12 @@
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-sm-6">
-                                                    <label>Số Giờ Lý Thuyết</label>
+                                                    <label>Số Giờ Lý Thuyết <span style="color: red">*</span></label>
                                                     <input required type="text" class="form-control" name="theoretical_hours[]"
                                                         placeholder="Nhập số giờ lý thuyết" value="{{old('theoretical_hours.'.$i)}}">
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <label>Số Giờ Thực Hành</label>
+                                                    <label>Số Giờ Thực Hành <span style="color: red">*</span></label>
                                                     <input required type="text" class="form-control" name="practice_hours[]" placeholder="Nhập số giờ thực hành"
                                                         value="{{old('practice_hours.'.$i)}}">
                                                 </div>
@@ -168,7 +155,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-sm-6">
-                                                    <label>Học kỳ </label>
+                                                    <label>Học kỳ <span style="color: red">*</span></label>
                                                     <select required name="semester[]" class="form-control">
                                                         <div class="session_list col-sm-6">
                                                             <option value="">Chọn Học Kì</option>
@@ -202,24 +189,48 @@
                                 <div class="panel-body">
                                     <div class="form-group">
                                         <div class="col-sm-6">
-                                            <label>Mã Môn Học</label>
+                                            <label>Học kỳ <span style="color: red">*</span></label>
+                                            <select required name="semester[]" class="form-control">
+                                                <div class="session_list col-sm-6">
+                                                    <option value="">Chọn Học Kì</option>
+                                                    @foreach($se as $semester)
+                                                        <option value="{{$semester->id}}">{{$semester->name}}</option>
+                                                    @endforeach
+                                                </div>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label>Khoa <span style="color: red">*</span></label>
+
+                                            <select  required class="form-control" name="unit_id">
+                                                <option value="">Chọn Khoa</option>
+                                                @foreach($unit as $uni)
+                                                    <option  value="{{$uni->id}}">{{$uni->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-6">
+                                            <label>Mã Môn Học <span style="color: red">*</span></label>
                                             <input required type="text" class="form-control" name="subject_code[]" placeholder="Nhập mã môn học"
                                                 value="">
                                         </div>
                                         <div class="col-sm-6">
-                                            <label>Tên Môn Học</label>
+                                            <label>Tên Môn Học <span style="color: red">*</span></label>
                                             <input required type="text" maxlength="60" class="form-control" name="subject_name[]"
                                                 placeholder="Nhập Tên môn học" value="">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-6">
-                                            <label>Số tiết học</label>
+                                            <label>Số tiết học <span style="color: red">*</span></label>
                                             <input required type="text" class="form-control" name="number_of_lessons[]" placeholder="Nhập số tiết học trong năm"
                                                 value="">
                                         </div>
                                         <div class="col-sm-6">
-                                            <label>Mã Lớp</label>
+                                            <label>Mã Lớp <span style="color: red">*</span></label>
                                             <input required type="text" maxlength="100" class="form-control" name="class_code[]"
                                                 placeholder="Nhập mã Lớp" value="">
                                         </div>
@@ -227,12 +238,12 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-6">
-                                            <label>Số Sinh Viên</label>
+                                            <label>Số Sinh Viên <span style="color: red">*</span></label>
                                             <input required type="text" maxlength="100" class="form-control" name="number_of_students[]"
                                                 placeholder="Nhập số sinh viên" value="">
                                         </div>
                                         <div class="col-sm-6">
-                                            <label>Tổng Khối Lượng công việc</label>
+                                            <label>Tổng Khối Lượng công việc <span style="color: red">*</span></label>
                                             <input required type="text" maxlength="100" class="form-control" name="total_workload[]"
                                                 placeholder="Nhập địa chỉ liên lạc" value="">
                                         </div>
@@ -240,33 +251,23 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-6">
-                                            <label>Số Giờ Lý Thuyết</label>
+                                            <label>Số Giờ Lý Thuyết <span style="color: red">*</span></label>
                                             <input required type="text" class="form-control" name="theoretical_hours[]"
                                                 placeholder="Nhập số giờ lý thuyết" value="">
                                         </div>
                                         <div class="col-sm-6">
-                                            <label>Số Giờ Thực Hành</label>
+                                            <label>Số Giờ Thực Hành <span style="color: red">*</span></label>
                                             <input required type="text" class="form-control" name="practice_hours[]" placeholder="Nhập số giờ thực hành"
                                                 value="">
                                         </div>
 
                                     </div>
+
                                     <div class="form-group">
-                                        <div class="col-sm-6">
-                                            <label>Học kỳ </label>
-                                            <select required name="semester[]" class="form-control">
-                                                <div class="session_list col-sm-6">
-                                                    <option value="">Chọn Học Kì</option>
-                                                    @foreach($se as $semester)
-                                                    <option value="{{$semester->id}}">{{$semester->name}}</option>
-                                                    @endforeach
-                                                </div>
-                                            </select>
-                                        </div>
                                         <div class="col-sm-6">
                                             <label>Ghi Chú</label>
                                             <input type="text" class="form-control" name="note[]" placeholder="Nhập Ghi chú nếu có"
-                                                value="">
+                                                   value="">
                                         </div>
                                     </div>
                                 </div>

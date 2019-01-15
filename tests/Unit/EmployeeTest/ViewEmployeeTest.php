@@ -21,6 +21,8 @@ class ViewEmployeeTest extends TestCase
     {
         $employee = Employee::where('username', 'T155444')->first();
         $this->actingAs($employee, 'employee');
+        $pi = $employee->pi;
+        return $pi;
     }
     public function test_view_Detail_Employee()
     {
@@ -58,9 +60,9 @@ class ViewEmployeeTest extends TestCase
     }
     public function test_view_Update_Degree_Employee()
     {
-        $this->login_employee();
-        $degreedetail_id = DegreeDetail::first()->id;
-        $response = $this->get('/pi-updatedetaildegree/'.$degreedetail_id);
+        $pi = $this->login_employee();
+        $degreedetail_id = $pi->degreedetails->first()->id;
+        $response = $this->get('/pi-update-degree-detail/'.$degreedetail_id);
         $this->assertEquals(200, $response->status());
         $response->assertViewHas('degrees');
         $response->assertViewHas('industries');
@@ -83,7 +85,30 @@ class ViewEmployeeTest extends TestCase
         $response = $this->get('/login');
         $this->assertEquals(200, $response->status());
     }
+    public function test_view_Workload_List_Employee()
+    {
+      $this->login_employee();
+      $response = $this->get('/workload-list');
+      $this->assertEquals(200, $response->status());
+      $response->assertViewHas('semester_filter');
+      $response->assertViewHas('semester');
+      $response->assertViewHas('workload_session');
+      $response->assertViewHas('workload_session_current');
+      $response->assertViewHas('workloads');
+      $response->assertViewHas('year_workload');
+      // $response->assertViewHas('workload');
+      $response->assertViewHas('pi');
+    }
 
+    public function test_view_Workload_Details_Employee()
+    {
+      $pi= $this->login_employee();
+
+      $id_workload = $pi->workloads->first()->id;
+      $response = $this->get('/workload-details/'.$id_workload);
+      $response->assertViewHas('workload');
+      // $response->assertViewHas('pi');
+    }
     // public function data()
     // {
     //     $data = [
