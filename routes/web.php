@@ -81,6 +81,8 @@ Route::prefix('admin')->group(function () {
         Route::post('/workload-import', 'WorkloadController@import')->name('admin.workload.import');
         Route::post('/workload-get-data-import', 'WorkloadController@getdataimport')->name('admin.workload.import.data');
         Route::get('/workload-download-template', 'WorkloadController@downloadtemplate')->name('admin.workload.template.download');
+        // auto complete employee code
+        Route::get('/fetch-employee-code', 'WorkloadController@fetch')->name('admin.workload.fetch.employee_code');
 
     });
 });

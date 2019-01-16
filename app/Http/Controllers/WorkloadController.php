@@ -470,6 +470,12 @@ class WorkloadController extends Controller
         return response()->download($file, 'Template Job Workload.xlsx', $headers);
     }
 
+    public function fetch(){
+        $query = \Request::get('query');
+        $pi = PI::select('employee_code','full_name')->where('employee_code','like','%'.$query.'%')->get();
+        return response()->json($pi);
+    }
+
     public function checkIsOwnerPermisson($current_user, $workload)
     {
         if ($current_user->can('access', $workload)) {

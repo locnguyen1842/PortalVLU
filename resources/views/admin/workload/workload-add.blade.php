@@ -34,8 +34,8 @@
                         <div class="form-group">
                             <div class="col-sm-6">
                                 <label>Mã nhân viên <span style="color: red">*</span> </label>
-                                <input  required {{$pi != null ? 'readonly' : ''}} type="text" class="form-control" name="employee_code"
-                                    placeholder="Nhập mã nhân viên" value="{{$pi != null ? $pi->employee_code : old('employee_code')}}">
+                                <input id="employee_code" required {{$pi != null ? 'readonly' : ''}} type="text" class="form-control" name="employee_code"
+                                   autocomplete="off" placeholder="Nhập mã nhân viên" value="{{$pi != null ? $pi->employee_code : old('employee_code')}}">
                             </div>
 
 
@@ -298,10 +298,46 @@
 </div>
 
     <script src="{{asset('js/scrollfix.js')}}"></script>
+    <script src="{{asset('js/typeahead.bundle.min.js')}}"></script>
     <script>
 
         $(document).ready(function(){
+            var engine = new Bloodhound({
+                identify : function(obj) { return  obj.employee_code; },
+                limit: 5,
+                remote: {
+                    url: '{{route('admin.workload.fetch.employee_code')}}'+'?query=%QUERY%',
+                    wildcard: '%QUERY%'
+                },
+                datumTokenizer: Bloodhound.tokenizers.whitespace,
+                queryTokenizer: Bloodhound.tokenizers.whitespace
+            });
+            $('#employee_code').typeahead({
+                hint:true,
+                highlight:true,
+                minLength:4,
 
+            },[
+                {
+                    source: engine.ttAdapter(),
+                    name: 'employee_code',
+                    display: function(data) {
+
+                        return data.employee_code;
+                    },
+                    templates: {
+                        empty: [
+                            '<div class="list-group search-results-dropdown"><div class="list-group-item">Không tìm thấy mã nhân viên này</div></div>'
+                        ],
+                        header: [
+                            '<div class="list-group search-results-dropdown"></div>'
+                        ],
+                        suggestion: function (data) {
+                            return '<div style="font-weight:normal; margin-top:-10px ! important;" class="list-group-item">' + data.employee_code +' - '+ data.full_name + '</div></div>';
+                        }
+                    }
+                }
+            ]);
             if ($('input[type=radio][name=session_new]:checked').val() == 0) {
                 $("select[name=session_id]").prop("required", true);
                 $("input[name=start_year]").prop("required", false);
