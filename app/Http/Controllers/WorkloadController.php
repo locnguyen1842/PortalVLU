@@ -128,7 +128,7 @@ class WorkloadController extends Controller
         $value_start_year = \Request::get('start_year');
         $validator=Validator::make($request->all(),
             [
-                'employee_code'=> 'required|min:4|max:60',
+                'employee_code'=> 'required|min:4|max:60|exists:personalinformations',
                 'session_id'=> 'required_if:session_new,==,0',
                 'session_new'=> 'required',
                 'start_year'=> 'required_if:session_new,==,1|integer|nullable|unique:workloadsessions,start_year',
@@ -156,6 +156,7 @@ class WorkloadController extends Controller
             ],
             [
                 'employee_code.required'=> 'Mã giảng viên không được bỏ trống',
+                'employee_code.exists'=> 'Mã giảng viên không tồn tại',
                 'session_id.required_if' =>'Năm học không được bỏ trống',
                 'session_new.required' =>'Năm học không được bỏ trống',
                 'start_year.required_if' =>'Năm học bắt đầu không được bỏ trống',

@@ -18,7 +18,7 @@
     <session id="-326970809">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="32" />
+          <entry key="project.closed" value="33" />
           <entry key="project.open.time.10" value="5" />
           <entry key="project.open.time.11" value="2" />
           <entry key="project.open.time.12" value="2" />
@@ -42,7 +42,7 @@
           <entry key="css" value="9" />
           <entry key="env" value="2" />
           <entry key="example" value="1" />
-          <entry key="php" value="335" />
+          <entry key="php" value="342" />
           <entry key="phpunit" value="3" />
           <entry key="rnc" value="2" />
           <entry key="xml" value="1" />
@@ -52,9 +52,9 @@
         <counts>
           <entry key=".env file" value="3" />
           <entry key="Bash" value="3" />
-          <entry key="Blade" value="186" />
+          <entry key="Blade" value="188" />
           <entry key="CSS" value="9" />
-          <entry key="PHP" value="149" />
+          <entry key="PHP" value="154" />
           <entry key="RNG Compact" value="2" />
           <entry key="XML" value="1" />
         </counts>
@@ -63,27 +63,34 @@
         <counts>
           <entry key="css" value="29" />
           <entry key="env" value="1" />
-          <entry key="php" value="17447" />
-          <entry key="txt" value="10" />
+          <entry key="php" value="17679" />
+          <entry key="txt" value="25" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key=".env file" value="1" />
-          <entry key="Blade" value="7790" />
+          <entry key="Blade" value="7829" />
           <entry key="CSS" value="29" />
-          <entry key="PHP" value="9657" />
-          <entry key="PLAIN_TEXT" value="10" />
+          <entry key="PHP" value="9850" />
+          <entry key="PLAIN_TEXT" value="25" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.php.new.test">
+        <counts>
+          <entry key="source.empty" value="2" />
+          <entry key="with.framework.PHPUnit.without.selected.methods" value="2" />
+          <entry key="without.target.element" value="2" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/admin/workload/workload-add.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
+            <state relative-caret-position="4340">
               <caret line="247" column="91" selection-start-line="247" selection-start-column="91" selection-end-line="247" selection-end-column="91" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
@@ -95,8 +102,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/WorkloadController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3360">
-              <caret line="179" column="77" selection-start-line="179" selection-start-column="77" selection-end-line="179" selection-end-column="77" />
+            <state relative-caret-position="3063">
+              <caret line="282" column="70" lean-forward="true" selection-start-line="282" selection-start-column="70" selection-end-line="282" selection-end-column="70" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tests/Unit/AdminTest/AddworkloadTest.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="5">
+              <caret line="28" column="19" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
+              <folding>
+                <element signature="e#120#139#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -153,7 +172,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/resources/views/pi/pi-update.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/pi/pi-detail.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/pi/pi-update.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/DegreeController.php" />
@@ -194,16 +212,17 @@
         <option value="$PROJECT_DIR$/resources/views/employee/workload/employee-workload-add.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/employee/layouts/left-sidebar.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/employee/pi/pi-detail.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/admin/workload/workload-list.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/employee/workload/employee-workload-list.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/workload/workload-update.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/workload/workload-add-detail.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/pi/pi-workload-list.blade.php" />
         <option value="$PROJECT_DIR$/routes/web.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/WorkloadController.php" />
         <option value="$PROJECT_DIR$/public/css/required.css" />
         <option value="$PROJECT_DIR$/public/css/style.css" />
         <option value="$PROJECT_DIR$/resources/views/admin/workload/workload-add.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/workload/workload-list.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/WorkloadController.php" />
+        <option value="$PROJECT_DIR$/tests/Unit/AdminTest/AddworkloadTest.php" />
       </list>
     </option>
   </component>
@@ -417,6 +436,31 @@
               <item name="PortalVLU" type="462c0819:PsiDirectoryNode" />
               <item name="routes" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="PortalVLU" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PortalVLU" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PortalVLU" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PortalVLU" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+              <item name="Unit" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PortalVLU" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PortalVLU" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+              <item name="Unit" type="462c0819:PsiDirectoryNode" />
+              <item name="AdminTest" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PortalVLU" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PortalVLU" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+              <item name="Unit" type="462c0819:PsiDirectoryNode" />
+              <item name="EmployeeTest" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -425,6 +469,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.jetbrains.php.phpunit.codeGeneration.PhpNewTestDialog.defaultLibrary" value="PHPUnit" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -522,18 +567,17 @@
       <workItem from="1547398586372" duration="7000" />
       <workItem from="1547452313824" duration="9966000" />
       <workItem from="1547544605524" duration="3086000" />
-      <workItem from="1547801558110" duration="64000" />
+      <workItem from="1547801558110" duration="8199000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="165253000" />
+    <option name="totallyTimeSpent" value="173388000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21543624" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21543624" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -546,7 +590,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49932885" weight="0.32907802" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49932885" visible="true" weight="0.32907802" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50067115" side_tool="true" weight="0.32907802" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -582,16 +626,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/TestCase.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="4" column="59" lean-forward="true" selection-start-line="4" selection-start-column="59" selection-end-line="4" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/employee/layouts/Error.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
@@ -644,13 +678,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="145">
           <caret line="31" column="22" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/Unit/AdminTest/PITest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4780">
-          <caret line="249" selection-start-line="249" selection-end-line="249" />
         </state>
       </provider>
     </entry>
@@ -752,13 +779,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/employee/workload/employee-workload-list.blade.php" />
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/workload/workload-list.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-280">
-          <caret line="243" selection-start-line="243" selection-end-line="243" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/pi/pi-update.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -815,13 +835,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PIController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="620">
-          <caret line="191" column="12" lean-forward="true" selection-start-line="191" selection-start-column="12" selection-end-line="191" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/phpstorm.jar!/resources/html5-schema/html5/web-forms.rnc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
@@ -854,9 +867,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/tests/Unit/AdminTest/ATest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/Unit/AdminTest/PITest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="180" column="60" lean-forward="true" selection-start-line="180" selection-start-column="6" selection-end-line="180" selection-end-column="60" />
+          <folding>
+            <element signature="e#30#49#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PIController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="188" column="49" lean-forward="true" selection-start-line="188" selection-start-column="49" selection-end-line="188" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/workload/workload-list.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1760">
+          <caret line="285" column="115" selection-start-line="285" selection-start-column="115" selection-end-line="285" selection-end-column="115" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/workload/workload-add.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
+        <state relative-caret-position="4340">
           <caret line="247" column="91" selection-start-line="247" selection-start-column="91" selection-end-line="247" selection-end-column="91" />
           <folding>
             <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
@@ -866,8 +910,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/WorkloadController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3360">
-          <caret line="179" column="77" selection-start-line="179" selection-start-column="77" selection-end-line="179" selection-end-column="77" />
+        <state relative-caret-position="3063">
+          <caret line="282" column="70" lean-forward="true" selection-start-line="282" selection-start-column="70" selection-end-line="282" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/Unit/AdminTest/AddworkloadTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5">
+          <caret line="28" column="19" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
+          <folding>
+            <element signature="e#120#139#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
