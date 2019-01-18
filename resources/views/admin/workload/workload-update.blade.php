@@ -25,11 +25,11 @@
             {{csrf_field()}}
             <div class="form-group">
                 <div class="col-sm-6">
-                    <label>Mã nhân viên</label>
+                    <label>Mã nhân viên <span style="color: red">*</span> </label>
                     <input type="text" readonly class="form-control" name="Mã nhân viên" value="{{$pi->employee_code}}">
                 </div>
                 <div class="col-sm-6">
-                    <label>Học kỳ </label>
+                    <label>Học kỳ <span style="color: red">*</span> </label>
                     <select required name="semester" class="form-control">
                         <option value="">Chọn Học Kì</option>
                         @foreach($se as $semester)
@@ -40,7 +40,7 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-6">
-                    <label>Năm học</label>
+                    <label>Năm học <span style="color: red">*</span> </label>
                     <div class="radio">
                         <label class="col-sm-6">
                             <input required type="radio" checked name="session_new" value="0">Chọn từ danh sách
@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <div class="session_list col-sm-6">
-                    <label>Năm học</label>
+                    <label>Năm học <span style="color: red">*</span> </label>
                     <select class="form-control" name="session_id">
                         <option value="">Chọn Năm Học</option>
                         @foreach($ws as $session)
@@ -79,25 +79,25 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-6">
-                    <label>Mã môn học</label>
+                    <label>Mã môn học <span style="color: red">*</span> </label>
                     <input required type="text" maxlength="60" class="form-control" name="subject_code" placeholder="Nhập mã môn học"
                         value="{{$workload->subject_code}}">
                 </div>
 
                 <div class="col-sm-6">
-                    <label>Tên môn học</label>
+                    <label>Tên môn học <span style="color: red">*</span> </label>
                     <input required type="text" maxlength="60" class="form-control" name="subject_name" placeholder="Nhập tên môn học"
                         value="{{$workload->subject_name}}">
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-6">
-                    <label>Số tiết học</label>
+                    <label>Số tiết học <span style="color: red">*</span> </label>
                     <input required type="text" maxlength="60" class="form-control" name="number_of_lessons"
                         placeholder="Nhập số tiết học trong năm" value="{{$workload->number_of_lessons}}">
                 </div>
                 <div class="col-sm-6">
-                    <label>Mã lớp</label>
+                    <label>Mã lớp <span style="color: red">*</span> </label>
                     <input required type="text" maxlength="100" class="form-control" name="class_code" placeholder="Nhập mã Lớp"
                         value="{{$workload->class_code}}">
                 </div>
@@ -105,12 +105,12 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-6">
-                    <label>Số sinh viên</label>
+                    <label>Số sinh viên <span style="color: red">*</span> </label>
                     <input required type="text" maxlength="100" class="form-control" name="number_of_students"
                         placeholder="Nhập số sinh viên" value="{{$workload->number_of_students}}">
                 </div>
                 <div class="col-sm-6">
-                    <label>Tổng số giờ</label>
+                    <label>Tổng số giờ <span style="color: red">*</span> </label>
                     <input required type="text" maxlength="100" class="form-control" name="total_workload" placeholder="Nhập địa chỉ liên lạc"
                         value="{{$workload->total_workload}}">
                 </div>
@@ -118,12 +118,12 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-6">
-                    <label>Số giờ lý thuyết</label>
+                    <label>Số giờ lý thuyết <span style="color: red">*</span> </label>
                     <input required type="text" class="form-control" name="theoretical_hours" placeholder="Nhập số gời lý thuyết"
                         value="{{$workload->theoretical_hours}}">
                 </div>
                 <div class="col-sm-6">
-                    <label>Số giờ thực hành</label>
+                    <label>Số giờ thực hành <span style="color: red">*</span> </label>
                     <input required type="text" class="form-control" name="practice_hours" placeholder="Nhập số giờ thực hành"
                         value="{{$workload->practice_hours}}">
                 </div>
@@ -131,7 +131,7 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-6">
-                    <label>Đơn vị</label>
+                    <label>Đơn vị <span style="color: red">*</span> </label>
                     <select required class="form-control" name="unit_id">
                         <option value="">Chọn Khoa</option>
                         @foreach($unit as $uni)
