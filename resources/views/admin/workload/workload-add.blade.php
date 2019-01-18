@@ -245,7 +245,7 @@
                                         <div class="col-sm-6">
                                             <label>Tổng Khối Lượng công việc <span style="color: red">*</span></label>
                                             <input required type="text" maxlength="100" class="form-control" name="total_workload[]"
-                                                placeholder="Nhập địa chỉ liên lạc" value="">
+                                                placeholder="Nhập tổng khối lượng công việc" value="">
                                         </div>
 
                                     </div>
