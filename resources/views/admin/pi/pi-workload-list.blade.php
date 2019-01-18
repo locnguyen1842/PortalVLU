@@ -26,16 +26,17 @@
 </nav>
 @endsection
 @section('content')
-@include('admin.layouts.Error')
-@if(session()->has('message'))
-    <div class="alert alert-success mt-10">
-        {{ session()->get('message') }}
-    </div>
-@endif
+
 <div style="padding-top: 71px">
     <div class="">
         <div class=" cm-fix-height">
             <div class="col-sm-12">
+                @include('admin.layouts.Error')
+                @if(session()->has('message'))
+                    <div class="alert alert-success mt-10">
+                        {{ session()->get('message') }}
+                    </div>
+                @endif
                 <div class="panel panel-default">
                     <div class="panel-heading">Khối lượng công việc<br>
                         <a href="{{route('admin.workload.add','pi_id='.$pi_id)}}">
@@ -200,8 +201,7 @@
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                                         aria-hidden="true">&times;</span></button>
-                                                <h4 class="modal-title" id="myModalLabel">Bạn thực sự muốn xóa workload
-                                                    này ?</h4>
+                                                <h4 class="modal-title" id="myModalLabel">Bạn thực sự muốn xóa khối lượng công việc này ?</h4>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-danger" id="btn-pd-yes">Có</button>
@@ -244,5 +244,31 @@
             window.location.href = url + '?year_workload=' + session_id+'&semester='+semester;
         });
     });
+
+    $(".delete_workload").on('click',function (e) {
+            e.preventDefault();
+            $("#pi-delete-modal").modal('show');
+            var delete_workload_form = $(this).attr('href');
+            var modalConfirm = function(callback){
+
+                $("#btn-pd-yes").on("click", function(){
+                    callback(true);
+                    $("#pi-delete-modal").modal('hide');
+                });
+
+                $("#btn-pd-no").on("click", function(){
+                    callback(false);
+                    $("#pi-delete-modal").modal('hide');
+                });
+            };
+            modalConfirm(function(confirm){
+                if(confirm){
+                    window.location.href = delete_workload_form;
+
+                }else{
+
+                }
+            });
+        });
 </script>
 @endsection
