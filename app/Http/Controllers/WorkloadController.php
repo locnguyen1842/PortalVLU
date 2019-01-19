@@ -49,7 +49,7 @@ class WorkloadController extends Controller
             } elseif ($search ==null && $year_workload==null) {
                 $query->where('session_id', $workload_session_current_id);
             }
-        })->orderBy('updated_at', 'asc')->paginate(10)->appends(['search'=>$search,'year_workload'=>$year_workload]);
+        })->orderBy('updated_at', 'desc')->paginate(10)->appends(['search'=>$search,'year_workload'=>$year_workload]);
 
         return view('admin.workload.workload-list', compact('workload_session', 'workload_session_current', 'workloads', 'search', 'year_workload'));
     }
@@ -94,7 +94,7 @@ class WorkloadController extends Controller
             } elseif ($search ==null && $year_workload==null) {
                 $query->where('session_id', $workload_session_current_id);
             }
-        })->orderBy('updated_at', 'asc')->paginate(10)->appends(['search'=>$search,'year_workload'=>$year_workload]);
+        })->orderBy('updated_at', 'decs')->paginate(10)->appends(['search'=>$search,'year_workload'=>$year_workload]);
 
         return view('admin.pi.pi-workload-list', compact('semester_filter', 'semester', 'pi_id', 'workload_session', 'workload_session_current', 'workloads', 'search', 'year_workload'));
     }
@@ -221,7 +221,7 @@ class WorkloadController extends Controller
             return redirect()->back()->with('message', 'Thêm thành công');
         }else{
 
-            return redirect()->route('admin.workload.add',['pi_id' => 4])->withErrors($validator)->withInput();
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
     }
@@ -364,7 +364,7 @@ class WorkloadController extends Controller
             } elseif ($search ==null && $year_workload==null && $semester_filter ==null) {
                 $query->where('session_id', $workload_session_current_id);
             }
-        })->orderBy('updated_at', 'asc')->paginate(10)->appends(['search'=>$search,'year_workload'=>$year_workload]);
+        })->orderBy('updated_at', 'desc')->paginate(10)->appends(['search'=>$search,'year_workload'=>$year_workload]);
 
         return view('employee.workload.workload-list', compact('semester_filter', 'semester', 'workload_session', 'workload_session_current', 'workloads', 'search', 'year_workload', 'workload', 'pi'));
     }
