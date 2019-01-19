@@ -114,12 +114,6 @@ class WorkloadController extends Controller
             $pi = null;
         }
 
-
-        if ($data_append !=null) {
-            return json_encode($data_append);
-            // return view('admin.workload.workload-add', compact('workload', 'pi', 'ws', 'se', 'unit','data_append'));
-        }
-
         return view('admin.workload.workload-add', compact('workload', 'pi', 'ws', 'se', 'unit'));
     }
     //post workload
@@ -152,7 +146,7 @@ class WorkloadController extends Controller
                 'theoretical_hours.*'=> 'required|numeric',
                 'semester.*' => 'required',
                 'practice_hours.*'=> 'required|numeric',
-                'unit_id' => 'required'
+                'unit_id.*' => 'required'
             ],
             [
                 'employee_code.required'=> 'Mã giảng viên không được bỏ trống',
@@ -184,7 +178,7 @@ class WorkloadController extends Controller
                 'theoretical_hours.*.required' =>'Số giờ lý thuyết không được bỏ trống',
                 'semester.*.required' =>'Học kỳ không được bỏ trống',
                 'practice_hours.*.required' =>'Số giờ thực hành không được bỏ trống',
-                'unit.*.required' =>'Đơn vị không được bỏ trống',
+                'unit_id.*.required' =>'Đơn vị không được bỏ trống',
             ]
         );
         if($validator->passes()){
@@ -405,6 +399,7 @@ class WorkloadController extends Controller
             $file = $request->file('import_file');
             $session_year = explode('-', $request->session_year);
             $workload_session = WorkloadSession::where('start_year', $session_year[0])->where('end_year', $session_year[1])->first();
+
             if ($workload_session!=null) {
                 $session_id = $workload_session->id;
             } else {
