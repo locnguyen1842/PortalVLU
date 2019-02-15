@@ -10,7 +10,7 @@
             </div>
         </div>
 @endsection
-@section('menu-tabs')
+{{-- @section('menu-tabs')
 <nav class="cm-navbar cm-navbar-default cm-navbar-slideup">
         <div class="cm-flex">
             <div class="nav-tabs-container">
@@ -21,7 +21,7 @@
             </div>
         </div>
 </nav>
-@endsection
+@endsection --}}
 @section('content')
     @include('employee.layouts.Error')
     @if(session()->has('message'))
@@ -29,7 +29,7 @@
             {{ session()->get('message') }}
         </div>
     @endif
-    <div id="" style="padding-top: 71px">
+    <div id="" style="padding-top: 21px">
         <div class="">
             <div class=" cm-fix-height">
                 <div class="col-sm-7">

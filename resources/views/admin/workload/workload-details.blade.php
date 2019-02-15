@@ -74,7 +74,13 @@
                                 <form class="form-horizontal">
                                         <div class="form-group">
                                             <label for="inputPassword3" class="col-sm-5  ">Mã nv</label>
-                                            <span for="" class="col-sm-7 text-nowrap">{{$workload->pi->employee_code}}</span>
+                                            <div class="col-sm-7">
+                                                    <a href="{{route('admin.pi.detail',$workload->pi->id)}}" data-toggle="tooltip" data-placement="right"
+                                                            title="" data-original-title="Chi tiết" href="javascript:" class="search_tag tooltip-test">
+                                                            <span for="" class="text-nowrap">{{$workload->pi->employee_code}}</span>
+                                                    </a>
+                                            </div>
+
                                         </div>
                                         <div class="form-group">
                                             <label for="inputPassword3" class="col-sm-5  ">Họ tên</label>

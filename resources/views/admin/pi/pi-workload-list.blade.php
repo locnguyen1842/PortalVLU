@@ -151,6 +151,9 @@
                                     <th>Khoa</th>
                                     <th>Mã - Tên môn học</th>
                                     <th>Số tiết</th>
+                                    <th>Quy đổi giờ chuẩn</th>
+                                    <th>Lý thuyết</th>
+                                    <th>Thực hành</th>
                                     <th>Học kỳ</th>
                                     <th></th>
                                 </tr>
@@ -171,8 +174,11 @@
                                     </td>
                                     <td class="col-sm-2">{{$item->pi->full_name}}</td>
                                     <td class="col-sm-1">{{$item->unit->unit_code}}</td>
-                                    <td class="col-sm-3">{{$item->subject_code}} - {{$item->subject_name }}</td>
-                                    <td class="col-sm-2">{{$item->number_of_lessons}}</td>
+                                    <td class="col-sm-2">{{$item->subject_code}} - {{$item->subject_name }}</td>
+                                    <td class="col-sm-1">{{$item->number_of_lessons}}</td>
+                                    <td class="col-sm-1">{{$item->total_workload}}</td>
+                                    <td class="col-sm-1">{{$item->theoretical_hours}}</td>
+                                    <td class="col-sm-1">{{$item->practice_hours}}</td>
                                     <td class="col-sm-1">{{$item->semester->alias}}</td>
                                     <td class="col-sm-1">
                                         <a href="{{route('admin.workload.update',$item->id)}}" data-toggle="tooltip"

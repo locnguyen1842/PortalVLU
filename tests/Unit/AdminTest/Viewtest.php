@@ -10,6 +10,7 @@ use Auth;
 use App\DegreeDetail;
 use Illuminate\Support\Facades\Session;
 use App\PI;
+use App\Employee;
 use Illuminate\Support\Facades\Hash;
 use App\Admin;
 use App\Workload;
@@ -28,6 +29,12 @@ class ViewTest extends TestCase
     {
         $admin = Admin::where('username', 'T154725')->first();
         $this->actingAs($admin, 'admin');
+    }
+    public function login_employee()
+    {
+        $employee = Employee::where('username', 'T154725')->first();
+        $this->actingAs($employee, 'employee');
+        return $employee;
     }
     //
 
@@ -107,62 +114,90 @@ class ViewTest extends TestCase
     }
     public function test_view_Workload_List()
     {
-      $this->login_admin();
-      $response = $this->get('/admin/workload-list');
-      $this->assertEquals(200, $response->status());
-      $response->assertViewHas('workload_session');
-      $response->assertViewHas('workload_session_current');
-      $response->assertViewHas('workloads');
-      $response->assertViewHas('search');
-      $response->assertViewHas('year_workload');
+        $this->login_admin();
+        $response = $this->get('/admin/workload-list');
+        $this->assertEquals(200, $response->status());
+        $response->assertViewHas('workload_session');
+        $response->assertViewHas('workload_session_current');
+        $response->assertViewHas('workloads');
+        $response->assertViewHas('search');
+        $response->assertViewHas('year_workload');
     }
     public function test_view_Workload_Add()
     {
-      $this->login_admin();
-      $response = $this->get('/admin/workload-add');
-      $this->assertEquals(200, $response->status());
-      $response->assertViewHas('workload');
-      $response->assertViewHas('pi');
-      $response->assertViewHas('ws');
-      $response->assertViewHas('se');
-      $response->assertViewHas('unit');
+        $this->login_admin();
+        $response = $this->get('/admin/workload-add');
+        $this->assertEquals(200, $response->status());
+        $response->assertViewHas('workload');
+        $response->assertViewHas('pi');
+        $response->assertViewHas('ws');
+        $response->assertViewHas('se');
+        $response->assertViewHas('unit');
+    }
+    public function test_view_Workload_Add_by_pi_id()
+    {
+        $pi = PI::first();
+        $this->login_admin();
+        $response = $this->get('/admin/workload-add?pi_id='.$pi->id);
+        $this->assertEquals(200, $response->status());
+        $response->assertViewHas('workload');
+        $response->assertViewHas('pi');
+        $response->assertViewHas('ws');
+        $response->assertViewHas('se');
+        $response->assertViewHas('unit');
     }
     public function test_view_Workload_Update()
     {
-      $this->login_admin();
-      $workload_id = Workload::first()->id;
-      $response = $this->get('/admin/workload-update/'.$workload_id);
-      $this->assertEquals(200, $response->status());
-      $response->assertViewHas('workload');
-      $response->assertViewHas('pi');
-      $response->assertViewHas('ws');
-      $response->assertViewHas('se');
-      $response->assertViewHas('unit');
+        $this->login_admin();
+        $workload_id = Workload::first()->id;
+        $response = $this->get('/admin/workload-update/'.$workload_id);
+        $this->assertEquals(200, $response->status());
+        $response->assertViewHas('workload');
+        $response->assertViewHas('pi');
+        $response->assertViewHas('ws');
+        $response->assertViewHas('se');
+        $response->assertViewHas('unit');
     }
-    public function test_view_Workload_Detail()
+    public function test_view_Workload_Detail_Admin()
     {
-      $this->login_admin();
-      $workload_id = Workload::first()->id;
-      $response = $this->get('/admin/workload-details/'.$workload_id);
-      $this->assertEquals(200, $response->status());
-      $response->assertViewHas('workload');
-      $response->assertViewHas('pi');
+        $this->login_admin();
+        $workload_id = Workload::first()->id;
+        $response = $this->get('/admin/workload-details/'.$workload_id);
+        $this->assertEquals(200, $response->status());
+        $response->assertViewHas('workload');
+        $response->assertViewHas('pi');
+    }
+    public function test_view_Workload_Detail_Employee()
+    {
+        $employee = $this->login_employee();
+        $workload_id = $employee->pi->workloads->first()->id;
+        $response = $this->get('/workload-details/'.$workload_id);
+        $this->assertEquals(200, $response->status());
+        $response->assertViewHas('workload');
+        $response->assertViewHas('pi');
+    }
+
+    public function test_view_a_employee_cant_access_other_employees_workload_detail()
+    {
+        $employee = $this->login_employee();
+        $workload_id = PI::where('employee_code','T155444')->first()->workloads->first()->id;
+
+        $response = $this->get('/workload-details/'.$workload_id);
+        $this->assertEquals(403, $response->status());
     }
     public function test_view_PI_Workload_List()
     {
-      $this->login_admin();
-      $pi = PI::first()->id;
-      $response = $this->get('/admin/pi-detail/'.$pi.'/workload');
-      $this->assertEquals(200, $response->status());
-      $response->assertViewHas('semester_filter');
-      $response->assertViewHas('semester');
-      $response->assertViewHas('pi_id');
-      $response->assertViewHas('workload_session');
-      $response->assertViewHas('workload_session_current');
-      $response->assertViewHas('workloads');
-      $response->assertViewHas('search');
-      $response->assertViewHas('year_workload');
+        $this->login_admin();
+        $pi = PI::first()->id;
+        $response = $this->get('/admin/pi-detail/'.$pi.'/workload');
+        $this->assertEquals(200, $response->status());
+        $response->assertViewHas('semester_filter');
+        $response->assertViewHas('semester');
+        $response->assertViewHas('pi_id');
+        $response->assertViewHas('workload_session');
+        $response->assertViewHas('workload_session_current');
+        $response->assertViewHas('workloads');
+        $response->assertViewHas('search');
+        $response->assertViewHas('year_workload');
     }
-
-
 }

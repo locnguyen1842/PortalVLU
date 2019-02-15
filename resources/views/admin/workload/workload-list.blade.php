@@ -120,12 +120,9 @@
                 {{ csrf_field() }}
                 <div class="col-sm-12">
                     <label for="import_file" class="control-label col-sm-4">
-                        Import (
-                        <a href="{{route('admin.workload.template.download')}}" data-toggle="tooltip" data-placement="top"
-                            title="" data-original-title="Tải tệp mẫu" class="tooltip-test">
-                            tải tệp mẫu
-                        </a>
-                        )
+                        Import
+
+
                     </label>
                     <div class="col-sm-8">
                         <div class="input-group">
@@ -134,6 +131,13 @@
                                     <button class="btn btn-primary" id="btn-import-submit" type="submit">Xem</button>
                                 </span>
                         </div>
+                        <span class="help-block">
+                            <a href="{{route('admin.workload.template.download')}}" data-toggle="tooltip" data-placement="top"
+                                title="" data-original-title="Tải tệp mẫu" class="tooltip-test">
+                                Tải về tệp mẫu <i class="fa fa-fw fa-lg fa-download"></i>
+                            </a>
+                        </span>
+
 
                         {{-- <button type="submit" id="btn-import-submit" class="btn btn-danger col-sm-6">Xác nhận</button> --}}
                     </div>
@@ -156,7 +160,7 @@
                         <br>
                         <ul id="myTab" class="nav nav-tabs" role="tablist">
                             <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab"
-                                    aria-controls="home" aria-expanded="false">Sheet1</a></li>
+                                    aria-controls="home" aria-expanded="false">Khối lượng công việc</a></li>
 
                         </ul>
 
@@ -235,6 +239,9 @@
                     <th>Khoa</th>
                     <th>Mã - Tên môn học</th>
                     <th>Số tiết</th>
+                    <th>Quy đổi giờ chuẩn</th>
+                    <th>Lý thuyết</th>
+                    <th>Thực hành</th>
                     <th>Học kỳ</th>
                     <th></th>
                 </tr>
@@ -254,10 +261,13 @@
                     </td>
                     <td class="col-sm-2">{{$item->pi->full_name}}</td>
                     <td class="col-sm-1">{{$item->unit->unit_code}}</td>
-                    <td class="col-sm-3">{{$item->subject_code}} - {{$item->subject_name }}</td>
-                    <td class="col-sm-2">{{$item->number_of_lessons}}</td>
-                    <td class="col-sm-2">{{$item->semester->alias}}</td>
-                    <td class="col-sm-2">
+                    <td class="col-sm-2">{{$item->subject_code}} - {{$item->subject_name }}</td>
+                    <td class="col-sm-1">{{$item->number_of_lessons}}</td>
+                    <td class="col-sm-1">{{$item->total_workload}}</td>
+                    <td class="col-sm-1">{{$item->theoretical_hours}}</td>
+                    <td class="col-sm-1">{{$item->practice_hours}}</td>
+                    <td class="col-sm-1">{{$item->semester->alias}}</td>
+                    <td class="col-sm-1">
                         <a href="{{route('admin.workload.update',$item->id)}}" data-toggle="tooltip" data-placement="top"
                             title="" data-original-title="Cập nhật" href="javascript:" class="tooltip-test">
                             <span class=""><i class="fa fa-lg fa-edit text-primary"></i>

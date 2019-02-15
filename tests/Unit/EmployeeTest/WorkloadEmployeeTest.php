@@ -1,0 +1,33 @@
+<?php
+
+namespace Tests\Unit;
+
+use Tests\TestCase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Auth;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Facades\Session;
+use App\PI;
+use App\DegreeDetail;
+use App\Admin;
+use Hash;
+use App\Employee;
+
+class WorkloadEmployeeTest extends TestCase
+{
+    use DatabaseTransactions;
+    /**
+     * A basic test example.
+     *
+     * @return void
+     */
+    public function test_search_workload(){
+        $employee = Employee::where('username','T154725')->first();
+        $this->actingAs($employee,'employee');
+        $response = $this->get('/workload-list?search=CNTT&year_workload=20&semester=1');
+        $response->assertSuccessful();
+        $response->assertSee('CNTT');
+      }
+}

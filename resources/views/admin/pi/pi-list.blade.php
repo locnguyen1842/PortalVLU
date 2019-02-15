@@ -56,11 +56,9 @@
                 {{ csrf_field() }}
                 <div class="col-sm-6">
                     <label for="import_file" class="control-label col-sm-4">
-                            Import (
-                      <a href="{{route('admin.pi.template.download')}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tải tệp mẫu" class="tooltip-test">
-                            tải tệp mẫu
-                      </a>
-                            )
+                            Import
+
+
                     </label>
                     <div class="col-sm-8">
                             <div class="input-group">
@@ -70,6 +68,11 @@
                                         </span>
 
                             </div>
+                            <span class="help-block">
+                                    <a href="{{route('admin.pi.template.download')}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tải tệp mẫu" class="tooltip-test">
+                                        Tải về tệp mẫu <i class="fa fa-fw fa-lg fa-download"></i>
+                                    </a>
+                            </span>
 
 
                     </div>
@@ -87,8 +90,8 @@
                             <h4 class="modal-title text-uppercase" id="header-modal"></h4>
                             <br>
                             <ul id="myTab" class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="false">Sheet1</a></li>
-                                <li role="presentation" class=""><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="true">Sheet2</a></li>
+                                <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="false">Thông tin nhân viên</a></li>
+                                <li role="presentation" class=""><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="true">Học vị / Học hàm</a></li>
 
                             </ul>
                         </div>

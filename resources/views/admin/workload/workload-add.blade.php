@@ -12,13 +12,15 @@
     </div>
 @endsection
 @section('content')
-
+<div class="col-sm-12">
     @include('admin.layouts.Error')
+
     @if(session()->has('message'))
         <div class="alert alert-success mt-10">
             {{ session()->get('message') }}
         </div>
     @endif
+</div>
 <div style="padding-top:20px">
     <form id="add-workload" class="form-horizontal" action="{{route('admin.workload.add')}}" method="post">
         <div class="cm-fix-height" id="parent_content">

@@ -364,16 +364,9 @@ class WorkloadController extends Controller
             } elseif ($search ==null && $year_workload==null && $semester_filter ==null) {
                 $query->where('session_id', $workload_session_current_id);
             }
-        })->orderBy('updated_at', 'desc')->paginate(10)->appends(['search'=>$search,'year_workload'=>$year_workload]);
+        })->orderBy('updated_at', 'desc')->get();
 
         return view('employee.workload.workload-list', compact('semester_filter', 'semester', 'workload_session', 'workload_session_current', 'workloads', 'search', 'year_workload', 'workload', 'pi'));
-    }
-    public function getWorkloadPIDetail($id)
-    {
-        $pi = Auth::guard('employee')->user()->pi;
-        $workload = Workload::find($id);
-
-        return view('employee.workload.workload-details-list', compact('workload', 'pi'));
     }
     public function delete($workload_id)
     {
@@ -421,6 +414,9 @@ class WorkloadController extends Controller
         $workload = Workload::find($id_workload);
         if ($this->checkIsOwnerPermisson($pi, $workload)) {
             return view('employee.workload.workload-details', compact('workload', 'pi'));
+        }
+        else{
+            return abort('403');
         }
     }
 
