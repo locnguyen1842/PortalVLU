@@ -6,6 +6,7 @@ use App\DegreeDetail;
 use App\Industry;
 use Illuminate\Http\Request;
 use App\PI;
+use App\ScientificBackground;
 use App\Imports\AdminPIImport;
 use App\Imports\GetPIImport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -153,6 +154,21 @@ class PIController extends Controller
             $admin->email = $pi->email_address;
             $admin->save();
         }
+        ScientificBackground::updateOrCreate(
+            [
+                'personalinformation_id' => $pi->id,
+            ],
+            [
+                'personalinformation_id' => $pi->id,
+                'highest_scientific_title' => 'Chưa có',
+                'year_of_appointment' => 'Chưa có',
+                'address' => $pi->contact_address,
+                'highest_degree' =>'Chưa có',
+                'orga_phone_number' => 'Chưa có',
+                'home_phone_number' => 'Chưa có',
+                'mobile_phone_number' => $pi->phone_number
+            ]
+        );
 
 
         return redirect()->back()->with('message', 'Thêm thành công');

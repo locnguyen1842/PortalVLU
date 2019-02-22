@@ -5,6 +5,7 @@ namespace App\Imports;
 use App\PI;
 use App\Employee;
 use App\Nation;
+use App\ScientificBackground;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Illuminate\Support\Facades\Validator;
@@ -133,17 +134,32 @@ class PIImport implements ToCollection,WithStartRow
                 ]
             );
 
-          $employee = Employee::updateOrCreate(
-            [
-              'username' => $pi->employee_code,
-            ],
-            [
-              'username' => $pi->employee_code,
-              'personalinformation_id'=> $pi->id,
-              'email' => $pi->email_address,
-              'password' => Hash::make($row[16]),
-            ]
-          );
+            $employee = Employee::updateOrCreate(
+                [
+                'username' => $pi->employee_code,
+                ],
+                [
+                'username' => $pi->employee_code,
+                'personalinformation_id'=> $pi->id,
+                'email' => $pi->email_address,
+                'password' => Hash::make($row[16]),
+                ]
+            );
+            ScientificBackground::updateOrCreate(
+                [
+                    'personalinformation_id' => $pi->id,
+                ],
+                [
+                    'personalinformation_id' => $pi->id,
+                    'highest_scientific_title' => 'Chưa có',
+                    'year_of_appointment' => 'Chưa có',
+                    'address' => $pi->contact_address,
+                    'highest_degree' =>'Chưa có',
+                    'orga_phone_number' => 'Chưa có',
+                    'home_phone_number' => 'Chưa có',
+                    'mobile_phone_number' => $pi->phone_number
+                ]
+            );
         }
 
     }

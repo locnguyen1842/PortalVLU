@@ -6,7 +6,7 @@
         <ol class="breadcrumb">
             {{-- <li><a href="#">Home</a></li> --}}
             <li class=""><a href="{{route('admin.pi.index')}}">Quản lý thông tin nhân viên</a></li>
-        <li class="active">Chi tiết nhân viên - {{$pi->employee_code}}</li>
+            <li class="active">Chi tiết nhân viên - {{$pi->employee_code}}</li>
         </ol>
     </div>
 </div>
@@ -15,10 +15,12 @@
 @section('menu-tabs')
 <nav class="cm-navbar cm-navbar-default cm-navbar-slideup">
         <div class="cm-flex">
-            <div class="nav-tabs-container">
+            <div class="nav-tabs-container  table-responsive">
                 <ul class="nav nav-tabs">
                     <li class="{{url()->current() == route('admin.pi.detail',$pi->id) ? 'active':''}}"><a href="{{route('admin.pi.detail',$pi->id)}}">Thông tin cá nhân</a></li>
                     <li class="{{url()->current() == route('admin.pi.workload.index',$pi->id) ? 'active':''}}"><a href="{{route('admin.pi.workload.index',$pi->id)}}">Khối lượng công việc</a></li>
+                    <li class="{{url()->current() == route('admin.sb.detail',$pi->id) ? 'active':''}}"><a href="{{route('admin.sb.detail',$pi->id)}}">Lý lịch khoa học</a></li>
+
                 </ul>
             </div>
         </div>

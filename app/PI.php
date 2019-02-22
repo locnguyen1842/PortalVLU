@@ -35,6 +35,10 @@ class PI extends Model
     {
         return $this->hasMany('App\DegreeDetail','personalinformation_id','id');
     }
+    public function scientificbackgrounds()
+    {
+        return $this->hasOne('App\ScientificBackground','personalinformation_id','id');
+    }
     public function admin(){
         return $this->hasOne('App\Admin','personalinformation_id','id');
     }

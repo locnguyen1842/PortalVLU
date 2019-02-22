@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTopicLevelsTable extends Migration
+class AddColumnAliasToDegreesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateTopicLevelsTable extends Migration
      */
     public function up()
     {
-        Schema::create('topic_levels', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('level');
-            $table->string('note')->nullable();
-            $table->timestamps();
+        Schema::table('degrees', function (Blueprint $table) {
+            $table->tinyInteger('alias');
         });
     }
 
@@ -28,6 +25,8 @@ class CreateTopicLevelsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('topic_levels');
+        Schema::table('degrees', function (Blueprint $table) {
+            $table->dropColumn('alias');
+        });
     }
 }

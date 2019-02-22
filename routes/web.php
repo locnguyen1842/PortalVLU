@@ -73,7 +73,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/workload-update/{id}', 'WorkloadController@getUpdateWorkload')->name('admin.workload.update');
         Route::post('/workload-update/{id}', 'WorkloadController@postUpdateWorkload')->name('admin.workload.update');
         //get detail workload
-        Route::get('/workload-details/{id_workload}', 'WorkloadController@getWorkloadDetail')->name('admin.workload.detail');
+        Route::get('/workload-details/{workload_id}', 'WorkloadController@getWorkloadDetail')->name('admin.workload.detail');
         //delete workload
         Route::get('/workload-delete/{workload_id}', 'WorkloadController@delete')->name('admin.workload.delete');
 
@@ -83,6 +83,10 @@ Route::prefix('admin')->group(function () {
         Route::get('/workload-download-template', 'WorkloadController@downloadtemplate')->name('admin.workload.template.download');
         // auto complete employee code
         Route::get('/fetch-employee-code', 'WorkloadController@fetch')->name('admin.workload.fetch.employee_code');
+
+        //scientific background
+        Route::get('/scientific-background/detail/{pi_id}', 'ScientificBackgroundController@getdetailAdmin')->name('admin.sb.detail');
+
 
     });
 });

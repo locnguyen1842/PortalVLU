@@ -16,10 +16,11 @@
 @section('menu-tabs')
 <nav class="cm-navbar cm-navbar-default cm-navbar-slideup" >
     <div class="cm-flex">
-        <div class="nav-tabs-container">
+        <div class="nav-tabs-container  table-responsive">
             <ul class="nav nav-tabs">
                 <li class="{{url()->current() == route('admin.pi.detail',$pi_id) ? 'active':''}}"><a href="{{route('admin.pi.detail',$pi_id)}}">Thông tin cá nhân</a></li>
                 <li class="{{url()->current() == route('admin.pi.workload.index',$pi_id) ? 'active':''}}"><a href="{{route('admin.pi.workload.index',$pi_id)}}">Khối lượng công việc</a></li>
+                <li class="{{url()->current() == route('admin.sb.detail',$pi_id) ? 'active':''}}"><a href="{{route('admin.sb.detail',$pi_id)}}">Lý lịch khoa học</a></li>
             </ul>
         </div>
     </div>
