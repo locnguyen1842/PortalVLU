@@ -14,6 +14,9 @@
                     <li class="{{url()->current() == route('employee.workload.index') ? 'active':''}}">
                         <a href="{{route('employee.workload.index')}}" class="sf-dashboard-alt">Khối lượng công việc</a>
                     </li>
+                    <li class="{{url()->current() == route('employee.sb.detail') ? 'active':''}}">
+                        <a href="{{route('employee.sb.detail')}}" class="sf-dashboard-alt">Lý lịch khoa học</a>
+                    </li>
                     {{-- <li><a href="components-text.html" class=" sf-cog ">Quản lý tài khoản</a></li> --}}
 {{--
                     <li class="cm-submenu">

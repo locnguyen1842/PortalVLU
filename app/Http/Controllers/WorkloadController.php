@@ -476,4 +476,102 @@ class WorkloadController extends Controller
             return abort('403', 'Bạn không có quyền thực hiện thao tác này');
         }
     }
+    public function getyear()
+    {
+        $yearlist = WorkloadSession::all();
+
+        return view('admin.schoolyear.year-list', compact( 'yearlist'));
+    }
+    public function getaddyear()
+{
+    $yearlist = WorkloadSession::all();
+    return view('admin.schoolyear.schoolyear-add', compact( 'yearlist'));
+}
+    public function postaddyear(Request $request)
+    {
+        $value_start_year = \Request::get('start_year');
+        $request->validate(
+            [
+
+                'start_year'=> 'required|integer',
+                'end_year'=> 'required|integer',
+//                'end_year'=>    [
+//                    'required_if:session_new,==,1',
+//                    'integer',
+//                    'nullable',
+//                    function ($attribute, $value, $fail) use ($value_start_year) {
+//                        if ($value - $value_start_year != 1) {
+//                            $fail('Năm kết thúc chỉ được lớn hơn năm bắt đầu 1 năm');
+//                        }
+//                    }
+//                ],
+
+
+            ],
+            [
+                'start_year.required'=> 'Năm học không được bỏ trống',
+                'end_year.required'=> 'Năm học không được bỏ trống',
+                'start_year.numeric'=> 'Năm học đúng định dạng',
+                'end_year.numeric'=> 'Năm học đúng định dạng',
+
+            ]
+        );
+        $yearlist = new WorkloadSession();
+        $yearlist->id = $request->id;
+        $yearlist->start_year = $request->start_year;
+        $yearlist->end_year = $request->end_year;
+        $yearlist->save();
+
+        return redirect()->back()->with('message', 'Thêm thành công');
+    }
+    public function getupdateyear($id)
+    {
+        $yearlist = WorkloadSession::Find($id);
+        return view('admin.schoolyear.schoolyear-update', compact( 'yearlist'));
+    }
+    public function postupdateyear(Request $request , $id)
+    {
+        $value_start_year = \Request::get('start_year');
+        $request->validate(
+            [
+
+                'start_year'=> 'required|integer',
+                'end_year'=> 'required|integer',
+//                'end_year'=>    [
+//                    'required_if:session_new,==,1',
+//                    'integer',
+//                    'nullable',
+//                    function ($attribute, $value, $fail) use ($value_start_year) {
+//                        if ($value - $value_start_year != 1) {
+//                            $fail('Năm kết thúc chỉ được lớn hơn năm bắt đầu 1 năm');
+//                        }
+//                    }
+//                ],
+
+
+            ],
+            [
+                'start_year.required'=> 'Năm học không được bỏ trống',
+                'end_year.required'=> 'Năm học không được bỏ trống',
+                'start_year.numeric'=> 'Năm học đúng định dạng',
+                'end_year.numeric'=> 'Năm học đúng định dạng',
+
+            ]
+        );
+        $yearlist = WorkloadSession::Find($id);
+        $yearlist->id = $request->id;
+        $yearlist->start_year = $request->start_year;
+        $yearlist->end_year = $request->end_year;
+        $yearlist->save();
+
+        return redirect()->back()->with('message', 'Cập Nhật thành công');
+    }
+    public function deleteschoolyear($id){
+
+        $degree = WorkloadSession::find($id);
+        $degree->delete();
+        return redirect()->back()->with('message', 'Xóa thông tin nhân viên thành công');
+    }
+
+
 }

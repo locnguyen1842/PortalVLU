@@ -245,7 +245,7 @@
                                                 placeholder="Nhập số sinh viên" value="">
                                         </div>
                                         <div class="col-sm-6">
-                                            <label>Tổng Khối Lượng công việc <span style="color: red">*</span></label>
+                                            <label>Tổng Khối Lượng công việc <span style="cưolor: red">*</span></label>
                                             <input required type="text" maxlength="100" class="form-control" name="total_workload[]"
                                                 placeholder="Nhập tổng khối lượng công việc" value="">
                                         </div>

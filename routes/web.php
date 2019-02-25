@@ -86,7 +86,16 @@ Route::prefix('admin')->group(function () {
 
         //scientific background
         Route::get('/scientific-background/detail/{pi_id}', 'ScientificBackgroundController@getdetailAdmin')->name('admin.sb.detail');
-
+        // view list school year
+        Route::get('/year-list', 'WorkloadController@getyear')->name('admin.schoolyear.index');
+        //add year
+        Route::get('/schoolyear-add', 'WorkloadController@getaddyear')->name('admin.schoolyear.add');
+        Route::post('/schoolyear-add', 'WorkloadController@postaddyear')->name('admin.schoolyear.add');
+        //update year
+        Route::get('/schoolyear-update/{id}', 'WorkloadController@getupdateyear')->name('admin.schoolyear.update');
+        Route::post('/schoolyear-update/{id}', 'WorkloadController@postupdateyear')->name('admin.schoolyear.update');
+        //delete school year
+        Route::get('/year-delete/{id}', 'WorkloadController@deleteschoolyear')->name('admin.schoolyear.delete');
 
     });
 });
@@ -126,7 +135,8 @@ Route::prefix('')->group(function () {
         Route::get('/workload-list', 'WorkloadController@getWorkloadList_Employee')->name('employee.workload.index');
         //workload details
         Route::get('/workload-details/{id_workload}', 'WorkloadController@getWorkloadDetail_Employee')->name('employee.workload.detail');
-
+        //scientific background
+        Route::get('/scientific-background/detail', 'ScientificBackgroundController@getdetailEmployeeSB')->name('employee.sb.detail');
     });
 });
 

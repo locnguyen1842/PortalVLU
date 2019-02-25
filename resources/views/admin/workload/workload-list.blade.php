@@ -37,6 +37,9 @@
         <a href="{{route('admin.workload.add')}}">
             <button type="button" name="button" class="btn btn-xs btn-success">Thêm Mới</button>
         </a>
+        <a href="{{route('admin.schoolyear.index')}}">
+            <button type="button" name="button" class="btn btn-xs btn-success">Quản lý năm học</button>
+        </a>
     </div>
 
     <div class="panel-body">

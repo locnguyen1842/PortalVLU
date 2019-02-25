@@ -1,9 +1,10 @@
 <?php
 
 namespace App;
-use App\PI;
-use App\ScientificBackground;
+
 use Illuminate\Database\Eloquent\Model;
+use App\PI;
+use App\DegreeDetail;
 
 class ScientificBackground extends Model
 {
