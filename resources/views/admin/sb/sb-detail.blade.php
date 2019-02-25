@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title','Danh sách khối lượng công việc')
+@section('title','Xem chi tiết lý lịch khoa học')
 @section('breadcrumb')
 <div class="cm-flex">
     <div class="cm-breadcrumb-container">
