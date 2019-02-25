@@ -84,6 +84,9 @@ body.cm-admin-login{
 .mt-20{
   margin-top: 20px;
 }
+.mt-25{
+    margin-top: 25px;
+}
 .ml-10{
   margin-left: 10px;
 
@@ -92,6 +95,9 @@ body.cm-admin-login{
 .mr-10{
   margin-right: 10px;
 }
+.mr-25{
+    margin-right: 25px;
+  }
 
 .mb-10{
   margin-bottom: 10px;
@@ -154,4 +160,13 @@ ol.breadcrumb >.active {
 .list-group-item:hover{
     background: #f3f2f2 !important;
 
+}
+
+.help-text{
+    display: block;
+    margin-top: 8px;
+}
+
+.help-text > a {
+    cursor: pointer;
 }
