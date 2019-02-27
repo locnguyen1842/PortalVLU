@@ -85,6 +85,8 @@ Route::prefix('admin')->group(function () {
         Route::get('/fetch-employee-code', 'WorkloadController@fetch')->name('admin.workload.fetch.employee_code');
 
         //scientific background
+        Route::get('/scientific-background/update/{pi_id}', 'ScientificBackgroundController@getupdateAdmin')->name('admin.sb.update');
+
         Route::get('/scientific-background/detail/{pi_id}', 'ScientificBackgroundController@getdetailAdmin')->name('admin.sb.detail');
         // view list school year
         Route::get('/year-list', 'WorkloadController@getyear')->name('admin.schoolyear.index');
@@ -137,6 +139,11 @@ Route::prefix('')->group(function () {
         Route::get('/workload-details/{id_workload}', 'WorkloadController@getWorkloadDetail_Employee')->name('employee.workload.detail');
         //scientific background
         Route::get('/scientific-background/detail', 'ScientificBackgroundController@getdetailEmployeeSB')->name('employee.sb.detail');
+        //update scientific background
+        Route::get('/scientific-background/update', 'ScientificBackgroundController@getupdateEmployeeSB')->name('employee.sb.update');
+        Route::post('/scientific-background/update', 'ScientificBackgroundController@postupdateEmployeeSB')->name('employee.sb.update');
+
+
     });
 });
 
