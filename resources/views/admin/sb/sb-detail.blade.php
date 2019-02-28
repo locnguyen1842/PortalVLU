@@ -27,6 +27,7 @@
 </nav>
 @endsection
 @section('content')
+
 <div style="padding-top: 71px">
     <div class="">
         <div class=" cm-fix-height">
@@ -37,9 +38,11 @@
                     {{ session()->get('message') }}
                 </div>
                 @endif
-
                 <div class="panel panel-default">
                     <div class="panel-heading">Lý lịch sơ lược<br>
+                        <a href="{{route('admin.sb.update',$sb->id)}}">
+                                <button type="button" name="button" class="btn btn-xs btn-primary">Cập nhật</button>
+                            </a>
                     </div>
                     <div class="panel-body">
                         <form class="form-horizontal">
