@@ -12,7 +12,6 @@ class TPPostgraduateMaster extends Model
         'field_of_study',
         'year_of_issue',
         'place_of_training',
-        'thesis_title',
         'scientific_background_id',
     ];
 

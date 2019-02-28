@@ -86,6 +86,7 @@ Route::prefix('admin')->group(function () {
 
         //scientific background
         Route::get('/scientific-background/update/{pi_id}', 'ScientificBackgroundController@getupdateAdmin')->name('admin.sb.update');
+        Route::post('/scientific-background/update/{pi_id}', 'ScientificBackgroundController@postupdateAdmin')->name('admin.sb.update');
 
         Route::get('/scientific-background/detail/{pi_id}', 'ScientificBackgroundController@getdetailAdmin')->name('admin.sb.detail');
         // view list school year

@@ -15,6 +15,7 @@ class TPGraduate extends Model
         'nation_of_training',
         'year_of_graduation',
         'scientific_background_id',
+        'industry',
     ];
 
     public function scientific_background(){

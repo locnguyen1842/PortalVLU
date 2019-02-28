@@ -13,6 +13,7 @@ class TPPostgraduateDoctor extends Model
         'year_of_issue',
         'place_of_training',
         'scientific_background_id',
+        'thesis_title',
     ];
 
     public function scientific_background(){

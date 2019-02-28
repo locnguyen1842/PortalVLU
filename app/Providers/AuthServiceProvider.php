@@ -7,6 +7,8 @@ use App\DegreeDetail;
 use App\Policies\DegreePolicy;
 use App\Workload;
 use App\Policies\WorkloadPolicy;
+use App\ScientificBackground;
+use App\Policies\SBPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -20,6 +22,7 @@ class AuthServiceProvider extends ServiceProvider
         'App\Model' => 'App\Policies\ModelPolicy',
         DegreeDetail::class => DegreePolicy::class,
         Workload::class => WorkloadPolicy::class,
+        ScientificBackground::class => SBPolicy::class,
 
     ];
 
