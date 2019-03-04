@@ -161,7 +161,7 @@ class PIController extends Controller
             [
                 'personalinformation_id' => $pi->id,
                 'highest_scientific_title' => 'Chưa có',
-                'year_of_appointment' => 'Chưa có',
+                'year_of_appointment' => '',
                 'address' => $pi->contact_address,
                 'highest_degree' =>'Chưa có',
                 'orga_phone_number' => 'Chưa có',

@@ -5,7 +5,7 @@
         <div class="cm-breadcrumb-container">
             <ol class="breadcrumb">
                 {{-- <li><a href="#">Home</a></li> --}}
-                <li class=""><a href="{{route('admin.schoolyear.index')}}">Quản lý thông tin nhân viên</a></li>
+                <li class=""><a href="{{route('admin.schoolyear.index')}}">Quản lý năm học</a></li>
                 <li class="active">Thêm năm học</li>
             </ol>
         </div>

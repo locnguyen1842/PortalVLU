@@ -132,7 +132,7 @@ class WorkloadController extends Controller
                                     'nullable',
                                     function ($attribute, $value, $fail) use ($value_start_year) {
                                         if ($value - $value_start_year != 1) {
-                                            $fail('Năm kết thúc chỉ được lớn hơn năm bắt đầu 1 năm');
+                                            $fail('Năm kết thúc phải lớn hơn năm bắt đầu 1 năm');
                                         }
                                     }
                                 ],
@@ -261,7 +261,7 @@ class WorkloadController extends Controller
             'nullable',
                                     function ($attribute, $value, $fail) use ($value_start_year) {
                                         if ($value - $value_start_year != 1) {
-                                            $fail('Năm kết thúc chỉ được lớn hơn năm bắt đầu 1 năm.');
+                                            $fail('Năm kết thúc phải lớn hơn năm bắt đầu 1 năm.');
                                         }
                                     }
             ],
@@ -478,41 +478,42 @@ class WorkloadController extends Controller
     }
     public function getyear()
     {
-        $yearlist = WorkloadSession::all();
+        $yearlist = WorkloadSession::orderBy('start_year','desc')->paginate(10);
 
         return view('admin.schoolyear.year-list', compact( 'yearlist'));
     }
     public function getaddyear()
-{
-    $yearlist = WorkloadSession::all();
-    return view('admin.schoolyear.schoolyear-add', compact( 'yearlist'));
-}
+    {
+        return view('admin.schoolyear.schoolyear-add');
+    }
     public function postaddyear(Request $request)
     {
         $value_start_year = \Request::get('start_year');
         $request->validate(
             [
 
-                'start_year'=> 'required|integer',
-                'end_year'=> 'required|integer',
-//                'end_year'=>    [
-//                    'required_if:session_new,==,1',
-//                    'integer',
-//                    'nullable',
-//                    function ($attribute, $value, $fail) use ($value_start_year) {
-//                        if ($value - $value_start_year != 1) {
-//                            $fail('Năm kết thúc chỉ được lớn hơn năm bắt đầu 1 năm');
-//                        }
-//                    }
-//                ],
+                'start_year'=> 'required|integer|digits:4',
+                'end_year'=> 'required|integer:digits:4',
+                'end_year'=>    [
+                    'required_if:session_new,==,1',
+                    'integer',
+                    'nullable',
+                    function ($attribute, $value, $fail) use ($value_start_year) {
+                        if ($value - $value_start_year != 1) {
+                            $fail('Năm kết thúc phải lớn hơn năm bắt đầu 1 năm');
+                        }
+                    }
+                ],
 
 
             ],
             [
-                'start_year.required'=> 'Năm học không được bỏ trống',
-                'end_year.required'=> 'Năm học không được bỏ trống',
-                'start_year.numeric'=> 'Năm học đúng định dạng',
-                'end_year.numeric'=> 'Năm học đúng định dạng',
+                'start_year.required'=> 'Năm bắt đầu không được bỏ trống',
+                'start_year.digits'=> 'Năm bắt đầu phải đúng 4 ký tự',
+                'start_year.integer'=> 'Năm bắt đầu phải là số',
+                'end_year.required'=> 'Năm kết thúc không được bỏ trống',
+                'end_year.digits'=> 'Năm kết thúc đúng 4 ký tự',
+                'end_year.integer'=> 'Năm kết thúc phải là số',
 
             ]
         );
@@ -535,26 +536,28 @@ class WorkloadController extends Controller
         $request->validate(
             [
 
-                'start_year'=> 'required|integer',
-                'end_year'=> 'required|integer',
-//                'end_year'=>    [
-//                    'required_if:session_new,==,1',
-//                    'integer',
-//                    'nullable',
-//                    function ($attribute, $value, $fail) use ($value_start_year) {
-//                        if ($value - $value_start_year != 1) {
-//                            $fail('Năm kết thúc chỉ được lớn hơn năm bắt đầu 1 năm');
-//                        }
-//                    }
-//                ],
+                'start_year'=> 'required|integer|digits:4',
+                'end_year'=> 'required|integer|digits:4',
+                'end_year'=>    [
+                    'required_if:session_new,==,1',
+                    'integer',
+                    'nullable',
+                    function ($attribute, $value, $fail) use ($value_start_year) {
+                        if ($value - $value_start_year != 1) {
+                            $fail('Năm kết thúc phải lớn hơn năm bắt đầu 1 năm');
+                        }
+                    }
+                ],
 
 
             ],
             [
-                'start_year.required'=> 'Năm học không được bỏ trống',
-                'end_year.required'=> 'Năm học không được bỏ trống',
-                'start_year.numeric'=> 'Năm học đúng định dạng',
-                'end_year.numeric'=> 'Năm học đúng định dạng',
+                'start_year.required'=> 'Năm bắt đầu không được bỏ trống',
+                'start_year.digits'=> 'Năm bắt đầu phải đúng 4 ký tự',
+                'start_year.integer'=> 'Năm bắt đầu phải là số',
+                'end_year.required'=> 'Năm kết thúc không được bỏ trống',
+                'end_year.digits'=> 'Năm kết thúc đúng 4 ký tự',
+                'end_year.integer'=> 'Năm kết thúc phải là số',
 
             ]
         );
@@ -568,9 +571,11 @@ class WorkloadController extends Controller
     }
     public function deleteschoolyear($id){
 
-        $degree = WorkloadSession::find($id);
-        $degree->delete();
-        return redirect()->back()->with('message', 'Xóa thông tin nhân viên thành công');
+
+        $school_year = WorkloadSession::find($id);
+        Workload::where('session_id',$school_year->id)->delete();
+        $school_year->delete();
+        return redirect()->back()->with('message', 'Xóa năm học thành công');
     }
 
 

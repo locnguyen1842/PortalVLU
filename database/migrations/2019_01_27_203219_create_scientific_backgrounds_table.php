@@ -16,8 +16,8 @@ class CreateScientificBackgroundsTable extends Migration
         Schema::create('scientific_backgrounds', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('personalinformation_id')->unsigned();
-            $table->string('highest_scientific_title');
-            $table->string('year_of_appointment');
+            $table->string('highest_scientific_title')->nullable();
+            $table->string('year_of_appointment')->nullable();
             $table->timestamps();
 
             $table->foreign('personalinformation_id')->references('id')->on('personalinformations');

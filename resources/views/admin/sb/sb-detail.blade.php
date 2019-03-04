@@ -40,7 +40,7 @@
                 @endif
                 <div class="panel panel-default">
                     <div class="panel-heading">Lý lịch sơ lược<br>
-                        <a href="{{route('admin.sb.update',$sb->id)}}">
+                        <a href="{{route('admin.sb.update',$pi_id)}}">
                                 <button type="button" name="button" class="btn btn-xs btn-primary">Cập nhật</button>
                             </a>
                     </div>
