@@ -34,8 +34,9 @@ class ScientificBackgroundController extends Controller
         return view('admin.sb.sb-update', compact('pi_id', 'sb', 'nations', 'units', 'topic_levels'));
     }
 
-    public function postupdateAdmin(Request $request)
+    public function postupdateAdmin($pi_id,Request $request)
     {
+        $pi = PI::find($pi_id);
         $request->validate(
             [
                 'full_name' => 'required',
@@ -45,11 +46,11 @@ class ScientificBackgroundController extends Controller
                 'nation' => 'required',
                 'highest_degree' => 'required',
                 'highest_scientific_title' => 'required',
-                'year_of_appointment' => 'required|digits:4|integer',
+                'year_of_appointment' => 'required|digits:4|integer|nullable',
                 'position' => 'required',
                 'unit' => 'required',
                 'address' => 'required',
-                'email_address'=> 'required|email|',
+                'email_address'=> 'required|email|unique:personalinformations,email_address,'.$pi->id,
                 "type_of_training" => 'required',
                 'place_of_training' => 'required',
                 'field_of_study' => 'required',
@@ -93,6 +94,7 @@ class ScientificBackgroundController extends Controller
               'address.required' => 'Chỗ ở riêng không được bỏ trống',
               'email_address.required' => 'Email không được bỏ trống',
               'email_address.email' =>'Email sai định dạng',
+              'email_address.unique' =>'Email đã tồn tại',
               'type_of_training.required' => 'Hệ đào tạo không được bỏ trống',
               'place_of_training.required' => 'Nơi đào tạo không được bỏ trống',
               'field_of_study.required' => 'Ngành học không được bỏ trống',
@@ -134,7 +136,7 @@ class ScientificBackgroundController extends Controller
 
             ]
         );
-        $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
+
         $pi->full_name = $request->full_name;
         $pi->gender = $request->gender;
         $pi->date_of_birth = $request->date_of_birth;
@@ -252,6 +254,7 @@ class ScientificBackgroundController extends Controller
 
     public function postupdateEmployeeSB(Request $request)
     {
+        $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
         $request->validate(
             [
                 'full_name' => 'required',
@@ -261,11 +264,11 @@ class ScientificBackgroundController extends Controller
                 'nation' => 'required',
                 'highest_degree' => 'required',
                 'highest_scientific_title' => 'required',
-                'year_of_appointment' => 'required|digits:4|integer',
+                'year_of_appointment' => 'required|digits:4|integer|nullable',
                 'position' => 'required',
                 'unit' => 'required',
                 'address' => 'required',
-                'email_address'=> 'required|email|',
+                'email_address'=> 'required|email|unique:personalinformations,email_address,'.$pi->id,
                 "type_of_training" => 'required',
                 'place_of_training' => 'required',
                 'field_of_study' => 'required',
@@ -309,6 +312,7 @@ class ScientificBackgroundController extends Controller
               'address.required' => 'Chỗ ở riêng không được bỏ trống',
               'email_address.required' => 'Email không được bỏ trống',
               'email_address.email' =>'Email sai định dạng',
+              'email_address.unique' =>'Email đã tồn tại',
               'type_of_training.required' => 'Hệ đào tạo không được bỏ trống',
               'place_of_training.required' => 'Nơi đào tạo không được bỏ trống',
               'field_of_study.required' => 'Ngành học không được bỏ trống',
@@ -350,7 +354,7 @@ class ScientificBackgroundController extends Controller
 
             ]
         );
-        $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
+
         $pi->full_name = $request->full_name;
         $pi->gender = $request->gender;
         $pi->date_of_birth = $request->date_of_birth;

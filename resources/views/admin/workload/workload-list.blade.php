@@ -38,7 +38,7 @@
             <button type="button" name="button" class="btn btn-xs btn-success">Thêm Mới</button>
         </a>
         <a href="{{route('admin.schoolyear.index')}}">
-            <button type="button" name="button" class="btn btn-xs btn-success">Quản lý năm học</button>
+            <button type="button" name="button" class="btn btn-xs btn-info">Quản lý năm học</button>
         </a>
     </div>
 

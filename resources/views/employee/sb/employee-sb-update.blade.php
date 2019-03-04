@@ -81,7 +81,7 @@
 
                                     <label>Học vị cao nhất</label>
 
-                                    <select required class="form-control" name="highest_degree">
+                                    <select class="form-control" name="highest_degree">
                                         <option value="">Chọn học vị</option>
                                         @if($sb->pi->degreedetails->count() >0)
                                         @foreach ($sb->pi->degreedetails->sortBy('degree_id') as $item)
@@ -90,6 +90,7 @@
                                             {{$item->specialized->name}}</option>
                                         @endforeach
                                         @else
+                                        <option value="">Chưa có bất kỳ bằng cấp nào. Vui lòng cập nhật bằng cấp</option>
 
                                         @endif
 
@@ -109,7 +110,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label>Năm bổ nhiệm</label>
-                                    <input required class="form-control" name="year_of_appointment" value="{{$sb->year_of_appointment}}">
+                                    <input class="form-control" name="year_of_appointment" value="{{$sb->year_of_appointment}}">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -226,7 +227,7 @@
                                     <div class="col-sm-6">
                                         <span class="help-text">
                                             <button type="button" id="btn_add_graduate" class="btn btn-sm btn-success r-add-master">Thêm
-                                                bằng tiến sĩ khác</button>
+                                                bằng thạc sĩ khác</button>
                                         </span>
                                     </div>
                                 </div>
@@ -421,7 +422,7 @@
 
                                         <tr class="group-research-topics form-horizontal">
 
-                                            <td class="col-sm-4">{{$item->name_of_topic}}
+                                            <td class="col-sm-4">
                                                 <input required class="form-control" name="name_of_topic[]">
 
                                             </td>
