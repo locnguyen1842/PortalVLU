@@ -211,13 +211,16 @@ class PITest extends TestCase
     }
 
     public function test_change_role_from_admin_to_employee(){
-      $pi = PI::where('employee_code','T155555')->first(); //role admin
+      $pi = PI::where('employee_code','T155444')->first(); //role admin
       //role = 0 is employee
+  
       $response = $this->post('/admin/pi-role/'.$pi->id,[
         'role' => 0
       ]);
-      $pi = PI::where('employee_code','T155555')->first();//get pi after change roles
+      $pi = PI::where('employee_code','T155444')->first();//get pi after change roles
+
       $response->assertSessionHas('message','Thay đổi vai trò tài khoản thành công');
+
       $this->assertTrue($pi->admin ==''); //check in admin table on db hasnt any record of this pi
 
     }

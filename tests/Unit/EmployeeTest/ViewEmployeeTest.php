@@ -109,6 +109,26 @@ class ViewEmployeeTest extends TestCase
       $response->assertViewHas('workload');
       // $response->assertViewHas('pi');
     }
+    public function test_view_Scientific_Background_Update_Employee()
+    {
+      $pi = $this->login_employee();
+      $response = $this->get('scientific-background/update');
+      $this->assertEquals(200, $response->status());
+      $response->assertViewHas('pi_id');
+      $response->assertViewHas('sb');
+      $response->assertViewHas('nations');
+      $response->assertViewHas('units');
+      $response->assertViewHas('topic_levels');
+    }
+
+    public function test_view_Scientific_Background_Detail_Employee()
+    {
+      $pi = $this->login_employee();
+      $response = $this->get('scientific-background/detail');
+      $this->assertEquals(200, $response->status());
+      $response->assertViewHas('pi_id');
+      $response->assertViewHas('sb');
+    }
     // public function data()
     // {
     //     $data = [

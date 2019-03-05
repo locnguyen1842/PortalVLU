@@ -39,7 +39,6 @@ class EmployeeForgotPasswordController extends Controller
         if($pi!=null && $pi->show == 1 ){
           $email = ['email'=>$pi->email_address];
           $response = $this->broker()->sendResetLink($email);
-
           return $response == Password::RESET_LINK_SENT
                       ? $this->sendResetLinkResponse($request, $response)
                       : $this->sendResetLinkFailedResponse($request, $response);

@@ -38,11 +38,10 @@ class AdminForgotPasswordController extends Controller
     {
 
         $pi = PI::where('employee_code',$request->employee_code)->first();
-
         if($pi != null && $pi->show == 1 ){
           $email = ['email'=>$pi->email_address];
           $response = $this->broker()->sendResetLink($email);
-
+        
           return $response == Password::RESET_LINK_SENT
                       ? $this->sendResetLinkResponse($request, $response)
                       : $this->sendResetLinkFailedResponse($request, $response);

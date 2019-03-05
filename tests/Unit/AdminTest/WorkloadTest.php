@@ -36,7 +36,7 @@ class WorkloadTest extends TestCase
         $this->actingAs($admin, 'admin');
         $workload = [
          'semester' =>1,
-         'session_id' =>1,
+         'session_id' =>28,
          'number_of_lessons' => 60,
          'class_code' =>'AP12',
          'total_workload' =>50,
@@ -58,7 +58,7 @@ class WorkloadTest extends TestCase
     {
         $actual = [
          'semester' =>1,
-         'session_id' =>1,
+         'session_id' =>28,
          'subject_code'=> 'NL31A',
          'subject_name' =>'Anh Phap',
          'number_of_lessons' => 60,
@@ -79,7 +79,7 @@ class WorkloadTest extends TestCase
         $actual = [
             'employee_code' => 'T154725',
             'session_new' =>0,
-            'session_id' =>1,
+            'session_id' =>28,
             'start_year' =>'2099',
             'end_year' => '2100',
             'subject_code' =>['AV07'],
@@ -129,7 +129,7 @@ class WorkloadTest extends TestCase
     {
         $admin = Admin::first();
         $this->actingAs($admin, 'admin');
-        $response = $this->get('/admin/workload-list?search=T154725&year_workload=20');
+        $response = $this->get('/admin/workload-list?search=T154725&year_workload=28');
         $response->assertSuccessful();
         $response->assertSee('Loc Nguyen'); // see name of T154725 code when search successful
         $response->assertSee('CNTT');

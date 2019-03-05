@@ -200,4 +200,25 @@ class ViewTest extends TestCase
         $response->assertViewHas('search');
         $response->assertViewHas('year_workload');
     }
+    public function test_view_Scientific_Background_Update()
+    {
+      $this->login_admin();
+      $pi = PI::first()->id;
+      $response = $this->get('admin/scientific-background/update/'.$pi);
+      $this->assertEquals(200, $response->status());
+      $response->assertViewHas('pi_id');
+      $response->assertViewHas('sb');
+      $response->assertViewHas('nations');
+      $response->assertViewHas('units');
+      $response->assertViewHas('topic_levels');
+    }
+
+    public function test_view_Scientific_Background_Detail()
+    {
+      $this->login_admin();
+      $pi = PI::first()->id;
+      $response = $this->get('admin/scientific-background/detail/'.$pi);
+      $response->assertViewHas('pi_id');
+      $response->assertViewHas('sb');
+    }
 }
