@@ -37,6 +37,24 @@ class SchoolyearTest extends TestCase
         
         $response->assertSessionHas('message','Xóa năm học thành công');
       }
+      public function test_Schooolyear_Update()
+      {
+          $admin = Admin::first();
+          $this->actingAs($admin, 'admin');
+          $data = $this->data();
+          $workloadsession = WorkloadSession::find(36);
+          $updateyear = $this->post('/admin/schoolyear-update/'.$workloadsession->id, $data);
+          $updateyear->assertSessionHas('message', 'Cập nhật thành công');
+      }
+      public function test_Schooolyear_Add()
+      {
+          $admin = Admin::first();
+          $this->actingAs($admin, 'admin');
+          $data = $this->data();
+          $workloadsession = WorkloadSession::find(36);
+          $updateyear = $this->post('/admin/schoolyear-add', $data);
+          $updateyear->assertSessionHas('message', 'Thêm thành công');
+      }
     public function data()
     {
         $actual = [

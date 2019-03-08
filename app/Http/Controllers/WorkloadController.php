@@ -567,7 +567,7 @@ class WorkloadController extends Controller
         $yearlist->end_year = $request->end_year;
         $yearlist->save();
 
-        return redirect()->back()->with('message', 'Cập Nhật thành công');
+        return redirect()->back()->with('message', 'Cập nhật thành công');
     }
     public function deleteschoolyear($id){
 
