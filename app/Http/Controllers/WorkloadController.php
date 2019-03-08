@@ -128,11 +128,16 @@ class WorkloadController extends Controller
                 'start_year'=> 'required_if:session_new,==,1|integer|nullable|unique:workloadsessions,start_year',
                 'end_year'=>    [
                                     'required_if:session_new,==,1',
+                                    'digits:4',
                                     'integer',
                                     'nullable',
                                     function ($attribute, $value, $fail) use ($value_start_year) {
-                                        if ($value - $value_start_year != 1) {
-                                            $fail('Năm kết thúc phải lớn hơn năm bắt đầu 1 năm');
+                                        if(is_int($value)){
+                                            if ($value - $value_start_year != 1) {
+                                                $fail('Năm kết thúc phải lớn hơn năm bắt đầu 1 năm');
+                                            }
+                                        }else{
+                                            $fail('Năm kết thúc phải là số');
                                         }
                                     }
                                 ],
@@ -155,9 +160,11 @@ class WorkloadController extends Controller
                 'session_new.required' =>'Năm học không được bỏ trống',
                 'start_year.required_if' =>'Năm học bắt đầu không được bỏ trống',
                 'end_year.required_if' =>'Năm học kết thúc không được bỏ trống',
-                'start_year.integer' =>'Năm học phải là số nguyên',
-                'start_year.unique' =>'Năm học đã tồn tại trong danh sách',
-                'end_year.integer' =>'Năm học phải là số nguyên',
+                'start_year.integer' =>'Năm học bắt đầu phải là số nguyên',
+                'start_year.unique' =>'Năm học bắt đầu đã tồn tại trong danh sách',
+               
+                'end_year.integer' =>'Năm học kết thúc phải số nguyên',
+                'end_year.digits'=> 'Năm học kết thúc phải đúng 4 ký tự',
                 'number_of_lessons.*.integer' =>'Số tiết học phải là số nguyên',
                 'number_of_students.*.integer' =>'Số sinh viên phải là số nguyên',
                 'total_workload.*.numeric' =>'Tổng khối lượng công việc phải là số',
@@ -258,10 +265,16 @@ class WorkloadController extends Controller
           'end_year' => [
             'required_if:session_new,==,1',
             'gt:start_year',
+            'digits:4',
+            'integer',
             'nullable',
                                     function ($attribute, $value, $fail) use ($value_start_year) {
-                                        if ($value - $value_start_year != 1) {
-                                            $fail('Năm kết thúc phải lớn hơn năm bắt đầu 1 năm.');
+                                        if(is_int($value)){
+                                            if ($value - $value_start_year != 1) {
+                                                $fail('Năm kết thúc phải lớn hơn năm bắt đầu 1 năm');
+                                            }
+                                        }else{
+                                            $fail('Năm kết thúc phải là số');
                                         }
                                     }
             ],
@@ -287,7 +300,8 @@ class WorkloadController extends Controller
           'start_year.required_if'=> 'Năm học bắt đầu không được bỏ trống',
           'start_year.unique'=> 'Năm học đã tồn tại trong danh sách',
           'end_year.required_if'=> 'Năm học kết thúc không được bỏ trống',
-          'end_year.gt'=> 'Năm học kết thúc phải lớn hơn năm bắt đầu',
+          'end_year.gt'=> 'Năm học kết thúc phải lớn hơn năm bắt đầu 1 năm',
+          'end_year.digits'=> 'Năm học kết thúc đúng 4 ký tự',
 
         ]
     );
@@ -493,15 +507,20 @@ class WorkloadController extends Controller
             [
 
                 'start_year'=> 'required|integer|digits:4',
-                'end_year'=> 'required|integer:digits:4',
                 'end_year'=>    [
-                    'required_if:session_new,==,1',
+                    'required',
+                    'digits:4',
                     'integer',
                     'nullable',
                     function ($attribute, $value, $fail) use ($value_start_year) {
-                        if ($value - $value_start_year != 1) {
-                            $fail('Năm kết thúc phải lớn hơn năm bắt đầu 1 năm');
+                        if(is_int($value)){
+                            if ($value - $value_start_year != 1) {
+                                $fail('Năm kết thúc phải lớn hơn năm bắt đầu 1 năm');
+                            }
+                        }else{
+                            $fail('Năm kết thúc phải là số');
                         }
+                       
                     }
                 ],
 
@@ -537,15 +556,20 @@ class WorkloadController extends Controller
             [
 
                 'start_year'=> 'required|integer|digits:4',
-                'end_year'=> 'required|integer|digits:4',
                 'end_year'=>    [
-                    'required_if:session_new,==,1',
+                    'required',
+                    'digits:4',
                     'integer',
                     'nullable',
                     function ($attribute, $value, $fail) use ($value_start_year) {
-                        if ($value - $value_start_year != 1) {
-                            $fail('Năm kết thúc phải lớn hơn năm bắt đầu 1 năm');
+                        if(is_int($value)){
+                            if ($value - $value_start_year != 1) {
+                                $fail('Năm kết thúc phải lớn hơn năm bắt đầu 1 năm');
+                            }
+                        }else{
+                            $fail('Năm kết thúc phải là số');
                         }
+                       
                     }
                 ],
 
