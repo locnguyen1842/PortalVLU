@@ -34,7 +34,7 @@ class SchoolyearTest extends TestCase
         $this->login_admin();
         $workloadsession = WorkloadSession::find(36);
         $response = $this->get('/admin/year-delete/'.$workloadsession->id);
-        
+
         $response->assertSessionHas('message','Xóa năm học thành công');
       }
       public function test_Schooolyear_Update()
@@ -58,9 +58,9 @@ class SchoolyearTest extends TestCase
     public function data()
     {
         $actual = [
-        'start_year' => '2019',
-        'end_year' =>'2020',
-      ];
+        'start_year' => 2019,
+        'end_year' =>2020,
+        ];
         return $actual;
     }
     //

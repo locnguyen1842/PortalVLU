@@ -48,7 +48,7 @@ class PIEmployeeTest extends TestCase
     {
         $this->login_employee();
         $data = $this->data();
-        $data['email_address']= 'haimuoibon024@gmail.com';
+        $data['email_address']= 'taolao024@gmail.com';
         $updatePI = $this->post('/pi-update', $data);
 
         $pi = PI::where('employee_code', Auth::guard('employee')->user()->username)->first();

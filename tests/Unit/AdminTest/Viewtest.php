@@ -14,6 +14,7 @@ use App\Employee;
 use Illuminate\Support\Facades\Hash;
 use App\Admin;
 use App\Workload;
+use App\WorkloadSession;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ViewTest extends TestCase
@@ -221,4 +222,30 @@ class ViewTest extends TestCase
       $response->assertViewHas('pi_id');
       $response->assertViewHas('sb');
     }
+
+    public function test_view_list_school_year(){
+        $this->login_admin();
+        $response = $this->get('admin/year-list');
+        $response->assertSuccessful();
+        $response->assertViewHas('yearlist');
+
+    }
+
+    public function test_view_add_school_year(){
+        $this->login_admin();
+        $response = $this->get('admin/schoolyear-add');
+        $response->assertSuccessful();
+
+    }
+
+    public function test_view_update_school_year(){
+        $this->login_admin();
+        $workloadsession = WorkloadSession::first();
+        $response = $this->get('admin/schoolyear-update/'.$workloadsession->id);
+        $response->assertSuccessful();
+        $response->assertViewHas('yearlist');
+
+
+    }
+
 }

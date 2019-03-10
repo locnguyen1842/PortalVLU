@@ -25,8 +25,9 @@ class WorkloadTest extends TestCase
         $admin = Admin::first();
         $this->actingAs($admin, 'admin');
         $workload = $this->data();
-        $pi = PI::find(1);
+        $pi = PI::first();
         $updateworkload = $this->post('/admin/workload-update/'.$pi->workloads->first()->id, $workload);
+
         $updateworkload->assertSessionHas('message', 'Cập nhật thành công');
     }
 
@@ -58,7 +59,7 @@ class WorkloadTest extends TestCase
     {
         $actual = [
          'semester' =>1,
-         'session_id' =>28,
+         'session_id' =>36,
          'subject_code'=> 'NL31A',
          'subject_name' =>'Anh Phap',
          'number_of_lessons' => 60,
@@ -79,9 +80,9 @@ class WorkloadTest extends TestCase
         $actual = [
             'employee_code' => 'T154725',
             'session_new' =>0,
-            'session_id' =>28,
-            'start_year' =>'2099',
-            'end_year' => '2100',
+            'session_id' =>36,
+            'start_year' =>2099,
+            'end_year' => 2100,
             'subject_code' =>['AV07'],
             'subject_name' =>['Anh Văn 7'],
             'number_of_lessons'=> [45],
@@ -129,7 +130,7 @@ class WorkloadTest extends TestCase
     {
         $admin = Admin::first();
         $this->actingAs($admin, 'admin');
-        $response = $this->get('/admin/workload-list?search=T154725&year_workload=28');
+        $response = $this->get('/admin/workload-list?search=T154725&year_workload=35');
         $response->assertSuccessful();
         $response->assertSee('Loc Nguyen'); // see name of T154725 code when search successful
         $response->assertSee('CNTT');
