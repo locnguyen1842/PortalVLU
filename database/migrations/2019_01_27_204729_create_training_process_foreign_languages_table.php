@@ -15,9 +15,9 @@ class CreateTrainingProcessForeignLanguagesTable extends Migration
     {
         Schema::create('training_process_foreign_languages', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('language');
-            $table->string('usage_level');
-            $table->integer('scientific_background_id')->unsigned();
+            $table->string('language')->nullable();
+            $table->string('usage_level')->nullable();
+            $table->integer('scientific_background_id')->nullable()->unsigned();
             $table->timestamps();
 
             $table->foreign('scientific_background_id','sb_training_process_languages_foreign')->references('id')->on('scientific_backgrounds');

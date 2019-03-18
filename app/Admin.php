@@ -36,4 +36,13 @@ class Admin extends Authenticatable
     {
         $this->notify(new AdminResetPasswordNotification($token));
     }
+
+    public function isSupervisor(){
+        if($this->is_supervisor == 1 ){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }

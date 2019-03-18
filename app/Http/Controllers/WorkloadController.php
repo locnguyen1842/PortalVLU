@@ -101,6 +101,8 @@ class WorkloadController extends Controller
     //get
     public function getadd()
     {
+        $this->authorize('cud', PI::first());
+
         $workload = Workload::all();
         $id = \Request::get('pi_id');
         $data_append = \Request::get('data_html');
@@ -119,8 +121,11 @@ class WorkloadController extends Controller
     //post workload
     public function postadd(Request $request)
     {
-        $value_start_year = \Request::get('start_year');
-        $validator=Validator::make($request->all(),
+        $this->authorize('cud', PI::first());
+
+        $value_start_year = (int)\Request::get('start_year');
+        $validator=Validator::make(
+            $request->all(),
             [
                 'employee_code'=> 'required|min:4|max:60|exists:personalinformations',
                 'session_id'=> 'required_if:session_new,==,0',
@@ -132,12 +137,10 @@ class WorkloadController extends Controller
                                     'integer',
                                     'nullable',
                                     function ($attribute, $value, $fail) use ($value_start_year) {
-                                        if(is_int($value)){
-                                            if ($value - $value_start_year != 1) {
-                                                $fail('Năm kết thúc phải lớn hơn năm bắt đầu 1 năm');
-                                            }
-                                        }else{
-                                            $fail('Năm kết thúc phải là số');
+                                        $value_end_year = (int)$value;
+
+                                        if ($value_end_year - $value_start_year != 1) {
+                                            $fail('Năm kết thúc phải lớn hơn năm bắt đầu 1 năm');
                                         }
                                     }
                                 ],
@@ -162,7 +165,7 @@ class WorkloadController extends Controller
                 'end_year.required_if' =>'Năm học kết thúc không được bỏ trống',
                 'start_year.integer' =>'Năm học bắt đầu phải là số nguyên',
                 'start_year.unique' =>'Năm học bắt đầu đã tồn tại trong danh sách',
-               
+
                 'end_year.integer' =>'Năm học kết thúc phải số nguyên',
                 'end_year.digits'=> 'Năm học kết thúc phải đúng 4 ký tự',
                 'number_of_lessons.*.integer' =>'Số tiết học phải là số nguyên',
@@ -188,7 +191,7 @@ class WorkloadController extends Controller
                 'unit_id.*.required' =>'Đơn vị không được bỏ trống',
             ]
         );
-        if($validator->passes()){
+        if ($validator->passes()) {
             //get id employee
 
             $pp = strtoupper($request->employee_code);
@@ -226,15 +229,15 @@ class WorkloadController extends Controller
                 $workload->save();
             }
             return redirect()->back()->with('message', 'Thêm thành công');
-        }else{
-
+        } else {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-
     }
     //
     public function getUpdateWorkload($workload_id)
     {
+        $this->authorize('cud', PI::first());
+
         $se = Semester::all();
         $workload = Workload::find($workload_id);
         $pi = PI::find($workload->pi->id);
@@ -246,7 +249,9 @@ class WorkloadController extends Controller
 
     public function postUpdateWorkload(Request $request, $workload_id)
     {
-        $value_start_year = \Request::get('start_year');
+        $this->authorize('cud', PI::first());
+
+        $value_start_year = (int)\Request::get('start_year');
         $request->validate(
         [
           'subject_code'=> 'required|alpha_num',
@@ -263,21 +268,19 @@ class WorkloadController extends Controller
           'start_year' => 'required_if:session_new,==,1|nullable|unique:workloadsessions,start_year',
 
           'end_year' => [
-            'required_if:session_new,==,1',
-            'gt:start_year',
-            'digits:4',
-            'integer',
-            'nullable',
-                                    function ($attribute, $value, $fail) use ($value_start_year) {
-                                        if(is_int($value)){
-                                            if ($value - $value_start_year != 1) {
-                                                $fail('Năm kết thúc phải lớn hơn năm bắt đầu 1 năm');
-                                            }
-                                        }else{
-                                            $fail('Năm kết thúc phải là số');
-                                        }
-                                    }
-            ],
+                            'required_if:session_new,==,1',
+                            'gt:start_year',
+                            'digits:4',
+                            'integer',
+                            'nullable',
+                            function ($attribute, $value, $fail) use ($value_start_year) {
+                                $value_end_year = (int)$value;
+
+                                if ($value_end_year - $value_start_year != 1) {
+                                    $fail('Năm kết thúc phải lớn hơn năm bắt đầu 1 năm');
+                                }
+                            }
+                        ],
         ],
         [
           'subject_code.required'=> 'Mã môn học không được bỏ trống',
@@ -384,6 +387,8 @@ class WorkloadController extends Controller
     }
     public function delete($workload_id)
     {
+        $this->authorize('cud', PI::first());
+
         $workload = Workload::find($workload_id);
         $workload->delete();
         return redirect()->back()->with('message', 'Xóa thông tin nhân viên thành công');
@@ -391,6 +396,7 @@ class WorkloadController extends Controller
 
     public function import(Request $request)
     {
+        $this->authorize('cud', PI::first());
         $request->validate(
             [
               'import_file' => 'required|mimetypes:application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|file'
@@ -428,8 +434,7 @@ class WorkloadController extends Controller
         $workload = Workload::find($id_workload);
         if ($this->checkIsOwnerPermisson($pi, $workload)) {
             return view('employee.workload.workload-details', compact('workload', 'pi'));
-        }
-        else{
+        } else {
             return abort('403');
         }
     }
@@ -476,9 +481,10 @@ class WorkloadController extends Controller
         return response()->download($file, 'Template Job Workload.xlsx', $headers);
     }
 
-    public function fetch(){
+    public function fetch()
+    {
         $query = \Request::get('query');
-        $pi = PI::select('employee_code','full_name')->where('employee_code','like','%'.$query.'%')->get();
+        $pi = PI::select('employee_code', 'full_name')->where('employee_code', 'like', '%'.$query.'%')->get();
         return response()->json($pi);
     }
 
@@ -492,17 +498,21 @@ class WorkloadController extends Controller
     }
     public function getyear()
     {
-        $yearlist = WorkloadSession::orderBy('start_year','desc')->paginate(10);
+        $yearlist = WorkloadSession::orderBy('start_year', 'desc')->paginate(10);
 
-        return view('admin.schoolyear.year-list', compact( 'yearlist'));
+        return view('admin.schoolyear.year-list', compact('yearlist'));
     }
     public function getaddyear()
     {
+        $this->authorize('cud', PI::first());
+
         return view('admin.schoolyear.schoolyear-add');
     }
     public function postaddyear(Request $request)
     {
-        $value_start_year = \Request::get('start_year');
+        $this->authorize('cud', PI::first());
+
+        $value_start_year = (int)\Request::get('start_year');
         $request->validate(
             [
 
@@ -513,14 +523,11 @@ class WorkloadController extends Controller
                     'integer',
                     'nullable',
                     function ($attribute, $value, $fail) use ($value_start_year) {
-                        if(is_int($value)){
-                            if ($value - $value_start_year != 1) {
-                                $fail('Năm kết thúc phải lớn hơn năm bắt đầu 1 năm');
-                            }
-                        }else{
-                            $fail('Năm kết thúc phải là số');
+                        $value_end_year = (int)$value;
+
+                        if ($value_end_year - $value_start_year != 1) {
+                            $fail('Năm kết thúc phải lớn hơn năm bắt đầu 1 năm');
                         }
-                       
                     }
                 ],
 
@@ -546,12 +553,16 @@ class WorkloadController extends Controller
     }
     public function getupdateyear($id)
     {
+        $this->authorize('cud', PI::first());
+
         $yearlist = WorkloadSession::Find($id);
-        return view('admin.schoolyear.schoolyear-update', compact( 'yearlist'));
+        return view('admin.schoolyear.schoolyear-update', compact('yearlist'));
     }
-    public function postupdateyear(Request $request , $id)
+    public function postupdateyear(Request $request, $id)
     {
-        $value_start_year = \Request::get('start_year');
+        $this->authorize('cud', PI::first());
+
+        $value_start_year = (int)\Request::get('start_year');
         $request->validate(
             [
 
@@ -562,14 +573,11 @@ class WorkloadController extends Controller
                     'integer',
                     'nullable',
                     function ($attribute, $value, $fail) use ($value_start_year) {
-                        if(is_int($value)){
-                            if ($value - $value_start_year != 1) {
-                                $fail('Năm kết thúc phải lớn hơn năm bắt đầu 1 năm');
-                            }
-                        }else{
-                            $fail('Năm kết thúc phải là số');
+                        $value_end_year = (int)$value;
+
+                        if ($value_end_year - $value_start_year != 1) {
+                            $fail('Năm kết thúc phải lớn hơn năm bắt đầu 1 năm');
                         }
-                       
                     }
                 ],
 
@@ -593,14 +601,13 @@ class WorkloadController extends Controller
 
         return redirect()->back()->with('message', 'Cập nhật thành công');
     }
-    public function deleteschoolyear($id){
-
+    public function deleteschoolyear($id)
+    {
+        $this->authorize('cud', PI::first());
 
         $school_year = WorkloadSession::find($id);
-        Workload::where('session_id',$school_year->id)->delete();
+        Workload::where('session_id', $school_year->id)->delete();
         $school_year->delete();
         return redirect()->back()->with('message', 'Xóa năm học thành công');
     }
-
-
 }

@@ -15,12 +15,12 @@ class CreateScientificResearchTopicsTable extends Migration
     {
         Schema::create('scientific_research_topics', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name_of_topic');
-            $table->string('start_year');
-            $table->string('end_year');
-            $table->integer('topic_level_id')->unsigned();
-            $table->integer('scientific_background_id')->unsigned();
-            $table->string('responsibility');
+            $table->string('name_of_topic')->nullable();
+            $table->string('start_year')->nullable();
+            $table->string('end_year')->nullable();
+            $table->integer('topic_level_id')->nullable()->unsigned();
+            $table->integer('scientific_background_id')->nullable()->unsigned();
+            $table->string('responsibility')->nullable();
             $table->timestamps();
 
             $table->foreign('scientific_background_id')->references('id')->on('scientific_backgrounds');

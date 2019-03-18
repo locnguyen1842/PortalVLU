@@ -19,9 +19,12 @@
                 <div class="col-sm-12 form-horizontal">
                     <div class="panel panel-default">
                         <div class="panel-heading">Thông tin môn học <br>
+                        @can('cud',App\PI::first())
+
                             <a href="{{route('admin.workload.update',$workload->id)}}">
                                 <button type="button" name="button" class="btn btn-xs btn-primary">Cập nhật</button>
                             </a>
+                            @endcan
                         </div>
                         <div class="panel-body">
 

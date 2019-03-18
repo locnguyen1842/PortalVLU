@@ -59,6 +59,12 @@ class ScientificBackground extends Model
                     $highest_st = $degreedetail;
                 }
             }
+            else if($degreedetail->degree_id == 4 ||$degreedetail->degree_id == 5){
+                if($degreedetail->degree->alias >= $highest_st_al){
+                    $highest_st_al = $degreedetail->degree->alias;
+                    $highest_st = $degreedetail;
+                }
+            }
         }
         return $highest_st; //return a degreedetail
     }

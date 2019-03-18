@@ -40,9 +40,11 @@
                 @endif
                 <div class="panel panel-default">
                     <div class="panel-heading">Lý lịch sơ lược<br>
+                        @can('cud',App\PI::first())
                         <a href="{{route('admin.sb.update',$pi_id)}}">
                                 <button type="button" name="button" class="btn btn-xs btn-primary">Cập nhật</button>
                             </a>
+                        @endcan
                     </div>
                     <div class="panel-body">
                         <form class="form-horizontal">

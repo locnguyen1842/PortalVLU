@@ -26,11 +26,11 @@
                 <div class="form-group">
                     <div class="col-sm-6">
                         <label>Năm bắt đầu</label>
-                        <input required type="text" class="form-control" name="start_year" placeholder="Nhập năm bắt đầu">
+                        <input required type="number" class="form-control" name="start_year" placeholder="Nhập năm bắt đầu">
                     </div>
                     <div class="col-sm-6">
                         <label>Năm kết thúc</label>
-                        <input required type="text" class="form-control" name="end_year" placeholder="Nhập năm kết thúc" >
+                        <input required type="number" class="form-control" name="end_year" placeholder="Nhập năm kết thúc" >
                     </div>
                 </div>
                 <div class="form-group" style="margin-bottom:0">

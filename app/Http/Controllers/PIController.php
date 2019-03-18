@@ -50,6 +50,7 @@ class PIController extends Controller
     }
     public function getAdd()
     {
+        $this->authorize('cud', PI::first());
         $nations = Nation::all();
         $units = Unit::all();
 
@@ -57,6 +58,7 @@ class PIController extends Controller
     }
     public function postAdd(Request $request)
     {
+        $this->authorize('cud', PI::first());
         $request->validate(
           [
             'employee_code'=> 'required|unique:personalinformations,employee_code',
@@ -121,8 +123,8 @@ class PIController extends Controller
         $pi->nation_id= $request->nation;
         $pi->date_of_birth= $request->date_of_birth;
         $pi->place_of_birth= $request->place_of_birth;
-        $pi->permanent_address= $request->permanent_address;
-        $pi->contact_address= $request->contact_address;
+        // $pi->permanent_address= $request->permanent_address;
+        // $pi->contact_address= $request->contact_address;
         $pi->phone_number= $request->phone_number;
         $pi->email_address= $request->email_address;
         $pi->position= $request->position;
@@ -176,6 +178,7 @@ class PIController extends Controller
     //get data personal information
     public function getupdate($id)
     {
+        $this->authorize('cud', PI::first());
         $pi = PI::Find($id);
         $nations = Nation::all();
         $units = Unit::all();
@@ -185,9 +188,9 @@ class PIController extends Controller
     public function postupdate(Request $request, $id)
     {
 
-
         //post data
         $pi = PI::Find($id);
+        $this->authorize('cud', $pi);
         $request->validate(
           [
               'full_name'=> 'required|min:4|max:60',
@@ -280,7 +283,9 @@ class PIController extends Controller
 
     public function recoverypassword($pi_id)
     {
+
         $pi = PI::find($pi_id);
+        $this->authorize('cud', $pi);
         //strtoupper cho nó in hoa khi gõ pass
         //chỉ cần thay đổi trường pwd la dc
         if ($pi->admin != '') {
@@ -298,6 +303,8 @@ class PIController extends Controller
 
     public function import(Request $request)
     {
+        $this->authorize('cud', PI::first());
+
         $request->validate(
         [
           'import_file' => 'required|mimetypes:application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|file'
@@ -317,6 +324,8 @@ class PIController extends Controller
 
     public function delete($pi_id)
     {
+        $this->authorize('cud', PI::first());
+
         $pi = PI::find($pi_id);
         $pi->show = 0;
         $pi->save();
@@ -330,6 +339,7 @@ class PIController extends Controller
     public function rolechange(Request $request, $pi_id)
     {
         $pi = PI::find($pi_id);
+        $this->authorize('cud', $pi);
         if ($request->role == 0) {
             //check if is admin
             if ($pi->admin !='') {
@@ -358,6 +368,7 @@ class PIController extends Controller
     }
     public function getdataimport(Request $request)
     {
+        $this->authorize('cud', PI::first());
         // dd('a');
         $validator = Validator::make(
           $request->all(),
@@ -409,4 +420,6 @@ class PIController extends Controller
         }
         return response()->json(['error'=>$validator->errors()->all()]);
     }
+
+
 }

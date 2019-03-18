@@ -27,6 +27,8 @@ class ScientificBackgroundController extends Controller
 
     public function getupdateAdmin($pi_id)
     {
+        $this->authorize('cud', PI::first());
+
         $sb = ScientificBackground::where('personalinformation_id', $pi_id)->firstOrFail();
         $nations = Nation::all();
         $units = Unit::all();
@@ -36,6 +38,8 @@ class ScientificBackgroundController extends Controller
 
     public function postupdateAdmin($pi_id,Request $request)
     {
+        $this->authorize('cud', PI::first());
+
         $pi = PI::find($pi_id);
         $request->validate(
             [

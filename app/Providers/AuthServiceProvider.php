@@ -9,6 +9,8 @@ use App\Workload;
 use App\Policies\WorkloadPolicy;
 use App\ScientificBackground;
 use App\Policies\SBPolicy;
+use App\PI;
+use App\Policies\PIPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -23,6 +25,7 @@ class AuthServiceProvider extends ServiceProvider
         DegreeDetail::class => DegreePolicy::class,
         Workload::class => WorkloadPolicy::class,
         ScientificBackground::class => SBPolicy::class,
+        PI::class => PIPolicy::class,
 
     ];
 

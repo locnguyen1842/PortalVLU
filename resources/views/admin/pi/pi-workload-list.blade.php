@@ -40,9 +40,11 @@
                 @endif
                 <div class="panel panel-default">
                     <div class="panel-heading">Khối lượng công việc<br>
+                        @can('cud',App\PI::first())
                         <a href="{{route('admin.workload.add','pi_id='.$pi_id)}}">
                             <button type="button" name="button" class="btn btn-xs btn-success">Thêm</button>
                         </a>
+                        @endcan
                     </div>
                     <div class="panel-body">
                             <form class="form-horizontal" action="{{route('admin.pi.workload.index',$pi_id)}}" method="get">
@@ -181,6 +183,8 @@
                                     <td class="col-sm-1">{{$item->theoretical_hours}}</td>
                                     <td class="col-sm-1">{{$item->practice_hours}}</td>
                                     <td class="col-sm-1">{{$item->semester->alias}}</td>
+                        @can('cud',App\PI::first())
+
                                     <td class="col-sm-1">
                                         <a href="{{route('admin.workload.update',$item->id)}}" data-toggle="tooltip"
                                             data-placement="top" title="" data-original-title="Cập nhật" href="javascript:"
@@ -196,8 +200,12 @@
                                             </span>
                                         </a>
                                     </td>
-
+                            @else
+                            <td></td>
+                            @endcan
                                 </tr>
+                        @can('cud',App\PI::first())
+
                                 {{--modal delete workload--}}
 
                                 <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
@@ -219,11 +227,11 @@
                                 </div>
 
 
-
+                                @endcan
                                 @endforeach
                                 @else
                                 <tr>
-                                    <td colspan="5" class="text-center">Không có bất kỳ dữ liệu nào được tìm thấy</td>
+                                    <td colspan="10" class="text-center">Không có bất kỳ dữ liệu nào được tìm thấy</td>
                                 </tr>
                                 @endif
 

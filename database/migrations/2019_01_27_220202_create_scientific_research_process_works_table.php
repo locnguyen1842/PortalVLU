@@ -15,9 +15,9 @@ class CreateScientificResearchProcessWorksTable extends Migration
     {
         Schema::create('scientific_research_process_works', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name_of_works');
-            $table->string('year_of_publication');
-            $table->string('name_of_journal');
+            $table->string('name_of_works')->nullable();
+            $table->string('year_of_publication')->nullable();
+            $table->string('name_of_journal')->nullable();
             $table->integer('scientific_background_id')->unsigned();
             $table->timestamps();
 

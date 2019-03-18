@@ -60,7 +60,7 @@
                     </select>
                 </div>
                 <div class="session_new col-sm-6 hide">
-                    <label>Tạo mới năm học</label>
+                    <label>Tạo mới năm học <span style="color: red">*</span></label>
                     <div class="form-horizontal">
                         <div class="col-sm-6 form-horizontal-none-pl">
                             <input type="text" class="form-control" name="start_year" placeholder="Nhập năm bắt đầu"

@@ -31,9 +31,12 @@
     <img src="{{asset('img/loader.gif')}}" alt="Đang tải">
   </div>
     <div class="panel-heading">Danh sách thông tin nhân viên<br>
+        @can('cud', $pis->first())
         <a href="{{route('admin.pi.add')}}">
             <button type="button" name="button" class="btn btn-xs btn-success">Thêm mới</button>
         </a>
+        @endcan
+
     </div>
     <div class="panel-body">
         <div class="form-group">
@@ -52,6 +55,8 @@
                     </div>
                 </div>
             </form>
+            @can('cud', $pis->first())
+
             <form class="form-horizontal" action="{{route('admin.pi.import')}}" id="pi-import-form" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="col-sm-6">
@@ -78,7 +83,9 @@
                     </div>
                 </div>
             </form>
+            @endcan
             {{-- Loading Div --}}
+            @can('cud', $pis->first())
 
             {{-- Modal Import --}}
             <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="pi-import-modal">
@@ -129,6 +136,7 @@
                         </div>
 
                         </div>
+
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" id="btn-pi-yes">Tải lên</button>
                             <button type="button" class="btn btn-default" id="btn-pi-no">Hủy bỏ</button>
@@ -136,6 +144,9 @@
                     </div>
                 </div>
             </div>
+            {{-- end modal --}}
+            @endcan
+
             @if($search !="")
             <div class="col-sm-6">
                 <div class="col-sm-3">
@@ -163,8 +174,9 @@
 
                     <th>Mã NV</th>
                     <th>Họ Tên</th>
-                    <th>Đơn vị</th>
+
                     <th>Ngày Sinh</th>
+                    <th>Đơn vị</th>
                     <th></th>
                 </tr>
             </thead>
@@ -181,8 +193,11 @@
                         </a>
                     </td>
                     <td class="col-sm-3">{{$item->full_name}}</td>
-                    <td class="col-sm-2">{{$item->unit->name}}</td>
+
                     <td class="col-sm-2">{{date('d-m-Y', strtotime($item->date_of_birth))}}</td>
+                    <td class="col-sm-2">{{$item->unit->name}}</td>
+                    @can('cud', $pis->first())
+
                     <td class="col-sm-3">
                       <a href="{{route('admin.pi.update',$item->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Cập nhật" href="javascript:" class="tooltip-test">
                           <span class=""><i class="fa fa-lg fa-edit text-primary"></i>
@@ -195,8 +210,13 @@
                           </span>
                       </a>
                      </td>
+                     @else
+                     <td></td>
+                     @endcan
 
                 </tr>
+        @can('cud', $pis->first())
+
                 {{--modal delete pi--}}
 
                     <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="pi-delete-modal">
@@ -215,12 +235,13 @@
                         </div>
                     </div>
 
-
+{{-- end modal --}}
+@endcan
 
                 @endforeach
               @else
               <tr>
-                <td colspan="5" class="text-center">Không có bất kỳ dữ liệu nào được tìm thấy</td>
+                <td colspan="4" class="text-center">Không có bất kỳ dữ liệu nào được tìm thấy</td>
               </tr>
             @endif
 

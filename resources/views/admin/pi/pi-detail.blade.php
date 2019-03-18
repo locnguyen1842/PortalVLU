@@ -49,9 +49,12 @@
 
                                 <div class="panel panel-default">
                                     <div class="panel-heading">Thông tin cá nhân <br>
+        @can('cud', $pi)
+
                                         <a href="{{route('admin.pi.update',$pi->id)}}">
                                             <button type="button" name="button" class="btn btn-xs btn-primary">Cập nhật</button>
                                         </a>
+                                        @endcan
                                     </div>
                                     <div class="panel-body">
                                         <form class="form-horizontal" action="{{route('admin.pi.detail',$pi->id)}}" method="get">
@@ -96,11 +99,11 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputPassword3" class="col-sm-3  ">Địa chỉ liên lạc </label>
-                                                <span for="" class="col-sm-9 text-nowrap">{{$pi->contact_address}}</span>
+                                                <span for="" class="col-sm-9 text-nowrap">{{$pi->contact_address_id}}</span>
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputPassword3" class="col-sm-3  ">Địa chỉ thường trú </label>
-                                                <span for="" class="col-sm-9 text-nowrap">{{$pi->permanent_address}}</span>
+                                                <span for="" class="col-sm-9 text-nowrap">{{$pi->permanent_address_id}}</span>
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputEmail3" class="col-sm-3  ">CMND </label>
@@ -126,9 +129,12 @@
                             <div class="col-sm-12">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">Thông tin bằng cấp <br>
+        @can('cud', $pi)
+
                                         <a href="{{route('admin.pi.degree.create',$pi->id)}}">
                                             <button type="button" name="button" class="btn btn-xs btn-success">Thêm mới</button>
                                         </a>
+                                        @endcan
                                     </div>
                                     <div class="panel-body">
                                         <form class="form-horizontal">
@@ -169,10 +175,12 @@
                                                 <label for="inputEmail3" class="col-sm-4 ">Vai trò</label>
                                                 <span for="" class="col-sm-3 text-nowrap">{{$pi->admin =='' ? 'Người
                                                     dùng':'Quản trị viên' }} </span>
+                                                    @can('cud', $pi)
                                                 <span class="col-sm-5 text-nowrap"><a id="change_role_show" href="#"><small>Thay
                                                             đổi</small></a></span>
+                                                            @endcan
                                             </div>
-
+                                            @can('cud', $pi)
                                             <div class="form-group">
                                                 <label for="inputEmail3" class="col-sm-4 ">Mật khẩu </label>
                                                 <span for="" class="col-sm-8 text-nowrap">
@@ -183,6 +191,7 @@
                                                 </span>
 
                                             </div>
+
                                             {{-- Modal Change ROles Account --}}
                                             <form action="{{route('admin.pi.role.change',$pi->id)}}" method="post" id="change_role">
                                                 {{csrf_field()}}
@@ -229,7 +238,9 @@
                                                     </div>
                                                 </div>
                                             </form>
+                                            @endcan
                                             {{-- Modal Reset Password --}}
+                                            @can('cud', $pi)
                                             <form id="recovery_password" action="{{route('admin.pi.password.recovery',$pi->id)}}"
                                                 method="get">
                                                 {{csrf_field()}}
@@ -254,6 +265,7 @@
                                                 </div>
 
                                             </form>
+                                            @endcan
                                         </div>
                                     </div>
                                 </div>

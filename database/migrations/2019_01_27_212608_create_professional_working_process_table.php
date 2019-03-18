@@ -15,10 +15,10 @@ class CreateProfessionalWorkingProcessTable extends Migration
     {
         Schema::create('professional_working_process', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('period_time');
-            $table->string('place_of_work');
-            $table->string('work_of_undertake');
-            $table->integer('scientific_background_id')->unsigned();
+            $table->string('period_time')->nullable();
+            $table->string('place_of_work')->nullable();
+            $table->string('work_of_undertake')->nullable();
+            $table->integer('scientific_background_id')->nullable()->unsigned();
             $table->timestamps();
             $table->foreign('scientific_background_id','sb_professional_process_foreign')->references('id')->on('scientific_backgrounds');
 

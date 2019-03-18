@@ -15,10 +15,10 @@ class CreateTrainingProcessPostgraduateEducationDoctorDegreesTable extends Migra
     {
         Schema::create('training_process_postgraduate_education_doctor_degrees', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('field_of_study');
-            $table->string('year_of_issue');
-            $table->string('place_of_training');
-            $table->string('thesis_title');
+            $table->string('field_of_study')->nullable();
+            $table->string('year_of_issue')->nullable();
+            $table->string('place_of_training')->nullable();
+            $table->string('thesis_title')->nullable();
             $table->integer('scientific_background_id')->unsigned();
             $table->timestamps();
 

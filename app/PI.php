@@ -16,8 +16,6 @@ class PI extends Model
       'gender',
       'date_of_birth',
       'place_of_birth',
-      'permanent_address',
-      'contact_address',
       'email_address',
       'phone_number',
       'identity_card',
@@ -29,6 +27,10 @@ class PI extends Model
       'professional_title',
       'unit_id',
       'new',
+      'home_town',
+      'fax',
+      'permanent_address_id',
+      'contact_address_id',
     ];
 
     public function degreedetails()
@@ -55,7 +57,26 @@ class PI extends Model
         return $this->belongsTo('App\Unit','unit_id','id');
     }
 
+    public function academic_ranks()
+    {
+        return $this->hasMany('App\AcademicRank','personalinformation_id','id');
+    }
 
+    public function teachers()
+    {
+        return $this->hasMany('App\Teacher','personalinformation_id','id');
+    }
+    public function officers()
+    {
+        return $this->hasMany('App\Officer','personalinformation_id','id');
+    }
+
+    public function permanent_address(){
+        return $this->belongsTo('App\Address','permanent_address_id','id');
+    }
+    public function contact_address(){
+        return $this->belongsTo('App\Address','contact_address_id','id');
+    }
 
 
 }

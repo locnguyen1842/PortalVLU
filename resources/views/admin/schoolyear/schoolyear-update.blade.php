@@ -26,11 +26,11 @@
                 <div class="form-group">
                     <div class="col-sm-6">
                         <label>Năm bắt đầu</label>
-                        <input type="text" class="form-control" name="start_year" placeholder="Nhập năm bắt đầu" value="{{$yearlist->start_year}}">
+                        <input type="number" class="form-control" name="start_year" placeholder="Nhập năm bắt đầu" value="{{$yearlist->start_year}}">
                     </div>
                     <div class="col-sm-6">
                         <label>Năm kết thúc</label>
-                        <input type="text" class="form-control" name="end_year" placeholder="Nhập năm kết thúc" value="{{$yearlist->end_year}}">
+                        <input type="number" class="form-control" name="end_year" placeholder="Nhập năm kết thúc" value="{{$yearlist->end_year}}">
                     </div>
 
                 </div>

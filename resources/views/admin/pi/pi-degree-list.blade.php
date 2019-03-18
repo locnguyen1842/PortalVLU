@@ -15,58 +15,12 @@
 @section('content')
 <div class="panel panel-default">
     <div class="panel-heading">Danh sách bằng cấp<br>
+        @can('cud', $pi)
         <a href="{{route('admin.pi.degree.create',$pi->id)}}">
             <button type="button" name="button" class="btn btn-xs btn-success">Thêm mới</button>
         </a>
+        @endcan
     </div>
-    {{-- <div class="panel-body">
-        <div class="form-group">
-            <form class="form-horizontal" action="{{route('admin.pi.index')}}" method="get">
-                <div class="col-sm-6">
-                    <div class="col-sm-3">
-                        <label class="control-label">Tìm kiếm</label>
-                    </div>
-                    <div class="col-sm-9">
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="search" placeholder="Nhập mã nv, tên hoặc cmnd">
-                            <span class="input-group-btn">
-                                <button class="btn btn-primary" type="submit">Tìm</button>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </form>
-            <div class="col-sm-2">
-            </div>
-
-                <div class="col-sm-4">
-                    <label class="control-label col-sm-4">Chọn tệp</label>
-                    <div class="col-sm-8">
-
-                        <input type="file" id="excel-import"  name="import_file" class="custom-file-input excel-default col-sm-4">
-                        <button type="submit" name="button" class="btn btn-danger">Tải lên</button>
-                    </div>
-                </div>
-
-            @if($search !="")
-            <div class="col-sm-6">
-                <div class="col-sm-3">
-                    <label class="control-label">Tìm theo </label>
-                </div>
-                <div class="col-sm-9">
-                    <div class="">
-                        <a data-toggle="tooltip" data-placement="right" title="" data-original-title="Xóa" href="javascript:" class="search_tag tooltip-test">
-                            <span class="badge badge-primary">{{$search}}
-                                <span class="mdi mdi-close"></span>
-                            </span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            @endif
-        </div>
-    </div> --}}
     <div class="table-responsive">
         <table class="table table-hover" action="{{route('admin.pi.degree.index',$pi->id)}}" method="get" style="margin-bottom:0">
             <thead>
@@ -89,7 +43,7 @@
                     <td class="col-sm-2">{{date('d-m-Y', strtotime($degree->date_of_issue))}}</td>
                         {{--{{date('d-m-Y',($degree->date_of_issue))}}--}}
                     <td class="col-sm-2">{{$degree->place_of_issue}}</td>
-
+                    @can('cud', $pi)
                     <td class="col-sm-2">
                         <a href="{{route('admin.pi.degree.update',$degree->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Cập nhật" class="tooltip-test">
                       <span class=""><i class="fa fa-lg fa-edit text-primary"></i>
@@ -102,9 +56,11 @@
                       </span>
                         </a>
                     </td>
-
+                    @else
+                    <td></td>
+                    @endcan
                     </tr>
-
+                    @can('cud', $pi)
                     <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="degree-delete-modal">
 
                         <div class="modal-dialog modal-sm">
@@ -120,6 +76,7 @@
                             </div>
                         </div>
                     </div>
+                    @endcan
             @endforeach
           @else
             <tr>
