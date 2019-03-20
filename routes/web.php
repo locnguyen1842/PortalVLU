@@ -100,6 +100,10 @@ Route::prefix('admin')->group(function () {
         //delete school year
         Route::get('/year-delete/{id}', 'WorkloadController@deleteschoolyear')->name('admin.schoolyear.delete');
 
+        // statistic
+        Route::get('/statistical', 'StatisticController@index')->name('admin.statistic.index');
+
+
     });
 });
 

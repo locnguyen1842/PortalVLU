@@ -102,6 +102,12 @@ body.cm-admin-login{
 .mb-10{
   margin-bottom: 10px;
 }
+.mb-5{
+    margin-bottom: 5px !important;
+  }
+.mb-25{
+    margin-bottom: 25px;
+  }
 .table-wrapper-scroll-y {
   display: block;
   max-height: 350px;
@@ -169,4 +175,35 @@ ol.breadcrumb >.active {
 
 .help-text > a {
     cursor: pointer;
+}
+
+.statistic-table > thead > tr > th{
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+.statistic-table > tbody > tr > td{
+    text-align: center;
+    vertical-align: middle;
+
+}
+
+.statistic-table > tbody > tr.disabled{
+    background-color: #eee;
+
+}
+
+
+
+.statistic-table > tbody > tr > td.left{
+    text-align: left !important;
+}
+.statistic-table > tbody > tr > td.bold{
+    font-weight: bold;
+}
+
+
+.help-tr > td {
+    font-style: italic;
 }
