@@ -13,6 +13,10 @@ use App\Specialized;
 use Illuminate\Support\Facades\Gate;
 use App\Industry;
 use App\Unit;
+use App\Workload;
+use App\WorkloadSession;
+use App\Semester;
+use App\ScientificBackground;
 use Hash;
 
 class EmployeeController extends Controller
@@ -261,6 +265,90 @@ class EmployeeController extends Controller
         } else {
             return abort('403','Bạn không có quyền thực hiện thao tác này');
         }
+    }
+    public function getFaculty()
+    {
+
+        $pi = Auth::guard('employee')->user()->pi;
+
+        // $pis = PI::all();
+
+
+        //check if have any get request named 'search' then assign value to $search
+        $search =  \Request::get('search');
+        //query if $search have a value
+        $pis = PI::where(function ($query) use ($search) {
+            if ($search != null) {
+                $query->where(function ($q) use ($search) {
+                    $q->where('employee_code', 'like', '%'.$search.'%')
+                      ->orWhere('full_name', 'like', '%'.$search.'%')
+                      ->orWhere('identity_card', 'like', '%'.$search.'%');
+                });
+            }
+        })->orderBy('first_name', 'asc')->paginate(10)->appends(['search'=>$search]);
+
+
+        return view('employee.faculty.fa-list', compact('pis','search'));
+    }
+    public function getFacultydetail($id)
+    {
+        $pi = PI::find($id);
+        $dh_count = $pi->degreedetails->where('degree_id', 1)->count();
+        $ths_count = $pi->degreedetails->where('degree_id', 2)->count();
+        $ts_count = $pi->degreedetails->where('degree_id', 3)->count();
+
+
+        return view('employee.faculty.faculty-detail', compact('pi', 'dh_count', 'ths_count', 'ts_count'));
+    }
+    public function getfaWorkload($id)
+    {
+        $pi = PI::find($id);
+        $workloads_own_user = Workload::where('personalinformation_id', $id);
+        $max_year = WorkloadSession::max('end_year');
+        $workload_session = WorkloadSession::orderBy('start_year', 'desc')->get();
+        $semester = Semester::all();
+        $workload_session_current = WorkloadSession::where('end_year', $max_year)->first();//get current workload year study
+        $year_workload = \Request::get('year_workload');
+        $workload_session_current_id = $workload_session_current->id;
+        $search =  \Request::get('search');
+        $semester_filter = \Request::get('semester');
+
+        //query if $search have a value
+        $workloads = $workloads_own_user->where(function ($query) use ($search,$year_workload,$workload_session_current_id,$semester_filter) {
+            if ($search != null) {
+                $query->where(function ($q) use ($search) {
+                    $q->where('subject_code', 'like', '%'.$search.'%')
+                        ->orWhere('subject_name', 'like', '%'.$search.'%')
+                        ->orWhere(function ($q2) use ($search) {
+                            $q2->whereHas('unit', function ($q3) use ($search) {
+                                $q3->where('name', 'like', '%'.$search.'%')
+                                    ->orWhere('unit_code', 'like', '%'.$search.'%');
+                            });
+                        });
+                });
+            }
+            if ($semester_filter != null) {
+                if ($semester_filter !=4) {
+                    $query->whereHas('semester', function ($q) use ($semester_filter) {
+                        $q->where('alias', $semester_filter);
+                    });
+                }
+            }
+            if ($year_workload != null) {
+                $query->where(function ($q) use ($year_workload) {
+                    $q->where('session_id', $year_workload);
+                });
+            } elseif ($search ==null && $year_workload==null && $semester_filter ==null) {
+                $query->where('session_id', $workload_session_current_id);
+            }
+        })->orderBy('updated_at', 'desc')->get();
+
+        return view('employee.workload.workload-list', compact('pi','semester_filter', 'semester', 'workload_session', 'workload_session_current', 'workloads', 'search', 'year_workload', 'pi'));
+    }
+    public function getfacultysb($id)
+    {
+        $sb = ScientificBackground::where('personalinformation_id', $id)->firstOrFail();
+        return view('employee.faculty.fa-sb-detail', compact('id', 'sb'));
     }
 
 }
