@@ -147,6 +147,11 @@ Route::prefix('')->group(function () {
         //update scientific background
         Route::get('/scientific-background/update', 'ScientificBackgroundController@getupdateEmployeeSB')->name('employee.sb.update');
         Route::post('/scientific-background/update', 'ScientificBackgroundController@postupdateEmployeeSB')->name('employee.sb.update');
+        //faculty view
+        Route::get('/faculty-index', 'EmployeeController@getFaculty')->name('employee.faculty.index');
+        Route::get('/faculty-pi-detail/{id}', 'EmployeeController@getFacultydetail')->name('employee.faculty.detail');
+        Route::get('/faculty-workload-detail/{id}', 'EmployeeController@getfaWorkload')->name('employee.faculty.workload');
+        Route::get('/faculty-sb-detail/{id}', 'EmployeeController@getfacultysb')->name('employee.faculty.sb');
 
         //Print scientific background
         Route::get('/scientific-background/print', 'ScientificBackgroundController@indexPrint')->name('employee.sb.print');

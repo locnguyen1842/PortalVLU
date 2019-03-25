@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddColumnSpecializedToDeegreedetailsTable extends Migration
+class UpdateDegreedetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,11 @@ class AddColumnSpecializedToDeegreedetailsTable extends Migration
     public function up()
     {
         Schema::table('degreedetails', function (Blueprint $table) {
-            $table->integer('specialized_id')->unsigned()->nullable();
+            $table->integer('nation_of_issue_id')->unsigned()->default(1);
+            $table->string('degree_type')->nullable();
+            $table->foreign('nation_of_issue_id')->references('id')->on('countries');
 
-            $table->foreign('specialized_id')->references('id')->on('specializes');
+
         });
     }
 

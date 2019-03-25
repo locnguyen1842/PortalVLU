@@ -1,15 +1,29 @@
 @extends('employee.master')
 @section('title','Danh sách khối lượng công việc')
 @section('breadcrumb')
-    <div class="cm-flex">
-        <div class="cm-breadcrumb-container">
-            <ol class="breadcrumb">
-                {{-- <li><a href="#">Home</a></li> --}}
-                <li><a href="{{route('employee.pi.detail')}}">Thông tin cá nhân</a></li>
-                <li class="active">Khối lượng công việc</li>
-            </ol>
-        </div>
+<div class="cm-flex">
+    <div class="cm-breadcrumb-container">
+        <ol class="breadcrumb">
+            {{-- <li><a href="#">Home</a></li> --}}
+            {{--  <li class=""><a href="{{route('employee.pi.index')}}">Quản lý thông tin nhân viên</a></li>  --}}
+             <li class="">Chi tiết nhân viên - {{$pi->employee_code}}</li>
+            <li class="active">Khối lượng công việc</li>
+        </ol>
     </div>
+</div>
+@endsection
+@section('menu-tabs')
+<nav class="cm-navbar cm-navbar-default cm-navbar-slideup">
+        <div class="cm-flex">
+            <div class="nav-tabs-container  table-responsive">
+                <ul class="nav nav-tabs">
+                    <li class="{{url()->current() == route('employee.faculty.detail',$pi->id) ? 'active':''}}"><a href="{{ route('employee.faculty.detail',$pi->id) }}">Thông tin cá nhân</a></li>
+                    <li class="{{url()->current() == route('employee.faculty.workload',$pi->id) ? 'active':''}}"><a href="{{ route('employee.faculty.workload',$pi->id)}}">khối lượng công việc</a></li>
+                    <li class="{{url()->current() == route('employee.faculty.sb',$pi->id) ? 'active':''}}"><a href="{{ route('employee.faculty.sb',$pi->id) }}">lý lịch khoa học</a></li>
+                </ul>
+            </div>
+        </div>
+</nav>
 @endsection
 @section('content')
 @include('employee.layouts.Error')
@@ -18,7 +32,7 @@
     {{ session()->get('message') }}
 </div>
 @endif
-<div style="padding-top: 21px">
+<div style="padding-top: 71px">
     <div class="">
         <div class=" cm-fix-height">
             <div class="col-sm-12">
@@ -26,7 +40,7 @@
                     <div class="panel-heading">Khối lượng công việc<br>
                     </div>
                     <div class="panel-body">
-                        <form class="form-horizontal" action="{{route('employee.workload.index',$pi->id)}}" method="get">
+                        <form class="form-horizontal" action="{{route('employee.faculty.workload',$pi->id)}}" method="get">
                             <div class="form-group col-sm-6">
 
                                 <div class="col-sm-12">

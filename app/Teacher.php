@@ -14,7 +14,7 @@ class Teacher extends Model
         'title_id',
         'is_retired',
         'date_of_retirement',
-        'is_elite_teacher',
+        'is_excellent_teacher',
         'is_national_teacher',
     ];
 

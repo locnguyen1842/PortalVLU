@@ -383,7 +383,7 @@ class WorkloadController extends Controller
             }
         })->orderBy('updated_at', 'desc')->get();
 
-        return view('employee.workload.workload-list', compact('semester_filter', 'semester', 'workload_session', 'workload_session_current', 'workloads', 'search', 'year_workload', 'workload', 'pi'));
+        return view('employee.workload.workload-list', compact('semester_filter', 'semester', 'workload_session', 'workload_session_current', 'workloads', 'search', 'year_workload', 'pi'));
     }
     public function delete($workload_id)
     {

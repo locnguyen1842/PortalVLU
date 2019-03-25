@@ -8,8 +8,9 @@ class Country extends Model
 {
     protected $table = 'countries';
 
-    public function pis()
+
+    public function degree_details()
     {
-      return $this->hasMany('App\PI','country_id','id');
+      return $this->hasMany('App\DegreeDetail','nation_of_issue_id','id');
     }
 }

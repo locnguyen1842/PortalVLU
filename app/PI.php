@@ -31,6 +31,7 @@ class PI extends Model
       'fax',
       'permanent_address_id',
       'contact_address_id',
+      'is_activity',
     ];
 
     public function degreedetails()
@@ -57,18 +58,18 @@ class PI extends Model
         return $this->belongsTo('App\Unit','unit_id','id');
     }
 
-    public function academic_ranks()
+    public function academic_rank()
     {
-        return $this->hasMany('App\AcademicRank','personalinformation_id','id');
+        return $this->hasOne('App\AcademicRank','personalinformation_id','id');
     }
 
-    public function teachers()
+    public function teacher()
     {
-        return $this->hasMany('App\Teacher','personalinformation_id','id');
+        return $this->hasOne('App\Teacher','personalinformation_id','id');
     }
-    public function officers()
+    public function officer()
     {
-        return $this->hasMany('App\Officer','personalinformation_id','id');
+        return $this->hasOne('App\Officer','personalinformation_id','id');
     }
 
     public function permanent_address(){

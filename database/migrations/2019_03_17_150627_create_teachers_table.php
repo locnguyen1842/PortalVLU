@@ -20,7 +20,7 @@ class CreateTeachersTable extends Migration
             $table->integer('title_id')->unsigned();
             $table->boolean('is_retired')->nullable();
             $table->date('date_of_retirement')->nullable();
-            $table->boolean('is_elite_teacher')->nullable();
+            $table->boolean('is_excellent_teacher')->nullable();
             $table->boolean('is_national_teacher')->nullable();
             $table->timestamps();
 

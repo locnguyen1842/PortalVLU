@@ -11,6 +11,9 @@ class AcademicRank extends Model
     protected $fillable = [
         'type_id',
         'personalinformation_id',
+        'date_of_recognition',
+        'industry_id',
+        'specialized',
     ];
 
     public function pi(){
@@ -18,6 +21,10 @@ class AcademicRank extends Model
     }
     public function type(){
         return $this->belongsTo('App\AcademicRankType','type_id','id');
+    }
+
+    public function industry(){
+        return $this->belongsTo('App\Industry','industry_id','id');
     }
 
 

@@ -54,7 +54,7 @@ class PIController extends Controller
         $nations = Nation::all();
         $units = Unit::all();
 
-        return view('admin.pi.pi-add', compact('nations','units'));
+        return view('admin.pi.pi-add', compact('nations', 'units'));
     }
     public function postAdd(Request $request)
     {
@@ -182,7 +182,7 @@ class PIController extends Controller
         $pi = PI::Find($id);
         $nations = Nation::all();
         $units = Unit::all();
-        return view('admin.pi.pi-update', compact('pi', 'nations','units'));
+        return view('admin.pi.pi-update', compact('pi', 'nations', 'units'));
     }
     //post date update information
     public function postupdate(Request $request, $id)
@@ -283,7 +283,6 @@ class PIController extends Controller
 
     public function recoverypassword($pi_id)
     {
-
         $pi = PI::find($pi_id);
         $this->authorize('cud', $pi);
         //strtoupper cho nó in hoa khi gõ pass
@@ -368,7 +367,7 @@ class PIController extends Controller
     }
     public function getdataimport(Request $request)
     {
-        $this->authorize('cud', PI::first());
+        // $this->authorize('cud', PI::first());
         // dd('a');
         $validator = Validator::make(
           $request->all(),
@@ -385,28 +384,57 @@ class PIController extends Controller
             if ($request->has('import_file')) {
                 $import_file = $request->file('import_file');
                 $arr_pi  = (new GetPIImport)->toArray($import_file);
-                if (count($arr_pi) == 2) {
-                    if (count($arr_pi[0][0]) == 18) {
-                        if (count($arr_pi[1][0]) == 6) {
-                            //handle date time from excel to array for sheet 1
-                            foreach ($arr_pi[0] as $key => $value) {
-                                if ($key != 0) {
-                                    $date_of_birth = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[4]);
-                                    $date_of_issue = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[9]);
-                                    $date_of_recruitment = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[13]);
-                                    $arr_pi[0][$key][4] = $date_of_birth->format('d-m-Y');
-                                    $arr_pi[0][$key][9] = $date_of_issue->format('d-m-Y');
-                                    $arr_pi[0][$key][13] = $date_of_recruitment->format('d-m-Y');
+                $number_of_sheet = 3;
+                $excel_column_length_sheet_1 = 25;
+                $excel_column_length_sheet_2 = 8;
+                $excel_column_length_sheet_3 = 5;
+                if (count($arr_pi) == $number_of_sheet) {
+                    if (count($arr_pi[0][0]) == $excel_column_length_sheet_1) {
+                        if (count($arr_pi[1][0]) == $excel_column_length_sheet_2) {
+                            if (count($arr_pi[2][0]) == $excel_column_length_sheet_3) {
+                                //handle date time from excel to array for sheet 1
+                                foreach ($arr_pi[0] as $key => $value) {
+                                    if ($key != 0) {
+                                        $date_of_birth = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[4]);
+                                        $date_of_issue = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[8]);
+                                        $date_of_recruitment = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[12]);
+                                        if($value[20] == 'x'){
+                                            if($value[21] != null){
+                                                $date_of_retirement = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[21]);
+                                                $arr_pi[0][$key][21] = $date_of_retirement->format('d-m-Y');
+                                            }else{
+                                                $date_of_retirement = null;
+                                            }
+                                        }else{
+                                            $date_of_retirement = null;
+                                        }
+
+                                        $arr_pi[0][$key][4] = $date_of_birth->format('d-m-Y');
+                                        $arr_pi[0][$key][8] = $date_of_issue->format('d-m-Y');
+                                        $arr_pi[0][$key][12] = $date_of_recruitment->format('d-m-Y');
+
+
+                                    }
                                 }
-                            }
-                            //handle date time from excel to array for sheet 2
-                            foreach ($arr_pi[1] as $key => $value) {
-                                if ($key != 0) {
-                                    $date_of_issue = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[3]);
-                                    $arr_pi[1][$key][3] = $date_of_issue->format('d-m-Y');
+                                //handle date time from excel to array for sheet 2
+                                foreach ($arr_pi[1] as $key => $value) {
+                                    if ($key != 0) {
+                                        $date_of_issue = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[3]);
+                                        $arr_pi[1][$key][3] = $date_of_issue->format('d-m-Y');
+                                    }
                                 }
+                                //handle date time from excel to array for sheet 3
+                                foreach ($arr_pi[2] as $key => $value) {
+                                    if ($key != 0) {
+                                        $date_of_issue = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[3]);
+                                        $arr_pi[2][$key][3] = $date_of_issue->format('d-m-Y');
+                                    }
+                                }
+                                return response()->json($arr_pi);
+                            } else {
+                                return response()->json(['error'=>[0=>'File tải lên không đúng cấu trúc (Sheet 3) .Vui lòng xem lại file mẫu <small> '.'<a href="'.route('admin.pi.template.download').'"> (tải file mẫu)</a></small>']]);
+
                             }
-                            return response()->json($arr_pi);
                         } else {
                             return response()->json(['error'=>[0=>'File tải lên không đúng cấu trúc (Sheet 2) .Vui lòng xem lại file mẫu <small> '.'<a href="'.route('admin.pi.template.download').'"> (tải file mẫu)</a></small>']]);
                         }
@@ -420,6 +448,4 @@ class PIController extends Controller
         }
         return response()->json(['error'=>$validator->errors()->all()]);
     }
-
-
 }
