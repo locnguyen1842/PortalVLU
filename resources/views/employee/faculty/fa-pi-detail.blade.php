@@ -1,23 +1,25 @@
 @extends('employee.master')
 @section('title','Xem chi tiết thông tin cá nhân')
 @section('breadcrumb')
-        <div class="cm-flex">
-            <div class="cm-breadcrumb-container">
-                <ol class="breadcrumb">
-                    {{-- <li><a href="#">Home</a></li> --}}
-                    <li class="active">Thông tin cá nhân</li>
-                </ol>
-            </div>
-        </div>
+<div class="cm-flex">
+    <div class="cm-breadcrumb-container">
+        <ol class="breadcrumb">
+            {{-- <li><a href="#">Home</a></li> --}}
+            {{--  <li class=""><a href="{{route('employee.pi.index')}}">Quản lý thông tin nhân viên</a></li>  --}}
+             <li class="">Chi tiết nhân viên - {{$pi->employee_code}}</li>
+            <li class="active">Thông tin cá nhân</li>
+        </ol>
+    </div>
+</div>
 @endsection
 @section('menu-tabs')
 <nav class="cm-navbar cm-navbar-default cm-navbar-slideup">
         <div class="cm-flex">
             <div class="nav-tabs-container  table-responsive">
                 <ul class="nav nav-tabs">
-                    <li class="#"><a href="{{ route('employee.faculty.index') }}">Danh sách nhân viên</a></li>
-                    <li class="#"><a href="{{ route('employee.faculty.workload',$pi->id)}}">khối lượng công việc</a></li>
-                    <li class="#"><a href="{{ route('employee.faculty.sb',$pi->id) }}">lý lịch khoa học</a></li>
+                    <li class="{{url()->current() == route('employee.faculty.detail',$pi->id) ? 'active':''}}"><a href="{{ route('employee.faculty.detail',$pi->id) }}">Thông tin cá nhân</a></li>
+                    <li class="{{url()->current() == route('employee.faculty.workload',$pi->id) ? 'active':''}}"><a href="{{ route('employee.faculty.workload',$pi->id)}}">khối lượng công việc</a></li>
+                    <li class="{{url()->current() == route('employee.faculty.sb',$pi->id) ? 'active':''}}"><a href="{{ route('employee.faculty.sb',$pi->id) }}">lý lịch khoa học</a></li>
                 </ul>
             </div>
         </div>
@@ -30,16 +32,14 @@
             {{ session()->get('message') }}
         </div>
     @endif
-    <div id="" style="padding-top: 21px">
+    <div id="" style="padding-top: 71px">
         <div class="">
             <div class=" cm-fix-height">
                 <div class="col-sm-7">
                     <div class="col-sm-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">Thông tin cá nhân <br>
-                                <a href="#">
-                                    <button type="button" name="button" class="btn btn-xs btn-primary">Cập nhật</button>
-                                </a>
+
                             </div>
                             <div class="panel-body">
                                 <form class="form-horizontal" action="{{ route('employee.faculty.detail',$pi->id)}}" method="get">
@@ -113,9 +113,7 @@
                     <div class="col-sm-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">Thông tin bằng cấp <br>
-                                <a href="#">
-                                    <button type="button" name="button" class="btn btn-xs btn-success">Thêm mới</button>
-                                </a>
+
                             </div>
                             <div class="panel-body">
                                 <form class="form-horizontal">
@@ -141,27 +139,6 @@
 
                         </div>
                     </div>
-                    {{--  <div class="col-sm-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">Thông tin tài khoản</div>
-                            <div class="panel-body">
-                                <form class="form-horizontal" action="{{ route('employee.pi.detail',$employee->id) }}" method="get">
-                                    {{csrf_field()}}
-                                    <div class="form-group">
-                                        <label for="inputEmail3" class="col-sm-4 ">Tên tài khoản</label>
-                                        <span for="" class="col-sm-8 text-nowrap">{{$employee->username}}</span>
-
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputEmail3" class="col-sm-4 ">Mật khẩu </label>
-                                        <span for="" class="col-sm-8 text-nowrap"><a href="{{route('employee.pi.change.pass')}}">Thay đổi</a></span>
-
-
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>  --}}
                     <div class="col-sm-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">Thông tin nghề nghiệp</div>

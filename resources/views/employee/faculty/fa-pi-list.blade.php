@@ -55,97 +55,7 @@
                     </div>
                 </div>
             </form>
-            {{--  @can('cud', $pis->first())  --}}
 
-            {{--  <form class="form-horizontal" action="#" id="pi-import-form" method="post" enctype="multipart/form-data">
-                {{ csrf_field() }}
-                <div class="col-sm-6">
-                    <label for="import_file" class="control-label col-sm-4">
-                            Import
-
-
-                    </label>
-                    <div class="col-sm-8">
-                            <div class="input-group">
-                                    <input required type="file" id="excel-import"  name="import_file" class="form-control col-sm-4">
-                                    <span class="input-group-btn">
-                                            <button class="btn btn-primary" id="btn-import-submit" type="submit">Xem</button>
-                                        </span>
-
-                            </div>
-                            <span class="help-block">
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tải tệp mẫu" class="tooltip-test">
-                                        Tải về tệp mẫu <i class="fa fa-fw fa-lg fa-download"></i>
-                                    </a>
-                            </span>
-
-
-                    </div>
-                </div>
-            </form>  --}}
-            {{--  @endcan  --}}
-            {{-- Loading Div --}}
-            {{--  @can('cud', $pis->first())  --}}
-
-            {{-- Modal Import --}}
-            <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="pi-import-modal">
-
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title text-uppercase" id="header-modal"></h4>
-                            <br>
-                            <ul id="myTab" class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="false">Thông tin nhân viên</a></li>
-                                <li role="presentation" class=""><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="true">Học vị / Học hàm</a></li>
-
-                            </ul>
-                        </div>
-                        <div class="modal-body">
-                          <div id="myTabContent" class="tab-content">
-                            <div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
-                              <div class="table-responsive table-wrapper-scroll-y">
-                                  <table class="table table-hover">
-                                    <thead>
-                                        <tr class="heading-table">
-
-                                        </tr>
-                                    </thead>
-                                    <tbody class="row-table">
-
-                                    </tbody>
-                                  </table>
-                              </div>
-                            </div>
-                            <div role="tabpanel" class="tab-pane fade" id="profile" aria-labelledby="profile-tab">
-                              <div class="table-responsive table-wrapper-scroll-y">
-                                  <table class="table table-hover">
-                                    <thead>
-                                        <tr class="heading-table-2">
-
-                                        </tr>
-                                    </thead>
-                                    <tbody class="row-table-2">
-
-                                    </tbody>
-                                  </table>
-                              </div>
-                            </div>
-
-                        </div>
-
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" id="btn-pi-yes">Tải lên</button>
-                            <button type="button" class="btn btn-default" id="btn-pi-no">Hủy bỏ</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {{-- end modal --}}
-            {{--  @endcan  --}}
 
             @if($search !="")
             <div class="col-sm-6">
@@ -177,7 +87,6 @@
 
                     <th>Ngày Sinh</th>
                     <th>Đơn vị</th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>

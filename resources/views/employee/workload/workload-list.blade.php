@@ -11,18 +11,6 @@
         </div>
     </div>
 @endsection
-{{-- @section('menu-tabs')
-<nav class="cm-navbar cm-navbar-default cm-navbar-slideup">
-        <div class="cm-flex">
-            <div class="nav-tabs-container">
-                <ul class="nav nav-tabs">
-                    <li class="{{url()->current() == route('employee.pi.detail') ? 'active':''}}"><a href="{{route('employee.pi.detail')}}">Thông tin cá nhân</a></li>
-                    <li class="{{url()->current() == route('employee.workload.index') ? 'active':''}}"><a href="{{route('employee.workload.index')}}">Khối lượng công việc</a></li>
-                </ul>
-            </div>
-        </div>
-</nav>
-@endsection --}}
 @section('content')
 @include('employee.layouts.Error')
 @if(session()->has('message'))

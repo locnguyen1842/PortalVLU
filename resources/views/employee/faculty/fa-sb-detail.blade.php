@@ -6,7 +6,7 @@
         <ol class="breadcrumb">
             {{-- <li><a href="#">Home</a></li> --}}
             {{--  <li class=""><a href="{{route('employee.pi.index')}}">Quản lý thông tin nhân viên</a></li>  --}}
-             <li class=""><a href="{{ route('employee.pi.detail',$id) }}">Chi tiết nhân viên - {{App\PI::find($id)->employee_code}}</a></li>
+             <li class="">Chi tiết nhân viên - {{$pi->employee_code}}</li>
             <li class="active">Lý lịch khoa học</li>
         </ol>
     </div>
@@ -18,9 +18,9 @@
         <div class="cm-flex">
             <div class="nav-tabs-container  table-responsive">
                 <ul class="nav nav-tabs">
-                    <li class="#"><a href="{{ route('employee.faculty.index') }}">Danh sách nhân viên</a></li>
-                    {{--  <li class="#"><a href="{{ route('employee.faculty.workload',$pi->id)}}">khối lượng công việc</a></li>  --}}
-                    {{--  <li class="#"><a href="{{ route('employee.faculty.sb',$pi->id) }}">lý lịch khoa học</a></li>  --}}
+                    <li class="{{url()->current() == route('employee.faculty.detail',$pi->id) ? 'active':''}}"><a href="{{ route('employee.faculty.detail',$pi->id) }}">Thông tin cá nhân</a></li>
+                    <li class="{{url()->current() == route('employee.faculty.workload',$pi->id) ? 'active':''}}"><a href="{{ route('employee.faculty.workload',$pi->id)}}">khối lượng công việc</a></li>
+                    <li class="{{url()->current() == route('employee.faculty.sb',$pi->id) ? 'active':''}}"><a href="{{ route('employee.faculty.sb',$pi->id) }}">lý lịch khoa học</a></li>
                 </ul>
             </div>
         </div>
