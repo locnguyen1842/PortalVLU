@@ -150,20 +150,20 @@ class PIImport implements ToCollection, WithStartRow
                             Rule::in($units_name),
                         ],
             '*.16'=>    [
-                            'required',
+                            'nullable',
                             Rule::in($officer_types_name),
                         ],
             '*.17'=>    [
-                            'required',
+                            'nullable',
                             Rule::in($position_types_name),
                         ],
             '*.18'=> 'nullable',
             '*.19'=>    [
-                            'required',
+                            'nullable',
                             Rule::in($teacher_types_name),
                         ],
             '*.20'=>    [
-                            'required',
+                            'nullable',
                             Rule::in($teacher_titles_name),
                         ],
             '*.21'=>    'nullable',
@@ -200,22 +200,22 @@ class PIImport implements ToCollection, WithStartRow
           '*.14.required' => 'Mật khẩu không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
           '*.15.required' => 'Đơn vị không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
           '*.15.in' => 'Đơn vị không hợp lệ ( vị trí: :attribute|sheet :1 ) ',
-          '*.16.required' => 'Loại cán bộ không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
+        //   '*.16.required' => 'Loại cán bộ không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
           '*.16.in' => 'Loại cán bộ không hợp lệ ( vị trí: :attribute|sheet :1 ) ',
-          '*.17.required' => 'Chức vụ không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
+        //   '*.17.required' => 'Chức vụ không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
           '*.17.in' => 'Chức vụ không hợp lệ ( vị trí: :attribute|sheet :1 ) ',
           '*.18.required' => 'Kiêm nhiệm giảng dạy không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
-          '*.19.required' => 'Loại giảng viên không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
+        //   '*.19.required' => 'Loại giảng viên không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
           '*.19.in' => 'Loại giảng viên không hợp lệ ( vị trí: :attribute|sheet :1 ) ',
-          '*.20.required' => 'Chức danh nghề nghiệp không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
+        //   '*.20.required' => 'Chức danh nghề nghiệp không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
           '*.20.in' => 'Chức danh nghề nghiệp không hợp lệ ( vị trí: :attribute|sheet :1 ) ',
-          '*.22.required_if' => 'Ngày nghỉ hưu không hợp lệ ( vị trí: :attribute|sheet :1 ) ',
+        //   '*.22.required_if' => 'Ngày nghỉ hưu không hợp lệ ( vị trí: :attribute|sheet :1 ) ',
 
 
         ]
         )->validate();
         foreach ($rows as $row) {
-
+            // dd($rows);
             $row = array_map('trim',$row->toArray());
 
             //split first name
@@ -250,17 +250,32 @@ class PIImport implements ToCollection, WithStartRow
                 ]
             );
 
-            $officer = Officer::updateOrCreate(
-                [
-                    'personalinformation_id' => $pi->id,
-                ],
-                [
-                    'personalinformation_id' => $pi->id,
-                    'type_id' => OfficerType::where('name', 'like', '%'.$row[15].'%')->first()->id,
-                    'position_id' => PositionType::where('name', 'like', '%'.$row[16].'%')->first()->id,
-                    'is_concurrently' => ($row[17] == 'x') ? 1:0,
-                ]
-            );
+            if($row[15] != null){
+                $officer_type_id = OfficerType::where('name','like','%'.$row[15].'%')->first()->id;
+
+            }else{
+                $officer_type_id = null ;
+            }
+            if($row[16] != null){
+
+                $position_type_id = PositionType::where('name','like','%'.$row[16].'%')->first()->id;
+            }else{
+                $position_type_id = null;
+            }
+            if($row[15] != null){
+                $officer = Officer::updateOrCreate(
+                    [
+                        'personalinformation_id' => $pi->id,
+                    ],
+                    [
+                        'personalinformation_id' => $pi->id,
+                        'type_id' => $officer_type_id,
+                        'position_id' => $position_type_id,
+                        'is_concurrently' => ($row[17] == 'x') ? 1:0,
+                    ]
+                );
+            }
+
 
             if($row[20] == 'x'){
                 if($row[21] != null){
@@ -272,20 +287,35 @@ class PIImport implements ToCollection, WithStartRow
                 $date_of_retirement = null;
             }
 
-            $teacher = Teacher::updateOrCreate(
-                [
-                    'personalinformation_id' => $pi->id,
-                ],
-                [
-                    'personalinformation_id' => $pi->id,
-                    'type_id' => TeacherType::where('name', 'like', '%'.$row[18].'%')->first()->id,
-                    'title_id' => TeacherTitle::where('name', 'like', '%'.$row[19].'%')->first()->id,
-                    'is_retired' => ($row[20] == 'x') ? 1:0,
-                    'date_of_retirement' => $date_of_retirement,
-                    'is_excellent_teacher' => ($row[22] == 'x') ? 1:0,
-                    'is_national_teacher' => ($row[23] == 'x') ? 1:0,
-                ]
-            );
+            if($row[18] != null){
+                $teacher_type_id = TeacherType::where('name','like','%'.$row[18].'%')->first()->id;
+
+            }else{
+                $teacher_type_id = null;
+            }
+            if($row[19] != null){
+
+                $teacher_title_id = TeacherTitle::where('name','like','%'.$row[19].'%')->first()->id;
+            }else{
+                $teacher_title_id = null;
+            }
+            if($row[18] !=null){
+                $teacher = Teacher::updateOrCreate(
+                    [
+                        'personalinformation_id' => $pi->id,
+                    ],
+                    [
+                        'personalinformation_id' => $pi->id,
+                        'type_id' => $teacher_type_id,
+                        'title_id' => $teacher_title_id,
+                        'is_retired' => ($row[20] == 'x') ? 1:0,
+                        'date_of_retirement' => $date_of_retirement,
+                        'is_excellent_teacher' => ($row[22] == 'x') ? 1:0,
+                        'is_national_teacher' => ($row[23] == 'x') ? 1:0,
+                    ]
+                );
+            }
+
             //  // 7 8 9 10 => permanent address (address,ward,district,province)
             // $permanent_address = Address::updateOrCreate(
             //     [
