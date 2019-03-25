@@ -15,7 +15,8 @@ class AdminPIImport implements WithMultipleSheets
           0 => new PIImport,
 
           // Select by sheet name
-          1 => new DegreeDetailImport
+          1 => new DegreeDetailImport,
+         2 => new AcademicRankImport,
       ];
   }
 }

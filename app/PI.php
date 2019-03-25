@@ -31,6 +31,7 @@ class PI extends Model
       'fax',
       'permanent_address_id',
       'contact_address_id',
+      'is_activity',
     ];
 
     public function degreedetails()

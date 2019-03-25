@@ -11,6 +11,9 @@ class AcademicRank extends Model
     protected $fillable = [
         'type_id',
         'personalinformation_id',
+        'date_of_recognition',
+        'industry_id',
+        'specialized',
     ];
 
     public function pi(){

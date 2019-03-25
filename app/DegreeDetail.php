@@ -14,7 +14,9 @@ class DegreeDetail extends Model
         'personalinformation_id',
         'degree_id',
         'industry_id',
-        'specialized_id'
+        'specialized',
+        'nation_of_issue_id',
+        'degree_type',
     ];
 
     public function pi(){

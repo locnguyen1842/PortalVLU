@@ -97,14 +97,15 @@
                             <h4 class="modal-title text-uppercase" id="header-modal"></h4>
                             <br>
                             <ul id="myTab" class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="false">Thông tin nhân viên</a></li>
-                                <li role="presentation" class=""><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="true">Học vị / Học hàm</a></li>
+                                <li role="presentation" class="active"><a href="#sheet1" id="sheet1-tab" role="tab" data-toggle="tab" aria-controls="sheet1" aria-expanded="false">Thông tin nhân viên</a></li>
+                                <li role="presentation" class=""><a href="#sheet2" role="tab" id="sheet2-tab" data-toggle="tab" aria-controls="sheet2" aria-expanded="true">Thông tin bằng cấp</a></li>
+                                <li role="presentation" class=""><a href="#sheet3" role="tab" id="sheet3-tab" data-toggle="tab" aria-controls="sheet3" aria-expanded="true">Thông tin học hàm</a></li>
 
                             </ul>
                         </div>
                         <div class="modal-body">
                           <div id="myTabContent" class="tab-content">
-                            <div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
+                            <div role="tabpanel" class="tab-pane fade active in" id="sheet1" aria-labelledby="sheet1-tab">
                               <div class="table-responsive table-wrapper-scroll-y">
                                   <table class="table table-hover">
                                     <thead>
@@ -118,7 +119,7 @@
                                   </table>
                               </div>
                             </div>
-                            <div role="tabpanel" class="tab-pane fade" id="profile" aria-labelledby="profile-tab">
+                            <div role="tabpanel" class="tab-pane fade" id="sheet2" aria-labelledby="sheet2-tab">
                               <div class="table-responsive table-wrapper-scroll-y">
                                   <table class="table table-hover">
                                     <thead>
@@ -132,6 +133,20 @@
                                   </table>
                               </div>
                             </div>
+                            <div role="tabpanel" class="tab-pane fade" id="sheet3" aria-labelledby="sheet3-tab">
+                                <div class="table-responsive table-wrapper-scroll-y">
+                                    <table class="table table-hover">
+                                      <thead>
+                                          <tr class="heading-table-3">
+
+                                          </tr>
+                                      </thead>
+                                      <tbody class="row-table-3">
+
+                                      </tbody>
+                                    </table>
+                                </div>
+                              </div>
 
                         </div>
 
@@ -294,10 +309,13 @@
                 $('.heading-table-import-tr').remove();
                 $('.row-table-import-tr-1').remove();
                 $('.heading-table-import-tr-1').remove();
+                $('.row-table-import-tr-2').remove();
+                $('.heading-table-import-tr-2').remove();
                  if($.isEmptyObject(datas.error)){
                      $('#header-modal').text('Xem Trước : Thông tin nhân viên');
 
                      console.log(datas);
+                    //  handle sheet 1
                      $.each(datas[0],function(index,value){
 
                         if(index == 0){
@@ -336,6 +354,26 @@
                            $('.row-table-2').children('tr:last').append($('<td>',{'text':value3}));
                          });
                      });
+
+                     // handle sheet 3
+                     $.each(datas[2],function(index,value){
+                        if(index == 0){
+                          $.each(datas[2][0],function(index1, value1) {
+                              $('.heading-table-3').append($('<th>',{'text':value1,'class':'heading-table-import-tr-2 text-nowrap'}));
+
+                          });
+
+
+                        }
+                     });
+                     datas[2].shift();
+                     console.log(datas[2]);
+                     $.each(datas[2],function(index2, value2) {
+                         $('.row-table-3').append($('<tr>',{'class':'row-table-import-tr-2 text-nowrap'}));
+                         $.each(datas[2][index2],function(index3, value3) {
+                           $('.row-table-3').children('tr:last').append($('<td>',{'text':value3}));
+                         });
+                     });
                      $("#pi-import-modal").modal('show');
 
                      var modalConfirm = function(callback){
@@ -362,6 +400,8 @@
                            $('.heading-table-import-tr').remove();
                            $('.row-table-import-tr-1').remove();
                            $('.heading-table-import-tr-1').remove();
+                           $('.row-table-import-tr-2').remove();
+                           $('.heading-table-import-tr-2').remove();
                          }
                      });
 	                }else{
