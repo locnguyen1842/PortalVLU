@@ -148,6 +148,8 @@ Route::prefix('')->group(function () {
         Route::get('/scientific-background/update', 'ScientificBackgroundController@getupdateEmployeeSB')->name('employee.sb.update');
         Route::post('/scientific-background/update', 'ScientificBackgroundController@postupdateEmployeeSB')->name('employee.sb.update');
 
+        //Print scientific background
+        Route::get('/scientific-background/print', 'ScientificBackgroundController@indexPrint')->name('employee.sb.print');
 
     });
 });

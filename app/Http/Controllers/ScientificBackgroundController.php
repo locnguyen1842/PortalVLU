@@ -16,6 +16,8 @@ use App\SBResearchTopic;
 use App\SBResearchProcessWork;
 use App\ScientificBackground;
 use Auth;
+use App;
+use PDF;
 
 class ScientificBackgroundController extends Controller
 {
@@ -36,7 +38,7 @@ class ScientificBackgroundController extends Controller
         return view('admin.sb.sb-update', compact('pi_id', 'sb', 'nations', 'units', 'topic_levels'));
     }
 
-    public function postupdateAdmin($pi_id,Request $request)
+    public function postupdateAdmin($pi_id, Request $request)
     {
         $this->authorize('cud', PI::first());
 
@@ -469,4 +471,14 @@ class ScientificBackgroundController extends Controller
         return view('employee.sb.employee-sb-detail', compact('pi_id', 'sb'));
     }
 
+    public function indexPrint()
+    {
+      $pi_id = PI::find(Auth::guard('employee')->user()->personalinformation_id)->id;
+      $sb = ScientificBackground::where('personalinformation_id', $pi_id)->firstOrFail();
+      $nations = Nation::all();
+      $units = Unit::all();
+      $topic_levels = SBTopicLevel::all();
+      $pdf = PDF::loadView('employee.sb.print', compact('pi_id', 'sb', 'nations', 'units', 'topic_levels'));
+      return $pdf->download('ly-lich-khoa-hoc.pdf');
+    }
 }
