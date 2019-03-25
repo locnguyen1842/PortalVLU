@@ -23,6 +23,10 @@ class AcademicRank extends Model
         return $this->belongsTo('App\AcademicRankType','type_id','id');
     }
 
+    public function industry(){
+        return $this->belongsTo('App\Industry','industry_id','id');
+    }
+
 
 
 }

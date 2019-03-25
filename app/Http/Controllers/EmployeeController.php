@@ -269,7 +269,7 @@ class EmployeeController extends Controller
     public function getFaculty()
     {
 
-        $pi = Auth::guard('employee')->user()->pi;
+        $current_user_pi = Auth::guard('employee')->user()->pi;
 
         // $pis = PI::all();
 
@@ -277,7 +277,7 @@ class EmployeeController extends Controller
         //check if have any get request named 'search' then assign value to $search
         $search =  \Request::get('search');
         //query if $search have a value
-        $pis = PI::where(function ($query) use ($search) {
+        $pis = PI::where('unit_id',$current_user_pi->unit_id)->where(function ($query) use ($search) {
             if ($search != null) {
                 $query->where(function ($q) use ($search) {
                     $q->where('employee_code', 'like', '%'.$search.'%')
@@ -288,7 +288,7 @@ class EmployeeController extends Controller
         })->orderBy('first_name', 'asc')->paginate(10)->appends(['search'=>$search]);
 
 
-        return view('employee.faculty.fa-list', compact('pis','search'));
+        return view('employee.faculty.fa-pi-list', compact('pis','search'));
     }
     public function getFacultydetail($id)
     {
@@ -298,7 +298,7 @@ class EmployeeController extends Controller
         $ts_count = $pi->degreedetails->where('degree_id', 3)->count();
 
 
-        return view('employee.faculty.faculty-detail', compact('pi', 'dh_count', 'ths_count', 'ts_count'));
+        return view('employee.faculty.fa-pi-detail', compact('pi', 'dh_count', 'ths_count', 'ts_count'));
     }
     public function getfaWorkload($id)
     {
@@ -343,12 +343,13 @@ class EmployeeController extends Controller
             }
         })->orderBy('updated_at', 'desc')->get();
 
-        return view('employee.workload.workload-list', compact('pi','semester_filter', 'semester', 'workload_session', 'workload_session_current', 'workloads', 'search', 'year_workload', 'pi'));
+        return view('employee.faculty.fa-workload-detail', compact('pi','semester_filter', 'semester', 'workload_session', 'workload_session_current', 'workloads', 'search', 'year_workload', 'pi'));
     }
     public function getfacultysb($id)
     {
-        $sb = ScientificBackground::where('personalinformation_id', $id)->firstOrFail();
-        return view('employee.faculty.fa-sb-detail', compact('id', 'sb'));
+        $pi = PI::find($id);
+        $sb = ScientificBackground::where('personalinformation_id', $pi->id)->firstOrFail();
+        return view('employee.faculty.fa-sb-detail', compact('id', 'sb','pi'));
     }
 
 }
