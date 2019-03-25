@@ -28,8 +28,9 @@
                     <th>Loại</th>
                     <th>Khối ngành</th>
                     <th>Chuyên ngành</th>
-                    <th>Ngày Cấp </th>
-                    <th>Nơi Cấp</th>
+                    <th>Ngày cấp </th>
+                    <th>Nơi cấp</th>
+                    <th>Nước cấp</th>
                     <th></th>
                 </tr>
             </thead>
@@ -37,14 +38,15 @@
               @if($degrees->count() > 0)
             @foreach($degrees as $degree)
                     <tr>
-                    <td class="col-sm-2">{{$degree->degree->name}}</td>
-                    <td class="col-sm-2">{{$degree->industry->name}}</td>
-                    <td class="col-sm-2">{{$degree->specialized->name}}</td>
-                    <td class="col-sm-2">{{date('d-m-Y', strtotime($degree->date_of_issue))}}</td>
+                    <td class="">{{$degree->degree->name}}</td>
+                    <td class="">{{$degree->industry->name}}</td>
+                    <td class="">{{$degree->specialized}}</td>
+                    <td class="">{{date('d-m-Y', strtotime($degree->date_of_issue))}}</td>
                         {{--{{date('d-m-Y',($degree->date_of_issue))}}--}}
-                    <td class="col-sm-2">{{$degree->place_of_issue}}</td>
+                    <td class="">{{$degree->place_of_issue}}</td>
+                    <td class="">{{$degree->country->country_name}}</td>
                     @can('cud', $pi)
-                    <td class="col-sm-2">
+                    <td class="">
                         <a href="{{route('admin.pi.degree.update',$degree->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Cập nhật" class="tooltip-test">
                       <span class=""><i class="fa fa-lg fa-edit text-primary"></i>
                           <span class="mdi mdi-close"></span>
