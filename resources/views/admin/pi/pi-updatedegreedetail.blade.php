@@ -50,13 +50,7 @@
                 <div class="form-group">
                   <div class="col-sm-6">
                       <label>Chuyên ngành</label>
-                      <select required class="form-control" name="specialized">
-                        <option value="">Chọn chuyên ngành</option>
-                          @foreach($specializes as $s)
-                            <option {{$degree->specialized_id == $s->id ? 'selected':''}} value="{{$s->id}}">{{$s->name}}</option>
-                          @endforeach
-                      </select>
-
+                      <input required type="text" maxlength="100" class="form-control" name="specialized" value="{{$degree->specialized}}" placeholder="Nhập chuyên ngành">
                   </div>
                     <div class="col-sm-6">
                         <label>Khối ngành</label>
@@ -76,6 +70,21 @@
                     <div class="col-sm-6">
                         <label>Nơi cấp</label>
                         <input required type="text" maxlength="100" class="form-control" name="place_of_issue" placeholder="Nhập nơi cấp" value="{{$degree->place_of_issue}}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label>Nước cấp</label>
+                        <select required class="form-control" name="nation_of_issue_id">
+                            <option value="{{$degree->nation_of_issue_id}}">Chọn nước cấp</option>
+                            @foreach($countries as $c)
+                            <option value="{{$c->id}}">{{$c->country_name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Loại bằng</label>
+                        <input required type="text" maxlength="100" class="form-control" name="degree_type" placeholder="Nhập loại bằng" value="{{$degree->degree_type}}">
                     </div>
                 </div>
                 <div class="form-group" style="margin-bottom:0">
