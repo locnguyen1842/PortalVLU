@@ -20,5 +20,14 @@ class PIPolicy
         }
     }
 
+    public function actAsFacultyLeader($employee, PI $pi)
+    {
+        if($employee->isFacultyLeader()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 
 }

@@ -268,7 +268,7 @@ class EmployeeController extends Controller
     }
     public function getFaculty()
     {
-
+        $this->authorize('actAsFacultyLeader', PI::first());
         $current_user_pi = Auth::guard('employee')->user()->pi;
 
         // $pis = PI::all();
@@ -293,6 +293,8 @@ class EmployeeController extends Controller
     public function getFacultydetail($id)
     {
         $pi = PI::find($id);
+        $this->authorize('actAsFacultyLeader', $pi);
+
         $dh_count = $pi->degreedetails->where('degree_id', 1)->count();
         $ths_count = $pi->degreedetails->where('degree_id', 2)->count();
         $ts_count = $pi->degreedetails->where('degree_id', 3)->count();
@@ -303,6 +305,8 @@ class EmployeeController extends Controller
     public function getfaWorkload($id)
     {
         $pi = PI::find($id);
+        $this->authorize('actAsFacultyLeader', $pi);
+
         $workloads_own_user = Workload::where('personalinformation_id', $id);
         $max_year = WorkloadSession::max('end_year');
         $workload_session = WorkloadSession::orderBy('start_year', 'desc')->get();
@@ -347,9 +351,13 @@ class EmployeeController extends Controller
     }
     public function getfacultysb($id)
     {
+
         $pi = PI::find($id);
+        $this->authorize('actAsFacultyLeader', $pi);
+
         $sb = ScientificBackground::where('personalinformation_id', $pi->id)->firstOrFail();
         return view('employee.faculty.fa-sb-detail', compact('id', 'sb','pi'));
     }
+
 
 }
