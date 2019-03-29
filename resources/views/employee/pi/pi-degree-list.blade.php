@@ -35,26 +35,33 @@
             </thead>
             <tbody>
               @if($degrees->count() >0)
-            @foreach($degrees as $degree)
+             @foreach($degrees as $degree)
                     <tr>
-                    <td class="col-sm-2">{{$degree->degree->name}}</td>
-                    <td class="col-sm-2">{{$degree->specialized->name}}</td>
-                    <td class="col-sm-2">{{date('d-m-Y', strtotime($degree->date_of_issue))}}</td>
+                    <td class="">{{$degree->degree->name}}</td>
+                    <td class="">{{ $degree->industry->name}}</td> 
+                    <td class="">{{$degree->specialized}}</td>
+                    <td class="">{{date('d-m-Y', strtotime($degree->date_of_issue))}}</td>
                         {{--{{date('d-m-Y',($degree->date_of_issue))}}--}}
-                    <td class="col-sm-2">{{$degree->place_of_issue}}</td>
-                    <td class="col-sm-2">
-                        <a href="{{route('employee.pi.update.detail.degree', $degree->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Cập nhật" class="tooltip-test">
+                    <td class="">{{$degree->place_of_issue}}</td>
+                    <td class="">{{$degree->country->country_name}}</td>
+                    {{-- @can('cud', $pi) --}}
+                    <td class="">
+                        <a href="{{route('employee.pi.update.detail.degree',$degree->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Cập nhật" class="tooltip-test">
                       <span class=""><i class="fa fa-lg fa-edit text-primary"></i>
                           <span class="mdi mdi-close"></span>
                       </span>
                         </a>
-                        <a href="{{route('employee.pi.degree.delete', $degree->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa"  class="delete_degree tooltip-test ml-10">
+                        <a href="{{route('employee.pi.degree.delete',$degree->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa"  class="delete_degree tooltip-test ml-10">
                       <span class=""><i class="fa fa-lg fa-trash text-danger"></i>
                           <span class="mdi mdi-close"></span>
                       </span>
                         </a>
                     </td>
+                    {{-- @else --}}
+                    <td></td>
+                    {{-- @endcan --}}
                     </tr>
+                    {{-- @can('cud', $pi) --}}
                     <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="degree-delete-modal">
 
                         <div class="modal-dialog modal-sm">
@@ -70,6 +77,7 @@
                             </div>
                         </div>
                     </div>
+                    {{-- @endcan --}}
             @endforeach
           @else
             <tr>

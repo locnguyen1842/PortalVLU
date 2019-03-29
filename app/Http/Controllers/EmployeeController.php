@@ -16,6 +16,7 @@ use App\Unit;
 use App\Workload;
 use App\WorkloadSession;
 use App\Semester;
+use App\Country;
 use App\ScientificBackground;
 use Hash;
 
@@ -112,12 +113,14 @@ class EmployeeController extends Controller
     }
     public function getcreatedegree()
     {
+       
         $specializes = Specialized::all();
         $degrees = Degree::all();
         $industries = Industry::all();
+        $countries = Country::all();
         $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
 
-        return view('employee.pi.pi-createdegreedetail', compact('degrees', 'industries', 'pi','specializes'));
+        return view('employee.pi.pi-createdegreedetail', compact('degrees',  'industries', 'pi','specializes','countries'));
     }
     public function postcreatedegree(Request $request)
     {
@@ -144,8 +147,10 @@ class EmployeeController extends Controller
         $degree_detail->date_of_issue = $request->date_of_issue;
         $degree_detail->place_of_issue = $request->place_of_issue;
         $degree_detail->degree_id = $request->degree;
-        $degree_detail->specialized_id = $request->specialized;
-        $degree_detail->industry_id = 8;
+        $degree_detail->industry_id = $request->industry;
+        $degree_detail->specialized = $request->specialized;
+        $degree_detail->nation_of_issue_id = $request->nation_of_issue_id;
+        $degree_detail->degree_type = $request->degree_type;
         $degree_detail->save();
         return redirect()->back()->with('message', 'Thêm thành công');
     }
@@ -211,7 +216,8 @@ class EmployeeController extends Controller
             $specializes = Specialized::all();
             $degrees = Degree::all();
             $industries = Industry::all();
-            return view('employee.pi.pi-updatedetaildegree', compact('degrees','degree', 'industries','pi','specializes'));
+            $countries = Country::all();
+            return view('employee.pi.pi-updatedetaildegree', compact('degrees','degree', 'industries','pi','specializes','countries'));
         }
 
     }
@@ -241,8 +247,10 @@ class EmployeeController extends Controller
             $degree->date_of_issue = $request->date_of_issue;
             $degree->place_of_issue = $request->place_of_issue;
             $degree->degree_id = $request->degree;
-            $degree->specialized_id = $request->specialized;
-
+            $degree->industry_id = $request->industry;
+            $degree->specialized = $request->specialized;
+            $degree->nation_of_issue_id = $request->nation_of_issue_id;
+            $degree->degree_type = $request->degree_type;
             $degree->save();
             return redirect()->back()->with('message', 'Cập nhật thành công');
         }
