@@ -29,7 +29,7 @@
 @endsection
 @section('content')
 
-<div style="padding-top: 21px">
+<div style="padding-top: 71px">
     <div class="">
         <div class=" cm-fix-height">
             <div class="col-sm-12">
@@ -39,7 +39,7 @@
                     {{ session()->get('message') }}
                 </div>
                 @endif
-                <form class="form-horizontal" action="{{route('employee.sb.update')}}" method="post">
+                <form class="form-horizontal" action="{{route('admin.sb.update',$pi_id)}}" method="post">
                     {{csrf_field()}}
                     <div class="panel panel-default">
                         <div class="panel-heading">Lý lịch sơ lược<br>
