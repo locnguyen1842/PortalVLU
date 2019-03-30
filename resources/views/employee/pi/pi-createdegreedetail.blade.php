@@ -35,15 +35,21 @@
                     </div>
                     <div class="col-sm-6">
                         <label>Chuyên ngành</label>
-                        <select required class="form-control" name="specialized">
-                          <option value="">Chọn chuyên ngành</option>
-                            @foreach($specializes as $s)
-                              <option value="{{$s->id}}">{{$s->name}}</option>
-                            @endforeach
-                        </select>
+                        <input required type="text" maxlength="100" class="form-control" name="specialized" value="{{ old('specialized') }}" placeholder="Nhập chuyên ngành">
 
                     </div>
                 </div>
+                <div class="form-group">
+                        <div class="col-sm-6">
+                                <label>Khối ngành</label>
+                                <select required class="form-control" name="industry">
+                                    <option value="">Chọn khối ngành</option>
+                                    @foreach($industries as $i)
+                                        <option value="{{$i->id}}">{{$i->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                </div>  
                 <div class="form-group">
                     <div class="col-sm-6">
                         <label>Ngày cấp</label>
@@ -54,6 +60,21 @@
                         <input required type="text" maxlength="100" class="form-control" name="place_of_issue" placeholder="Nhập nơi cấp"  value="{{old('place_of_issue')}}">
                     </div>
                 </div>
+                <div class="form-group">
+                        <div class="col-sm-6">
+                            <label>Nước cấp</label>
+                            <select required class="form-control" name="nation_of_issue_id">
+                                <option >Chọn nước cấp</option>
+                                @foreach($countries as $c)
+                                <option value="{{$c->id}}">{{$c->country_name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-sm-6">
+                            <label>Loại bằng</label>
+                            <input required type="text" maxlength="100" class="form-control" name="degree_type" placeholder="Nhập loại bằng" value="{{old('degree_type')}}">
+                        </div>
+                    </div>
                 <div class="form-group" style="margin-bottom:0">
                     <div class="col-sm-offset-2 col-sm-10 text-right">
                         <button type="reset" class="btn btn-default">Hủy Bỏ</button>

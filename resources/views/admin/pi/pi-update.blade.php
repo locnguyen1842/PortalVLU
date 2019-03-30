@@ -109,7 +109,7 @@
                         <select required class="form-control" name="unit">
                             <option value="">Chọn đơn vị</option>
                             @foreach($units as $unit)
-                            <option {{$pi->unit_id == $unit->id ? 'selected' : ''}} value="{{$unit->id}}">{{$unit->name}}</option>
+                            <option {{ $pi->unit_id==$unit->id?'selected':'' }} value="{{$unit->id}}">{{$unit->name}}</option>
                             @endforeach
                         </select>
                     </div>
