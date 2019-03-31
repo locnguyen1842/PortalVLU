@@ -12,7 +12,7 @@
                       <a href="{{route('admin.pi.index')}}" class="sf-profile-group">Quản lý nhân viên</a>
                     </li>
                     <li class="{{url()->current() == route('admin.workload.index') ? 'active':''}}">
-                        <a href="{{route('admin.workload.index')}}" class="sf-dashboard-alt">Khối lượng công việc</a>
+                        <a href="{{route('admin.workload.index')}}" class="sf-dashboard">Khối lượng công việc</a>
                     </li>
                     <li class="{{url()->current() == route('admin.statistic.index') ? 'active':''}}">
                             <a href="{{route('admin.statistic.index')}}" class="sf-notepad">Thống kê - Báo cáo</a>

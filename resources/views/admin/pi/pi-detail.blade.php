@@ -224,42 +224,45 @@
                                     </div>
                                 </div>
                             </div>
-                            @if($pi->academic_rank()->exists())
                             <div class="col-sm-12">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">Thông tin học hàm<br>
                                         @can('cud', $pi)
-
-                                        <a href="{{route('admin.pi.degree.create',$pi->id)}}">
+                                        @if($pi->academic_rank()->exists())
+                                        <a href="{{route('admin.academic.update',$pi->id)}}">
                                             <button type="button" name="button" class="btn btn-xs btn-primary">Cập nhật</button>
                                         </a>
+                                        @else
+                                        <a href="{{route('admin.academic.create',$pi->id)}}">
+                                                <button type="button" name="button" class="btn btn-xs btn-success">Thêm mới</button>
+                                            </a>
+                                        @endif
                                         @endcan
                                     </div>
                                     <div class="panel-body">
                                         <form class="form-horizontal">
                                             <div class="form-group">
                                                 <label for="inputEmail3" class="col-sm-4  ">Học hàm </label>
-                                                <span for="" class="col-sm-3 text-nowrap">{{$pi->academic_rank->type->name}}</span>
+                                                <span for="" class="col-sm-3 text-nowrap">{{$pi->academic_rank()->exists() ? $pi->academic_rank->type->name : 'Chưa có'}}</span>
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputEmail3" class="col-sm-4 ">Chuyên ngành</label>
-                                                <span for="" class="col-sm-3 text-nowrap">{{$pi->academic_rank->specialized}}</span>
+                                                <span for="" class="col-sm-3 text-nowrap">{{$pi->academic_rank()->exists() ? $pi->academic_rank->specialized : 'Chưa có'}}</span>
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputEmail3" class="col-sm-4  ">Ngày công nhận </label>
-                                                <span for="" class="col-sm-3 text-nowrap">{{date('d-m-Y', strtotime($pi->academic_rank->date_of_recognition))}}</span>
+                                                <span for="" class="col-sm-3 text-nowrap">{{$pi->academic_rank()->exists() ? date('d-m-Y', strtotime($pi->academic_rank->date_of_recognition)) : 'Chưa có'}}</span>
 
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputEmail3" class="col-sm-4  ">Khối ngành </label>
-                                                <span for="" class="col-sm-3 text-nowrap">{{$pi->academic_rank->industry->name}}</span>
+                                                <span for="" class="col-sm-3 text-nowrap">{{$pi->academic_rank()->exists() ? $pi->academic_rank->industry->name : 'Chưa có'}}</span>
 
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
-                            @endif
                             <div class="col-sm-12">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">Thông tin tài khoản</div>
@@ -273,14 +276,30 @@
 
                                             </div>
                                             <div class="form-group">
-                                                <label for="inputEmail3" class="col-sm-4 ">Vai trò</label>
+                                                <label for="inputEmail3" class="col-sm-4 ">Loại tài khoản</label>
                                                 <span for="" class="col-sm-3 text-nowrap">{{$pi->admin =='' ? 'Người
                                                     dùng':'Quản trị viên' }} </span>
-                                                    @can('cud', $pi)
-                                                <span class="col-sm-5 text-nowrap"><a id="change_role_show" href="#"><small>Thay
-                                                            đổi</small></a></span>
-                                                            @endcan
+
                                             </div>
+                                            <div class="form-group">
+                                                    <label for="inputEmail3" class="col-sm-4 ">Vai trò</label>
+                                                    @if($pi->admin != '')
+                                                        <span for="" class="col-sm-4 text-nowrap">
+                                                            {{$pi->admin->is_supervisor == 1 ? 'Ban quản trị':'Phòng tổng hợp' }}
+                                                        </span>
+
+                                                    @else
+                                                        <span for="" class="col-sm-4 text-nowrap">
+                                                            {{$pi->employee->is_leader == 1 ? 'Trưởng khoa':'CBGV/NV' }}
+                                                        </span>
+                                                    @endif
+
+
+                                                    @can('cud', $pi)
+                                                    <span class="col-sm-4 text-nowrap"><a id="change_role_show" href="#"><small>Thay
+                                                                đổi</small></a></span>
+                                                                @endcan
+                                                </div>
                                             @can('cud', $pi)
                                             <div class="form-group">
                                                 <label for="inputEmail3" class="col-sm-4 ">Mật khẩu </label>
@@ -298,12 +317,12 @@
                                                 {{csrf_field()}}
                                                 <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
                                                     aria-hidden="true" id="role-change-modal">
-                                                    <div class="modal-dialog modal-sm">
+                                                    <div class="modal-dialog modal-md">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                                                         aria-hidden="true">&times;</span></button>
-                                                                <h4 class="modal-title" id="myModalLabel">Phân quyền tài khoản</h4>
+                                                                <h4 class="modal-title" id="myModalLabel">Thay đổi vai trò tài khoản</h4>
                                                             </div>
 
                                                             <div class="modal-body">
@@ -315,7 +334,7 @@
                                                                 </div>
 
                                                                 <div class="form-group">
-                                                                    <label for="inputEmail3" class="col-sm-4">Vai trò </label>
+                                                                    <label for="inputEmail3" class="col-sm-4 control-label text-al">Loại tài khoản</label>
                                                                     <div class="col-sm-8">
                                                                         <select class="form-control" name="role">
                                                                             <option {{$pi->admin !='' ? '':'selected'}} value="0">Người
@@ -326,6 +345,61 @@
                                                                     </div>
 
                                                                 </div>
+                                                                <div class="role_admin form-group hide">
+                                                                        <label for="inputEmail3" class="col-sm-4 control-label text-al">Vai trò </label>
+                                                                        <div class="col-sm-8">
+                                                                                <div class="radio">
+                                                                                        <label class="col-sm-6">
+                                                                                            @if($pi->admin != '')
+                                                                                            <input {{$pi->admin->is_supervisor == '1' ? 'checked' : ''}} required type="radio"
+                                                                                                name="role_admin" value="0">Ban quản trị
+                                                                                            @else
+                                                                                            <input required type="radio"
+                                                                                                name="role_admin" value="0">Ban quản trị
+                                                                                            @endif
+
+                                                                                        </label>
+                                                                                        <label class="col-sm-6">
+                                                                                            @if($pi->admin != '')
+                                                                                            <input required type="radio" {{$pi->admin->is_supervisor == '0' ? 'checked' : ''}}
+                                                                                                name="role_admin" value="1">Phòng tổng hợp
+                                                                                            @else
+                                                                                            <input required type="radio"
+                                                                                                name="role_admin" value="1">Phòng tổng hợp
+                                                                                            @endif
+
+                                                                                        </label>
+                                                                                    </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="role_employee form-group hide">
+                                                                            <label for="inputEmail3" class="col-sm-4 control-label text-al">Vai trò </label>
+                                                                            <div class="col-sm-8">
+                                                                                    <div class="radio">
+                                                                                            <label class="col-sm-6">
+                                                                                                @if($pi->employee != '')
+                                                                                                <input {{$pi->employee->is_leader == '0' ? 'checked' : ''}} required type="radio"
+                                                                                                    name="role_employee" value="0">CBGV/NV
+                                                                                                @else
+                                                                                                <input required type="radio"
+                                                                                                    name="role_employee" value="0">CBGV/NV
+                                                                                                @endif
+                                                                                            </label>
+                                                                                            <label class="col-sm-6">
+                                                                                                @if($pi->employee != '')
+                                                                                                <input required type="radio" {{$pi->employee->is_leader == '1' ? 'checked' : ''}}
+                                                                                                    name="role_employee" value="1">Trưởng Khoa
+                                                                                                @else
+                                                                                                <input required type="radio"
+                                                                                                    name="role_employee" value="1">Trưởng Khoa
+                                                                                                @endif
+
+                                                                                            </label>
+                                                                                        </div>
+                                                                            </div>
+
+                                                                        </div>
 
                                                             </div>
 
@@ -435,6 +509,24 @@
 
                 }
             });
+        });
+        if ($('select[name=role]').val() == 0) {
+                    $('.role_employee').removeClass('hide');
+                    $('.role_admin').addClass('hide');
+            }
+            else{
+                    $('.role_admin').removeClass('hide');
+                    $('.role_employee').addClass('hide');
+            }
+        $('select[name=role]').change(function() {
+                if (this.value == 0) {
+                    $('.role_employee').removeClass('hide');
+                    $('.role_admin').addClass('hide');
+                }
+                else if (this.value == 1) {
+                    $('.role_admin').removeClass('hide');
+                    $('.role_employee').addClass('hide');
+                }
         });
     });
 </script>

@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Storage;
 use Hash;
 use App\Workload;
 use App\WorkloadSession;
+use App\AcademicRankType;
+use App\AcademicRank;
 use App\Admin;
 use App\Nation;
 use App\Unit;
@@ -346,6 +348,13 @@ class PIController extends Controller
                 $admin->delete();
                 return redirect()->back()->with('message', 'Thay đổi vai trò tài khoản thành công');
             } elseif ($pi->admin =='') {
+                if($request->role_employee == 0){
+                    $pi->employee->is_leader = 0;
+                    $pi->employee->save();
+                }else {
+                    $pi->employee->is_leader = 1;
+                    $pi->employee->save();
+                }
                 return redirect()->back()->with('message', 'Thay đổi vai trò tài khoản thành công');
             }
         } elseif ($request->role == 1) {
@@ -356,11 +365,23 @@ class PIController extends Controller
                 $admin->password = Hash::make($pi->employee_code);
                 $admin->email = $pi->email_address;
                 $admin->personalinformation_id = $pi->id;
+                if($request->role_admin == 0 ){
+                    $admin->is_supervisor = 1;
+                }else{
+                    $admin->is_supervisor = 0;
+                }
                 $admin->save();
                 return redirect()->back()->with('message', 'Thay đổi vai trò tài khoản thành công');
             }
             //check if is admin
             elseif ($pi->admin !='') {
+                if($request->role_admin == 0 ){
+                    $pi->admin->is_supervisor = 1;
+                    $pi->admin->save();
+                }else{
+                    $pi->admin->is_supervisor = 0;
+                    $pi->admin->save();
+                }
                 return redirect()->back()->with('message', 'Thay đổi vai trò tài khoản thành công');
             }
         }
@@ -447,5 +468,74 @@ class PIController extends Controller
             }
         }
         return response()->json(['error'=>$validator->errors()->all()]);
+    }
+
+
+    public function getCreateAcademicRank($pi_id){
+        $industries = Industry::all();
+        $academic_rank_types = AcademicRankType::all();
+        $pi = PI::find($pi_id);
+        return view('admin.pi.academic-create',compact('pi','academic_rank_types','industries'));
+
+    }
+    public function postCreateAcademicRank($pi_id,Request $request){
+        $this->validate($request,
+            [
+                'academic_rank_type' => 'required',
+                'specialized' => 'required',
+                'date_of_recognition' => 'date|required',
+                'industry' => 'required',
+            ],
+            [
+                'academic_rank_type.required' => 'Vui lòng chọn học hàm',
+                'specialized.required' => 'Vui lòng nhập chuyên ngành',
+                'date_of_recognition.required' => 'Vui lòng nhập ngày công nhận',
+                'date_of_recognition.date' => 'Ngày công nhận không hợp lệ',
+                'industry.required' => 'Vui lòng chọn khối ngành',
+            ]
+        );
+        $pi = PI::find($pi_id);
+        $academic_rank = new AcademicRank;
+        $academic_rank->personalinformation_id = $pi->id;
+        $academic_rank->type_id = $request->academic_rank_type;
+        $academic_rank->specialized = $request->specialized;
+        $academic_rank->date_of_recognition = $request->date_of_recognition;
+        $academic_rank->industry_id = $request->industry;
+        $academic_rank->save();
+        return redirect()->route('admin.pi.detail',$pi->id)->with('message','Thêm mới thành công');
+    }
+
+    public function getUpdateAcademicRank($pi_id){
+        $industries = Industry::all();
+        $pi = PI::find($pi_id);
+        $academic_rank_types = AcademicRankType::all();
+        return view('admin.pi.academic-update',compact('pi','academic_rank_types','industries'));
+
+    }
+
+    public function postUpdateAcademicRank($pi_id,Request $request){
+        $this->validate($request,
+            [
+                'academic_rank_type' => 'required',
+                'specialized' => 'required',
+                'date_of_recognition' => 'date|required',
+                'industry' => 'required',
+            ],
+            [
+                'academic_rank_type.required' => 'Vui lòng chọn học hàm',
+                'specialized.required' => 'Vui lòng nhập chuyên ngành',
+                'date_of_recognition.required' => 'Vui lòng nhập ngày công nhận',
+                'date_of_recognition.date' => 'Ngày công nhận không hợp lệ',
+                'industry.required' => 'Vui lòng chọn khối ngành',
+            ]
+        );
+        $pi = PI::find($pi_id);
+        $academic_rank = AcademicRank::where('personalinformation_id',$pi->id)->first();
+        $academic_rank->type_id = $request->academic_rank_type;
+        $academic_rank->specialized = $request->specialized;
+        $academic_rank->date_of_recognition = $request->date_of_recognition;
+        $academic_rank->industry_id = $request->industry;
+        $academic_rank->save();
+        return redirect()->back()->with('message','Cập nhật thành công');
     }
 }

@@ -9,6 +9,7 @@ use App\PI;
 use App\Nation;
 use App\Degree;
 use App\DegreeDetail;
+use App\AcademicRankType;
 use App\Specialized;
 use Illuminate\Support\Facades\Gate;
 use App\Industry;
@@ -18,6 +19,7 @@ use App\WorkloadSession;
 use App\Semester;
 use App\Country;
 use App\ScientificBackground;
+use App\AcademicRank;
 use Hash;
 
 class EmployeeController extends Controller
@@ -113,7 +115,7 @@ class EmployeeController extends Controller
     }
     public function getcreatedegree()
     {
-       
+
         $specializes = Specialized::all();
         $degrees = Degree::all();
         $industries = Industry::all();
@@ -366,6 +368,65 @@ class EmployeeController extends Controller
         $sb = ScientificBackground::where('personalinformation_id', $pi->id)->firstOrFail();
         return view('employee.faculty.fa-sb-detail', compact('id', 'sb','pi'));
     }
+    public function getCreateAcademicRank(){
+        $academic_rank_types = AcademicRankType::all();
+        $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
+        return view('employee.pi.academic-create',compact('pi','academic_rank_types'));
 
+    }
+    public function postCreateAcademicRank(Request $request){
+        $this->validate($request,
+            [
+                'academic_rank_type' => 'required',
+                'specialized' => 'required',
+                'date_of_recognition' => 'date|required',
+            ],
+            [
+                'academic_rank_type.required' => 'Vui lòng chọn học hàm',
+                'specialized.required' => 'Vui lòng nhập chuyên ngành',
+                'date_of_recognition.required' => 'Vui lòng nhập ngày công nhận',
+                'date_of_recognition.date' => 'Ngày công nhận không hợp lệ',
+            ]
+        );
+        $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
+        $academic_rank = new AcademicRank;
+        $academic_rank->personalinformation_id = $pi->id;
+        $academic_rank->type_id = $request->academic_rank_type;
+        $academic_rank->specialized = $request->specialized;
+        $academic_rank->date_of_recognition = $request->date_of_recognition;
+        $academic_rank->save();
+        return redirect()->route('employee.pi.detail')->with('message','Thêm mới thành công');
+    }
+
+    public function getUpdateAcademicRank(){
+
+        $academic_rank_types = AcademicRankType::all();
+        $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
+        return view('employee.pi.academic-update',compact('pi','academic_rank_types'));
+
+    }
+
+    public function postUpdateAcademicRank(Request $request){
+        $this->validate($request,
+            [
+                'academic_rank_type' => 'required',
+                'specialized' => 'required',
+                'date_of_recognition' => 'date|required',
+            ],
+            [
+                'academic_rank_type.required' => 'Vui lòng chọn học hàm',
+                'specialized.required' => 'Vui lòng nhập chuyên ngành',
+                'date_of_recognition.required' => 'Vui lòng nhập ngày công nhận',
+                'date_of_recognition.date' => 'Ngày công nhận không hợp lệ',
+            ]
+        );
+        $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
+        $academic_rank = AcademicRank::where('personalinformation_id',$pi->id)->first();
+        $academic_rank->type_id = $request->academic_rank_type;
+        $academic_rank->specialized = $request->specialized;
+        $academic_rank->date_of_recognition = $request->date_of_recognition;
+        $academic_rank->save();
+        return redirect()->back()->with('message','Cập nhật thành công');
+    }
 
 }

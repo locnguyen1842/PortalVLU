@@ -9,17 +9,17 @@
                 <ul class="cm-menu-items">
 
                     <li class="{{url()->current() == route('employee.pi.detail') ? 'active':''}}">
-                      <a href="{{route('employee.pi.detail')}}" class="sf-profile-group">Thông tin cá nhân</a>
+                      <a href="{{route('employee.pi.detail')}}" class="sf-profile">Thông tin cá nhân</a>
                     </li>
                     <li class="{{url()->current() == route('employee.workload.index') ? 'active':''}}">
-                        <a href="{{route('employee.workload.index')}}" class="sf-dashboard-alt">Khối lượng công việc</a>
+                        <a href="{{route('employee.workload.index')}}" class="sf-dashboard">Khối lượng công việc</a>
                     </li>
                     <li class="{{url()->current() == route('employee.sb.detail') ? 'active':''}}">
-                        <a href="{{route('employee.sb.detail')}}" class="sf-dashboard-alt">Lý lịch khoa học</a>
+                        <a href="{{route('employee.sb.detail')}}" class="sf-file-text">Lý lịch khoa học</a>
                     </li>
                     @can('actAsFacultyLeader',App\PI::first())
                     <li class="{{url()->current() == route('employee.faculty.index') ? 'active':''}}">
-                        <a href="{{route('employee.faculty.index')}}" class="sf-dashboard-alt">Danh sách giảng viên</a>
+                        <a href="{{route('employee.faculty.index')}}" class="sf-profile-group">Danh sách giảng viên</a>
                     </li>
                     @endcan
                 </ul>
