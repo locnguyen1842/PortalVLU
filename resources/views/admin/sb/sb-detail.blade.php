@@ -197,6 +197,10 @@
                                     <label for="inputEmail3" class="col-sm-4">Năm cấp bằng</label>
                                     <span for="" class="col-sm-8 text-nowrap">{{$sb->tp_postgraduate_masters->isEmpty() ? '' : $sb->tp_postgraduate_masters->first()->year_of_issue}}</span>
                                 </div>
+                            </div>
+                                <div class="form-group">
+
+
                                 <div class="col-sm-6">
                                     <label for="inputEmail3" class="col-sm-4">Nơi đào tạo</label>
                                     <span for="" class="col-sm-8 text-nowrap">{{$sb->tp_postgraduate_masters->isEmpty() ? '' : $sb->tp_postgraduate_masters->first()->place_of_training}}</span>
@@ -206,19 +210,23 @@
                             <div class="form-group">
                                 <div class="col-sm-6">
                                     <label for="inputEmail3" class="col-sm-4">Tiến sĩ chuyên ngành</label>
-                                    <span for="" class="col-sm-8 text-nowrap">{{$sb->tp_postgraduate_doctors->isEmpty() ? '' : $sb->tp_postgraduate_masters->first()->field_of_study}}</span>
+                                    <span for="" class="col-sm-8 text-nowrap">{{$sb->tp_postgraduate_doctors->isEmpty() ? '' : $sb->tp_postgraduate_doctors->first()->field_of_study}}</span>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="inputEmail3" class="col-sm-4">Năm cấp bằng</label>
-                                    <span for="" class="col-sm-8 text-nowrap">{{$sb->tp_postgraduate_doctors->isEmpty() ? '' : $sb->tp_postgraduate_masters->first()->year_of_issue}}</span>
+                                    <span for="" class="col-sm-8 text-nowrap">{{$sb->tp_postgraduate_doctors->isEmpty() ? '' : $sb->tp_postgraduate_doctors->first()->year_of_issue}}</span>
                                 </div>
+                            </div>
+                                <div class="form-group">
+
+
                                 <div class="col-sm-6">
                                     <label for="inputEmail3" class="col-sm-4">Tên luận án</label>
-                                    <span for="" class="col-sm-8">{{$sb->tp_postgraduate_doctors->isEmpty() ? '' : $sb->tp_postgraduate_masters->first()->thesis_title}}</span>
+                                    <span for="" class="col-sm-8">{{$sb->tp_postgraduate_doctors->isEmpty() ? '' : $sb->tp_postgraduate_doctors->first()->thesis_title}}</span>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="inputEmail3" class="col-sm-4">Nơi đào tạo</label>
-                                    <span for="" class="col-sm-8 text-nowrap">{{$sb->tp_postgraduate_doctors->isEmpty() ? '' : $sb->tp_postgraduate_masters->first()->place_of_training}}</span>
+                                    <span for="" class="col-sm-8 text-nowrap">{{$sb->tp_postgraduate_doctors->isEmpty() ? '' : $sb->tp_postgraduate_doctors->first()->place_of_training}}</span>
                                 </div>
 
                             </div>

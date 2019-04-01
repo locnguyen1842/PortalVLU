@@ -9,6 +9,7 @@ use App\PI;
 use App\Nation;
 use App\Degree;
 use App\DegreeDetail;
+use App\AcademicRankType;
 use App\Specialized;
 use Illuminate\Support\Facades\Gate;
 use App\Industry;
@@ -16,7 +17,9 @@ use App\Unit;
 use App\Workload;
 use App\WorkloadSession;
 use App\Semester;
+use App\Country;
 use App\ScientificBackground;
+use App\AcademicRank;
 use Hash;
 
 class EmployeeController extends Controller
@@ -112,12 +115,14 @@ class EmployeeController extends Controller
     }
     public function getcreatedegree()
     {
+
         $specializes = Specialized::all();
         $degrees = Degree::all();
         $industries = Industry::all();
+        $countries = Country::all();
         $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
 
-        return view('employee.pi.pi-createdegreedetail', compact('degrees', 'industries', 'pi','specializes'));
+        return view('employee.pi.pi-createdegreedetail', compact('degrees',  'industries', 'pi','specializes','countries'));
     }
     public function postcreatedegree(Request $request)
     {
@@ -144,8 +149,10 @@ class EmployeeController extends Controller
         $degree_detail->date_of_issue = $request->date_of_issue;
         $degree_detail->place_of_issue = $request->place_of_issue;
         $degree_detail->degree_id = $request->degree;
-        $degree_detail->specialized_id = $request->specialized;
-        $degree_detail->industry_id = 8;
+        $degree_detail->industry_id = $request->industry;
+        $degree_detail->specialized = $request->specialized;
+        $degree_detail->nation_of_issue_id = $request->nation_of_issue_id;
+        $degree_detail->degree_type = $request->degree_type;
         $degree_detail->save();
         return redirect()->back()->with('message', 'Thêm thành công');
     }
@@ -211,7 +218,8 @@ class EmployeeController extends Controller
             $specializes = Specialized::all();
             $degrees = Degree::all();
             $industries = Industry::all();
-            return view('employee.pi.pi-updatedetaildegree', compact('degrees','degree', 'industries','pi','specializes'));
+            $countries = Country::all();
+            return view('employee.pi.pi-updatedetaildegree', compact('degrees','degree', 'industries','pi','specializes','countries'));
         }
 
     }
@@ -241,8 +249,10 @@ class EmployeeController extends Controller
             $degree->date_of_issue = $request->date_of_issue;
             $degree->place_of_issue = $request->place_of_issue;
             $degree->degree_id = $request->degree;
-            $degree->specialized_id = $request->specialized;
-
+            $degree->industry_id = $request->industry;
+            $degree->specialized = $request->specialized;
+            $degree->nation_of_issue_id = $request->nation_of_issue_id;
+            $degree->degree_type = $request->degree_type;
             $degree->save();
             return redirect()->back()->with('message', 'Cập nhật thành công');
         }
@@ -268,7 +278,7 @@ class EmployeeController extends Controller
     }
     public function getFaculty()
     {
-
+        $this->authorize('actAsFacultyLeader', PI::first());
         $current_user_pi = Auth::guard('employee')->user()->pi;
 
         // $pis = PI::all();
@@ -293,6 +303,8 @@ class EmployeeController extends Controller
     public function getFacultydetail($id)
     {
         $pi = PI::find($id);
+        $this->authorize('actAsFacultyLeader', $pi);
+
         $dh_count = $pi->degreedetails->where('degree_id', 1)->count();
         $ths_count = $pi->degreedetails->where('degree_id', 2)->count();
         $ts_count = $pi->degreedetails->where('degree_id', 3)->count();
@@ -303,6 +315,8 @@ class EmployeeController extends Controller
     public function getfaWorkload($id)
     {
         $pi = PI::find($id);
+        $this->authorize('actAsFacultyLeader', $pi);
+
         $workloads_own_user = Workload::where('personalinformation_id', $id);
         $max_year = WorkloadSession::max('end_year');
         $workload_session = WorkloadSession::orderBy('start_year', 'desc')->get();
@@ -347,9 +361,72 @@ class EmployeeController extends Controller
     }
     public function getfacultysb($id)
     {
+
         $pi = PI::find($id);
+        $this->authorize('actAsFacultyLeader', $pi);
+
         $sb = ScientificBackground::where('personalinformation_id', $pi->id)->firstOrFail();
         return view('employee.faculty.fa-sb-detail', compact('id', 'sb','pi'));
+    }
+    public function getCreateAcademicRank(){
+        $academic_rank_types = AcademicRankType::all();
+        $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
+        return view('employee.pi.academic-create',compact('pi','academic_rank_types'));
+
+    }
+    public function postCreateAcademicRank(Request $request){
+        $this->validate($request,
+            [
+                'academic_rank_type' => 'required',
+                'specialized' => 'required',
+                'date_of_recognition' => 'date|required',
+            ],
+            [
+                'academic_rank_type.required' => 'Vui lòng chọn học hàm',
+                'specialized.required' => 'Vui lòng nhập chuyên ngành',
+                'date_of_recognition.required' => 'Vui lòng nhập ngày công nhận',
+                'date_of_recognition.date' => 'Ngày công nhận không hợp lệ',
+            ]
+        );
+        $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
+        $academic_rank = new AcademicRank;
+        $academic_rank->personalinformation_id = $pi->id;
+        $academic_rank->type_id = $request->academic_rank_type;
+        $academic_rank->specialized = $request->specialized;
+        $academic_rank->date_of_recognition = $request->date_of_recognition;
+        $academic_rank->save();
+        return redirect()->route('employee.pi.detail')->with('message','Thêm mới thành công');
+    }
+
+    public function getUpdateAcademicRank(){
+
+        $academic_rank_types = AcademicRankType::all();
+        $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
+        return view('employee.pi.academic-update',compact('pi','academic_rank_types'));
+
+    }
+
+    public function postUpdateAcademicRank(Request $request){
+        $this->validate($request,
+            [
+                'academic_rank_type' => 'required',
+                'specialized' => 'required',
+                'date_of_recognition' => 'date|required',
+            ],
+            [
+                'academic_rank_type.required' => 'Vui lòng chọn học hàm',
+                'specialized.required' => 'Vui lòng nhập chuyên ngành',
+                'date_of_recognition.required' => 'Vui lòng nhập ngày công nhận',
+                'date_of_recognition.date' => 'Ngày công nhận không hợp lệ',
+            ]
+        );
+        $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
+        $academic_rank = AcademicRank::where('personalinformation_id',$pi->id)->first();
+        $academic_rank->type_id = $request->academic_rank_type;
+        $academic_rank->specialized = $request->specialized;
+        $academic_rank->date_of_recognition = $request->date_of_recognition;
+        $academic_rank->save();
+        return redirect()->back()->with('message','Cập nhật thành công');
     }
 
 }

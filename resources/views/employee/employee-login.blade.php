@@ -24,7 +24,7 @@
 
               <div class="panel">
                 <div class="panel-heading">
-                  <h4>CBGV - Đăng nhập</h4>
+                  <h4>CBGV/NV - Đăng nhập</h4>
 
                 </div>
                 <div class="panel-body">

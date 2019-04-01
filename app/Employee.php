@@ -36,4 +36,13 @@ class Employee extends Authenticatable
     {
         $this->notify(new EmployeeResetPasswordNotification($token));
     }
+
+    public function isFacultyLeader(){
+        if($this->is_leader == 1 ){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }

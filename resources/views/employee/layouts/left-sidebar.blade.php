@@ -9,28 +9,19 @@
                 <ul class="cm-menu-items">
 
                     <li class="{{url()->current() == route('employee.pi.detail') ? 'active':''}}">
-                      <a href="{{route('employee.pi.detail')}}" class="sf-profile-group">Thông tin cá nhân</a>
+                      <a href="{{route('employee.pi.detail')}}" class="sf-profile">Thông tin cá nhân</a>
                     </li>
                     <li class="{{url()->current() == route('employee.workload.index') ? 'active':''}}">
-                        <a href="{{route('employee.workload.index')}}" class="sf-dashboard-alt">Khối lượng công việc</a>
+                        <a href="{{route('employee.workload.index')}}" class="sf-dashboard">Khối lượng công việc</a>
                     </li>
                     <li class="{{url()->current() == route('employee.sb.detail') ? 'active':''}}">
-                        <a href="{{route('employee.sb.detail')}}" class="sf-dashboard-alt">Lý lịch khoa học</a>
+                        <a href="{{route('employee.sb.detail')}}" class="sf-file-text">Lý lịch khoa học</a>
                     </li>
+                    @can('actAsFacultyLeader',App\PI::first())
                     <li class="{{url()->current() == route('employee.faculty.index') ? 'active':''}}">
-                        <a href="{{route('employee.faculty.index')}}" class="sf-dashboard-alt">Danh sách giảng viên</a>
+                        <a href="{{route('employee.faculty.index')}}" class="sf-profile-group">Danh sách giảng viên</a>
                     </li>
-                    {{-- <li><a href="components-text.html" class=" sf-cog ">Quản lý tài khoản</a></li> --}}
-{{--
-                    <li class="cm-submenu">
-                        <a class="sf-cat">Icons <span class="caret"></span></a>
-                        <ul>
-                            <li><a href="ico-sf.html">Small-n-flat</a></li>
-                            <li><a href="ico-md.html">Material Design</a></li>
-                            <li><a href="ico-fa.html">Font Awesome</a></li>
-                        </ul>
-                    </li>
-                   --}}
+                    @endcan
                 </ul>
             </div>
         </div>

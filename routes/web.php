@@ -102,6 +102,13 @@ Route::prefix('admin')->group(function () {
 
         // statistic
         Route::get('/statistical', 'StatisticController@index')->name('admin.statistic.index');
+        Route::get('/statistical-industry', 'StatisticController@industry')->name('admin.statistic.industry');
+
+        // academic_rank
+        Route::get('/academic-rank/{pi_id}/update', 'PIController@getUpdateAcademicRank')->name('admin.academic.update');
+        Route::post('/academic-rank/{pi_id}/update', 'PIController@postUpdateAcademicRank')->name('admin.academic.update');
+        Route::get('/academic-rank/{pi_id}/create', 'PIController@getCreateAcademicRank')->name('admin.academic.create');
+        Route::post('/academic-rank/{pi_id}/create', 'PIController@postCreateAcademicRank')->name('admin.academic.create');
 
 
     });
@@ -158,6 +165,14 @@ Route::prefix('')->group(function () {
 
         //Print scientific background
         Route::get('/scientific-background/print', 'ScientificBackgroundController@indexPrint')->name('employee.sb.print');
+
+        // academic rank
+        Route::get('/academic-rank/update', 'EmployeeController@getUpdateAcademicRank')->name('employee.academic.update');
+        Route::post('/academic-rank/update', 'EmployeeController@postUpdateAcademicRank')->name('employee.academic.update');
+        Route::get('/academic-rank/create', 'EmployeeController@getCreateAcademicRank')->name('employee.academic.create');
+        Route::post('/academic-rank/create', 'EmployeeController@postCreateAcademicRank')->name('employee.academic.create');
+
+
 
     });
 });

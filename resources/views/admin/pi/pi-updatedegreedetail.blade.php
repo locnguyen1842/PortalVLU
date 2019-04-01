@@ -78,7 +78,7 @@
                         <select required class="form-control" name="nation_of_issue_id">
                             <option value="{{$degree->nation_of_issue_id}}">Chọn nước cấp</option>
                             @foreach($countries as $c)
-                            <option value="{{$c->id}}">{{$c->country_name}}</option>
+                            <option {{ $c->id==$degree->id?'selected':'' }} value="{{$c->id}}">{{$c->country_name}}</option>
                             @endforeach
                         </select>
                     </div>
