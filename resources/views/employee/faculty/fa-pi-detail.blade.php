@@ -107,6 +107,7 @@
                     </div>
 
                 </div>
+                
 
                 <div class="col-sm-5">
 
@@ -133,7 +134,7 @@
                                 </form>
                             </div>
                             <div class="panel-footer text-center">
-                              <label><a href="#">Chi tiết</a> </label>
+                              <label><a href="{{ route('employee.faculty.degree.list',$pi->id)}}">Chi tiết</a> </label>
 
                             </div>
 
@@ -141,31 +142,110 @@
                     </div>
                     <div class="col-sm-12">
                         <div class="panel panel-default">
+                            <div class="panel-heading">Thông tin học hàm<br>
+                                {{-- @can('cud', $pi)
+                                @if($pi->academic_rank()->exists())
+                                <a href="{{route('admin.academic.update',$pi->id)}}">
+                                    <button type="button" name="button" class="btn btn-xs btn-primary">Cập nhật</button>
+                                </a>
+                                @else
+                                <a href="{{route('admin.academic.create',$pi->id)}}">
+                                        <button type="button" name="button" class="btn btn-xs btn-success">Thêm mới</button>
+                                    </a>
+                                @endif
+                                @endcan --}}
+                            </div>
+                            <div class="panel-body">
+                                <form class="form-horizontal">
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-4  ">Học hàm </label>
+                                        <span for="" class="col-sm-3 text-nowrap">{{$pi->academic_rank()->exists() ? $pi->academic_rank->type->name : 'Chưa có'}}</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-4 ">Chuyên ngành</label>
+                                        <span for="" class="col-sm-3 text-nowrap">{{$pi->academic_rank()->exists() ? $pi->academic_rank->specialized : 'Chưa có'}}</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-4  ">Ngày công nhận </label>
+                                        <span for="" class="col-sm-3 text-nowrap">{{$pi->academic_rank()->exists() ? date('d-m-Y', strtotime($pi->academic_rank->date_of_recognition)) : 'Chưa có'}}</span>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-4  ">Khối ngành </label>
+                                        <span for="" class="col-sm-3 text-nowrap">{{$pi->academic_rank()->exists() ? $pi->academic_rank->industry->name : 'Chưa có'}}</span>
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="panel panel-default">
                             <div class="panel-heading">Thông tin nghề nghiệp</div>
                             <div class="panel-body">
-                                <form class="form-horizontal" action="#" method="get">
+                                <form class="form-horizontal" action="{{route('admin.pi.detail',$pi->id)}}" method="get">
                                     {{csrf_field()}}
+                                    @if($pi->officer()->exists())
                                     <div class="form-group">
-                                        <label for="inputPassword3" class="col-sm-5  ">Chức vụ </label>
-                                        <span for="" class="col-sm-7 text-nowrap">{{$pi->position}}</span>
+                                        <label for="inputPassword3" class="col-sm-5  ">Loại cán bộ </label>
+                                        <span for="" class="col-sm-7 text-nowrap">{{$pi->officer->type->name}}</span>
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputPassword3" class="col-sm-5  ">Chức danh chuyên môn </label>
-                                        <span for="" class="col-sm-7 text-nowrap">{{$pi->professional_title}}</span>
+                                        <label for="inputPassword3" class="col-sm-5  ">Chức vụ</label>
+                                        <span for="" class="col-sm-7 text-nowrap">{{$pi->officer->position->name}}</span>
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputPassword3" class="col-sm-5  ">Đơn vị </label>
+                                        <label for="inputPassword3" class="col-sm-5  ">Kiêm nhiệm giảng dạy</label>
+                                        <span for="" class="col-sm-7 text-nowrap">{{$pi->officer->is_concurrently == 1 ? 'Có':'Không'}}</span>
+                                    </div>
+                                    @endif
+                                    @if($pi->teacher()->exists())
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-5  ">Loại giảng viên </label>
+                                        <span for="" class="col-sm-7 text-nowrap">{{$pi->teacher->type->note}}</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-5  ">Chức danh nghề nghiệp </label>
+                                        <span for="" class="col-sm-7 text-nowrap">{{$pi->teacher->title->name}}</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-5  ">Danh hiệu</label>
+                                        <span for="" class="col-sm-7 text-nowrap">
+                                            {{(($pi->teacher->is_excellent_teacher == 1 ? 'Nhà giáo ưu tú': ''))}}
+
+                                            {{(($pi->teacher->is_national_teacher == 1 &&$pi->teacher->is_excellent_teacher == 1 ) ? ',': '')}}
+
+                                            {{($pi->teacher->is_national_teacher == 1 ? 'Nhà giáo nhân dân': '')}}
+
+                                        </span>
+                                    </div>
+                                    @if($pi->teacher->is_retired == 1)
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-5  ">Nghĩ hưu</label>
+                                        <span for="" class="col-sm-7 text-nowrap">Đã nghĩ hưu</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-5  ">Ngày nghĩ hưu</label>
+                                        <span for="" class="col-sm-7 text-nowrap">{{date('d-m-Y',strtotime($pi->teacher->date_of_retirement))}}</span>
+                                    </div>
+
+                                    @endif
+                                    @endif
+
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-5  ">Đơn vị</label>
                                         <span for="" class="col-sm-7 text-nowrap">{{$pi->unit->name}}</span>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputPassword3" class="col-sm-5  ">Ngày tuyển dụng </label>
-                                        <span for="" class="col-sm-7 text-nowrap">{{date('d-m-Y', strtotime($pi->date_of_recruitment))}}</span>
+                                        <span for="" class="col-sm-7 text-nowrap">{{date('d-m-Y',strtotime($pi->date_of_recruitment))}}</span>
                                     </div>
 
                                 </form>
                             </div>
                         </div>
                     </div>
+                    
 
                 </div>
 

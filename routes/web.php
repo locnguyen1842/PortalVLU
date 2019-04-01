@@ -159,6 +159,7 @@ Route::prefix('')->group(function () {
         Route::get('/faculty-pi-detail/{id}', 'EmployeeController@getFacultydetail')->name('employee.faculty.detail');
         Route::get('/faculty-workload-detail/{id}', 'EmployeeController@getfaWorkload')->name('employee.faculty.workload');
         Route::get('/faculty-sb-detail/{id}', 'EmployeeController@getfacultysb')->name('employee.faculty.sb');
+        Route::get('/faculty-degreee-list/{id}', 'EmployeeController@getfacultydegreelist')->name('employee.faculty.degree.list');
 
         //Print scientific background
         Route::get('/scientific-background/print', 'ScientificBackgroundController@indexPrint')->name('employee.sb.print');

@@ -368,6 +368,22 @@ class EmployeeController extends Controller
         $sb = ScientificBackground::where('personalinformation_id', $pi->id)->firstOrFail();
         return view('employee.faculty.fa-sb-detail', compact('id', 'sb','pi'));
     }
+    public function getfacultydegreelist($id){
+        $pi = PI::find($id);
+        $this->authorize('actAsFacultyLeader', $pi);
+        $degrees = DegreeDetail::where('personalinformation_id',$pi->id)->get();
+
+
+        $degree = Degree::where('id');
+        $industries = Industry::all();
+        
+
+
+        return view('employee.faculty.fa-degree-list', compact('degrees', 'industries','pi'));
+
+        $sb = ScientificBackground::where('personalinformation_id', $pi->id)->firstOrFail();
+        return view('employee.faculty.degree.list', compact('id', 'sb','pi'));
+    }
     public function getCreateAcademicRank(){
         $academic_rank_types = AcademicRankType::all();
         $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
