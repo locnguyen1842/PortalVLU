@@ -44,6 +44,9 @@
                         <a href="{{route('admin.sb.update',$pi_id)}}">
                                 <button type="button" name="button" class="btn btn-xs btn-primary">Cập nhật</button>
                             </a>
+                        <a href="{{route('admin.sb.print',$pi_id)}}" target="_blank">
+                            <button type="button" name="button" class="btn btn-xs btn-warning">Xuất pdf</button>
+                        </a>
                         @endcan
                     </div>
                     <div class="panel-body">
@@ -91,7 +94,7 @@
                             <div class="form-group">
                                 <div class="col-sm-6">
                                     <label for="inputEmail3" class="col-sm-4">Chức danh khoa học cao nhất</label>
-                                    <span for="" class="col-sm-8">{{$sb->highest_scientific_title}}</span>
+                                    <span for="" class="col-sm-8  text-truncate">{{$sb->highest_scientific_title}}</span>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="inputEmail3" class="col-sm-4">Năm bổ nhiệm</label>
@@ -101,21 +104,21 @@
                             <div class="form-group">
                                 <div class="col-sm-6">
                                     <label for="inputEmail3" class="col-sm-4">Chức vụ</label>
-                                    <span for="" class="col-sm-8 text-nowrap">{{$sb->pi->position}}</span>
+                                    <span for="" class="col-sm-8 text-truncate">{{$sb->pi->position}}</span>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="inputEmail3" class="col-sm-4">Đơn vị công tác</label>
-                                    <span for="" class="col-sm-8 text-nowrap">{{$sb->pi->unit->name}}</span>
+                                    <span for="" class="col-sm-8 text-truncate">{{$sb->pi->unit->name}}</span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-6">
                                     <label for="inputEmail3" class="col-sm-4">Chỗ ở riêng hoặc địa chỉ liên lạc</label>
-                                    <span for="" class="col-sm-8 text-nowrap">{{$sb->address}}</span>
+                                    <span for="" class="col-sm-8 text-truncate">{{$sb->address}}</span>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="inputEmail3" class="col-sm-4">Email</label>
-                                    <span for="" class="col-sm-8 text-nowrap">{{$sb->pi->email_address}}</span>
+                                    <span for="" class="col-sm-8 text-truncate">{{$sb->pi->email_address}}</span>
                                 </div>
                             </div>
                             <div class="form-group">

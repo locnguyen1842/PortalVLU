@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     {{-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> --}}
     {{-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> --}}
-    <title>Ly Lich Khoa Hoc</title>
+    <title>Lý lịch khoa học</title>
 </head>
 
 <body>
@@ -13,12 +13,12 @@
         <!-- begin header -->
         <div class="header">
             <div class="headerLeft">
-                <p>BỘ GIÁO DỤC VÀ ĐÀO TẠO</p>
-                <h4>TRƯỜNG ĐẠI HỌC VĂN LANG</h4>
+                <p style="padding-left:0.9rem">BỘ GIÁO DỤC VÀ ĐÀO TẠO</p>
+                <p><strong>TRƯỜNG ĐẠI HỌC VĂN LANG</strong></p>
             </div>
             <div class="headerRight">
                 <h4>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</h4>
-                <h4 class="hr2">Độc lập-Tự do- Hạnh phúc</h4>
+                <h4 class="hr2">Độc lập - Tự do - Hạnh phúc</h4>
             </div>
             <div class="clear"></div>
         </div>
@@ -47,7 +47,7 @@
             </div>
             <div class="form-group">
                 <div class="form-group-sub1">
-                    <label for="">Ngày,tháng,năm sinh</label>
+                    <label for="">Ngày,tháng,năm sinh:</label>
                     <span for="" class="col-sm-8 text-nowrap">{{date('d-m-Y',strtotime($sb->pi->date_of_birth))}}</span>
                 </div>
                 <div class="form-group-sub2">
@@ -166,7 +166,7 @@
             @foreach($sb->tp_graduates as $item)
             <div class="form-group">
                 <div class="form-group-sub1">
-                    <label for="">Bằng đại học {{$loop->iteration}}</label>
+                    <label for="">Bằng đại học {{$loop->iteration}}:</label>
                     <span for="" class="col-sm-8 text-nowrap">{{$item->nation_of_training}}</span>
                 </div>
                 <div class="form-group-sub2">
@@ -208,18 +208,18 @@
                     <ul class="dash">
                         <li>
                             <label for="">Tiến sĩ chuyên ngành:</label>
-                            <span for="" class="col-sm-8 text-nowrap">{{$sb->tp_postgraduate_doctors->isEmpty() ? '' : $sb->tp_postgraduate_masters->first()->field_of_study}}</span>
+                            <span for="" class="col-sm-8 text-nowrap">{{$sb->tp_postgraduate_doctors->isEmpty() ? '' : $sb->tp_postgraduate_doctors->first()->field_of_study}}</span>
                         </li>
                     </ul>
                     <!-- <label for="">-Thạc sĩ chuyên ngành:</label> -->
                 </div>
                 <div class="form-group-sub2">
                     <label for="">Năm cấp bằng:</label>
-                    <span for="" class="col-sm-8 text-nowrap">{{$sb->tp_postgraduate_doctors->isEmpty() ? '' : $sb->tp_postgraduate_masters->first()->year_of_issue}}</span>
+                    <span for="" class="col-sm-8 text-nowrap">{{$sb->tp_postgraduate_doctors->isEmpty() ? '' : $sb->tp_postgraduate_doctors->first()->year_of_issue}}</span>
                 </div>
                 <div class="form-group-sub2">
                     <label for="">Nơi đào tạo:</label>
-                    <span for="" class="col-sm-8 text-nowrap">{{$sb->tp_postgraduate_doctors->isEmpty() ? '' : $sb->tp_postgraduate_masters->first()->place_of_training}}</span>
+                    <span for="" class="col-sm-8 text-nowrap">{{$sb->tp_postgraduate_doctors->isEmpty() ? '' : $sb->tp_postgraduate_doctors->first()->place_of_training}}</span>
                 </div>
             </div>
             <div class="clear"></div>
@@ -228,7 +228,7 @@
                     <ul class="dash">
                         <li>
                             <label for="">Tên luận án:</label>
-                            <span for="" class="col-sm-8">{{$sb->tp_postgraduate_doctors->isEmpty() ? '' : $sb->tp_postgraduate_masters->first()->thesis_title}}</span>
+                            <span for="" class="col-sm-8">{{$sb->tp_postgraduate_doctors->isEmpty() ? '' : $sb->tp_postgraduate_doctors->first()->thesis_title}}</span>
                         </li>
                     </ul>
                     <!-- <label for="">-Thạc sĩ chuyên ngành:</label> -->
@@ -244,13 +244,22 @@
                     <div class="form-group-sub1">
                             <ul style="list-style-type: none">
                                 <li>
-                                    <label for="">1.</label>
+                                    @if($sb->tp_foreign_languages()->exists())
+                                    <label for="">1. {{$sb->tp_foreign_languages->first()->language}}</label>
+                                    @else
+                                    <label for="">1. </label>
+                                    @endif
                                 </li>
                             </ul>
                             <!-- <label for="">-Thạc sĩ chuyên ngành:</label> -->
                         </div>
                         <div class="form-group-sub2">
-                            <label for="">Mức độ sử dụng:</label>
+                                @if($sb->tp_foreign_languages()->exists())
+                                <label for="">Mức độ sử dụng: {{$sb->tp_foreign_languages->first()->usage_level}}</label>
+                                @else
+                                <label for="">Mức độ sử dụng: </label>
+                                @endif
+
                         </div>
 
             </div>
@@ -258,13 +267,23 @@
                     <div class="form-group-sub1">
                             <ul style="list-style-type: none">
                                 <li>
-                                    <label for="">2.</label>
+                                        @if($sb->tp_foreign_languages()->exists())
+                                        <label for="">2. {{$sb->tp_foreign_languages->last()->language}}</label>
+                                        @else
+                                        <label for="">2. </label>
+                                        @endif
+
                                 </li>
                             </ul>
                             <!-- <label for="">-Thạc sĩ chuyên ngành:</label> -->
                         </div>
                         <div class="form-group-sub2">
-                            <label for="">Mức độ sử dụng:</label>
+                                @if($sb->tp_foreign_languages()->exists())
+                                <label for="">Mức độ sử dụng: {{$sb->tp_foreign_languages->last()->usage_level}}</label>
+                                @else
+                                <label for="">Mức độ sử dụng: </label>
+                                @endif
+
                         </div>
 
             </div>
@@ -304,7 +323,9 @@
               @endforeach
               @else
               <tr>
-                  <td colspan="5" class="text-center">Không có bất kỳ dữ liệu nào được tìm thấy</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
               </tr>
               @endif
             {{-- </tbody> --}}
@@ -358,7 +379,11 @@
               @endforeach
               @else
               <tr>
-                  <td colspan="5" class="text-center">Không có bất kỳ dữ liệu nào được tìm thấy</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
               </tr>
               @endif
             </table>
@@ -396,7 +421,10 @@
               @endforeach
               @else
               <tr>
-                  <td colspan="5" class="text-center">Không có bất kỳ dữ liệu nào được tìm thấy</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
               </tr>
               @endif
             </table>
@@ -438,6 +466,9 @@ table{
   page-break-inside: avoid;
 
 }
+table.table-content > tbody > tr > td {
+    text-align: center;
+}
 .clear{ clear: both;}
 .wrap{
     width: 100%;
@@ -457,7 +488,7 @@ table{
     width: 50%;
 }
 .headerLeft>p{
-    padding-left: 2rem;
+
     font-size: 15px;
 }
 .headerRight{

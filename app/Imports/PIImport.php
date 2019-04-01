@@ -355,12 +355,12 @@ class PIImport implements ToCollection, WithStartRow
                 ],
                 [
                     'personalinformation_id' => $pi->id,
-                    'highest_scientific_title' => 'Chưa có',
+                    'highest_scientific_title' => '',
                     'year_of_appointment' => '',
-                    'address' => $pi->contact_address,
-                    'highest_degree' =>'Chưa có',
-                    'orga_phone_number' => 'Chưa có',
-                    'home_phone_number' => 'Chưa có',
+                    'address' => '',
+                    'highest_degree' =>'',
+                    'orga_phone_number' => '',
+                    'home_phone_number' => '',
                     'mobile_phone_number' => $pi->phone_number
                 ]
             );

@@ -28,6 +28,9 @@
                             <a href="{{route('employee.sb.update')}}">
                                     <button type="button" name="button" class="btn btn-xs btn-primary">Cập nhật</button>
                                 </a>
+                                <a href="{{route('employee.sb.print')}}"  target="_blank">
+                                    <button type="button" name="button" class="btn btn-xs btn-warning">Xuất pdf</button>
+                                </a>
                         </div>
                         <div class="panel-body">
                             <form class="form-horizontal">
