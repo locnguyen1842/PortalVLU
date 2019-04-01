@@ -105,6 +105,72 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-sm-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Thông tin nghề nghiệp</div>
+                            <div class="panel-body">
+                                <form class="form-horizontal" action="{{route('admin.pi.detail',$pi->id)}}" method="get">
+                                    {{csrf_field()}}
+                                    @if($pi->officer()->exists())
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-5  ">Loại cán bộ </label>
+                                        <span for="" class="col-sm-7 text-nowrap">{{$pi->officer->type->name}}</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-5  ">Chức vụ</label>
+                                        <span for="" class="col-sm-7 text-nowrap">{{$pi->officer->position->name}}</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-5  ">Kiêm nhiệm giảng dạy</label>
+                                        <span for="" class="col-sm-7 text-nowrap">{{$pi->officer->is_concurrently == 1 ? 'Có':'Không'}}</span>
+                                    </div>
+                                    @endif
+                                    @if($pi->teacher()->exists())
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-5  ">Loại giảng viên </label>
+                                        <span for="" class="col-sm-7 text-nowrap">{{$pi->teacher->type->note}}</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-5  ">Chức danh nghề nghiệp </label>
+                                        <span for="" class="col-sm-7 text-nowrap">{{$pi->teacher->title->name}}</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-5  ">Danh hiệu</label>
+                                        <span for="" class="col-sm-7 text-nowrap">
+                                            {{(($pi->teacher->is_excellent_teacher == 1 ? 'Nhà giáo ưu tú': ''))}}
+
+                                            {{(($pi->teacher->is_national_teacher == 1 &&$pi->teacher->is_excellent_teacher == 1 ) ? ',': '')}}
+
+                                            {{($pi->teacher->is_national_teacher == 1 ? 'Nhà giáo nhân dân': '')}}
+
+                                        </span>
+                                    </div>
+                                    @if($pi->teacher->is_retired == 1)
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-5  ">Nghĩ hưu</label>
+                                        <span for="" class="col-sm-7 text-nowrap">Đã nghĩ hưu</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-5  ">Ngày nghĩ hưu</label>
+                                        <span for="" class="col-sm-7 text-nowrap">{{date('d-m-Y',strtotime($pi->teacher->date_of_retirement))}}</span>
+                                    </div>
+
+                                    @endif
+                                    @endif
+
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-5  ">Đơn vị</label>
+                                        <span for="" class="col-sm-7 text-nowrap">{{$pi->unit->name}}</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-5  ">Ngày tuyển dụng </label>
+                                        <span for="" class="col-sm-7 text-nowrap">{{date('d-m-Y',strtotime($pi->date_of_recruitment))}}</span>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
                 
@@ -179,73 +245,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">Thông tin nghề nghiệp</div>
-                            <div class="panel-body">
-                                <form class="form-horizontal" action="{{route('admin.pi.detail',$pi->id)}}" method="get">
-                                    {{csrf_field()}}
-                                    @if($pi->officer()->exists())
-                                    <div class="form-group">
-                                        <label for="inputPassword3" class="col-sm-5  ">Loại cán bộ </label>
-                                        <span for="" class="col-sm-7 text-nowrap">{{$pi->officer->type->name}}</span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputPassword3" class="col-sm-5  ">Chức vụ</label>
-                                        <span for="" class="col-sm-7 text-nowrap">{{$pi->officer->position->name}}</span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputPassword3" class="col-sm-5  ">Kiêm nhiệm giảng dạy</label>
-                                        <span for="" class="col-sm-7 text-nowrap">{{$pi->officer->is_concurrently == 1 ? 'Có':'Không'}}</span>
-                                    </div>
-                                    @endif
-                                    @if($pi->teacher()->exists())
-                                    <div class="form-group">
-                                        <label for="inputPassword3" class="col-sm-5  ">Loại giảng viên </label>
-                                        <span for="" class="col-sm-7 text-nowrap">{{$pi->teacher->type->note}}</span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputPassword3" class="col-sm-5  ">Chức danh nghề nghiệp </label>
-                                        <span for="" class="col-sm-7 text-nowrap">{{$pi->teacher->title->name}}</span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputPassword3" class="col-sm-5  ">Danh hiệu</label>
-                                        <span for="" class="col-sm-7 text-nowrap">
-                                            {{(($pi->teacher->is_excellent_teacher == 1 ? 'Nhà giáo ưu tú': ''))}}
-
-                                            {{(($pi->teacher->is_national_teacher == 1 &&$pi->teacher->is_excellent_teacher == 1 ) ? ',': '')}}
-
-                                            {{($pi->teacher->is_national_teacher == 1 ? 'Nhà giáo nhân dân': '')}}
-
-                                        </span>
-                                    </div>
-                                    @if($pi->teacher->is_retired == 1)
-                                    <div class="form-group">
-                                        <label for="inputPassword3" class="col-sm-5  ">Nghĩ hưu</label>
-                                        <span for="" class="col-sm-7 text-nowrap">Đã nghĩ hưu</span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputPassword3" class="col-sm-5  ">Ngày nghĩ hưu</label>
-                                        <span for="" class="col-sm-7 text-nowrap">{{date('d-m-Y',strtotime($pi->teacher->date_of_retirement))}}</span>
-                                    </div>
-
-                                    @endif
-                                    @endif
-
-                                    <div class="form-group">
-                                        <label for="inputPassword3" class="col-sm-5  ">Đơn vị</label>
-                                        <span for="" class="col-sm-7 text-nowrap">{{$pi->unit->name}}</span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputPassword3" class="col-sm-5  ">Ngày tuyển dụng </label>
-                                        <span for="" class="col-sm-7 text-nowrap">{{date('d-m-Y',strtotime($pi->date_of_recruitment))}}</span>
-                                    </div>
-
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    
 
                 </div>
 
