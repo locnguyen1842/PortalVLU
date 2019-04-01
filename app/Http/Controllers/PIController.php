@@ -13,12 +13,23 @@ use Maatwebsite\Excel\Facades\Excel;
 use Validator;
 use App\Employee;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Input;
 use Hash;
 use App\Workload;
 use App\WorkloadSession;
 use App\Admin;
 use App\Nation;
 use App\Unit;
+use App\Ward;
+use App\District;
+use App\Province;
+use App\Address;
+use App\OfficerType;
+use App\Officer;
+use App\PositionType;
+use App\TeacherTitle;
+use App\TeacherType;
+use App\Teacher;
 
 class PIController extends Controller
 {
@@ -53,9 +64,26 @@ class PIController extends Controller
         $this->authorize('cud', PI::first());
         $nations = Nation::all();
         $units = Unit::all();
-
-        return view('admin.pi.pi-add', compact('nations', 'units'));
+        $officer_types = OfficerType::all();
+        $position_types = PositionType::all();
+        $teacher_types = TeacherType::all();
+        $teacher_titles = TeacherTitle::all();
+        // $wards = Ward::all('name_with_type','code');
+        $provinces = Province::all('name_with_type','code');
+        return view('admin.pi.pi-add', compact('nations', 'units','provinces','officer_types','position_types','teacher_types','teacher_titles'));
     }
+
+    public function getDistricts(){
+        $province_code = Input::get('province_code');
+        $districts = District::where('parent_code',$province_code)->get(['name_with_type','code']);
+        return response()->json($districts);
+    }
+    public function getWards(){
+        $district_code = Input::get('district_code');
+        $wards = Ward::where('parent_code',$district_code)->get(['name_with_type','code']);
+        return response()->json($wards);
+    }
+
     public function postAdd(Request $request)
     {
         $this->authorize('cud', PI::first());
@@ -67,7 +95,13 @@ class PIController extends Controller
             'date_of_birth'=>'required|date',
             'place_of_birth'=> 'required',
             'permanent_address'=> 'required|min:6|max:100',
+            'province_1'=> 'required',
+            'district_1'=> 'required',
+            'ward_1'=> 'required',
             'contact_address'=> 'required|min:6|max:100',
+            'province_2'=> 'required',
+            'district_2'=> 'required',
+            'ward_2'=> 'required',
             'phone_number'=> 'required',
             'email_address'=> 'required|email|unique:personalinformations,email_address',
             'position'=> 'required',
@@ -77,6 +111,13 @@ class PIController extends Controller
             'date_of_issue' => 'required|date',
             'place_of_issue'=> 'required',
             'unit'=> 'required',
+            'position_type'=> 'required',
+            'officer_type'=> 'required',
+            'teacher_type'=> 'required',
+            'teacher_title'=> 'required',
+            'is_retired'=> 'required',
+            'date_of_retirement'=> 'required',
+            'is_concurrently'=> 'required',
           ],
           [
             'employee_code.required'=> 'Mã giảng viên không được bỏ trống',
@@ -91,9 +132,15 @@ class PIController extends Controller
             'permanent_address.min' =>'Địa chỉ thường trú phải lớn hơn 6 kí tự',
             'permanent_address.max' =>'Địa chỉ thường trú phải nhỏ hơn 100 kí tự',
             'permanent_address.required' =>'Địa chỉ thường trú không được bỏ trống',
+            'province_1.required' =>'Tỉnh/Thành phố không được bỏ trống',
+            'district_1.required' =>'Quận không được bỏ trống',
+            'ward_1.required' =>'Phường/xã không được bỏ trống',
             'contact_address.min' =>'Địa chỉ liên hệ phải lớn hơn 6 kí tự',
             'contact_address.max' =>'Địa chỉ liên hệ phải nhỏ hơn 100 kí tự',
             'contact_address.required' =>'Địa chỉ liên hệ không được bỏ trống',
+            'province_2.required' =>'Tỉnh/Thành phố không được bỏ trống',
+            'district_2.required' =>'Quận không được bỏ trống',
+            'ward_2.required' =>'Phường/xã không được bỏ trống',
             'phone_number.required' =>'Số điện thoại không được bỏ trống',
             'email_address.required' =>'Email không được bỏ trống',
             'email_address.email' =>'Email sai định dạng',
@@ -108,6 +155,13 @@ class PIController extends Controller
             'date_of_issue.date' =>'Ngày cấp sai định dạng',
             'place_of_issue.required' =>'Nơi cấp không được bỏ trống',
             'unit.required' =>'Đơn vị không được bỏ trống',
+            'teacher_type.required' =>'Loại giảng viên không được bỏ trống',
+            'teacher_title.required' =>'Chức danh nghề nghiệp không được bỏ trống',
+            'is_retired.required' =>'Nghỉ hưu không được bỏ trống',
+            'date_of_retirement.required' =>'Ngày nghỉ hưu không được bỏ trống',
+            'officer_type.required' =>'Loại cán bộ không được bỏ trống',
+            'position_type.required' =>'Chức vụ không được bỏ trống',
+            'is_concurrently.required' =>'Kiêm nhiệm giảng dạy không được bỏ trống',
           ]
       );
         //add data
@@ -123,8 +177,7 @@ class PIController extends Controller
         $pi->nation_id= $request->nation;
         $pi->date_of_birth= $request->date_of_birth;
         $pi->place_of_birth= $request->place_of_birth;
-        // $pi->permanent_address= $request->permanent_address;
-        // $pi->contact_address= $request->contact_address;
+        // $pi->permanent_address_id= $request->permanent_address;
         $pi->phone_number= $request->phone_number;
         $pi->email_address= $request->email_address;
         $pi->position= $request->position;
@@ -136,7 +189,25 @@ class PIController extends Controller
         $pi->show = 1;
         $pi->new = 0;
         $pi->unit_id = $request->unit;
+
+        $permanent_address = new Address;
+        $permanent_address->address_content = $request->permanent_address;
+        $permanent_address->province_code = $request->province_1;
+        $permanent_address->district_code = $request->district_1;
+        $permanent_address->ward_code = $request->ward_1;
+        $permanent_address->save();
+        $pi->permanent_address_id = $permanent_address->id;
+
+        $contact_address = new Address;
+        $contact_address->address_content = $request->$contact_address;
+        $contact_address->province_code = $request->province_2;
+        $contact_address->district_code = $request->district_2;
+        $contact_address->ward_code = $request->ward_2;
+        $contact_address->save();
+        $pi->contact_address_id = $contact_address->id;
         $pi->save();
+
+
         //check is Admin ?
         //add acoount for employee role
         $employee = new Employee;
@@ -144,18 +215,10 @@ class PIController extends Controller
         $employee->username= $pi->employee_code;
         $employee->password = Hash::make($pi->employee_code);
         $employee->email = $pi->email_address;
+        $employee->is_leader = 0 ;
         $employee->save();
 
-        if ($request->role == 1) {
 
-          //add account for admin role
-            $admin = new Admin;
-            $admin->personalinformation_id = $pi->id;
-            $admin->username= $pi->employee_code;
-            $admin->password = Hash::make($pi->employee_code);
-            $admin->email = $pi->email_address;
-            $admin->save();
-        }
         ScientificBackground::updateOrCreate(
             [
                 'personalinformation_id' => $pi->id,
@@ -173,6 +236,27 @@ class PIController extends Controller
         );
 
 
+        $officer = new Officer;
+        $officer->personalinformation_id = $pi->id;
+        $officer->type_id = $request->officer_type;
+        $officer->position_id = $request->position_type;
+        $officer->is_concurrently = $request->is_concurrently;
+        $officer->save();
+
+        $teacher = new Teacher;
+        $teacher->personalinformation_id = $pi->id;
+        $teacher->type_id = $request->teacher_type;
+        $teacher->title_id = $request->teacher_title;
+        $teacher->is_retired = $request->is_retired; //đã nghĩ hưu chưa ( radio button)
+        $teacher->date_of_retirement = $request->date_of_retirement; // ngày nghĩ hưu người dùng nhập bên view
+        if ($request->has('is_excellent_teacher')){
+          $teacher->is_excellent_teacher = 1; //Nhà giáo ưu tú
+        }
+        if($request->has('is_excellent_teacher')){
+          //Nhà giáo nhân dân | 2 thang cuối này là cái checkbox chọn cái nào thì cái đó = 1
+          $teacher->is_national_teacher = 1;
+        }
+        $teacher->save();
         return redirect()->back()->with('message', 'Thêm thành công');
     }
     //get data personal information
