@@ -114,6 +114,9 @@ Route::prefix('admin')->group(function () {
     });
 });
 
+Route::get('/fetch-district', 'PIController@getDistricts')->name('res.districts');
+Route::get('/fetch-ward', 'PIController@getWards')->name('res.wards');
+
 
 Route::prefix('')->group(function () {
     //authenticate admin login/logout

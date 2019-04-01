@@ -9,19 +9,19 @@ class Address extends Model
     protected $table = 'addresses';
     protected $fillable = [
         'address_content',
-        'province_id',
-        'district_id',
-        'ward_id',
+        'province_code',
+        'district_code',
+        'ward_code',
     ];
 
     public function province(){
-        return $this->belongsTo('App\Province','province_id','id');
+        return $this->belongsTo('App\Province','province_code','code');
     }
     public function district(){
-        return $this->belongsTo('App\Province','district_id','id');
+        return $this->belongsTo('App\District','district_code','code');
     }
     public function ward(){
-        return $this->belongsTo('App\Province','ward_id','id');
+        return $this->belongsTo('App\Ward','ward_code','code');
     }
 
     public function pi_permanent_addresses(){
