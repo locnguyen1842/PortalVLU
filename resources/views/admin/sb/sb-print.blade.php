@@ -435,11 +435,11 @@
         <div class="content">
             <div class="form-group" style="margin-left: 60%">
                 <span>.............,</span>
-                <span style="">ngày</span>
-                <span style="margin-left: 2rem">tháng</span>
-                <span style="margin-left: 2rem">năm</span>
+                <span style="">ngày .....</span>
+                <span >tháng .....</span>
+                <span >năm .....</span>
             </div>
-            <div class="form-group" style="margin-left: 67% ; margin-top: 0.7rem">
+            <div class="form-group" style="margin-left: 66% ; margin-top: 0.7rem">
                 <span><strong>Người khai kí tên</strong></span>
             </div>
             <div class="form-group" style="margin-left: 63% ; margin-top: 0.5rem">

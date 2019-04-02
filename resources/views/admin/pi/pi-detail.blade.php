@@ -6,7 +6,7 @@
         <ol class="breadcrumb">
             {{-- <li><a href="#">Home</a></li> --}}
             <li class=""><a href="{{route('admin.pi.index')}}">Quản lý thông tin nhân viên</a></li>
-            <li class="active">Chi tiết nhân viên - {{$pi->employee_code}}</li>
+            <li class="active">Thông tin cá nhân - {{$pi->employee_code}}</li>
         </ol>
     </div>
 </div>
