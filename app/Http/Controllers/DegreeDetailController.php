@@ -27,7 +27,6 @@ class DegreeDetailController extends Controller
         $degrees = Degree::all();
         $industries = Industry::all();
         $countries = Country::all();
-        //$degreede = DegreeDetail::all();
 
 
         return view('admin.pi.pi-updatedegreedetail', compact('degrees', 'degree', 'industries', 'pi', 'specializes', 'countries'));

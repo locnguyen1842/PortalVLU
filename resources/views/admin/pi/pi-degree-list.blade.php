@@ -31,6 +31,7 @@
                     <th>Ngày cấp </th>
                     <th>Nơi cấp</th>
                     <th>Nước cấp</th>
+                    <th>Loại bằng</th>
                     <th></th>
                 </tr>
             </thead>
@@ -45,6 +46,7 @@
                         {{--{{date('d-m-Y',($degree->date_of_issue))}}--}}
                     <td class="">{{$degree->place_of_issue}}</td>
                     <td class="">{{$degree->country->country_name}}</td>
+                    <td class="">{{$degree->degree_type}}</td>
                     @can('cud', $pi)
                     <td class="">
                         <a href="{{route('admin.pi.degree.update',$degree->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Cập nhật" class="tooltip-test">
@@ -82,7 +84,7 @@
             @endforeach
           @else
             <tr>
-              <td colspan="5" class="text-center">Không có bất kỳ dữ liệu nào được tìm thấy</td>
+              <td colspan="8" class="text-center">Không có bất kỳ dữ liệu nào được tìm thấy</td>
             </tr>
           @endif
             </tbody>

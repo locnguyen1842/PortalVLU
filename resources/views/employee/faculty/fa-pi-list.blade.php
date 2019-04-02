@@ -31,12 +31,6 @@
     <img src="{{asset('img/loader.gif')}}" alt="Đang tải">
   </div>
     <div class="panel-heading">Danh sách nhân viên<br>
-        {{--  @can('cud', $pis->first())
-        <a href="{{route('employee.pi.add')}}">
-            <button type="button" name="button" class="btn btn-xs btn-success">Thêm mới</button>
-        </a>
-        @endcan  --}}
-
     </div>
     <div class="panel-body">
         <div class="form-group">
@@ -92,7 +86,7 @@
             <tbody>
               @if($pis->where('show',1)->count() >0)
                 @foreach ($pis->where('show',1) as $item)
-                <tr class="{{$item->new ==1 ? 'font-weight-bold':''}}">
+                <tr>
                     <td class="col-sm-1">
 
                         <a href="{{route('employee.faculty.detail',$item->id)}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="Chi tiết" href="javascript:" class="search_tag tooltip-test">
@@ -105,28 +99,9 @@
 
                     <td class="col-sm-2">{{date('d-m-Y', strtotime($item->date_of_birth))}}</td>
                     <td class="col-sm-2">{{$item->unit->name}}</td>
-                    {{--  @can('cud', $pis->first())  --}}
 
-                    {{--  <td class="col-sm-3">
-                      <a href="{{route('employee.pi.update',$item->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Cập nhật" href="javascript:" class="tooltip-test">
-                          <span class=""><i class="fa fa-lg fa-edit text-primary"></i>
-                              <span class="mdi mdi-close"></span>
-                          </span>
-                      </a>
-                      <a href="{{route('employee.pi.delete',$item->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xóa" class="delete_pi tooltip-test ml-10">
-                          <span class=""><i class="fa fa-lg fa-trash text-danger"></i>
-                              <span class="mdi mdi-close"></span>
-                          </span>
-                      </a>
-                     </td>  --}}
-                     {{--  @else
-                     <td></td>  --}}
-                     {{--  @endcan  --}}
 
                 </tr>
-        {{--  @can('cud', $pis->first())  --}}
-
-                {{--modal delete pi--}}
 
                     <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="pi-delete-modal">
 
@@ -144,8 +119,6 @@
                         </div>
                     </div>
 
-{{-- end modal --}}
-{{--  @endcan  --}}
 
                 @endforeach
               @else

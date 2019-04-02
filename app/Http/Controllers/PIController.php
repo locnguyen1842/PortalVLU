@@ -726,4 +726,11 @@ class PIController extends Controller
         $academic_rank->save();
         return redirect()->back()->with('message','Cập nhật thành công');
     }
+
+    public function getDeleteAcademicRank($pi_id){
+        $pi = PI::find($pi_id);
+        $academic_rank = AcademicRank::where('personalinformation_id',$pi->id)->firstOrFail();
+        $academic_rank->delete();
+        return redirect()->back()->with('message','Xóa học hàm thành công');
+    }
 }

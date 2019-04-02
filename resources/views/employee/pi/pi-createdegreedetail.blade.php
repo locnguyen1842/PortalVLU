@@ -40,28 +40,11 @@
                     </div>
                 </div>
                 <div class="form-group">
-                        <div class="col-sm-6">
-                                <label>Khối ngành</label>
-                                <select required class="form-control" name="industry">
-                                    <option value="">Chọn khối ngành</option>
-                                    @foreach($industries as $i)
-                                        <option value="{{$i->id}}">{{$i->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                </div>  
-                <div class="form-group">
                     <div class="col-sm-6">
                         <label>Ngày cấp</label>
                         <input required type="date" min="1900-01-01" class="form-control" name="date_of_issue" value="{{old('date_of_issue')}}">
                     </div>
                     <div class="col-sm-6">
-                        <label>Nơi cấp</label>
-                        <input required type="text" maxlength="100" class="form-control" name="place_of_issue" placeholder="Nhập nơi cấp"  value="{{old('place_of_issue')}}">
-                    </div>
-                </div>
-                <div class="form-group">
-                        <div class="col-sm-6">
                             <label>Nước cấp</label>
                             <select required class="form-control" name="nation_of_issue_id">
                                 <option >Chọn nước cấp</option>
@@ -70,9 +53,16 @@
                                 @endforeach
                             </select>
                         </div>
+
+                </div>
+                <div class="form-group">
+                        <div class="col-sm-6">
+                                <label>Nơi cấp</label>
+                                <input required type="text" maxlength="100" class="form-control" name="place_of_issue" placeholder="Nhập nơi cấp"  value="{{old('place_of_issue')}}">
+                            </div>
                         <div class="col-sm-6">
                             <label>Loại bằng</label>
-                            <input required type="text" maxlength="100" class="form-control" name="degree_type" placeholder="Nhập loại bằng" value="{{old('degree_type')}}">
+                            <input required type="text" maxlength="100" class="form-control" name="degree_type" placeholder="Nhập loại bằng ( vd: Cử nhân, Kỹ Sư, Kiến trúc sư,... )" value="{{old('degree_type')}}">
                         </div>
                     </div>
                 <div class="form-group" style="margin-bottom:0">
