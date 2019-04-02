@@ -268,7 +268,13 @@ class PIController extends Controller
         $pi = PI::Find($id);
         $nations = Nation::all();
         $units = Unit::all();
-        return view('admin.pi.pi-update', compact('pi', 'nations', 'units'));
+        $officer_types = OfficerType::all();
+        $position_types = PositionType::all();
+        $teacher_types = TeacherType::all();
+        $teacher_titles = TeacherTitle::all();
+
+        $provinces = Province::all('name_with_type','code');
+        return view('admin.pi.pi-update', compact('pi', 'nations', 'units', 'provinces','officer_types','position_types','teacher_types','teacher_titles'));
     }
     //post date update information
     public function postupdate(Request $request, $id)
@@ -348,8 +354,8 @@ class PIController extends Controller
         $pi->place_of_issue= $request->place_of_issue;
         $pi->unit_id = $request->unit;
 
-
         $pi->save();
+
 
 
         return redirect()->back()->with('message', 'Cập Nhật thành công');
