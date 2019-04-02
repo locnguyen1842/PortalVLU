@@ -87,7 +87,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="inputPassword3" class="col-sm-3  ">Địa chỉ liên lạc </label>
-                                        <span for="" class="col-sm-9 text-nowrap">{{$pi->contact_address}}</span>
+                                        <span for="" class="col-sm-9 text-nowrap">{{ $pi->address_content }},{{ $pi->wards }}</span>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputPassword3" class="col-sm-3  ">Địa chỉ thường trú </label>
