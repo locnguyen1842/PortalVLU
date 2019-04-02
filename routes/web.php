@@ -113,6 +113,7 @@ Route::prefix('admin')->group(function () {
         Route::post('/academic-rank/{pi_id}/update', 'PIController@postUpdateAcademicRank')->name('admin.academic.update');
         Route::get('/academic-rank/{pi_id}/create', 'PIController@getCreateAcademicRank')->name('admin.academic.create');
         Route::post('/academic-rank/{pi_id}/create', 'PIController@postCreateAcademicRank')->name('admin.academic.create');
+        Route::get('/academic-rank/{pi_id}/delete', 'PIController@getDeleteAcademicRank')->name('admin.academic.delete');
 
 
     });
@@ -176,6 +177,7 @@ Route::prefix('')->group(function () {
         Route::post('/academic-rank/update', 'EmployeeController@postUpdateAcademicRank')->name('employee.academic.update');
         Route::get('/academic-rank/create', 'EmployeeController@getCreateAcademicRank')->name('employee.academic.create');
         Route::post('/academic-rank/create', 'EmployeeController@postCreateAcademicRank')->name('employee.academic.create');
+        Route::get('/academic-rank/delete', 'EmployeeController@getDeleteAcademicRank')->name('employee.academic.delete');
 
 
 

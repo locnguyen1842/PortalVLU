@@ -6,7 +6,7 @@
         <ol class="breadcrumb">
             {{-- <li><a href="#">Home</a></li> --}}
             <li class=""><a href="{{route('admin.pi.index')}}">Quản lý thông tin nhân viên</a></li>
-            <li class="active">Chi tiết nhân viên - {{$pi->employee_code}}</li>
+            <li class="active">Thông tin cá nhân - {{$pi->employee_code}}</li>
         </ol>
     </div>
 </div>
@@ -94,16 +94,12 @@
                                                 <span for="" class="col-sm-9 text-nowrap">{{$pi->email_address}}</span>
                                             </div>
                                             <div class="form-group">
-                                                <label for="inputPassword3" class="col-sm-3  ">Số điện thoại </label>
-                                                <span for="" class="col-sm-9 text-nowrap">{{$pi->phone_number}}</span>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="inputPassword3" class="col-sm-3  ">Địa chỉ liên lạc </label>
-                                                <span for="" class="col-sm-9 text-nowrap">{{$pi->contact_address_id}}</span>
-                                            </div>
-                                            <div class="form-group">
                                                 <label for="inputPassword3" class="col-sm-3  ">Địa chỉ thường trú </label>
-                                                <span for="" class="col-sm-9 text-nowrap">{{$pi->permanent_address_id}}</span>
+                                                <span for="" class="col-sm-9 text-truncate">{{$pi->permanent_address()->exists() && $pi->permanent_address->address_content != null ? $pi->permanent_address->address_content .', ' :''}}{{$pi->permanent_address()->exists() ? $pi->permanent_address->ward->path_with_type :''}}</span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputPassword3" class="col-sm-3  ">Địa chỉ tạm trú </label>
+                                                <span for="" class="col-sm-9 text-truncate">{{$pi->contact_address()->exists() && $pi->contact_address->address_content != null ? $pi->contact_address->address_content .', ' :''}}{{$pi->contact_address()->exists() ? $pi->contact_address->ward->path_with_type :''}}</span>
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputEmail3" class="col-sm-3  ">CMND </label>
@@ -259,8 +255,16 @@
                                                 <span for="" class="col-sm-3 text-nowrap">{{$pi->academic_rank()->exists() ? $pi->academic_rank->industry->name : 'Chưa có'}}</span>
 
                                             </div>
+
+
                                         </form>
                                     </div>
+                                    @if($pi->academic_rank()->exists())
+                                    <div class="panel-footer text-center">
+                                        <label><a class="text-danger" href="{{ route('admin.academic.delete',$pi->id)}}">Xóa</a> </label>
+
+                                    </div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="col-sm-12">

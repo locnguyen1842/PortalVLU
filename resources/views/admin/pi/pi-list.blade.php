@@ -198,8 +198,8 @@
             <tbody>
               @if($pis->where('show',1)->count() >0)
                 @foreach ($pis->where('show',1) as $item)
-                <tr class="{{$item->new ==1 ? 'font-weight-bold':''}}">
-                    <td class="col-sm-1">
+                <tr>
+                    <td>
 
                         <a href="{{route('admin.pi.detail',$item->id)}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="Chi tiết" href="javascript:" class="search_tag tooltip-test">
                             <span class="badge badge-danger">{{$item->employee_code}}
@@ -207,13 +207,13 @@
                             </span>
                         </a>
                     </td>
-                    <td class="col-sm-3">{{$item->full_name}}</td>
+                    <td class="col-sm-2">{{$item->full_name}}</td>
 
-                    <td class="col-sm-2">{{date('d-m-Y', strtotime($item->date_of_birth))}}</td>
-                    <td class="col-sm-2">{{$item->unit->name}}</td>
+                    <td>{{date('d-m-Y', strtotime($item->date_of_birth))}}</td>
+                    <td>{{$item->unit->name}}</td>
                     @can('cud', $pis->first())
 
-                    <td class="col-sm-3">
+                    <td>
                       <a href="{{route('admin.pi.update',$item->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Cập nhật" href="javascript:" class="tooltip-test">
                           <span class=""><i class="fa fa-lg fa-edit text-primary"></i>
                               <span class="mdi mdi-close"></span>

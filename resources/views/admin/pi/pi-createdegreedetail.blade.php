@@ -6,7 +6,7 @@
             <ol class="breadcrumb">
                 {{-- <li><a href="#">Home</a></li> --}}
                 <li class=""><a href="{{route('admin.pi.index')}}">Quản lý thông tin nhân viên</a></li>
-                <li class=""><a href="{{route('admin.pi.detail',$pi->id)}}">Chi tiết thông tin nhân viên</a></li>
+                <li class=""><a href="{{route('admin.pi.detail',$pi->id)}}">Thông tin cá nhân - {{$pi->employee_code}}</a></li>
                 <li class=""><a href="{{route('admin.pi.degree.index',$pi->id)}}">Danh sách bằng cấp</a></li>
                 <li class="active">Thêm bằng cấp</li>
             </ol>
@@ -61,21 +61,22 @@
                         <label>Ngày cấp</label>
                         <input required type="date" min="1900-01-01" class="form-control" name="date_of_issue" value="{{old('date_of_issue')}}">
                     </div>
+
                     <div class="col-sm-6">
-                        <label>Nơi cấp</label>
-                        <input required type="text" maxlength="100" class="form-control" name="place_of_issue" placeholder="Nhập nơi cấp" value="{{old('place_of_issue')}}">
-                    </div>
+                            <label>Nước cấp</label>
+                            <select required class="form-control" name="nation_of_issue_id">
+                                <option value="">Chọn nước cấp</option>
+                                @foreach($countries as $c)
+                                <option value="{{$c->id}}">{{$c->country_name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-6">
-                        <label>Nước cấp</label>
-                        <select required class="form-control" name="nation_of_issue_id">
-                            <option value="">Chọn nước cấp</option>
-                            @foreach($countries as $c)
-                            <option value="{{$c->id}}">{{$c->country_name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                        <div class="col-sm-6">
+                                <label>Nơi cấp</label>
+                                <input required type="text" maxlength="100" class="form-control" name="place_of_issue" placeholder="Nhập nơi cấp" value="{{old('place_of_issue')}}">
+                            </div>
                     <div class="col-sm-6">
                         <label>Loại bằng</label>
                         <input required type="text" maxlength="100" class="form-control" name="degree_type" placeholder="Nhập loại bằng" value="{{old('degree_type')}}">

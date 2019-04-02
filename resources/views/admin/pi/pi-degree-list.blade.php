@@ -6,7 +6,7 @@
             <ol class="breadcrumb">
                 {{-- <li><a href="#">Home</a></li> --}}
                 <li class=""><a href="{{route('admin.pi.index')}}">Quản lý thông tin nhân viên</a></li>
-                <li class=""><a href="{{route('admin.pi.detail',$pi->id)}}">Chi tiết thông tin nhân viên</a></li>
+                <li class=""><a href="{{route('admin.pi.detail',$pi->id)}}">Thông tin cá nhân - {{$pi->employee_code}}</a></li>
                 <li class="active">Danh sách bằng cấp</li>
             </ol>
         </div>
@@ -31,6 +31,7 @@
                     <th>Ngày cấp </th>
                     <th>Nơi cấp</th>
                     <th>Nước cấp</th>
+                    <th>Loại bằng</th>
                     <th></th>
                 </tr>
             </thead>
@@ -45,6 +46,7 @@
                         {{--{{date('d-m-Y',($degree->date_of_issue))}}--}}
                     <td class="">{{$degree->place_of_issue}}</td>
                     <td class="">{{$degree->country->country_name}}</td>
+                    <td class="">{{$degree->degree_type}}</td>
                     @can('cud', $pi)
                     <td class="">
                         <a href="{{route('admin.pi.degree.update',$degree->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Cập nhật" class="tooltip-test">
@@ -82,7 +84,7 @@
             @endforeach
           @else
             <tr>
-              <td colspan="5" class="text-center">Không có bất kỳ dữ liệu nào được tìm thấy</td>
+              <td colspan="8" class="text-center">Không có bất kỳ dữ liệu nào được tìm thấy</td>
             </tr>
           @endif
             </tbody>
