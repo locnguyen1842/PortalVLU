@@ -28,8 +28,10 @@
                 <tr>
                     <th>Loại</th>
                     <th>Chuyên ngành</th>
-                    <th>Ngày Cấp </th>
-                    <th>Nơi Cấp</th>
+                    <th>Ngày cấp </th>
+                    <th>Nơi cấp</th>
+                    <th>Nước cấp</th>
+                    <th>Loại bằng</th>
                     <th></th>
                 </tr>
             </thead>
@@ -38,13 +40,11 @@
              @foreach($degrees as $degree)
                     <tr>
                     <td class="">{{$degree->degree->name}}</td>
-                    <td class="">{{ $degree->industry->name}}</td> 
                     <td class="">{{$degree->specialized}}</td>
                     <td class="">{{date('d-m-Y', strtotime($degree->date_of_issue))}}</td>
-                        {{--{{date('d-m-Y',($degree->date_of_issue))}}--}}
                     <td class="">{{$degree->place_of_issue}}</td>
                     <td class="">{{$degree->country->country_name}}</td>
-                    {{-- @can('cud', $pi) --}}
+                    <td class="">{{$degree->degree_type}}</td>
                     <td class="">
                         <a href="{{route('employee.pi.update.detail.degree',$degree->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Cập nhật" class="tooltip-test">
                       <span class=""><i class="fa fa-lg fa-edit text-primary"></i>
@@ -57,11 +57,8 @@
                       </span>
                         </a>
                     </td>
-                    {{-- @else --}}
                     <td></td>
-                    {{-- @endcan --}}
                     </tr>
-                    {{-- @can('cud', $pi) --}}
                     <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="degree-delete-modal">
 
                         <div class="modal-dialog modal-sm">
@@ -81,7 +78,7 @@
             @endforeach
           @else
             <tr>
-              <td colspan="5" class="text-center">Không có bất kỳ dữ liệu nào được tìm thấy</td>
+              <td colspan="7" class="text-center">Không có bất kỳ dữ liệu nào được tìm thấy</td>
             </tr>
           @endif
             </tbody>
