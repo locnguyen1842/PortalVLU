@@ -198,7 +198,7 @@
             <tbody>
               @if($pis->where('show',1)->count() >0)
                 @foreach ($pis->where('show',1) as $item)
-                <tr class="{{$item->new ==1 ? 'font-weight-bold':''}}">
+                <tr>
                     <td class="col-sm-1">
 
                         <a href="{{route('admin.pi.detail',$item->id)}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="Chi tiết" href="javascript:" class="search_tag tooltip-test">
