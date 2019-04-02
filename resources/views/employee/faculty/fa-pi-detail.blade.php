@@ -81,12 +81,12 @@
                                         <span for="" class="col-sm-9 text-nowrap">{{$pi->phone_number}}</span>
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputPassword3" class="col-sm-3  ">Địa chỉ liên lạc </label>
-                                        <span for="" class="col-sm-9 text-nowrap">{{$pi->contact_address}}</span>
+                                        <label for="inputPassword3" class="col-sm-3  ">Địa chỉ thường trú </label>
+                                        <span for="" class="col-sm-9 text-truncate">{{$pi->permanent_address()->exists() && $pi->permanent_address->address_content != null ? $pi->permanent_address->address_content .', ' :''}}{{$pi->permanent_address()->exists() ? $pi->permanent_address->ward->path_with_type :''}}</span>
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputPassword3" class="col-sm-3  ">Địa chỉ thường trú </label>
-                                        <span for="" class="col-sm-9 text-nowrap">{{$pi->permanent_address}}</span>
+                                        <label for="inputPassword3" class="col-sm-3  ">Địa chỉ tạm trú </label>
+                                        <span for="" class="col-sm-9 text-truncate">{{$pi->contact_address()->exists() && $pi->contact_address->address_content != null ? $pi->contact_address->address_content .', ' :''}}{{$pi->contact_address()->exists() ? $pi->contact_address->ward->path_with_type :''}}</span>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputEmail3" class="col-sm-3  ">CMND </label>
@@ -208,17 +208,6 @@
                     <div class="col-sm-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">Thông tin học hàm<br>
-                                {{-- @can('cud', $pi)
-                                @if($pi->academic_rank()->exists())
-                                <a href="{{route('admin.academic.update',$pi->id)}}">
-                                    <button type="button" name="button" class="btn btn-xs btn-primary">Cập nhật</button>
-                                </a>
-                                @else
-                                <a href="{{route('admin.academic.create',$pi->id)}}">
-                                        <button type="button" name="button" class="btn btn-xs btn-success">Thêm mới</button>
-                                    </a>
-                                @endif
-                                @endcan --}}
                             </div>
                             <div class="panel-body">
                                 <form class="form-horizontal">

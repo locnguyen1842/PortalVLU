@@ -102,7 +102,7 @@ class EmployeeController extends Controller
                 'province_2.required' =>'Tỉnh/Thành phố không được bỏ trống',
                 'district_2.required' =>'Quận không được bỏ trống',
                 'ward_2.required' =>'Phường/xã không được bỏ trống',
-                
+
                 'phone_number.required' =>'Số điện thoại không được bỏ trống',
                 'email_address.required' =>'Email không được bỏ trống',
                 'email_address.email' =>'Email sai định dạng',
@@ -167,7 +167,7 @@ class EmployeeController extends Controller
             $pi->permanent_address_id = $permanent_address->id;
 
 
-            
+
             $contact_address = new Address;
             // luu cac thong tin update ve address o day
 
@@ -178,9 +178,9 @@ class EmployeeController extends Controller
             $contact_address->save();
             $pi->contact_address_id = $contact_address->id;
 
-            
+
         }
-        
+
 
 
         $pi->save();
@@ -193,11 +193,10 @@ class EmployeeController extends Controller
 
         $specializes = Specialized::all();
         $degrees = Degree::all();
-        $industries = Industry::all();
         $countries = Country::all();
         $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
 
-        return view('employee.pi.pi-createdegreedetail', compact('degrees',  'industries', 'pi','specializes','countries'));
+        return view('employee.pi.pi-createdegreedetail', compact('degrees', 'pi','specializes','countries'));
     }
     public function postcreatedegree(Request $request)
     {
@@ -224,7 +223,7 @@ class EmployeeController extends Controller
         $degree_detail->date_of_issue = $request->date_of_issue;
         $degree_detail->place_of_issue = $request->place_of_issue;
         $degree_detail->degree_id = $request->degree;
-        $degree_detail->industry_id = $request->industry;
+        $degree_detail->industry_id = 8;
         $degree_detail->specialized = $request->specialized;
         $degree_detail->nation_of_issue_id = $request->nation_of_issue_id;
         $degree_detail->degree_type = $request->degree_type;
@@ -292,9 +291,8 @@ class EmployeeController extends Controller
             $pi = Auth::guard('employee')->user()->pi;
             $specializes = Specialized::all();
             $degrees = Degree::all();
-            $industries = Industry::all();
             $countries = Country::all();
-            return view('employee.pi.pi-updatedetaildegree', compact('degrees','degree', 'industries','pi','specializes','countries'));
+            return view('employee.pi.pi-updatedetaildegree', compact('degrees','degree','pi','specializes','countries'));
         }
 
     }
@@ -324,7 +322,7 @@ class EmployeeController extends Controller
             $degree->date_of_issue = $request->date_of_issue;
             $degree->place_of_issue = $request->place_of_issue;
             $degree->degree_id = $request->degree;
-            $degree->industry_id = $request->industry;
+            $degree->industry_id = 8;
             $degree->specialized = $request->specialized;
             $degree->nation_of_issue_id = $request->nation_of_issue_id;
             $degree->degree_type = $request->degree_type;
@@ -451,7 +449,7 @@ class EmployeeController extends Controller
 
         $degree = Degree::where('id');
         $industries = Industry::all();
-        
+
 
 
         return view('employee.faculty.fa-degree-list', compact('degrees', 'industries','pi'));
@@ -520,4 +518,11 @@ class EmployeeController extends Controller
         return redirect()->back()->with('message','Cập nhật thành công');
     }
 
+
+    public function getDeleteAcademicRank(){
+        $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
+        $academic_rank = AcademicRank::where('personalinformation_id',$pi->id)->firstOrFail();
+        $academic_rank->delete();
+        return redirect()->back()->with('message','Xóa học hàm thành công');
+    }
 }
