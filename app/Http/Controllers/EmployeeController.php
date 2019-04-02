@@ -102,7 +102,7 @@ class EmployeeController extends Controller
                 'province_2.required' =>'Tỉnh/Thành phố không được bỏ trống',
                 'district_2.required' =>'Quận không được bỏ trống',
                 'ward_2.required' =>'Phường/xã không được bỏ trống',
-                
+
                 'phone_number.required' =>'Số điện thoại không được bỏ trống',
                 'email_address.required' =>'Email không được bỏ trống',
                 'email_address.email' =>'Email sai định dạng',
@@ -167,7 +167,7 @@ class EmployeeController extends Controller
             $pi->permanent_address_id = $permanent_address->id;
 
 
-            
+
             $contact_address = new Address;
             // luu cac thong tin update ve address o day
 
@@ -178,9 +178,9 @@ class EmployeeController extends Controller
             $contact_address->save();
             $pi->contact_address_id = $contact_address->id;
 
-            
+
         }
-        
+
 
 
         $pi->save();
@@ -451,7 +451,7 @@ class EmployeeController extends Controller
 
         $degree = Degree::where('id');
         $industries = Industry::all();
-        
+
 
 
         return view('employee.faculty.fa-degree-list', compact('degrees', 'industries','pi'));

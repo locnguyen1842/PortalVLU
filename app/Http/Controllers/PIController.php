@@ -258,6 +258,10 @@ class PIController extends Controller
           //Nhà giáo nhân dân | 2 thang cuối này là cái checkbox chọn cái nào thì cái đó = 1
           $teacher->is_national_teacher = 1;
         }
+        else{
+          $teacher->is_excellent_teacher = 0;
+          $teacher->is_national_teacher = 0;
+        }
         $teacher->save();
         return redirect()->back()->with('message', 'Thêm thành công');
     }
@@ -272,9 +276,11 @@ class PIController extends Controller
         $position_types = PositionType::all();
         $teacher_types = TeacherType::all();
         $teacher_titles = TeacherTitle::all();
+        $officer = Officer::all();
+        $teacher = Teacher::all();
 
         $provinces = Province::all('name_with_type','code');
-        return view('admin.pi.pi-update', compact('pi', 'nations', 'units', 'provinces','officer_types','position_types','teacher_types','teacher_titles'));
+        return view('admin.pi.pi-update', compact('pi', 'nations', 'units', 'provinces','officer_types','officer_type','position_types','teacher_types','teacher_titles','teacher'));
     }
     //post date update information
     public function postupdate(Request $request, $id)
@@ -289,8 +295,14 @@ class PIController extends Controller
               'nation'=> 'required',
               'date_of_birth'=>'required|date',
               'place_of_birth'=> 'required',
-              'permanent_address'=> 'required|min:6|max:100',
-              'contact_address'=> 'required|min:6|max:100',
+              'permanent_address'=> 'max:100',
+              'province_1'=> 'required',
+              'district_1'=> 'required',
+              'ward_1'=> 'required',
+              'contact_address'=> 'max:100',
+              'province_2'=> 'required',
+              'district_2'=> 'required',
+              'ward_2'=> 'required',
               'phone_number'=> 'required',
               'email_address'=> 'required|email|unique:personalinformations,email_address,'.$pi->id,
               'position'=> 'required',
@@ -299,7 +311,14 @@ class PIController extends Controller
               'identity_card'=> 'required|unique:personalinformations,identity_card,'.$pi->id,
               'date_of_issue' => 'required|date',
               'place_of_issue'=> 'required',
-              'unit' => 'required'
+              'unit' => 'required',
+              'position_type'=> 'required',
+              'officer_type'=> 'required',
+              'teacher_type'=> 'required',
+              'teacher_title'=> 'required',
+              'is_retired'=> 'required',
+              'date_of_retirement'=> 'required',
+              'is_concurrently'=> 'required',
           ],
           [
               'employee_code.required'=> 'Mã giảng viên không được bỏ trống',
@@ -311,12 +330,17 @@ class PIController extends Controller
               'date_of_birth.required' =>'Ngày sinh không được bỏ trống',
               'date_of_birth.date' =>'Ngày sinh sai định dạng',
               'place_of_birth.required' =>'Nơi sinh không được bỏ trống',
-              'permanent_address.min' =>'Địa chỉ thường trú phải lớn hơn 6 kí tự',
               'permanent_address.max' =>'Địa chỉ thường trú phải nhỏ hơn 100 kí tự',
-              'permanent_address.required' =>'Địa chỉ thường trú không được bỏ trống',
-              'contact_address.min' =>'Địa chỉ liên hệ phải lớn hơn 6 kí tự',
+              // 'permanent_address.required' =>'Địa chỉ thường trú không được bỏ trống',
+              'province_1.required' =>'Tỉnh/Thành phố không được bỏ trống',
+              'district_1.required' =>'Quận không được bỏ trống',
+              'ward_1.required' =>'Phường/xã không được bỏ trống',
+              // 'contact_address.min' =>'Địa chỉ liên hệ phải lớn hơn 6 kí tự',
               'contact_address.max' =>'Địa chỉ liên hệ phải nhỏ hơn 100 kí tự',
-              'contact_address.required' =>'Địa chỉ liên hệ không được bỏ trống',
+              // 'contact_address.required' =>'Địa chỉ liên hệ không được bỏ trống',
+              'province_2.required' =>'Tỉnh/Thành phố không được bỏ trống',
+              'district_2.required' =>'Quận không được bỏ trống',
+              'ward_2.required' =>'Phường/xã không được bỏ trống',
               'phone_number.required' =>'Số điện thoại không được bỏ trống',
               'email_address.required' =>'Email không được bỏ trống',
               'email_address.email' =>'Email sai định dạng',
@@ -331,6 +355,13 @@ class PIController extends Controller
               'date_of_issue.date' =>'Ngày cấp sai định dạng',
               'place_of_issue.required' =>'Nơi cấp không được bỏ trống',
               'unit.required' =>'Đơn vị không được bỏ trống',
+              'teacher_type.required' =>'Loại giảng viên không được bỏ trống',
+              'teacher_title.required' =>'Chức danh nghề nghiệp không được bỏ trống',
+              'is_retired.required' =>'Nghỉ hưu không được bỏ trống',
+              'date_of_retirement.required' =>'Ngày nghỉ hưu không được bỏ trống',
+              'officer_type.required' =>'Loại cán bộ không được bỏ trống',
+              'position_type.required' =>'Chức vụ không được bỏ trống',
+              'is_concurrently.required' =>'Kiêm nhiệm giảng dạy không được bỏ trống',
           ]
         );
         //post data
@@ -342,8 +373,6 @@ class PIController extends Controller
         $pi->nation_id= $request->nation;
         $pi->date_of_birth= $request->date_of_birth;
         $pi->place_of_birth= $request->place_of_birth;
-        $pi->permanent_address= $request->permanent_address;
-        $pi->contact_address= $request->contact_address;
         $pi->phone_number= $request->phone_number;
         $pi->email_address= $request->email_address;
         $pi->position= $request->position;
@@ -354,7 +383,76 @@ class PIController extends Controller
         $pi->place_of_issue= $request->place_of_issue;
         $pi->unit_id = $request->unit;
 
+        if($pi->permanent_address()->exists() && $pi->contact_address()->exists()){
+            $permanent_address = Address::where('id',$pi->permanent_address_id)->first();
+            // luu cac thong tin update ve address o day
+            $permanent_address->address_content = $request->permanent_address;
+            $permanent_address->province_code = $request->province_1;
+            $permanent_address->district_code = $request->district_1;
+            $permanent_address->ward_code = $request->ward_1;
+            $permanent_address->save();
+            $pi->permanent_address_id = $permanent_address->id;
+
+
+            $contact_address = Address::where('id',$pi->contact_address_id)->first();
+            // luu cac thong tin update ve address o day
+            $contact_address->address_content = $request->contact_address;
+            $contact_address->province_code = $request->province_2;
+            $contact_address->district_code = $request->district_2;
+            $contact_address->ward_code = $request->ward_2;
+            $contact_address->save();
+            $pi->contact_address_id = $contact_address->id;
+
+
+        }else{
+            $permanent_address = new Address;
+            // neu nhan vien nao chua co address tu truoc se dc tao moi address
+            // luu cac thong tin update ve address o day
+            $permanent_address->address_content = $request->permanent_address;
+            $permanent_address->province_code = $request->province_1;
+            $permanent_address->district_code = $request->district_1;
+            $permanent_address->ward_code = $request->ward_1;
+            $permanent_address->save();
+            $pi->permanent_address_id = $permanent_address->id;
+
+
+
+            $contact_address = new Address;
+            // luu cac thong tin update ve address o day
+
+            $contact_address->address_content = $request->contact_address;
+            $contact_address->province_code = $request->province_2;
+            $contact_address->district_code = $request->district_2;
+            $contact_address->ward_code = $request->ward_2;
+            $contact_address->save();
+            $pi->contact_address_id = $contact_address->id;
+
+
+        }
         $pi->save();
+        $officer = Officer::where('personalinformation_id',$pi->id)->first();
+        $officer->type_id = $request->officer_type;
+        $officer->position_id = $request->position_type;
+        $officer->is_concurrently = $request->is_concurrently;
+        $officer->save();
+
+        $teacher = Teacher::where('personalinformation_id',$pi->id)->first();
+        $teacher->type_id = $request->teacher_type;
+        $teacher->title_id = $request->teacher_title;
+        $teacher->is_retired = $request->is_retired; //đã nghĩ hưu chưa ( radio button)
+        $teacher->date_of_retirement = $request->date_of_retirement; // ngày nghĩ hưu người dùng nhập bên view
+        if ($request->has('is_excellent_teacher')){
+          $teacher->is_excellent_teacher = 1; //Nhà giáo ưu tú
+        }
+        if($request->has('is_excellent_teacher')){
+          //Nhà giáo nhân dân | 2 thang cuối này là cái checkbox chọn cái nào thì cái đó = 1
+          $teacher->is_national_teacher = 1;
+        }
+        else{
+          $teacher->is_excellent_teacher = 0; //Nhà giáo ưu tú
+          $teacher->is_national_teacher = 0;
+        }
+        $teacher->save();
 
 
 
