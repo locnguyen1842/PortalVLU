@@ -21,6 +21,16 @@ use App\Country;
 use App\ScientificBackground;
 use App\AcademicRank;
 use Hash;
+use App\Ward;
+use App\District;
+use App\Province;
+use App\Address;
+use App\OfficerType;
+use App\Officer;
+use App\PositionType;
+use App\TeacherTitle;
+use App\TeacherType;
+use App\Teacher;
 
 class EmployeeController extends Controller
 {
@@ -40,7 +50,13 @@ class EmployeeController extends Controller
 
         $nations = Nation::all();
         $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
-        return view('employee.pi.pi-update', compact('pi','nations'));
+        $provinces = Province::all('name_with_type','code');
+        $units = Unit::all();
+        $officer_types = OfficerType::all();
+        $position_types = PositionType::all();
+        $teacher_types = TeacherType::all();
+        $teacher_titles = TeacherTitle::all();
+        return view('employee.pi.pi-update', compact('pi','nations', 'units','provinces','officer_types','position_types','teacher_types','teacher_titles'));
     }
     public function postupdate(Request $request)
     {
@@ -53,13 +69,19 @@ class EmployeeController extends Controller
                 'nation'=> 'required',
                 'date_of_birth'=>'required|date',
                 'place_of_birth'=> 'required',
-                'permanent_address'=> 'required|min:6|max:100',
-                'contact_address'=> 'required|min:6|max:100',
+                'permanent_address'=> 'max:100',
+                'contact_address'=> 'max:100',
                 'phone_number'=> 'required',
                 'email_address'=> 'required|email|unique:personalinformations,email_address,'.$pi->id,
                 'identity_card'=> 'required|unique:personalinformations,identity_card,'.$pi->id,
                 'date_of_issue' => 'required|date',
                 'place_of_issue'=> 'required',
+                'province_1'=> 'required',
+                'district_1'=> 'required',
+                'ward_1'=> 'required',
+                'province_2'=> 'required',
+                'district_2'=> 'required',
+                'ward_2'=> 'required',
             ],
             [
 
@@ -70,12 +92,17 @@ class EmployeeController extends Controller
                 'date_of_birth.required' =>'Ngày sinh không được bỏ trống',
                 'date_of_birth.date' =>'Ngày sinh sai định dạng',
                 'place_of_birth.required' =>'Nơi sinh không được bỏ trống',
-                'permanent_address.min' =>'Địa chỉ thường trú phải lớn hơn 6 kí tự',
+                // 'permanent_address.min' =>'Địa chỉ thường trú phải lớn hơn 6 kí tự',
                 'permanent_address.max' =>'Địa chỉ thường trú phải nhỏ hơn 100 kí tự',
-                'permanent_address.required' =>'Địa chỉ thường trú không được bỏ trống',
-                'contact_address.min' =>'Địa chỉ liên hệ phải lớn hơn 6 kí tự',
+                'province_1.required' =>'Tỉnh/Thành phố không được bỏ trống',
+                'district_1.required' =>'Quận không được bỏ trống',
+                'ward_1.required' =>'Phường/xã không được bỏ trống',
+                // 'contact_address.min' =>'Địa chỉ liên hệ phải lớn hơn 6 kí tự',
                 'contact_address.max' =>'Địa chỉ liên hệ phải nhỏ hơn 100 kí tự',
-                'contact_address.required' =>'Địa chỉ liên hệ không được bỏ trống',
+                'province_2.required' =>'Tỉnh/Thành phố không được bỏ trống',
+                'district_2.required' =>'Quận không được bỏ trống',
+                'ward_2.required' =>'Phường/xã không được bỏ trống',
+                
                 'phone_number.required' =>'Số điện thoại không được bỏ trống',
                 'email_address.required' =>'Email không được bỏ trống',
                 'email_address.email' =>'Email sai định dạng',
@@ -98,8 +125,8 @@ class EmployeeController extends Controller
         $pi->nation_id= $request->nation;
         $pi->date_of_birth= $request->date_of_birth;
         $pi->place_of_birth= $request->place_of_birth;
-        $pi->permanent_address= $request->permanent_address;
-        $pi->contact_address= $request->contact_address;
+        // $pi->permanent_address= $request->permanent_address;
+        // $pi->contact_address= $request->contact_address;
         $pi->phone_number= $request->phone_number;
         $pi->email_address= $request->email_address;
         $pi->identity_card= $request->identity_card;
@@ -107,6 +134,54 @@ class EmployeeController extends Controller
         $pi->place_of_issue= $request->place_of_issue;
         $pi->new = 1 ;
         //validate data
+        if($pi->permanent_address()->exists() && $pi->contact_address()->exists()){
+            $permanent_address = Address::where('id',$pi->permanent_address_id)->first();
+            // luu cac thong tin update ve address o day
+            $permanent_address->address_content = $request->permanent_address;
+            $permanent_address->province_code = $request->province_1;
+            $permanent_address->district_code = $request->district_1;
+            $permanent_address->ward_code = $request->ward_1;
+            $permanent_address->save();
+            $pi->permanent_address_id = $permanent_address->id;
+
+
+            $contact_address = Address::where('id',$pi->contact_address_id)->first();
+            // luu cac thong tin update ve address o day
+            $contact_address->address_content = $request->contact_address;
+            $contact_address->province_code = $request->province_2;
+            $contact_address->district_code = $request->district_2;
+            $contact_address->ward_code = $request->ward_2;
+            $contact_address->save();
+            $pi->contact_address_id = $contact_address->id;
+
+
+        }else{
+            $permanent_address = new Address;
+            // neu nhan vien nao chua co address tu truoc se dc tao moi address
+            // luu cac thong tin update ve address o day
+            $permanent_address->address_content = $request->permanent_address;
+            $permanent_address->province_code = $request->province_1;
+            $permanent_address->district_code = $request->district_1;
+            $permanent_address->ward_code = $request->ward_1;
+            $permanent_address->save();
+            $pi->permanent_address_id = $permanent_address->id;
+
+
+            
+            $contact_address = new Address;
+            // luu cac thong tin update ve address o day
+
+            $contact_address->address_content = $request->contact_address;
+            $contact_address->province_code = $request->province_2;
+            $contact_address->district_code = $request->district_2;
+            $contact_address->ward_code = $request->ward_2;
+            $contact_address->save();
+            $pi->contact_address_id = $contact_address->id;
+
+            
+        }
+        
+
 
         $pi->save();
 
@@ -367,6 +442,22 @@ class EmployeeController extends Controller
 
         $sb = ScientificBackground::where('personalinformation_id', $pi->id)->firstOrFail();
         return view('employee.faculty.fa-sb-detail', compact('id', 'sb','pi'));
+    }
+    public function getfacultydegreelist($id){
+        $pi = PI::find($id);
+        $this->authorize('actAsFacultyLeader', $pi);
+        $degrees = DegreeDetail::where('personalinformation_id',$pi->id)->get();
+
+
+        $degree = Degree::where('id');
+        $industries = Industry::all();
+        
+
+
+        return view('employee.faculty.fa-degree-list', compact('degrees', 'industries','pi'));
+
+        $sb = ScientificBackground::where('personalinformation_id', $pi->id)->firstOrFail();
+        return view('employee.faculty.degree.list', compact('id', 'sb','pi'));
     }
     public function getCreateAcademicRank(){
         $academic_rank_types = AcademicRankType::all();

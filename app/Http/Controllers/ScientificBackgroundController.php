@@ -519,13 +519,13 @@ class ScientificBackgroundController extends Controller
         $sb = ScientificBackground::where('personalinformation_id', $pi_id)->firstOrFail();
         return view('employee.sb.employee-sb-detail', compact('pi_id', 'sb'));
     }
-    public function indexPrintAdmin()
+    public function indexPrintAdmin($pi_id)
     {
-      $pi_id = PI::find(Auth::guard('employee')->user()->personalinformation_id)->id;
       $sb = ScientificBackground::where('personalinformation_id', $pi_id)->firstOrFail();
       $nations = Nation::all();
       $units = Unit::all();
       $topic_levels = SBTopicLevel::all();
+    //   return view('admin.sb.sb-print', compact('pi_id', 'sb', 'nations', 'units', 'topic_levels'));
       $pdf = PDF::loadView('admin.sb.sb-print', compact('pi_id', 'sb', 'nations', 'units', 'topic_levels'));
       return $pdf->download('ly-lich-khoa-hoc.pdf');
     }

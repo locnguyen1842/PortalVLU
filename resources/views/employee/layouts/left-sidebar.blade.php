@@ -19,7 +19,7 @@
                     </li>
                     @can('actAsFacultyLeader',App\PI::first())
                     <li class="{{url()->current() == route('employee.faculty.index') ? 'active':''}}">
-                        <a href="{{route('employee.faculty.index')}}" class="sf-profile-group">Danh sách giảng viên</a>
+                        <a href="{{route('employee.faculty.index')}}" class="sf-profile-group">Quản lý CBGV/NV</a>
                     </li>
                     @endcan
                 </ul>

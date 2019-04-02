@@ -87,6 +87,10 @@ Route::prefix('admin')->group(function () {
         //scientific background
         Route::get('/scientific-background/update/{pi_id}', 'ScientificBackgroundController@getupdateAdmin')->name('admin.sb.update');
         Route::post('/scientific-background/update/{pi_id}', 'ScientificBackgroundController@postupdateAdmin')->name('admin.sb.update');
+        //print sb
+        Route::get('/scientific-background/print/{pi_id}', 'ScientificBackgroundController@indexPrintAdmin')->name('admin.sb.print');
+
+
 
         Route::get('/scientific-background/detail/{pi_id}', 'ScientificBackgroundController@getdetailAdmin')->name('admin.sb.detail');
         // view list school year
@@ -162,6 +166,7 @@ Route::prefix('')->group(function () {
         Route::get('/faculty-pi-detail/{id}', 'EmployeeController@getFacultydetail')->name('employee.faculty.detail');
         Route::get('/faculty-workload-detail/{id}', 'EmployeeController@getfaWorkload')->name('employee.faculty.workload');
         Route::get('/faculty-sb-detail/{id}', 'EmployeeController@getfacultysb')->name('employee.faculty.sb');
+        Route::get('/faculty-degreee-list/{id}', 'EmployeeController@getfacultydegreelist')->name('employee.faculty.degree.list');
 
         //Print scientific background
         Route::get('/scientific-background/print', 'ScientificBackgroundController@indexPrint')->name('employee.sb.print');
