@@ -116,9 +116,9 @@ class PIController extends Controller
             'position_type'=> 'required',
             'officer_type'=> 'required',
             'teacher_type'=> 'required',
-            'teacher_title'=> 'required',
-            'is_retired'=> 'required',
-            'date_of_retirement'=> 'required',
+            'teacher_title'=> 'required_unless:teacher_type,0',
+            'is_retired'=> 'required_unless:teacher_type,0',
+            'date_of_retirement'=> 'required_unless:teacher_type,0',
             'is_concurrently'=> 'required',
           ],
           [
@@ -158,9 +158,9 @@ class PIController extends Controller
             'place_of_issue.required' =>'Nơi cấp không được bỏ trống',
             'unit.required' =>'Đơn vị không được bỏ trống',
             'teacher_type.required' =>'Loại giảng viên không được bỏ trống',
-            'teacher_title.required' =>'Chức danh nghề nghiệp không được bỏ trống',
-            'is_retired.required' =>'Nghỉ hưu không được bỏ trống',
-            'date_of_retirement.required' =>'Ngày nghỉ hưu không được bỏ trống',
+            'teacher_title.required_unless' =>'Chức danh nghề nghiệp không được bỏ trống',
+            'is_retired.required_unless' =>'Nghỉ hưu không được bỏ trống',
+            'date_of_retirement.required_unless' =>'Ngày nghỉ hưu không được bỏ trống',
             'officer_type.required' =>'Loại cán bộ không được bỏ trống',
             'position_type.required' =>'Chức vụ không được bỏ trống',
             'is_concurrently.required' =>'Kiêm nhiệm giảng dạy không được bỏ trống',
@@ -168,7 +168,6 @@ class PIController extends Controller
       );
         //add data
         $pi = new PI;
-        $pi->id= $request->id;
         $pi->employee_code= strtoupper($request->employee_code);
 
         // $full_name = " ".$request->full_name;
@@ -191,6 +190,7 @@ class PIController extends Controller
         $pi->show = 1;
         $pi->new = 0;
         $pi->unit_id = $request->unit;
+        $pi->is_activity = $request->is_activity;
 
         $permanent_address = new Address;
         $permanent_address->address_content = $request->permanent_address;
@@ -245,24 +245,36 @@ class PIController extends Controller
         $officer->is_concurrently = $request->is_concurrently;
         $officer->save();
 
-        $teacher = new Teacher;
-        $teacher->personalinformation_id = $pi->id;
-        $teacher->type_id = $request->teacher_type;
-        $teacher->title_id = $request->teacher_title;
-        $teacher->is_retired = $request->is_retired; //đã nghĩ hưu chưa ( radio button)
-        $teacher->date_of_retirement = $request->date_of_retirement; // ngày nghĩ hưu người dùng nhập bên view
-        if ($request->has('is_excellent_teacher')){
-          $teacher->is_excellent_teacher = 1; //Nhà giáo ưu tú
+
+        if($request->teacher_type != 0){
+            $teacher = new Teacher;
+            $teacher->personalinformation_id = $pi->id;
+            $teacher->type_id = $request->teacher_type;
+            $teacher->title_id = $request->teacher_title;
+            if($request->is_retired == 0 ){
+                $teacher->is_retired = $request->is_retired;
+                $teacher->date_of_retirement = null;
+            }else{
+                $teacher->is_retired = $request->is_retired;
+                $teacher->date_of_retirement = $request->date_of_retirement;
+            }
+
+            if ($request->has('is_excellent_teacher')){
+              $teacher->is_excellent_teacher = 1; //Nhà giáo ưu tú
+            }else{
+                $teacher->is_excellent_teacher = 0;
+            }
+            if($request->has('is_excellent_teacher')){
+              //Nhà giáo nhân dân | 2 thang cuối này là cái checkbox chọn cái nào thì cái đó = 1
+              $teacher->is_national_teacher = 1;
+            }
+            else{
+
+              $teacher->is_national_teacher = 0;
+            }
+            $teacher->save();
         }
-        if($request->has('is_excellent_teacher')){
-          //Nhà giáo nhân dân | 2 thang cuối này là cái checkbox chọn cái nào thì cái đó = 1
-          $teacher->is_national_teacher = 1;
-        }
-        else{
-          $teacher->is_excellent_teacher = 0;
-          $teacher->is_national_teacher = 0;
-        }
-        $teacher->save();
+
         return redirect()->back()->with('message', 'Thêm thành công');
     }
     //get data personal information
@@ -315,9 +327,9 @@ class PIController extends Controller
               'position_type'=> 'required',
               'officer_type'=> 'required',
               'teacher_type'=> 'required',
-              'teacher_title'=> 'required',
-              'is_retired'=> 'required',
-              'date_of_retirement'=> 'required',
+              'teacher_title'=> 'required_unless:teacher_type,0',
+              'is_retired'=> 'required_unless:teacher_type,0',
+              'date_of_retirement'=> 'required_if:is_retired,1',
               'is_concurrently'=> 'required',
           ],
           [
@@ -356,16 +368,15 @@ class PIController extends Controller
               'place_of_issue.required' =>'Nơi cấp không được bỏ trống',
               'unit.required' =>'Đơn vị không được bỏ trống',
               'teacher_type.required' =>'Loại giảng viên không được bỏ trống',
-              'teacher_title.required' =>'Chức danh nghề nghiệp không được bỏ trống',
-              'is_retired.required' =>'Nghỉ hưu không được bỏ trống',
-              'date_of_retirement.required' =>'Ngày nghỉ hưu không được bỏ trống',
+              'teacher_title.required_unless' =>'Chức danh nghề nghiệp không được bỏ trống',
+              'is_retired.required_unless' =>'Nghỉ hưu không được bỏ trống',
+              'date_of_retirement.required_if' =>'Ngày nghỉ hưu không được bỏ trống',
               'officer_type.required' =>'Loại cán bộ không được bỏ trống',
               'position_type.required' =>'Chức vụ không được bỏ trống',
               'is_concurrently.required' =>'Kiêm nhiệm giảng dạy không được bỏ trống',
           ]
         );
         //post data
-        $pi->id= $request->id;
         $pi->full_name= $request->full_name;
         $split = explode(" ", $request->full_name);
         $pi->first_name =$split[sizeof($split)-1]; // get name
@@ -382,6 +393,7 @@ class PIController extends Controller
         $pi->date_of_issue= $request->date_of_issue;
         $pi->place_of_issue= $request->place_of_issue;
         $pi->unit_id = $request->unit;
+        $pi->is_activity = $request->is_activity;
 
         if($pi->permanent_address()->exists() && $pi->contact_address()->exists()){
             $permanent_address = Address::where('id',$pi->permanent_address_id)->first();
@@ -436,23 +448,70 @@ class PIController extends Controller
         $officer->is_concurrently = $request->is_concurrently;
         $officer->save();
 
-        $teacher = Teacher::where('personalinformation_id',$pi->id)->first();
-        $teacher->type_id = $request->teacher_type;
-        $teacher->title_id = $request->teacher_title;
-        $teacher->is_retired = $request->is_retired; //đã nghĩ hưu chưa ( radio button)
-        $teacher->date_of_retirement = $request->date_of_retirement; // ngày nghĩ hưu người dùng nhập bên view
-        if ($request->has('is_excellent_teacher')){
-          $teacher->is_excellent_teacher = 1; //Nhà giáo ưu tú
+        if($request->teacher_type != 0){
+
+            if($pi->teacher()->exists()){
+                $teacher = Teacher::where('personalinformation_id',$pi->id)->first();
+                $teacher->type_id = $request->teacher_type;
+                $teacher->title_id = $request->teacher_title;
+                if($request->is_retired == 0 ){
+                    $teacher->is_retired = $request->is_retired;
+                    $teacher->date_of_retirement = null;
+                }else{
+                    $teacher->is_retired = $request->is_retired;
+                    $teacher->date_of_retirement = $request->date_of_retirement;
+                }
+
+                if ($request->has('is_excellent_teacher')){
+                  $teacher->is_excellent_teacher = 1; //Nhà giáo ưu tú
+                }else{
+                    $teacher->is_excellent_teacher = 0;
+                }
+                if($request->has('is_excellent_teacher')){
+                  //Nhà giáo nhân dân | 2 thang cuối này là cái checkbox chọn cái nào thì cái đó = 1
+                  $teacher->is_national_teacher = 1;
+                }
+                else{
+
+                  $teacher->is_national_teacher = 0;
+                }
+                $teacher->save();
+            }else{
+                $teacher = new Teacher;
+                $teacher->personalinformation_id = $pi->id;
+                $teacher->type_id = $request->teacher_type;
+                $teacher->title_id = $request->teacher_title;
+                if($request->is_retired == 0 ){
+                    $teacher->is_retired = $request->is_retired;
+                    $teacher->date_of_retirement = null;
+                }else{
+                    $teacher->is_retired = $request->is_retired;
+                    $teacher->date_of_retirement = $request->date_of_retirement;
+                }
+
+                if ($request->has('is_excellent_teacher')){
+                  $teacher->is_excellent_teacher = 1; //Nhà giáo ưu tú
+                }else{
+                    $teacher->is_excellent_teacher = 0;
+                }
+                if($request->has('is_excellent_teacher')){
+                  //Nhà giáo nhân dân | 2 thang cuối này là cái checkbox chọn cái nào thì cái đó = 1
+                  $teacher->is_national_teacher = 1;
+                }
+                else{
+
+                  $teacher->is_national_teacher = 0;
+                }
+                $teacher->save();
+            }
+
+        }else if ($request->teacher_type == 0){
+            if($pi->teacher()->exists()){
+                $teacher = Teacher::where('personalinformation_id',$pi->id)->first();
+                $teacher->delete();
+            }
+
         }
-        if($request->has('is_excellent_teacher')){
-          //Nhà giáo nhân dân | 2 thang cuối này là cái checkbox chọn cái nào thì cái đó = 1
-          $teacher->is_national_teacher = 1;
-        }
-        else{
-          $teacher->is_excellent_teacher = 0; //Nhà giáo ưu tú
-          $teacher->is_national_teacher = 0;
-        }
-        $teacher->save();
 
 
 

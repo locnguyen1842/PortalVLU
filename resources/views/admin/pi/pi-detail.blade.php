@@ -173,7 +173,7 @@
 
                                             <div class="form-group">
                                                 <label for="inputPassword3" class="col-sm-5  ">Đơn vị</label>
-                                                <span for="" class="col-sm-7 text-nowrap">{{$pi->unit->name}}</span>
+                                                <span for="" class="col-sm-7 text-truncate">{{$pi->unit->name}}</span>
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputPassword3" class="col-sm-5  ">Ngày tuyển dụng </label>
@@ -287,7 +287,8 @@
                                             </div>
                                             <div class="form-group">
                                                     <label for="inputEmail3" class="col-sm-4 ">Vai trò</label>
-                                                    @if($pi->admin != '')
+
+                                                    @if($pi->admin()->exists())
                                                         <span for="" class="col-sm-4 text-nowrap">
                                                             {{$pi->admin->is_supervisor == 1 ? 'Ban quản trị':'Phòng tổng hợp' }}
                                                         </span>
