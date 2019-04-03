@@ -31,6 +31,8 @@
     <img src="{{asset('img/loader.gif')}}" alt="Đang tải">
   </div>
     <div class="panel-heading">Danh sách thông tin nhân viên<br>
+
+
         @can('cud', $pis->first())
         <a href="{{route('admin.pi.add')}}">
             <button type="button" name="button" class="btn btn-xs btn-success">Thêm mới</button>

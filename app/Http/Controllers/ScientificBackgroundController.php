@@ -521,22 +521,23 @@ class ScientificBackgroundController extends Controller
     }
     public function indexPrintAdmin($pi_id)
     {
-      $sb = ScientificBackground::where('personalinformation_id', $pi_id)->firstOrFail();
-      $nations = Nation::all();
-      $units = Unit::all();
-      $topic_levels = SBTopicLevel::all();
+        $sb = ScientificBackground::where('personalinformation_id', $pi_id)->firstOrFail();
+        $nations = Nation::all();
+        $units = Unit::all();
+        $topic_levels = SBTopicLevel::all();
+
     //   return view('admin.sb.sb-print', compact('pi_id', 'sb', 'nations', 'units', 'topic_levels'));
-      $pdf = PDF::loadView('admin.sb.sb-print', compact('pi_id', 'sb', 'nations', 'units', 'topic_levels'));
-      return $pdf->download('ly-lich-khoa-hoc.pdf');
+        $pdf = PDF::loadView('admin.sb.sb-print', compact('pi_id', 'sb', 'nations', 'units', 'topic_levels'));
+        return $pdf->stream('ly-lich-khoa-hoc.pdf');
     }
     public function indexPrint()
     {
-      $pi_id = PI::find(Auth::guard('employee')->user()->personalinformation_id)->id;
-      $sb = ScientificBackground::where('personalinformation_id', $pi_id)->firstOrFail();
-      $nations = Nation::all();
-      $units = Unit::all();
-      $topic_levels = SBTopicLevel::all();
-      $pdf = PDF::loadView('employee.sb.print', compact('pi_id', 'sb', 'nations', 'units', 'topic_levels'));
-      return $pdf->download('ly-lich-khoa-hoc.pdf');
+        $pi_id = PI::find(Auth::guard('employee')->user()->personalinformation_id)->id;
+        $sb = ScientificBackground::where('personalinformation_id', $pi_id)->firstOrFail();
+        $nations = Nation::all();
+        $units = Unit::all();
+        $topic_levels = SBTopicLevel::all();
+        $pdf = PDF::loadView('employee.sb.print', compact('pi_id', 'sb', 'nations', 'units', 'topic_levels'));
+        return $pdf->download('ly-lich-khoa-hoc.pdf');
     }
 }
