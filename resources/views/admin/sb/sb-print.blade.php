@@ -170,10 +170,11 @@
                     <span class="col-sm-6 text-truncate">{{$sb->tp_graduates->isEmpty() ? '' : $sb->tp_graduates->first()->year_of_graduation}}</span>
                 </div>
             </div>
-            @foreach($sb->tp_graduates as $item)
+            @if($sb->tp_graduates->count() > 1)
+            @foreach($sb->tp_graduates->slice(1) as $item)
             <div class="form-group">
                 <div class="col-sm-6">
-                    <label class="col-sm-5">Bằng đại học {{$loop->iteration}}:</label>
+                    <label class="col-sm-5">Bằng đại học {{$loop->iteration + 1}}:</label>
                     <span class="col-sm-7 text-truncate">{{$item->nation_of_training}}</span>
                 </div>
                 <div class="col-sm-6">
@@ -183,42 +184,127 @@
                 </div>
             </div>
           @endforeach
+          @else
+          <div class="form-group">
+            <div class="col-sm-6">
+                <label for="inputEmail3" class="col-sm-4">Bằng đại học 2</label>
+                <span for="" class="col-sm-8 text-truncate"></span>
+            </div>
+            <div class="col-sm-6">
+                <label for="inputEmail3" class="col-sm-4">Năm tốt nghiệp</label>
+                <span for="" class="col-sm-8 text-truncate"></span>
+            </div>
+        </div>
+            @endif
             <div class="clear"></div>
             <div class="form-group">
                     <h4 for="">2. Sau đại học</h4>
 
             </div>
+            @if($sb->tp_postgraduate_masters()->exists())
+            @foreach($sb->tp_postgraduate_masters as $item)
+            @if($item->field_of_study !=null &&$item->place_of_training !=null &&$item->year_of_issue!=null )
             <div class="form-group">
                 <div class="col-sm-6">
-                        <label class="col-sm-6">Thạc sĩ chuyên ngành:</label>
-                        <span class="col-sm-6 text-truncate">{{$sb->tp_postgraduate_masters->isEmpty() ? '' : $sb->tp_postgraduate_masters->first()->field_of_study}}</span>
+                        <label class="col-sm-6">Thạc sĩ chuyên ngành {{$loop->iteration}}:</label>
+                        <span class="col-sm-6 text-truncate">{{ $item->field_of_study}}</span>
 
                 </div>
                 <div class="col-sm-6">
                     <label class="col-sm-5">Năm cấp bằng:</label>
-                    <span class="col-sm-7 text-truncate">{{$sb->tp_postgraduate_masters->isEmpty() ? '' : $sb->tp_postgraduate_masters->first()->year_of_issue}}</span>
+                    <span class="col-sm-7 text-truncate">{{$item->year_of_issue}}</span>
                 </div>
                 <div class="col-sm-6">
                     <label class="col-sm-4">Nơi đào tạo:</label>
-                    <span class="col-sm-8 text-truncate">{{$sb->tp_postgraduate_masters->isEmpty() ? '' : $sb->tp_postgraduate_masters->first()->place_of_training}}</span>
+                    <span class="col-sm-8 text-truncate">{{$item->place_of_training}}</span>
                 </div>
             </div>
-            <br>
-            <div class="clear"></div>
+            @else
+            @if($loop->iteration == 1 )
+
             <div class="form-group">
                 <div class="col-sm-6">
-                            <label class="col-sm-6">Tiến sĩ chuyên ngành:</label>
-                            <span class="col-sm-6 text-truncate">{{$sb->tp_postgraduate_doctors->isEmpty() ? '' : $sb->tp_postgraduate_doctors->first()->field_of_study}}</span>
+                        <label class="col-sm-6">Thạc sĩ chuyên ngành:</label>
+                        <span class="col-sm-6 text-truncate"></span>
+
+                </div>
+                <div class="col-sm-6">
+                    <label class="col-sm-5">Năm cấp bằng:</label>
+                    <span class="col-sm-7 text-truncate"></span>
+                </div>
+                <div class="col-sm-6">
+                    <label class="col-sm-4">Nơi đào tạo:</label>
+                    <span class="col-sm-8 text-truncate"></span>
+                </div>
+            </div>
+            @endif
+            @endif
+
+            @endforeach
+            @else
+            <div class="form-group">
+                <div class="col-sm-6">
+                        <label class="col-sm-6">Thạc sĩ chuyên ngành:</label>
+                        <span class="col-sm-6 text-truncate"></span>
+
+                </div>
+                <div class="col-sm-6">
+                    <label class="col-sm-5">Năm cấp bằng:</label>
+                    <span class="col-sm-7 text-truncate"></span>
+                </div>
+                <div class="col-sm-6">
+                    <label class="col-sm-4">Nơi đào tạo:</label>
+                    <span class="col-sm-8 text-truncate"></span>
+                </div>
+            </div>
+            @endif
+
+            <br>
+            <div class="clear"></div>
+            @if($sb->tp_postgraduate_doctors()->exists())
+            @foreach ($sb->tp_postgraduate_doctors as $item)
+            @if($item->field_of_study != null &&$item->year_of_issue != null&&$item->thesis_title !=null&&$item->place_of_training != null)
+            <div class="form-group">
+                <div class="col-sm-6">
+                            <label class="col-sm-6">Tiến sĩ chuyên ngành {{$loop->iteration}}:</label>
+                            <span class="col-sm-6 text-truncate">{{$item->field_of_study}}</span>
 
                     <!-- <label class="col-sm-4">-Thạc sĩ chuyên ngành:</label> -->
                 </div>
                 <div class="col-sm-6">
                     <label class="col-sm-5">Năm cấp bằng:</label>
-                    <span class="col-sm-7 text-truncate">{{$sb->tp_postgraduate_doctors->isEmpty() ? '' : $sb->tp_postgraduate_doctors->first()->year_of_issue}}</span>
+                    <span class="col-sm-7 text-truncate">{{$item->year_of_issue}}</span>
                 </div>
                 <div class="col-sm-6">
                     <label class="col-sm-4">Nơi đào tạo:</label>
-                    <span class="col-sm-8 text-truncate">{{$sb->tp_postgraduate_doctors->isEmpty() ? '' : $sb->tp_postgraduate_doctors->first()->place_of_training}}</span>
+                    <span class="col-sm-8 text-truncate">{{$item->place_of_training}}</span>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="form-group">
+                <div class="col-sm-6">
+                            <label class="col-sm-4">Tên luận án:</label>
+                            <span class="col-sm-8">{{$item->thesis_title}}</span>
+
+                    <!-- <label class="col-sm-4">-Thạc sĩ chuyên ngành:</label> -->
+                </div>
+            </div>
+            @else
+            @if($loop->iteration == 1)
+            <div class="form-group">
+                <div class="col-sm-6">
+                            <label class="col-sm-6">Tiến sĩ chuyên ngành:</label>
+                            <span class="col-sm-6 text-truncate"></span>
+
+                    <!-- <label class="col-sm-4">-Thạc sĩ chuyên ngành:</label> -->
+                </div>
+                <div class="col-sm-6">
+                    <label class="col-sm-5">Năm cấp bằng:</label>
+                    <span class="col-sm-7 text-truncate"></span>
+                </div>
+                <div class="col-sm-6">
+                    <label class="col-sm-4">Nơi đào tạo:</label>
+                    <span class="col-sm-8 text-truncate"></span>
                 </div>
             </div>
             <div class="clear"></div>
@@ -226,11 +312,45 @@
                 <div class="col-sm-6">
 
                             <label class="col-sm-4">Tên luận án:</label>
-                            <span class="col-sm-8">{{$sb->tp_postgraduate_doctors->isEmpty() ? '' : $sb->tp_postgraduate_doctors->first()->thesis_title}}</span>
+                            <span class="col-sm-8"></span>
 
                     <!-- <label class="col-sm-4">-Thạc sĩ chuyên ngành:</label> -->
                 </div>
             </div>
+            @endif
+
+            @endif
+
+            @endforeach
+            @else
+            <div class="form-group">
+                <div class="col-sm-6">
+                            <label class="col-sm-6">Tiến sĩ chuyên ngành:</label>
+                            <span class="col-sm-6 text-truncate"></span>
+
+                    <!-- <label class="col-sm-4">-Thạc sĩ chuyên ngành:</label> -->
+                </div>
+                <div class="col-sm-6">
+                    <label class="col-sm-5">Năm cấp bằng:</label>
+                    <span class="col-sm-7 text-truncate"></span>
+                </div>
+                <div class="col-sm-6">
+                    <label class="col-sm-4">Nơi đào tạo:</label>
+                    <span class="col-sm-8 text-truncate"></span>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="form-group">
+                <div class="col-sm-6">
+
+                            <label class="col-sm-4">Tên luận án:</label>
+                            <span class="col-sm-8"></span>
+
+                    <!-- <label class="col-sm-4">-Thạc sĩ chuyên ngành:</label> -->
+                </div>
+            </div>
+            @endif
+
             <div class="clear"></div>
             <div class="form-group">
                         <h4 for="">3. Ngoại ngữ</h4>
@@ -308,26 +428,33 @@
                 </tr>
               </thead>
               <tbody>
-                @if($sb->wp_professionals->count() >0)
+                @if($sb->wp_professionals()->exists())
                 @foreach ($sb->wp_professionals as $item)
+                @if($item->period_time !=null && $item->place_of_work !=null&&$item->work_of_undertake !=null)
+                <tr>
+                    <td class="col-sm-2">{{$item->period_time}}</td>
+                    <td class="col-sm-6">{{$item->place_of_work}}</td>
+                    <td class="col-sm-4">{{$item->work_of_undertake}}</td>
+                </tr>
+                @else
+                @if($loop->iteration == 1)
+                <tr>
+                    <td style="height:30px" class="col-sm-2"></td>
+                    <td style="height:30px" class="col-sm-6"></td>
+                    <td style="height:30px" class="col-sm-4"></td>
+                </tr>
 
-                        <tr>
-                                <td class="col-sm-2">{{$item->period_time}}</td>
-                                <td class="col-sm-6">{{$item->place_of_work}}</td>
-                                <td class="col-sm-4">{{$item->work_of_undertake}}</td>
-                            </tr>
 
-
-              @endforeach
-
-              @else
-              <tbody></tbody>
-              <tr>
-                    <td class="col-sm-2"></td>
-                    <td class="col-sm-6"></td>
-                    <td class="col-sm-4"></td>
-              </tr>
-              @endif
+                @endif
+                @endif
+                @endforeach
+                @else
+                <tr>
+                    <td style="height:30px" class="col-sm-2"></td>
+                    <td style="height:30px" class="col-sm-6"></td>
+                    <td style="height:30px" class="col-sm-4"></td>
+                </tr>
+                @endif
             </tbody>
             </table>
 
@@ -371,26 +498,36 @@
 
                 </thead>
                 <tbody>
-                @if($sb->research_topics->count() >0)
+                @if($sb->research_topics()->exists())
                 @foreach ($sb->research_topics as $item)
+                @if($item->name_of_topic != null && $item->start_year != null && $item->end_year !=null && $item->topic_level != null && $item->responsibility != null)
+                <tr>
+                    <td class="col-sm-1">{{$loop->iteration}}</td>
+                    <td class="col-sm-5">{{$item->name_of_topic}}</td>
+                    <td class="col-sm-2">{{$item->start_year}}/{{$item->end_year}}</td>
+                    <td class="col-sm-2">{{$item->topic_level->level}}</td>
+                    <td class="col-sm-3">{{$item->responsibility}}</td>
+                </tr>
 
-                        <tr>
-                                <td class="col-sm-1">{{$loop->iteration}}</td>
-                                <td class="col-sm-5">{{$item->name_of_topic}}</td>
-                                <td class="col-sm-2">{{$item->start_year}}/{{$item->end_year}}</td>
-                                <td class="col-sm-2">{{$item->topic_level->level}}</td>
-                                <td class="col-sm-3">{{$item->responsibility}}</td>
-                            </tr>
-
-
-              @endforeach
-              @else
+                @else
+                @if($loop->iteration == 1)
+                <tr>
+                    <td style="height:30px" class="col-sm-1"></td>
+                    <td style="height:30px" class="col-sm-5"></td>
+                    <td style="height:30px" class="col-sm-2"></td>
+                    <td style="height:30px" class="col-sm-2"></td>
+                    <td style="height:30px" class="col-sm-3"></td>
+              </tr>
+                @endif
+                @endif
+                @endforeach
+                @else
                     <tr>
-                            <td class="col-sm-1"></td>
-                            <td class="col-sm-5"></td>
-                            <td class="col-sm-2"></td>
-                            <td class="col-sm-2"></td>
-                            <td class="col-sm-3"></td>
+                            <td style="height:30px" class="col-sm-1"></td>
+                            <td style="height:30px" class="col-sm-5"></td>
+                            <td style="height:30px" class="col-sm-2"></td>
+                            <td style="height:30px" class="col-sm-2"></td>
+                            <td style="height:30px" class="col-sm-3"></td>
                       </tr>
 
 
@@ -424,9 +561,9 @@
 
                 </thead>
                 <tbody>
-                @if($sb->research_process_works->count() >0)
+                @if($sb->research_process_works()->exists())
                 @foreach ($sb->research_process_works as $item)
-
+                @if($item->name_of_works != null &&$item->year_of_publication != null&&$item->name_of_journal != null )
                         <tr>
                                 <td class="col-sm-1">{{$loop->iteration}}</td>
                                 <td class="col-sm-4">{{$item->name_of_works}}</td>
@@ -434,14 +571,24 @@
                                 <td class="col-sm-5">{{$item->name_of_journal}}</td>
                             </tr>
 
+                @else
+                @if($loop->iteration == 1)
+                <tr>
+                    <td style="height:30px" class="col-sm-1"></td>
+                    <td style="height:30px" class="col-sm-4"></td>
+                    <td style="height:30px" class="col-sm-2"></td>
+                    <td style="height:30px" class="col-sm-5"></td>
+              </tr>
+                @endif
 
+                @endif
               @endforeach
               @else
                     <tr>
-                            <td class="col-sm-1"></td>
-                            <td class="col-sm-4"></td>
-                            <td class="col-sm-2"></td>
-                            <td class="col-sm-5"></td>
+                            <td style="height:30px" class="col-sm-1"></td>
+                            <td style="height:30px" class="col-sm-4"></td>
+                            <td style="height:30px" class="col-sm-2"></td>
+                            <td style="height:30px" class="col-sm-5"></td>
                       </tr>
 
 
@@ -491,6 +638,9 @@ table{
 table td, table th{
     border: 1px solid black;
     text-align: center;
+}
+table > tbody > tr > td {
+    height: 30px;
 }
 .clear{ clear: both;}
 .wrap{

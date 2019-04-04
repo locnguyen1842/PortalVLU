@@ -8,5 +8,5 @@ return [
 	'keywords'              => '',
 	'creator'               => 'Phong Tong Hop',
 	'display_mode'          => 'fullpage',
-	'tempDir'               => base_path('../temp/')
+	'tempDir'               => __DIR__ . '/tmp'
 ];
