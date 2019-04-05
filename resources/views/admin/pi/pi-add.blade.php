@@ -152,11 +152,11 @@
                 </div>
                 <div class="col-sm-6">
                     <label>Loại hợp đồng</label>
-                    <select required class="form-control" name="unit" data-dependent>
+                    <select required class="form-control" name="contract_type" data-dependent>
                         <option value="">Chọn loại hợp đồng</option>
-                        {{-- @foreach($units as $unit)
-                        <option {{$unit->id == old('unit') ? 'selected':''}} value="{{$unit->id}}">{{$unit->name}}</option>
-                        @endforeach --}}
+                        @foreach($contract_types as $contract_type)
+                        <option {{$contract_type->id == old('contract_type') ? 'selected':''}} value="{{$contract_type->id}}">{{$contract_type->name}}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
