@@ -4,7 +4,7 @@
 <div class="cm-flex">
     <div class="cm-breadcrumb-container">
         <ol class="breadcrumb">
-            {{-- <li><a href="#">Home</a></li> --}}
+            <li><a href="{{route('employee.sb.detail')}}">Chi tiết lý lịch khoa học</a></li>
                <li class="active">Cập nhật lý lịch khoa học</li>
         </ol>
     </div>
@@ -190,6 +190,12 @@
                                     <input required class="form-control" name="nation_of_training" value="{{$sb->tp_graduates->isEmpty() ? '' : $sb->tp_graduates->first()->nation_of_training}}">
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <label>Năm tốt nghiệp <span style="color: red">*</span></label>
+                                    <input required class="form-control" name="year_of_graduation_first" value="{{$sb->tp_graduates->isEmpty() ? '' : $sb->tp_graduates->first()->year_of_graduation}}">
+                                </div>
+                            </div>
 
 
                             <div id="graduate_repeater">
@@ -203,12 +209,12 @@
                                 </div>
                                 <div class="form-group group-graduate">
                                     <div class="col-sm-6">
-                                        <label data-pattern-text="Bằng đại học +=1">Bằng đại học 1 </label> <span style="color: red">*</span>
-                                        <input required  class="form-control" name="industry[]">
+                                        <label data-pattern-text="Bằng đại học +=2">Bằng đại học 1 </label>
+                                        <input  class="form-control" name="industry[]">
                                     </div>
                                     <div class="col-sm-5">
-                                        <label>Năm tốt nghiệp <span style="color: red">*</span></label>
-                                        <input required class="form-control" name="year_of_graduation[]">
+                                        <label>Năm tốt nghiệp </label>
+                                        <input class="form-control" name="year_of_graduation[]">
 
                                     </div>
                                     <div class="col-sm-1">
@@ -525,7 +531,8 @@
 <script type="text/javascript">
 
     $(document).ready(function(){
-        var list1 = '{!!json_encode($sb->tp_graduates->toArray())!!}';
+        var list1 = '{!!json_encode($sb->tp_graduates->count() > 1  ? $sb->tp_graduates->slice(1)->flatten()->toArray() :$sb->tp_graduates->slice(1)->toArray() )!!}';
+
         var list_graduate = JSON.parse(list1);
         var text;
         var array_graduate = new Array();
@@ -536,7 +543,7 @@
 
         list_graduate.forEach(function(item,key){
 
-            text = '{'+'"'+ industry+'"'+':'+'"'+item['industry']+'"'+','+'"'+year_of_graduation+'"'+':'+'"'+item['year_of_graduation'] +'"' +'}';
+            text = '{'+'"'+ industry+'"'+':'+'"'+item['field_of_study']+'"'+','+'"'+year_of_graduation+'"'+':'+'"'+item['year_of_graduation'] +'"' +'}';
             array_graduate.push($.parseJSON(text));
         });
         $(array_graduate).each(function (index, element) {

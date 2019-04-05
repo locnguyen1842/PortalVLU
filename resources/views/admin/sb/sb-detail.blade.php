@@ -6,7 +6,7 @@
         <ol class="breadcrumb">
             {{-- <li><a href="#">Home</a></li> --}}
             <li class=""><a href="{{route('admin.pi.index')}}">Quản lý thông tin nhân viên</a></li>
-             <li class=""><a href="{{route('admin.pi.detail',$pi_id)}}">Chi tiết nhân viên - {{App\PI::find($pi_id)->employee_code}}</a></li>
+             <li class=""><a href="{{route('admin.pi.detail',$pi_id)}}">Thông tin cá nhân - {{App\PI::find($pi_id)->employee_code}}</a></li>
             <li class="active">Lý lịch khoa học</li>
         </ol>
     </div>
@@ -42,8 +42,8 @@
                     <div class="panel-heading">Lý lịch sơ lược<br>
                         @can('cud',App\PI::first())
                         <a href="{{route('admin.sb.update',$pi_id)}}">
-                                <button type="button" name="button" class="btn btn-xs btn-primary">Cập nhật</button>
-                            </a>
+                            <button type="button" name="button" class="btn btn-xs btn-primary">Cập nhật</button>
+                        </a>
                         <a href="{{route('admin.sb.print',$pi_id)}}" target="_blank">
                             <button type="button" name="button" class="btn btn-xs btn-warning">Xuất pdf</button>
                         </a>
@@ -54,51 +54,56 @@
                             <div class="form-group">
                                 <div class="col-sm-6">
                                     <label for="inputEmail3" class="col-sm-4">Họ và tên</label>
-                                    <span for="" class="col-sm-8 text-nowrap">{{$sb->pi->full_name}}</span>
+                                    <span for="" class="col-sm-8 text-truncate">{{$sb->pi->full_name}}</span>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="inputEmail3" class="col-sm-4">Giới tính</label>
-                                    <span for="" class="col-sm-8 text-nowrap">{{$sb->pi->gender == 0 ? 'Nam' : 'Nữ'}}</span>
+                                    <span for=""
+                                        class="col-sm-8 text-truncate">{{$sb->pi->gender == 0 ? 'Nam' : 'Nữ'}}</span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-6">
                                     <label for="inputEmail3" class="col-sm-4">Ngày, tháng ,năm sinh</label>
-                                    <span for="" class="col-sm-8 text-nowrap">{{date('d-m-Y',strtotime($sb->pi->date_of_birth))}}</span>
+                                    <span for=""
+                                        class="col-sm-8 text-truncate">{{date('d-m-Y',strtotime($sb->pi->date_of_birth))}}</span>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="inputEmail3" class="col-sm-4">Nơi sinh</label>
-                                    <span for="" class="col-sm-8 text-nowrap">{{$sb->pi->place_of_birth}}</span>
+                                    <span for="" class="col-sm-8 text-truncate">{{$sb->pi->place_of_birth}}</span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-6">
                                     <label for="inputEmail3" class="col-sm-4">Quê quán</label>
-                                    <span for="" class="col-sm-8 text-nowrap">{{$sb->pi->home_town}}</span>
+                                    <span for="" class="col-sm-8 text-truncate">{{$sb->pi->home_town}}</span>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="inputEmail3" class="col-sm-4">Dân tộc</label>
-                                    <span for="" class="col-sm-8 text-nowrap">{{$sb->pi->nation->name}}</span>
+                                    <span for="" class="col-sm-8 text-truncate">{{$sb->pi->nation->name}}</span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-6">
                                     <label for="inputEmail3" class="col-sm-4">Học vị cao nhất</label>
-                                    <span for="" class="col-sm-8 text-nowrap">{{($sb->getHighestDegree($pi_id))== null ? 'Chưa có':($sb->getHighestDegree($pi_id))->degree->name}}</span>
+                                    <span for=""
+                                        class="col-sm-8 text-truncate">{{($sb->getHighestDegree($pi_id))== null ? 'Chưa có':($sb->getHighestDegree($pi_id))->degree->name}}</span>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="inputEmail3" class="col-sm-4">Năm, nước nhận học vị</label>
-                                    <span for="" class="col-sm-8 text-nowrap">{{($sb->getHighestDegree($pi_id)) == null ? 'Chưa có': date('Y',strtotime($sb->getHighestDegree($pi_id)->date_of_issue))}}</span>
+                                    <span for=""
+                                        class="col-sm-8 text-truncate">{{($sb->getHighestDegree($pi_id)) == null ? 'Chưa có': date('Y',strtotime($sb->getHighestDegree($pi_id)->date_of_issue))}}</span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-6">
                                     <label for="inputEmail3" class="col-sm-4">Chức danh khoa học cao nhất</label>
-                                    <span for="" class="col-sm-8  text-truncate">{{$sb->highest_scientific_title}}</span>
+                                    <span for=""
+                                        class="col-sm-8  text-truncate">{{$sb->highest_scientific_title}}</span>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="inputEmail3" class="col-sm-4">Năm bổ nhiệm</label>
-                                    <span for="" class="col-sm-8 text-nowrap">{{$sb->year_of_appointment}}</span>
+                                    <span for="" class="col-sm-8 text-truncate">{{$sb->year_of_appointment}}</span>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -125,17 +130,17 @@
                                 <div class="col-sm-6">
                                     <label for="inputEmail3" class="col-sm-4">Số điện thoại</label>
                                     <div class="col-sm-8">CQ:
-                                        <span for="" class="text-nowrap">{{$sb->orga_phone_number}}</span>
+                                        <span for="" class="text-truncate">{{$sb->orga_phone_number}}</span>
                                     </div>
 
 
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="col-sm-6">NR:
-                                        <span for="" class="text-nowrap">{{$sb->home_phone_number}}</span>
+                                        <span for="" class="text-truncate">{{$sb->home_phone_number}}</span>
                                     </div>
                                     <div class="col-sm-6">DĐ:
-                                        <span for="" class="text-nowrap">{{$sb->mobile_phone_number}}</span>
+                                        <span for="" class="text-truncate">{{$sb->mobile_phone_number}}</span>
                                     </div>
                                 </div>
 
@@ -143,7 +148,7 @@
                             <div class="form-group">
                                 <div class="col-sm-6">
                                     <label for="inputEmail3" class="col-sm-4">Fax</label>
-                                    <span for="" class="col-sm-8 text-nowrap">{{$sb->pi->fax}}</span>
+                                    <span for="" class="col-sm-8 text-truncate">{{$sb->pi->fax}}</span>
                                 </div>
                             </div>
 
@@ -161,98 +166,258 @@
                             <div class="form-group">
                                 <div class="col-sm-6">
                                     <label for="inputEmail3" class="col-sm-4">Hệ đào tạo</label>
-                                    <span for="" class="col-sm-8 text-nowrap">{{$sb->tp_graduates->isEmpty() ? '' : $sb->tp_graduates->first()->type_of_training}}</span>
+                                    <span for=""
+                                        class="col-sm-8 text-truncate">{{$sb->tp_graduates->isEmpty() ? '' : $sb->tp_graduates->first()->type_of_training}}</span>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="inputEmail3" class="col-sm-4">Nơi đào tạo</label>
-                                    <span for="" class="col-sm-8 text-nowrap">{{$sb->tp_graduates->isEmpty() ? '' : $sb->tp_graduates->first()->place_of_training}}</span>
+                                    <span for=""
+                                        class="col-sm-8 text-truncate">{{$sb->tp_graduates->isEmpty() ? '' : $sb->tp_graduates->first()->place_of_training}}</span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-6">
                                     <label for="inputEmail3" class="col-sm-4">Ngành học</label>
-                                    <span for="" class="col-sm-8 text-nowrap">{{$sb->tp_graduates->isEmpty() ? '' : $sb->tp_graduates->first()->field_of_study}}</span>
+                                    <span for=""
+                                        class="col-sm-8 text-truncate">{{$sb->tp_graduates->isEmpty() ? '' : $sb->tp_graduates->first()->field_of_study}}</span>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="inputEmail3" class="col-sm-4">Nước đào tạo</label>
-                                    <span for="" class="col-sm-8 text-nowrap">{{$sb->tp_graduates->isEmpty() ? '' : $sb->tp_graduates->first()->nation_of_training}}</span>
+                                    <span for=""
+                                        class="col-sm-8 text-truncate">{{$sb->tp_graduates->isEmpty() ? '' : $sb->tp_graduates->first()->nation_of_training}}</span>
                                 </div>
                             </div>
-                            @foreach($sb->tp_graduates as $item)
+                            @if($sb->tp_graduates->count() > 1)
+                            @foreach($sb->tp_graduates->slice(1) as $item)
                             <div class="form-group">
                                 <div class="col-sm-6">
-                                    <label for="inputEmail3" class="col-sm-4">Bằng đại học {{$loop->iteration}}</label>
-                                    <span for="" class="col-sm-8 text-nowrap">{{$item->nation_of_training}}</span>
+                                    <label for="inputEmail3" class="col-sm-4">Bằng đại học {{$loop->iteration + 1}}</label>
+                                    <span for="" class="col-sm-8 text-truncate">{{$item->field_of_study}}</span>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="inputEmail3" class="col-sm-4">Năm tốt nghiệp</label>
-                                    <span for="" class="col-sm-8 text-nowrap">{{$item->year_of_graduation}}</span>
+                                    <span for="" class="col-sm-8 text-truncate">{{$item->year_of_graduation}}</span>
                                 </div>
                             </div>
                             @endforeach
-                            <h4><label for="inputEmail3">2. Sau đại học</label></h4>
+                            @else
+
                             <div class="form-group">
                                 <div class="col-sm-6">
-                                    <label for="inputEmail3" class="col-sm-4">Thạc sĩ chuyên ngành</label>
-                                    <span for="" class="col-sm-8 text-nowrap">{{$sb->tp_postgraduate_masters->isEmpty() ? '' : $sb->tp_postgraduate_masters->first()->field_of_study}}</span>
+                                    <label for="inputEmail3" class="col-sm-4">Bằng đại học 2</label>
+                                    <span for="" class="col-sm-8 text-truncate"></span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="inputEmail3" class="col-sm-4">Năm tốt nghiệp</label>
+                                    <span for="" class="col-sm-8 text-truncate"></span>
+                                </div>
+                            </div>
+                            @endif
+
+                            <h4><label for="inputEmail3">2. Sau đại học</label></h4>
+
+                            @if($sb->tp_postgraduate_masters()->exists())
+                            @foreach($sb->tp_postgraduate_masters as $item)
+                            @if($item->field_of_study !=null &&$item->place_of_training !=null &&$item->year_of_issue
+                            !=null )
+
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <label for="inputEmail3" class="col-sm-4">Thạc sĩ chuyên
+                                        ngành {{$loop->iteration}}</label>
+                                    <span for="" class="col-sm-8 text-truncate">{{$item->field_of_study}}</span>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="inputEmail3" class="col-sm-4">Năm cấp bằng</label>
-                                    <span for="" class="col-sm-8 text-nowrap">{{$sb->tp_postgraduate_masters->isEmpty() ? '' : $sb->tp_postgraduate_masters->first()->year_of_issue}}</span>
+                                    <span for="" class="col-sm-8 text-truncate">{{$item->year_of_issue}}</span>
                                 </div>
                             </div>
-                                <div class="form-group">
+                            <div class="form-group">
 
 
                                 <div class="col-sm-6">
                                     <label for="inputEmail3" class="col-sm-4">Nơi đào tạo</label>
-                                    <span for="" class="col-sm-8 text-nowrap">{{$sb->tp_postgraduate_masters->isEmpty() ? '' : $sb->tp_postgraduate_masters->first()->place_of_training}}</span>
+                                    <span for="" class="col-sm-8 text-truncate">{{$item->place_of_training}}</span>
                                 </div>
                             </div>
-                            <hr>
+                            @else
+                            @if($loop->iteration == 1 )
                             <div class="form-group">
                                 <div class="col-sm-6">
-                                    <label for="inputEmail3" class="col-sm-4">Tiến sĩ chuyên ngành</label>
-                                    <span for="" class="col-sm-8 text-nowrap">{{$sb->tp_postgraduate_doctors->isEmpty() ? '' : $sb->tp_postgraduate_doctors->first()->field_of_study}}</span>
+                                    <label for="inputEmail3" class="col-sm-4">Thạc sĩ chuyên ngành</label>
+                                    <span for="" class="col-sm-8 text-truncate"></span>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="inputEmail3" class="col-sm-4">Năm cấp bằng</label>
-                                    <span for="" class="col-sm-8 text-nowrap">{{$sb->tp_postgraduate_doctors->isEmpty() ? '' : $sb->tp_postgraduate_doctors->first()->year_of_issue}}</span>
+                                    <span for="" class="col-sm-8 text-truncate"></span>
                                 </div>
                             </div>
-                                <div class="form-group">
+                            <div class="form-group">
+
+
+                                <div class="col-sm-6">
+                                    <label for="inputEmail3" class="col-sm-4">Nơi đào tạo</label>
+                                    <span for="" class="col-sm-8 text-truncate"></span>
+                                </div>
+                            </div>
+                            @endif
+                            @endif
+
+
+                            @endforeach
+                            @else
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <label for="inputEmail3" class="col-sm-4">Thạc sĩ chuyên ngành</label>
+                                    <span for="" class="col-sm-8 text-truncate"></span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="inputEmail3" class="col-sm-4">Năm cấp bằng</label>
+                                    <span for="" class="col-sm-8 text-truncate"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+
+                                <div class="col-sm-6">
+                                    <label for="inputEmail3" class="col-sm-4">Nơi đào tạo</label>
+                                    <span for="" class="col-sm-8 text-truncate"></span>
+                                </div>
+                            </div>
+
+                            @endif
+
+                            <hr>
+
+                            @if($sb->tp_postgraduate_doctors()->exists())
+                            @foreach($sb->tp_postgraduate_doctors as $item)
+                            @if($item->field_of_study != null &&$item->year_of_issue != null&&$item->thesis_title !=
+                            null&&$item->place_of_training != null)
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <label for="inputEmail3" class="col-sm-4">Tiến sĩ chuyên ngành
+                                        {{$loop->iteration}}</label>
+                                    <span for="" class="col-sm-8 text-truncate">{{$item->field_of_study}}</span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="inputEmail3" class="col-sm-4">Năm cấp bằng</label>
+                                    <span for="" class="col-sm-8 text-truncate">{{$item->year_of_issue}}</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
 
 
                                 <div class="col-sm-6">
                                     <label for="inputEmail3" class="col-sm-4">Tên luận án</label>
-                                    <span for="" class="col-sm-8">{{$sb->tp_postgraduate_doctors->isEmpty() ? '' : $sb->tp_postgraduate_doctors->first()->thesis_title}}</span>
+                                    <span for="" class="col-sm-8">{{$item->thesis_title}}</span>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="inputEmail3" class="col-sm-4">Nơi đào tạo</label>
-                                    <span for="" class="col-sm-8 text-nowrap">{{$sb->tp_postgraduate_doctors->isEmpty() ? '' : $sb->tp_postgraduate_doctors->first()->place_of_training}}</span>
+                                    <span for="" class="col-sm-8 text-truncate">{{$item->place_of_training}}</span>
                                 </div>
 
                             </div>
+                            @else
+                            @if($loop->iteration == 1)
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <label for="inputEmail3" class="col-sm-4">Tiến sĩ chuyên ngành</label>
+                                    <span for="" class="col-sm-8 text-truncate"></span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="inputEmail3" class="col-sm-4">Năm cấp bằng</label>
+                                    <span for="" class="col-sm-8 text-truncate"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+
+                                <div class="col-sm-6">
+                                    <label for="inputEmail3" class="col-sm-4">Tên luận án</label>
+                                    <span for="" class="col-sm-8"></span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="inputEmail3" class="col-sm-4">Nơi đào tạo</label>
+                                    <span for="" class="col-sm-8 text-truncate"></span>
+                                </div>
+
+                            </div>
+                            @endif
+                            @endif
+                            @endforeach
+                            @else
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <label for="inputEmail3" class="col-sm-4">Tiến sĩ chuyên ngành</label>
+                                    <span for="" class="col-sm-8 text-truncate"></span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="inputEmail3" class="col-sm-4">Năm cấp bằng</label>
+                                    <span for="" class="col-sm-8 text-truncate"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+
+                                <div class="col-sm-6">
+                                    <label for="inputEmail3" class="col-sm-4">Tên luận án</label>
+                                    <span for="" class="col-sm-8"></span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="inputEmail3" class="col-sm-4">Nơi đào tạo</label>
+                                    <span for="" class="col-sm-8 text-truncate"></span>
+                                </div>
+
+                            </div>
+                            @endif
+
                             <hr>
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <label for="inputEmail3" class="col-sm-2">Ngoại ngữ</label>
+
+                                    @if($sb->tp_foreign_languages()->exists())
                                     @foreach($sb->tp_foreign_languages as $item)
                                     @if($loop->iteration > 2)
                                     @break
                                     @endif
                                     <div>
                                         <div class="col-sm-4" style="padding-left:5px">{{$loop->iteration}}.
-                                            <span for="" class="text-nowrap">{{$item->language}}</span>
+                                            <span for="" class="text-truncate">{{$item->language}}</span>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="col-sm-6">Mức độ sử dụng :
 
                                             </div>
-                                            <span for="" class="col-sm-6 text-nowrap"> {{$item->usage_level}}</span>
+                                            <span for="" class="col-sm-6 text-truncate"> {{$item->usage_level}}</span>
                                         </div>
                                     </div>
                                     @endforeach
+                                    @else
+                                    <div>
+                                        <div class="col-sm-4" style="padding-left:5px">1.
+                                            <span for="" class="text-truncate"></span>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="col-sm-6">Mức độ sử dụng :
+
+                                            </div>
+                                            <span for="" class="col-sm-6 text-truncate"></span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="col-sm-4" style="padding-left:5px">2.
+                                            <span for="" class="text-truncate"></span>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="col-sm-6">Mức độ sử dụng :
+
+                                            </div>
+                                            <span for="" class="col-sm-6 text-truncate"></span>
+                                        </div>
+                                    </div>
+                                    @endif
+
 
 
 
@@ -280,8 +445,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if($sb->wp_professionals->count() >0)
+                                    @if($sb->wp_professionals()->exists())
                                     @foreach ($sb->wp_professionals as $item)
+                                    @if($item->period_time !=null && $item->place_of_work !=null
+                                    &&$item->work_of_undertake !=null)
                                     <tr>
 
                                         <td class="col-sm-4">{{$item->period_time}}</td>
@@ -289,10 +456,20 @@
                                         <td class="col-sm-4">{{$item->work_of_undertake}}</td>
 
                                     </tr>
+                                    @else
+                                    @if($loop->iteration == 1)
+
+                                    <tr>
+                                        <td colspan="5" class="text-center">Không có bất kỳ dữ liệu nào được tìm thấy
+                                        </td>
+                                    </tr>
+                                    @endif
+                                    @endif
                                     @endforeach
                                     @else
                                     <tr>
-                                        <td colspan="5" class="text-center">Không có bất kỳ dữ liệu nào được tìm thấy</td>
+                                        <td colspan="5" class="text-center">Không có bất kỳ dữ liệu nào được tìm thấy
+                                        </td>
                                     </tr>
                                     @endif
 
@@ -320,8 +497,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if($sb->research_topics->count() >0)
+                                    @if($sb->research_topics()->exists())
                                     @foreach ($sb->research_topics as $item)
+                                    @if($item->name_of_topic != null && $item->start_year != null && $item->end_year !=
+                                    null && $item->topic_level != null && $item->responsibility != null)
                                     <tr>
                                         <td class="col-sm-1">{{$loop->iteration}}</td>
                                         <td class="col-sm-5">{{$item->name_of_topic}}</td>
@@ -330,10 +509,20 @@
                                         <td class="col-sm-2">{{$item->responsibility}}</td>
 
                                     </tr>
+                                    @else
+                                    @if($loop->iteration == 1)
+                                    <tr>
+                                        <td colspan="5" class="text-center">Không có bất kỳ dữ liệu nào được tìm thấy
+                                        </td>
+                                    </tr>
+                                    @endif
+                                    @endif
+
                                     @endforeach
                                     @else
                                     <tr>
-                                        <td colspan="5" class="text-center">Không có bất kỳ dữ liệu nào được tìm thấy</td>
+                                        <td colspan="5" class="text-center">Không có bất kỳ dữ liệu nào được tìm thấy
+                                        </td>
                                     </tr>
                                     @endif
 
@@ -354,8 +543,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if($sb->research_process_works->count() >0)
+                                    @if($sb->research_process_works()->exists())
                                     @foreach ($sb->research_process_works as $item)
+                                    @if($item->name_of_works != null &&$item->year_of_publication != null
+                                    &&$item->name_of_journal != null )
                                     <tr>
                                         <td class="col-sm-1">{{$loop->iteration}}</td>
                                         <td class="col-sm-4">{{$item->name_of_works}}</td>
@@ -363,10 +554,19 @@
                                         <td class="col-sm-3">{{$item->name_of_journal}}</td>
 
                                     </tr>
+                                    @else
+                                    @if($loop->iteration == 1)
+                                    <tr>
+                                        <td colspan="5" class="text-center">Không có bất kỳ dữ liệu nào được tìm thấy
+                                        </td>
+                                    </tr>
+                                    @endif
+                                    @endif
                                     @endforeach
                                     @else
                                     <tr>
-                                        <td colspan="5" class="text-center">Không có bất kỳ dữ liệu nào được tìm thấy</td>
+                                        <td colspan="5" class="text-center">Không có bất kỳ dữ liệu nào được tìm thấy
+                                        </td>
                                     </tr>
                                     @endif
 

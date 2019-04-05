@@ -5,8 +5,9 @@
     <div class="cm-breadcrumb-container">
         <ol class="breadcrumb">
             {{-- <li><a href="#">Home</a></li> --}}
-            {{--  <li class=""><a href="{{route('employee.pi.index')}}">Quản lý thông tin nhân viên</a></li>  --}}
-             <li class="">Chi tiết nhân viên - {{$pi->employee_code}}</li>
+
+             <li class=""><a href="{{route('employee.faculty.detail',$pi->id)}}">Chi tiết nhân viên - {{$pi->employee_code}}</a></li>
+
             <li class="active">Khối lượng công việc</li>
         </ol>
     </div>
