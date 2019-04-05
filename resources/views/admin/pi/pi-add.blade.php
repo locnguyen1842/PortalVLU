@@ -244,10 +244,9 @@
                         @foreach($teacher_types as $teacher_type)
                         <option {{$teacher_type->id == old('teacher_type') ? 'selected':''}} value="{{$teacher_type->id}}">{{$teacher_type->name}}</option>
                         @endforeach
-                        <option value="0">Không có</option>
                     </select>
                 </div>
-                <div class="col-sm-6 dependent-on-teacher">
+                <div class="col-sm-6">
                     <label>Chức danh nghề nghiệp</label>
                     <select required class="form-control" name="teacher_title" data-dependent>
                         <option value="">Chọn chức danh</option>
@@ -259,7 +258,7 @@
 
             </div>
             <div class="form-group">
-                <div class="col-sm-6 dependent-on-teacher">
+                <div class="col-sm-6">
                     <label>Danh hiệu</label>
                     <div class="checkbox">
                         <label class="col-sm-4">
@@ -271,37 +270,24 @@
                     </div>
                 </div>
                 <div class="col-sm-6">
-                        <label>Nghỉ việc</label>
-                            <div class="radio">
-                                <label class="col-sm-4">
-                                    <input required type="radio" name="is_activity" value="1" checked>Chưa nghỉ việc
-                                </label>
-                                <label class="col-sm-4">
-                                    <input required type="radio" name="is_activity" value="0" >Đã nghỉ việc
-                                </label>
-                            </div>
-                    </div>
-
-            </div>
-
-            <div class="form-group dependent-on-teacher">
-                <div class="col-sm-6">
                     <label>Nghỉ hưu</label>
                     <div class="radio">
                         <label class="col-sm-4">
-                            <input required type="radio" name="is_retired" value="0" checked>Chưa nghỉ hưu
+                            <input required type="radio" name="is_retired" value="0" checked>Đã nghỉ hưu
                         </label>
                         <label class="col-sm-4">
-                            <input required type="radio" name="is_retired" value="1">Đã nghỉ hưu
+                            <input required type="radio" name="is_retired" value="1">Chưa nghỉ hưu
                         </label>
                     </div>
                 </div>
-                <div class="col-sm-6">
+
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-6  pull-right">
                     <label>Ngày nghỉ hưu</label>
                     <input required type="date" min="1900-01-01" class="form-control" name="date_of_retirement" value="{{old('date_of_retirement')}}">
                 </div>
-
-
             </div>
             <div class="form-group" style="margin-bottom:0">
                 <div class="col-sm-offset-2 col-sm-10 text-right">
@@ -316,29 +302,6 @@
     <script type="text/javascript">
         $(document).ready(function() {
 
-            $('select[name=teacher_type]').on('change',function(){
-                if($(this).val() == 0){
-
-                    $('.dependent-on-teacher').addClass('hide');
-                    $('.dependent-on-teacher :input').prop('disabled',true);
-
-                }else{
-                    $('.dependent-on-teacher').removeClass('hide');
-                    $('.dependent-on-teacher :input').prop('disabled',false);
-                }
-            })
-
-            $('input[type=radio][name=is_retired]').on('change',function(){
-                if($(this).val() == 1){
-
-                    $('input[name=date_of_retirement]').prop('disabled',false);
-                }else{
-                    $('input[name=date_of_retirement]').prop('disabled',true);
-                }
-
-            })
-
-
             $('#province_1').on('change', function(e) {
                 var province_code = e.target.value;
                 $.get('{{route('res.districts')}}' + '?province_code=' + province_code,
@@ -348,6 +311,7 @@
                         $.each(data, function(index, district) {
                             $('#district_1').append('<option data-old-1="old-'+district.code+'" value="' + district.code + '">' + district.name_with_type + '</option>');
                             var old_district_1 = '{{old('district_1')}}';
+                            console.log(district.code);
                             if(district.code == old_district_1){
                               $('option[data-old-1="old-'+district.code+'"]').prop('selected',true);
                             }
@@ -364,6 +328,8 @@
                         $.each(data, function(index, ward) {
                             $('#ward_1').append('<option data-old-1="old-'+ward.code+'" value="' + ward.code + '">' + ward.name_with_type + '</option>');
                             var old_ward_1 = '{{old('ward_1')}}';
+                            console.log(ward.code);
+
                             if(ward.code == old_ward_1){
                               $('option[data-old-1="old-'+district.code+'"]').prop('selected',true);
                             }

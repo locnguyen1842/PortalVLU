@@ -6,8 +6,6 @@
             <ol class="breadcrumb">
                 {{-- <li><a href="#">Home</a></li> --}}
                 <li class=""><a href="{{route('admin.pi.index')}}">Quản lý thông tin nhân viên</a></li>
-                <li class=""><a href="{{route('admin.pi.detail',$pi->id)}}">Thông tin cá nhân - {{$pi->employee_code}}</a></li>
-
                 <li class="active">Cập nhật thông tin nhân viên</li>
             </ol>
         </div>
@@ -296,99 +294,54 @@
                         <label>Loại giảng viên</label>
                         <select required class="form-control" name="teacher_type" data-dependent>
                             <option value="">Chọn loại giảng viên</option>
-                            @if($pi->teacher()->exists())
                             @foreach($teacher_types as $teacher_type)
                             <option {{ $teacher_type->id== $pi->teacher->type_id?'selected':'' }} value="{{$teacher_type->id}}">{{$teacher_type->name}}</option>
-
                             @endforeach
-                            <option {{ $teacher_type->id== old('teacher_type')?'selected':'' }} value="0">Không có</option>
-
-                            @else
-                            @foreach($teacher_types as $teacher_type)
-                            <option {{ $teacher_type->id== old('teacher_type')?'selected':'' }} value="{{$teacher_type->id}}">{{$teacher_type->name}}</option>
-                            @endforeach
-                            <option {{ $teacher_type->id== old('teacher_type')?'selected':'' }} value="0" selected>Không có</option>
-                            @endif
                         </select>
-
                     </div>
-                    <div class="col-sm-6 dependent-on-teacher">
+                    <div class="col-sm-6">
                         <label>Chức danh nghề nghiệp</label>
                         <select required class="form-control" name="teacher_title" data-dependent>
                             <option value="">Chọn chức danh</option>
-                            @if($pi->teacher()->exists())
                             @foreach($teacher_titles as $teacher_title)
                             <option {{ $teacher_title->id== $pi->teacher->title_id?'selected':'' }} value="{{$teacher_title->id}}">{{$teacher_title->name}}</option>
                             @endforeach
-                            @else
-                            @foreach($teacher_titles as $teacher_title)
-                            <option {{ $teacher_title->id== old('teacher_title')?'selected':'' }} value="{{$teacher_title->id}}">{{$teacher_title->name}}</option>
-                            @endforeach
-                            @endif
                         </select>
                     </div>
 
                 </div>
                 <div class="form-group">
-                        <div class="col-sm-6 dependent-on-teacher">
-                            <label>Danh hiệu</label>
-                            <div class="checkbox">
-                                <label class="col-sm-4">
-                                    <input type="checkbox" name="is_excellent_teacher" value="1">Nhà giáo ưu tú
-                                </label>
-                                <label class="col-sm-4">
-                                    <input type="checkbox" name="is_national_teacher" value="1">Nhà giáo nhân dân
-                                </label>
-                            </div>
+                    <div class="col-sm-6">
+                        <label>Danh hiệu</label>
+                        <div class="checkbox">
+                            <label class="col-sm-4">
+                                <input class="yes" type="checkbox" name="is_excellent_teacher" value="1" {{$pi->teacher->is_excellent_teacher ==1 ? "checked":""}}>Nhà giáo ưu tú
+                            </label>
+                            <label class="col-sm-4">
+                                <input class="no" type="checkbox" name="is_national_teacher" value="1"  {{$pi->teacher->is_national_teacher ==1 ? "checked":""}}>Nhà giáo nhân dân
+                            </label>
                         </div>
-                        <div class="col-sm-6">
-                                <label>Nghỉ việc</label>
-                                    <div class="radio">
-                                        <label class="col-sm-4">
-                                            <input required type="radio" name="is_activity" value="1" {{$pi->is_activity==1 ? 'checked':''}}>Chưa nghỉ việc
-                                        </label>
-                                        <label class="col-sm-4">
-                                            <input required type="radio" name="is_activity" value="0" {{$pi->is_activity==0  ? 'checked':''}}>Đã nghỉ việc
-                                        </label>
-                                    </div>
-                            </div>
-
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Nghỉ hưu</label>
+                        <div class="radio">
+                            <label class="col-sm-4">
+                                <input required type="radio" name="is_retired" value="0" {{$pi->teacher->is_retired ==0 ? "checked":""}}>Đã nghỉ hưu
+                            </label>
+                            <label class="col-sm-4">
+                                <input required type="radio" name="is_retired" value="1" {{$pi->teacher->is_retired ==1 ? "checked":""}}>Chưa nghỉ hưu
+                            </label>
+                        </div>
                     </div>
 
-                    <div class="form-group dependent-on-teacher">
-                        <div class="col-sm-6">
-                            <label>Nghỉ hưu</label>
-                            <div class="radio">
-                                @if($pi->teacher()->exists())
-                                    <label class="col-sm-4">
-                                            <input required type="radio" name="is_retired" value="1" {{$pi->teacher->is_retired==1 ? 'checked':''}}>Đã nghỉ hưu
-                                    </label>
-                                <label class="col-sm-4">
-                                    <input required type="radio" name="is_retired" value="0" {{$pi->teacher->is_retired==0 ? 'checked':''}}>Chưa nghỉ hưu
-                                </label>
-                                @else
-                                 <label class="col-sm-4">
-                                            <input required type="radio" name="is_retired" value="1" {{old('is_retired')==1 ? 'checked':''}}>Đã nghỉ hưu
-                                    </label>
-                                <label class="col-sm-4">
-                                    <input required type="radio" name="is_retired" value="0" {{old('is_retired')==0 ? 'checked':''}}>Chưa nghỉ hưu
-                                </label>
-                                @endif
+                </div>
 
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <label>Ngày nghỉ hưu</label>
-                            @if($pi->teacher()->exists())
-                            <input required disabled type="date" min="1900-01-01" class="form-control" name="date_of_retirement" value="{{$pi->teacher->date_of_retirement}}">
-                            @else
-                            <input required disabled type="date" min="1900-01-01" class="form-control" name="date_of_retirement" value="{{old('date_of_retirement')}}">
-
-                            @endif
-                        </div>
-
-
+                <div class="form-group">
+                    <div class="col-sm-6  pull-right">
+                        <label>Ngày nghỉ hưu</label>
+                        <input required type="date" min="1900-01-01" class="form-control" name="date_of_retirement" value="{{$pi->teacher->date_of_retirement}}">
                     </div>
+                </div>
 
                 <div class="form-group" style="margin-bottom:0">
                     <div class="col-sm-offset-2 col-sm-10 text-right">
@@ -402,41 +355,6 @@
 
     <script type="text/javascript">
     $(document).ready(function(){
-        var teacher_type = $('select[name=teacher_type]');
-        var is_retired = $('input[type=radio][name=is_retired]:checked');
-
-        teacherType(teacher_type);
-        isRetired(is_retired);
-        teacher_type.on('change', function () {
-            teacherType($(this));
-        })
-
-        $('input[type=radio][name=is_retired]').on('change', function (e) {
-            isRetired($(this));
-
-        })
-
-        function isRetired(element) {
-            if (element.val() == 0) {
-
-                $('input[name=date_of_retirement]').prop('disabled', true);
-            } else {
-                $('input[name=date_of_retirement]').prop('disabled', false);
-            }
-        }
-
-        function teacherType(element) {
-            if (element.val() == 0) {
-
-                $('.dependent-on-teacher').addClass('hide');
-                $('.dependent-on-teacher :input').not('input[name=date_of_retirement]').prop('disabled', true);
-
-            } else {
-                $('.dependent-on-teacher').removeClass('hide');
-                $('.dependent-on-teacher :input').not('input[name=date_of_retirement]').prop('disabled', false);
-
-            }
-        }
         if('{{ $pi->permanent_address()->exists() && $pi->contact_address()->exists() }}' == true){
             var province_code_1 = $('#province_1').val();
             $.get('{{route('res.districts')}}' + '?province_code=' + province_code_1,
@@ -499,7 +417,14 @@
             });
     }
 
-
+    $('input[type=radio][name=is_retired]').on('change',function() {
+        if (this.val() == 0) {
+            $("input[name=date_of_retirement]").prop("disabled", true);
+        }
+        else if (this.val() == 1) {
+          $("input[name=date_of_retirement]").prop("disabled", false);
+      }
+    });
     });
         $('#province_1').on('change', function(e) {
             var province_code = e.target.value;

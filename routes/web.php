@@ -107,8 +107,6 @@ Route::prefix('admin')->group(function () {
         // statistic
         Route::get('/statistical', 'StatisticController@index')->name('admin.statistic.index');
         Route::get('/statistical-industry', 'StatisticController@industry')->name('admin.statistic.industry');
-        Route::get('/statistical-download', 'StatisticController@download')->name('admin.statistic.download');
-
 
         // academic_rank
         Route::get('/academic-rank/{pi_id}/update', 'PIController@getUpdateAcademicRank')->name('admin.academic.update');

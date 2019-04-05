@@ -61,7 +61,8 @@ class ScientificBackgroundController extends Controller
                 'place_of_training' => 'required',
                 'field_of_study' => 'required',
                 'nation_of_training' => 'required',
-                'year_of_graduation_first' => 'required',
+                'industry.0' => 'required',
+                'year_of_graduation.0' => 'required',
                 'industry.*' => 'required_with:year_of_graduation.*',
                 'year_of_graduation.*' => 'required_with:industry.*',
                 'master_field_of_study.*' => 'required_with:master_year_of_issue.*,master_place_of_training.*|nullable',
@@ -101,11 +102,11 @@ class ScientificBackgroundController extends Controller
               'email_address.required' => 'Email không được bỏ trống',
               'email_address.email' =>'Email sai định dạng',
               'email_address.unique' =>'Email đã tồn tại',
-              'type_of_training.required' => 'Hệ đào tạo không được bỏ trống',
-              'place_of_training.required' => 'Nơi đào tạo không được bỏ trống',
-              'field_of_study.required' => 'Ngành học không được bỏ trống',
-              'nation_of_training.required' => 'Nước đào tạo không được bỏ trống',
-              'year_of_graduation_first.required' => 'Năm tốt nghiệp không được bỏ trống',
+              'type_of_training.required_with' => 'Hệ đào tạo không được bỏ trống',
+              'place_of_training.required_with' => 'Nơi đào tạo không được bỏ trống',
+              'field_of_study.required_with' => 'Ngành học không được bỏ trống',
+              'nation_of_training.required_with' => 'Nước đào tạo không được bỏ trống',
+              'industry.0.required' => 'Hệ đào tạo không được bỏ trống',
               'industry.*.required_with' => 'Hệ đào tạo không được bỏ trống',
               'year_of_graduation.0.required' => 'Năm tốt nghiệp không được bỏ trống',
               'year_of_graduation.*.required_with' => 'Năm tốt nghiệp không được bỏ trống',
@@ -168,24 +169,16 @@ class ScientificBackgroundController extends Controller
         if(($request->industry) !=null){
             $request->industry = ($request->industry);
             TPGraduate::where('scientific_background_id', $sb->id)->delete();
-            $tp_graduate = new TPGraduate;
-            $tp_graduate->scientific_background_id = $sb->id;
-            $tp_graduate->type_of_training = $request->type_of_training;
-            $tp_graduate->place_of_training = $request->place_of_training;
-            $tp_graduate->field_of_study = $request->field_of_study;
-            $tp_graduate->nation_of_training = $request->nation_of_training;
-            $tp_graduate->year_of_graduation = $request->year_of_graduation_first;
-            $tp_graduate ->save();
             for ($i = 0 ; $i < count($request->industry) ; $i++) {
-
-                    $tp_graduate = new TPGraduate;
-                    $tp_graduate->scientific_background_id = $sb->id;
-                    $tp_graduate->type_of_training = $request->type_of_training;
-                    $tp_graduate->place_of_training = $request->place_of_training;
-                    $tp_graduate->field_of_study = $request->industry[$i];
-                    $tp_graduate->nation_of_training = $request->nation_of_training;
-                    $tp_graduate->year_of_graduation = $request->year_of_graduation[$i];
-                    $tp_graduate ->save();
+                $tp_graduate = new TPGraduate;
+                $tp_graduate->scientific_background_id = $sb->id;
+                $tp_graduate->industry = $request->industry[$i];
+                $tp_graduate->type_of_training = $request->type_of_training;
+                $tp_graduate->place_of_training = $request->place_of_training;
+                $tp_graduate->field_of_study = $request->field_of_study;
+                $tp_graduate->nation_of_training = $request->nation_of_training;
+                $tp_graduate->year_of_graduation = $request->year_of_graduation[$i];
+                $tp_graduate ->save();
             }
         }
 
@@ -311,7 +304,8 @@ class ScientificBackgroundController extends Controller
                 'place_of_training' => 'required',
                 'field_of_study' => 'required',
                 'nation_of_training' => 'required',
-                'year_of_graduation_first' => 'required',
+                'industry.0' => 'required',
+                'year_of_graduation.0' => 'required',
                 'industry.*' => 'required_with:year_of_graduation.*',
                 'year_of_graduation.*' => 'required_with:industry.*',
                 'master_field_of_study.*' => 'required_with:master_year_of_issue.*,master_place_of_training.*|nullable',
@@ -351,13 +345,13 @@ class ScientificBackgroundController extends Controller
               'email_address.required' => 'Email không được bỏ trống',
               'email_address.email' =>'Email sai định dạng',
               'email_address.unique' =>'Email đã tồn tại',
-              'type_of_training.required' => 'Hệ đào tạo không được bỏ trống',
-              'place_of_training.required' => 'Nơi đào tạo không được bỏ trống',
-              'field_of_study.required' => 'Ngành học không được bỏ trống',
-              'nation_of_training.required' => 'Nước đào tạo không được bỏ trống',
-              'year_of_graduation_first.required' => 'Năm tốt nghiệp không được bỏ trống',
-
+              'type_of_training.required_with' => 'Hệ đào tạo không được bỏ trống',
+              'place_of_training.required_with' => 'Nơi đào tạo không được bỏ trống',
+              'field_of_study.required_with' => 'Ngành học không được bỏ trống',
+              'nation_of_training.required_with' => 'Nước đào tạo không được bỏ trống',
+              'industry.0.required' => 'Hệ đào tạo không được bỏ trống',
               'industry.*.required_with' => 'Hệ đào tạo không được bỏ trống',
+              'year_of_graduation.0.required' => 'Năm tốt nghiệp không được bỏ trống',
               'year_of_graduation.*.required_with' => 'Năm tốt nghiệp không được bỏ trống',
               'year_of_graduation.digits' => 'Năm tốt nghiệp không đúng định dạng',
               'year_of_graduation.integer' => 'Năm tốt nghiệp không đúng định dạng',
@@ -418,20 +412,13 @@ class ScientificBackgroundController extends Controller
         if(($request->industry) !=null){
             $request->industry = ($request->industry);
             TPGraduate::where('scientific_background_id', $sb->id)->delete();
-            $tp_graduate = new TPGraduate;
-            $tp_graduate->scientific_background_id = $sb->id;
-            $tp_graduate->type_of_training = $request->type_of_training;
-            $tp_graduate->place_of_training = $request->place_of_training;
-            $tp_graduate->field_of_study = $request->field_of_study;
-            $tp_graduate->nation_of_training = $request->nation_of_training;
-            $tp_graduate->year_of_graduation = $request->year_of_graduation_first;
-            $tp_graduate ->save();
             for ($i = 0 ; $i < count($request->industry) ; $i++) {
                 $tp_graduate = new TPGraduate;
                 $tp_graduate->scientific_background_id = $sb->id;
+                $tp_graduate->industry = $request->industry[$i];
                 $tp_graduate->type_of_training = $request->type_of_training;
                 $tp_graduate->place_of_training = $request->place_of_training;
-                $tp_graduate->field_of_study = $request->industry[$i];
+                $tp_graduate->field_of_study = $request->field_of_study;
                 $tp_graduate->nation_of_training = $request->nation_of_training;
                 $tp_graduate->year_of_graduation = $request->year_of_graduation[$i];
                 $tp_graduate ->save();
@@ -534,23 +521,22 @@ class ScientificBackgroundController extends Controller
     }
     public function indexPrintAdmin($pi_id)
     {
-        $sb = ScientificBackground::where('personalinformation_id', $pi_id)->firstOrFail();
-        $nations = Nation::all();
-        $units = Unit::all();
-        $topic_levels = SBTopicLevel::all();
-
+      $sb = ScientificBackground::where('personalinformation_id', $pi_id)->firstOrFail();
+      $nations = Nation::all();
+      $units = Unit::all();
+      $topic_levels = SBTopicLevel::all();
     //   return view('admin.sb.sb-print', compact('pi_id', 'sb', 'nations', 'units', 'topic_levels'));
-        $pdf = PDF::loadView('admin.sb.sb-print', compact('pi_id', 'sb', 'nations', 'units', 'topic_levels'));
-        return $pdf->stream('ly-lich-khoa-hoc.pdf');
+      $pdf = PDF::loadView('admin.sb.sb-print', compact('pi_id', 'sb', 'nations', 'units', 'topic_levels'));
+      return $pdf->download('ly-lich-khoa-hoc.pdf');
     }
     public function indexPrint()
     {
-        $pi_id = PI::find(Auth::guard('employee')->user()->personalinformation_id)->id;
-        $sb = ScientificBackground::where('personalinformation_id', $pi_id)->firstOrFail();
-        $nations = Nation::all();
-        $units = Unit::all();
-        $topic_levels = SBTopicLevel::all();
-        $pdf = PDF::loadView('employee.sb.print', compact('pi_id', 'sb', 'nations', 'units', 'topic_levels'));
-        return $pdf->download('ly-lich-khoa-hoc.pdf');
+      $pi_id = PI::find(Auth::guard('employee')->user()->personalinformation_id)->id;
+      $sb = ScientificBackground::where('personalinformation_id', $pi_id)->firstOrFail();
+      $nations = Nation::all();
+      $units = Unit::all();
+      $topic_levels = SBTopicLevel::all();
+      $pdf = PDF::loadView('employee.sb.print', compact('pi_id', 'sb', 'nations', 'units', 'topic_levels'));
+      return $pdf->download('ly-lich-khoa-hoc.pdf');
     }
 }

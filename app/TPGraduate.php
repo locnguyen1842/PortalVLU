@@ -11,6 +11,7 @@ class TPGraduate extends Model
     protected $fillable = [
         'type_of_training',
         'place_of_training',
+        'field_of_study',
         'nation_of_training',
         'year_of_graduation',
         'scientific_background_id',

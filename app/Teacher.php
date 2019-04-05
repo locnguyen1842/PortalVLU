@@ -30,7 +30,7 @@ class Teacher extends Model
 
     public function getTeacherByAcademicRankType($teacher_type_id,$academic_type_id){
         $result = $this->where('type_id',$teacher_type_id)->whereHas('pi',function ($query) use($academic_type_id){
-            $query->where('show',1)->where('is_activity',1)->whereHas('academic_rank',function ($q) use($academic_type_id){
+            $query->whereHas('academic_rank',function ($q) use($academic_type_id){
                 $q->where('type_id',$academic_type_id);
             });
         })->get();
@@ -40,7 +40,7 @@ class Teacher extends Model
 
         // $result = $this->where('type_id',1)->whereHas('pi')->whereHas('degreedetails')->count();
         $result = $this->where('type_id',$teacher_type_id)->whereHas('pi',function ($query) use($degree_type_id){
-            $query->where('show',1)->where('is_activity',1)->where('is_activity',1)->whereHas('degreedetails',function ($q) use($degree_type_id){
+            $query->whereHas('degreedetails',function ($q) use($degree_type_id){
                 $q->where('degree_id',$degree_type_id);
             });
         })->get();
@@ -57,7 +57,7 @@ class Teacher extends Model
 
             $min_date = Carbon::today()->subYears($max_age);
             $max_date = Carbon::today()->subYears($min_age)->endOfDay();
-            $query->where('show',1)->where('is_activity',1)->whereBetween('date_of_birth',[$min_date,$max_date]);
+            $query->whereBetween('date_of_birth',[$min_date,$max_date]);
 
         })->get();
         return ($result);
@@ -68,12 +68,7 @@ class Teacher extends Model
         $start_of_year = Carbon::now()->startOfYear();
         $end_of_year = Carbon::now()->endOfYear();
 
-        $result = $this
-        ->where('type_id',1)
-        ->whereBetween('date_of_retirement',[$start_of_year,$end_of_year])
-        ->whereHas('pi',function($q){
-            $q->where('show',1)->where('is_activity',1);
-        })->get();
+        $result = $this->where('type_id',1)->whereBetween('date_of_retirement',[$start_of_year,$end_of_year])->get();
         return $result;
 
     }
@@ -84,7 +79,7 @@ class Teacher extends Model
         $end_of_year = Carbon::now()->endOfYear();
 
         $result = $this->where('type_id',1)->whereHas('pi',function($query) use($start_of_year,$end_of_year){
-            $query->where('show',1)->where('is_activity',1)->whereBetween('date_of_recruitment',[$start_of_year,$end_of_year]);
+            $query->whereBetween('date_of_recruitment',[$start_of_year,$end_of_year]);
         })->get();
         return $result;
 

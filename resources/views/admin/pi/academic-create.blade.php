@@ -4,8 +4,7 @@
         <div class="cm-flex">
             <div class="cm-breadcrumb-container">
                 <ol class="breadcrumb">
-                    <li><a href="{{route('admin.pi.index')}}">Quản lý thông tin nhân viên</a></li>
-                    <li><a href="{{route('admin.pi.detail',$pi->id)}}">Thông tin cá nhân - {{$pi->employee_code}}</a></li>
+                    <li><a href="{{route('admin.pi.detail',$pi->id)}}">Thông tin cá nhân</a></li>
 
                     <li >Thêm mới thông tin học hàm</li>
                 </ol>
