@@ -32,6 +32,7 @@ use App\PositionType;
 use App\TeacherTitle;
 use App\TeacherType;
 use App\Teacher;
+use App\ContractType;
 
 class PIController extends Controller
 {
@@ -70,9 +71,11 @@ class PIController extends Controller
         $position_types = PositionType::all();
         $teacher_types = TeacherType::all();
         $teacher_titles = TeacherTitle::all();
+        $contract_types = ContractType::all();
+
         // $wards = Ward::all('name_with_type','code');
         $provinces = Province::all('name_with_type','code');
-        return view('admin.pi.pi-add', compact('nations', 'units','provinces','officer_types','position_types','teacher_types','teacher_titles'));
+        return view('admin.pi.pi-add', compact('nations', 'units','provinces','officer_types','position_types','teacher_types','teacher_titles','contract_types'));
     }
 
     public function getDistricts(){
@@ -109,7 +112,7 @@ class PIController extends Controller
             'position'=> 'required',
             'date_of_recruitment' => 'required|date',
             'professional_title'=> 'required',
-            'identity_card'=> 'required|unique:personalinformations,identity_card',
+            'identity_card'=> 'required|min:9|max:12|unique:personalinformations,identity_card',
             'date_of_issue' => 'required|date',
             'place_of_issue'=> 'required',
             'unit'=> 'required',
@@ -118,8 +121,10 @@ class PIController extends Controller
             'teacher_type'=> 'required',
             'teacher_title'=> 'required_unless:teacher_type,0',
             'is_retired'=> 'required_unless:teacher_type,0',
-            'date_of_retirement'=> 'required_unless:teacher_type,0',
+            'date_of_retirement'=> 'required_if:is_retired,1',
             'is_concurrently'=> 'required',
+            'home_town'=> 'required',
+            'contract_type'=> 'required',
           ],
           [
             'employee_code.required'=> 'Mã giảng viên không được bỏ trống',
@@ -153,6 +158,8 @@ class PIController extends Controller
             'professional_title.required' =>'Chức danh chuyên môn không được bỏ trống',
             'identity_card.unique' =>'Chứng minh nhân dân đã được sử dụng',
             'identity_card.required' =>'Chứng minh nhân dân không được bỏ trống',
+            'identity_card.min' =>'Chứng minh nhân dân không hợp lệ',
+            'identity_card.max' =>'Chứng minh nhân dân không hợp lệ',
             'date_of_issue.required' =>'Ngày cấp không được bỏ trống',
             'date_of_issue.date' =>'Ngày cấp sai định dạng',
             'place_of_issue.required' =>'Nơi cấp không được bỏ trống',
@@ -160,10 +167,13 @@ class PIController extends Controller
             'teacher_type.required' =>'Loại giảng viên không được bỏ trống',
             'teacher_title.required_unless' =>'Chức danh nghề nghiệp không được bỏ trống',
             'is_retired.required_unless' =>'Nghỉ hưu không được bỏ trống',
-            'date_of_retirement.required_unless' =>'Ngày nghỉ hưu không được bỏ trống',
+            'date_of_retirement.required_if' =>'Ngày nghỉ hưu không được bỏ trống',
             'officer_type.required' =>'Loại cán bộ không được bỏ trống',
             'position_type.required' =>'Chức vụ không được bỏ trống',
             'is_concurrently.required' =>'Kiêm nhiệm giảng dạy không được bỏ trống',
+            'home_town.required' =>'Quê quán không được bỏ trống',
+            'contract_type.required' =>'Loại hợp đồng không được bỏ trống',
+
           ]
       );
         //add data
@@ -181,6 +191,8 @@ class PIController extends Controller
         // $pi->permanent_address_id= $request->permanent_address;
         $pi->phone_number= $request->phone_number;
         $pi->email_address= $request->email_address;
+        $pi->home_town= $request->home_town;
+        $pi->contract_type_id= $request->contract_type;
         $pi->position= $request->position;
         $pi->date_of_recruitment= $request->date_of_recruitment;
         $pi->professional_title= $request->professional_title;
@@ -290,9 +302,10 @@ class PIController extends Controller
         $teacher_titles = TeacherTitle::all();
         $officer = Officer::all();
         $teacher = Teacher::all();
+        $contract_types = ContractType::all();
 
         $provinces = Province::all('name_with_type','code');
-        return view('admin.pi.pi-update', compact('pi', 'nations', 'units', 'provinces','officer_types','officer_type','position_types','teacher_types','teacher_titles','teacher'));
+        return view('admin.pi.pi-update', compact('pi', 'nations', 'units', 'provinces','officer_types','officer_type','position_types','teacher_types','teacher_titles','teacher','contract_types'));
     }
     //post date update information
     public function postupdate(Request $request, $id)
@@ -320,7 +333,7 @@ class PIController extends Controller
               'position'=> 'required',
               'date_of_recruitment' => 'required|date',
               'professional_title'=> 'required',
-              'identity_card'=> 'required|unique:personalinformations,identity_card,'.$pi->id,
+              'identity_card'=> 'required|min:9|max:12|unique:personalinformations,identity_card,'.$pi->id,
               'date_of_issue' => 'required|date',
               'place_of_issue'=> 'required',
               'unit' => 'required',
@@ -331,6 +344,8 @@ class PIController extends Controller
               'is_retired'=> 'required_unless:teacher_type,0',
               'date_of_retirement'=> 'required_if:is_retired,1',
               'is_concurrently'=> 'required',
+              'home_town'=> 'required',
+              'contract_type'=> 'required',
           ],
           [
               'employee_code.required'=> 'Mã giảng viên không được bỏ trống',
@@ -363,6 +378,8 @@ class PIController extends Controller
               'professional_title.required' =>'Chức danh chuyên môn không được bỏ trống',
               'identity_card.unique' =>'Chứng minh nhân dân đã được sử dụng',
               'identity_card.required' =>'Chứng minh nhân dân không được bỏ trống',
+              'identity_card.min' =>'Chứng minh nhân dân không hợp lệ',
+              'identity_card.max' =>'Chứng minh nhân dân không hợp lệ',
               'date_of_issue.required' =>'Ngày cấp không được bỏ trống',
               'date_of_issue.date' =>'Ngày cấp sai định dạng',
               'place_of_issue.required' =>'Nơi cấp không được bỏ trống',
@@ -374,6 +391,8 @@ class PIController extends Controller
               'officer_type.required' =>'Loại cán bộ không được bỏ trống',
               'position_type.required' =>'Chức vụ không được bỏ trống',
               'is_concurrently.required' =>'Kiêm nhiệm giảng dạy không được bỏ trống',
+              'home_town.required' =>'Quê quán không được bỏ trống',
+              'contract_type.required' =>'Loại hợp đồng không được bỏ trống',
           ]
         );
         //post data
@@ -386,6 +405,8 @@ class PIController extends Controller
         $pi->place_of_birth= $request->place_of_birth;
         $pi->phone_number= $request->phone_number;
         $pi->email_address= $request->email_address;
+        $pi->home_town= $request->home_town;
+        $pi->contract_type_id= $request->contract_type;
         $pi->position= $request->position;
         $pi->date_of_recruitment= $request->date_of_recruitment;
         $pi->professional_title= $request->professional_title;
