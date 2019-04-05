@@ -143,8 +143,24 @@
                     <label>Địa chỉ Email</label>
                     <input required type="text" class="form-control" name="email_address" placeholder="Nhập địa chỉ Email" value="{{old('email_address')}}">
                 </div>
-
             </div>
+
+            <div class="form-group">
+                <div class="col-sm-6">
+                    <label>Quê quán</label>
+                    <input required type="text" class="form-control" name="home_town" placeholder="Nhập quê quán" value="{{old('home_town')}}">
+                </div>
+                <div class="col-sm-6">
+                    <label>Loại hợp đồng</label>
+                    <select required class="form-control" name="unit" data-dependent>
+                        <option value="">Chọn loại hợp đồng</option>
+                        {{-- @foreach($units as $unit)
+                        <option {{$unit->id == old('unit') ? 'selected':''}} value="{{$unit->id}}">{{$unit->name}}</option>
+                        @endforeach --}}
+                    </select>
+                </div>
+            </div>
+
             <div class="form-group">
                 <div class="col-sm-6">
                     <label>Chức vụ</label>
