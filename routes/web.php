@@ -106,7 +106,6 @@ Route::prefix('admin')->group(function () {
 
         // statistic
         Route::get('/statistical', 'StatisticController@index')->name('admin.statistic.index');
-        Route::get('/statistical-industry', 'StatisticController@industry')->name('admin.statistic.industry');
         Route::get('/statistical-download', 'StatisticController@download')->name('admin.statistic.download');
 
 

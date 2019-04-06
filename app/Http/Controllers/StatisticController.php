@@ -8,6 +8,7 @@ use App\AcademicRank;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\StatisticalExport;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class StatisticController extends Controller
 {
@@ -24,7 +25,8 @@ class StatisticController extends Controller
         return view('admin.statistic.index',compact('pis','officers','teachers','academic_ranks'));
     }
     public function download(){
-        return Excel::download(new StatisticalExport, 'thong-ke-bao-cao.xlsx');
+
+        return (new StatisticalExport)->download('thongke.xlsx', \Maatwebsite\Excel\Excel::XLSX);
 
     }
 }

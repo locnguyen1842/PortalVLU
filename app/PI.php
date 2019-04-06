@@ -79,5 +79,23 @@ class PI extends Model
         return $this->belongsTo('App\Address','contact_address_id','id');
     }
 
+    public function getPI($contract_type_id = 999 , $gender_id = 999, $nation_id = 999){
+        $result = $this->where(function($query) use ($contract_type_id,$gender_id,$nation_id){
+            $query->where('show',1)
+                    ->where('is_activity',1);
+            if($contract_type_id != 999){
+                $query->where('contract_type_id',$contract_type_id);
+            }
+            if($gender_id != 999){
+                $query->where('gender',$gender_id);
+            }
+            if($nation_id != 999){
+                $query->where('nation_id','!=',$nation_id);
+            }
+        })->get();
+
+        return $result;
+    }
+
 
 }

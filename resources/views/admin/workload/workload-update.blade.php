@@ -98,7 +98,7 @@
                 </div>
                 <div class="col-sm-6">
                     <label>Mã lớp <span style="color: red">*</span> </label>
-                    <input required type="text" maxlength="100" class="form-control" name="class_code" placeholder="Nhập mã Lớp"
+                    <input required type="text" maxlength="100" class="form-control" name="class_code" placeholder="Nhập mã lớp"
                         value="{{$workload->class_code}}">
                 </div>
 
@@ -111,7 +111,7 @@
                 </div>
                 <div class="col-sm-6">
                     <label>Tổng số giờ <span style="color: red">*</span> </label>
-                    <input required type="text" maxlength="100" class="form-control" name="total_workload" placeholder="Nhập địa chỉ liên lạc"
+                    <input required type="text" maxlength="100" class="form-control" name="total_workload" placeholder="Nhập tổng số giờ"
                         value="{{$workload->total_workload}}">
                 </div>
 
@@ -119,7 +119,7 @@
             <div class="form-group">
                 <div class="col-sm-6">
                     <label>Số giờ lý thuyết <span style="color: red">*</span> </label>
-                    <input required type="text" class="form-control" name="theoretical_hours" placeholder="Nhập số gời lý thuyết"
+                    <input required type="text" class="form-control" name="theoretical_hours" placeholder="Nhập số giờ lý thuyết"
                         value="{{$workload->theoretical_hours}}">
                 </div>
                 <div class="col-sm-6">

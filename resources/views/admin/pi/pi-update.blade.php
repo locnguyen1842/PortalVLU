@@ -261,8 +261,14 @@
                         <label>Loại cán bộ</label>
                         <select required class="form-control" name="officer_type" data-dependent>
                             <option value="">Chọn loại cán bộ</option>
+
                             @foreach($officer_types as $officer_type)
+                            @if($pi->officer()->exists())
                             <option {{ $officer_type->id== $pi->officer->type_id?'selected':'' }} value="{{$officer_type->id}}">{{$officer_type->name}}</option>
+                            @else
+                            <option {{ $officer_type->id== old('officer_type')?'selected':'' }} value="{{$officer_type->id}}">{{$officer_type->name}}</option>
+
+                            @endif
                             @endforeach
                         </select>
                     </div>
@@ -274,19 +280,34 @@
                         <select required class="form-control" name="position_type" data-dependent>
                             <option value="">Chọn chức vụ</option>
                             @foreach($position_types as $position_type)
+                            @if($pi->officer()->exists())
                             <option {{ $position_type->id== $pi->officer->position_id?'selected':'' }} value="{{$position_type->id}}">{{$position_type->name}}</option>
+                            @else
+                            <option {{ $position_type->id== old('position_type')?'selected':'' }} value="{{$position_type->id}}">{{$position_type->name}}</option>
+
+                            @endif
                             @endforeach
                         </select>
                     </div>
                     <div class="col-sm-6">
                         <label>Kiêm nhiệm giảng dạy</label>
                         <div class="radio">
+                            @if($pi->officer()->exists())
                             <label class="col-sm-4">
-                                <input required type="radio" name="is_concurrently" value="0" {{$pi->officer->is_concurrently ==0 ? "checked":""}}>Có
-                            </label>
+                                    <input required type="radio" name="is_concurrently" value="0" {{$pi->officer->is_concurrently ==0 ? "checked":""}}>Có
+                                </label>
+                                <label class="col-sm-4">
+                                    <input required type="radio" name="is_concurrently" value="1" {{$pi->officer->is_concurrently ==1 ? "checked":""}}>Không
+                                </label>
+                            @else
                             <label class="col-sm-4">
-                                <input required type="radio" name="is_concurrently" value="1" {{$pi->officer->is_concurrently ==1 ? "checked":""}}>Không
-                            </label>
+                                    <input required type="radio" name="is_concurrently" value="0" {{old('is_concurrently') ==0 ? "checked":""}}>Có
+                                </label>
+                                <label class="col-sm-4">
+                                    <input required type="radio" name="is_concurrently" value="1" {{old('is_concurrently') ==1 ? "checked":""}}>Không
+                                </label>
+                            @endif
+
                         </div>
                     </div>
 
