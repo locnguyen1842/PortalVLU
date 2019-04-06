@@ -213,8 +213,24 @@
                         <label>Địa chỉ Email</label>
                         <input required type="text" class="form-control" name="email_address" placeholder="Nhập địa chỉ Email" value="{{$pi->email_address}}">
                     </div>
-
                 </div>
+
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label>Quê quán</label>
+                        <input required type="text" class="form-control" name="home_town" placeholder="Nhập quê quán" value="{{$pi->home_town}}">
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Loại hợp đồng</label>
+                        <select required class="form-control" name="contract_type" data-dependent>
+                            <option value="">Chọn loại hợp đồng</option>
+                            @foreach($contract_types as $contract_type)
+                            <option {{$pi->contract_type_id == $contract_type->id?'selected':'' }} value="{{$contract_type->id}}">{{$contract_type->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <div class="col-sm-6">
                         <label>Chức vụ</label>

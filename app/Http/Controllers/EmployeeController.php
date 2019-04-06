@@ -128,6 +128,7 @@ class EmployeeController extends Controller
         $pi->place_of_birth= $request->place_of_birth;
         // $pi->permanent_address= $request->permanent_address;
         // $pi->contact_address= $request->contact_address;
+        $pi->home_town= $request->home_town;
         $pi->phone_number= $request->phone_number;
         $pi->email_address= $request->email_address;
         $pi->identity_card= $request->identity_card;
