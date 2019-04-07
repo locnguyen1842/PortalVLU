@@ -33,6 +33,7 @@ class PI extends Model
       'contact_address_id',
       'is_activity',
       'contract_type_id',
+      'religion_id',
     ];
 
     public function degreedetails()
@@ -57,6 +58,9 @@ class PI extends Model
     }
     public function unit(){
         return $this->belongsTo('App\Unit','unit_id','id');
+    }
+    public function religion(){
+        return $this->belongsTo('App\Religion','religion_id','id');
     }
     public function contract_type(){
         return $this->belongsTo('App\ContractType','contract_type_id','id');

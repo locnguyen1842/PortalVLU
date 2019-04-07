@@ -29,7 +29,7 @@ class ScientificBackgroundController extends Controller
 
     public function getupdateAdmin($pi_id)
     {
-        $this->authorize('cud', PI::first());
+        $this->authorize('cud', PI::firstOrFail());
 
         $sb = ScientificBackground::where('personalinformation_id', $pi_id)->firstOrFail();
         $nations = Nation::all();
@@ -40,9 +40,9 @@ class ScientificBackgroundController extends Controller
 
     public function postupdateAdmin($pi_id, Request $request)
     {
-        $this->authorize('cud', PI::first());
+        $this->authorize('cud', PI::firstOrFail());
 
-        $pi = PI::find($pi_id);
+        $pi = PI::findOrFail($pi_id);
         $request->validate(
             [
                 'full_name' => 'required',
@@ -278,7 +278,7 @@ class ScientificBackgroundController extends Controller
 
     public function getupdateEmployeeSB()
     {
-        $pi_id = PI::find(Auth::guard('employee')->user()->personalinformation_id)->id;
+        $pi_id = PI::findOrFail(Auth::guard('employee')->user()->personalinformation_id)->id;
         $sb = ScientificBackground::where('personalinformation_id', $pi_id)->firstOrFail();
         $nations = Nation::all();
         $units = Unit::all();
@@ -290,7 +290,7 @@ class ScientificBackgroundController extends Controller
 
     public function postupdateEmployeeSB(Request $request)
     {
-        $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
+        $pi = PI::findOrFail(Auth::guard('employee')->user()->personalinformation_id);
         // dd(array_filter($request->industry) != null ? 'true':'false');
         // dd($request);
         $request->validate(
@@ -528,7 +528,7 @@ class ScientificBackgroundController extends Controller
 
     public function getdetailEmployeeSB()
     {
-        $pi_id = PI::find(Auth::guard('employee')->user()->personalinformation_id)->id;
+        $pi_id = PI::findOrFail(Auth::guard('employee')->user()->personalinformation_id)->id;
         $sb = ScientificBackground::where('personalinformation_id', $pi_id)->firstOrFail();
         return view('employee.sb.employee-sb-detail', compact('pi_id', 'sb'));
     }
@@ -545,7 +545,7 @@ class ScientificBackgroundController extends Controller
     }
     public function indexPrint()
     {
-        $pi_id = PI::find(Auth::guard('employee')->user()->personalinformation_id)->id;
+        $pi_id = PI::findOrFail(Auth::guard('employee')->user()->personalinformation_id)->id;
         $sb = ScientificBackground::where('personalinformation_id', $pi_id)->firstOrFail();
         $nations = Nation::all();
         $units = Unit::all();

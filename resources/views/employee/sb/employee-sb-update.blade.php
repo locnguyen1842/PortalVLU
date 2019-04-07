@@ -90,7 +90,7 @@
                                     <label>Năm, nước nhận học vị</label>
 
                                     @if($sb->pi->degreedetails->count() >0)
-                                    <input type="text" readonly class="form-control" value="năm {{date('Y', strtotime($sb->getHighestDegree($pi_id)->date_of_issue))}}, nước {{$sb->getHighestDegree($pi_id)->country->country_name}}">
+                                    <input type="text" readonly class="form-control" value="năm {{date('Y', strtotime($sb->getHighestDegree($pi_id)->date_of_issue))}}, nước {{$sb->getHighestDegree($pi_id)->nation_of_issue_id}}">
                                     @else
                                     <input type="text" readonly class="form-control" value="">
 

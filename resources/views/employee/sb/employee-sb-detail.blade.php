@@ -75,7 +75,7 @@
                                 <div class="col-sm-6">
                                     <label for="inputEmail3" class="col-sm-4">Năm, nước nhận học vị</label>
                                     <span for=""
-                                        class="col-sm-8 text-truncate">{{($sb->getHighestDegree($pi_id)) == null ? 'Chưa có': date('Y',strtotime($sb->getHighestDegree($pi_id)->date_of_issue))}}</span>
+                                        class="col-sm-8 text-truncate">{{($sb->getHighestDegree($pi_id)) == null ? '':'năm '. date('Y',strtotime($sb->getHighestDegree($pi_id)->date_of_issue)).', nước '.$sb->getHighestDegree($pi_id)->nation_of_issue_id}}</span>
                                 </div>
                             </div>
                             <div class="form-group">
