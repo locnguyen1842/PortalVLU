@@ -32,14 +32,6 @@ class ViewFacultyLeaderTest extends TestCase
         $pi = $faculty_leader->pi;
         return $pi;
     }
-    public function test_view_List_Job_Workload_By_Faculty()
-    {
-        $this->login_faculty_leader();
-        $response = $this->get('workload-list');
-        $response->assertViewHas('id');
-        $response->assertViewHas('sb');
-        $response->assertViewHas('pi');
-    }
     public function test_view_Detail_Scientific_Background_Employee()
     {
         $this->login_faculty_leader();
@@ -63,24 +55,25 @@ class ViewFacultyLeaderTest extends TestCase
           $response->assertViewHas('search');
           $response->assertViewHas('year_workload');
       }
-      public function test_view_Detail_Imformation_Employee ()
+      public function test_view_Detail_Imformation_Employee()
       {
           $this->login_faculty_leader();
           $pi = PI::where('unit_id', '2')->first()->id;
           $response = $this->get('faculty-pi-detail/'.$pi);
           $response->assertViewHas('dh_count');
+
+
           $response->assertViewHas('ths_count');
           $response->assertViewHas('pi');
           $response->assertViewHas('ts_count');
       }
-      public function test_view_Detail_Imformation_Employee ()
+      public function test_view_List_Employees_By_Faculty()
       {
           $this->login_faculty_leader();
-          $pi = PI::where('unit_id', '2')->first()->id;
-          $response = $this->get('faculty-pi-detail/'.$pi);
-          $response->assertViewHas('dh_count');
-          $response->assertViewHas('ths_count');
-          $response->assertViewHas('pi');
-          $response->assertViewHas('ts_count');
+          $pi = PI::where('unit_id', '2');
+          $response = $this->get('faculty-index',$pi);
+          $response->assertViewHas('pis');
+          $response->assertViewHas('search');
       }
+
 }

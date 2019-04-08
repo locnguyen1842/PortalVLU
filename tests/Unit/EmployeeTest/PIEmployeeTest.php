@@ -25,7 +25,7 @@ class PIEmployeeTest extends TestCase
     {
         $this->login_employee();
         $data = $this->data();
-        $data['full_name']= 'Le Le Le';
+        $data['full_name']= 'Lâm Tuệ Khương';
         $updatePI = $this->post('/pi-update', $data);
         $pi = PI::where('employee_code', Auth::guard('employee')->user()->username)->first();
         $this->assertEquals($pi->full_name, $data['full_name']);
@@ -71,8 +71,9 @@ class PIEmployeeTest extends TestCase
     public function data()
     {
         $actual = [
-      "full_name" => "Lâm Tuệ Khương",
+      "full_name" => "Ân Phạm",
       "nation" => "1",
+      "religion" => "14",
       "gender" => "1",
       "date_of_birth" => "1962-12-19",
       "place_of_birth" => "Gia Lai",

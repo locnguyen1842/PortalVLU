@@ -45,36 +45,46 @@
                 </div>
                 <div class="col-sm-6">
                     <label>Tôn Giáo</label>
-                    <select required class="form-control" name="nation">
+                    <select required class="form-control" name="religion">
                         <option value="">Chọn tôn giáo</option>
-                        @foreach($nations as $nation)
-                        <option {{$nation->id == old('nation') ? 'selected':''}} value="{{$nation->id}}">{{$nation->name}}</option>
+                        @foreach($religions as $religion)
+                        <option {{$religion->id == old('religion') ? 'selected':''}} value="{{$religion->id}}">{{$religion->name}}</option>
                         @endforeach
                     </select>
                 </div>
-                <div class="col-sm-6">
-                    <label>Giới tính</label>
-                    <div class="radio">
-                        <label class="col-sm-4">
-                            <input required type="radio" name="gender" value="0" checked>Nam
-                        </label>
-                        <label class="col-sm-4">
-                            <input required type="radio" name="gender" value="1">Nữ
-                        </label>
-                    </div>
-                </div>
+
             </div>
             <div class="form-group">
+              <div class="col-sm-6">
+                  <label>Giới tính</label>
+                  <div class="radio">
+                      <label class="col-sm-4">
+                          <input required type="radio" name="gender" value="0" checked>Nam
+                      </label>
+                      <label class="col-sm-4">
+                          <input required type="radio" name="gender" value="1">Nữ
+                      </label>
+                  </div>
+              </div>
                 <div class="col-sm-6">
                     <label>Ngày sinh</label>
                     <input required type="date" min="1900-01-01" min="1900-01-01" class="form-control" name="date_of_birth" value="{{old('date_of_birth')}}">
                 </div>
+
+            </div>
+
+            <div class="form-group">
+              <div class="col-sm-6">
+                  <label>Nơi sinh</label>
+                  <input required type="text" maxlength="100" class="form-control" name="place_of_birth" placeholder="Nhập nơi sinh" value="{{old('place_of_birth')}}">
+              </div>
                 <div class="col-sm-6">
-                    <label>Nơi sinh</label>
-                    <input required type="text" maxlength="100" class="form-control" name="place_of_birth" placeholder="Nhập nơi sinh" value="{{old('place_of_birth')}}">
+                    <label>Số điện thoại</label>
+                    <input required type="text" class="form-control" name="phone_number" placeholder="Nhập số điện thoại" value="{{old('phone_number')}}">
                 </div>
 
             </div>
+
             <div class="form-group">
                 <div class="col-sm-12">
                     <div class="form-group">
@@ -145,20 +155,17 @@
 
             <div class="form-group">
                 <div class="col-sm-6">
-                    <label>Số điện thoại</label>
-                    <input required type="text" class="form-control" name="phone_number" placeholder="Nhập số điện thoại" value="{{old('phone_number')}}">
-                </div>
-                <div class="col-sm-6">
                     <label>Địa chỉ Email</label>
                     <input required type="text" class="form-control" name="email_address" placeholder="Nhập địa chỉ Email" value="{{old('email_address')}}">
                 </div>
-            </div>
-
-            <div class="form-group">
                 <div class="col-sm-6">
                     <label>Quê quán</label>
                     <input required type="text" class="form-control" name="home_town" placeholder="Nhập quê quán" value="{{old('home_town')}}">
                 </div>
+            </div>
+
+            <div class="form-group">
+
                 <div class="col-sm-6">
                     <label>Loại hợp đồng</label>
                     <select required class="form-control" name="contract_type" data-dependent>
@@ -168,23 +175,25 @@
                         @endforeach
                     </select>
                 </div>
-            </div>
-
-            <div class="form-group">
                 <div class="col-sm-6">
                     <label>Chức vụ</label>
                     <input required type="text" class="form-control" name="position" placeholder="Nhập chức vụ" value="{{old('position')}}">
                 </div>
+            </div>
+
+            <div class="form-group">
+
                 <div class="col-sm-6">
                     <label>Ngày tuyển dụng</label>
                     <input required type="date" min="1900-01-01" class="form-control" name="date_of_recruitment" value="{{old('date_of_recruitment')}}">
                 </div>
-            </div>
-            <div class="form-group">
                 <div class="col-sm-6">
                     <label>Chức danh chuyên môn</label>
                     <input required type="text" class="form-control" name="professional_title" placeholder="Nhập chức danh chuyên môn" value="{{old('professional_title')}}">
                 </div>
+            </div>
+            <div class="form-group">
+
                 <div class="col-sm-6">
                     <label>Đơn vị</label>
                     <select required class="form-control" name="unit" data-dependent>
@@ -194,23 +203,24 @@
                         @endforeach
                     </select>
                 </div>
-            </div>
-            <div class="form-group">
                 <div class="col-sm-6">
                     <label>Chứng minh nhân dân</label>
                     <input required type="text" class="form-control" name="identity_card" placeholder="Nhập chứng minh nhân dân" value="{{old('identity_card')}}">
                 </div>
+            </div>
+            <div class="form-group">
+
                 <div class="col-sm-6">
                     <label>Ngày cấp</label>
                     <input required type="date" min="1900-01-01" class="form-control" name="date_of_issue" value="{{old('date_of_issue')}}">
                 </div>
-
-            </div>
-            <div class="form-group">
                 <div class="col-sm-6">
                     <label>Nơi cấp</label>
                     <input required type="text" maxlength="100" class="form-control" name="place_of_issue" placeholder="Nhập nơi cấp" value="{{old('place_of_issue')}}">
                 </div>
+            </div>
+            <div class="form-group">
+
                 <div class="col-sm-6">
                     <label>Loại cán bộ</label>
                     <select required class="form-control" name="officer_type" data-dependent>
@@ -220,9 +230,6 @@
                         @endforeach
                     </select>
                 </div>
-
-            </div>
-            <div class="form-group">
                 <div class="col-sm-6">
                     <label>Chức vụ</label>
                     <select required class="form-control" name="position_type" data-dependent>
@@ -232,6 +239,9 @@
                         @endforeach
                     </select>
                 </div>
+            </div>
+            <div class="form-group">
+
                 <div class="col-sm-6">
                     <label>Kiêm nhiệm giảng dạy</label>
                     <div class="radio">
@@ -243,9 +253,6 @@
                         </label>
                     </div>
                 </div>
-
-            </div>
-            <div class="form-group">
                 <div class="col-sm-6">
                     <label>Loại giảng viên</label>
                     <select required class="form-control" name="teacher_type" data-dependent>
@@ -256,6 +263,9 @@
                         <option value="0">Không có</option>
                     </select>
                 </div>
+            </div>
+            <div class="form-group">
+
                 <div class="col-sm-6 dependent-on-teacher">
                     <label>Chức danh nghề nghiệp</label>
                     <select required class="form-control" name="teacher_title" data-dependent>
@@ -265,9 +275,6 @@
                         @endforeach
                     </select>
                 </div>
-
-            </div>
-            <div class="form-group">
                 <div class="col-sm-6 dependent-on-teacher">
                     <label>Danh hiệu</label>
                     <div class="checkbox">
@@ -279,6 +286,9 @@
                         </label>
                     </div>
                 </div>
+            </div>
+            <div class="form-group">
+
                 <div class="col-sm-6">
                         <label>Nghỉ việc</label>
                             <div class="radio">
@@ -290,21 +300,21 @@
                                 </label>
                             </div>
                     </div>
-
+                    <div class="col-sm-6">
+                        <label>Nghỉ hưu</label>
+                        <div class="radio">
+                            <label class="col-sm-4">
+                                <input required type="radio" name="is_retired" value="0" checked>Chưa nghỉ hưu
+                            </label>
+                            <label class="col-sm-4">
+                                <input required type="radio" name="is_retired" value="1">Đã nghỉ hưu
+                            </label>
+                        </div>
+                    </div>
             </div>
 
             <div class="form-group dependent-on-teacher">
-                <div class="col-sm-6">
-                    <label>Nghỉ hưu</label>
-                    <div class="radio">
-                        <label class="col-sm-4">
-                            <input required type="radio" name="is_retired" value="0" checked>Chưa nghỉ hưu
-                        </label>
-                        <label class="col-sm-4">
-                            <input required type="radio" name="is_retired" value="1">Đã nghỉ hưu
-                        </label>
-                    </div>
-                </div>
+
                 <div class="col-sm-6">
                     <label>Ngày nghỉ hưu</label>
                     <input required type="date" min="1900-01-01" class="form-control" name="date_of_retirement" value="{{old('date_of_retirement')}}">

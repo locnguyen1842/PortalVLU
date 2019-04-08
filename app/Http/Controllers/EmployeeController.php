@@ -31,6 +31,8 @@ use App\PositionType;
 use App\TeacherTitle;
 use App\TeacherType;
 use App\Teacher;
+use App\Religion;
+
 
 class EmployeeController extends Controller
 {
@@ -57,7 +59,9 @@ class EmployeeController extends Controller
         $position_types = PositionType::all();
         $teacher_types = TeacherType::all();
         $teacher_titles = TeacherTitle::all();
-        return view('employee.pi.pi-update', compact('pi','nations', 'units','provinces','officer_types','position_types','teacher_types','teacher_titles'));
+        $religions = Religion::all();
+
+        return view('employee.pi.pi-update', compact('pi','nations', 'units','provinces','officer_types','position_types','teacher_types','teacher_titles','religions'));
     }
     public function postupdate(Request $request)
     {
@@ -83,6 +87,7 @@ class EmployeeController extends Controller
                 'province_2'=> 'required',
                 'district_2'=> 'required',
                 'ward_2'=> 'required',
+                'religion'=> 'required',
             ],
             [
 
@@ -113,7 +118,8 @@ class EmployeeController extends Controller
                 'identity_card.required' =>'Chứng minh nhân dân không được bỏ trống',
                 'date_of_issue.required' =>'Ngày cấp không được bỏ trống',
                 'date_of_issue.date' =>'Ngày cấp sai định dạng',
-                'place_of_issue.required' =>'Nơi cấp không được bỏ trống'
+                'place_of_issue.required' =>'Nơi cấp không được bỏ trống',
+                'religion.required' =>'Tôn giáo không được bỏ trống'
             ]
         );
         //post data
@@ -124,6 +130,7 @@ class EmployeeController extends Controller
         $pi->first_name =$split[sizeof($split)-1]; // get name
         $pi->gender= $request->gender;
         $pi->nation_id= $request->nation;
+        $pi->religion_id= $request->religion;
         $pi->date_of_birth= $request->date_of_birth;
         $pi->place_of_birth= $request->place_of_birth;
         // $pi->permanent_address= $request->permanent_address;

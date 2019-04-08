@@ -44,26 +44,33 @@
                         </select>
                     </div>
                     <div class="col-sm-6">
-                        <label>Giới tính</label>
-                        <div class="radio">
-                            <label class="col-sm-4">
-                                <input required type="radio" name="gender" value="0"{{$pi->gender ==0 ? "checked":""}}>Male
-                            </label>
-                            <label class="col-sm-4">
-                                <input required type="radio" name="gender" value="1"{{$pi->gender ==1 ? "checked":""}}>Female
-                            </label>
-                        </div>
+                        <label>Tôn giáo</label>
+                        <select required class="form-control" name="religion">
+                            <option value="">Chọn tôn giáo</option>
+                            @foreach($religions as $religion)
+                            <option {{$pi->religion_id == $religion->id ? 'selected' : ''}} value="{{$religion->id}}">{{$religion->name}}</option>
+                            @endforeach
+                        </select>
                     </div>
+
                 </div>
                 <div class="form-group">
+                  <div class="col-sm-6">
+                      <label>Giới tính</label>
+                      <div class="radio">
+                          <label class="col-sm-4">
+                              <input required type="radio" name="gender" value="0"{{$pi->gender ==0 ? "checked":""}}>Male
+                          </label>
+                          <label class="col-sm-4">
+                              <input required type="radio" name="gender" value="1"{{$pi->gender ==1 ? "checked":""}}>Female
+                          </label>
+                      </div>
+                  </div>
                     <div class="col-sm-6">
                         <label>Ngày sinh</label>
                         <input required required type="date" min="1900-01-01" class="form-control" name="date_of_birth" value="{{$pi->date_of_birth}}">
                     </div>
-                    <div class="col-sm-6">
-                        <label>Nơi sinh</label>
-                        <input required type="text" class="form-control" name="place_of_birth" placeholder="Nhập nơi sinh" value="{{$pi->place_of_birth}}">
-                    </div>
+
 
                 </div>
                 <div class="form-group">
@@ -200,29 +207,32 @@
                 </div>
                 <div class="form-group">
                   <div class="col-sm-6">
+                      <label>Nơi sinh</label>
+                      <input required type="text" class="form-control" name="place_of_birth" placeholder="Nhập nơi sinh" value="{{$pi->place_of_birth}}">
+                  </div>
+                  <div class="col-sm-6">
                       <label>Quê quán</label>
                       <input required type="text" class="form-control" name="home_town" placeholder="Nhập quê quán" value="{{$pi->home_town}}">
                   </div>
-                    <div class="col-sm-6">
-                        <label>Số điện thoại</label>
-                        <input required type="text" class="form-control" name="phone_number" placeholder="Nhập số điện thoại" value="{{$pi->phone_number}}">
-                    </div>
-
-
                 </div>
 
                 <div class="form-group">
                   <div class="col-sm-6">
+                      <label>Số điện thoại</label>
+                      <input required type="text" class="form-control" name="phone_number" placeholder="Nhập số điện thoại" value="{{$pi->phone_number}}">
+                  </div>
+                  <div class="col-sm-6">
                       <label>Địa chỉ Email</label>
                       <input required type="text" class="form-control" name="email_address" placeholder="Nhập địa chỉ Email" value="{{$pi->email_address}}">
                   </div>
-                    <div class="col-sm-6">
-                        <label>Chứng minh nhân dân</label>
-                        <input required type="text" class="form-control" name="identity_card" placeholder="Nhập chứng minh nhân dân" value="{{$pi->identity_card}}">
-                    </div>
+
 
                 </div>
                 <div class="form-group">
+                  <div class="col-sm-6">
+                      <label>Chứng minh nhân dân</label>
+                      <input required type="text" class="form-control" name="identity_card" placeholder="Nhập chứng minh nhân dân" value="{{$pi->identity_card}}">
+                  </div>
                   <div class="col-sm-6">
                       <label>Nơi cấp</label>
                       <input required type="text" class="form-control" name="place_of_issue" placeholder="Nhập nơi cấp" value="{{$pi->place_of_issue   }}">
@@ -234,6 +244,13 @@
 
                 </div>
 
+
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label>Ngày cấp</label>
+                        <input required required type="date" min="1900-01-01" class="form-control" name="date_of_issue" value="{{$pi->date_of_issue}}">
+                    </div>
+                </div>
 
                 <div class="form-group" style="margin-bottom:0">
                     <div class="col-sm-offset-2 col-sm-10 text-right">

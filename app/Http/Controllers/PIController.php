@@ -33,6 +33,7 @@ use App\TeacherTitle;
 use App\TeacherType;
 use App\Teacher;
 use App\ContractType;
+use App\Religion;
 
 class PIController extends Controller
 {
@@ -72,10 +73,11 @@ class PIController extends Controller
         $teacher_types = TeacherType::all();
         $teacher_titles = TeacherTitle::all();
         $contract_types = ContractType::all();
+        $religions = Religion::all();
 
         // $wards = Ward::all('name_with_type','code');
         $provinces = Province::all('name_with_type', 'code');
-        return view('admin.pi.pi-add', compact('nations', 'units', 'provinces', 'officer_types', 'position_types', 'teacher_types', 'teacher_titles', 'contract_types'));
+        return view('admin.pi.pi-add', compact('nations', 'units', 'provinces', 'officer_types', 'position_types', 'teacher_types', 'teacher_titles', 'contract_types','religions'));
     }
 
     public function getDistricts()
@@ -127,6 +129,7 @@ class PIController extends Controller
             'is_concurrently'=> 'required',
             'home_town'=> 'required',
             'contract_type'=> 'required',
+            'religion'=> 'required',
           ],
           [
             'employee_code.required'=> 'Mã giảng viên không được bỏ trống',
@@ -175,6 +178,7 @@ class PIController extends Controller
             'is_concurrently.required' =>'Kiêm nhiệm giảng dạy không được bỏ trống',
             'home_town.required' =>'Quê quán không được bỏ trống',
             'contract_type.required' =>'Loại hợp đồng không được bỏ trống',
+            'religion.required' =>'Tôn giáo không được bỏ trống',
 
           ]
       );
@@ -187,6 +191,7 @@ class PIController extends Controller
         $split = explode(" ", $request->full_name);
         $pi->first_name =$split[sizeof($split)-1]; // get name
         $pi->gender= $request->gender;
+        $pi->religion_id= $request->religion;
         $pi->nation_id= $request->nation;
         $pi->date_of_birth= $request->date_of_birth;
         $pi->place_of_birth= $request->place_of_birth;
@@ -303,9 +308,9 @@ class PIController extends Controller
         $officer = Officer::all();
         $teacher = Teacher::all();
         $contract_types = ContractType::all();
-
+        $religions = Religion::all();
         $provinces = Province::all('name_with_type', 'code');
-        return view('admin.pi.pi-update', compact('pi', 'nations', 'units', 'provinces', 'officer_types', 'officer_type', 'position_types', 'teacher_types', 'teacher_titles', 'teacher', 'contract_types'));
+        return view('admin.pi.pi-update', compact('pi', 'nations', 'units', 'provinces', 'officer_types', 'officer_type', 'position_types', 'teacher_types', 'teacher_titles', 'teacher', 'contract_types','religions'));
     }
     //post date update information
     public function postupdate(Request $request, $id)
@@ -345,6 +350,7 @@ class PIController extends Controller
               'is_concurrently'=> 'required',
               'home_town'=> 'required',
               'contract_type'=> 'required',
+              'religion'=> 'required',
           ],
           [
               'employee_code.required'=> 'Mã giảng viên không được bỏ trống',
@@ -392,6 +398,7 @@ class PIController extends Controller
               'is_concurrently.required' =>'Kiêm nhiệm giảng dạy không được bỏ trống',
               'home_town.required' =>'Quê quán không được bỏ trống',
               'contract_type.required' =>'Loại hợp đồng không được bỏ trống',
+              'religion.required' =>'Tôn giáo không được bỏ trống',
           ]
         );
         //post data
@@ -400,6 +407,7 @@ class PIController extends Controller
         $pi->first_name =$split[sizeof($split)-1]; // get name
         $pi->gender= $request->gender;
         $pi->nation_id= $request->nation;
+        $pi->religion_id= $request->religion;
         $pi->date_of_birth= $request->date_of_birth;
         $pi->place_of_birth= $request->place_of_birth;
         $pi->phone_number= $request->phone_number;

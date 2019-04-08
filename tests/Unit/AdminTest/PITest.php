@@ -231,6 +231,7 @@ class PITest extends TestCase
           "employee_code" =>  "T153772",
           "full_name" => "Lâm Tuệ Khương",
           "nation" => 1,
+          "religion" => 14,
           "gender" => 1,
           "date_of_birth" => "1962-12-19",
           "place_of_birth" => "Gia Lai",
