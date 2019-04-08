@@ -310,7 +310,6 @@ class PIController extends Controller
     //post date update information
     public function postupdate(Request $request, $id)
     {
-
         //post data
         $pi = PI::Find($id);
         $this->authorize('cud', $pi);

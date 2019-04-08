@@ -45,7 +45,7 @@ class ViewEmployeeTest extends TestCase
         $response = $this->get('/pi-degree-create');
         $this->assertEquals(200, $response->status());
         $response->assertViewHas('degrees');
-        $response->assertViewHas('industries');
+        $response->assertViewHas('countries');
         $response->assertViewHas('pi');
         $response->assertViewHas('specializes');
     }
@@ -65,8 +65,10 @@ class ViewEmployeeTest extends TestCase
         $response = $this->get('/pi-update-degree-detail/'.$degreedetail_id);
         $this->assertEquals(200, $response->status());
         $response->assertViewHas('degrees');
-        $response->assertViewHas('industries');
         $response->assertViewHas('pi');
+        $response->assertViewHas('degree');
+        $response->assertViewHas('specializes');
+        $response->assertViewHas('countries');
     }
     public function test_view_Change_Password_Employee()
     {

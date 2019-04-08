@@ -78,6 +78,7 @@ class DegreeDetailController extends Controller
     }
     public function postcreatedegree(Request $request, $id)
     {
+        
         $request->validate(
         [
           'date_of_issue'=> 'required|date',
