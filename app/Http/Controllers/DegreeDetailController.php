@@ -15,15 +15,15 @@ class DegreeDetailController extends Controller
     //get degree
     public function getdegreelist($id)
     {
-        $pi = PI::find($id);
+        $pi = PI::findOrFail($id);
         $degrees = DegreeDetail::where('personalinformation_id', $id)->orderBy('degree_id', 'asc')->paginate(10);
         return view('admin.pi.pi-degree-list', compact('degrees', 'pi'));
     }
     public function getupdatedegreedetail($degreedetail_id)
     {
-        $degree = DegreeDetail::find($degreedetail_id);//where('personalinformation_id',$id)->where('degree_id',$b)->get();
+        $degree = DegreeDetail::findOrFail($degreedetail_id);//where('personalinformation_id',$id)->where('degree_id',$b)->get();
         $specializes = Specialized::all();
-        $pi = PI::find($degree->pi->id);
+        $pi = PI::findOrFail($degree->pi->id);
         $degrees = Degree::all();
         $industries = Industry::all();
         $countries = Country::all();
@@ -55,7 +55,7 @@ class DegreeDetailController extends Controller
 
             ]
         );
-        $degree = DegreeDetail::find($degreedetail_id);
+        $degree = DegreeDetail::findOrFail($degreedetail_id);
         $degree->date_of_issue = $request->date_of_issue;
         $degree->place_of_issue = $request->place_of_issue;
         $degree->degree_id = $request->degree;
@@ -72,7 +72,7 @@ class DegreeDetailController extends Controller
         $degrees = Degree::all();
         $industries = Industry::all();
         $countries = Country::all();
-        $pi = PI::find($id);
+        $pi = PI::findOrFail($id);
 
         return view('admin.pi.pi-createdegreedetail', compact('degrees', 'industries', 'pi', 'specializes', 'countries'));
     }
@@ -102,7 +102,7 @@ class DegreeDetailController extends Controller
 
         ]
       );
-        $pi = PI::find($id);
+        $pi = PI::findOrFail($id);
         $degree_detail = new DegreeDetail;
         $degree_detail->personalinformation_id = $pi->id;
         $degree_detail->date_of_issue = $request->date_of_issue;
@@ -117,7 +117,7 @@ class DegreeDetailController extends Controller
     }
     public function delete($degreedetail_id)
     {
-        $degree = DegreeDetail::find($degreedetail_id);
+        $degree = DegreeDetail::findOrFail($degreedetail_id);
         $degree->delete();
         return redirect()->back()->with('message', 'Xóa thông tin nhân viên thành công');
     }

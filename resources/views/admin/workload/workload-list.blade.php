@@ -228,11 +228,13 @@
                                         </div>
 
                                         <div class="radio col-sm-8">
-                                            <label class="col-sm-6">
+                                            <label class="col-sm-6 text-danger">
                                                 <input required type="radio" checked name="append" value="0">Tạo mới
+                                                <span class="help-block">Thao tác này sẽ xóa hết dữ liệu cũ.</span>
                                             </label>
                                             <label class="col-sm-6">
                                                 <input required type="radio" name="append" value="1">Thêm mới
+                                                <span class="help-block">Thao tác này sẽ thêm mới dữ liệu.</span>
                                             </label>
                                         </div>
                                     </div>

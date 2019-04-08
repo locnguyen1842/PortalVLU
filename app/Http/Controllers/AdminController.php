@@ -21,13 +21,13 @@ class AdminController extends Controller
     public function getchangepass()
     {
         //$admin = admin::all();
-        $admin = admin::find(Auth::guard('admin')->user()->id);
+        $admin = admin::findOrFail(Auth::guard('admin')->user()->id);
         return view('admin.admin-changepass', compact('admin'));
     }
     public function postchangepass(Request $request)
     {
-        $admin = admin::find(Auth::guard('admin')->user()->id);
-        $pi = PI::find(Auth::guard('admin')->user()->personalinformation_id);
+        $admin = admin::findOrFail(Auth::guard('admin')->user()->id);
+        $pi = PI::findOrFail(Auth::guard('admin')->user()->personalinformation_id);
         $request->validate(
             [
                 'password'=> 'required',

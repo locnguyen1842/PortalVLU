@@ -102,14 +102,14 @@
                                 <li role="presentation" class="active"><a href="#sheet1" id="sheet1-tab" role="tab" data-toggle="tab" aria-controls="sheet1" aria-expanded="false">Thông tin nhân viên</a></li>
                                 <li role="presentation" class=""><a href="#sheet2" role="tab" id="sheet2-tab" data-toggle="tab" aria-controls="sheet2" aria-expanded="true">Thông tin bằng cấp</a></li>
                                 <li role="presentation" class=""><a href="#sheet3" role="tab" id="sheet3-tab" data-toggle="tab" aria-controls="sheet3" aria-expanded="true">Thông tin học hàm</a></li>
-
+                                <li role="presentation" class=""><a href="#sheet4" role="tab" id="sheet4-tab" data-toggle="tab" aria-controls="sheet4" aria-expanded="true">Thông tin địa chỉ</a></li>
                             </ul>
                         </div>
                         <div class="modal-body">
                           <div id="myTabContent" class="tab-content">
                             <div role="tabpanel" class="tab-pane fade active in" id="sheet1" aria-labelledby="sheet1-tab">
                               <div class="table-responsive table-wrapper-scroll-y">
-                                  <table class="table table-hover">
+                                  <table class="table table-hover table-bordered">
                                     <thead>
                                         <tr class="heading-table">
 
@@ -123,7 +123,7 @@
                             </div>
                             <div role="tabpanel" class="tab-pane fade" id="sheet2" aria-labelledby="sheet2-tab">
                               <div class="table-responsive table-wrapper-scroll-y">
-                                  <table class="table table-hover">
+                                  <table class="table table-hover table-bordered">
                                     <thead>
                                         <tr class="heading-table-2">
 
@@ -137,13 +137,30 @@
                             </div>
                             <div role="tabpanel" class="tab-pane fade" id="sheet3" aria-labelledby="sheet3-tab">
                                 <div class="table-responsive table-wrapper-scroll-y">
-                                    <table class="table table-hover">
+                                    <table class="table table-hover table-bordered">
                                       <thead>
                                           <tr class="heading-table-3">
 
                                           </tr>
                                       </thead>
                                       <tbody class="row-table-3">
+
+                                      </tbody>
+                                    </table>
+                                </div>
+                              </div>
+                              <div role="tabpanel" class="tab-pane fade" id="sheet4" aria-labelledby="sheet4-tab">
+                                <div class="table-responsive table-wrapper-scroll-y">
+                                    <table class="table table-hover table-bordered">
+                                      <thead>
+                                          <tr class="heading-table-4">
+
+                                          </tr>
+                                          <tr class="heading-table-4-2">
+
+                                        </tr>
+                                      </thead>
+                                      <tbody class="row-table-4">
 
                                       </tbody>
                                     </table>
@@ -316,7 +333,6 @@
                  if($.isEmptyObject(datas.error)){
                      $('#header-modal').text('Xem Trước : Thông tin nhân viên');
 
-                     console.log(datas);
                     //  handle sheet 1
                      $.each(datas[0],function(index,value){
 
@@ -349,7 +365,6 @@
                         }
                      });
                      datas[1].shift();
-                     console.log(datas[1]);
                      $.each(datas[1],function(index2, value2) {
                          $('.row-table-2').append($('<tr>',{'class':'row-table-import-tr-1 text-nowrap'}));
                          $.each(datas[1][index2],function(index3, value3) {
@@ -369,12 +384,64 @@
                         }
                      });
                      datas[2].shift();
-                     console.log(datas[2]);
                      $.each(datas[2],function(index2, value2) {
                          $('.row-table-3').append($('<tr>',{'class':'row-table-import-tr-2 text-nowrap'}));
                          $.each(datas[2][index2],function(index3, value3) {
                            $('.row-table-3').children('tr:last').append($('<td>',{'text':value3}));
                          });
+                     });
+
+                     // handle sheet 4
+                     $.each(datas[3],function(index,value){
+                        if(index == 0){
+                          $.each(datas[3][0],function(index1, value1) {
+
+                              if(index1 == 0 ||index1 == 1){
+
+                                $('.heading-table-4').append($('<th>',{text:value1,'class':'heading-table-import-tr-3 text-nowrap text-center table-rowspan'}).attr('rowspan','2'));
+                              }
+                              if(index1 == 2 ||index1 == 6){
+
+                                $('.heading-table-4').append($('<th>',{'text':value1,'class':'heading-table-import-tr-3 text-nowrap text-center'}).attr('colspan','4'));
+
+                              }
+
+                          });
+
+
+                        }
+                     });
+                     datas[3].shift();
+                     $.each(datas[3],function(index,value){
+
+
+                        if(index == 0){
+                          $.each(datas[3][0],function(index1, value1) {
+
+                              if(value1 == 0 ||index1 == 1){
+
+
+                              }
+                              if(index1 == 2 ||index1 == 3||index1 == 4||index1 == 5||index1 == 6||index1 == 7||index1 == 8||index1 == 9){
+
+                                $('.heading-table-4-2').append($('<th>',{'text':value1,'class':'heading-table-import-tr-3 text-nowrap text-center'}));
+
+                              }
+
+                          });
+
+
+                        }
+                     });
+                     datas[3].shift();
+                    //  console.log(datas[3]);
+                     $.each(datas[3],function(index2, value2) {
+                         $('.row-table-4').append($('<tr>',{'class':'row-table-import-tr-3 text-nowrap'}));
+                         $.each(datas[3][index2],function(index3, value3) {
+
+                           $('.row-table-4').children('tr:last').append($('<td>',{'text':value3}));
+                         });
+                        //  $('.row-table-4').children('tr:first').addClass('font-weight-bold');
                      });
                      $("#pi-import-modal").modal('show');
 
@@ -419,7 +486,7 @@
                  console.log(er);
                    $(".print-error-msg").find("ul").html('');
                    $(".print-error-msg").css('display','block');
-                  $(".print-error-msg").find("ul").append('<li>'+'File tải lên không đúng cấu trúc .Vui lòng xem lại file mẫu <small> <a href="{{route('admin.pi.template.download')}}"> (tải file mẫu)</a></small>'+'</li>');
+                $(".print-error-msg").find("ul").append('<li>'+'File tải lên không đúng cấu trúc .Vui lòng xem lại file mẫu <small> <a href="{{route('admin.pi.template.download')}}"> (tải file mẫu)</a></small>'+'</li>');
                },
             });
 

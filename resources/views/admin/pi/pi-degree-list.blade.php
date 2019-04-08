@@ -45,7 +45,7 @@
                     <td class="">{{date('d-m-Y', strtotime($degree->date_of_issue))}}</td>
                         {{--{{date('d-m-Y',($degree->date_of_issue))}}--}}
                     <td class="">{{$degree->place_of_issue}}</td>
-                    <td class="">{{$degree->country->country_name}}</td>
+                    <td class="">{{$degree->nation_of_issue_id}}</td>
                     <td class="">{{$degree->degree_type}}</td>
                     @can('cud', $pi)
                     <td class="">
