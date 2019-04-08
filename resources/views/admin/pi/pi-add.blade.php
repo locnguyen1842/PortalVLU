@@ -257,10 +257,10 @@
                     <label>Nghỉ hưu</label>
                     <div class="radio">
                         <label class="col-sm-4">
-                            <input required type="radio" name="is_retired" value="0" checked>Đã nghỉ hưu
+                            <input required type="radio" name="is_retired" value="1" checked>Đã nghỉ hưu
                         </label>
                         <label class="col-sm-4">
-                            <input required type="radio" name="is_retired" value="1">Chưa nghỉ hưu
+                            <input required type="radio" name="is_retired" value="0">Chưa nghỉ hưu
                         </label>
                     </div>
                 </div>
