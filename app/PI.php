@@ -32,6 +32,8 @@ class PI extends Model
       'permanent_address_id',
       'contact_address_id',
       'is_activity',
+      'contract_type_id',
+      'religion_id',
     ];
 
     public function degreedetails()
@@ -57,6 +59,12 @@ class PI extends Model
     public function unit(){
         return $this->belongsTo('App\Unit','unit_id','id');
     }
+    public function religion(){
+        return $this->belongsTo('App\Religion','religion_id','id');
+    }
+    public function contract_type(){
+        return $this->belongsTo('App\ContractType','contract_type_id','id');
+    }
 
     public function academic_rank()
     {
@@ -77,6 +85,24 @@ class PI extends Model
     }
     public function contact_address(){
         return $this->belongsTo('App\Address','contact_address_id','id');
+    }
+
+    public function getPI($contract_type_id = 999 , $gender_id = 999, $nation_id = 999){
+        $result = $this->where(function($query) use ($contract_type_id,$gender_id,$nation_id){
+            $query->where('show',1)
+                    ->where('is_activity',1);
+            if($contract_type_id != 999){
+                $query->where('contract_type_id',$contract_type_id);
+            }
+            if($gender_id != 999){
+                $query->where('gender',$gender_id);
+            }
+            if($nation_id != 999){
+                $query->where('nation_id','!=',$nation_id);
+            }
+        })->get();
+
+        return $result;
     }
 
 

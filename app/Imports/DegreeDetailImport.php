@@ -54,7 +54,7 @@ class DegreeDetailImport implements ToCollection, WithStartRow
         Validator::make(
           $data_to_validate,
           [
-        '*.1' => 'nullable|exists:personalinformations,employee_code',
+        '*.1' => 'required|exists:personalinformations,employee_code',
         '*.2'=>[
                   'required',
                   Rule::in($degrees_name),
@@ -66,7 +66,6 @@ class DegreeDetailImport implements ToCollection, WithStartRow
         '*.5'=>'required',
         '*.6'=> [
                     'required',
-                    Rule::in($countries_code),
                 ],
         '*.7' => [
                     'required',
@@ -87,7 +86,7 @@ class DegreeDetailImport implements ToCollection, WithStartRow
         '*.4.date' => 'Ngày cấp bằng không đúng định dạng ngày tháng ( vị trí: :attribute|sheet :2 )',
         '*.5.required'=>'Nơi cấp bằng không được bỏ trống ( vị trí: :attribute|sheet :2 )',
         '*.6.required' => 'Nước cấp bằng không được bỏ trống ( vị trí: :attribute|sheet :2 )',
-        '*.6.in' => 'Nước cấp bằng không hợp lệ ( vị trí: :attribute|sheet :2 )',
+        // '*.6.in' => 'Nước cấp bằng không hợp lệ ( vị trí: :attribute|sheet :2 )',
         '*.7.required' => 'Khối ngành không được bỏ trống ( vị trí: :attribute|sheet :2 )',
         '*.7.in' => 'Khối ngành không hợp lệ. Chỉ được nhập : '.implode(", ", $industries_name).' ( vị trí: :attribute|sheet :2 )',
         '*.8.required' => 'Học vị không được bỏ trống ( vị trí: :attribute|sheet :2 )',
@@ -96,16 +95,12 @@ class DegreeDetailImport implements ToCollection, WithStartRow
       )->validate();
         // dd($rows);
         foreach ($rows as $row) {
-            if (empty($row[0])) {
-                return null;
-            };
-            $row = array_map('trim',$row->toArray());
-            $row[5] = strtoupper($row[5]);
 
-            $pi_id = PI::where('employee_code', $row[0])->first()->id;
-            $degree_id = Degree::where('name', 'like', '%'.$row[1].'%')->first()->id;
-            $nation_of_issue_id = Country::where('country_code',$row[5])->first()->id;
-            $industry_id = Industry::where('name', 'like', '%'.$row[6].'%')->first()->id;
+            $row = array_map('trim',$row->toArray());
+
+            $pi_id = PI::where('employee_code', $row[0])->firstOrFail()->id;
+            $degree_id = Degree::where('name', 'like', '%'.$row[1].'%')->firstOrFail()->id;
+            $industry_id = Industry::where('name', 'like', '%'.$row[6].'%')->firstOrFail()->id;
 
             DegreeDetail::updateOrCreate(
           [
@@ -114,7 +109,7 @@ class DegreeDetailImport implements ToCollection, WithStartRow
             'specialized' => $row[2],
             'date_of_issue' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[3]),
             'place_of_issue' => $row[4],
-            'nation_of_issue_id' => $nation_of_issue_id,
+            'nation_of_issue_id' => $row[5],
             'industry_id' => $industry_id,
             'degree_type' => $row[7],
 
@@ -125,7 +120,7 @@ class DegreeDetailImport implements ToCollection, WithStartRow
             'specialized' => $row[2],
             'date_of_issue' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[3]),
             'place_of_issue' => $row[4],
-            'nation_of_issue_id' => $nation_of_issue_id,
+            'nation_of_issue_id' => $row[5],
             'industry_id' => $industry_id,
             'degree_type' => $row[7],
           ]

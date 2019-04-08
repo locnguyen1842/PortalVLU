@@ -47,29 +47,45 @@
                       </select>
                     </div>
                     <div class="col-sm-6">
-                        <label>Giới tính</label>
-                        <div class="radio">
-                            <label class="col-sm-4">
-                                <input required type="radio" name="gender" value="0" {{$pi->gender ==0 ? "checked":""}}>Nam
-                            </label>
-                            <label class="col-sm-4">
-                                <input required type="radio" name="gender" value="1" {{$pi->gender ==1 ? "checked":""}}>Nữ
-                            </label>
-                        </div>
+                      <label>Tôn giáo</label>
+                      <select required class="form-control" name="religion">
+                          <option value="">Chọn tôn giáo</option>
+                          @foreach($religions as $religion)
+                          <option {{$pi->religion_id == $religion->id ? 'selected' : ''}} value="{{$religion->id}}">{{$religion->name}}</option>
+                          @endforeach
+                      </select>
                     </div>
+
                 </div>
                 <div class="form-group">
+                  <div class="col-sm-6">
+                      <label>Giới tính</label>
+                      <div class="radio">
+                          <label class="col-sm-4">
+                              <input required type="radio" name="gender" value="0" {{$pi->gender ==0 ? "checked":""}}>Nam
+                          </label>
+                          <label class="col-sm-4">
+                              <input required type="radio" name="gender" value="1" {{$pi->gender ==1 ? "checked":""}}>Nữ
+                          </label>
+                      </div>
+                  </div>
                     <div class="col-sm-6">
                         <label>Ngày sinh</label>
                         <input required required type="date" min="1900-01-01"  class="form-control" name="date_of_birth" value="{{$pi->date_of_birth}}">
                     </div>
-                    <div class="col-sm-6">
-                        <label>Nơi sinh</label>
-                        <input required type="text" maxlength="100" class="form-control" name="place_of_birth" placeholder="Nhập nơi sinh" value="{{$pi->place_of_birth}}">
-                    </div>
 
                 </div>
 
+                <div class="form-group">
+                  <div class="col-sm-6">
+                      <label>Nơi sinh</label>
+                      <input required type="text" maxlength="100" class="form-control" name="place_of_birth" placeholder="Nhập nơi sinh" value="{{$pi->place_of_birth}}">
+                  </div>
+                    <div class="col-sm-6">
+                        <label>Số điện thoại</label>
+                        <input required type="text" class="form-control" name="phone_number" placeholder="Nhập số điện thoại" value="{{$pi->phone_number}}">
+                    </div>
+                </div>
                 <div class="form-group">
                     <div class="col-sm-12">
                       @if($pi->permanent_address()->exists() && $pi->contact_address()->exists())
@@ -206,30 +222,45 @@
 
                 <div class="form-group">
                     <div class="col-sm-6">
-                        <label>Số điện thoại</label>
-                        <input required type="text" class="form-control" name="phone_number" placeholder="Nhập số điện thoại" value="{{$pi->phone_number}}">
-                    </div>
-                    <div class="col-sm-6">
                         <label>Địa chỉ Email</label>
                         <input required type="text" class="form-control" name="email_address" placeholder="Nhập địa chỉ Email" value="{{$pi->email_address}}">
                     </div>
-
+                    <div class="col-sm-6">
+                        <label>Quê quán</label>
+                        <input required type="text" class="form-control" name="home_town" placeholder="Nhập quê quán" value="{{$pi->home_town}}">
+                    </div>
                 </div>
+
                 <div class="form-group">
+
+                    <div class="col-sm-6">
+                        <label>Loại hợp đồng</label>
+                        <select required class="form-control" name="contract_type" data-dependent>
+                            <option value="">Chọn loại hợp đồng</option>
+                            @foreach($contract_types as $contract_type)
+                            <option {{$pi->contract_type_id == $contract_type->id?'selected':'' }} value="{{$contract_type->id}}">{{$contract_type->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="col-sm-6">
                         <label>Chức vụ</label>
                         <input required type="text" class="form-control" name="position" placeholder="Nhập chức vụ" value="{{$pi->position}}">
                     </div>
+                </div>
+
+                <div class="form-group">
+
                     <div class="col-sm-6">
                         <label>Ngày tuyển dụng</label>
                         <input required required type="date" min="1900-01-01"  class="form-control" name="date_of_recruitment" value="{{$pi->date_of_recruitment}}">
                     </div>
-                </div>
-                <div class="form-group">
                     <div class="col-sm-6">
                         <label>Chức danh chuyên môn</label>
                         <input required type="text" class="form-control" name="professional_title" placeholder="Nhập chức danh chuyên môn" value="{{$pi->professional_title}}">
                     </div>
+                </div>
+                <div class="form-group">
+
                     <div class="col-sm-6">
                         <label>Đơn vị</label>
                         <select required class="form-control" name="unit">
@@ -239,111 +270,177 @@
                             @endforeach
                         </select>
                     </div>
+                    <div class="col-sm-6">
+                        <label>Chứng minh nhân dân</label>
+                        <input required type="text" class="form-control" name="identity_card" placeholder="Nhập chứng minh nhân dân" value="{{$pi->identity_card}}">
+                    </div>
                 </div>
                 <div class="form-group">
-                  <div class="col-sm-6">
-                      <label>Chứng minh nhân dân</label>
-                      <input required type="text" class="form-control" name="identity_card" placeholder="Nhập chứng minh nhân dân" value="{{$pi->identity_card}}">
-                  </div>
+
                   <div class="col-sm-6">
                       <label>Ngày cấp</label>
                       <input required required type="date" min="1900-01-01"  class="form-control" name="date_of_issue" value="{{$pi->date_of_issue}}">
                   </div>
-
+                  <div class="col-sm-6">
+                      <label>Nơi cấp</label>
+                      <input required type="text" maxlength="100" class="form-control" name="place_of_issue" placeholder="Nhập nơi cấp" value="{{$pi->place_of_issue   }}">
+                  </div>
                 </div>
                 <div class="form-group">
-
-                    <div class="col-sm-6">
-                        <label>Nơi cấp</label>
-                        <input required type="text" maxlength="100" class="form-control" name="place_of_issue" placeholder="Nhập nơi cấp" value="{{$pi->place_of_issue   }}">
-                    </div>
                     <div class="col-sm-6">
                         <label>Loại cán bộ</label>
                         <select required class="form-control" name="officer_type" data-dependent>
                             <option value="">Chọn loại cán bộ</option>
+
                             @foreach($officer_types as $officer_type)
+                            @if($pi->officer()->exists())
                             <option {{ $officer_type->id== $pi->officer->type_id?'selected':'' }} value="{{$officer_type->id}}">{{$officer_type->name}}</option>
+                            @else
+                            <option {{ $officer_type->id== old('officer_type')?'selected':'' }} value="{{$officer_type->id}}">{{$officer_type->name}}</option>
+
+                            @endif
                             @endforeach
                         </select>
                     </div>
-                </div>
-
-                <div class="form-group">
                     <div class="col-sm-6">
                         <label>Chức vụ</label>
                         <select required class="form-control" name="position_type" data-dependent>
                             <option value="">Chọn chức vụ</option>
                             @foreach($position_types as $position_type)
+                            @if($pi->officer()->exists())
                             <option {{ $position_type->id== $pi->officer->position_id?'selected':'' }} value="{{$position_type->id}}">{{$position_type->name}}</option>
+                            @else
+                            <option {{ $position_type->id== old('position_type')?'selected':'' }} value="{{$position_type->id}}">{{$position_type->name}}</option>
+
+                            @endif
                             @endforeach
                         </select>
                     </div>
+                </div>
+
+                <div class="form-group">
+
                     <div class="col-sm-6">
                         <label>Kiêm nhiệm giảng dạy</label>
                         <div class="radio">
+                            @if($pi->officer()->exists())
                             <label class="col-sm-4">
-                                <input required type="radio" name="is_concurrently" value="0" {{$pi->officer->is_concurrently ==0 ? "checked":""}}>Có
-                            </label>
+                                    <input required type="radio" name="is_concurrently" value="0" {{$pi->officer->is_concurrently ==0 ? "checked":""}}>Có
+                                </label>
+                                <label class="col-sm-4">
+                                    <input required type="radio" name="is_concurrently" value="1" {{$pi->officer->is_concurrently ==1 ? "checked":""}}>Không
+                                </label>
+                            @else
                             <label class="col-sm-4">
-                                <input required type="radio" name="is_concurrently" value="1" {{$pi->officer->is_concurrently ==1 ? "checked":""}}>Không
-                            </label>
+                                    <input required type="radio" name="is_concurrently" value="0" {{old('is_concurrently') ==0 ? "checked":""}}>Có
+                                </label>
+                                <label class="col-sm-4">
+                                    <input required type="radio" name="is_concurrently" value="1" {{old('is_concurrently') ==1 ? "checked":""}}>Không
+                                </label>
+                            @endif
+
                         </div>
                     </div>
-
-                </div>
-                <div class="form-group">
                     <div class="col-sm-6">
                         <label>Loại giảng viên</label>
                         <select required class="form-control" name="teacher_type" data-dependent>
                             <option value="">Chọn loại giảng viên</option>
+                            @if($pi->teacher()->exists())
                             @foreach($teacher_types as $teacher_type)
                             <option {{ $teacher_type->id== $pi->teacher->type_id?'selected':'' }} value="{{$teacher_type->id}}">{{$teacher_type->name}}</option>
+
                             @endforeach
+                            <option {{ $teacher_type->id== old('teacher_type')?'selected':'' }} value="0">Không có</option>
+
+                            @else
+                            @foreach($teacher_types as $teacher_type)
+                            <option {{ $teacher_type->id== old('teacher_type')?'selected':'' }} value="{{$teacher_type->id}}">{{$teacher_type->name}}</option>
+                            @endforeach
+                            <option {{ $teacher_type->id== old('teacher_type')?'selected':'' }} value="0" selected>Không có</option>
+                            @endif
                         </select>
+
                     </div>
-                    <div class="col-sm-6">
+                </div>
+                <div class="form-group">
+
+                    <div class="col-sm-6 dependent-on-teacher">
                         <label>Chức danh nghề nghiệp</label>
                         <select required class="form-control" name="teacher_title" data-dependent>
                             <option value="">Chọn chức danh</option>
+                            @if($pi->teacher()->exists())
                             @foreach($teacher_titles as $teacher_title)
                             <option {{ $teacher_title->id== $pi->teacher->title_id?'selected':'' }} value="{{$teacher_title->id}}">{{$teacher_title->name}}</option>
                             @endforeach
+                            @else
+                            @foreach($teacher_titles as $teacher_title)
+                            <option {{ $teacher_title->id== old('teacher_title')?'selected':'' }} value="{{$teacher_title->id}}">{{$teacher_title->name}}</option>
+                            @endforeach
+                            @endif
                         </select>
                     </div>
-
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-6">
+                    <div class="col-sm-6 dependent-on-teacher">
                         <label>Danh hiệu</label>
                         <div class="checkbox">
                             <label class="col-sm-4">
-                                <input class="yes" type="checkbox" name="is_excellent_teacher" value="1" {{$pi->teacher->is_excellent_teacher ==1 ? "checked":""}}>Nhà giáo ưu tú
+                                <input type="checkbox" name="is_excellent_teacher" value="1">Nhà giáo ưu tú
                             </label>
                             <label class="col-sm-4">
-                                <input class="no" type="checkbox" name="is_national_teacher" value="1"  {{$pi->teacher->is_national_teacher ==1 ? "checked":""}}>Nhà giáo nhân dân
+                                <input type="checkbox" name="is_national_teacher" value="1">Nhà giáo nhân dân
                             </label>
                         </div>
                     </div>
-                    <div class="col-sm-6">
-                        <label>Nghỉ hưu</label>
-                        <div class="radio">
-                            <label class="col-sm-4">
-                                <input required type="radio" name="is_retired" value="0" {{$pi->teacher->is_retired ==0 ? "checked":""}}>Đã nghỉ hưu
-                            </label>
-                            <label class="col-sm-4">
-                                <input required type="radio" name="is_retired" value="1" {{$pi->teacher->is_retired ==1 ? "checked":""}}>Chưa nghỉ hưu
-                            </label>
-                        </div>
-                    </div>
-
                 </div>
-
                 <div class="form-group">
-                    <div class="col-sm-6  pull-right">
-                        <label>Ngày nghỉ hưu</label>
-                        <input required type="date" min="1900-01-01" class="form-control" name="date_of_retirement" value="{{$pi->teacher->date_of_retirement}}">
+
+                        <div class="col-sm-6">
+                                <label>Nghỉ việc</label>
+                                    <div class="radio">
+                                        <label class="col-sm-4">
+                                            <input required type="radio" name="is_activity" value="1" {{$pi->is_activity==1 ? 'checked':''}}>Chưa nghỉ việc
+                                        </label>
+                                        <label class="col-sm-4">
+                                            <input required type="radio" name="is_activity" value="0" {{$pi->is_activity==0  ? 'checked':''}}>Đã nghỉ việc
+                                        </label>
+                                    </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Nghỉ hưu</label>
+                                <div class="radio">
+                                    @if($pi->teacher()->exists())
+                                        <label class="col-sm-4">
+                                                <input required type="radio" name="is_retired" value="1" {{$pi->teacher->is_retired==1 ? 'checked':''}}>Đã nghỉ hưu
+                                        </label>
+                                    <label class="col-sm-4">
+                                        <input required type="radio" name="is_retired" value="0" {{$pi->teacher->is_retired==0 ? 'checked':''}}>Chưa nghỉ hưu
+                                    </label>
+                                    @else
+                                     <label class="col-sm-4">
+                                                <input required type="radio" name="is_retired" value="1" {{old('is_retired')==1 ? 'checked':''}}>Đã nghỉ hưu
+                                        </label>
+                                    <label class="col-sm-4">
+                                        <input required type="radio" name="is_retired" value="0" {{old('is_retired')==0 ? 'checked':''}}>Chưa nghỉ hưu
+                                    </label>
+                                    @endif
+
+                                </div>
                     </div>
-                </div>
+
+                    <div class="form-group dependent-on-teacher">
+
+                        </div>
+                        <div class="col-sm-6">
+                            <label>Ngày nghỉ hưu</label>
+                            @if($pi->teacher()->exists())
+                            <input required disabled type="date" min="1900-01-01" class="form-control" name="date_of_retirement" value="{{$pi->teacher->date_of_retirement}}">
+                            @else
+                            <input required disabled type="date" min="1900-01-01" class="form-control" name="date_of_retirement" value="{{old('date_of_retirement')}}">
+
+                            @endif
+                        </div>
+
+
+                    </div>
 
                 <div class="form-group" style="margin-bottom:0">
                     <div class="col-sm-offset-2 col-sm-10 text-right">
@@ -357,6 +454,41 @@
 
     <script type="text/javascript">
     $(document).ready(function(){
+        var teacher_type = $('select[name=teacher_type]');
+        var is_retired = $('input[type=radio][name=is_retired]:checked');
+
+        teacherType(teacher_type);
+        isRetired(is_retired);
+        teacher_type.on('change', function () {
+            teacherType($(this));
+        })
+
+        $('input[type=radio][name=is_retired]').on('change', function (e) {
+            isRetired($(this));
+
+        })
+
+        function isRetired(element) {
+            if (element.val() == 0) {
+
+                $('input[name=date_of_retirement]').prop('disabled', true);
+            } else {
+                $('input[name=date_of_retirement]').prop('disabled', false);
+            }
+        }
+
+        function teacherType(element) {
+            if (element.val() == 0) {
+
+                $('.dependent-on-teacher').addClass('hide');
+                $('.dependent-on-teacher :input').not('input[name=date_of_retirement]').prop('disabled', true);
+
+            } else {
+                $('.dependent-on-teacher').removeClass('hide');
+                $('.dependent-on-teacher :input').not('input[name=date_of_retirement]').prop('disabled', false);
+
+            }
+        }
         if('{{ $pi->permanent_address()->exists() && $pi->contact_address()->exists() }}' == true){
             var province_code_1 = $('#province_1').val();
             $.get('{{route('res.districts')}}' + '?province_code=' + province_code_1,
@@ -419,14 +551,7 @@
             });
     }
 
-    $('input[type=radio][name=is_retired]').on('change',function() {
-        if (this.val() == 0) {
-            $("input[name=date_of_retirement]").prop("disabled", true);
-        }
-        else if (this.val() == 1) {
-          $("input[name=date_of_retirement]").prop("disabled", false);
-      }
-    });
+
     });
         $('#province_1').on('change', function(e) {
             var province_code = e.target.value;

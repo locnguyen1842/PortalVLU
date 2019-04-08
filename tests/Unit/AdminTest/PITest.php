@@ -86,7 +86,7 @@ class PITest extends TestCase
     public function test_add_PI_with_incorrect_identity_card()
     {
         $actual = $this->data();
-        $actual['identity_card']= '321368999';
+        $actual['identity_card']= '352390125';
         $addPI = $this->post('/admin/pi-add', $actual);
         $duplicate_indentitycard = $this->post('/admin/pi-add', $actual);
         $duplicate_indentitycard->assertSessionHasErrors([
@@ -98,8 +98,8 @@ class PITest extends TestCase
         $actual = $this->data();
         $addPI = $this->post('/admin/pi-add', $actual);
         $actual1 = $this->data();
-        $actual1['email_address']= 'lethanhson2910@gmail.com';
-        $actual1['employee_code']= 'T155477';
+        $actual1['email_address']= 'taolao024@gmail.com';
+        $actual1['employee_code']= 'T123899';
         $duplicate_emailaddress = $this->post('/admin/pi-add', $actual1);
         $duplicate_emailaddress->assertSessionHasErrors([
           'email_address'=> 'Email đã được sử dụng'
@@ -160,7 +160,7 @@ class PITest extends TestCase
       $this->actingAs($admin,'admin');
       $response = $this->get('/admin/pi-list?search=T154725');
       $response->assertSuccessful();
-      $response->assertSee('Loc Nguyen'); // see name of T154725 code when search successful
+      $response->assertSee('Ân Phạm'); // see name of T154725 code when search successful
 
     }
     public function test_delete_a_PI(){
@@ -213,7 +213,7 @@ class PITest extends TestCase
     public function test_change_role_from_admin_to_employee(){
       $pi = PI::where('employee_code','T155444')->first(); //role admin
       //role = 0 is employee
-  
+
       $response = $this->post('/admin/pi-role/'.$pi->id,[
         'role' => 0
       ]);
@@ -228,24 +228,43 @@ class PITest extends TestCase
     public function data()
     {
         $actual = [
-        'employee_code' => 'T153772',
-        'full_name' =>'Le Thanh Son',
-        'nation' =>1,
-        'gender'=> 1,
-        'date_of_birth' =>'1997-04-10',
-        'place_of_birth' =>'TPHCM',
-        'permanent_address' =>'An Giang',
-        'contact_address' =>'An Giang',
-        'phone_number' =>'0123456789',
-        'email_address' =>'lethanhson2910@gmail.com',
-        'position' =>'Quan ly',
-        'date_of_recruitment' =>'2018-04-10',
-        'professional_title' =>'Lao cong',
-        'identity_card' =>'321368999',
-        'date_of_issue' =>'2015-04-10',
-        'place_of_issue' =>'TPHCM',
-        'unit'=>1,
-        'role'=>0,
+          "employee_code" =>  "T153772",
+          "full_name" => "Lâm Tuệ Khương",
+          "nation" => 1,
+          "religion" => 14,
+          "gender" => 1,
+          "date_of_birth" => "1962-12-19",
+          "place_of_birth" => "Gia Lai",
+          "permanent_address" => "Bình Lợi",
+          "province_1" => 67,
+          "district_1" => 661,
+          "ward_1" => "24620",
+          "contact_address" => "Bình Lợi",
+          "province_2" => 86,
+          "district_2" => 858,
+          "ward_2" => 29626,
+          "home_town" => "Kiên Giang",
+          "contract_type" => 1,
+          "position" => "Không có",
+          "date_of_recruitment" => "2018-12-19",
+          "phone_number" => "123456789",
+          "email_address" => "taolao024@gmail.com",
+          "identity_card" => "352390125",
+          "place_of_issue" => "TPHCM",
+          "date_of_issue" => "2018-12-19",
+          'unit'=>1,
+          'professional_title'=>"Khong co",
+          'officer_type'=>1,
+          'position_type'=>1,
+          'is_concurrently'=>1,
+          'teacher_type'=>2,
+          'teacher_title'=> 1,
+          'is_excellent_teacher'=>1,
+          'is_national_teacher'=>1,
+          'is_activity'=>1,
+          'is_retired'=>1,
+          'date_of_retirement'=>"2018-12-19",
+
       ];
         return $actual;
     }

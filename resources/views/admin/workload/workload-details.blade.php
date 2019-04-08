@@ -30,38 +30,38 @@
 
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-5">Mã môn học</label>
-                                    <span for="" class="col-sm-7 text-nowrap">{{$workload->subject_code}}</span>
+                                    <span for="" class="col-sm-7 text-truncate">{{$workload->subject_code}}</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputPassword3" class="col-sm-5  ">Mã lớp học</label>
-                                    <span for="" class="col-sm-7 text-nowrap">{{$workload->class_code}}</span>
+                                    <span for="" class="col-sm-7 text-truncate">{{$workload->class_code}}</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputPassword3" class="col-sm-5  ">Tên môn học</label>
-                                    <span for="" class="col-sm-7 text-nowrap">{{$workload->subject_name}}</span>
+                                    <span for="" class="col-sm-7 text-truncate">{{$workload->subject_name}}</span>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="inputPassword3" class="col-sm-5  ">Số sinh viên</label>
-                                    <span for="" class="col-sm-7 text-nowrap">{{$workload->number_of_students}} sinh viên </span>
+                                    <span for="" class="col-sm-7 text-truncate">{{$workload->number_of_students}} sinh viên </span>
                                 </div>
 
                                 <div class="form-group">
                                         <label for="inputPassword3" class="col-sm-5  ">Số tiết học</label>
-                                        <span for="" class="col-sm-7 text-nowrap">{{$workload->number_of_lessons}} tiết</span>
+                                        <span for="" class="col-sm-7 text-truncate">{{$workload->number_of_lessons}} tiết</span>
                                     </div>
 
                                 <div class="form-group">
                                     <label for="inputPassword3" class="col-sm-5  ">Tổng số giờ</label>
-                                    <span for="" class="col-sm-7 text-nowrap">{{$workload->total_workload}} giờ</span>
+                                    <span for="" class="col-sm-7 text-truncate">{{$workload->total_workload}} giờ</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputPassword3" class="col-sm-5  ">Số giờ lý thuyết</label>
-                                    <span for="" class="col-sm-7 text-nowrap">{{$workload->theoretical_hours}} giờ</span>
+                                    <span for="" class="col-sm-7 text-truncate">{{$workload->theoretical_hours}} giờ</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputPassword3" class="col-sm-5  ">Số giờ thực hành</label>
-                                    <span for="" class="col-sm-7 text-nowrap">{{$workload->practice_hours}} giờ</span>
+                                    <span for="" class="col-sm-7 text-truncate">{{$workload->practice_hours}} giờ</span>
                                 </div>
                         </div>
                     </div>
@@ -76,22 +76,22 @@
                         <div class="panel-body">
                                 <form class="form-horizontal">
                                         <div class="form-group">
-                                            <label for="inputPassword3" class="col-sm-5  ">Mã nv</label>
-                                            <div class="col-sm-7">
+                                            <label for="inputPassword3" class="col-sm-4">Mã nv</label>
+                                            <div class="col-sm-8">
                                                     <a href="{{route('admin.pi.detail',$workload->pi->id)}}" data-toggle="tooltip" data-placement="right"
                                                             title="" data-original-title="Chi tiết" href="javascript:" class="search_tag tooltip-test">
-                                                            <span for="" class="text-nowrap">{{$workload->pi->employee_code}}</span>
+                                                            <span for="" class="text-truncate">{{$workload->pi->employee_code}}</span>
                                                     </a>
                                             </div>
 
                                         </div>
                                         <div class="form-group">
-                                            <label for="inputPassword3" class="col-sm-5  ">Họ tên</label>
-                                            <span for="" class="col-sm-7 text-nowrap">{{$workload->pi->full_name}}</span>
+                                            <label for="inputPassword3" class="col-sm-4">Họ tên</label>
+                                            <span for="" class="col-sm-8 text-truncate">{{$workload->pi->full_name}}</span>
                                         </div>
                                         <div class="form-group">
-                                            <label for="inputPassword3" class="col-sm-5  ">Khoa</label>
-                                            <span for="" class="col-sm-7 text-nowrap">{{$workload->pi->unit->name}}</span>
+                                            <label for="inputPassword3" class="col-sm-4  ">Khoa</label>
+                                            <span for="" class="col-sm-8 text-truncate">{{$workload->pi->unit->name}}</span>
                                         </div>
                                       </form>
                         </div>
@@ -102,16 +102,16 @@
                         <div class="panel-body">
                                 <form class="form-horizontal">
                                         <div class="form-group">
-                                            <label for="inputPassword3" class="col-sm-5  ">Học kỳ</label>
-                                            <span for="" class="col-sm-7 text-nowrap">{{$workload->semester->alias}}</span>
+                                            <label for="inputPassword3" class="col-sm-4">Học kỳ</label>
+                                            <span for="" class="col-sm-8 text-truncate">{{$workload->semester->alias}}</span>
                                         </div>
                                         <div class="form-group">
-                                            <label for="inputPassword3" class="col-sm-5  ">Niên khóa</label>
-                                            <span for="" class="col-sm-7 text-nowrap">{{$workload->workloadsession->start_year}}-{{$workload->workloadsession->end_year}}</span>
+                                            <label for="inputPassword3" class="col-sm-4">Niên khóa</label>
+                                            <span for="" class="col-sm-8 text-truncate">{{$workload->workloadsession->start_year}}-{{$workload->workloadsession->end_year}}</span>
                                         </div>
                                         <div class="form-group">
-                                            <label for="inputPassword3" class="col-sm-5  ">Khoa</label>
-                                            <span for="" class="col-sm-7 text-nowrap">{{$workload->unit->name}}</span>
+                                            <label for="inputPassword3" class="col-sm-4">Khoa</label>
+                                            <span for="" class="col-sm-8 text-truncate">{{$workload->unit->name}}</span>
                                         </div>
                                     </form>
 

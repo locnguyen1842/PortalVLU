@@ -59,7 +59,7 @@ class WorkloadTest extends TestCase
     {
         $actual = [
          'semester' =>1,
-         'session_id' =>36,
+         'session_id' =>32,
          'subject_code'=> 'NL31A',
          'subject_name' =>'Anh Phap',
          'number_of_lessons' => 60,
@@ -80,7 +80,7 @@ class WorkloadTest extends TestCase
         $actual = [
             'employee_code' => 'T154725',
             'session_new' =>0,
-            'session_id' =>36,
+            'session_id' =>32,
             'start_year' =>2099,
             'end_year' => 2100,
             'subject_code' =>['AV07'],
@@ -132,8 +132,8 @@ class WorkloadTest extends TestCase
         $this->actingAs($admin, 'admin');
         $response = $this->get('/admin/workload-list?search=T154725&year_workload=35');
         $response->assertSuccessful();
-        $response->assertSee('Loc Nguyen'); // see name of T154725 code when search successful
-        $response->assertSee('CNTT');
+        $response->assertSee('Ân Phạm'); // see name of T154725 code when search successful
+        $response->assertSee('T');
     }
     public function test_search_workload_on_list_of_a_specific_pi()
     {

@@ -47,9 +47,8 @@ class PIImport implements ToCollection, WithStartRow
         $units = Unit::all();
         $units_name = [];
         foreach ($units as $unit) {
-            array_push($units_name, strtolower($unit->name));
+            array_push($units_name, strtolower($unit->unit_code));
         }
-
         $officer_types = OfficerType::all();
         $officer_types_name = [];
         foreach ($officer_types as $type) {
@@ -108,13 +107,20 @@ class PIImport implements ToCollection, WithStartRow
             $item[13] = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($item[13]);
             // ngay nghi huu
 
-            if ($item[22] == 'x') {
+            if ($item[22] != 'x' && $item[22] != null) {
                 $item[22] = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($item[22]);
 
             } else {
-                $item[22] = '';
+                $item[22] = null;
 
 
+            }if($item[19] == 'x' || $item[19] == null){
+                $item[19] = null;
+                $item[20] = null;
+                $item[21] = null;
+                $item[22] = null;
+                $item[23] = null;
+                $item[24] = null;
             }
 
         }
@@ -150,7 +156,8 @@ class PIImport implements ToCollection, WithStartRow
                             Rule::in($units_name),
                         ],
             '*.16'=>    [
-                            'nullable',
+                            'required',
+                            'required_if:*.16,x',
                             Rule::in($officer_types_name),
                         ],
             '*.17'=>    [
@@ -167,7 +174,7 @@ class PIImport implements ToCollection, WithStartRow
                             Rule::in($teacher_titles_name),
                         ],
             '*.21'=>    'nullable',
-            '*.22'=>    'nullable',
+            '*.22'=>    'required_if:*.21,x|date|nullable',
 
             '*.23'=> 'nullable',
             '*.24'=> 'nullable',
@@ -200,7 +207,8 @@ class PIImport implements ToCollection, WithStartRow
           '*.14.required' => 'Mật khẩu không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
           '*.15.required' => 'Đơn vị không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
           '*.15.in' => 'Đơn vị không hợp lệ ( vị trí: :attribute|sheet :1 ) ',
-        //   '*.16.required' => 'Loại cán bộ không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
+          '*.16.required' => 'Loại cán bộ không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
+          '*.16.required_if' => 'Loại cán bộ không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
           '*.16.in' => 'Loại cán bộ không hợp lệ ( vị trí: :attribute|sheet :1 ) ',
         //   '*.17.required' => 'Chức vụ không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
           '*.17.in' => 'Chức vụ không hợp lệ ( vị trí: :attribute|sheet :1 ) ',
@@ -209,7 +217,8 @@ class PIImport implements ToCollection, WithStartRow
           '*.19.in' => 'Loại giảng viên không hợp lệ ( vị trí: :attribute|sheet :1 ) ',
         //   '*.20.required' => 'Chức danh nghề nghiệp không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
           '*.20.in' => 'Chức danh nghề nghiệp không hợp lệ ( vị trí: :attribute|sheet :1 ) ',
-        //   '*.22.required_if' => 'Ngày nghỉ hưu không hợp lệ ( vị trí: :attribute|sheet :1 ) ',
+          '*.22.required_if' => 'Ngày nghỉ hưu được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
+          '*.22.date' => 'Ngày nghỉ hưu không hợp lệ ( vị trí: :attribute|sheet :1 ) ',
 
 
         ]
@@ -217,7 +226,6 @@ class PIImport implements ToCollection, WithStartRow
         foreach ($rows as $row) {
             // dd($rows);
             $row = array_map('trim',$row->toArray());
-
             //split first name
 
             $split = explode(" ", $row[1]);
@@ -231,7 +239,7 @@ class PIImport implements ToCollection, WithStartRow
                     'employee_code' => $row[0],
                     'full_name' => $row[1],
                     'first_name' => $first_name,
-                    'nation_id' => Nation::where('name', 'like', '%'.$row[2].'%')->first()->id,
+                    'nation_id' => Nation::where('name', 'like', '%'.$row[2].'%')->firstOrFail()->id,
                     'gender' => $row[3] == 'nam' ? 0:1,
                     'date_of_birth' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[4]),
                     'place_of_birth' => $row[5],
@@ -245,20 +253,20 @@ class PIImport implements ToCollection, WithStartRow
 
                     'show' => 1,
                     'new' =>0,
-                    'unit_id' => Unit::where('name', 'like', '%'.$row[14].'%')->first()->id,
+                    'unit_id' => Unit::where('unit_code', $row[14])->firstOrFail()->id,
                     'is_activity' => ($row[24] == 'x') ? 0:1,
                 ]
             );
 
             if($row[15] != null){
-                $officer_type_id = OfficerType::where('name','like','%'.$row[15].'%')->first()->id;
+                $officer_type_id = OfficerType::where('name','like','%'.$row[15].'%')->firstOrFail()->id;
 
             }else{
                 $officer_type_id = null ;
             }
-            if($row[16] != null){
+            if($row[16] != null||$row[16] != 'x'){
 
-                $position_type_id = PositionType::where('name','like','%'.$row[16].'%')->first()->id;
+                $position_type_id = PositionType::where('name','like','%'.$row[16].'%')->firstOrFail()->id;
             }else{
                 $position_type_id = null;
             }
@@ -277,29 +285,25 @@ class PIImport implements ToCollection, WithStartRow
             }
 
 
-            if($row[20] == 'x'){
-                if($row[21] != null){
+            if($row[18] == 'x'||$row[18] == null){
+                if($pi->teacher()->exists()){
+                    $pi->teacher->delete();
+                }
+                $item[18] = null;
+                $item[19] = null;
+                $item[20] = null;
+                $item[21] = null;
+                $item[22] = null;
+                $item[23] = null;
+            }else{
+                $teacher_type_id = TeacherType::where('name','like','%'.$row[18].'%')->firstOrFail()->id;
+                $teacher_title_id = TeacherTitle::where('name','like','%'.$row[19].'%')->firstOrFail()->id;
+                if($row[20] == 'x'){
+
                     $date_of_retirement = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[21]);
                 }else{
                     $date_of_retirement = null;
                 }
-            }else{
-                $date_of_retirement = null;
-            }
-
-            if($row[18] != null){
-                $teacher_type_id = TeacherType::where('name','like','%'.$row[18].'%')->first()->id;
-
-            }else{
-                $teacher_type_id = null;
-            }
-            if($row[19] != null){
-
-                $teacher_title_id = TeacherTitle::where('name','like','%'.$row[19].'%')->first()->id;
-            }else{
-                $teacher_title_id = null;
-            }
-            if($row[18] !=null){
                 $teacher = Teacher::updateOrCreate(
                     [
                         'personalinformation_id' => $pi->id,
@@ -316,28 +320,6 @@ class PIImport implements ToCollection, WithStartRow
                 );
             }
 
-            //  // 7 8 9 10 => permanent address (address,ward,district,province)
-            // $permanent_address = Address::updateOrCreate(
-            //     [
-            //         'address_content' => $row[7],
-            //         'ward_id' => $row[8],
-            //         'district_id' => $row[9],
-            //         'province_id' => $row[10],
-            //     ]
-            // );
-            // $pi->permanent_address_id = $permanent_address->id;
-
-            // // 11 12 13 14 => contact address (address,ward,district,province)
-            // $contact_address = Address::updateOrCreate(
-            //     [
-            //         'address_content' => $row[11],
-            //         'ward_id' => $row[12],
-            //         'district_id' => $row[13],
-            //         'province_id' => $row[14],
-            //     ]
-            // );
-            // $pi->contact_address_id = $contact_address->id;
-            // $pi->save();
             $employee = Employee::updateOrCreate(
                 [
                 'username' => $pi->employee_code,

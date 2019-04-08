@@ -44,28 +44,47 @@
                     </select>
                 </div>
                 <div class="col-sm-6">
-                    <label>Giới tính</label>
-                    <div class="radio">
-                        <label class="col-sm-4">
-                            <input required type="radio" name="gender" value="0" checked>Nam
-                        </label>
-                        <label class="col-sm-4">
-                            <input required type="radio" name="gender" value="1">Nữ
-                        </label>
-                    </div>
+                    <label>Tôn Giáo</label>
+                    <select required class="form-control" name="religion">
+                        <option value="">Chọn tôn giáo</option>
+                        @foreach($religions as $religion)
+                        <option {{$religion->id == old('religion') ? 'selected':''}} value="{{$religion->id}}">{{$religion->name}}</option>
+                        @endforeach
+                    </select>
                 </div>
+
             </div>
             <div class="form-group">
+              <div class="col-sm-6">
+                  <label>Giới tính</label>
+                  <div class="radio">
+                      <label class="col-sm-4">
+                          <input required type="radio" name="gender" value="0" checked>Nam
+                      </label>
+                      <label class="col-sm-4">
+                          <input required type="radio" name="gender" value="1">Nữ
+                      </label>
+                  </div>
+              </div>
                 <div class="col-sm-6">
                     <label>Ngày sinh</label>
                     <input required type="date" min="1900-01-01" min="1900-01-01" class="form-control" name="date_of_birth" value="{{old('date_of_birth')}}">
                 </div>
+
+            </div>
+
+            <div class="form-group">
+              <div class="col-sm-6">
+                  <label>Nơi sinh</label>
+                  <input required type="text" maxlength="100" class="form-control" name="place_of_birth" placeholder="Nhập nơi sinh" value="{{old('place_of_birth')}}">
+              </div>
                 <div class="col-sm-6">
-                    <label>Nơi sinh</label>
-                    <input required type="text" maxlength="100" class="form-control" name="place_of_birth" placeholder="Nhập nơi sinh" value="{{old('place_of_birth')}}">
+                    <label>Số điện thoại</label>
+                    <input required type="text" class="form-control" name="phone_number" placeholder="Nhập số điện thoại" value="{{old('phone_number')}}">
                 </div>
 
             </div>
+
             <div class="form-group">
                 <div class="col-sm-12">
                     <div class="form-group">
@@ -80,7 +99,7 @@
                             <select required class="form-control" id="province_1" name="province_1">
                                 <option value="">Chọn tỉnh/thành phố</option>
                                 @foreach($provinces as $item)
-                                <option value="{{$item->code}}">{{$item->name_with_type}}</option>
+                                <option {{$item->code == old('province_1') ? 'selected' :''}} value="{{$item->code}}">{{$item->name_with_type}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -114,7 +133,7 @@
                             <select required class="form-control" id="province_2" name="province_2">
                                 <option value="">Chọn tỉnh/thành phố</option>
                                 @foreach($provinces as $item)
-                                <option value="{{$item->code}}">{{$item->name_with_type}}</option>
+                                <option {{$item->code == old('province_2') ? 'selected' :''}} value="{{$item->code}}">{{$item->name_with_type}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -136,30 +155,45 @@
 
             <div class="form-group">
                 <div class="col-sm-6">
-                    <label>Số điện thoại</label>
-                    <input required type="text" class="form-control" name="phone_number" placeholder="Nhập số điện thoại" value="{{old('phone_number')}}">
-                </div>
-                <div class="col-sm-6">
                     <label>Địa chỉ Email</label>
                     <input required type="text" class="form-control" name="email_address" placeholder="Nhập địa chỉ Email" value="{{old('email_address')}}">
                 </div>
-
+                <div class="col-sm-6">
+                    <label>Quê quán</label>
+                    <input required type="text" class="form-control" name="home_town" placeholder="Nhập quê quán" value="{{old('home_town')}}">
+                </div>
             </div>
+
             <div class="form-group">
+
+                <div class="col-sm-6">
+                    <label>Loại hợp đồng</label>
+                    <select required class="form-control" name="contract_type" data-dependent>
+                        <option value="">Chọn loại hợp đồng</option>
+                        @foreach($contract_types as $contract_type)
+                        <option {{$contract_type->id == old('contract_type') ? 'selected':''}} value="{{$contract_type->id}}">{{$contract_type->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
                 <div class="col-sm-6">
                     <label>Chức vụ</label>
                     <input required type="text" class="form-control" name="position" placeholder="Nhập chức vụ" value="{{old('position')}}">
                 </div>
+            </div>
+
+            <div class="form-group">
+
                 <div class="col-sm-6">
                     <label>Ngày tuyển dụng</label>
                     <input required type="date" min="1900-01-01" class="form-control" name="date_of_recruitment" value="{{old('date_of_recruitment')}}">
                 </div>
-            </div>
-            <div class="form-group">
                 <div class="col-sm-6">
                     <label>Chức danh chuyên môn</label>
                     <input required type="text" class="form-control" name="professional_title" placeholder="Nhập chức danh chuyên môn" value="{{old('professional_title')}}">
                 </div>
+            </div>
+            <div class="form-group">
+
                 <div class="col-sm-6">
                     <label>Đơn vị</label>
                     <select required class="form-control" name="unit" data-dependent>
@@ -169,23 +203,24 @@
                         @endforeach
                     </select>
                 </div>
-            </div>
-            <div class="form-group">
                 <div class="col-sm-6">
                     <label>Chứng minh nhân dân</label>
                     <input required type="text" class="form-control" name="identity_card" placeholder="Nhập chứng minh nhân dân" value="{{old('identity_card')}}">
                 </div>
+            </div>
+            <div class="form-group">
+
                 <div class="col-sm-6">
                     <label>Ngày cấp</label>
                     <input required type="date" min="1900-01-01" class="form-control" name="date_of_issue" value="{{old('date_of_issue')}}">
                 </div>
-
-            </div>
-            <div class="form-group">
                 <div class="col-sm-6">
                     <label>Nơi cấp</label>
                     <input required type="text" maxlength="100" class="form-control" name="place_of_issue" placeholder="Nhập nơi cấp" value="{{old('place_of_issue')}}">
                 </div>
+            </div>
+            <div class="form-group">
+
                 <div class="col-sm-6">
                     <label>Loại cán bộ</label>
                     <select required class="form-control" name="officer_type" data-dependent>
@@ -195,9 +230,6 @@
                         @endforeach
                     </select>
                 </div>
-
-            </div>
-            <div class="form-group">
                 <div class="col-sm-6">
                     <label>Chức vụ</label>
                     <select required class="form-control" name="position_type" data-dependent>
@@ -207,6 +239,9 @@
                         @endforeach
                     </select>
                 </div>
+            </div>
+            <div class="form-group">
+
                 <div class="col-sm-6">
                     <label>Kiêm nhiệm giảng dạy</label>
                     <div class="radio">
@@ -218,9 +253,6 @@
                         </label>
                     </div>
                 </div>
-
-            </div>
-            <div class="form-group">
                 <div class="col-sm-6">
                     <label>Loại giảng viên</label>
                     <select required class="form-control" name="teacher_type" data-dependent>
@@ -228,9 +260,13 @@
                         @foreach($teacher_types as $teacher_type)
                         <option {{$teacher_type->id == old('teacher_type') ? 'selected':''}} value="{{$teacher_type->id}}">{{$teacher_type->name}}</option>
                         @endforeach
+                        <option value="0">Không có</option>
                     </select>
                 </div>
-                <div class="col-sm-6">
+            </div>
+            <div class="form-group">
+
+                <div class="col-sm-6 dependent-on-teacher">
                     <label>Chức danh nghề nghiệp</label>
                     <select required class="form-control" name="teacher_title" data-dependent>
                         <option value="">Chọn chức danh</option>
@@ -239,10 +275,7 @@
                         @endforeach
                     </select>
                 </div>
-
-            </div>
-            <div class="form-group">
-                <div class="col-sm-6">
+                <div class="col-sm-6 dependent-on-teacher">
                     <label>Danh hiệu</label>
                     <div class="checkbox">
                         <label class="col-sm-4">
@@ -253,25 +286,41 @@
                         </label>
                     </div>
                 </div>
-                <div class="col-sm-6">
-                    <label>Nghỉ hưu</label>
-                    <div class="radio">
-                        <label class="col-sm-4">
-                            <input required type="radio" name="is_retired" value="1" checked>Đã nghỉ hưu
-                        </label>
-                        <label class="col-sm-4">
-                            <input required type="radio" name="is_retired" value="0">Chưa nghỉ hưu
-                        </label>
-                    </div>
-                </div>
+            </div>
+            <div class="form-group">
 
+                <div class="col-sm-6">
+                        <label>Nghỉ việc</label>
+                            <div class="radio">
+                                <label class="col-sm-4">
+                                    <input required type="radio" name="is_activity" value="1" checked>Chưa nghỉ việc
+                                </label>
+                                <label class="col-sm-4">
+                                    <input required type="radio" name="is_activity" value="0" >Đã nghỉ việc
+                                </label>
+                            </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Nghỉ hưu</label>
+                        <div class="radio">
+                            <label class="col-sm-4">
+                                <input required type="radio" name="is_retired" value="0" checked>Chưa nghỉ hưu
+                            </label>
+                            <label class="col-sm-4">
+                                <input required type="radio" name="is_retired" value="1">Đã nghỉ hưu
+                            </label>
+                        </div>
+                    </div>
             </div>
 
-            <div class="form-group">
-                <div class="col-sm-6  pull-right">
+            <div class="form-group dependent-on-teacher">
+
+                <div class="col-sm-6">
                     <label>Ngày nghỉ hưu</label>
                     <input required type="date" min="1900-01-01" class="form-control" name="date_of_retirement" value="{{old('date_of_retirement')}}">
                 </div>
+
+
             </div>
             <div class="form-group" style="margin-bottom:0">
                 <div class="col-sm-offset-2 col-sm-10 text-right">
@@ -286,67 +335,158 @@
     <script type="text/javascript">
         $(document).ready(function() {
 
-            $('#province_1').on('change', function(e) {
-                var province_code = e.target.value;
-                $.get('{{route('res.districts')}}' + '?province_code=' + province_code,
-                    function(data) {
-                        $('#district_1').empty();
-                        $('#district_1').append('<option value="" disabled selected>Chọn quận/huyện</option>');
-                        $.each(data, function(index, district) {
-                            $('#district_1').append('<option data-old-1="old-'+district.code+'" value="' + district.code + '">' + district.name_with_type + '</option>');
-                            var old_district_1 = '{{old('district_1')}}';
-                            console.log(district.code);
-                            if(district.code == old_district_1){
+          var teacher_type = $('select[name=teacher_type]');
+          var is_retired = $('input[type=radio][name=is_retired]:checked');
+
+          teacherType(teacher_type);
+          isRetired(is_retired);
+          teacher_type.on('change', function () {
+              teacherType($(this));
+          })
+
+          $('input[type=radio][name=is_retired]').on('change', function (e) {
+              isRetired($(this));
+
+          })
+
+          function isRetired(element) {
+              if (element.val() == 0) {
+
+                  $('input[name=date_of_retirement]').prop('disabled', true);
+              } else {
+                  $('input[name=date_of_retirement]').prop('disabled', false);
+              }
+          }
+
+          function teacherType(element) {
+              if (element.val() == 0) {
+
+                  $('.dependent-on-teacher').addClass('hide');
+                  $('.dependent-on-teacher :input').not('input[name=date_of_retirement]').prop('disabled', true);
+
+              } else {
+                  $('.dependent-on-teacher').removeClass('hide');
+                  $('.dependent-on-teacher :input').not('input[name=date_of_retirement]').prop('disabled', false);
+
+              }
+          }
+
+
+          if(1 == true){
+              var province_code_1 = '{{old('province_1')}}';
+              $.get('{{route('res.districts')}}' + '?province_code=' + province_code_1,
+              function(data) {
+                  $('#district_1').empty();
+                  $('#district_1').append('<option value="" disabled>Chọn quận/huyện</option>');
+                  $.each(data, function(index, district) {
+                      $('#district_1').append('<option data-old-1="old-'+district.code+'" value="' + district.code + '">' + district.name_with_type + '</option>');
+                      var district_1 = '{{old('district_1') }}'
+
+                      if(district.code == district_1){
+                          $('option[data-old-1="old-'+district.code+'"]').prop('selected',true);
+                      }
+
+                  });
+              });
+              var district_code_1 = '{{ old('district_1') }}';
+              $.get('{{route('res.wards')}}' + '?district_code=' + district_code_1,
+              function(data) {
+                  $('#ward_1').empty();
+                  $('#ward_1').append('<option value="" disabled>Chọn phường/xã</option>');
+                  $.each(data, function(index, ward) {
+                      $('#ward_1').append('<option data-old-1="old-'+ward.code+'" value="' + ward.code + '">' + ward.name_with_type + '</option>');
+                      var ward_1 = '{{old('ward_1')}}';
+
+                      if(ward.code == ward_1){
+                          $('option[data-old-1="old-'+ward.code+'"]').prop('selected',true);
+                      }
+                  });
+              });
+
+              var province_code_2 = '{{old('province_2')}}';
+              $.get('{{route('res.districts')}}' + '?province_code=' + province_code_2,
+              function(data) {
+                      $('#district_2').empty();
+                      $('#district_2').append('<option value="" disabled>Chọn quận/huyện</option>');
+                      $.each(data, function(index, district) {
+                          $('#district_2').append('<option data-old-2="old-'+district.code+'" value="' + district.code + '">' + district.name_with_type + '</option>')
+                          var district_2 = '{{  old('district_2') }}'
+
+                          if(district.code == district_2){
                               $('option[data-old-1="old-'+district.code+'"]').prop('selected',true);
-                            }
+                          }
+                  });
+              });
 
-                        });
-                    });
-            });
-            $('#district_1').on('change', function(e) {
-                var district_code = e.target.value;
-                $.get('{{route('res.wards')}}' + '?district_code=' + district_code,
-                    function(data) {
-                        $('#ward_1').empty();
-                        $('#ward_1').append('<option value="" disabled selected>Chọn phường/xã</option>');
-                        $.each(data, function(index, ward) {
-                            $('#ward_1').append('<option data-old-1="old-'+ward.code+'" value="' + ward.code + '">' + ward.name_with_type + '</option>');
-                            var old_ward_1 = '{{old('ward_1')}}';
-                            console.log(ward.code);
+              var district_code_2 = '{{  old('district_2') }}';
+              $.get('{{route('res.wards')}}' + '?district_code=' + district_code_2,
+              function(data) {
+                  $('#ward_2').empty();
+                  $('#ward_2').append('<option value="" disabled>Chọn phường/xã</option>');
+                  $.each(data, function(index, ward) {
+                      $('#ward_2').append('<option data-old-2="old-'+ward.code+'"  value="' + ward.code + '">' + ward.name_with_type + '</option>')
+                      var ward_2 = '{{ old('ward_2')}}';
 
-                            if(ward.code == old_ward_1){
-                              $('option[data-old-1="old-'+district.code+'"]').prop('selected',true);
-                            }
-                        });
-                    });
-            });
-            $('#province_2').on('change', function(e) {
-                var province_code = e.target.value;
-                $.get('{{route('res.districts')}}' + '?province_code=' + province_code,
-                    function(data) {
-                        $('#district_2').empty();
-                        $('#district_2').append('<option value="" disabled selected>Chọn quận/huyện</option>');
-                        $.each(data, function(index, district) {
-                            $('#district_2').append('<option value="' + district.code + '">' + district.name_with_type + '</option>')
-                        });
-                    });
+                          if(ward.code == ward_2){
+                              $('option[data-old-2="old-'+ward.code+'"]').prop('selected',true);
+                          }
+                  });
+              });
+      }
 
 
-            });
+      });
+          $('#province_1').on('change', function(e) {
+              var province_code = e.target.value;
+              $.get('{{route('res.districts')}}' + '?province_code=' + province_code,
+                  function(data) {
+                      $('#district_1').empty();
+                      $('#district_1').append('<option value="" disabled selected>Chọn quận/huyện</option>');
+                      $.each(data, function(index, district) {
+                          $('#district_1').append('<option data-old-1="old-'+district.code+'" value="' + district.code + '">' + district.name_with_type + '</option>');
 
 
-            $('#district_2').on('change', function(e) {
-                var district_code = e.target.value;
-                $.get('{{route('res.wards')}}' + '?district_code=' + district_code,
-                    function(data) {
-                        $('#ward_2').empty();
-                        $('#ward_2').append('<option value="" disabled selected>Chọn phường/xã</option>');
-                        $.each(data, function(index, ward) {
-                            $('#ward_2').append('<option value="' + ward.code + '">' + ward.name_with_type + '</option>')
-                        });
-                    });
-            });
-        });
+                      });
+                  });
+          });
+          $('#district_1').on('change', function(e) {
+              var district_code = e.target.value;
+              $.get('{{route('res.wards')}}' + '?district_code=' + district_code,
+                  function(data) {
+                      $('#ward_1').empty();
+                      $('#ward_1').append('<option value="" disabled selected>Chọn phường/xã</option>');
+                      $.each(data, function(index, ward) {
+                          $('#ward_1').append('<option data-old-1="old-'+ward.code+'" value="' + ward.code + '">' + ward.name_with_type + '</option>');
+
+                      });
+                  });
+          });
+          $('#province_2').on('change', function(e) {
+              var province_code = e.target.value;
+              $.get('{{route('res.districts')}}' + '?province_code=' + province_code,
+                  function(data) {
+                      $('#district_2').empty();
+                      $('#district_2').append('<option value="" disabled selected>Chọn quận/huyện</option>');
+                      $.each(data, function(index, district) {
+                          $('#district_2').append('<option value="' + district.code + '">' + district.name_with_type + '</option>')
+                      });
+                  });
+
+
+          });
+
+
+          $('#district_2').on('change', function(e) {
+              var district_code = e.target.value;
+              $.get('{{route('res.wards')}}' + '?district_code=' + district_code,
+                  function(data) {
+                      $('#ward_2').empty();
+                      $('#ward_2').append('<option value="" disabled selected>Chọn phường/xã</option>');
+                      $.each(data, function(index, ward) {
+                          $('#ward_2').append('<option value="' + ward.code + '">' + ward.name_with_type + '</option>')
+                      });
+                  });
+          });
     </script>
 
     @endsection

@@ -25,7 +25,7 @@ class PIEmployeeTest extends TestCase
     {
         $this->login_employee();
         $data = $this->data();
-        $data['full_name']= 'Le Le Le';
+        $data['full_name']= 'Lâm Tuệ Khương';
         $updatePI = $this->post('/pi-update', $data);
         $pi = PI::where('employee_code', Auth::guard('employee')->user()->username)->first();
         $this->assertEquals($pi->full_name, $data['full_name']);
@@ -48,7 +48,7 @@ class PIEmployeeTest extends TestCase
     {
         $this->login_employee();
         $data = $this->data();
-        $data['email_address']= 'taolao024@gmail.com';
+        $data['email_address']= 'haimuoibon020@gmail.com';
         $updatePI = $this->post('/pi-update', $data);
 
         $pi = PI::where('employee_code', Auth::guard('employee')->user()->username)->first();
@@ -71,24 +71,32 @@ class PIEmployeeTest extends TestCase
     public function data()
     {
         $actual = [
-         'full_name' =>'Le Thanh Son',
-         'nation' =>1,
-         'gender'=> 1,
-         'date_of_birth' =>'1997-04-10',
-         'place_of_birth' =>'TPHCM',
-         'permanent_address' =>'An Giang',
-         'contact_address' =>'An Giang',
-         'phone_number' =>'0123456789',
-         'email_address' =>'lethanhson2910@gmail.com',
-         'identity_card' =>'321368999',
-         'date_of_issue' =>'2015-04-10',
-         'place_of_issue' =>'TPHCM',
+      "full_name" => "Ân Phạm",
+      "nation" => "1",
+      "religion" => "14",
+      "gender" => "1",
+      "date_of_birth" => "1962-12-19",
+      "place_of_birth" => "Gia Lai",
+      "permanent_address" => "Bình Lợi",
+      "province_1" => "62",
+      "district_1" => "610",
+      "ward_1" => "23344",
+      "contact_address" => "Bình Lợi",
+      "province_2" => "68",
+      "district_2" => "672",
+      "ward_2" => "24769",
+      "home_town" => "Kiên Giang",
+      "phone_number" => "123456789",
+      "email_address" => "taolao024@gmail.com",
+      "identity_card" => "352390125",
+      "place_of_issue" => "TPHCM",
+      "date_of_issue" => "2018-12-19"
        ];
         return $actual;
     }
     public function login_employee()
     {
-        $employee = Employee::where('username', 'T155444')->first();
+        $employee = Employee::where('username', 'T154725')->first();
         $this->actingAs($employee, 'employee');
     }
 }

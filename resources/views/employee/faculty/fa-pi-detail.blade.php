@@ -7,7 +7,6 @@
             {{-- <li><a href="#">Home</a></li> --}}
             {{--  <li class=""><a href="{{route('employee.pi.index')}}">Quản lý thông tin nhân viên</a></li>  --}}
              <li class="">Chi tiết nhân viên - {{$pi->employee_code}}</li>
-            <li class="active">Thông tin cá nhân</li>
         </ol>
     </div>
 </div>
@@ -67,6 +66,10 @@
                                     <div class="form-group">
                                         <label for="inputPassword3" class="col-sm-3  ">Giới tính </label>
                                         <span for="" class="col-sm-9 text-nowrap">{{$pi->gender ==0 ? "Nam":""}}{{$pi->gender ==1 ? "Nữ":""}}</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-3  ">Tôn giáo</label>
+                                        <span for="" class="col-sm-9 text-nowrap">{{$pi->religion->name}}</span>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputPassword3" class="col-sm-3  ">Dân tộc </label>
@@ -160,13 +163,16 @@
 
                                         <div class="form-group">
                                             <label for="inputPassword3" class="col-sm-5  ">Đơn vị</label>
-                                            <span for="" class="col-sm-7 text-nowrap">{{$pi->unit->name}}</span>
+                                            <span for="" class="col-sm-7 text-truncate">{{$pi->unit->name}}</span>
                                         </div>
                                         <div class="form-group">
                                             <label for="inputPassword3" class="col-sm-5  ">Ngày tuyển dụng </label>
                                             <span for="" class="col-sm-7 text-nowrap">{{date('d-m-Y',strtotime($pi->date_of_recruitment))}}</span>
                                         </div>
-
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-5  ">Loại hợp đồng </label>
+                                            <span for="" class="col-sm-7 text-nowrap">{{($pi->contract_type->name)}}</span>
+                                        </div>
                                     </form>
                                 </div>
                             </div>

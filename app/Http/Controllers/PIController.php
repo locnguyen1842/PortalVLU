@@ -32,6 +32,8 @@ use App\PositionType;
 use App\TeacherTitle;
 use App\TeacherType;
 use App\Teacher;
+use App\ContractType;
+use App\Religion;
 
 class PIController extends Controller
 {
@@ -63,32 +65,37 @@ class PIController extends Controller
     }
     public function getAdd()
     {
-        $this->authorize('cud', PI::first());
+        $this->authorize('cud', PI::firstOrFail());
         $nations = Nation::all();
         $units = Unit::all();
         $officer_types = OfficerType::all();
         $position_types = PositionType::all();
         $teacher_types = TeacherType::all();
         $teacher_titles = TeacherTitle::all();
+        $contract_types = ContractType::all();
+        $religions = Religion::all();
+
         // $wards = Ward::all('name_with_type','code');
-        $provinces = Province::all('name_with_type','code');
-        return view('admin.pi.pi-add', compact('nations', 'units','provinces','officer_types','position_types','teacher_types','teacher_titles'));
+        $provinces = Province::all('name_with_type', 'code');
+        return view('admin.pi.pi-add', compact('nations', 'units', 'provinces', 'officer_types', 'position_types', 'teacher_types', 'teacher_titles', 'contract_types','religions'));
     }
 
-    public function getDistricts(){
+    public function getDistricts()
+    {
         $province_code = Input::get('province_code');
-        $districts = District::where('parent_code',$province_code)->get(['name_with_type','code']);
+        $districts = District::where('parent_code', $province_code)->get(['name_with_type','code']);
         return response()->json($districts);
     }
-    public function getWards(){
+    public function getWards()
+    {
         $district_code = Input::get('district_code');
-        $wards = Ward::where('parent_code',$district_code)->get(['name_with_type','code']);
+        $wards = Ward::where('parent_code', $district_code)->get(['name_with_type','code']);
         return response()->json($wards);
     }
 
     public function postAdd(Request $request)
     {
-        $this->authorize('cud', PI::first());
+        $this->authorize('cud', PI::firstOrFail());
         $request->validate(
           [
             'employee_code'=> 'required|unique:personalinformations,employee_code',
@@ -109,17 +116,20 @@ class PIController extends Controller
             'position'=> 'required',
             'date_of_recruitment' => 'required|date',
             'professional_title'=> 'required',
-            'identity_card'=> 'required|unique:personalinformations,identity_card',
+            'identity_card'=> 'required|min:9|max:12|unique:personalinformations,identity_card',
             'date_of_issue' => 'required|date',
             'place_of_issue'=> 'required',
             'unit'=> 'required',
             'position_type'=> 'required',
             'officer_type'=> 'required',
             'teacher_type'=> 'required',
-            'teacher_title'=> 'required',
-            'is_retired'=> 'required',
-            'date_of_retirement'=> 'required',
+            'teacher_title'=> 'required_unless:teacher_type,0',
+            'is_retired'=> 'required_unless:teacher_type,0',
+            'date_of_retirement'=> 'required_if:is_retired,1',
             'is_concurrently'=> 'required',
+            'home_town'=> 'required',
+            'contract_type'=> 'required',
+            'religion'=> 'required',
           ],
           [
             'employee_code.required'=> 'Mã giảng viên không được bỏ trống',
@@ -153,22 +163,27 @@ class PIController extends Controller
             'professional_title.required' =>'Chức danh chuyên môn không được bỏ trống',
             'identity_card.unique' =>'Chứng minh nhân dân đã được sử dụng',
             'identity_card.required' =>'Chứng minh nhân dân không được bỏ trống',
+            'identity_card.min' =>'Chứng minh nhân dân không hợp lệ',
+            'identity_card.max' =>'Chứng minh nhân dân không hợp lệ',
             'date_of_issue.required' =>'Ngày cấp không được bỏ trống',
             'date_of_issue.date' =>'Ngày cấp sai định dạng',
             'place_of_issue.required' =>'Nơi cấp không được bỏ trống',
             'unit.required' =>'Đơn vị không được bỏ trống',
             'teacher_type.required' =>'Loại giảng viên không được bỏ trống',
-            'teacher_title.required' =>'Chức danh nghề nghiệp không được bỏ trống',
-            'is_retired.required' =>'Nghỉ hưu không được bỏ trống',
-            'date_of_retirement.required' =>'Ngày nghỉ hưu không được bỏ trống',
+            'teacher_title.required_unless' =>'Chức danh nghề nghiệp không được bỏ trống',
+            'is_retired.required_unless' =>'Nghỉ hưu không được bỏ trống',
+            'date_of_retirement.required_if' =>'Ngày nghỉ hưu không được bỏ trống',
             'officer_type.required' =>'Loại cán bộ không được bỏ trống',
             'position_type.required' =>'Chức vụ không được bỏ trống',
             'is_concurrently.required' =>'Kiêm nhiệm giảng dạy không được bỏ trống',
+            'home_town.required' =>'Quê quán không được bỏ trống',
+            'contract_type.required' =>'Loại hợp đồng không được bỏ trống',
+            'religion.required' =>'Tôn giáo không được bỏ trống',
+
           ]
       );
         //add data
         $pi = new PI;
-        $pi->id= $request->id;
         $pi->employee_code= strtoupper($request->employee_code);
 
         // $full_name = " ".$request->full_name;
@@ -176,12 +191,15 @@ class PIController extends Controller
         $split = explode(" ", $request->full_name);
         $pi->first_name =$split[sizeof($split)-1]; // get name
         $pi->gender= $request->gender;
+        $pi->religion_id= $request->religion;
         $pi->nation_id= $request->nation;
         $pi->date_of_birth= $request->date_of_birth;
         $pi->place_of_birth= $request->place_of_birth;
         // $pi->permanent_address_id= $request->permanent_address;
         $pi->phone_number= $request->phone_number;
         $pi->email_address= $request->email_address;
+        $pi->home_town= $request->home_town;
+        $pi->contract_type_id= $request->contract_type;
         $pi->position= $request->position;
         $pi->date_of_recruitment= $request->date_of_recruitment;
         $pi->professional_title= $request->professional_title;
@@ -191,6 +209,7 @@ class PIController extends Controller
         $pi->show = 1;
         $pi->new = 0;
         $pi->unit_id = $request->unit;
+        $pi->is_activity = $request->is_activity;
 
         $permanent_address = new Address;
         $permanent_address->address_content = $request->permanent_address;
@@ -245,30 +264,40 @@ class PIController extends Controller
         $officer->is_concurrently = $request->is_concurrently;
         $officer->save();
 
-        $teacher = new Teacher;
-        $teacher->personalinformation_id = $pi->id;
-        $teacher->type_id = $request->teacher_type;
-        $teacher->title_id = $request->teacher_title;
-        $teacher->is_retired = $request->is_retired; //đã nghĩ hưu chưa ( radio button)
-        $teacher->date_of_retirement = $request->date_of_retirement; // ngày nghĩ hưu người dùng nhập bên view
-        if ($request->has('is_excellent_teacher')){
-          $teacher->is_excellent_teacher = 1; //Nhà giáo ưu tú
+
+        if ($request->teacher_type != 0) {
+            $teacher = new Teacher;
+            $teacher->personalinformation_id = $pi->id;
+            $teacher->type_id = $request->teacher_type;
+            $teacher->title_id = $request->teacher_title;
+            if ($request->is_retired == 0) {
+                $teacher->is_retired = $request->is_retired;
+                $teacher->date_of_retirement = null;
+            } else {
+                $teacher->is_retired = $request->is_retired;
+                $teacher->date_of_retirement = $request->date_of_retirement;
+            }
+
+            if ($request->has('is_excellent_teacher')) {
+                $teacher->is_excellent_teacher = 1; //Nhà giáo ưu tú
+            } else {
+                $teacher->is_excellent_teacher = 0;
+            }
+            if ($request->has('is_excellent_teacher')) {
+                //Nhà giáo nhân dân | 2 thang cuối này là cái checkbox chọn cái nào thì cái đó = 1
+                $teacher->is_national_teacher = 1;
+            } else {
+                $teacher->is_national_teacher = 0;
+            }
+            $teacher->save();
         }
-        if($request->has('is_excellent_teacher')){
-          //Nhà giáo nhân dân | 2 thang cuối này là cái checkbox chọn cái nào thì cái đó = 1
-          $teacher->is_national_teacher = 1;
-        }
-        else{
-          $teacher->is_excellent_teacher = 0;
-          $teacher->is_national_teacher = 0;
-        }
-        $teacher->save();
+
         return redirect()->back()->with('message', 'Thêm thành công');
     }
     //get data personal information
     public function getupdate($id)
     {
-        $this->authorize('cud', PI::first());
+        $this->authorize('cud', PI::firstOrFail());
         $pi = PI::Find($id);
         $nations = Nation::all();
         $units = Unit::all();
@@ -276,14 +305,12 @@ class PIController extends Controller
         $position_types = PositionType::all();
         $teacher_types = TeacherType::all();
         $teacher_titles = TeacherTitle::all();
-
         $provinces = Province::all('name_with_type','code');
         return view('admin.pi.pi-update', compact('pi', 'nations', 'units', 'provinces','officer_types','position_types','teacher_types','teacher_titles'));
     }
     //post date update information
     public function postupdate(Request $request, $id)
     {
-
         //post data
         $pi = PI::Find($id);
         $this->authorize('cud', $pi);
@@ -306,17 +333,20 @@ class PIController extends Controller
               'position'=> 'required',
               'date_of_recruitment' => 'required|date',
               'professional_title'=> 'required',
-              'identity_card'=> 'required|unique:personalinformations,identity_card,'.$pi->id,
+              'identity_card'=> 'required|min:9|max:12|unique:personalinformations,identity_card,'.$pi->id,
               'date_of_issue' => 'required|date',
               'place_of_issue'=> 'required',
               'unit' => 'required',
               'position_type'=> 'required',
               'officer_type'=> 'required',
               'teacher_type'=> 'required',
-              'teacher_title'=> 'required',
-              'is_retired'=> 'required',
-              'date_of_retirement'=> 'required',
+              'teacher_title'=> 'required_unless:teacher_type,0',
+              'is_retired'=> 'required_unless:teacher_type,0',
+              'date_of_retirement'=> 'required_if:is_retired,1',
               'is_concurrently'=> 'required',
+              'home_town'=> 'required',
+              'contract_type'=> 'required',
+              'religion'=> 'required',
           ],
           [
               'employee_code.required'=> 'Mã giảng viên không được bỏ trống',
@@ -349,30 +379,37 @@ class PIController extends Controller
               'professional_title.required' =>'Chức danh chuyên môn không được bỏ trống',
               'identity_card.unique' =>'Chứng minh nhân dân đã được sử dụng',
               'identity_card.required' =>'Chứng minh nhân dân không được bỏ trống',
+              'identity_card.min' =>'Chứng minh nhân dân không hợp lệ',
+              'identity_card.max' =>'Chứng minh nhân dân không hợp lệ',
               'date_of_issue.required' =>'Ngày cấp không được bỏ trống',
               'date_of_issue.date' =>'Ngày cấp sai định dạng',
               'place_of_issue.required' =>'Nơi cấp không được bỏ trống',
               'unit.required' =>'Đơn vị không được bỏ trống',
               'teacher_type.required' =>'Loại giảng viên không được bỏ trống',
-              'teacher_title.required' =>'Chức danh nghề nghiệp không được bỏ trống',
-              'is_retired.required' =>'Nghỉ hưu không được bỏ trống',
-              'date_of_retirement.required' =>'Ngày nghỉ hưu không được bỏ trống',
+              'teacher_title.required_unless' =>'Chức danh nghề nghiệp không được bỏ trống',
+              'is_retired.required_unless' =>'Nghỉ hưu không được bỏ trống',
+              'date_of_retirement.required_if' =>'Ngày nghỉ hưu không được bỏ trống',
               'officer_type.required' =>'Loại cán bộ không được bỏ trống',
               'position_type.required' =>'Chức vụ không được bỏ trống',
               'is_concurrently.required' =>'Kiêm nhiệm giảng dạy không được bỏ trống',
+              'home_town.required' =>'Quê quán không được bỏ trống',
+              'contract_type.required' =>'Loại hợp đồng không được bỏ trống',
+              'religion.required' =>'Tôn giáo không được bỏ trống',
           ]
         );
         //post data
-        $pi->id= $request->id;
         $pi->full_name= $request->full_name;
         $split = explode(" ", $request->full_name);
         $pi->first_name =$split[sizeof($split)-1]; // get name
         $pi->gender= $request->gender;
         $pi->nation_id= $request->nation;
+        $pi->religion_id= $request->religion;
         $pi->date_of_birth= $request->date_of_birth;
         $pi->place_of_birth= $request->place_of_birth;
         $pi->phone_number= $request->phone_number;
         $pi->email_address= $request->email_address;
+        $pi->home_town= $request->home_town;
+        $pi->contract_type_id= $request->contract_type;
         $pi->position= $request->position;
         $pi->date_of_recruitment= $request->date_of_recruitment;
         $pi->professional_title= $request->professional_title;
@@ -380,9 +417,10 @@ class PIController extends Controller
         $pi->date_of_issue= $request->date_of_issue;
         $pi->place_of_issue= $request->place_of_issue;
         $pi->unit_id = $request->unit;
+        $pi->is_activity = $request->is_activity;
 
-        if($pi->permanent_address()->exists() && $pi->contact_address()->exists()){
-            $permanent_address = Address::where('id',$pi->permanent_address_id)->first();
+        if ($pi->permanent_address()->exists() && $pi->contact_address()->exists()) {
+            $permanent_address = Address::where('id', $pi->permanent_address_id)->firstOrFail();
             // luu cac thong tin update ve address o day
             $permanent_address->address_content = $request->permanent_address;
             $permanent_address->province_code = $request->province_1;
@@ -392,7 +430,7 @@ class PIController extends Controller
             $pi->permanent_address_id = $permanent_address->id;
 
 
-            $contact_address = Address::where('id',$pi->contact_address_id)->first();
+            $contact_address = Address::where('id', $pi->contact_address_id)->firstOrFail();
             // luu cac thong tin update ve address o day
             $contact_address->address_content = $request->contact_address;
             $contact_address->province_code = $request->province_2;
@@ -400,9 +438,7 @@ class PIController extends Controller
             $contact_address->ward_code = $request->ward_2;
             $contact_address->save();
             $pi->contact_address_id = $contact_address->id;
-
-
-        }else{
+        } else {
             $permanent_address = new Address;
             // neu nhan vien nao chua co address tu truoc se dc tao moi address
             // luu cac thong tin update ve address o day
@@ -424,33 +460,71 @@ class PIController extends Controller
             $contact_address->ward_code = $request->ward_2;
             $contact_address->save();
             $pi->contact_address_id = $contact_address->id;
-
-
         }
         $pi->save();
-        $officer = Officer::where('personalinformation_id',$pi->id)->first();
+        $officer = Officer::where('personalinformation_id', $pi->id)->firstOrFail();
         $officer->type_id = $request->officer_type;
         $officer->position_id = $request->position_type;
         $officer->is_concurrently = $request->is_concurrently;
         $officer->save();
 
-        $teacher = Teacher::where('personalinformation_id',$pi->id)->first();
-        $teacher->type_id = $request->teacher_type;
-        $teacher->title_id = $request->teacher_title;
-        $teacher->is_retired = $request->is_retired; //đã nghĩ hưu chưa ( radio button)
-        $teacher->date_of_retirement = $request->date_of_retirement; // ngày nghĩ hưu người dùng nhập bên view
-        if ($request->has('is_excellent_teacher')){
-          $teacher->is_excellent_teacher = 1; //Nhà giáo ưu tú
+        if ($request->teacher_type != 0) {
+            if ($pi->teacher()->exists()) {
+                $teacher = Teacher::where('personalinformation_id', $pi->id)->firstOrFail();
+                $teacher->type_id = $request->teacher_type;
+                $teacher->title_id = $request->teacher_title;
+                if ($request->is_retired == 0) {
+                    $teacher->is_retired = $request->is_retired;
+                    $teacher->date_of_retirement = null;
+                } else {
+                    $teacher->is_retired = $request->is_retired;
+                    $teacher->date_of_retirement = $request->date_of_retirement;
+                }
+
+                if ($request->has('is_excellent_teacher')) {
+                    $teacher->is_excellent_teacher = 1; //Nhà giáo ưu tú
+                } else {
+                    $teacher->is_excellent_teacher = 0;
+                }
+                if ($request->has('is_excellent_teacher')) {
+                    //Nhà giáo nhân dân | 2 thang cuối này là cái checkbox chọn cái nào thì cái đó = 1
+                    $teacher->is_national_teacher = 1;
+                } else {
+                    $teacher->is_national_teacher = 0;
+                }
+                $teacher->save();
+            } else {
+                $teacher = new Teacher;
+                $teacher->personalinformation_id = $pi->id;
+                $teacher->type_id = $request->teacher_type;
+                $teacher->title_id = $request->teacher_title;
+                if ($request->is_retired == 0) {
+                    $teacher->is_retired = $request->is_retired;
+                    $teacher->date_of_retirement = null;
+                } else {
+                    $teacher->is_retired = $request->is_retired;
+                    $teacher->date_of_retirement = $request->date_of_retirement;
+                }
+
+                if ($request->has('is_excellent_teacher')) {
+                    $teacher->is_excellent_teacher = 1; //Nhà giáo ưu tú
+                } else {
+                    $teacher->is_excellent_teacher = 0;
+                }
+                if ($request->has('is_excellent_teacher')) {
+                    //Nhà giáo nhân dân | 2 thang cuối này là cái checkbox chọn cái nào thì cái đó = 1
+                    $teacher->is_national_teacher = 1;
+                } else {
+                    $teacher->is_national_teacher = 0;
+                }
+                $teacher->save();
+            }
+        } elseif ($request->teacher_type == 0) {
+            if ($pi->teacher()->exists()) {
+                $teacher = Teacher::where('personalinformation_id', $pi->id)->firstOrFail();
+                $teacher->delete();
+            }
         }
-        if($request->has('is_excellent_teacher')){
-          //Nhà giáo nhân dân | 2 thang cuối này là cái checkbox chọn cái nào thì cái đó = 1
-          $teacher->is_national_teacher = 1;
-        }
-        else{
-          $teacher->is_excellent_teacher = 0; //Nhà giáo ưu tú
-          $teacher->is_national_teacher = 0;
-        }
-        $teacher->save();
 
 
 
@@ -458,7 +532,7 @@ class PIController extends Controller
     }
     public function getdetail($id)
     {
-        $pi = PI::find($id);
+        $pi = PI::findOrFail($id);
         $pi->new = 0;
         $pi->save();
         $dh_count = $pi->degreedetails->where('degree_id', 1)->count();
@@ -471,7 +545,7 @@ class PIController extends Controller
 
     public function recoverypassword($pi_id)
     {
-        $pi = PI::find($pi_id);
+        $pi = PI::findOrFail($pi_id);
         $this->authorize('cud', $pi);
         //strtoupper cho nó in hoa khi gõ pass
         //chỉ cần thay đổi trường pwd la dc
@@ -490,7 +564,7 @@ class PIController extends Controller
 
     public function import(Request $request)
     {
-        $this->authorize('cud', PI::first());
+        $this->authorize('cud', PI::firstOrFail());
 
         $request->validate(
         [
@@ -511,21 +585,21 @@ class PIController extends Controller
 
     public function delete($pi_id)
     {
-        $this->authorize('cud', PI::first());
+        $this->authorize('cud', PI::firstOrFail());
 
-        $pi = PI::find($pi_id);
+        $pi = PI::findOrFail($pi_id);
         $pi->show = 0;
         $pi->save();
         return redirect()->back()->with('message', 'Xóa thông tin nhân viên thành công');
     }
 //    public function getdegreedetail($id){
-//        $dedeatail = DegreeDetail::find($id);
+//        $dedeatail = DegreeDetail::findOrFail($id);
 //        return view('admin.pi.pi-detail',compact('dedeatail'));
 //    }
 
     public function rolechange(Request $request, $pi_id)
     {
-        $pi = PI::find($pi_id);
+        $pi = PI::findOrFail($pi_id);
         $this->authorize('cud', $pi);
         if ($request->role == 0) {
             //check if is admin
@@ -534,10 +608,10 @@ class PIController extends Controller
                 $admin->delete();
                 return redirect()->back()->with('message', 'Thay đổi vai trò tài khoản thành công');
             } elseif ($pi->admin =='') {
-                if($request->role_employee == 0){
+                if ($request->role_employee == 0) {
                     $pi->employee->is_leader = 0;
                     $pi->employee->save();
-                }else {
+                } else {
                     $pi->employee->is_leader = 1;
                     $pi->employee->save();
                 }
@@ -551,9 +625,9 @@ class PIController extends Controller
                 $admin->password = Hash::make($pi->employee_code);
                 $admin->email = $pi->email_address;
                 $admin->personalinformation_id = $pi->id;
-                if($request->role_admin == 0 ){
+                if ($request->role_admin == 0) {
                     $admin->is_supervisor = 1;
-                }else{
+                } else {
                     $admin->is_supervisor = 0;
                 }
                 $admin->save();
@@ -561,10 +635,10 @@ class PIController extends Controller
             }
             //check if is admin
             elseif ($pi->admin !='') {
-                if($request->role_admin == 0 ){
+                if ($request->role_admin == 0) {
                     $pi->admin->is_supervisor = 1;
                     $pi->admin->save();
-                }else{
+                } else {
                     $pi->admin->is_supervisor = 0;
                     $pi->admin->save();
                 }
@@ -574,7 +648,7 @@ class PIController extends Controller
     }
     public function getdataimport(Request $request)
     {
-        // $this->authorize('cud', PI::first());
+        // $this->authorize('cud', PI::firstOrFail());
         // dd('a');
         $validator = Validator::make(
           $request->all(),
@@ -591,56 +665,54 @@ class PIController extends Controller
             if ($request->has('import_file')) {
                 $import_file = $request->file('import_file');
                 $arr_pi  = (new GetPIImport)->toArray($import_file);
-                $number_of_sheet = 3;
+                $number_of_sheet = 4;
                 $excel_column_length_sheet_1 = 25;
                 $excel_column_length_sheet_2 = 8;
                 $excel_column_length_sheet_3 = 5;
-                if (count($arr_pi) == $number_of_sheet) {
+                $excel_column_length_sheet_4 = 10;
+                if (count($arr_pi) >= $number_of_sheet) {
                     if (count($arr_pi[0][0]) == $excel_column_length_sheet_1) {
                         if (count($arr_pi[1][0]) == $excel_column_length_sheet_2) {
                             if (count($arr_pi[2][0]) == $excel_column_length_sheet_3) {
-                                //handle date time from excel to array for sheet 1
-                                foreach ($arr_pi[0] as $key => $value) {
-                                    if ($key != 0) {
-                                        $date_of_birth = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[4]);
-                                        $date_of_issue = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[8]);
-                                        $date_of_recruitment = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[12]);
-                                        if($value[20] == 'x'){
-                                            if($value[21] != null){
+                                if (count($arr_pi[3][0]) == $excel_column_length_sheet_4) {
+                                    foreach ($arr_pi[0] as $key => $value) {
+                                        if ($key != 0) {
+                                            $date_of_birth = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[4]);
+                                            $date_of_issue = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[8]);
+                                            $date_of_recruitment = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[12]);
+                                            if (trim($value[21], ' ') != null && trim($value[21], ' ') != 'x') {
+                                                // $arr_pi[0][$key][21] = $value[21];
                                                 $date_of_retirement = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[21]);
                                                 $arr_pi[0][$key][21] = $date_of_retirement->format('d-m-Y');
-                                            }else{
+                                            } else {
                                                 $date_of_retirement = null;
                                             }
-                                        }else{
-                                            $date_of_retirement = null;
+
+                                            $arr_pi[0][$key][4] = $date_of_birth->format('d-m-Y');
+                                            $arr_pi[0][$key][8] = $date_of_issue->format('d-m-Y');
+                                            $arr_pi[0][$key][12] = $date_of_recruitment->format('d-m-Y');
                                         }
-
-                                        $arr_pi[0][$key][4] = $date_of_birth->format('d-m-Y');
-                                        $arr_pi[0][$key][8] = $date_of_issue->format('d-m-Y');
-                                        $arr_pi[0][$key][12] = $date_of_recruitment->format('d-m-Y');
-
-
                                     }
-                                }
-                                //handle date time from excel to array for sheet 2
-                                foreach ($arr_pi[1] as $key => $value) {
-                                    if ($key != 0) {
-                                        $date_of_issue = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[3]);
-                                        $arr_pi[1][$key][3] = $date_of_issue->format('d-m-Y');
+                                    //handle date time from excel to array for sheet 2
+                                    foreach ($arr_pi[1] as $key => $value) {
+                                        if ($key != 0) {
+                                            $date_of_issue = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[3]);
+                                            $arr_pi[1][$key][3] = $date_of_issue->format('d-m-Y');
+                                        }
                                     }
-                                }
-                                //handle date time from excel to array for sheet 3
-                                foreach ($arr_pi[2] as $key => $value) {
-                                    if ($key != 0) {
-                                        $date_of_issue = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[3]);
-                                        $arr_pi[2][$key][3] = $date_of_issue->format('d-m-Y');
+                                    //handle date time from excel to array for sheet 3
+                                    foreach ($arr_pi[2] as $key => $value) {
+                                        if ($key != 0) {
+                                            $date_of_issue = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[3]);
+                                            $arr_pi[2][$key][3] = $date_of_issue->format('d-m-Y');
+                                        }
                                     }
+                                    return response()->json($arr_pi);
+                                } else {
+                                    return response()->json(['error'=>[0=>'File tải lên không đúng cấu trúc (Sheet 4) .Vui lòng xem lại file mẫu <small> '.'<a href="'.route('admin.pi.template.download').'"> (tải file mẫu)</a></small>']]);
                                 }
-                                return response()->json($arr_pi);
                             } else {
                                 return response()->json(['error'=>[0=>'File tải lên không đúng cấu trúc (Sheet 3) .Vui lòng xem lại file mẫu <small> '.'<a href="'.route('admin.pi.template.download').'"> (tải file mẫu)</a></small>']]);
-
                             }
                         } else {
                             return response()->json(['error'=>[0=>'File tải lên không đúng cấu trúc (Sheet 2) .Vui lòng xem lại file mẫu <small> '.'<a href="'.route('admin.pi.template.download').'"> (tải file mẫu)</a></small>']]);
@@ -657,15 +729,17 @@ class PIController extends Controller
     }
 
 
-    public function getCreateAcademicRank($pi_id){
+    public function getCreateAcademicRank($pi_id)
+    {
         $industries = Industry::all();
         $academic_rank_types = AcademicRankType::all();
-        $pi = PI::find($pi_id);
-        return view('admin.pi.academic-create',compact('pi','academic_rank_types','industries'));
-
+        $pi = PI::findOrFail($pi_id);
+        return view('admin.pi.academic-create', compact('pi', 'academic_rank_types', 'industries'));
     }
-    public function postCreateAcademicRank($pi_id,Request $request){
-        $this->validate($request,
+    public function postCreateAcademicRank($pi_id, Request $request)
+    {
+        $this->validate(
+            $request,
             [
                 'academic_rank_type' => 'required',
                 'specialized' => 'required',
@@ -680,7 +754,7 @@ class PIController extends Controller
                 'industry.required' => 'Vui lòng chọn khối ngành',
             ]
         );
-        $pi = PI::find($pi_id);
+        $pi = PI::findOrFail($pi_id);
         $academic_rank = new AcademicRank;
         $academic_rank->personalinformation_id = $pi->id;
         $academic_rank->type_id = $request->academic_rank_type;
@@ -688,19 +762,21 @@ class PIController extends Controller
         $academic_rank->date_of_recognition = $request->date_of_recognition;
         $academic_rank->industry_id = $request->industry;
         $academic_rank->save();
-        return redirect()->route('admin.pi.detail',$pi->id)->with('message','Thêm mới thành công');
+        return redirect()->route('admin.pi.detail', $pi->id)->with('message', 'Thêm mới thành công');
     }
 
-    public function getUpdateAcademicRank($pi_id){
+    public function getUpdateAcademicRank($pi_id)
+    {
         $industries = Industry::all();
-        $pi = PI::find($pi_id);
+        $pi = PI::findOrFail($pi_id);
         $academic_rank_types = AcademicRankType::all();
-        return view('admin.pi.academic-update',compact('pi','academic_rank_types','industries'));
-
+        return view('admin.pi.academic-update', compact('pi', 'academic_rank_types', 'industries'));
     }
 
-    public function postUpdateAcademicRank($pi_id,Request $request){
-        $this->validate($request,
+    public function postUpdateAcademicRank($pi_id, Request $request)
+    {
+        $this->validate(
+            $request,
             [
                 'academic_rank_type' => 'required',
                 'specialized' => 'required',
@@ -715,20 +791,21 @@ class PIController extends Controller
                 'industry.required' => 'Vui lòng chọn khối ngành',
             ]
         );
-        $pi = PI::find($pi_id);
-        $academic_rank = AcademicRank::where('personalinformation_id',$pi->id)->first();
+        $pi = PI::findOrFail($pi_id);
+        $academic_rank = AcademicRank::where('personalinformation_id', $pi->id)->firstOrFail();
         $academic_rank->type_id = $request->academic_rank_type;
         $academic_rank->specialized = $request->specialized;
         $academic_rank->date_of_recognition = $request->date_of_recognition;
         $academic_rank->industry_id = $request->industry;
         $academic_rank->save();
-        return redirect()->back()->with('message','Cập nhật thành công');
+        return redirect()->back()->with('message', 'Cập nhật thành công');
     }
 
-    public function getDeleteAcademicRank($pi_id){
-        $pi = PI::find($pi_id);
-        $academic_rank = AcademicRank::where('personalinformation_id',$pi->id)->firstOrFail();
+    public function getDeleteAcademicRank($pi_id)
+    {
+        $pi = PI::findOrFail($pi_id);
+        $academic_rank = AcademicRank::where('personalinformation_id', $pi->id)->firstOrFail();
         $academic_rank->delete();
-        return redirect()->back()->with('message','Xóa học hàm thành công');
+        return redirect()->back()->with('message', 'Xóa học hàm thành công');
     }
 }

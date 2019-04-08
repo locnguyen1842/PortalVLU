@@ -64,12 +64,8 @@
 
                     <div class="col-sm-6">
                             <label>Nước cấp</label>
-                            <select required class="form-control" name="nation_of_issue_id">
-                                <option value="">Chọn nước cấp</option>
-                                @foreach($countries as $c)
-                                <option value="{{$c->id}}">{{$c->country_name}}</option>
-                                @endforeach
-                            </select>
+                            <input required type="text" maxlength="100" class="form-control" name="nation_of_issue_id" placeholder="Nhập nước cấp" value="{{old('nation_of_issue_id')}}">
+
                         </div>
                 </div>
                 <div class="form-group">
