@@ -305,8 +305,10 @@ class PIController extends Controller
         $position_types = PositionType::all();
         $teacher_types = TeacherType::all();
         $teacher_titles = TeacherTitle::all();
+        $religions = Religion::all();
+        $contract_types = ContractType::all();
         $provinces = Province::all('name_with_type','code');
-        return view('admin.pi.pi-update', compact('pi', 'nations', 'units', 'provinces','officer_types','position_types','teacher_types','teacher_titles'));
+        return view('admin.pi.pi-update', compact('pi', 'nations', 'units', 'provinces','officer_types','position_types','teacher_types','teacher_titles','religions','contract_types'));
     }
     //post date update information
     public function postupdate(Request $request, $id)
