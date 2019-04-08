@@ -27,11 +27,13 @@ class DegreeTest extends TestCase
         $this->actingAs($admin,'admin');
 
         $degree = [
-            'date_of_issue' => '1999-02-02',
-            'place_of_issue' =>'Mot noi rat xa',
-            'degree' =>1,
-            'specialized'=> 1,
-            'industry'=> 1,
+          "degree" => "1",
+          "specialized" => "Công Nghệ Thông Tin",
+          "date_of_issue" => "2018-12-14",
+          "industry" => "1",
+          "nation_of_issue_id" => "8",
+          "place_of_issue" => "TPHCM",
+          "degree_type" => "dai hoc"
 
         ];
         //
@@ -47,11 +49,13 @@ class DegreeTest extends TestCase
         $this->actingAs($admin,'admin');
 
         $degree = [
-            'date_of_issue' => '1999-02-03',
-            'place_of_issue' =>'Mot noi rat xa xoi',
-            'degree' =>1,
-            'specialized'=> 1,
-            'industry'=> 1,
+          "degree" => "1",
+          "specialized" => "Công Nghệ Thông Tin",
+          "date_of_issue" => "2018-12-14",
+          "industry" => "1",
+          "nation_of_issue_id" => "7",
+          "place_of_issue" => "TPHCM",
+          "degree_type" => "dai hoc"
 
         ];
         //
