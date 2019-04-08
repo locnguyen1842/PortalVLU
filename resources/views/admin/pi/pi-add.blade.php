@@ -44,6 +44,15 @@
                     </select>
                 </div>
                 <div class="col-sm-6">
+                    <label>Tôn Giáo</label>
+                    <select required class="form-control" name="nation">
+                        <option value="">Chọn tôn giáo</option>
+                        @foreach($nations as $nation)
+                        <option {{$nation->id == old('nation') ? 'selected':''}} value="{{$nation->id}}">{{$nation->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-sm-6">
                     <label>Giới tính</label>
                     <div class="radio">
                         <label class="col-sm-4">
