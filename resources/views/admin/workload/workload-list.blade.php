@@ -181,7 +181,8 @@
                             <br>
                             <ul id="myTab" class="nav nav-tabs" role="tablist">
                                 <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab"
-                                        aria-controls="home" aria-expanded="false">Khối lượng công việc</a></li>
+                                        aria-controls="home" aria-expanded="false">Khối lượng giảng dạy</a></li>
+
 
                             </ul>
 
@@ -233,7 +234,7 @@
                                                 <span class="help-block">Thao tác này sẽ xóa hết dữ liệu cũ.</span>
                                             </label>
                                             <label class="col-sm-6">
-                                                <input required type="radio" name="append" value="1">Thêm mới
+                                                <input required type="radio" name="append" value="1" checked>Thêm mới
                                                 <span class="help-block">Thao tác này sẽ thêm mới dữ liệu.</span>
                                             </label>
                                         </div>
