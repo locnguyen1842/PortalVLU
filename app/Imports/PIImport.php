@@ -124,7 +124,7 @@ class PIImport implements ToCollection, WithStartRow
             }
 
         }
-        // dd($teacher_types_name);
+        // dd($data_to_validate);
         //validate data da thay doi index
         Validator::make(
             $data_to_validate,

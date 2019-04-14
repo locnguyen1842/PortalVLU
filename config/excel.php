@@ -1,11 +1,7 @@
 <?php
-
 use Maatwebsite\Excel\Excel;
-
 return [
-
     'exports' => [
-
         /*
         |--------------------------------------------------------------------------
         | Chunk size
@@ -16,14 +12,12 @@ return [
         |
         */
         'chunk_size'             => 1000,
-
         /*
        |--------------------------------------------------------------------------
        | Pre-calculate formulas during export
        |--------------------------------------------------------------------------
        */
         'pre_calculate_formulas' => false,
-
         /*
         |--------------------------------------------------------------------------
         | CSV Settings
@@ -41,13 +35,9 @@ return [
             'excel_compatibility'    => false,
         ],
     ],
-
     'imports'            => [
-
         'read_only' => true,
-
         'heading_row' => [
-
             /*
             |--------------------------------------------------------------------------
             | Heading Row Formatter
@@ -59,7 +49,6 @@ return [
             */
             'formatter' => 'slug',
         ],
-
         /*
         |--------------------------------------------------------------------------
         | CSV Settings
@@ -77,7 +66,6 @@ return [
             'excel_compatibility'    => false,
         ],
     ],
-
     /*
     |--------------------------------------------------------------------------
     | Extension detector
@@ -104,7 +92,6 @@ return [
         'html'     => Excel::HTML,
         'csv'      => Excel::CSV,
         'tsv'      => Excel::TSV,
-
         /*
         |--------------------------------------------------------------------------
         | PDF Extension
@@ -116,9 +103,7 @@ return [
         */
         'pdf'      => Excel::DOMPDF,
     ],
-
     'value_binder' => [
-
         /*
         |--------------------------------------------------------------------------
         | Default Value Binder
@@ -132,9 +117,7 @@ return [
         */
         'default' => Maatwebsite\Excel\DefaultValueBinder::class,
     ],
-
     'transactions' => [
-
         /*
         |--------------------------------------------------------------------------
         | Transaction Handler
@@ -152,9 +135,7 @@ return [
         */
         'handler' => 'db',
     ],
-
     'temporary_files' => [
-
         /*
         |--------------------------------------------------------------------------
         | Local Temporary Path
@@ -164,8 +145,7 @@ return [
         | storing reading or downloading. Here you can customize that path.
         |
         */
-        'local_path'  => storage_path('app/public'),
-
+        'local_path'  => storage_path('app/public/temp'),
         /*
         |--------------------------------------------------------------------------
         | Remote Temporary Disk
@@ -181,6 +161,5 @@ return [
         |
         */
         'remote_disk' => null,
-
     ],
 ];

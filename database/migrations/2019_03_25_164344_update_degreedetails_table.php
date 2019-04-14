@@ -16,7 +16,10 @@ class UpdateDegreedetailsTable extends Migration
         Schema::table('degreedetails', function (Blueprint $table) {
             $table->integer('nation_of_issue_id')->unsigned()->default(1);
             $table->string('degree_type')->nullable();
+            $table->dropColumn('specialized_id');
+            $table->string('specialized');
             $table->foreign('nation_of_issue_id')->references('id')->on('countries');
+
 
 
         });
@@ -30,7 +33,7 @@ class UpdateDegreedetailsTable extends Migration
     public function down()
     {
         Schema::table('degreedetails', function (Blueprint $table) {
-            //
+            $table->dropColumn('specialized');
         });
     }
 }

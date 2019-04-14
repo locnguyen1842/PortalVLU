@@ -96,6 +96,8 @@ class PIController extends Controller
     public function postAdd(Request $request)
     {
         $this->authorize('cud', PI::firstOrFail());
+
+
         $request->validate(
           [
             'employee_code'=> 'required|unique:personalinformations,employee_code',
@@ -283,7 +285,7 @@ class PIController extends Controller
             } else {
                 $teacher->is_excellent_teacher = 0;
             }
-            if ($request->has('is_excellent_teacher')) {
+            if ($request->has('is_national_teacher')) {
                 //Nhà giáo nhân dân | 2 thang cuối này là cái checkbox chọn cái nào thì cái đó = 1
                 $teacher->is_national_teacher = 1;
             } else {
@@ -318,6 +320,7 @@ class PIController extends Controller
         //post data
         $pi = PI::Find($id);
         $this->authorize('cud', $pi);
+        // dd($request);
         $request->validate(
           [
               'full_name'=> 'required|min:4|max:60',
@@ -353,8 +356,7 @@ class PIController extends Controller
               'religion'=> 'required',
           ],
           [
-              'employee_code.required'=> 'Mã giảng viên không được bỏ trống',
-              'employee_code.unique'=> 'Mã giảng viên đã tồn tại',
+
               'full_name.required' =>'Họ và tên không được bỏ trống',
               'full_name.min' =>'Họ và tên phải lớn hơn 4 kí tự',
               'full_name.max' =>'Họ và tên phải nhỏ hơn 60 kí tự',
@@ -490,7 +492,7 @@ class PIController extends Controller
                 } else {
                     $teacher->is_excellent_teacher = 0;
                 }
-                if ($request->has('is_excellent_teacher')) {
+                if ($request->has('is_national_teacher')) {
                     //Nhà giáo nhân dân | 2 thang cuối này là cái checkbox chọn cái nào thì cái đó = 1
                     $teacher->is_national_teacher = 1;
                 } else {
@@ -568,6 +570,7 @@ class PIController extends Controller
 
     public function import(Request $request)
     {
+
         $this->authorize('cud', PI::firstOrFail());
 
         $request->validate(
