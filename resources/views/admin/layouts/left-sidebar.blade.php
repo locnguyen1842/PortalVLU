@@ -7,7 +7,13 @@
         <div id="cm-menu-items-wrapper">
             <div id="cm-menu-scroller">
                 <ul class="cm-menu-items">
-                    <li class="cm-submenu {{(url()->current() == route('admin.pi.index')||url()->current() == route('admin.pi.add')) ? 'open':''}}">
+                <li class="{{url()->current() == route('admin.pi.index') ? 'active':''}}">
+                            <a href="{{route('admin.pi.index')}}" class="sf-profile-group">Danh sách nhân viên</a>
+                        </li>
+                        <li class="{{url()->current() == route('admin.pi.add') ? 'active':''}}">
+                            <a href="{{route('admin.pi.add')}}" class="sf-sign-add">Thêm mới nhân viên</a>
+                        </li>
+                    {{-- <li class="cm-submenu {{(url()->current() == route('admin.pi.index')||url()->current() == route('admin.pi.add')) ? 'open':''}}">
                         <a class=" sf-profile-group">
                             Quản lý nhân viên
                             <span class="caret"></span>
@@ -23,8 +29,14 @@
 
                             </li>
                         </ul>
+                    </li> --}}
+                    <li class="{{url()->current() == route('admin.workload.index') ? 'active':''}}">
+                        <a href="{{route('admin.workload.index')}}" class=" sf-dashboard">Danh sách KLGD</a>
                     </li>
-                    <li class="cm-submenu {{(url()->current() == route('admin.workload.index')|| url()->current() == route('admin.workload.add')) ? 'open':''}}">
+                    <li class="{{url()->current() == route('admin.workload.add') ? 'active':''}}">
+                        <a href="{{route('admin.workload.add')}}" class="sf-sign-add">Thêm mới KLGD</a>
+                    </li>
+                    {{-- <li class="cm-submenu {{(url()->current() == route('admin.workload.index')|| url()->current() == route('admin.workload.add')) ? 'open':''}}">
                             <a class="sf-dashboard ">
                                 Khối lượng giảng dạy
                                 <span class="caret"></span>
@@ -40,7 +52,7 @@
 
                                 </li>
                             </ul>
-                        </li>
+                        </li> --}}
                         {{-- <li class="cm-submenu">
                                 <a class="sf-dashboard-alt">
                                     Khối lượng NCKH
@@ -58,25 +70,16 @@
                                     </li>
                                 </ul>
                             </li> --}}
-                    <li class="{{url()->current() == route('admin.statistic.index') ? 'active':''}}">
+                     <li class="{{url()->current() == route('admin.statistic.index') ? 'active':''}}">
                             <a href="{{route('admin.statistic.index')}}" class="sf-notepad">Thống kê - Báo cáo</a>
                         </li>
-{{--
-                    <li class="cm-submenu">
-                        <a class="sf-cat">Icons <span class="caret"></span></a>
-                        <ul>
-                            <li><a href="ico-sf.html">Small-n-flat</a></li>
-                            <li><a href="ico-md.html">Material Design</a></li>
-                            <li><a href="ico-fa.html">Font Awesome</a></li>
-                        </ul>
-                    </li>
-                   --}}
+
                 </ul>
             </div>
         </div>
     </div>
 </div>
-<script>
+{{-- <script>
     $(document).ready(function(){
         var f = $('.cm-submenu');
         var h = f.hasClass("open");
@@ -87,4 +90,4 @@
         }
     })
 
-</script>
+</script> --}}

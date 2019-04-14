@@ -1,11 +1,11 @@
 @extends('admin.master')
-@section('title','Danh sách khối lượng công việc')
+@section('title','Danh sách khối lượng giảng dạy')
 @section('breadcrumb')
     <div class="cm-flex">
         <div class="cm-breadcrumb-container">
             <ol class="breadcrumb">
                 {{-- <li><a href="#">Home</a></li> --}}
-                <li class="active">Quản lý khối lượng công việc</li>
+                <li class="active">Quản lý khối lượng giảng dạy</li>
             </ol>
         </div>
     </div>

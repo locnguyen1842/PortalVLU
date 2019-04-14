@@ -1,10 +1,10 @@
 @extends('employee.master')
-@section('title','Danh sách khối lượng công việc')
+@section('title','khối lượng giảng dạy')
 @section('breadcrumb')
     <div class="cm-flex">
         <div class="cm-breadcrumb-container">
             <ol class="breadcrumb">
-                <li class="active">Khối lượng công việc</li>
+                <li class="active">Khối lượng giảng dạy</li>
             </ol>
         </div>
     </div>
@@ -21,7 +21,7 @@
         <div class=" cm-fix-height">
             <div class="col-sm-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Khối lượng công việc<br>
+                    <div class="panel-heading">Khối lượng giảng dạy<br>
                     </div>
                     <div class="panel-body">
                         <form class="form-horizontal" action="{{route('employee.workload.index',$pi->id)}}" method="get">

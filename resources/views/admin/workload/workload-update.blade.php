@@ -1,12 +1,12 @@
 @extends('admin.master')
-@section('title','Cập nhật khối lượng công việc')
+@section('title','Cập nhật khối lượng giảng dạy')
 @section('breadcrumb')
     <div class="cm-flex">
         <div class="cm-breadcrumb-container">
             <ol class="breadcrumb">
                 {{-- <li><a href="#">Home</a></li> --}}
-                <li class=""><a href="{{route('admin.workload.index')}}">Quản lý khối lượng công việc</a></li>
-                 <li class="active">Cập nhật khối lượng công việc - {{$workload->pi->employee_code}}</li>
+                <li class=""><a href="{{route('admin.workload.index')}}">Quản lý khối lượng giảng dạy</a></li>
+                 <li class="active">Cập nhật khối lượng giảng dạy - {{$workload->pi->employee_code}}</li>
             </ol>
         </div>
     </div>
@@ -19,7 +19,7 @@
 </div>
 @endif
 <div class="panel panel-default">
-    <div class="panel-heading">Cập Nhật Khối Lượng Công Việc</div>
+    <div class="panel-heading">Cập Nhật Khối Lượng Giảng Dạy</div>
     <div class="panel-body">
         <form class="form-horizontal" action="{{route('admin.workload.update',$workload->id)}}" method="post">
             {{csrf_field()}}

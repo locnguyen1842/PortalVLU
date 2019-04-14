@@ -23,7 +23,7 @@
     <div class="panel-body">
 
         <div class="form-group col-sm-12 mt-25 mb-5">
-            <h2 class="text-center">Số cán bộ, Giảng viên, Nhân viên</h2>
+            <h2 class="text-center">Số Cán bộ, Giảng viên, Nhân viên</h2>
         <span class="help-text text-center">Năm : {{Carbon\Carbon::now()->format('Y')}}</span>
         </div>
 

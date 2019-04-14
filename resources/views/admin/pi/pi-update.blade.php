@@ -1,14 +1,14 @@
 @extends('admin.master')
-@section('title','Cập nhật thông tin nhân viên')
+@section('title','Cập nhật thông tin CBGV/NV')
 @section('breadcrumb')
     <div class="cm-flex">
         <div class="cm-breadcrumb-container">
             <ol class="breadcrumb">
                 {{-- <li><a href="#">Home</a></li> --}}
-                <li class=""><a href="{{route('admin.pi.index')}}">Quản lý thông tin nhân viên</a></li>
+                <li class=""><a href="{{route('admin.pi.index')}}">Quản lý thông tin CBGV/NV</a></li>
                 <li class=""><a href="{{route('admin.pi.detail',$pi->id)}}">Thông tin cá nhân - {{$pi->employee_code}}</a></li>
 
-                <li class="active">Cập nhật thông tin nhân viên</li>
+                <li class="active">Cập nhật thông tin CBGV/NV</li>
             </ol>
         </div>
     </div>
@@ -381,14 +381,26 @@
                     </div>
                     <div class="col-sm-6 dependent-on-teacher">
                         <label>Danh hiệu</label>
+                        @if($pi->teacher()->exists())
                         <div class="checkbox">
                             <label class="col-sm-4">
-                                <input type="checkbox" name="is_excellent_teacher" value="1">Nhà giáo ưu tú
+                                <input type="checkbox" name="is_excellent_teacher" {{$pi->teacher->is_excellent_teacher == 1 ? 'checked':''}} value="1">Nhà giáo ưu tú
                             </label>
                             <label class="col-sm-4">
-                                <input type="checkbox" name="is_national_teacher" value="1">Nhà giáo nhân dân
+                                <input type="checkbox" name="is_national_teacher" {{$pi->teacher->is_national_teacher == 1 ? 'checked':''}} value="1">Nhà giáo nhân dân
                             </label>
                         </div>
+                        @else
+                        <div class="checkbox">
+                            <label class="col-sm-4">
+                                <input type="checkbox" name="is_excellent_teacher" {{old('is_excellent_teacher') == 1 ? 'checked':''}} value="1">Nhà giáo ưu tú
+                            </label>
+                            <label class="col-sm-4">
+                                <input type="checkbox" name="is_national_teacher" {{old('is_national_teacher') == 1 ? 'checked':''}} value="1">Nhà giáo nhân dân
+                            </label>
+                        </div>
+                        @endif
+
                     </div>
                 </div>
                 <div class="form-group">
@@ -404,7 +416,7 @@
                                         </label>
                                     </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-6 dependent-on-teacher">
                                 <label>Nghỉ hưu</label>
                                 <div class="radio">
                                     @if($pi->teacher()->exists())
@@ -426,9 +438,12 @@
                                 </div>
                     </div>
 
-                    <div class="form-group dependent-on-teacher">
 
-                        </div>
+
+
+
+                    </div>
+                    <div class="form-group dependent-on-teacher">
                         <div class="col-sm-6">
                             <label>Ngày nghỉ hưu</label>
                             @if($pi->teacher()->exists())
@@ -438,10 +453,7 @@
 
                             @endif
                         </div>
-
-
                     </div>
-
                 <div class="form-group" style="margin-bottom:0">
                     <div class="col-sm-offset-2 col-sm-10 text-right">
                         <button type="reset" class="btn btn-default">Hủy Bỏ</button>

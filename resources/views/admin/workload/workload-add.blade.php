@@ -1,12 +1,12 @@
 @extends('admin.master')
-@section('title','Thêm khối lượng công việc')
+@section('title','Thêm khối lượng giảng dạy')
 @section('breadcrumb')
     <div class="cm-flex">
         <div class="cm-breadcrumb-container">
             <ol class="breadcrumb">
                 {{-- <li><a href="#">Home</a></li> --}}
-                <li class=""><a href="{{route('admin.workload.index')}}">Quản lý khối lượng công việc</a></li>
-                <li class="active">Thêm khối lượng công việc</li>
+                <li class=""><a href="{{route('admin.workload.index')}}">Quản lý khối lượng giảng dạy</a></li>
+                <li class="active">Thêm khối lượng giảng dạy</li>
             </ol>
         </div>
     </div>
@@ -28,7 +28,7 @@
             <div class=" col-sm-9">
 
                 <div class="panel panel-default">
-                    <div class="panel-heading">Thêm Khối Lượng Công Việc</div>
+                    <div class="panel-heading">Thêm Khối Lượng Giảng Dạy</div>
                     <div class="panel-body">
 
                         {{csrf_field()}}

@@ -1,12 +1,12 @@
 @extends('admin.master')
-@section('title','Thêm mới thông tin nhân viên')
+@section('title','Thêm mới thông tin CBGV/NV')
 @section('breadcrumb')
 <div class="cm-flex">
     <div class="cm-breadcrumb-container">
         <ol class="breadcrumb">
             {{-- <li><a href="#">Home</a></li> --}}
-            <li class=""><a href="{{route('admin.pi.index')}}">Quản lý thông tin nhân viên</a></li>
-            <li class="active">Thêm thông tin nhân viên</li>
+            <li class=""><a href="{{route('admin.pi.index')}}">Quản lý thông tin CBGV/NV</a></li>
+            <li class="active">Thêm thông tin CBGV/NV</li>
         </ol>
     </div>
 </div>
@@ -300,7 +300,7 @@
                                 </label>
                             </div>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-6 dependent-on-teacher">
                         <label>Nghỉ hưu</label>
                         <div class="radio">
                             <label class="col-sm-4">

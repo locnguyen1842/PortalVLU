@@ -6,7 +6,7 @@
         <div class="cm-breadcrumb-container">
             <ol class="breadcrumb">
                 {{-- <li><a href="#">Home</a></li> --}}
-                <li class="active">Quản lý thông tin nhân viên</li>
+                <li class="active">Quản lý thông tin CBGV/NV</li>
             </ol>
         </div>
     </div>
@@ -30,7 +30,7 @@
   <div class="waiting">
     <img src="{{asset('img/loader.gif')}}" alt="Đang tải">
   </div>
-    <div class="panel-heading">Danh sách thông tin nhân viên<br>
+    <div class="panel-heading">Danh sách thông tin CBGV/NV<br>
 
 
         @can('cud', $pis->first())
