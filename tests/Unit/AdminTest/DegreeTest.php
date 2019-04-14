@@ -23,7 +23,7 @@ class DegreeTest extends TestCase
      */
     public function test_Degree_Create_Admin()
     {
-        $admin = Admin::first();
+        $admin = Admin::where('is_supervisor',0)->first();
         $this->actingAs($admin,'admin');
 
         $degree = [
@@ -45,7 +45,7 @@ class DegreeTest extends TestCase
     }
     public function test_Degree_Update_Admin()
     {
-        $admin = Admin::first();
+        $admin = Admin::where('is_supervisor',0)->first();
         $this->actingAs($admin,'admin');
 
         $degree = [
@@ -66,12 +66,58 @@ class DegreeTest extends TestCase
     }
 
     public function test_delete_degreedetail(){
-        $admin = Admin::first();
+        $admin = Admin::where('is_supervisor',0)->first();
         $this->actingAs($admin,'admin');
         $pi = PI::find(1);
 
         $response = $this->get('/admin/pi-degree-delete/'.$pi->degreedetails->first()->id);
         $response->assertSessionHas('message','Xóa thông tin nhân viên thành công');
+    }
+
+    public function test_delete_academic_rank(){
+        $admin = Admin::where('is_supervisor',0)->first();
+        $this->actingAs($admin,'admin');
+        $pi = PI::find(1);
+
+        $response = $this->get('/admin/academic-rank/delete/'.$pi->id);
+        $response->assertSessionHas('message','Xóa học hàm thành công');
+    }
+
+    public function test_Academic_Update()
+    {
+        $admin = Admin::where('is_supervisor',0)->first();
+        $this->actingAs($admin,'admin');
+
+        $academic_rank = [
+            "academic_rank_type" => "1",
+            "specialized" => "Công Nghệ Thông Tin",
+            "date_of_recognition" => "2018-12-14",
+            "industry" => "1",
+
+        ];
+        //
+        $pi = PI::find(1);
+        $addde = $this->post('/admin/academic-rank/update/'.$pi->id,$academic_rank);
+        $addde->assertSessionHas('message','Cập nhật thành công');
+
+    }
+    public function test_Academic_Create()
+    {
+        $admin = Admin::where('is_supervisor',0)->first();
+        $this->actingAs($admin,'admin');
+
+        $academic_rank = [
+          "academic_rank_type" => "1",
+          "specialized" => "Công Nghệ Thông Tin",
+          "date_of_recognition" => "2018-12-14",
+          "industry" => "1",
+
+        ];
+        //
+        $pi = PI::find(1);
+        $addde = $this->post('/admin/academic-rank/create/'.$pi->id,$academic_rank);
+        $addde->assertSessionHas('message','Thêm mới thành công');
+
     }
 
 }

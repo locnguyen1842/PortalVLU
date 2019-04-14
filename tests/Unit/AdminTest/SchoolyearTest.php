@@ -17,7 +17,6 @@ use App\WorkloadSession;
 class SchoolyearTest extends TestCase
 {
     use DatabaseTransactions;
-    use WithoutMiddleware;
     /**
      * A basic test example.
      *
@@ -32,34 +31,33 @@ class SchoolyearTest extends TestCase
     public function test_delete_a_Schoolyear(){
 
         $this->login_admin();
-        $workloadsession = WorkloadSession::find(36);
+        $workloadsession = WorkloadSession::first();
         $response = $this->get('/admin/year-delete/'.$workloadsession->id);
 
         $response->assertSessionHas('message','Xóa năm học thành công');
       }
       public function test_Schooolyear_Update()
       {
-          $admin = Admin::first();
-          $this->actingAs($admin, 'admin');
+        $this->login_admin();
           $data = $this->data();
-          $workloadsession = WorkloadSession::find(36);
+          $workloadsession = WorkloadSession::first();
+        //   dd($workloadsession);
           $updateyear = $this->post('/admin/schoolyear-update/'.$workloadsession->id, $data);
+        //   dd($updateyear);
           $updateyear->assertSessionHas('message', 'Cập nhật thành công');
       }
       public function test_Schooolyear_Add()
       {
-          $admin = Admin::first();
-          $this->actingAs($admin, 'admin');
+        $this->login_admin();
           $data = $this->data();
-          $workloadsession = WorkloadSession::find(36);
           $updateyear = $this->post('/admin/schoolyear-add', $data);
           $updateyear->assertSessionHas('message', 'Thêm thành công');
       }
     public function data()
     {
         $actual = [
-        'start_year' => 2019,
-        'end_year' =>2020,
+        'start_year' => 2030,
+        'end_year' =>2031,
         ];
         return $actual;
     }

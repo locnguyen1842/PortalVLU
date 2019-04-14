@@ -69,4 +69,50 @@ class DegreeEmployeeTest extends TestCase
         $response->assertSessionHas('message', 'Xóa thành công');
 
     }
+
+    public function test_delete_academic_rank(){
+        $employee = Employee::where('username', 'T155444')->first();
+        $this->actingAs($employee, 'employee');
+        $pi = $employee->pi;
+
+        $response = $this->get('/academic-rank/delete/');
+        $response->assertSessionHas('message','Xóa học hàm thành công');
+    }
+
+    public function test_Academic_Update()
+    {
+        $employee = Employee::where('username', 'T155444')->first();
+        $this->actingAs($employee, 'employee');
+        $pi = $employee->pi;
+
+        $academic_rank = [
+            "academic_rank_type" => "1",
+            "specialized" => "Công Nghệ Thông Tin",
+            "date_of_recognition" => "2018-12-14",
+
+        ];
+        //
+        $pi = PI::find(1);
+        $addde = $this->post('/academic-rank/update/',$academic_rank);
+        $addde->assertSessionHas('message','Cập nhật thành công');
+
+    }
+    public function test_Academic_Create()
+    {
+        $employee = Employee::where('username', 'T155444')->first();
+        $this->actingAs($employee, 'employee');
+        $pi = $employee->pi;
+
+        $academic_rank = [
+          "academic_rank_type" => "1",
+          "specialized" => "Công Nghệ Thông Tin",
+          "date_of_recognition" => "2018-12-14",
+
+        ];
+        //
+        $pi = PI::find(1);
+        $addde = $this->post('/academic-rank/create/',$academic_rank);
+        $addde->assertSessionHas('message','Thêm mới thành công');
+
+    }
 }

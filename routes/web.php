@@ -110,11 +110,16 @@ Route::prefix('admin')->group(function () {
 
 
         // academic_rank
-        Route::get('/academic-rank/{pi_id}/update', 'PIController@getUpdateAcademicRank')->name('admin.academic.update');
-        Route::post('/academic-rank/{pi_id}/update', 'PIController@postUpdateAcademicRank')->name('admin.academic.update');
-        Route::get('/academic-rank/{pi_id}/create', 'PIController@getCreateAcademicRank')->name('admin.academic.create');
-        Route::post('/academic-rank/{pi_id}/create', 'PIController@postCreateAcademicRank')->name('admin.academic.create');
-        Route::get('/academic-rank/{pi_id}/delete', 'PIController@getDeleteAcademicRank')->name('admin.academic.delete');
+        Route::get('/academic-rank/update/{pi_id}', 'PIController@getUpdateAcademicRank')->name('admin.academic.update');
+        Route::post('/academic-rank/update/{pi_id}', 'PIController@postUpdateAcademicRank')->name('admin.academic.update');
+        Route::get('/academic-rank/create/{pi_id}', 'PIController@getCreateAcademicRank')->name('admin.academic.create');
+        Route::post('/academic-rank/create/{pi_id}', 'PIController@postCreateAcademicRank')->name('admin.academic.create');
+        Route::get('/academic-rank/delete/{pi_id}', 'PIController@getDeleteAcademicRank')->name('admin.academic.delete');
+
+        // confirmation letter
+        Route::get('/confirmation-request/index','ConfirmationRequestController@index')->name('admin.confirmation.index');
+        Route::get('/confirmation-request/detail/{letter_id}','ConfirmationRequestController@index')->name('admin.confirmation.detail');
+        Route::get('/confirmation-request/update/{letter_id}','ConfirmationRequestController@index')->name('admin.confirmation.update');
 
 
     });

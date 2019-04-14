@@ -17,7 +17,6 @@ class ImportTest extends TestCase
 {
 
       use DatabaseTransactions;
-      use WithoutMiddleware;
     /**
      * A basic test example.
      *
@@ -26,6 +25,8 @@ class ImportTest extends TestCase
     public function setUp()
     {
         parent::setUp();
+        $admin = Admin::where('is_supervisor',0)->first();
+        $this->actingAs($admin, 'admin');
         $origional_file_path_pi = public_path('template-personalinformation.xlsx');
         $origional_file_path_workload = public_path('Workload.xlsx');
         copy($origional_file_path_pi,public_path('test_data_pi.xlsx'));
@@ -33,26 +34,33 @@ class ImportTest extends TestCase
 
     }
 
-    public function test_send_correct_file_import_template_pi()
-    {
-
-    //file to test
-        $test_file_path = public_path('test_data_pi.xlsx');
-        $uploadedFile = new UploadedFile(
-            $test_file_path,
-            'template-personalinformation.xlsx',
-            'application/vnd.ms-excel',
-            null,
-            null,
-            true
-
-        );
-
-        $response = $this->post('/admin/pi-import',[
-        'import_file' => $uploadedFile
-        ]);
-        $response->assertSessionHas('message','Import thành công');
+    public function test_download_statistical(){
+        $response= $this->get('admin/statistical-download');
+        $response->assertHeader('content-disposition', 'attachment; filename=thongke.xlsx');
+        $this->assertEquals($response->getStatusCode(), 200);
     }
+    // public function test_send_correct_file_import_template_pi()
+    // {
+
+    // //file to test
+    //     $test_file_path = public_path('test_data_pi.xlsx');
+    //     $uploadedFile = new UploadedFile(
+    //         $test_file_path,
+    //         'template-personalinformation.xlsx',
+    //         'application/vnd.ms-excel',
+    //         null,
+    //         null,
+    //         true
+
+    //     );
+    //     // return response()->download($uploadedFile);
+    //     $response = $this->post('/admin/pi-import',[
+    //     'import_file' => $uploadedFile
+    //     ]);
+
+
+    //     $response->assertSessionHas('message','Import thành công');
+    // }
 
     public function test_get_data_preview_success_after_import_pi(){
 

@@ -30,6 +30,7 @@ class ViewTest extends TestCase
     {
         $admin = Admin::where('username', 'T154725')->first();
         $this->actingAs($admin, 'admin');
+        return $admin;
     }
     public function login_employee()
     {
@@ -66,15 +67,16 @@ class ViewTest extends TestCase
     public function test_view_Degree_Create()
     {
         $this->login_admin();
-        $degreedetail_id = DegreeDetail::first()->id;
-        $response = $this->get('/admin/pi-degree-create/'.$degreedetail_id);
+        $pi_id = PI::first()->id;
+        $response = $this->get('/admin/pi-degree-create/'.$pi_id);
+        // dd($degreedetail_id);
         $this->assertEquals(200, $response->status());
     }
     public function test_view_Degree_List()
     {
         $this->login_admin();
-        $degreedetail_id = DegreeDetail::first()->id;
-        $response = $this->get('/admin/pi-degree-list/'.$degreedetail_id);
+        $pi_id = PI::first()->id;
+        $response = $this->get('/admin/pi-degree-list/'.$pi_id);
         $this->assertEquals(200, $response->status());
         $response->assertViewHas('degrees');
         $response->assertViewHas('pi');
@@ -181,8 +183,9 @@ class ViewTest extends TestCase
     public function test_view_a_employee_cant_access_other_employees_workload_detail()
     {
         $employee = $this->login_employee();
-        $workload_id = PI::where('employee_code','T155444')->first()->workloads->first()->id;
-
+        $pi_id = PI::where('employee_code','T155444')->first()->id;
+        $workload_id = Workload::where('personalinformation_id',$pi_id)->first()->id;
+        // dd($workload_id);
         $response = $this->get('/workload-details/'.$workload_id);
         $this->assertEquals(403, $response->status());
     }
@@ -246,6 +249,29 @@ class ViewTest extends TestCase
         $response->assertViewHas('yearlist');
 
 
+    }
+
+    public function test_view_statistical(){
+        $this->login_admin();
+        $response = $this->get('admin/statistical');
+        $response->assertSuccessful();
+        $response->assertViewHas('pis');
+        $response->assertViewHas('officers');
+        $response->assertViewHas('teachers');
+    }
+
+    public function test_view_create_academic_rank(){
+        $this->login_admin();
+        $pi = PI::find(29);
+        $response = $this->get('admin/academic-rank/create/'.$pi->id);
+        $response->assertSuccessful();
+    }
+
+    public function test_view_update_academic_rank(){
+        $this->login_admin();
+        $pi = PI::find(16);
+        $response = $this->get('admin/academic-rank/update/'.$pi->id);
+        $response->assertSuccessful();
     }
 
 }

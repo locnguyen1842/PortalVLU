@@ -154,4 +154,16 @@ class ViewEmployeeTest extends TestCase
     //       ];
     //     return $data;
     // }
+    public function test_view_create_academic_rank(){
+        $pi = $this->login_employee();
+        $pi = PI::find(29);
+        $response = $this->get('academic-rank/create/');
+        $response->assertSuccessful();
+    }
+
+    public function test_view_update_academic_rank(){
+        $pi = $this->login_employee();
+        $response = $this->get('academic-rank/update/');
+        $response->assertSuccessful();
+    }
 }

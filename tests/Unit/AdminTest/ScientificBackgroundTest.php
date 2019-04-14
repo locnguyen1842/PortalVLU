@@ -24,7 +24,7 @@ class ScientificBackgroundTest extends TestCase
      */
      public function test_Scientific_Background_Update()
      {
-       $admin = Admin::first();
+       $admin = Admin::where('is_supervisor',0)->first();
        $this->actingAs($admin, 'admin');
        $scientific_background = $this->data();
        $pi = PI::find(1);
@@ -32,6 +32,13 @@ class ScientificBackgroundTest extends TestCase
        $update_scientific_background->assertSessionHas('message', 'Cập nhật thành công');
      }
 
+    //  public function test_download_SB(){
+    //     $admin = Admin::where('is_supervisor',0)->first();
+    //     $this->actingAs($admin, 'admin');
+    //     $pi_id = PI::whereHas('scientificbackgrounds')->first()->id;
+    //     $response = $this->get('admin/scientific-background/print/'.$pi_id);
+    //     $response->assertHas();
+    //  }
 
      public function data()
      {

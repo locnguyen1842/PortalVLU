@@ -70,8 +70,7 @@ class ViewFacultyLeaderTest extends TestCase
       public function test_view_List_Employees_By_Faculty()
       {
           $this->login_faculty_leader();
-          $pi = PI::where('unit_id', '2');
-          $response = $this->get('faculty-index',$pi);
+          $response = $this->get('faculty-index/');
           $response->assertViewHas('pis');
           $response->assertViewHas('search');
       }

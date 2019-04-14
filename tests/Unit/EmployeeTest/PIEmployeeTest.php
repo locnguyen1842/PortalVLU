@@ -32,6 +32,21 @@ class PIEmployeeTest extends TestCase
         $this->assertEquals($pi->identity_card, $data['identity_card']);
         $this->assertEquals($pi->email_address, $data['email_address']);
     }
+    public function test_update_PI_correct_data_with_new_address()
+    {
+        $this->login_employee();
+        $data = $this->data();
+        $data['full_name']= 'Lâm Tuệ Khương';
+        $pi = PI::where('employee_code', Auth::guard('employee')->user()->username)->first();
+        $pi->permanent_address_id = null;
+        $pi->contact_address_id = null;
+        $pi->save();
+        $updatePI = $this->post('/pi-update', $data);
+        $pi = PI::where('employee_code', Auth::guard('employee')->user()->username)->first();
+        $this->assertEquals($pi->full_name, $data['full_name']);
+        $this->assertEquals($pi->identity_card, $data['identity_card']);
+        $this->assertEquals($pi->email_address, $data['email_address']);
+    }
 
     public function test_update_PI_with_incorrect_format_email()
     {
