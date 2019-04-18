@@ -17,7 +17,7 @@ use App\Unit;
 use App\Semester;
 use Carbon\Carbon;
 
-class WorkloadImport implements ToCollection
+class JobWorkloadImport implements ToCollection
 {
     use Importable;
     protected $append= null;

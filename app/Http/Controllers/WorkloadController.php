@@ -6,12 +6,13 @@ use App\PI;
 use App\Unit;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Workload;
+use App\ScientificResearchWorkload;
 use App\WorkloadSession;
 use Validator;
 use App\Employee;
 use App\Semester;
 use Auth;
-use App\Imports\WorkloadImport;
+use App\Imports\AdminWorkloadImport;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -30,7 +31,8 @@ class WorkloadController extends Controller
             if ($search != null) {
                 $query->where(function ($q) use ($search) {
                     $q->whereHas('pi', function ($q1) use ($search) {
-                        $q1->where('employee_code', 'like', '%'.$search.'%');
+                        $q1->where('employee_code', 'like', '%'.$search.'%')
+                            ->orWhere('full_name', 'like', '%'.$search.'%');
                     })
                         ->orWhere(function ($q2) use ($search) {
                             $q2->whereHas('unit', function ($q3) use ($search) {
@@ -53,6 +55,37 @@ class WorkloadController extends Controller
 
         return view('admin.workload.workload-list', compact('workload_session', 'workload_session_current', 'workloads', 'search', 'year_workload'));
     }
+
+    public function srworkload_index()
+    {
+        $max_year = WorkloadSession::max('end_year');
+        $workload_session = WorkloadSession::orderBy('start_year', 'desc')->get();
+        $workload_session_current = WorkloadSession::where('end_year', $max_year)->firstOrFail();//get current workload year study
+        $year_workload = \Request::get('year_workload');
+        $search =  \Request::get('search');
+        $workload_session_current_id = $workload_session_current->id;
+        //query if $search have a value
+        $workloads = ScientificResearchWorkload::where(function ($query) use ($search,$year_workload,$workload_session_current_id) {
+            if ($search != null) {
+                $query->where(function ($q) use ($search) {
+                    $q->whereHas('pi', function ($q1) use ($search) {
+                        $q1->where('employee_code', 'like', '%'.$search.'%')
+                            ->orWhere('full_name', 'like', '%'.$search.'%');
+                    });
+                });
+            }
+            if ($year_workload != null) {
+                $query->where(function ($q) use ($year_workload) {
+                    $q->where('session_id', $year_workload);
+                });
+            } elseif ($search ==null && $year_workload==null) {
+                $query->where('session_id', $workload_session_current_id);
+            }
+        })->orderBy('updated_at', 'desc')->paginate(10)->appends(['search'=>$search,'year_workload'=>$year_workload]);
+
+        return view('admin.workload.srworkload-list', compact('workload_session', 'workload_session_current', 'workloads', 'search', 'year_workload'));
+    }
+
     public function getlistworkloadbypi($pi_id)
     {
         //workload of own detail
@@ -97,6 +130,31 @@ class WorkloadController extends Controller
         })->orderBy('updated_at', 'decs')->paginate(10)->appends(['search'=>$search,'year_workload'=>$year_workload]);
 
         return view('admin.pi.pi-workload-list', compact('semester_filter', 'semester', 'pi_id', 'workload_session', 'workload_session_current', 'workloads', 'search', 'year_workload'));
+    }
+
+    public function getlistsrworkloadbypi($pi_id)
+    {
+        //workload of own detail
+        $workloads_own_user = ScientificResearchWorkload::where('personalinformation_id', $pi_id);
+        $max_year = WorkloadSession::max('end_year');
+        $workload_session = WorkloadSession::orderBy('start_year', 'desc')->get();
+        $workload_session_current = WorkloadSession::where('end_year', $max_year)->firstOrFail();//get current workload year study
+        $year_workload = \Request::get('year_workload');
+        $workload_session_current_id = $workload_session_current->id;
+
+        //query if $search have a value
+        $workloads = $workloads_own_user->where(function ($query) use ($year_workload,$workload_session_current_id) {
+
+            if ($year_workload != null) {
+                $query->where(function ($q) use ($year_workload) {
+                    $q->where('session_id', $year_workload);
+                });
+            } elseif ($year_workload==null) {
+                $query->where('session_id', $workload_session_current_id);
+            }
+        })->orderBy('updated_at', 'decs')->paginate(10)->appends(['year_workload'=>$year_workload]);
+
+        return view('admin.pi.pi-srworkload-list', compact(  'pi_id', 'workload_session', 'workload_session_current', 'workloads', 'year_workload'));
     }
     //get
     public function getadd()
@@ -385,6 +443,31 @@ class WorkloadController extends Controller
 
         return view('employee.workload.workload-list', compact('semester_filter', 'semester', 'workload_session', 'workload_session_current', 'workloads', 'search', 'year_workload', 'pi'));
     }
+    public function getSRWorkloadList_Employee()
+    {
+        $pi = Auth::guard('employee')->user();
+        $workloads_own_user = ScientificResearchWorkload::where('personalinformation_id', $pi->personalinformation_id);
+        $max_year = WorkloadSession::max('end_year');
+        $workload_session = WorkloadSession::orderBy('start_year', 'desc')->get();
+        $workload_session_current = WorkloadSession::where('end_year', $max_year)->firstOrFail();//get current workload year study
+        $year_workload = \Request::get('year_workload');
+        $workload_session_current_id = $workload_session_current->id;
+
+
+        //query if $search have a value
+        $workloads = $workloads_own_user->where(function ($query) use ($year_workload,$workload_session_current_id) {
+
+            if ($year_workload != null) {
+                $query->where(function ($q) use ($year_workload) {
+                    $q->where('session_id', $year_workload);
+                });
+            } elseif ($year_workload==null) {
+                $query->where('session_id', $workload_session_current_id);
+            }
+        })->orderBy('updated_at', 'desc')->paginate(10);
+
+        return view('employee.workload.srworkload-list', compact('workload_session', 'workload_session_current', 'workloads', 'year_workload', 'pi'));
+    }
     public function delete($workload_id)
     {
         $this->authorize('cud', PI::firstOrFail());
@@ -423,7 +506,7 @@ class WorkloadController extends Controller
 
                 $session_id = $session->id;
             }
-            Excel::import(new WorkloadImport($request->append, $session_id), $file);
+            Excel::import(new AdminWorkloadImport($request->append, $session_id), $file);
             return redirect()->back()->with('message', 'Import thành công');
         }
     }
@@ -456,16 +539,23 @@ class WorkloadController extends Controller
         if ($validator->passes()) {
             if ($request->has('import_file')) {
                 $import_file = $request->file('import_file');
-                $arr_workload  = (new WorkloadImport(5, 5))->toArray($import_file);
+                $arr_workload  = (new AdminWorkloadImport(5, 5))->toArray($import_file);
+                $number_of_sheet = 2;
+                $excel_column_length_sheet_1 = 16;
+                $excel_column_length_sheet_2 = 11;
                 //[0][5] length of excel columns = 16 [0-15]
-                if (count($arr_workload[0]) < 6) {
-                    return response()->json(['error'=>[0=>'File tải lên không đúng cấu trúc. Vui lòng xem lại file mẫu <small> '.'<a href="'.route('admin.workload.template.download').'"> (tải file mẫu)</a></small>']]);
-                } else {
-                    if (count($arr_workload[0][5]) == 16) {
-                        return response()->json($arr_workload[0]);
-                    } else {
-                        return response()->json(['error'=>[0=>'File tải lên không đúng cấu trúc. Vui lòng xem lại file mẫu <small> '.'<a href="'.route('admin.workload.template.download').'"> (tải file mẫu)</a></small>']]);
+                if(count($arr_workload) > 1){
+                    if(count($arr_workload[0][5]) >= $excel_column_length_sheet_1){
+                       if(count($arr_workload[1][5]) >= $excel_column_length_sheet_2){
+                            return response()->json($arr_workload);
+                       }else{
+                            return response()->json(['error'=>[0=>'File tải lên không đúng cấu trúc (Sheet 2). Vui lòng xem lại file mẫu <small> '.'<a href="'.route('admin.workload.template.download').'"> (tải file mẫu)</a></small>']]);
+                       }
+                    }else{
+                        return response()->json(['error'=>[0=>'File tải lên không đúng cấu trúc (Sheet 1). Vui lòng xem lại file mẫu <small> '.'<a href="'.route('admin.workload.template.download').'"> (tải file mẫu)</a></small>']]);
                     }
+                }else{
+                    return response()->json(['error'=>[0=>'File tải lên không đúng cấu trúc. Vui lòng xem lại file mẫu <small> '.'<a href="'.route('admin.workload.template.download').'"> (tải file mẫu)</a></small>']]);
                 }
             }
         }

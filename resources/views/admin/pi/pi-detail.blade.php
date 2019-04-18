@@ -18,7 +18,8 @@
             <div class="nav-tabs-container  table-responsive">
                 <ul class="nav nav-tabs">
                     <li class="{{url()->current() == route('admin.pi.detail',$pi->id) ? 'active':''}}"><a href="{{route('admin.pi.detail',$pi->id)}}">Thông tin cá nhân</a></li>
-                    <li class="{{url()->current() == route('admin.pi.workload.index',$pi->id) ? 'active':''}}"><a href="{{route('admin.pi.workload.index',$pi->id)}}">Khối lượng công việc</a></li>
+                    <li class="{{url()->current() == route('admin.pi.workload.index',$pi->id) ? 'active':''}}"><a href="{{route('admin.pi.workload.index',$pi->id)}}">Khối lượng giảng dạy</a></li>
+                    <li class="{{url()->current() == route('admin.pi.srworkload.index',$pi->id) ? 'active':''}}"><a href="{{route('admin.pi.srworkload.index',$pi->id)}}">Khối lượng NCKH</a></li>
                     <li class="{{url()->current() == route('admin.sb.detail',$pi->id) ? 'active':''}}"><a href="{{route('admin.sb.detail',$pi->id)}}">Lý lịch khoa học</a></li>
 
                 </ul>
@@ -84,10 +85,6 @@
                                                 <label for="inputPassword3" class="col-sm-3  ">Giới tính </label>
                                                 <span for="" class="col-sm-9 text-nowrap">{{$pi->gender ==0 ?
                                                     "Nam":""}}{{$pi->gender ==1 ? "Nữ":""}}</span>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="inputPassword3" class="col-sm-3  ">Tôn giáo</label>
-                                                <span for="" class="col-sm-9 text-nowrap">{{$pi->religion->name}}</span>
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputPassword3" class="col-sm-3  ">Dân tộc </label>

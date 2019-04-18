@@ -14,12 +14,16 @@
                     <li class="{{url()->current() == route('employee.workload.index') ? 'active':''}}">
                         <a href="{{route('employee.workload.index')}}" class="sf-dashboard">Khối lượng giảng dạy</a>
                     </li>
+                    <li class="{{url()->current() == route('employee.srworkload.index') ? 'active':''}}">
+                        <a href="{{route('employee.srworkload.index')}}" class="sf-dashboard-alt">Khối lượng NCKH</a>
+                    </li>
                     <li class="{{url()->current() == route('employee.sb.detail') ? 'active':''}}">
                         <a href="{{route('employee.sb.detail')}}" class="sf-file-text">Lý lịch khoa học</a>
                     </li>
+
                     @can('actAsFacultyLeader',App\PI::first())
                     <li class="{{url()->current() == route('employee.faculty.index') ? 'active':''}}">
-                        <a href="{{route('employee.faculty.index')}}" class="sf-profile-group">Quản lý CBGV/NV</a>
+                        <a href="{{route('employee.faculty.index')}}" class="sf-profile-group">Quản lý khoa</a>
                     </li>
                     @endcan
                 </ul>

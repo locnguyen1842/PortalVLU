@@ -676,10 +676,10 @@ class PIController extends Controller
                 $excel_column_length_sheet_3 = 5;
                 $excel_column_length_sheet_4 = 10;
                 if (count($arr_pi) >= $number_of_sheet) {
-                    if (count($arr_pi[0][0]) == $excel_column_length_sheet_1) {
-                        if (count($arr_pi[1][0]) == $excel_column_length_sheet_2) {
-                            if (count($arr_pi[2][0]) == $excel_column_length_sheet_3) {
-                                if (count($arr_pi[3][0]) == $excel_column_length_sheet_4) {
+                    if (count($arr_pi[0][0]) >= $excel_column_length_sheet_1) {
+                        if (count($arr_pi[1][0]) >= $excel_column_length_sheet_2) {
+                            if (count($arr_pi[2][0]) >= $excel_column_length_sheet_3) {
+                                if (count($arr_pi[3][0]) >= $excel_column_length_sheet_4) {
                                     foreach ($arr_pi[0] as $key => $value) {
                                         if ($key != 0) {
                                             $date_of_birth = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value[4]);

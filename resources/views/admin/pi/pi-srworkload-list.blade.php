@@ -48,37 +48,10 @@
                         @endcan
                     </div>
                     <div class="panel-body">
-                            <form class="form-horizontal" action="{{route('admin.pi.workload.index',$pi_id)}}" method="get">
+                            <form class="form-horizontal" action="{{route('admin.pi.srworkload.index',$pi_id)}}" method="get">
                         <div class="form-group col-sm-6">
 
-                                <div class="col-sm-12">
-                                    <div class="col-sm-3">
-                                        <label class="control-label">Tìm kiếm</label>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="search" placeholder="Nhập mã hoặc tên khoa/môn.">
 
-
-                                    </div>
-                                </div>
-                                @if($search !="")
-                                <div class="col-sm-12 mt-10">
-                                    <div class="col-sm-3">
-                                        <label class="control-label">Tìm theo </label>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <div class="control-label text-al">
-                                            <a data-toggle="tooltip" data-placement="right" title=""
-                                                data-original-title="Xóa" href="javascript:" class="search_tag tooltip-test">
-                                                <span class="badge badge-primary">{{$search}}
-                                                    <span class="mdi mdi-close"></span>
-                                                </span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                @endif
 
                                 <div class="col-sm-12 mt-10">
                                     <div class="col-sm-3">
@@ -125,21 +98,7 @@
 
 
                         </div>
-                        <div class="form-group col-sm-6">
-                                <div class="col-sm-12">
-                                        <label class="control-label col-sm-4">Học kỳ
-                                        </label>
-                                        <div class="col-sm-8">
-                                                <select class="form-control semester" name="semester">
-                                                    <option value="4" selected>Cả năm</option>
-                                                    @foreach($semester as $item)
-                                                    <option {{$semester_filter == $item->alias ? 'selected':''}} value="{{$item->id}}">{{$item->name}}</option>
 
-                                                    @endforeach
-                                                </select>
-                                        </div>
-                                    </div>
-                        </div>
                     </form>
                         {{-- Loading Div --}}
 
@@ -152,13 +111,14 @@
 
                                     <th>Mã NV</th>
                                     <th>Họ Tên</th>
-                                    <th>Khoa</th>
-                                    <th>Mã - Tên môn học</th>
-                                    <th>Số tiết</th>
+                                    <th>Công việc</th>
+                                    <th>Chi tiết</th>
+                                    <th>Diễn giải (tên cụ thể của hoạt động NCKH, …)</th>
+                                    <th>Đơn vị (đề tài, bài báo, tài liệu, giáo trình...)</th>
+                                    <th>Số lượng</th>
                                     <th>Quy đổi giờ chuẩn</th>
-                                    <th>Lý thuyết</th>
-                                    <th>Thực hành</th>
-                                    <th>Học kỳ</th>
+                                    <th>Số tiết/giờ quy đổi</th>
+                                    <th>Ghi chú</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -176,14 +136,15 @@
                                             </span>
                                         </a>
                                     </td>
-                                    <td class="col-sm-2">{{$item->pi->full_name}}</td>
-                                    <td class="col-sm-1">{{$item->unit->unit_code}}</td>
-                                    <td class="col-sm-2">{{$item->subject_code}} - {{$item->subject_name }}</td>
-                                    <td class="col-sm-1">{{$item->number_of_lessons}}</td>
-                                    <td class="col-sm-1">{{$item->total_workload}}</td>
-                                    <td class="col-sm-1">{{$item->theoretical_hours}}</td>
-                                    <td class="col-sm-1">{{$item->practice_hours}}</td>
-                                    <td class="col-sm-1">{{$item->semester->alias}}</td>
+                                    <td>{{$item->pi->full_name}}</td>
+                                    <td>{{$item->name_of_work}}</td>
+                                    <td>{{$item->detail_of_work}}</td>
+                                    <td>{{$item->explain_of_work}}</td>
+                                    <td>{{$item->unit_of_work}}</td>
+                                    <td>{{$item->quantity_of_work}}</td>
+                                    <td>{{$item->converted_standard_time}}</td>
+                                    <td>{{$item->converted_time}}</td>
+                                    <td>{{$item->note}}</td>
                         @can('cud',App\PI::first())
 
                                     <td class="col-sm-1">
@@ -232,7 +193,7 @@
                                 @endforeach
                                 @else
                                 <tr>
-                                    <td colspan="10" class="text-center">Không có bất kỳ dữ liệu nào được tìm thấy</td>
+                                    <td colspan="11" class="text-center">Không có bất kỳ dữ liệu nào được tìm thấy</td>
                                 </tr>
                                 @endif
 

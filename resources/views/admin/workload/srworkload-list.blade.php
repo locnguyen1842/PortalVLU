@@ -1,11 +1,11 @@
 @extends('admin.master')
-@section('title','Danh sách khối lượng giảng dạy')
+@section('title','Danh sách khối lượng NCKH')
 @section('breadcrumb')
     <div class="cm-flex">
         <div class="cm-breadcrumb-container">
             <ol class="breadcrumb">
                 {{-- <li><a href="#">Home</a></li> --}}
-                <li class="active">Quản lý khối lượng giảng dạy</li>
+                <li class="active">Quản lý khối lượng NCKH</li>
             </ol>
         </div>
     </div>
@@ -47,7 +47,7 @@
         <div class="waiting">
             <img src="{{asset('img/loader.gif')}}" alt="Đang tải">
         </div>
-        <div class="panel-heading">Danh sách khối lượng giảng dạy<br>
+        <div class="panel-heading">Danh sách khối lượng NCKH<br>
             @can('cud',App\PI::first())
             <a href="{{route('admin.workload.add')}}">
                 <button type="button" name="button" class="btn btn-xs btn-success">Thêm Mới</button>
@@ -58,13 +58,13 @@
 
         <div class="panel-body">
             <div class="form-group col-sm-6">
-                <form class="form-horizontal" action="{{route('admin.workload.index')}}" method="get">
+                <form class="form-horizontal" action="{{route('admin.srworkload.index')}}" method="get">
                     <div class="col-sm-12">
                         <div class="col-sm-3">
                             <label class="control-label">Tìm kiếm</label>
                         </div>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="search" placeholder="Nhập mã hoặc tên nv/khoa/môn.">
+                            <input type="text" class="form-control" name="search" placeholder="Nhập mã hoặc tên nv.">
 
 
                         </div>
@@ -261,13 +261,14 @@
 
                         <th>Mã NV</th>
                         <th>Họ Tên</th>
-                        <th>Khoa</th>
-                        <th>Mã - Tên môn học</th>
-                        <th>Số tiết</th>
+                        <th>Công việc</th>
+                        <th>Chi tiết</th>
+                        <th>Diễn giải (tên cụ thể của hoạt động NCKH, …)</th>
+                        <th>Đơn vị (đề tài, bài báo, tài liệu, giáo trình...)</th>
+                        <th>Số lượng</th>
                         <th>Quy đổi giờ chuẩn</th>
-                        <th>Lý thuyết</th>
-                        <th>Thực hành</th>
-                        <th>Học kỳ</th>
+                        <th>Số tiết/giờ quy đổi</th>
+                        <th>Ghi chú</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -275,7 +276,7 @@
                     @if($workloads->count() >0)
                     @foreach ($workloads as $item)
                     <tr>
-                        <td class="col-sm-1">
+                        <td>
 
                             <a href="{{route('admin.workload.detail',$item->id)}}" data-toggle="tooltip" data-placement="right"
                                 title="" data-original-title="Chi tiết" href="javascript:" class="search_tag tooltip-test">
@@ -284,17 +285,18 @@
                                 </span>
                             </a>
                         </td>
-                        <td class="col-sm-2">{{$item->pi->full_name}}</td>
-                        <td class="col-sm-1">{{$item->unit->unit_code}}</td>
-                        <td class="col-sm-2">{{$item->subject_code}} - {{$item->subject_name }}</td>
-                        <td class="col-sm-1">{{$item->number_of_lessons}}</td>
-                        <td class="col-sm-1">{{$item->total_workload}}</td>
-                        <td class="col-sm-1">{{$item->theoretical_hours}}</td>
-                        <td class="col-sm-1">{{$item->practice_hours}}</td>
-                        <td class="col-sm-1">{{$item->semester->alias}}</td>
+                        <td>{{$item->pi->full_name}}</td>
+                        <td>{{$item->name_of_work}}</td>
+                        <td>{{$item->detail_of_work}}</td>
+                        <td>{{$item->explain_of_work}}</td>
+                        <td>{{$item->unit_of_work}}</td>
+                        <td>{{$item->quantity_of_work}}</td>
+                        <td>{{$item->converted_standard_time}}</td>
+                        <td>{{$item->converted_time}}</td>
+                        <td>{{$item->note}}</td>
             @can('cud',App\PI::first())
 
-                        <td class="col-sm-1">
+                        <td>
                             <a href="{{route('admin.workload.update',$item->id)}}" data-toggle="tooltip" data-placement="top"
                                 title="" data-original-title="Cập nhật" href="javascript:" class="tooltip-test">
                                 <span class=""><i class="fa fa-lg fa-edit text-primary"></i>
@@ -338,7 +340,7 @@
                     @endforeach
                     @else
                     <tr>
-                        <td colspan="10" class="text-center">Không có bất kỳ dữ liệu nào được tìm thấy</td>
+                        <td colspan="11" class="text-center">Không có bất kỳ dữ liệu nào được tìm thấy</td>
                     </tr>
                     @endif
 
@@ -357,7 +359,7 @@
     $(document).ready(function() {
 
         $(".search_tag").on('click', function() {
-            var url = {!!json_encode(route('admin.workload.index'), JSON_UNESCAPED_SLASHES) !!};
+            var url = {!!json_encode(route('admin.srworkload.index'), JSON_UNESCAPED_SLASHES) !!};
             var session_id = $('.year_workload').val();
             var search = "";
             window.location.href = url+'?year_workload='+session_id;

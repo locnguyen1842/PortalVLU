@@ -19,8 +19,9 @@
         <div class="nav-tabs-container table-responsive">
             <ul class="nav nav-tabs">
                 <li class="{{url()->current() == route('admin.pi.detail',$pi_id) ? 'active':''}}"><a href="{{route('admin.pi.detail',$pi_id)}}">Thông tin cá nhân</a></li>
-                <li class="{{url()->current() == route('admin.pi.workload.index',$pi_id) ? 'active':''}}"><a href="{{route('admin.pi.workload.index',$pi_id)}}">Khối lượng công việc</a></li>
-                <li class="{{url()->current() == route('admin.sb.detail',$pi_id) ? 'active':''}}"><a href="{{route('admin.sb.detail',$pi_id)}}">Lý lịch khoa học</a></li>
+                <li class="{{url()->current() == route('admin.pi.workload.index',$pi_id) ? 'active':''}}"><a href="{{route('admin.pi.workload.index',$pi_id)}}">Khối lượng giảng dạy</a></li>
+                    <li class="{{url()->current() == route('admin.pi.srworkload.index',$pi_id) ? 'active':''}}"><a href="{{route('admin.pi.srworkload.index',$pi_id)}}">Khối lượng NCKH</a></li>
+                    <li class="{{url()->current() == route('admin.sb.detail',$pi_id) ? 'active':''}}"><a href="{{route('admin.sb.detail',$pi_id)}}">Lý lịch khoa học</a></li>
             </ul>
         </div>
     </div>

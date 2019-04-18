@@ -74,10 +74,6 @@
                                         <span for="" class="col-sm-9 text-nowrap">{{$pi->gender ==0 ? "Nam":""}}{{$pi->gender ==1 ? "Nữ":""}}</span>
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputPassword3" class="col-sm-3  ">Tôn giáo</label>
-                                        <span for="" class="col-sm-9 text-nowrap">{{$pi->religion->name}}</span>
-                                    </div>
-                                    <div class="form-group">
                                         <label for="inputPassword3" class="col-sm-3  ">Dân tộc </label>
                                         <span for="" class="col-sm-9 text-nowrap">{{$pi->nation->name}}</span>
                                     </div>

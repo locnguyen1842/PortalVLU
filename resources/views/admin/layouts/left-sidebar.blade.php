@@ -8,10 +8,10 @@
             <div id="cm-menu-scroller">
                 <ul class="cm-menu-items">
                 <li class="{{url()->current() == route('admin.pi.index') ? 'active':''}}">
-                            <a href="{{route('admin.pi.index')}}" class="sf-profile-group">Danh sách nhân viên</a>
+                            <a href="{{route('admin.pi.index')}}" class="md-contacts">Danh sách nhân viên</a>
                         </li>
                         <li class="{{url()->current() == route('admin.pi.add') ? 'active':''}}">
-                            <a href="{{route('admin.pi.add')}}" class="sf-sign-add">Thêm mới nhân viên</a>
+                            <a href="{{route('admin.pi.add')}}" class=" sf-sign-add">Thêm mới nhân viên</a>
                         </li>
                     {{-- <li class="cm-submenu {{(url()->current() == route('admin.pi.index')||url()->current() == route('admin.pi.add')) ? 'open':''}}">
                         <a class=" sf-profile-group">
@@ -31,10 +31,16 @@
                         </ul>
                     </li> --}}
                     <li class="{{url()->current() == route('admin.workload.index') ? 'active':''}}">
-                        <a href="{{route('admin.workload.index')}}" class=" sf-dashboard">Danh sách KLGD</a>
+                        <a href="{{route('admin.workload.index')}}" class="md-assignment">Danh sách khối lượng GD</a>
                     </li>
                     <li class="{{url()->current() == route('admin.workload.add') ? 'active':''}}">
-                        <a href="{{route('admin.workload.add')}}" class="sf-sign-add">Thêm mới KLGD</a>
+                        <a href="{{route('admin.workload.add')}}" class=" sf-sign-add">Thêm mới khối lượng GD</a>
+                    </li>
+                    <li class="{{url()->current() == route('admin.srworkload.index') ? 'active':''}}">
+                        <a href="{{route('admin.srworkload.index')}}" class=" md-work">Danh sách khối lượng NCKH</a>
+                    </li>
+                    <li class="{{url()->current() == route('admin.workload.add') ? 'active':''}}">
+                        <a href="{{route('admin.workload.add')}}" class=" sf-sign-add">Thêm mới khối lượng NCKH</a>
                     </li>
                     {{-- <li class="cm-submenu {{(url()->current() == route('admin.workload.index')|| url()->current() == route('admin.workload.add')) ? 'open':''}}">
                             <a class="sf-dashboard ">

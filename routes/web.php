@@ -60,10 +60,12 @@ Route::prefix('admin')->group(function () {
         Route::get('/pi-degree-delete/{degreedetail_id}', 'DegreeDetailController@delete')->name('admin.pi.degree.delete');
 
         //workload details of one user
-        Route::get('/pi-detail/{pi_id}/workload', 'WorkloadController@getlistworkloadbypi')->name('admin.pi.workload.index');
+        Route::get('/pi-detail/{pi_id}/job-workload', 'WorkloadController@getlistworkloadbypi')->name('admin.pi.workload.index');
+        Route::get('/pi-detail/{pi_id}/scientific-research-workload', 'WorkloadController@getlistsrworkloadbypi')->name('admin.pi.srworkload.index');
 
         //workload all user
-        Route::get('/workload-list', 'WorkloadController@index')->name('admin.workload.index');
+        Route::get('/job-workload-list', 'WorkloadController@index')->name('admin.workload.index');
+        Route::get('/scientific-research-workload-list', 'WorkloadController@srworkload_index')->name('admin.srworkload.index');
         //
         //add workload
         Route::get('/workload-add', 'WorkloadController@getadd')->name('admin.workload.add');
@@ -160,7 +162,8 @@ Route::prefix('')->group(function () {
         //delete degree employee
         Route::get('/pi-degree-delete/{degreedetail_id}', 'EmployeeController@delete')->name('employee.pi.degree.delete');
         //workload
-        Route::get('/workload-list', 'WorkloadController@getWorkloadList_Employee')->name('employee.workload.index');
+        Route::get('/job-workload-list', 'WorkloadController@getWorkloadList_Employee')->name('employee.workload.index');
+        Route::get('/scientific-research-workload-list', 'WorkloadController@getSRWorkloadList_Employee')->name('employee.srworkload.index');
         //workload details
         Route::get('/workload-details/{id_workload}', 'WorkloadController@getWorkloadDetail_Employee')->name('employee.workload.detail');
         //scientific background
