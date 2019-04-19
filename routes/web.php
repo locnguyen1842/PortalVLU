@@ -119,7 +119,6 @@ Route::prefix('admin')->group(function () {
         Route::get('/academic-rank/delete/{pi_id}', 'PIController@getDeleteAcademicRank')->name('admin.academic.delete');
 
         // confirmation letter
-        Route::get('/confirmation-request/index','ConfirmationRequestController@index')->name('admin.confirmation.index');
         Route::get('/confirmation-request/detail/{letter_id}','ConfirmationRequestController@index')->name('admin.confirmation.detail');
         Route::get('/confirmation-request/update/{letter_id}','ConfirmationRequestController@index')->name('admin.confirmation.update');
 
@@ -188,6 +187,9 @@ Route::prefix('')->group(function () {
         Route::post('/academic-rank/create', 'EmployeeController@postCreateAcademicRank')->name('employee.academic.create');
         Route::get('/academic-rank/delete', 'EmployeeController@getDeleteAcademicRank')->name('employee.academic.delete');
 
+        // 
+        Route::get('/confirmation-request/create','ConfirmationRequestController@getCreate')->name('employee.confirmation.create');
+        Route::post('/confirmation-request/create','ConfirmationRequestController@postCreate')->name('employee.confirmation.create');
 
 
     });

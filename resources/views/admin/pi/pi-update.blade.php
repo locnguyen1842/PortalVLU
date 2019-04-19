@@ -359,7 +359,6 @@
                             <option {{ $teacher_type->id== old('teacher_type')?'selected':'' }} value="0" selected>Không có</option>
                             @endif
                         </select>
-
                     </div>
                 </div>
                 <div class="form-group">
