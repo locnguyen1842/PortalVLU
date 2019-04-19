@@ -6,7 +6,7 @@
         <ol class="breadcrumb">
             {{-- <li><a href="#">Home</a></li> --}}
             <li class=""><a href="{{route('admin.pi.index')}}">Quản lý thông tin nhân viên</a></li>
-             <li class=""><a href="{{route('admin.pi.detail',$pi_id)}}">Chi tiết nhân viên - {{App\PI::find($pi_id)->employee_code}}</a></li>
+             <li class=""><a href="{{route('admin.pi.detail',$pi_id)}}">Thông tin cá nhân - {{App\PI::find($pi_id)->employee_code}}</a></li>
              <li class=""><a href="{{route('admin.sb.detail',$pi_id)}}">Lý lịch khoa học</a></li>
             <li class="active">Cập nhật lý lịch khoa học</li>
         </ol>
@@ -21,7 +21,8 @@
             <ul class="nav nav-tabs">
                 <li class="{{url()->current() == route('admin.pi.detail',$pi_id) ? 'active':''}}"><a href="{{route('admin.pi.detail',$pi_id)}}">Thông tin cá nhân</a></li>
                 <li class="{{url()->current() == route('admin.pi.workload.index',$pi_id) ? 'active':''}}"><a href="{{route('admin.pi.workload.index',$pi_id)}}">Khối lượng công việc</a></li>
-                <li class="{{url()->current() == route('admin.sb.detail',$pi_id) ? 'active':''}}"><a href="{{route('admin.sb.detail',$pi_id)}}">Lý lịch khoa học</a></li>
+                    <li class="{{url()->current() == route('admin.pi.srworkload.index',$pi_id) ? 'active':''}}"><a href="{{route('admin.pi.srworkload.index',$pi_id)}}">Khối lượng NCKH</a></li>
+                    <li class="{{url()->current() == route('admin.sb.detail',$pi_id) ? 'active':''}}"><a href="{{route('admin.sb.detail',$pi_id)}}">Lý lịch khoa học</a></li>
             </ul>
         </div>
     </div>
@@ -125,7 +126,12 @@
                             <div class="form-group">
                                 <div class="col-sm-6">
                                     <label>Chức vụ (hiện tại hoặc trước khi nghỉ hưu) <span style="color: red">*</span></label>
-                                    <input required class="form-control" name="position" value="{{$sb->pi->position}}">
+                                    <select required class="form-control" name="position">
+                                        <option value="">Chọn chức vụ</option>
+                                        @foreach($positions as $position)
+                                        <option {{$sb->pi->officer->position_id == $position->id ? 'selected' : ''}} value="{{$position->id}}">{{$position->name}}</option>
+                                        @endforeach
+                                    </select>
 
                                 </div>
                                 <div class="col-sm-6">
@@ -140,8 +146,8 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-6">
-                                    <label>Chỗ ở riêng hoặc địa chỉ liên lạc <span style="color: red">*</span></label>
-                                    <input required class="form-control" name="address" value="{{$sb->address}}">
+                                    <label>Chỗ ở riêng hoặc địa chỉ liên lạc</label>
+                                    <input disabled class="form-control" name="address" value="{{$sb->pi->contact_address->address_content}}, {{$sb->pi->contact_address->ward->path_with_type}}">
                                 </div>
                                 <div class="col-sm-6">
                                     <label>Email <span style="color: red">*</span></label>

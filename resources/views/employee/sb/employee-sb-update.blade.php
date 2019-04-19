@@ -110,24 +110,26 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-6">
-                                    <label>Chức vụ (hiện tại hoặc trước khi nghỉ hưu) <span style="color: red">*</span></label>
-                                    <input required class="form-control" name="position" value="{{$sb->pi->position}}">
+                                    <label>Chức vụ (hiện tại hoặc trước khi nghỉ hưu)</label>
+                                    <input disabled class="form-control" name="position" value="{{$sb->pi->officer->position->name}}">
 
                                 </div>
                                 <div class="col-sm-6">
-                                    <label>Đơn vị công tác (hiện tại hoặc trước khi nghỉ hưu) <span style="color: red">*</span></label>
-                                    <select required class="form-control" name="unit">
+                                    <label>Đơn vị công tác (hiện tại hoặc trước khi nghỉ hưu)</label>
+                                    <input disabled class="form-control" name="unit" value="{{$sb->pi->unit->name}}">
+
+                                    {{-- <select required class="form-control" name="unit">
                                         <option value="">Chọn đơn vị</option>
                                         @foreach($units as $unit)
                                         <option {{$sb->pi->unit_id == $unit->id ? 'selected' : ''}} value="{{$unit->id}}">{{$unit->name}}</option>
                                         @endforeach
-                                    </select>
+                                    </select> --}}
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-6">
-                                    <label>Chỗ ở riêng hoặc địa chỉ liên lạc <span style="color: red">*</span></label>
-                                    <input required class="form-control" name="address" value="{{$sb->address}}">
+                                    <label>Chỗ ở riêng hoặc địa chỉ liên lạc</label>
+                                    <input disabled class="form-control" name="address" value="{{$sb->pi->contact_address->address_content}}, {{$sb->pi->contact_address->ward->path_with_type}}">
                                 </div>
                                 <div class="col-sm-6">
                                     <label>Email <span style="color: red">*</span></label>

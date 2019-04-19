@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Nation;
 use App\Unit;
 use App\SBTopicLevel;
+use App\PositionType;
 use App\PI;
 use App\TPForeignLanguage;
 use App\TPGraduate;
@@ -30,12 +31,12 @@ class ScientificBackgroundController extends Controller
     public function getupdateAdmin($pi_id)
     {
         $this->authorize('cud', PI::firstOrFail());
-
+        $positions = PositionType::all();
         $sb = ScientificBackground::where('personalinformation_id', $pi_id)->firstOrFail();
         $nations = Nation::all();
         $units = Unit::all();
         $topic_levels = SBTopicLevel::all();
-        return view('admin.sb.sb-update', compact('pi_id', 'sb', 'nations', 'units', 'topic_levels'));
+        return view('admin.sb.sb-update', compact('pi_id', 'sb', 'nations', 'units', 'topic_levels','positions'));
     }
 
     public function postupdateAdmin($pi_id, Request $request)
@@ -55,7 +56,6 @@ class ScientificBackgroundController extends Controller
                 'year_of_appointment' => 'digits:4|integer|nullable',
                 'position' => 'required',
                 'unit' => 'required',
-                'address' => 'required',
                 'email_address'=> 'required|email|unique:personalinformations,email_address,'.$pi->id,
                 "type_of_training" => 'required',
                 'place_of_training' => 'required',
@@ -97,7 +97,6 @@ class ScientificBackgroundController extends Controller
               'year_of_appointment.integer' => 'Năm bổ nhiệm không đúng định dạng',
               'position.required' => 'Chức vụ không được bỏ trống',
               'unit.required' => 'Đơn vị   không được bỏ trống',
-              'address.required' => 'Chỗ ở riêng không được bỏ trống',
               'email_address.required' => 'Email không được bỏ trống',
               'email_address.email' =>'Email sai định dạng',
               'email_address.unique' =>'Email đã tồn tại',
@@ -151,15 +150,16 @@ class ScientificBackgroundController extends Controller
         $pi->place_of_birth = $request->place_of_birth;
         $pi->home_town = $request->home_town;
         $pi->nation_id = $request->nation;
-        $pi->position = $request->position;
+        $pi->officer->position_id = $request->position;
         $pi->unit_id = $request->unit;
         $pi->email_address = $request->email_address;
         $pi->fax = $request->fax;
         $pi->save();
+        $pi->officer->save();
         $sb = ScientificBackground::where('personalinformation_id', $pi->id)->firstOrFail();
         $sb->highest_scientific_title = $request->highest_scientific_title;
         $sb->year_of_appointment = $request->year_of_appointment;
-        $sb->address = $request->address;
+        // $sb->address = $request->address;
         $sb->orga_phone_number = $request->orga_phone_number;
         $sb->home_phone_number = $request->home_phone_number;
         $sb->mobile_phone_number = $request->mobile_phone_number;
@@ -303,9 +303,6 @@ class ScientificBackgroundController extends Controller
                 'highest_degree' => 'nullable',
                 'highest_scientific_title' => 'nullable',
                 'year_of_appointment' => 'digits:4|integer|nullable',
-                'position' => 'required',
-                'unit' => 'required',
-                'address' => 'required',
                 'email_address'=> 'required|email|unique:personalinformations,email_address,'.$pi->id,
                 "type_of_training" => 'required',
                 'place_of_training' => 'required',
@@ -347,7 +344,6 @@ class ScientificBackgroundController extends Controller
               'year_of_appointment.integer' => 'Năm bổ nhiệm không đúng định dạng',
               'position.required' => 'Chức vụ không được bỏ trống',
               'unit.required' => 'Đơn vị   không được bỏ trống',
-              'address.required' => 'Chỗ ở riêng không được bỏ trống',
               'email_address.required' => 'Email không được bỏ trống',
               'email_address.email' =>'Email sai định dạng',
               'email_address.unique' =>'Email đã tồn tại',
@@ -401,15 +397,13 @@ class ScientificBackgroundController extends Controller
         $pi->place_of_birth = $request->place_of_birth;
         $pi->home_town = $request->home_town;
         $pi->nation_id = $request->nation;
-        $pi->position = $request->position;
-        $pi->unit_id = $request->unit;
         $pi->email_address = $request->email_address;
         $pi->fax = $request->fax;
         $pi->save();
         $sb = ScientificBackground::where('personalinformation_id', $pi->id)->firstOrFail();
         $sb->highest_scientific_title = $request->highest_scientific_title;
         $sb->year_of_appointment = $request->year_of_appointment;
-        $sb->address = $request->address;
+        // $sb->address = $request->address;
         $sb->orga_phone_number = $request->orga_phone_number;
         $sb->home_phone_number = $request->home_phone_number;
         $sb->mobile_phone_number = $request->mobile_phone_number;

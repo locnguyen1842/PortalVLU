@@ -90,8 +90,12 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-12">
-                    <label class="col-sm-5">Chức vụ(hiện tại hoặc trước khi nghỉ hưu):</label>
-                    <span class="col-sm-7 text-truncate">{{$sb->pi->position}}</span>
+                    <label class="col-sm-5">Chức vụ (hiện tại hoặc trước khi nghỉ hưu):</label>
+                    <span class="col-sm-7 text-truncate">{{$sb->pi->officer->position->name}}</span>
+                </div>
+                <div class="col-sm-12">
+                    <label class="col-sm-5">Đơn vị công tác (hiện tại hoặc trước khi nghỉ hưu):</label>
+                    <span class="col-sm-7 text-truncate">{{$sb->pi->unit->name}}</span>
                 </div>
             </div>
             <div class="form-group">
@@ -206,7 +210,7 @@
             @if($item->field_of_study !=null &&$item->place_of_training !=null &&$item->year_of_issue!=null )
             <div class="form-group">
                 <div class="col-sm-6">
-                        <label class="col-sm-6">Thạc sĩ chuyên ngành {{$loop->iteration}}:</label>
+                        <label class="col-sm-6">Thạc sĩ chuyên ngành {{$loop->iteration == 1 ? '' : $loop->iteration}}:</label>
                         <span class="col-sm-6 text-truncate">{{ $item->field_of_study}}</span>
 
                 </div>
@@ -266,7 +270,7 @@
             @if($item->field_of_study != null &&$item->year_of_issue != null&&$item->thesis_title !=null&&$item->place_of_training != null)
             <div class="form-group">
                 <div class="col-sm-6">
-                            <label class="col-sm-6">Tiến sĩ chuyên ngành {{$loop->iteration}}:</label>
+                            <label class="col-sm-6">Tiến sĩ chuyên ngành {{$loop->iteration == 1 ? '' : $loop->iteration}}:</label>
                             <span class="col-sm-6 text-truncate">{{$item->field_of_study}}</span>
 
                     <!-- <label class="col-sm-4">-Thạc sĩ chuyên ngành:</label> -->

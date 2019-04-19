@@ -90,18 +90,18 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-6">
-                                    <label for="inputEmail3" class="col-sm-4">Chức vụ</label>
-                                    <span for="" class="col-sm-8 text-truncate">{{$sb->pi->position}}</span>
+                                    <label for="inputEmail3" class="col-sm-4">Chức vụ (hiện tại hoặc trước khi nghỉ hưu)</label>
+                                    <span for="" class="col-sm-8 text-truncate">{{$sb->pi->officer->position->name}}</span>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="inputEmail3" class="col-sm-4">Đơn vị công tác</label>
+                                    <label for="inputEmail3" class="col-sm-4">Đơn vị công tác (hiện tại hoặc trước khi nghỉ hưu)</label>
                                     <span for="" class="col-sm-8 text-truncate">{{$sb->pi->unit->name}}</span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-6">
                                     <label for="inputEmail3" class="col-sm-4">Chỗ ở riêng hoặc địa chỉ liên lạc</label>
-                                    <span for="" class="col-sm-8 text-truncate">{{$sb->address}}</span>
+                                    <span for="" class="col-sm-8 text-truncate">{{$sb->pi->contact_address->address_content}}, {{$sb->pi->contact_address->ward->path_with_type}}</span>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="inputEmail3" class="col-sm-4">Email</label>
