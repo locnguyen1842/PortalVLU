@@ -42,6 +42,11 @@
                     <li class="{{url()->current() == route('admin.workload.add') ? 'active':''}}">
                         <a href="{{route('admin.workload.add')}}" class=" sf-sign-add">Thêm mới khối lượng NCKH</a>
                     </li>
+
+                    <li class="{{url()->current() == route('admin.confirmation.index') ? 'active':''}}">
+                            <a href="{{route('admin.confirmation.index')}}" class=" md-work">Danh sách đơn yêu cầu</a>
+                        </li>
+
                     {{-- <li class="cm-submenu {{(url()->current() == route('admin.workload.index')|| url()->current() == route('admin.workload.add')) ? 'open':''}}">
                             <a class="sf-dashboard ">
                                 Khối lượng giảng dạy

@@ -24,6 +24,7 @@ class Address extends Model
         return $this->belongsTo('App\Ward','ward_code','code');
     }
 
+
     public function pi_permanent_addresses(){
         return $this->hasMany('App\PI','permanent_address_id','id');
     }

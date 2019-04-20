@@ -5,27 +5,16 @@
         <div class="cm-breadcrumb-container">
             <ol class="breadcrumb">
                 {{-- <li><a href="#">Home</a></li> --}}
-                <li class="active">Quản lý năm học</li>
+                <li class="active">Danh sách đơn yêu cầu xác nhận</li>
             </ol>
         </div>
     </div>
 @endsection
-@section('menu-tabs')
-<nav class="cm-navbar cm-navbar-default cm-navbar-slideup" >
-    <div class="cm-flex">
-        <div class="nav-tabs-container  table-responsive">
-            <ul class="nav nav-tabs">
-                <li class="{{url()->current() == route('admin.workload.index') ? 'active':''}}"><a href="{{route('admin.workload.index')}}">Quản lý khối lượng công việc</a></li>
-                <li class="{{url()->current() == route('admin.schoolyear.index') ? 'active':''}}"><a href="{{route('admin.schoolyear.index')}}">Quản lý năm học</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
-@endsection
+
 @section('content')
 
 
-<div  style="padding-top:51px">
+<div  style="padding-top:0px">
     @include('admin.layouts.Error')
     @if(session()->has('message'))
         <div class="alert alert-success mt-10">
@@ -36,12 +25,8 @@
         <div class="waiting">
             <img src="{{asset('img/loader.gif')}}" alt="Đang tải">
         </div>
-        <div class="panel-heading">Danh sách xác nhận yêu cầu<br>
-            @can('cud',App\PI::first())
-            <a href="{{route('admin.schoolyear.add')}}" methods="post">
-                <button type="button" name="button" class="btn btn-xs btn-secondary">Thiết lập</button>
-            </a>
-            @endcan
+        <div class="panel-heading">Danh sách đơn yêu cầu xác nhận<br>
+
         </div>
 
 
@@ -49,40 +34,73 @@
             <table class="table table-hover" style="margin-bottom:0">
                 <thead>
                     <tr>
-                        <th>Năm bắt đầu</th>
-                        <th>Năm kết thúc</th>
+                        <th>Mã NV</th>
+                        <th>Họ tên</th>
+                        <th>Lý do</th>
+                        <th>Ngày yêu cầu</th>
+                        <th>Trạng thái</th>
+
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @if($yearlist->count() >0)
-                    @foreach ($yearlist as $item)
+                    @if($crs->count() >0)
+                    @foreach ($crs as $item)
                     <tr>
-                        <td class="col-sm-6">{{$item->start_year}}</td>
-                        <td class="col-sm-5">{{$item->end_year}}</td>
-            @can('cud',App\PI::first())
+                        <td>{{$item->pi->employee_code}}</td>
+                        <td>{{$item->pi->full_name}}</td>
+                        <td>{{$item->reason}}</td>
+                        <td>{{$item->date_of_request}}</td>
+                        <td class="font-weight-bold {{$item->is_printed == 0 ? 'text-danger':'text-success'}}">{{$item->is_printed == 0 ? 'Chưa in':'Đã in'}}</td>
 
-                        <td class="col-sm-1">
-                            <a href="{{route('admin.schoolyear.update',$item->id)}}" data-toggle="tooltip" data-placement="top"
-                                title="" data-original-title="Cập nhật" href="javascript:" class="tooltip-test">
+                        <td>
+                            <a href="{{route('admin.confirmation.print',$item->id)}}" data-toggle="tooltip" data-placement="top"
+                                    title="" data-original-title="Xem trước" href="javascript:" class="preview_cr tooltip-test ml-10">
+                                    <span class=""><i class="fa fa-lg fa-sign-out"></i>
+                                        <span class="mdi mdi-close"></span>
+                                    </span>
+                                </a>
+                                <div class="modal fade cr-preview-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="cr-preview-modal">
+
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+
+                                                <div class="modal-body">
+                                                  <div class="preview-confirmation">
+                                                        <iframe frameborder="0" style="width:100%;height:400px" src="{{route('admin.confirmation.preview',$item->id)}}"></iframe>
+                                                  </div>
+
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default btn-preview-no" id="btn-preview-no">Quay lại</button>
+
+                                                    <button type="button" data-src="{{route('admin.confirmation.update',$item->id)}}" name="button" class="btn btn-primary btn-preview-update" id="btn-preview-update">Cập nhật</button>
+
+                                                    <button type="button" class="btn btn-warning btn-preview-yes" id="btn-preview-yes">Xuất pdf</button>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            <a href="{{route('admin.confirmation.update',$item->id)}}" data-toggle="tooltip" data-placement="top"
+                                title="" data-original-title="Cập nhật" href="javascript:" class="tooltip-test ml-10">
                                 <span class=""><i class="fa fa-lg fa-edit text-primary"></i>
                                     <span class="mdi mdi-close"></span>
                                 </span>
                             </a>
-                            <a href="{{route('admin.schoolyear.delete',$item->id)}}" data-toggle="tooltip" data-placement="top"
+                            {{-- <a href="{{route('admin.confirmation.delete',$item->id)}}" data-toggle="tooltip" data-placement="top"
                                 title="" data-original-title="Xóa" class="delete_workload tooltip-test ml-10">
                                 <span class=""><i class="fa fa-lg fa-trash text-danger"></i>
                                     <span class="mdi mdi-close"></span>
                                 </span>
-                            </a>
+                            </a> --}}
                         </td>
-                        @else
                         <td></td>
-                        @endcan
 
                     </tr>
                     {{--modal delete workload--}}
-                    @can('cud',App\PI::first())
 
                     <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"
                         id="pi-delete-modal">
@@ -102,7 +120,6 @@
                         </div>
                     </div>
 
-                    @endcan
 
                     @endforeach
                     @else
@@ -116,11 +133,50 @@
 
         </div>
         <div class="panel-footer">
-                {{$yearlist->links()}}
+                {{$crs->links()}}
 
         </div>
     </div>
 </div>
 
+<script>
+    $(document).ready(function(){
+        $(".preview_cr").on('click',function (e) {
+            e.preventDefault();
+            var modal = $(this).closest('tr').find('.cr-preview-modal');
+            var btn_yes = modal.find('.btn-preview-yes');
+            var btn_no = modal.find('.btn-preview-no');
+            var btn_update = modal.find('.btn-preview-update');
+            modal.modal('show');
 
+            var send_form = $(this).attr('href');
+            var modalConfirm = function(callback){
+
+                btn_yes.on("click", function(){
+                    callback(true);
+                    modal.modal('hide');
+                });
+
+                btn_no.on("click", function(){
+                    callback(false);
+                    modal.modal('hide');
+                });
+
+                btn_update.on("click", function(){
+                    callback(false);
+                    window.location.href = $(this).data('src');
+                    modal.modal('hide');
+                });
+            };
+            modalConfirm(function(confirm){
+                if(confirm){
+                    window.location.href = send_form;
+
+                }else{
+
+                }
+            });
+        });
+    });
+</script>
 @endsection

@@ -20,6 +20,9 @@
                     <li class="{{url()->current() == route('employee.sb.detail') ? 'active':''}}">
                         <a href="{{route('employee.sb.detail')}}" class="sf-file-text">Lý lịch khoa học</a>
                     </li>
+                    <li class="{{url()->current() == route('employee.confirmation.index') ? 'active':''}}">
+                            <a href="{{route('employee.confirmation.index')}}" class=" sf-notepad">Yêu cầu xác nhận</a>
+                        </li>
 
                     @can('actAsFacultyLeader',App\PI::first())
                     <li class="{{url()->current() == route('employee.faculty.index') ? 'active':''}}">

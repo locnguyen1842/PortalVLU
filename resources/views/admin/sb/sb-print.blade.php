@@ -51,7 +51,7 @@
             <div class="form-group">
                 <div class="col-sm-6">
                     <label class="col-sm-6">Ngày,tháng,năm sinh:</label>
-                    <span class="col-sm-6 text-truncate">{{date('d-m-Y',strtotime($sb->pi->date_of_birth))}}</span>
+                    <span class="col-sm-6 text-truncate">{{date('d/m/Y',strtotime($sb->pi->date_of_birth))}}</span>
                 </div>
                 <div class="col-sm-6">
                     <label class="col-sm-4">Nơi sinh:</label>

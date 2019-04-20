@@ -4,7 +4,7 @@
 <div class="cm-flex">
     <div class="cm-breadcrumb-container">
         <ol class="breadcrumb">
-            <li><a href="{{route('employee.sb.detail')}}">Chi tiết đơn xác nhận</a></li>
+            {{-- <li><a href="{{route('employee.sb.detail')}}">Chi tiết đơn xác nhận</a></li> --}}
                <li class="active">Tạo đơn xác nhận</li>
         </ol>
     </div>
@@ -22,53 +22,54 @@
                     {{ session()->get('message') }}
                 </div>
                 @endif
-            <form class="form-horizontal" action="{{route('employee.confirmation.create')}}" method="post">
-                {{csrf_field()}}
-                <div class="panel panel-default">
-                        <div class="panel-heading">Lý lịch sơ lược<br>
+                <form class="form-horizontal" action="{{route('employee.confirmation.create')}}" method="post">
+                    {{csrf_field()}}
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Yêu cầu xác nhận<br>
                         </div>
                         <div class="panel-body">
-                <div class="form-group">
-                    <div class="col-sm-12">
-                        <label for="">Lý do</label>
-                        <input require type="text" class="form-control" name="reason">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-12">
-                      @if($pi->permanent_address()->exists() && $pi->contact_address()->exists())
-                      <label for="">Địa chỉ</label>
-                                  <select require class="form-control" name="address" id="">
-                                    <option value="">Chọn địa chỉ</option>
-                                    <option value="{{$pi->contact_address_id}}">
-                                        Địa chỉ tạm trú: 
-                                        {{$pi->contact_address->address_content}}, 
-                                        {{$pi->contact_address->ward->path_with_type}}</option>
-                                    <option value="{{$pi->permanent_address_id}}">
-                                        Địa chỉ thường trú: 
-                                    {{$pi->permanent_address->address_content}}, 
-                                    {{$pi->permanent_address->ward->path_with_type}}</option>
-
-                                  </select>
-                      
-                      @endif
-
-                    </div>
-                </div>
-
-                <div class="form-group" style="margin-bottom:0">
-                <div class="col-sm-offset-2 col-sm-10 text-right">
-                        <button type="reset" class="btn btn-default">Hủy Bỏ</button>
-                        <button type="submit" class="btn btn-primary">Xác Nhận</button>
-                    </div>
-                                    </div>
-
-</div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <label for="">Lý do</label>
+                                    <input require type="text" class="form-control" name="reason">
                                 </div>
-            </form>
-        </div>
-    </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    @if($pi->permanent_address()->exists() && $pi->contact_address()->exists())
+                                    <label for="">Địa chỉ</label>
+                                    <select require class="form-control" name="address" id="">
+                                        <option value="">Chọn địa chỉ</option>
+                                        <option
+                                            value="{{$pi->permanent_address->address_content}}, {{$pi->permanent_address->ward->path_with_type}}">
+                                            Địa chỉ tạm trú:
+                                            {{$pi->contact_address->address_content}},
+                                            {{$pi->contact_address->ward->path_with_type}}</option>
+                                        <option
+                                            value="{{$pi->permanent_address->address_content}}, {{$pi->permanent_address->ward->path_with_type}}">
+                                            Địa chỉ thường trú:
+                                            {{$pi->permanent_address->address_content}},
+                                            {{$pi->permanent_address->ward->path_with_type}}</option>
 
+                                    </select>
+
+                                    @endif
+
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="margin-bottom:0">
+                                <div class="col-sm-offset-2 col-sm-10 text-right">
+                                    <button type="reset" class="btn btn-default">Hủy Bỏ</button>
+                                    <button type="submit" class="btn btn-primary">Xác Nhận</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
 
 
 <script type="text/javascript">

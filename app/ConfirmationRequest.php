@@ -16,9 +16,12 @@ class ConfirmationRequest extends Model
         'name_of_signer',
         'first_signer',
         'second_signer',
+        'address_id',
     ];
 
     public function pi(){
         return $this->belongsTo('App\PI','personalinformation_id','id');
     }
+
+
 }
