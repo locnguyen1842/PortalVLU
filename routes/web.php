@@ -124,7 +124,8 @@ Route::prefix('admin')->group(function () {
         Route::get('/confirmation-request/preview/{cr_id}','ConfirmationRequestController@previewAdmin')->name('admin.confirmation.preview');
 
         Route::get('/confirmation-request/detail/{cr_id}','ConfirmationRequestController@getdetail')->name('admin.confirmation.detail');
-        Route::get('/confirmation-request/update/{cr_id}','ConfirmationRequestController@getupdate')->name('admin.confirmation.update');
+        Route::get('/confirmation-request/update/{cr_id}','AdminController@getupdate')->name('admin.confirmation.update');
+        Route::post('/confirmation-request/update/{cr_id}','AdminController@postupdate')->name('admin.confirmation.update');
 
 
     });
@@ -197,8 +198,8 @@ Route::prefix('')->group(function () {
         Route::get('/confirmation-request/send/{cr_id}','ConfirmationRequestController@sendRequest')->name('employee.confirmation.send');
         Route::get('/confirmation-request/create','ConfirmationRequestController@getCreate')->name('employee.confirmation.create');
         Route::post('/confirmation-request/create','ConfirmationRequestController@postCreate')->name('employee.confirmation.create');
-        Route::get('/confirmation-request/update/{cr_id}','ConfirmationRequestController@getCreate')->name('employee.confirmation.update');
-        Route::post('/confirmation-request/update/{cr_id}','ConfirmationRequestController@getCreate')->name('employee.confirmation.update');
+        Route::get('/confirmation-request/update/{cr_id}','ConfirmationRequestController@getUpdate')->name('employee.confirmation.update');
+        Route::post('/confirmation-request/update/{cr_id}','ConfirmationRequestController@postUpdate')->name('employee.confirmation.update');
         Route::get('/confirmation-request/delete{cr_id}','ConfirmationRequestController@getCreate')->name('employee.confirmation.delete');
 
 

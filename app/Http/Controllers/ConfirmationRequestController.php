@@ -46,7 +46,9 @@ class ConfirmationRequestController extends Controller
         $cr->personalinformation_id = $pi->id;
         $cr->reason = $request->reason;
         $cr->confirmation = $request->reason;
-        $cr->address = $request->address;
+        $address = Address::findOrfail($request->address);
+        $cr->address = $address->address_content .', '.$address->ward->path_with_type;
+        $cr->address_id = $address->id;
         $cr->status = 0;
         $cr->save();
         return redirect()->back()->with('message', 'Tạo đơn thành công');
@@ -78,5 +80,33 @@ class ConfirmationRequestController extends Controller
         $cr = ConfirmationRequest::findOrFail($cr_id);
         return view('admin.confirmation.print',compact('cr'));
     }
+    public function getUpdate($cr_id){
+        // $this->authorize('cud', PI::firstOrFail());
+        $pi = PI::findOrFail(Auth::guard('employee')->user()->personalinformation_id);
+        $cr= ConfirmationRequest::find($cr_id);
+        return view('employee.confirmation.update', compact('pi','cr'));
+    }
+    public function postUpdate(Request $request,$cr_id){
+        $pi = PI::findOrFail(Auth::guard('employee')->user()->personalinformation_id);
+        $request->validate(
+            [
+                'address'=> 'required',
+                'reason'=> 'required',
+            ],
+            [
+                'address.required' => 'Địa chỉ không được bỏ trống',
+                'reason.required' => 'Lý do không được bỏ trống',
+            ]
+        );
+        $cr= ConfirmationRequest::find($cr_id);
+        $cr->reason = $request->reason;
+        $cr->confirmation = $request->reason;
+        $address = Address::findOrfail($request->address);
+        $cr->address = $address->address_content .', '.$address->ward->path_with_type;
+        $cr->address_id = $address->id;
+        $cr->save();
+        return redirect()->back()->with('message', 'Cập nhật đơn thành công');
+    }
+    
 
 }

@@ -61,7 +61,7 @@
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <label for="">Lý do</label>
-                                    <input require type="text" class="form-control" name="reason">
+                                    <input require type="text" class="form-control" name="reason" value="{{ old('reason') }}">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -70,13 +70,13 @@
                                     <label for="">Địa chỉ</label>
                                     <select require class="form-control" name="address" id="">
                                         <option value="">Chọn địa chỉ</option>
-                                        <option
-                                            value="{{$pi->permanent_address->address_content}}, {{$pi->permanent_address->ward->path_with_type}}">
+                                        <option {{ $pi->contact_address->id == old('address') ? 'selected':'' }}
+                                            value="{{ $pi->contact_address->id }}">
                                             Địa chỉ tạm trú:
-                                            {{$pi->contact_address->address_content}},
+                                            {{ $pi->contact_address->address_content }},
                                             {{$pi->contact_address->ward->path_with_type}}</option>
-                                        <option
-                                            value="{{$pi->permanent_address->address_content}}, {{$pi->permanent_address->ward->path_with_type}}">
+                                        <option {{ $pi->permanent_address->id == old('address') ? 'selected':'' }}
+                                            value="{{ $pi->permanent_address->id }}">
                                             Địa chỉ thường trú:
                                             {{$pi->permanent_address->address_content}},
                                             {{$pi->permanent_address->ward->path_with_type}}</option>
