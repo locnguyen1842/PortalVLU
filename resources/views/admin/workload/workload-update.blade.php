@@ -63,13 +63,13 @@
                     <label>Tạo mới năm học <span style="color: red">*</span></label>
                     <div class="form-horizontal">
                         <div class="col-sm-6 form-horizontal-none-pl">
-                            <input type="text" class="form-control" name="start_year" placeholder="Nhập năm bắt đầu"
+                            <input type="number" class="form-control" name="start_year" placeholder="Nhập năm bắt đầu"
                                 value="{{old('start_year')}}">
 
                         </div>
 
                         <div class="col-sm-6 form-horizontal-none-pl">
-                            <input type="text" class="form-control" name="end_year" placeholder="Nhập năm Kết thúc"
+                            <input type="number" class="form-control" name="end_year" placeholder="Nhập năm Kết thúc"
                                 value="{{old('start_year')}}">
 
                         </div>

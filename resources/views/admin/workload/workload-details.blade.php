@@ -71,7 +71,7 @@
 
                 <div class="col-sm-12">
                     <div class="panel panel-default">
-                        <div class="panel-heading">Thông tin giảng viên<br>
+                        <div class="panel-heading">Thông tin CBGV/NV<br>
                         </div>
                         <div class="panel-body">
                                 <form class="form-horizontal">
@@ -97,7 +97,7 @@
                         </div>
                     </div>
                     <div class="panel panel-default">
-                        <div class="panel-heading">Thông tin khai giảng<br>
+                        <div class="panel-heading">Thông tin CBGV/NV<br>
                         </div>
                         <div class="panel-body">
                                 <form class="form-horizontal">
