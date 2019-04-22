@@ -564,11 +564,11 @@ class WorkloadController extends Controller
 
     public function downloadtemplate()
     {
-        $file = public_path('Workload.xlsx');
+        $file = public_path('template-workload.xlsx');
         $headers = array(
             'Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
         );
-        return response()->download($file, 'Template Job Workload.xlsx', $headers);
+        return response()->download($file, 'Template Workload.xlsx', $headers);
     }
 
     public function fetch()

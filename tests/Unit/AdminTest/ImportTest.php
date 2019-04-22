@@ -28,7 +28,7 @@ class ImportTest extends TestCase
         $admin = Admin::where('is_supervisor',0)->first();
         $this->actingAs($admin, 'admin');
         $origional_file_path_pi = public_path('template-personalinformation.xlsx');
-        $origional_file_path_workload = public_path('Workload.xlsx');
+        $origional_file_path_workload = public_path('template-workload.xlsx');
         copy($origional_file_path_pi,public_path('test_data_pi.xlsx'));
         copy($origional_file_path_workload,public_path('test_data_workload.xlsx'));
 
