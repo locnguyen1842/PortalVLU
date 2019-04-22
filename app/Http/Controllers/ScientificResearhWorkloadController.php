@@ -30,11 +30,12 @@ class ScientificResearhWorkloadController extends Controller
         $this->authorize('cud', PI::firstOrFail());
         $value_start_year = (int)\Request::get('start_year');
         $request->validate(
-            [   
-                'name_of_work' => 'required',
-                'detail_of_work' => 'required',
-                'explain_of_work' => 'required',
-                'unit_of_work' => 'required',
+            [
+                'name_of_work' => 'required|max:1000',
+                'detail_of_work' => 'required|max:1000',
+                'explain_of_work' => 'required|max:1000',
+                'unit_of_work' => 'required|max:1000',
+                'note' => 'max:1000',
                 'quantity_of_work' => 'required',
                 'converted_standard_time' => 'required',
                 'converted_time' => 'required',
@@ -61,6 +62,11 @@ class ScientificResearhWorkloadController extends Controller
                 'detail_of_work.required'=> 'Chi tiết công việc không được bỏ trống',
                 'explain_of_work.required'=> 'Diễn giải công việc không được bỏ trống',
                 'unit_of_work.required'=> 'Đơn vị không được bỏ trống',
+                'name_of_work.max'=> 'Tên công việc chỉ được chứa 1000 ký tự',
+                'detail_of_work.max'=> 'Chi tiết công việc chỉ được chứa 1000 ký tự',
+                'explain_of_work.max'=> 'Diễn giải công việc chỉ được chứa 1000 ký tự',
+                'unit_of_work.max'=> 'Đơn vị chỉ được chứa 1000 ký tự',
+                'note.max'=> 'Ghi chú chỉ được chứa 1000 ký tự',
                 'quantity_of_work.required'=> 'Số lượng không được bỏ trống',
                 'converted_standard_time.required'=> 'Quy đổi giờ chuẩn không được bỏ trống',
                 'converted_time.required'=> 'Số tiết/giờ quy đổi không được bỏ trống',
@@ -119,11 +125,12 @@ class ScientificResearhWorkloadController extends Controller
         $this->authorize('cud', PI::firstOrFail());
         $value_start_year = (int)\Request::get('start_year');
         $request->validate(
-            [   
-                'name_of_work' => 'required',
-                'detail_of_work' => 'required',
-                'explain_of_work' => 'required',
-                'unit_of_work' => 'required',
+            [
+                'name_of_work' => 'required|max:1000',
+                'detail_of_work' => 'required|max:1000',
+                'explain_of_work' => 'required|max:1000',
+                'unit_of_work' => 'required|max:1000',
+                'note' => 'max:1000',
                 'quantity_of_work' => 'required',
                 'converted_standard_time' => 'required',
                 'converted_time' => 'required',
@@ -150,6 +157,11 @@ class ScientificResearhWorkloadController extends Controller
                 'detail_of_work.required'=> 'Chi tiết công việc không được bỏ trống',
                 'explain_of_work.required'=> 'Diễn giải công việc không được bỏ trống',
                 'unit_of_work.required'=> 'Đơn vị không được bỏ trống',
+                'name_of_work.max'=> 'Tên công việc chỉ được chứa 1000 ký tự',
+                'detail_of_work.max'=> 'Chi tiết công việc chỉ được chứa 1000 ký tự',
+                'explain_of_work.max'=> 'Diễn giải công việc chỉ được chứa 1000 ký tự',
+                'unit_of_work.max'=> 'Đơn vị chỉ được chứa 1000 ký tự',
+                'note.max'=> 'Ghi chú chỉ được chứa 1000 ký tự',
                 'quantity_of_work.required'=> 'Số lượng không được bỏ trống',
                 'converted_standard_time.required'=> 'Quy đổi giờ chuẩn không được bỏ trống',
                 'converted_time.required'=> 'Số tiết/giờ quy đổi không được bỏ trống',
@@ -185,7 +197,7 @@ class ScientificResearhWorkloadController extends Controller
         $srworkload->converted_time = $request->converted_time;
         $srworkload->note = $request->note;
         $srworkload->save();
-        
+
         return redirect()->back()->with('message', 'Cập nhật thành công');
 
     }

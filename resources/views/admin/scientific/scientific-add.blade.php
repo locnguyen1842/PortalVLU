@@ -79,27 +79,28 @@
                         <div class="form-group">
                             <div class="col-sm-6">
                                 <label>Công việc <span style="color: red">*</span> </label>
-                                <input required type="text" class="form-control" name="name_of_work"
-                                    placeholder="Nhập tên công việc" value="{{old('name_of_work')}}">
+
+                                <textarea required rows="4" style="overflow:auto;resize:none" type="text" class="form-control" name="name_of_work"
+                                    placeholder="Nhập tên công việc">{{old('name_of_work')}}</textarea>
                             </div>
                             <div class="col-sm-6">
                                 <label>Chi tiết <span style="color: red">*</span></label>
-                                <textarea required rows="1" style="overflow:auto;resize:none" type="text" class="form-control" name="detail_of_work"
-                                    placeholder="Nhập chi tiết công việc" value="{{old('detail_of_work')}}"></textarea>
+                                <textarea required rows="4" style="overflow:auto;resize:none" type="text" class="form-control" name="detail_of_work"
+                                    placeholder="Nhập chi tiết công việc">{{old('detail_of_work')}}</textarea>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-6">
                                 <label>Diễn giải (tên cụ thể của hoạt động NCKH, …) <span style="color: red">*</span>
                                 </label>
-                                <textarea required rows="1" style="overflow:auto;resize:none" type="text" class="form-control" name="explain_of_work"
-                                    placeholder="Nhập diễn giải" value="{{old('explain_of_work')}}"></textarea>
+                                <textarea required rows="4" style="overflow:auto;resize:none" type="text" class="form-control" name="explain_of_work"
+                                    placeholder="Nhập diễn giải">{{old('explain_of_work')}}</textarea>
                             </div>
                             <div class="col-sm-6">
                                 <label>Đơn vị (đề tài, bài báo, tài liệu, giáo trình...) <span
                                         style="color: red">*</span></label>
-                                <textarea required rows="1" style="overflow:auto;resize:none" type="text" class="form-control" name="unit_of_work"
-                                    placeholder="Nhập đơn vị" value="{{old('unit_of_work')}}"></textarea>
+                                <textarea required rows="4" style="overflow:auto;resize:none" type="text" class="form-control" name="unit_of_work"
+                                    placeholder="Nhập đơn vị">{{old('unit_of_work')}}</textarea>
                             </div>
                         </div>
                         <div class="form-group">

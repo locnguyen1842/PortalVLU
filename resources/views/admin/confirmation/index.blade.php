@@ -39,7 +39,7 @@
                     <div class="col-sm-9">
                             <div class="input-group">
                         <input type="text" class="form-control" name="search" placeholder="Nhập mã hoặc tên nv">
-                        
+
                         <span class="input-group-btn">
                                 <button class="btn btn-primary" type="submit">Tìm</button>
                             </span>
@@ -76,7 +76,7 @@
 
 
         </div>
-        
+
     </form>
         {{-- Loading Div --}}
 
@@ -235,7 +235,7 @@
                         send_form,
                         '_blank' // <- This is what makes it open in a new window.
                     );
-                    
+
                 }else{
 
                 }

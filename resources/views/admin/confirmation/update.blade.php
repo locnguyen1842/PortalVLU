@@ -24,102 +24,67 @@
                 @endif
                 <form class="form-horizontal" action="{{route('admin.confirmation.update',$cr->id)}}" method="post">
                     {{csrf_field()}}
+
+
                     <div class="panel panel-default">
-                            <div class="panel-heading">Thông tin cá nhân<br>
-                                <a href="{{route('admin.pi.update',$pi->id)}}" target="_blank">
-                                    <button type="button" name="button" class="btn btn-xs btn-primary">Cập nhật</button>
+                        <div class="panel-heading">Thông tin đơn xác nhận yêu cầu<br>
+                            <a href="{{route('admin.confirmation.print',$cr->id)}}" target="_blank">
+                                    <button type="button" name="button" class="btn btn-xs btn-warning">Xuất pdf</button>
                                 </a>
-                            </div>
+                        </div>
                         <div class="panel-body">
                                 <div class="form-group">
-                                    <div class="col-sm-6">
-                                            <label for="">Họ tên</label>
-                                            <input readonly type="text" class="form-control" value="{{$pi->full_name}}">
-                                    </div>
-                                    <div class="col-sm-6">
-                                            <label for="">Ngày sinh, Nơi sinh</label>
-                                            <input readonly type="text" class="form-control" value="{{date('d/m/Y', strtotime($pi->date_of_birth)).', tại '.$pi->place_of_birth}}">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                        <div class="col-sm-6">
-                                                <label for="">CMND</label>
-                                                <input readonly type="text" class="form-control" value="{{$pi->identity_card}}">
-                                        </div>
-                                        <div class="col-sm-6">
-                                                <label for="">Ngày cấp</label>
-                                                <input readonly type="text" class="form-control" value="{{$pi->date_of_issue}}">
+                                        <div class="col-sm-12">
+                                            <label for="">Lý do</label>
+                                            <input require type="text" class="form-control" name="reason" value="{{$cr->reason}}">
                                         </div>
                                     </div>
-                        </div>
-                    </div>
-
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Thông tin yêu cầu xác nhận<br>
-                        </div>
-                        <div class="panel-body">
                             <div class="form-group">
-                                <div class="col-sm-12">
-                                    <label for="">Lý do</label>
-                                    <input require type="text" class="form-control" name="reason" value="{{$cr->reason}}">
+                                <div class="col-sm-4">
+                                    <label for="">Người ký cấp I</label>
+                                    <input require type="text" class="form-control" name="first_signer" value="{{$cr->first_signer == null ? 'KT. HIỆU TRƯỞNG': $cr->first_signer}}">
                                 </div>
+                                <div class="col-sm-4">
+                                    <label for="">Người ký cấp II</label>
+                                    <input require type="text" class="form-control" name="second_signer" value="{{$cr->second_signer == null ? 'PHÓ HIỆU TRƯỞNG': $cr->second_signer}}">
+                                </div>
+                                <div class="col-sm-4">
+                                        <label for="">Họ tên người ký</label>
+                                        <input require type="text" class="form-control" name="name_of_signer" value="{{$cr->name_of_signer}}">
+                                    </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-sm-12">
-                                    @if($pi->permanent_address()->exists() && $pi->contact_address()->exists())
-                                    <label for="">Địa chỉ</label>
-                                    <select require class="form-control" name="address" id="">
-                                        <option value="" >Chọn địa chỉ</option>
-                                       
-                                        <option {{ $pi->contact_address->id == $cr->address_id ? 'selected':'' }}
-                                            value="{{ $pi->contact_address->id }}">
-                                            Địa chỉ tạm trú:
-                                            {{$pi->contact_address->address_content}},
-                                            {{$pi->contact_address->ward->path_with_type}}</option>
-                                        <option {{ $pi->permanent_address->id == $cr->address_id ? 'selected':'' }}
-                                            value="{{ $pi->permanent_address->id }}">
-                                            Địa chỉ thường trú:
-                                            {{$pi->permanent_address->address_content}},
-                                            {{$pi->permanent_address->ward->path_with_type}}</option>
 
-                                    </select>
-                                    @else
-                                    <label for="">Địa chỉ</label><br>
-                                    <label for="" class="text-danger">Không tìm thấy bất cứ địa chỉ cá nhân nào ( vui lòng cập nhật <a href="{{route('admin.pi.update')}}">tại đây</a> )</label>
-                                    @endif
 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Người xác nhận<br>
-                        </div>
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <div class="col-sm-6">
-                                    <label for="">Người ký I</label>
-                                    <input require type="text" class="form-control" name="first_signer" value="{{$cr->first_signer}}">
-                                </div>
-                                <div class="col-sm-6">
-                                    <label for="">Người ký II</label>
-                                    <input require type="text" class="form-control" name="second_signer" value="{{$cr->second_signer}}">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-12">
-                                    <label for="">Tên Người ký</label>
-                                    <input require type="text" class="form-control" name="name_of_signer" value="{{$cr->name_of_signer}}">
-                                </div>
-                        
                             </div>
                             <div class="form-group" style="margin-bottom:0">
                                 <div class="col-sm-offset-2 col-sm-10 text-right">
                                     <button type="reset" class="btn btn-default">Hủy Bỏ</button>
-                                    <button type="submit" class="btn btn-primary">Xác Nhận</button>
+                                    <button type="button" class="btn btn-turquoise btn-preview">Xem trước</button>
+                                    <button type="submit" class="btn btn-primary">Cập nhật</button>
                                 </div>
                             </div>
+                            <div class="modal fade cr-preview-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="cr-preview-modal">
 
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+
+                                            <div class="modal-body">
+                                              <div class="preview-confirmation">
+                                                    <iframe frameborder="0" style="width:100%;height:400px" src="{{route('admin.confirmation.preview',$cr->id)}}"></iframe>
+                                              </div>
+
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default btn-preview-no" id="btn-preview-no">Quay lại</button>
+                                                <button type="button" class="btn btn-warning btn-preview-yes" id="btn-preview-yes">Xuất pdf</button>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                         </div>
                     </div>
                 </form>
@@ -129,157 +94,39 @@
 
 <script type="text/javascript">
     $(document).ready(function(){
-        var teacher_type = $('select[name=teacher_type]');
-        var is_retired = $('input[type=radio][name=is_retired]:checked');
+        $('.btn-preview').on('click',function(e){
+            e.preventDefault();
+            var modal = $('.cr-preview-modal');
+            var btn_yes = modal.find('.btn-preview-yes');
+            var btn_no = modal.find('.btn-preview-no');
+            var btn_update = modal.find('.btn-preview-update');
+            modal.modal('show');
 
-        teacherType(teacher_type);
-        isRetired(is_retired);
-        teacher_type.on('change', function () {
-            teacherType($(this));
-        })
+            var send_form = $(this).attr('href');
+            var modalConfirm = function(callback){
 
-        $('input[type=radio][name=is_retired]').on('change', function (e) {
-            isRetired($(this));
-
-        })
-
-        function isRetired(element) {
-            if (element.val() == 0) {
-
-                $('input[name=date_of_retirement]').prop('disabled', true);
-            } else {
-                $('input[name=date_of_retirement]').prop('disabled', false);
-            }
-        }
-
-        function teacherType(element) {
-            if (element.val() == 0) {
-
-                $('.dependent-on-teacher').addClass('hide');
-                $('.dependent-on-teacher :input').not('input[name=date_of_retirement]').prop('disabled', true);
-
-            } else {
-                $('.dependent-on-teacher').removeClass('hide');
-                $('.dependent-on-teacher :input').not('input[name=date_of_retirement]').prop('disabled', false);
-
-            }
-        }
-        if('{{ $pi->permanent_address()->exists() && $pi->contact_address()->exists() }}' == true){
-            var province_code_1 = $('#province_1').val();
-            $.get('{{route('res.districts')}}' + '?province_code=' + province_code_1,
-            function(data) {
-                $('#district_1').empty();
-                $('#district_1').append('<option value="" disabled>Chọn quận/huyện</option>');
-                $.each(data, function(index, district) {
-                    $('#district_1').append('<option data-old-1="old-'+district.code+'" value="' + district.code + '">' + district.name_with_type + '</option>');
-                    var district_1 = '{{ $pi->permanent_address()->exists() ? $pi->permanent_address->district->code :'' }}'
-
-                    if(district.code == district_1){
-                        $('option[data-old-1="old-'+district.code+'"]').prop('selected',true);
-                    }
-
+                btn_yes.on("click", function(){
+                    callback(true);
+                    modal.modal('hide');
                 });
-            });
-            var district_code_1 = '{{ $pi->permanent_address()->exists() ? $pi->permanent_address->district->code :'' }}';
-            $.get('{{route('res.wards')}}' + '?district_code=' + district_code_1,
-            function(data) {
-                $('#ward_1').empty();
-                $('#ward_1').append('<option value="" disabled>Chọn phường/xã</option>');
-                $.each(data, function(index, ward) {
-                    $('#ward_1').append('<option data-old-1="old-'+ward.code+'" value="' + ward.code + '">' + ward.name_with_type + '</option>');
-                    var ward_1 = '{{ $pi->permanent_address()->exists() ? $pi->permanent_address->ward->code : ''}}';
 
-                    if(ward.code == ward_1){
-                        $('option[data-old-1="old-'+ward.code+'"]').prop('selected',true);
-                    }
+                btn_no.on("click", function(){
+                    callback(false);
+                    modal.modal('hide');
                 });
+            };
+            modalConfirm(function(confirm){
+                if(confirm){
+                    window.open(
+                        send_form,
+                        '_blank' // <- This is what makes it open in a new window.
+                    );
+
+                }else{
+
+                }
             });
-
-            var province_code_2 = $('#province_2').val();
-            $.get('{{route('res.districts')}}' + '?province_code=' + province_code_2,
-            function(data) {
-                    $('#district_2').empty();
-                    $('#district_2').append('<option value="" disabled>Chọn quận/huyện</option>');
-                    $.each(data, function(index, district) {
-                        $('#district_2').append('<option data-old-2="old-'+district.code+'" value="' + district.code + '">' + district.name_with_type + '</option>')
-                        var district_2 = '{{ $pi->contact_address()->exists() ? $pi->contact_address->district->code:'' }}'
-
-                        if(district.code == district_2){
-                            $('option[data-old-1="old-'+district.code+'"]').prop('selected',true);
-                        }
-                });
-            });
-
-            var district_code_2 = '{{ $pi->contact_address()->exists() ? $pi->contact_address->district->code :'' }}';
-            $.get('{{route('res.wards')}}' + '?district_code=' + district_code_2,
-            function(data) {
-                $('#ward_2').empty();
-                $('#ward_2').append('<option value="" disabled>Chọn phường/xã</option>');
-                $.each(data, function(index, ward) {
-                    $('#ward_2').append('<option data-old-2="old-'+ward.code+'"  value="' + ward.code + '">' + ward.name_with_type + '</option>')
-                    var ward_2 = '{{ $pi->contact_address()->exists() ? $pi->contact_address->ward->code :'' }}';
-
-                        if(ward.code == ward_2){
-                            $('option[data-old-2="old-'+ward.code+'"]').prop('selected',true);
-                        }
-                });
-            });
-    }
-
-
+        });
     });
-        $('#province_1').on('change', function(e) {
-            var province_code = e.target.value;
-            $.get('{{route('res.districts')}}' + '?province_code=' + province_code,
-                function(data) {
-                    $('#district_1').empty();
-                    $('#district_1').append('<option value="" disabled selected>Chọn quận/huyện</option>');
-                    $.each(data, function(index, district) {
-                        $('#district_1').append('<option data-old-1="old-'+district.code+'" value="' + district.code + '">' + district.name_with_type + '</option>');
-
-
-                    });
-                });
-        });
-        $('#district_1').on('change', function(e) {
-            var district_code = e.target.value;
-            $.get('{{route('res.wards')}}' + '?district_code=' + district_code,
-                function(data) {
-                    $('#ward_1').empty();
-                    $('#ward_1').append('<option value="" disabled selected>Chọn phường/xã</option>');
-                    $.each(data, function(index, ward) {
-                        $('#ward_1').append('<option data-old-1="old-'+ward.code+'" value="' + ward.code + '">' + ward.name_with_type + '</option>');
-
-                    });
-                });
-        });
-        $('#province_2').on('change', function(e) {
-            var province_code = e.target.value;
-            $.get('{{route('res.districts')}}' + '?province_code=' + province_code,
-                function(data) {
-                    $('#district_2').empty();
-                    $('#district_2').append('<option value="" disabled selected>Chọn quận/huyện</option>');
-                    $.each(data, function(index, district) {
-                        $('#district_2').append('<option value="' + district.code + '">' + district.name_with_type + '</option>')
-                    });
-                });
-
-
-        });
-
-
-        $('#district_2').on('change', function(e) {
-            var district_code = e.target.value;
-            $.get('{{route('res.wards')}}' + '?district_code=' + district_code,
-                function(data) {
-                    $('#ward_2').empty();
-                    $('#ward_2').append('<option value="" disabled selected>Chọn phường/xã</option>');
-                    $.each(data, function(index, ward) {
-                        $('#ward_2').append('<option value="' + ward.code + '">' + ward.name_with_type + '</option>')
-                    });
-                });
-        });
-
-
 </script>
-    @endsection
+@endsection
