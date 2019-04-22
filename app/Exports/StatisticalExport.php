@@ -11,10 +11,12 @@ use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Events\BeforeExport;
 use Maatwebsite\Excel\Events\AfterSheet;
+
 
 class StatisticalExport implements FromView,WithColumnFormatting,WithEvents
 {
@@ -43,7 +45,8 @@ class StatisticalExport implements FromView,WithColumnFormatting,WithEvents
         return [
             AfterSheet::class    => function(AfterSheet $event) {
                 $cellRangeHeader = 'A1:K4'; // All headers
-                $cellRangeSta = 'C1:K80'; // All headers
+                $cellRangeSta = 'C1:K80'; // All statistical
+                $cellAll = 'A1:K79';
                 $event->sheet->getDelegate()
                 ->getStyle($cellRangeHeader)
                 ->getAlignment()
@@ -58,7 +61,14 @@ class StatisticalExport implements FromView,WithColumnFormatting,WithEvents
                 ->setWrapText(true);
                 $event->sheet->getDelegate()
                 ->getColumnDimension('B')
-                ->setAutoSize(true);
+                ->setWidth(28);
+                $event->sheet->getDelegate()
+                ->getStyle($cellAll)
+                ->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
+
+
+
+
 
             },
         ];
