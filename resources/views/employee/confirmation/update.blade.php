@@ -61,14 +61,14 @@
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <label for="">Lý do</label>
-                                    <input require type="text" class="form-control" name="reason" value="{{$cr->reason}}">
+                                    <input required type="text" class="form-control" name="reason" value="{{$cr->reason}}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     @if($pi->permanent_address()->exists() && $pi->contact_address()->exists())
                                     <label for="">Địa chỉ</label>
-                                    <select require class="form-control" name="address" id="">
+                                    <select required class="form-control" name="address" id="">
                                         <option value="" >Chọn địa chỉ</option>
                                        
                                         <option {{ $pi->contact_address->id == $cr->address_id ? 'selected':'' }}

@@ -36,21 +36,21 @@
                                 <div class="form-group">
                                         <div class="col-sm-12">
                                             <label for="">Lý do</label>
-                                            <input require type="text" class="form-control" name="reason" value="{{$cr->reason}}">
+                                            <input required type="text" class="form-control" name="reason" value="{{$cr->reason}}">
                                         </div>
                                     </div>
                             <div class="form-group">
                                 <div class="col-sm-4">
                                     <label for="">Người ký cấp I</label>
-                                    <input require type="text" class="form-control" name="first_signer" value="{{$cr->first_signer == null ? 'KT. HIỆU TRƯỞNG': $cr->first_signer}}">
+                                    <input required type="text" class="form-control" name="first_signer" value="{{$cr->first_signer == null ? 'KT. HIỆU TRƯỞNG': $cr->first_signer}}">
                                 </div>
                                 <div class="col-sm-4">
                                     <label for="">Người ký cấp II</label>
-                                    <input require type="text" class="form-control" name="second_signer" value="{{$cr->second_signer == null ? 'PHÓ HIỆU TRƯỞNG': $cr->second_signer}}">
+                                    <input required type="text" class="form-control" name="second_signer" value="{{$cr->second_signer == null ? 'PHÓ HIỆU TRƯỞNG': $cr->second_signer}}">
                                 </div>
                                 <div class="col-sm-4">
                                         <label for="">Họ tên người ký</label>
-                                        <input require type="text" class="form-control" name="name_of_signer" value="{{$cr->name_of_signer}}">
+                                        <input required type="text" class="form-control" name="name_of_signer" value="{{$cr->name_of_signer}}">
                                     </div>
                             </div>
                             <div class="form-group">
