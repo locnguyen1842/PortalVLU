@@ -11,6 +11,8 @@ use App\ScientificBackground;
 use App\Policies\SBPolicy;
 use App\PI;
 use App\Policies\PIPolicy;
+use App\Policies\ConfirmationPolicy;
+use App\ConfirmationRequest;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -26,6 +28,7 @@ class AuthServiceProvider extends ServiceProvider
         Workload::class => WorkloadPolicy::class,
         ScientificBackground::class => SBPolicy::class,
         PI::class => PIPolicy::class,
+        ConfirmationRequest::class => ConfirmationPolicy::class,
 
     ];
 

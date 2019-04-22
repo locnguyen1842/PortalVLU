@@ -42,8 +42,8 @@ class ConfirmationRequestController extends Controller
 
     }
     public function indexEmployee(){
+        
         $crs = ConfirmationRequest::where('personalinformation_id',Auth::guard('employee')->user()->personalinformation_id)->orderBy('created_at','desc')->paginate(10);
-
         return view('employee.confirmation.index', compact('crs'));
 
     }
@@ -77,7 +77,9 @@ class ConfirmationRequestController extends Controller
     }
 
     public function sendRequest($cr_id){
+        
         $cr = ConfirmationRequest::findOrFail($cr_id);
+        $this->authorize('send_request', $cr);
         $pi = PI::findOrFail($cr->personalinformation_id);
         $cr->date_of_request = Carbon::now();
         $cr->gender = $pi->gender;
@@ -95,22 +97,26 @@ class ConfirmationRequestController extends Controller
     public function previewEmployee($cr_id){
         $pi = PI::findOrFail(Auth::guard('employee')->user()->personalinformation_id);
         $cr = ConfirmationRequest::findOrFail($cr_id);
+        $this->authorize('preview', $cr);
         return view('employee.confirmation.preview',compact('pi','cr'));
     }
 
     public function previewAdmin($cr_id){
         $cr = ConfirmationRequest::findOrFail($cr_id);
+        $this->authorize('access_only_status_true_admin', $cr);
         return view('admin.confirmation.print',compact('cr'));
     }
     public function getUpdate($cr_id){
         // $this->authorize('cud', PI::firstOrFail());
         $pi = PI::findOrFail(Auth::guard('employee')->user()->personalinformation_id);
         $cr= ConfirmationRequest::findOrFail($cr_id);
-        
+        $this->authorize('access', $cr);
         return view('employee.confirmation.update', compact('pi','cr'));
     }
     public function postUpdate(Request $request,$cr_id){
         $pi = PI::findOrFail(Auth::guard('employee')->user()->personalinformation_id);
+        $cr= ConfirmationRequest::findOrFail($cr_id);
+        $this->authorize('access', $cr);
         $request->validate(
             [
                 'address'=> 'required',
@@ -121,7 +127,7 @@ class ConfirmationRequestController extends Controller
                 'reason.required' => 'Lý do không được bỏ trống',
             ]
         );
-        $cr= ConfirmationRequest::findOrFail($cr_id);
+        
         $cr->reason = $request->reason;
         $cr->confirmation = $request->reason;
         $address = Address::findOrfail($request->address);
@@ -133,6 +139,7 @@ class ConfirmationRequestController extends Controller
     
     public function print($cr_id){
         $cr = ConfirmationRequest::findOrFail($cr_id);
+        $this->authorize('access_only_status_true_admin', $cr);
         $cr->is_printed = 1 ;
         $cr->save();
         $pdf = PDF::loadView('admin.confirmation.print', compact('cr'));
@@ -142,6 +149,7 @@ class ConfirmationRequestController extends Controller
 
     public function delete($cr_id){
         $cr = ConfirmationRequest::findOrFail($cr_id);
+        $this->authorize('access', $cr);
         $cr->delete();
         return redirect()->back()->with('message', 'Xóa đơn thành công');
     }

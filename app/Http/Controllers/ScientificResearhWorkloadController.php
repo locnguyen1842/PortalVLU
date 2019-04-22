@@ -13,8 +13,6 @@ class ScientificResearhWorkloadController extends Controller
 {
     public function getAdd(){
         $this->authorize('cud', PI::firstOrFail());
-
-        $srworkload = ScientificResearchWorkload::all();
         $id = \Request::get('pi_id');
         $data_append = \Request::get('data_html');
         $ws = WorkloadSession::orderBy('start_year', 'desc')->get();
@@ -24,7 +22,7 @@ class ScientificResearhWorkloadController extends Controller
             $pi = null;
         }
 
-        return view('admin.scientific.scientific-add', compact('workload', 'pi', 'ws'));
+        return view('admin.scientific.scientific-add', compact('pi', 'ws'));
     }
     public function postAdd(Request $request){
         $this->authorize('cud', PI::firstOrFail());
@@ -195,7 +193,7 @@ class ScientificResearhWorkloadController extends Controller
         $this->authorize('cud', PI::firstOrFail());
         $srworkload = ScientificResearchWorkload::findOrFail($id_srworkload);
         $srworkload->delete();
-        return redirect()->back()->with('message', 'Xóa nghiên cứu khoa học thành công');
+        return redirect()->back()->with('message', 'Xóa thành công');
     }
 
 

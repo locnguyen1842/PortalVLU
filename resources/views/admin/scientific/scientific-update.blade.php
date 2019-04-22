@@ -117,7 +117,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <label>Quy đổi giờ chuẩn <span style="color: red">*</span></label>
-                                <input required type="text" step="0.1" class="form-control"
+                                <input required type="number" step="0.1" class="form-control"
                                     name="converted_standard_time" placeholder="Nhập quy đổi giờ chuẩn"
                                     value="{{$srworkload->converted_standard_time}}">
                             </div>
@@ -125,7 +125,7 @@
                         <div class="form-group">
                             <div class="col-sm-6">
                                 <label>Số tiết/giờ quy đổi <span style="color: red">*</span></label>
-                                <input required type="text" step="0.1" class="form-control" name="converted_time"
+                                <input required type="number" step="0.1" class="form-control" name="converted_time"
                                     placeholder="Nhập số tiết/giờ quy đổi" value="{{$srworkload->converted_time}}">
                             </div>
                             <div class="col-sm-6">
