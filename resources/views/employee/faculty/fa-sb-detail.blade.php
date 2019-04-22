@@ -5,7 +5,8 @@
     <div class="cm-breadcrumb-container">
         <ol class="breadcrumb">
             {{-- <li><a href="#">Home</a></li> --}}
-             <li class=""><a href="{{route('employee.faculty.detail',$pi->id)}}">Chi tiết nhân viên - {{$pi->employee_code}}</a></li>
+                <li class=""><a href="{{route('employee.faculty.index')}}">Quản lý khoa</a></li>
+                <li class=""><a href="{{route('employee.faculty.detail',$pi->id)}}">Chi tiết nhân viên - {{$pi->employee_code}}</a></li>
 
             <li class="active">Lý lịch khoa học</li>
         </ol>
@@ -15,15 +16,16 @@
 @endsection
 @section('menu-tabs')
 <nav class="cm-navbar cm-navbar-default cm-navbar-slideup">
-        <div class="cm-flex">
-            <div class="nav-tabs-container  table-responsive">
-                <ul class="nav nav-tabs">
-                    <li class="{{url()->current() == route('employee.faculty.detail',$pi->id) ? 'active':''}}"><a href="{{ route('employee.faculty.detail',$pi->id) }}">Thông tin cá nhân</a></li>
-                    <li class="{{url()->current() == route('employee.faculty.workload',$pi->id) ? 'active':''}}"><a href="{{ route('employee.faculty.workload',$pi->id)}}">khối lượng công việc</a></li>
-                    <li class="{{url()->current() == route('employee.faculty.sb',$pi->id) ? 'active':''}}"><a href="{{ route('employee.faculty.sb',$pi->id) }}">lý lịch khoa học</a></li>
-                </ul>
-            </div>
+    <div class="cm-flex">
+        <div class="nav-tabs-container  table-responsive">
+            <ul class="nav nav-tabs">
+                <li class="{{url()->current() == route('employee.faculty.detail',$pi->id) ? 'active':''}}"><a href="{{ route('employee.faculty.detail',$pi->id) }}">Thông tin cá nhân</a></li>
+                <li class="{{url()->current() == route('employee.faculty.workload',$pi->id) ? 'active':''}}"><a href="{{ route('employee.faculty.workload',$pi->id)}}">khối lượng giảng dạy</a></li>
+                <li class="{{url()->current() == route('employee.faculty.srworkload.index',$pi->id) ? 'active':''}}"><a href="{{ route('employee.faculty.srworkload.index',$pi->id)}}">khối lượng NCKH</a></li>
+                <li class="{{url()->current() == route('employee.faculty.sb',$pi->id) ? 'active':''}}"><a href="{{ route('employee.faculty.sb',$pi->id) }}">lý lịch khoa học</a></li>
+            </ul>
         </div>
+    </div>
 </nav>
 @endsection
 @section('content')
