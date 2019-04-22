@@ -18,7 +18,7 @@
             <div class="col-sm-12">
                 @include('admin.layouts.Error')
                 @if(session()->has('message'))
-                <div class="alert alert-success mt-10">
+                <div class="alert alert-success">
                     {{ session()->get('message') }}
                 </div>
                 @endif

@@ -1,5 +1,6 @@
 /vendor/
 /report-coverage/
+/.vscode
 node_modules/
 npm-debug.log
 yarn-error.log

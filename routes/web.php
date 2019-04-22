@@ -213,19 +213,8 @@ Route::prefix('')->group(function () {
         Route::post('/confirmation-request/create','ConfirmationRequestController@postCreate')->name('employee.confirmation.create');
         Route::get('/confirmation-request/update/{cr_id}','ConfirmationRequestController@getUpdate')->name('employee.confirmation.update');
         Route::post('/confirmation-request/update/{cr_id}','ConfirmationRequestController@postUpdate')->name('employee.confirmation.update');
-        Route::get('/confirmation-request/delete{cr_id}','ConfirmationRequestController@getCreate')->name('employee.confirmation.delete');
-        // // add scientific research workload
-        // Route::get('/scientific-research-workload-add','EmployeeController@getAdd')->name('employee.srworkload.add');
-        // Route::post('/scientific-research-workload-add','EmployeeController@postAdd')->name('employee.srworkload.add');
-        // // update scientific research workload
-        // Route::get('/scientific-research-workload-update/{id_srworkload}','EmployeeController@getUpdate')->name('employee.srworkload.update');
-        // Route::post('/scientific-research-workload-update/{id_srworkload}','EmployeeController@postUpdate')->name('employee.srworkload.update');
+        Route::get('/confirmation-request/delete/{cr_id}','ConfirmationRequestController@delete')->name('employee.confirmation.delete');
 
-        // //  detail scientific research workload
-        // Route::get('/scientific-research-workload-details/{srworkload_id}','EmployeeController@getSRWorkloadDetail')->name('employee.srworkload.detail');
-    
-        // // delete scientific research workload
-        //  Route::get('/scientific-research-workload-delete/{srworkload_id}','EmployeeController@deleteSRWorkload')->name('employee.srworkload.delete');
 
     });
 });

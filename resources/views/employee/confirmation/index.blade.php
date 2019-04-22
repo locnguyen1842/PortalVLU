@@ -16,11 +16,11 @@
 <div  style="padding-top:21px">
     @include('employee.layouts.Error')
     @if(session()->has('message'))
-        <div class="alert alert-success mt-10">
+        <div class="alert alert-success">
             {{ session()->get('message') }}
         </div>
     @endif
-    <div class="panel panel-default mt-20">
+    <div class="panel panel-default mt-10">
         <div class="waiting">
             <img src="{{asset('img/loader.gif')}}" alt="Đang tải">
         </div>
