@@ -535,5 +535,30 @@ class EmployeeController extends Controller
         $academic_rank->delete();
         return redirect()->back()->with('message','Xóa học hàm thành công');
     }
+
+    public function getFaSRWorkload($pi_id){
+        $pi = PI::findOrFail($pi_id);
+        $workloads_own_user = ScientificResearchWorkload::where('personalinformation_id', $pi->id);
+        $max_year = WorkloadSession::max('end_year');
+        $workload_session = WorkloadSession::orderBy('start_year', 'desc')->get();
+        $workload_session_current = WorkloadSession::where('end_year', $max_year)->firstOrFail();//get current workload year study
+        $year_workload = \Request::get('year_workload');
+        $workload_session_current_id = $workload_session_current->id;
+
+
+        //query if $search have a value
+        $workloads = $workloads_own_user->where(function ($query) use ($year_workload,$workload_session_current_id) {
+
+            if ($year_workload != null) {
+                $query->where(function ($q) use ($year_workload) {
+                    $q->where('session_id', $year_workload);
+                });
+            } elseif ($year_workload==null) {
+                $query->where('session_id', $workload_session_current_id);
+            }
+        })->orderBy('updated_at', 'desc')->paginate(10);
+
+        return view('employee.faculty.fa-srworkload-list', compact('workload_session', 'workload_session_current', 'workloads', 'year_workload', 'pi'));
+    }
     
 }

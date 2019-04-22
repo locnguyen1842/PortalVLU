@@ -123,7 +123,6 @@ Route::prefix('admin')->group(function () {
         Route::get('/confirmation-request/print/{cr_id}','ConfirmationRequestController@print')->name('admin.confirmation.print');
         Route::get('/confirmation-request/preview/{cr_id}','ConfirmationRequestController@previewAdmin')->name('admin.confirmation.preview');
 
-        Route::get('/confirmation-request/detail/{cr_id}','ConfirmationRequestController@getdetail')->name('admin.confirmation.detail');
         Route::get('/confirmation-request/update/{cr_id}','ConfirmationRequestController@getupdateAdmin')->name('admin.confirmation.update');
         Route::post('/confirmation-request/update/{cr_id}','ConfirmationRequestController@postupdateAdmin')->name('admin.confirmation.update');
 
@@ -191,9 +190,10 @@ Route::prefix('')->group(function () {
         //faculty view
         Route::get('/faculty-index', 'EmployeeController@getFaculty')->name('employee.faculty.index');
         Route::get('/faculty-pi-detail/{id}', 'EmployeeController@getFacultydetail')->name('employee.faculty.detail');
-        Route::get('/faculty-workload-detail/{id}', 'EmployeeController@getfaWorkload')->name('employee.faculty.workload');
+        Route::get('/faculty-job-workload/{id}', 'EmployeeController@getfaWorkload')->name('employee.faculty.workload');
+        Route::get('/faculty-scientific-research-workload/{id}', 'EmployeeController@getFaSRWorkload')->name('employee.faculty.srworkload.index');
         Route::get('/faculty-sb-detail/{id}', 'EmployeeController@getfacultysb')->name('employee.faculty.sb');
-        Route::get('/faculty-degreee-list/{id}', 'EmployeeController@getfacultydegreelist')->name('employee.faculty.degree.list');
+        Route::get('/faculty-degree-list/{id}', 'EmployeeController@getfacultydegreelist')->name('employee.faculty.degree.list');
 
         //Print scientific background
         Route::get('/scientific-background/print', 'ScientificBackgroundController@indexPrint')->name('employee.sb.print');

@@ -155,13 +155,16 @@ class ConfirmationRequestController extends Controller
     }
 
     public function getUpdateAdmin($cr_id){
-        // $this->authorize('cud', PI::firstOrFail());
+        $this->authorize('cud', PI::firstOrFail());
         $cr= ConfirmationRequest::find($cr_id);
+        $this->authorize('access_only_status_true_admin', $cr);
         $pi = PI::findOrFail($cr->pi->id);
         return view('admin.confirmation.update', compact('pi','cr'));
     }
     public function postUpdateAdmin(Request $request,$cr_id){
-
+        $this->authorize('cud', PI::firstOrFail());
+        $cr= ConfirmationRequest::find($cr_id);
+        $this->authorize('access_only_status_true_admin', $cr);
         $request->validate(
             [
                 'reason'=> 'required',
@@ -177,7 +180,7 @@ class ConfirmationRequestController extends Controller
 
             ]
         );
-        $cr= ConfirmationRequest::find($cr_id);
+        
         $cr->reason = $request->reason;
         $cr->confirmation = $request->reason;
         $cr->first_signer = $request->first_signer;
