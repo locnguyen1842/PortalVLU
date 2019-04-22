@@ -16,7 +16,7 @@ class ConfirmationRequestController extends Controller
     public function index(){
         $search =  \Request::get('search');
         $show_printed = \Request::get('show_printed');
-        
+
         if($show_printed == 'undefined'){
             $show_printed = null;
         }
@@ -37,7 +37,7 @@ class ConfirmationRequestController extends Controller
             $query->where('status',1);
         })->orderBy('date_of_request', 'desc')->paginate(10)->appends(['search'=>$search,'show_printed'=>$show_printed]);
         // $crs = ConfirmationRequest::where('status',1)->orderBy('date_of_request','desc')->paginate(10);
-        
+
         return view('admin.confirmation.index', compact('crs','search','show_printed'));
 
     }
@@ -136,7 +136,7 @@ class ConfirmationRequestController extends Controller
         $cr->save();
         return redirect()->back()->with('message', 'Cập nhật đơn thành công');
     }
-    
+
     public function print($cr_id){
         $cr = ConfirmationRequest::findOrFail($cr_id);
         $this->authorize('access_only_status_true_admin', $cr);
@@ -152,5 +152,38 @@ class ConfirmationRequestController extends Controller
         $this->authorize('access', $cr);
         $cr->delete();
         return redirect()->back()->with('message', 'Xóa đơn thành công');
+    }
+
+    public function getUpdateAdmin($cr_id){
+        // $this->authorize('cud', PI::firstOrFail());
+        $cr= ConfirmationRequest::find($cr_id);
+        $pi = PI::findOrFail($cr->pi->id);
+        return view('admin.confirmation.update', compact('pi','cr'));
+    }
+    public function postUpdateAdmin(Request $request,$cr_id){
+
+        $request->validate(
+            [
+                'reason'=> 'required',
+                'first_signer'=> 'required',
+                'second_signer'=> 'required',
+                'name_of_signer'=> 'required',
+            ],
+            [
+                'reason.required' => 'Lý do không được bỏ trống',
+                'first_signer.required' => 'Người ký cấp I không được bỏ trống',
+                'second_signer.required' => 'Người ký cấp II không được bỏ trống',
+                'name_of_signer.required' => 'Họ tên người ký không được bỏ trống',
+
+            ]
+        );
+        $cr= ConfirmationRequest::find($cr_id);
+        $cr->reason = $request->reason;
+        $cr->confirmation = $request->reason;
+        $cr->first_signer = $request->first_signer;
+        $cr->second_signer = $request->second_signer;
+        $cr->name_of_signer = $request->name_of_signer;
+        $cr->save();
+        return redirect()->back()->with('message', 'Cập nhật đơn thành công');
     }
 }

@@ -20,6 +20,7 @@ use App\Semester;
 use App\Country;
 use App\ScientificBackground;
 use App\AcademicRank;
+use App\ScientificResearchWorkload;
 use Hash;
 use App\Ward;
 use App\District;
@@ -534,4 +535,5 @@ class EmployeeController extends Controller
         $academic_rank->delete();
         return redirect()->back()->with('message','Xóa học hàm thành công');
     }
+    
 }

@@ -55,32 +55,6 @@ class AdminController extends Controller
             return redirect()->back()->with('error_message', 'Mật khẩu cũ không chính xác');
         }
     }
-    public function getUpdate($cr_id){
-        // $this->authorize('cud', PI::firstOrFail());
-        $cr= ConfirmationRequest::find($cr_id);
-        $pi = PI::findOrFail($cr->pi->id);
-        return view('admin.confirmation.update', compact('pi','cr'));
-    }
-    public function postUpdate(Request $request,$cr_id){
-        
-        $request->validate(
-            [
-                'address'=> 'required',
-                'reason'=> 'required',
-            ],
-            [
-                'address.required' => 'Địa chỉ không được bỏ trống',
-                'reason.required' => 'Lý do không được bỏ trống',
-            ]
-        );
-        $cr= ConfirmationRequest::find($cr_id);
-        $cr->reason = $request->reason;
-        $cr->confirmation = $request->reason;
-        $address = Address::findOrfail($request->address);
-        $cr->address = $address->address_content .', '.$address->ward->path_with_type;
-        $cr->address_id = $address->id;
-        $cr->save();
-        return redirect()->back()->with('message', 'Cập nhật đơn thành công');
-    }
+
 
 }

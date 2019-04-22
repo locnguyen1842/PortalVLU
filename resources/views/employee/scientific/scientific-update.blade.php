@@ -1,11 +1,11 @@
-@extends('admin.master')
+@extends('employee.master')
 @section('title','Cập nhật khối nghiên cứu khoa học')
 @section('breadcrumb')
 <div class="cm-flex">
     <div class="cm-breadcrumb-container">
         <ol class="breadcrumb">
             {{-- <li><a href="#">Home</a></li> --}}
-            <li class=""><a href="{{route('admin.srworkload.index')}}">Quản lý khối lượng NCKH</a></li>
+            <li class=""><a href="{{route('employee.srworkload.index')}}">Quản lý khối lượng NCKH</a></li>
             <li class="active">Cập nhật khối lượng NCKH</li>
         </ol>
     </div>
@@ -13,7 +13,7 @@
 @endsection
 @section('content')
 <div class="col-sm-12">
-    @include('admin.layouts.Error')
+    @include('employee.layouts.Error')
 
     @if(session()->has('message'))
     <div class="alert alert-success mt-10">
@@ -22,7 +22,7 @@
     @endif
 </div>
 <div style="padding-top:20px">
-    <form id="add-workload" class="form-horizontal" action="{{route('admin.srworkload.update',$srworkload->id)}}" method="post">
+    <form id="add-workload" class="form-horizontal" action="{{route('employee.srworkload.update',$srworkload->id)}}" method="post">
         <div class="cm-fix-height" id="parent_content">
 
             <div class=" col-sm-12">
@@ -83,12 +83,12 @@
                         <div class="form-group">
                             <div class="col-sm-6">
                                 <label>Công việc <span style="color: red">*</span> </label>
-                                <textarea required rows="4" style="overflow:auto;resize:none" type="text" class="form-control" name="name_of_work"
-                                    placeholder="Nhập tên công việc" >{{$srworkload->name_of_work}}</textarea>
+                                <input required type="text" class="form-control" name="name_of_work"
+                                    placeholder="Nhập tên công việc" value="{{$srworkload->name_of_work}}">
                             </div>
                             <div class="col-sm-6">
                                 <label>Chi tiết <span style="color: red">*</span></label>
-                                <textarea required rows="4" style="overflow:auto;resize:none" type="text"
+                                <textarea required rows="1" style="overflow:auto;resize:none" type="text"
                                     class="form-control" name="detail_of_work"
                                     placeholder="Nhập chi tiết công việc">{{$srworkload->detail_of_work}}</textarea>
                             </div>
@@ -97,14 +97,14 @@
                             <div class="col-sm-6">
                                 <label>Diễn giải (tên cụ thể của hoạt động NCKH, …) <span style="color: red">*</span>
                                 </label>
-                                <textarea required rows="4" style="overflow:auto;resize:none" type="text"
+                                <textarea required rows="1" style="overflow:auto;resize:none" type="text"
                                     class="form-control" name="explain_of_work"
                                     placeholder="Nhập diễn giải">{{$srworkload->explain_of_work}}</textarea>
                             </div>
                             <div class="col-sm-6">
                                 <label>Đơn vị (đề tài, bài báo, tài liệu, giáo trình...) <span
                                         style="color: red">*</span></label>
-                                <textarea required rows="4" style="overflow:auto;resize:none" type="text"
+                                <textarea required rows="1" style="overflow:auto;resize:none" type="text"
                                     class="form-control" name="unit_of_work"
                                     placeholder="Nhập đơn vị">{{$srworkload->unit_of_work}}</textarea>
                             </div>
@@ -117,7 +117,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <label>Quy đổi giờ chuẩn <span style="color: red">*</span></label>
-                                <input required type="number" step="0.1" class="form-control"
+                                <input required type="text" step="0.1" class="form-control"
                                     name="converted_standard_time" placeholder="Nhập quy đổi giờ chuẩn"
                                     value="{{$srworkload->converted_standard_time}}">
                             </div>
@@ -125,7 +125,7 @@
                         <div class="form-group">
                             <div class="col-sm-6">
                                 <label>Số tiết/giờ quy đổi <span style="color: red">*</span></label>
-                                <input required type="number" step="0.1" class="form-control" name="converted_time"
+                                <input required type="text" step="0.1" class="form-control" name="converted_time"
                                     placeholder="Nhập số tiết/giờ quy đổi" value="{{$srworkload->converted_time}}">
                             </div>
                             <div class="col-sm-6">

@@ -124,8 +124,8 @@ Route::prefix('admin')->group(function () {
         Route::get('/confirmation-request/preview/{cr_id}','ConfirmationRequestController@previewAdmin')->name('admin.confirmation.preview');
 
         Route::get('/confirmation-request/detail/{cr_id}','ConfirmationRequestController@getdetail')->name('admin.confirmation.detail');
-        Route::get('/confirmation-request/update/{cr_id}','AdminController@getupdate')->name('admin.confirmation.update');
-        Route::post('/confirmation-request/update/{cr_id}','AdminController@postupdate')->name('admin.confirmation.update');
+        Route::get('/confirmation-request/update/{cr_id}','ConfirmationRequestController@getupdateAdmin')->name('admin.confirmation.update');
+        Route::post('/confirmation-request/update/{cr_id}','ConfirmationRequestController@postupdateAdmin')->name('admin.confirmation.update');
 
         // add scientific research workload
         Route::get('/scientific-research-workload-add','ScientificResearhWorkloadController@getAdd')->name('admin.srworkload.add');
@@ -137,10 +137,10 @@ Route::prefix('admin')->group(function () {
 
         //  detail scientific research workload
         Route::get('/scientific-research-workload-details/{srworkload_id}','ScientificResearhWorkloadController@getSRWorkloadDetail')->name('admin.srworkload.detail');
-    
+
         // delete scientific research workload
          Route::get('/scientific-research-workload-delete/{srworkload_id}','ScientificResearhWorkloadController@delete')->name('admin.srworkload.delete');
-    
+
     });
 });
 

@@ -39,12 +39,12 @@
                     <li class="{{url()->current() == route('admin.srworkload.index') ? 'active':''}}">
                         <a href="{{route('admin.srworkload.index')}}" class=" md-work">Danh sách khối lượng NCKH</a>
                     </li>
-                    <li class="{{url()->current() == route('admin.workload.add') ? 'active':''}}">
-                        <a href="{{route('admin.workload.add')}}" class=" sf-sign-add">Thêm mới khối lượng NCKH</a>
+                    <li class="{{url()->current() == route('admin.srworkload.add') ? 'active':''}}">
+                        <a href="{{route('admin.srworkload.add')}}" class=" sf-sign-add">Thêm mới khối lượng NCKH</a>
                     </li>
 
                     <li class="{{url()->current() == route('admin.confirmation.index') ? 'active':''}}">
-                            <a href="{{route('admin.confirmation.index')}}" class=" md-work">Danh sách đơn yêu cầu</a>
+                            <a href="{{route('admin.confirmation.index')}}" class="md-assignment-turned-in">Danh sách đơn yêu cầu</a>
                         </li>
 
                     {{-- <li class="cm-submenu {{(url()->current() == route('admin.workload.index')|| url()->current() == route('admin.workload.add')) ? 'open':''}}">
