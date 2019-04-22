@@ -49,7 +49,7 @@
         </div>
         <div class="panel-heading">Danh sách khối lượng NCKH<br>
             @can('cud',App\PI::first())
-            <a href="{{route('admin.workload.add')}}">
+            <a href="{{route('admin.srworkload.add')}}">
                 <button type="button" name="button" class="btn btn-xs btn-success">Thêm Mới</button>
             </a>
             @endcan
@@ -278,7 +278,7 @@
                     <tr>
                         <td>
 
-                            <a href="{{route('admin.workload.detail',$item->id)}}" data-toggle="tooltip" data-placement="right"
+                            <a href="{{route('admin.srworkload.detail',$item->id)}}" data-toggle="tooltip" data-placement="right"
                                 title="" data-original-title="Chi tiết" href="javascript:" class="search_tag tooltip-test">
                                 <span class="badge badge-danger">{{$item->pi->employee_code}}
                                     <span class="mdi mdi-close"></span>
@@ -296,8 +296,8 @@
                         <td>{{$item->note}}</td>
             @can('cud',App\PI::first())
 
-                        <td>
-                            <a href="{{route('admin.workload.update',$item->id)}}" data-toggle="tooltip" data-placement="top"
+                        <td class="col-sm-1">
+                            <a href="{{route('admin.srworkload.update',$item->id)}}" data-toggle="tooltip" data-placement="top"
                                 title="" data-original-title="Cập nhật" href="javascript:" class="tooltip-test">
                                 <span class=""><i class="fa fa-lg fa-edit text-primary"></i>
                                     <span class="mdi mdi-close"></span>

@@ -228,7 +228,7 @@
                                     <div class="form-group">
                                         <div class="col-sm-6">
                                             <label>Số tiết học <span style="color: red">*</span></label>
-                                            <input required type="text" class="form-control" name="number_of_lessons[]" placeholder="Nhập số tiết học trong năm"
+                                            <input required type="number" step="0.1" class="form-control" name="number_of_lessons[]" placeholder="Nhập số tiết học trong năm"
                                                 value="">
                                         </div>
                                         <div class="col-sm-6">
@@ -241,12 +241,12 @@
                                     <div class="form-group">
                                         <div class="col-sm-6">
                                             <label>Số Sinh Viên <span style="color: red">*</span></label>
-                                            <input required type="text" maxlength="100" class="form-control" name="number_of_students[]"
+                                            <input required type="number" step="0.1" maxlength="100" class="form-control" name="number_of_students[]"
                                                 placeholder="Nhập số sinh viên" value="">
                                         </div>
                                         <div class="col-sm-6">
                                             <label>Tổng Khối Lượng công việc <span style="cưolor: red">*</span></label>
-                                            <input required type="text" maxlength="100" class="form-control" name="total_workload[]"
+                                            <input required type="number" step="0.1" maxlength="100" class="form-control" name="total_workload[]"
                                                 placeholder="Nhập tổng khối lượng công việc" value="">
                                         </div>
 
@@ -254,15 +254,14 @@
                                     <div class="form-group">
                                         <div class="col-sm-6">
                                             <label>Số Giờ Lý Thuyết <span style="color: red">*</span></label>
-                                            <input required type="text" class="form-control" name="theoretical_hours[]"
+                                            <input required type="number" step="0.1" class="form-control" name="theoretical_hours[]"
                                                 placeholder="Nhập số giờ lý thuyết" value="">
                                         </div>
                                         <div class="col-sm-6">
                                             <label>Số Giờ Thực Hành <span style="color: red">*</span></label>
-                                            <input required type="text" class="form-control" name="practice_hours[]" placeholder="Nhập số giờ thực hành"
+                                            <input required type="number" step="0.1" class="form-control" name="practice_hours[]" placeholder="Nhập số giờ thực hành"
                                                 value="">
                                         </div>
-
                                     </div>
 
                                     <div class="form-group">

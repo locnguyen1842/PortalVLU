@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title','Danh sách khối lượng công việc')
+@section('title','Danh sách năm học')
 @section('breadcrumb')
     <div class="cm-flex">
         <div class="cm-breadcrumb-container">
@@ -15,7 +15,7 @@
     <div class="cm-flex">
         <div class="nav-tabs-container  table-responsive">
             <ul class="nav nav-tabs">
-                <li class="{{url()->current() == route('admin.workload.index') ? 'active':''}}"><a href="{{route('admin.workload.index')}}">Quản lý khối lượng công việc</a></li>
+                <li class="{{url()->current() == route('admin.workload.index') ? 'active':''}}"><a href="{{route('admin.workload.index')}}">Quản lý khối lượng giảng dạy</a></li>
                 <li class="{{url()->current() == route('admin.srworkload.index') ? 'active':''}}"><a href="{{route('admin.srworkload.index')}}">Quản lý khối lượng NCKH</a></li>
                 <li class="{{url()->current() == route('admin.schoolyear.index') ? 'active':''}}"><a href="{{route('admin.schoolyear.index')}}">Quản lý năm học</a></li>
             </ul>

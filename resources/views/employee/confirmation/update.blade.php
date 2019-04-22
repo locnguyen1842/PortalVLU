@@ -1,10 +1,10 @@
-@extends('admin.master')
+@extends('employee.master')
 @section('title','Cập nhật đơn xác nhận')
 @section('breadcrumb')
 <div class="cm-flex">
     <div class="cm-breadcrumb-container">
         <ol class="breadcrumb">
-            <li><a href="{{route('admin.confirmation.index')}}">Danh sách đơn xác nhận</a></li>
+            <li><a href="{{route('employee.confirmation.index')}}">Danh sách đơn xác nhận</a></li>
                <li class="active">Cập nhật đơn xác nhận</li>
         </ol>
     </div>
@@ -16,17 +16,17 @@
     <div class="">
         <div class=" cm-fix-height">
             <div class="col-sm-12">
-                @include('admin.layouts.Error')
+                @include('employee.layouts.Error')
                 @if(session()->has('message'))
-                <div class="alert alert-success">
+                <div class="alert alert-success mt-10">
                     {{ session()->get('message') }}
                 </div>
                 @endif
-                <form class="form-horizontal" action="{{route('admin.confirmation.update',$cr->id)}}" method="post">
+                <form class="form-horizontal" action="{{route('employee.confirmation.update',$cr->id)}}" method="post">
                     {{csrf_field()}}
                     <div class="panel panel-default">
                             <div class="panel-heading">Thông tin cá nhân<br>
-                                <a href="{{route('admin.pi.update',$pi->id)}}" target="_blank">
+                                <a href="{{route('employee.pi.update')}}" target="_blank">
                                     <button type="button" name="button" class="btn btn-xs btn-primary">Cập nhật</button>
                                 </a>
                             </div>
@@ -85,34 +85,12 @@
                                     </select>
                                     @else
                                     <label for="">Địa chỉ</label><br>
-                                    <label for="" class="text-danger">Không tìm thấy bất cứ địa chỉ cá nhân nào ( vui lòng cập nhật <a href="{{route('admin.pi.update')}}">tại đây</a> )</label>
+                                    <label for="" class="text-danger">Không tìm thấy bất cứ địa chỉ cá nhân nào ( vui lòng cập nhật <a href="{{route('employee.pi.update')}}">tại đây</a> )</label>
                                     @endif
 
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Người xác nhận<br>
-                        </div>
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <div class="col-sm-6">
-                                    <label for="">Người ký I</label>
-                                    <input require type="text" class="form-control" name="first_signer" value="{{$cr->first_signer}}">
-                                </div>
-                                <div class="col-sm-6">
-                                    <label for="">Người ký II</label>
-                                    <input require type="text" class="form-control" name="second_signer" value="{{$cr->second_signer}}">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-12">
-                                    <label for="">Tên Người ký</label>
-                                    <input require type="text" class="form-control" name="name_of_signer" value="{{$cr->name_of_signer}}">
-                                </div>
-                        
-                            </div>
+
                             <div class="form-group" style="margin-bottom:0">
                                 <div class="col-sm-offset-2 col-sm-10 text-right">
                                     <button type="reset" class="btn btn-default">Hủy Bỏ</button>

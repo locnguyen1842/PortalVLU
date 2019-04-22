@@ -7,27 +7,27 @@
 <body>
      <div class="form-group col-sm-12">
           <div class="col-sm-6 text-center">
-               <div class="form-group">
-                    <h4>BỘ GIÁO DỤC VÀ ĐÀO TẠO</h4>
+               <div class="form-group-header">
+                    <strong>BỘ GIÁO DỤC VÀ ĐÀO TẠO</strong>
                </div>
-               <div class="form-group">
-                    <h4>TRƯỜNG ĐẠI HỌC VĂN LANG
+               <div class="form-group-header">
+                    <strong>TRƯỜNG ĐẠI HỌC VĂN LANG
                          <hr style="width: 180px">
                          <label
                               style="font-weight:normal">Số:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/GXN-ĐHVL</label>
 
-                    </h4>
+                    </strong>
 
                </div>
           </div>
           <div class="col-sm-6 text-center">
-               <div class="form-group">
-                    <h4>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</h4>
+               <div class="form-group-header">
+                    <strong>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</strong>
                </div>
-               <div class="form-group">
-                    <h4 style="font-size:1.06rem">Độc lập – Tự do – Hạnh phúc
+               <div class="form-group-header">
+                    <strong style="font-size:1.06rem">Độc lập – Tự do – Hạnh phúc
                          <hr style="width: 200px">
-                    </h4>
+                    </strong>
                </div>
           </div>
 
@@ -170,6 +170,10 @@
 
      .form-group {
           margin-bottom: 1rem;
+     }
+
+     .form-group-header {
+          margin-bottom: 0.5rem;
      }
 
      .text-center {

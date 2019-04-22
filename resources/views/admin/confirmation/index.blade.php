@@ -28,7 +28,60 @@
         <div class="panel-heading">Danh sách đơn yêu cầu xác nhận<br>
 
         </div>
+        <div class="panel-body">
+            <form class="form-horizontal" action="{{route('admin.confirmation.index')}}" method="get">
+        <div class="form-group col-sm-6">
 
+                <div class="col-sm-12">
+                    <div class="col-sm-3">
+                        <label class="control-label">Tìm kiếm</label>
+                    </div>
+                    <div class="col-sm-9">
+                            <div class="input-group">
+                        <input type="text" class="form-control" name="search" placeholder="Nhập mã hoặc tên nv">
+                        
+                        <span class="input-group-btn">
+                                <button class="btn btn-primary" type="submit">Tìm</button>
+                            </span>
+                            </div>
+                            <span class="help-block">
+                                    <div class="checkbox">
+                                            <label>
+                                                <input {{$show_printed != null ? 'checked' : ''}} type="checkbox" name="show_printed">
+                                                Chỉ hiện thị đơn chưa in
+                                            </label>
+                                        </div>
+                            </span>
+                    </div>
+                </div>
+                @if($search !="")
+                <div class="col-sm-12 mt-10">
+                    <div class="col-sm-3">
+                        <label class="control-label">Tìm theo </label>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="control-label text-al">
+                            <a data-toggle="tooltip" data-placement="right" title=""
+                                data-original-title="Xóa" href="javascript:" class="search_tag tooltip-test">
+                                <span class="badge badge-primary">{{$search}}
+                                    <span class="mdi mdi-close"></span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                @endif
+
+
+
+        </div>
+        
+    </form>
+        {{-- Loading Div --}}
+
+
+    </div>
 
         <div class="table-responsive">
             <table class="table table-hover" style="margin-bottom:0">
@@ -50,11 +103,11 @@
                         <td>{{$item->pi->employee_code}}</td>
                         <td>{{$item->pi->full_name}}</td>
                         <td>{{$item->reason}}</td>
-                        <td>{{$item->date_of_request}}</td>
+                        <td>{{date('d-m-Y',strtotime($item->date_of_request))}}</td>
                         <td class="font-weight-bold {{$item->is_printed == 0 ? 'text-danger':'text-success'}}">{{$item->is_printed == 0 ? 'Chưa in':'Đã in'}}</td>
 
                         <td>
-                            <a href="{{route('admin.confirmation.print',$item->id)}}" data-toggle="tooltip" data-placement="top"
+                            <a href="{{route('admin.confirmation.print',$item->id)}}" data-toggle="tooltip" target="_blank" data-placement="top"
                                     title="" data-original-title="Xem trước" href="javascript:" class="preview_cr tooltip-test ml-10">
                                     <span class=""><i class="fa fa-lg fa-sign-out"></i>
                                         <span class="mdi mdi-close"></span>
@@ -124,7 +177,7 @@
                     @endforeach
                     @else
                     <tr>
-                        <td colspan="3" class="text-center">Không có bất kỳ dữ liệu nào được tìm thấy</td>
+                        <td colspan="6" class="text-center">Không có bất kỳ dữ liệu nào được tìm thấy</td>
                     </tr>
                     @endif
 
@@ -141,6 +194,14 @@
 
 <script>
     $(document).ready(function(){
+
+        $(".search_tag").on('click', function() {
+            var url = {!!json_encode(route('admin.confirmation.index'), JSON_UNESCAPED_SLASHES) !!};
+            var show_printed = $("input[name='show_printed']:checked").val();
+            var search = "";
+            window.location.href = url + '?&show_printed='+show_printed;
+        });
+
         $(".preview_cr").on('click',function (e) {
             e.preventDefault();
             var modal = $(this).closest('tr').find('.cr-preview-modal');
@@ -170,8 +231,11 @@
             };
             modalConfirm(function(confirm){
                 if(confirm){
-                    window.location.href = send_form;
-
+                    window.open(
+                        send_form,
+                        '_blank' // <- This is what makes it open in a new window.
+                    );
+                    
                 }else{
 
                 }
