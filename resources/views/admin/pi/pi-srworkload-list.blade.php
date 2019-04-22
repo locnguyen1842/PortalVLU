@@ -40,9 +40,9 @@
                     </div>
                 @endif
                 <div class="panel panel-default">
-                    <div class="panel-heading">Khối lượng công việc<br>
+                    <div class="panel-heading">Khối lượng nghiên cứu khoa học<br>
                         @can('cud',App\PI::first())
-                        <a href="{{route('admin.workload.add','pi_id='.$pi_id)}}">
+                        <a href="{{route('admin.srworkload.add','pi_id='.$pi_id)}}">
                             <button type="button" name="button" class="btn btn-xs btn-success">Thêm</button>
                         </a>
                         @endcan
@@ -128,7 +128,7 @@
                                 <tr>
                                     <td class="col-sm-1">
 
-                                        <a href="{{route('admin.workload.detail',$item->id)}}" data-toggle="tooltip"
+                                        <a href="{{route('admin.srworkload.detail',$item->id)}}" data-toggle="tooltip"
                                             data-placement="right" title="" data-original-title="Chi tiết" href="javascript:"
                                             class="search_tag tooltip-test">
                                             <span class="badge badge-danger">{{$item->pi->employee_code}}
@@ -148,14 +148,14 @@
                         @can('cud',App\PI::first())
 
                                     <td class="col-sm-1">
-                                        <a href="{{route('admin.workload.update',$item->id)}}" data-toggle="tooltip"
+                                        <a href="{{route('admin.srworkload.update',$item->id)}}" data-toggle="tooltip"
                                             data-placement="top" title="" data-original-title="Cập nhật" href="javascript:"
                                             class="tooltip-test">
                                             <span class=""><i class="fa fa-lg fa-edit text-primary"></i>
                                                 <span class="mdi mdi-close"></span>
                                             </span>
                                         </a>
-                                        <a href="{{route('admin.workload.delete',$item->id)}}" data-toggle="tooltip"
+                                        <a href="{{route('admin.srworkload.delete',$item->id)}}" data-toggle="tooltip"
                                             data-placement="top" title="" data-original-title="Xóa" class="delete_workload tooltip-test ml-10">
                                             <span class=""><i class="fa fa-lg fa-trash text-danger"></i>
                                                 <span class="mdi mdi-close"></span>
@@ -178,7 +178,7 @@
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                                         aria-hidden="true">&times;</span></button>
-                                                <h4 class="modal-title" id="myModalLabel">Bạn thực sự muốn xóa khối lượng công việc này ?</h4>
+                                                <h4 class="modal-title" id="myModalLabel">Bạn thực sự muốn xóa nghiên cứu khoa học này ?</h4>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-danger" id="btn-pd-yes">Có</button>

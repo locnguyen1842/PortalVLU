@@ -700,4 +700,7 @@ class WorkloadController extends Controller
         $school_year->delete();
         return redirect()->back()->with('message', 'Xóa năm học thành công');
     }
+
+
+  
 }
