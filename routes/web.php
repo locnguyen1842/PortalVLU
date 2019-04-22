@@ -200,7 +200,7 @@ Route::prefix('')->group(function () {
         Route::post('/confirmation-request/create','ConfirmationRequestController@postCreate')->name('employee.confirmation.create');
         Route::get('/confirmation-request/update/{cr_id}','ConfirmationRequestController@getUpdate')->name('employee.confirmation.update');
         Route::post('/confirmation-request/update/{cr_id}','ConfirmationRequestController@postUpdate')->name('employee.confirmation.update');
-        Route::get('/confirmation-request/delete{cr_id}','ConfirmationRequestController@getCreate')->name('employee.confirmation.delete');
+        Route::get('/confirmation-request/delete/{cr_id}','ConfirmationRequestController@delete')->name('employee.confirmation.delete');
 
 
     });
