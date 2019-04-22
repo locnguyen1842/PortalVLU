@@ -90,7 +90,29 @@
 
                                 </div>
                             </div>
-
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Người xác nhận<br>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <label for="">Người ký I</label>
+                                    <input require type="text" class="form-control" name="first_signer" value="{{$cr->first_signer}}">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="">Người ký II</label>
+                                    <input require type="text" class="form-control" name="second_signer" value="{{$cr->second_signer}}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <label for="">Tên Người ký</label>
+                                    <input require type="text" class="form-control" name="name_of_signer" value="{{$cr->name_of_signer}}">
+                                </div>
+                        
+                            </div>
                             <div class="form-group" style="margin-bottom:0">
                                 <div class="col-sm-offset-2 col-sm-10 text-right">
                                     <button type="reset" class="btn btn-default">Hủy Bỏ</button>

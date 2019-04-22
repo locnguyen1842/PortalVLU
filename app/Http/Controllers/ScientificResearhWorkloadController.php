@@ -24,7 +24,7 @@ class ScientificResearhWorkloadController extends Controller
             $pi = null;
         }
 
-        return view('admin.scientific.scientific-add', compact('workload', 'pi', 'ws'));
+        return view('admin.scientific.scientific-add', compact('srworkload', 'pi', 'ws'));
     }
     public function postAdd(Request $request){
         $this->authorize('cud', PI::firstOrFail());

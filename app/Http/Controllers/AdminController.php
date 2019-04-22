@@ -67,10 +67,17 @@ class AdminController extends Controller
             [
                 'address'=> 'required',
                 'reason'=> 'required',
+                'first_signer'=> 'required',
+                'second_signer'=> 'required',
+                'name_of_signer'=> 'required',
             ],
             [
                 'address.required' => 'Địa chỉ không được bỏ trống',
                 'reason.required' => 'Lý do không được bỏ trống',
+                'first_signer.required' => 'Địa chỉ không được bỏ trống',
+                'second_signer.required' => 'Lý do không được bỏ trống',
+                'name_of_signer.required' => 'Địa chỉ không được bỏ trống',
+                
             ]
         );
         $cr= ConfirmationRequest::find($cr_id);
@@ -79,6 +86,9 @@ class AdminController extends Controller
         $address = Address::findOrfail($request->address);
         $cr->address = $address->address_content .', '.$address->ward->path_with_type;
         $cr->address_id = $address->id;
+        $cr->first_signer = $request->first_signer;
+        $cr->second_signer = $request->second_signer;
+        $cr->name_of_signer = $request->name_of_signer;
         $cr->save();
         return redirect()->back()->with('message', 'Cập nhật đơn thành công');
     }
