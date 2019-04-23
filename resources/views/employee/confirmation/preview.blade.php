@@ -8,26 +8,26 @@
      <div class="form-group col-sm-12">
           <div class="col-sm-6 text-center">
                <div class="form-group">
-                    <h4>BỘ GIÁO DỤC VÀ ĐÀO TẠO</h4>
+                    <label>BỘ GIÁO DỤC VÀ ĐÀO TẠO</label>
                </div>
                <div class="form-group">
-                    <h4>TRƯỜNG ĐẠI HỌC VĂN LANG
+                    <strong>TRƯỜNG ĐẠI HỌC VĂN LANG
                          <hr style="width: 180px">
                          <label
                               style="font-weight:normal">Số:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/GXN-ĐHVL</label>
 
-                    </h4>
+                    </strong>
 
                </div>
           </div>
           <div class="col-sm-6 text-center">
                <div class="form-group">
-                    <h4>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</h4>
+                    <strong>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</strong>
                </div>
                <div class="form-group">
-                    <h4 style="font-size:1.06rem">Độc lập – Tự do – Hạnh phúc
+                    <strong style="font-size:1.06rem">Độc lập – Tự do – Hạnh phúc
                          <hr style="width: 200px">
-                    </h4>
+                    </strong>
                </div>
           </div>
 
@@ -105,8 +105,8 @@
                <div class="form-group col-sm-12">
                     <div class="col-sm-4">&nbsp;</div>
                     <div class="col-sm-8 text-center">
-                         <h4 for="">NGƯỜI KÝ CẤP I</h4>
-                         <h4 for="">NGƯỜI KÝ CẤP II</h4>
+                         <h4 class="text-upper" for="">{{$cr->first_signer != null ? $cr->first_signer : 'KT.HIỆU TRƯỞNG'}}</h4>
+                         <h4 class="text-upper" for="">{{$cr->second_signer != null ? $cr->second_signer : 'PHÓ HIỆU TRƯỞNG'}}</h4>
 
                     </div>
 
@@ -115,7 +115,7 @@
                <div class="form-group col-sm-12" style="margin-top:3rem">
                     <div class="col-sm-4">&nbsp;</div>
                     <div class="col-sm-8 text-center">
-                         <h4 for="">Họ Tên Người Ký</h4>
+                         <h4 class="text-capitalize" for="">{{$cr->name_of_signer != null ? $cr->name_of_signer : 'Họ Tên Người Ký'}}</h4>
 
                     </div>
 
@@ -146,7 +146,9 @@
           margin-block-start: 0.5rem;
           margin-block-end: 0.5rem;
      }
-
+     .text-capitalize{
+          text-transform: capitalize;
+     }
      .fs-14 {
           font-size: 14px;
 
@@ -167,6 +169,9 @@
 
      .text-center {
           text-align: center;
+     }
+     .text-upper{
+          text-transform: uppercase;
      }
 
      .col-sm-1,

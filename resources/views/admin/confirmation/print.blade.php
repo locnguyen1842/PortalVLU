@@ -8,7 +8,7 @@
      <div class="form-group col-sm-12">
           <div class="col-sm-6 text-center">
                <div class="form-group-header">
-                    <strong>BỘ GIÁO DỤC VÀ ĐÀO TẠO</strong>
+                    <label>BỘ GIÁO DỤC VÀ ĐÀO TẠO</label>
                </div>
                <div class="form-group-header">
                     <strong>TRƯỜNG ĐẠI HỌC VĂN LANG

@@ -13,16 +13,27 @@
     <div class="">
         <!-- begin header -->
         <div>
-            <div class="form-group">
-                <div class="col-sm-5">
-                    <h4 style="padding-left:0.5rem">BỘ GIÁO DỤC VÀ ĐÀO TẠO</h4>
-                    <h4><strong>TRƯỜNG ĐẠI HỌC VĂN LANG</strong></h4>
+            <div class="form-group col-sm-5" style="text-align:center">
+                <div class="form-group-header" >
+                    <label  style="font-weight:normal">BỘ GIÁO DỤC VÀ ĐÀO TẠO</label>
                 </div>
-            <div class="col-sm-7" style="text-align:center">
-                <h4><strong>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</strong></h4>
-                <h4 class="hr2"><strong>Độc lập - Tự do - Hạnh phúc</strong></h4>
+                <div class="form-group-header">
+                    <label><strong>TRƯỜNG ĐẠI HỌC VĂN LANG</strong></label>
+
+                </div>
             </div>
-        </div>
+                <div class="form-group col-sm-7" style="text-align:center">
+                    <div class="form-group-header" >
+
+                        <label><strong>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</strong></label>
+                    </div>
+                    <div class="form-group-header">
+                        <label class="hr2"><strong>Độc lập - Tự do - Hạnh phúc</strong></label>
+        
+                    </div>
+                </div>
+            
+        
             <div class="clear"></div>
         </div>
         <!-- END HEADER -->
@@ -627,7 +638,7 @@ body{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family:"Arial" , sans-serif;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .header-content {
@@ -637,7 +648,9 @@ table{
   page-break-inside: avoid;
   border-collapse : collapse;
 }
-
+.form-group-header {
+          margin-bottom: 0.5rem;
+     }
 
 table td, table th{
     border: 1px solid black;
