@@ -30,20 +30,12 @@ class ConfirmationPolicy
         return $confirmation->personalinformation_id == $user->personalinformation_id;
     }
     
-    public function send_request($user,ConfirmationRequest $confirmation){
-        return $confirmation->personalinformation_id == $user->personalinformation_id;
-    }
 
     public function preview($user,ConfirmationRequest $confirmation){
         return $confirmation->personalinformation_id == $user->personalinformation_id;
     }
 
-    public function access_only_status_true_admin($user,ConfirmationRequest $confirmation){
-        if($confirmation->status ==1 ){
-            return true;
-        }
-        
-    }
+    
 }
 
 

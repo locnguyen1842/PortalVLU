@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\ConfirmationRequest;
+use App\ConfirmationIncome;
 
 use App\PI;
 use App\Address;
@@ -15,12 +16,12 @@ class ConfirmationRequestController extends Controller
 
     public function index(){
         $search =  \Request::get('search');
-        $show_printed = \Request::get('show_printed');
+        $status = \Request::get('status');
 
-        if($show_printed == 'undefined'){
-            $show_printed = null;
+        if($status == 'undefined'){
+            $status = null;
         }
-        $crs = ConfirmationRequest::where(function ($query) use ($search,$show_printed) {
+        $crs = ConfirmationRequest::where(function ($query) use ($search,$status) {
             if ($search != null) {
                 $query->where(function ($q) use ($search) {
                     $q->whereHas('pi', function ($q1) use ($search) {
@@ -29,16 +30,15 @@ class ConfirmationRequestController extends Controller
                     });
                 });
             }
-            if ($show_printed != null ) {
-                $query->where(function ($q) use ($show_printed) {
-                    $q->where('is_printed', 0);
+            if ($status != null ) {
+                $query->where(function ($q) use ($status) {
+                    $q->where('status', 0);
                 });
-            }
-            $query->where('status',1);
-        })->orderBy('date_of_request', 'desc')->paginate(10)->appends(['search'=>$search,'show_printed'=>$show_printed]);
+            };
+        })->orderBy('date_of_request', 'desc')->paginate(10)->appends(['search'=>$search,'status'=>$status]);
         // $crs = ConfirmationRequest::where('status',1)->orderBy('date_of_request','desc')->paginate(10);
 
-        return view('admin.confirmation.index', compact('crs','search','show_printed'));
+        return view('admin.confirmation.index', compact('crs','search','status'));
 
     }
     public function indexEmployee(){
@@ -57,42 +57,44 @@ class ConfirmationRequestController extends Controller
         $request->validate(
             [
                 'address'=> 'required',
-                'reason'=> 'required',
+                'confirmation'=> 'required',
+                'number_of_month_income' =>'required_if:is_confirm_income,on',
             ],
             [
                 'address.required' => 'Địa chỉ không được bỏ trống',
-                'reason.required' => 'Lý do không được bỏ trống',
+                'confirmation.required' => 'Lý do không được bỏ trống',
+                'number_of_month_income.required_if' => 'Số tháng không được bỏ trống khi chọn xác nhận thu nhập',
             ]
         );
         $cr = new ConfirmationRequest;
         $cr->personalinformation_id = $pi->id;
-        $cr->reason = $request->reason;
-        $cr->confirmation = $request->reason;
-        $address = Address::findOrfail($request->address);
-        $cr->address = $address->address_content .', '.$address->ward->path_with_type;
-        $cr->address_id = $address->id;
+        $cr->confirmation = $request->confirmation;
+        $cr->address_id = $request->address;
+        $cr->date_of_request = Carbon::now();
+        if($request->has('is_confirm_income')){
+            $cr->is_confirm_income = 1;
+            $cr->number_of_month_income = $request->number_of_month_income;
+            
+
+
+        }else{
+            $cr->is_confirm_income = 0;
+            
+        }
+
         $cr->status = 0;
         $cr->save();
-        return redirect()->route('employee.confirmation.index')->with('message', 'Tạo đơn thành công');
+        for($i= 0 ; $i < $cr->number_of_month_income;$i++){
+            if($i >= 6){
+                break;
+            }
+            $income = new ConfirmationIncome;
+            $income->confirmation_request_id = $cr->id;
+            $income->save();
+        }
+        return redirect()->route('employee.confirmation.index')->with('message', 'Gửi đơn thành công');
     }
 
-    public function sendRequest($cr_id){
-        
-        $cr = ConfirmationRequest::findOrFail($cr_id);
-        $this->authorize('send_request', $cr);
-        $pi = PI::findOrFail($cr->personalinformation_id);
-        $cr->date_of_request = Carbon::now();
-        $cr->gender = $pi->gender;
-        $cr->full_name = $pi->full_name;
-        $cr->identity_card = $pi->identity_card;
-        $cr->date_of_issue = $pi->date_of_issue;
-        $cr->date_of_birth = $pi->date_of_birth;
-        $cr->place_of_birth = $pi->place_of_birth;
-        $cr->status = 1;
-        $cr->save();
-        return redirect()->back()->with('message', 'Gửi đơn thành công');
-
-    }
 
     public function previewEmployee($cr_id){
         $pi = PI::findOrFail(Auth::guard('employee')->user()->personalinformation_id);
@@ -103,7 +105,6 @@ class ConfirmationRequestController extends Controller
 
     public function previewAdmin($cr_id){
         $cr = ConfirmationRequest::findOrFail($cr_id);
-        $this->authorize('access_only_status_true_admin', $cr);
         return view('admin.confirmation.print',compact('cr'));
     }
     public function getUpdate($cr_id){
@@ -120,27 +121,32 @@ class ConfirmationRequestController extends Controller
         $request->validate(
             [
                 'address'=> 'required',
-                'reason'=> 'required',
+                'confirmation'=> 'required',
+                'number_of_month_income' =>'required_if:is_confirm_income,on',
             ],
             [
                 'address.required' => 'Địa chỉ không được bỏ trống',
-                'reason.required' => 'Lý do không được bỏ trống',
+                'confirmation.required' => 'Lý do không được bỏ trống',
+                'number_of_month_income.required_if' => 'Số tháng không được bỏ trống khi chọn xác nhận thu nhập',
             ]
         );
         
-        $cr->reason = $request->reason;
-        $cr->confirmation = $request->reason;
-        $address = Address::findOrfail($request->address);
-        $cr->address = $address->address_content .', '.$address->ward->path_with_type;
-        $cr->address_id = $address->id;
+        $cr->confirmation = $request->confirmation;
+        $cr->address_id = $request->address;
+        if($request->has('is_confirm_income')){
+            $cr->is_confirm_income = 1;
+            $cr->number_of_month_income = $request->number_of_month_income;
+        }else{
+            $cr->is_confirm_income = 0;
+            
+        }
         $cr->save();
         return redirect()->back()->with('message', 'Cập nhật đơn thành công');
     }
 
     public function print($cr_id){
         $cr = ConfirmationRequest::findOrFail($cr_id);
-        $this->authorize('access_only_status_true_admin', $cr);
-        $cr->is_printed = 1 ;
+        $cr->status = 1 ;
         $cr->save();
         $pdf = PDF::loadView('admin.confirmation.print', compact('cr'));
         // return view('admin.confirmation.print',compact('cr'));
@@ -156,33 +162,55 @@ class ConfirmationRequestController extends Controller
 
     public function getUpdateAdmin($cr_id){
         $this->authorize('cud', PI::firstOrFail());
-        $cr= ConfirmationRequest::find($cr_id);
-        $this->authorize('access_only_status_true_admin', $cr);
+        $cr= ConfirmationRequest::findOrFail($cr_id);
         $pi = PI::findOrFail($cr->pi->id);
         return view('admin.confirmation.update', compact('pi','cr'));
     }
     public function postUpdateAdmin(Request $request,$cr_id){
         $this->authorize('cud', PI::firstOrFail());
-        $cr= ConfirmationRequest::find($cr_id);
-        $this->authorize('access_only_status_true_admin', $cr);
+        $cr= ConfirmationRequest::findOrFail($cr_id);
         $request->validate(
             [
-                'reason'=> 'required',
+                'confirmation'=> 'required',
                 'first_signer'=> 'required',
                 'second_signer'=> 'required',
                 'name_of_signer'=> 'required',
+                'month_of_income.*'=> 'required|integer|max:12|min:0',
+                'year_of_income.*'=> 'required|integer|digits:4',
+                'amount_of_income.*'=> 'required|numeric',
+                
             ],
             [
-                'reason.required' => 'Lý do không được bỏ trống',
+                'confirmation.required' => 'Lý do không được bỏ trống',
                 'first_signer.required' => 'Người ký cấp I không được bỏ trống',
                 'second_signer.required' => 'Người ký cấp II không được bỏ trống',
                 'name_of_signer.required' => 'Họ tên người ký không được bỏ trống',
+                'month_of_income.*.required' => 'Tháng thu nhập ký không được bỏ trống',
+                'month_of_income.*.integer' => 'Tháng thu nhập không hợp lệ',
+                'month_of_income.*.max' => 'Tháng thu nhập không hợp lệ',
+                'month_of_income.*.min' => 'Tháng thu nhập không hợp lệ',
+                'year_of_income.*.required' => 'Năm thu nhập ký không được bỏ trống',
+                'year_of_income.*.integer' => 'Năm thu nhập không hợp lệ',
+                'year_of_income.*.digits' => 'Năm thu nhập không hợp lệ',
+                'amount_of_income.*.required' => 'Thu nhập ký không được bỏ trống',
+                'amount_of_income.*.numeric' => 'Thu nhập ký không hợp lệ',
 
             ]
         );
-        
-        $cr->reason = $request->reason;
-        $cr->confirmation = $request->reason;
+        if(($request->month_of_income) != null){
+            $request->month_of_income = ($request->month_of_income);
+            ConfirmationIncome::where('confirmation_request_id', $cr->id)->delete();
+            for ($i = 0 ; $i < count($request->month_of_income) ; $i++) {
+                $ci = new ConfirmationIncome;
+                $ci->confirmation_request_id = $cr->id;
+
+                $ci->month_of_income = $request->month_of_income[$i];
+                $ci->year_of_income = $request->year_of_income[$i];
+                $ci->amount_of_income = $request->amount_of_income[$i];
+                $ci ->save();
+            }
+        }
+        $cr->confirmation = $request->confirmation;
         $cr->first_signer = $request->first_signer;
         $cr->second_signer = $request->second_signer;
         $cr->name_of_signer = $request->name_of_signer;

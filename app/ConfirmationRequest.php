@@ -9,7 +9,6 @@ class ConfirmationRequest extends Model
     protected $table = 'confirmation_requests';
 
     protected $fillable = [
-        'reason',
         'personalinformation_id',
         'confirmation',
         'date_of_request',
@@ -17,10 +16,19 @@ class ConfirmationRequest extends Model
         'first_signer',
         'second_signer',
         'address_id',
+        'status',
+        'number_of_month_income',
     ];
 
     public function pi(){
         return $this->belongsTo('App\PI','personalinformation_id','id');
+    }
+    public function address(){
+        return $this->belongsTo('App\Address','address_id','id');
+    }
+
+    public function incomes(){
+        return $this->hasMany('App\ConfirmationIncome','confirmation_request_id','id');
     }
 
 

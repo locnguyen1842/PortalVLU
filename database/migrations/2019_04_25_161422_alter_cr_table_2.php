@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlterCrsTable extends Migration
+class AlterCrTable2 extends Migration
 {
     /**
      * Run the migrations.
@@ -14,12 +14,8 @@ class AlterCrsTable extends Migration
     public function up()
     {
         Schema::table('confirmation_requests', function (Blueprint $table) {
-            
-            $table->boolean('status')->nullable()->default(0);
-            $table->boolean('is_printed')->nullable()->default(0);
-            $table->integer('number_of_month_income')->nullable();
-            
-
+            $table->integer('address_id')->unsigned()->nullable();
+            $table->foreign('address_id')->references('id')->on('addresses');
 
         });
     }

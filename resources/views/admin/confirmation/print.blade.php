@@ -42,32 +42,32 @@
           <div class="col-sm-1">&nbsp;</div>
           <div class="col-sm-10" style="margin-top:2rem">
                 <div class="form-group col-sm-12">
-                <label for="">Xác nhận: {{$cr->reason}}</label>
+                <label for="">Xác nhận: {{$cr->confirmation}}</label>
 
                 </div>
                 <div class="form-group col-sm-12">
                      <div class="col-sm-6">
-                         <label for="">Sinh ngày: {{date('d/m/Y', strtotime($cr->date_of_birth))}}</label>
+                         <label for="">Sinh ngày: {{date('d/m/Y', strtotime($cr->pi->date_of_birth))}}</label>
 
                      </div>
                      <div class="col-sm-6">
-                          <label for="">tại {{$cr->place_of_birth}}</label>
+                          <label for="">tại {{$cr->pi->place_of_birth}}</label>
 
                      </div>
 
                 </div>
                 <div class="form-group col-sm-12">
                      <div class="col-sm-6">
-                          <label for="">CMND: {{$cr->identity_card}}</label>
+                          <label for="">CMND: {{$cr->pi->identity_card}}</label>
 
                      </div>
                      <div class="col-sm-6">
-                          <label for="">Ngày cấp: {{date('d/m/Y', strtotime($cr->date_of_issue))}}</label>
+                          <label for="">Ngày cấp: {{date('d/m/Y', strtotime($cr->pi->date_of_issue))}}</label>
 
                      </div>
                 </div>
                 <div class="form-group col-sm-12">
-                     <label for="">Địa chỉ: {{$cr->address}}</label>
+                     <label for="">Địa chỉ: {{$cr->address->address_content.', '.$cr->address->ward->path_with_type}}</label>
 
                 </div>
                 <div class="form-group col-sm-12">
@@ -89,7 +89,7 @@
 
                 </div>
                 <div class="form-group col-sm-12">
-                     <label for="">Nhà trường cấp giấy xác nhận để {{$cr->gender == 1 ? 'bà' : 'ông'}} {{$cr->full_name}} bổ túc hồ sơ cá nhân.</label>
+                     <label for="">Nhà trường cấp giấy xác nhận để {{$cr->pi->gender == 1 ? 'bà' : 'ông'}} {{$cr->pi->full_name}} {{$cr->confirmation}}.</label>
 
                 </div>
                 <div class="form-group col-sm-12" style="margin-top:1rem">

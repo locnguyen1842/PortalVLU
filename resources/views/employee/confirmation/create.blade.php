@@ -61,13 +61,13 @@
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <label for="">Lý do</label>
-                                    <input required type="text" class="form-control" name="reason" value="{{ old('reason') }}">
+                                    <input required type="text" class="form-control" name="confirmation" value="{{ old('confirmation') }}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     @if($pi->permanent_address()->exists() && $pi->contact_address()->exists())
-                                    <label for="">Địa chỉ</label>
+                                    <label for="">Địa chỉ (sẽ in ra trong giấy xác nhận)</label>
                                     <select required class="form-control" name="address" id="">
                                         <option value="">Chọn địa chỉ</option>
                                         <option {{ $pi->contact_address->id == old('address') ? 'selected':'' }}
@@ -86,14 +86,26 @@
                                     <label for="">Địa chỉ</label><br>
                                     <label for="" class="text-danger">Không tìm thấy bất cứ địa chỉ cá nhân nào ( vui lòng cập nhật <a href="{{route('employee.pi.update')}}">tại đây</a> )</label>
                                     @endif
-
+                                    
+                                    
                                 </div>
                             </div>
-
+                            
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input {{old('is_confirm_income') == 'on' ? 'checked':''}} type="checkbox" name="is_confirm_income">
+                                            Xác nhận thu nhập trong
+                                        </label>
+                                        <input min="0" class="input-on-checkbox" oninput="this.value = Math.abs(this.value)" type="number" name="number_of_month_income"> tháng gần nhất
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group" style="margin-bottom:0">
                                 <div class="col-sm-offset-2 col-sm-10 text-right">
                                     <button type="reset" class="btn btn-default">Hủy Bỏ</button>
-                                    <button type="submit" class="btn btn-primary">Xác Nhận</button>
+                                    <button type="submit" class="btn btn-primary">&nbsp; Gửi &nbsp;</button>
                                 </div>
                             </div>
 
@@ -104,159 +116,27 @@
         </div>
 
 
-<script type="text/javascript">
+<script>
     $(document).ready(function(){
-        var teacher_type = $('select[name=teacher_type]');
-        var is_retired = $('input[type=radio][name=is_retired]:checked');
 
-        teacherType(teacher_type);
-        isRetired(is_retired);
-        teacher_type.on('change', function () {
-            teacherType($(this));
+        checkedInput();
+        $('input[name=is_confirm_income]').on('click',function(){
+            checkedInput();
         })
 
-        $('input[type=radio][name=is_retired]').on('change', function (e) {
-            isRetired($(this));
+        function checkedInput(){
+        if($('input[name=is_confirm_income]:checked').val() == 'on'){
+            $('input[name=number_of_month_income]').prop('required',true);
+            $('input[name=number_of_month_income]').prop('disabled',false);
+        }else{
+            $('input[name=number_of_month_income]').prop('disabled',true);
+            $('input[name=number_of_month_income]').prop('required',false);
+            $('input[name=number_of_month_income]').val('');
 
-        })
-
-        function isRetired(element) {
-            if (element.val() == 0) {
-
-                $('input[name=date_of_retirement]').prop('disabled', true);
-            } else {
-                $('input[name=date_of_retirement]').prop('disabled', false);
-            }
         }
-
-        function teacherType(element) {
-            if (element.val() == 0) {
-
-                $('.dependent-on-teacher').addClass('hide');
-                $('.dependent-on-teacher :input').not('input[name=date_of_retirement]').prop('disabled', true);
-
-            } else {
-                $('.dependent-on-teacher').removeClass('hide');
-                $('.dependent-on-teacher :input').not('input[name=date_of_retirement]').prop('disabled', false);
-
-            }
         }
-        if('{{ $pi->permanent_address()->exists() && $pi->contact_address()->exists() }}' == true){
-            var province_code_1 = $('#province_1').val();
-            $.get('{{route('res.districts')}}' + '?province_code=' + province_code_1,
-            function(data) {
-                $('#district_1').empty();
-                $('#district_1').append('<option value="" disabled>Chọn quận/huyện</option>');
-                $.each(data, function(index, district) {
-                    $('#district_1').append('<option data-old-1="old-'+district.code+'" value="' + district.code + '">' + district.name_with_type + '</option>');
-                    var district_1 = '{{ $pi->permanent_address()->exists() ? $pi->permanent_address->district->code :'' }}'
-
-                    if(district.code == district_1){
-                        $('option[data-old-1="old-'+district.code+'"]').prop('selected',true);
-                    }
-
-                });
-            });
-            var district_code_1 = '{{ $pi->permanent_address()->exists() ? $pi->permanent_address->district->code :'' }}';
-            $.get('{{route('res.wards')}}' + '?district_code=' + district_code_1,
-            function(data) {
-                $('#ward_1').empty();
-                $('#ward_1').append('<option value="" disabled>Chọn phường/xã</option>');
-                $.each(data, function(index, ward) {
-                    $('#ward_1').append('<option data-old-1="old-'+ward.code+'" value="' + ward.code + '">' + ward.name_with_type + '</option>');
-                    var ward_1 = '{{ $pi->permanent_address()->exists() ? $pi->permanent_address->ward->code : ''}}';
-
-                    if(ward.code == ward_1){
-                        $('option[data-old-1="old-'+ward.code+'"]').prop('selected',true);
-                    }
-                });
-            });
-
-            var province_code_2 = $('#province_2').val();
-            $.get('{{route('res.districts')}}' + '?province_code=' + province_code_2,
-            function(data) {
-                    $('#district_2').empty();
-                    $('#district_2').append('<option value="" disabled>Chọn quận/huyện</option>');
-                    $.each(data, function(index, district) {
-                        $('#district_2').append('<option data-old-2="old-'+district.code+'" value="' + district.code + '">' + district.name_with_type + '</option>')
-                        var district_2 = '{{ $pi->contact_address()->exists() ? $pi->contact_address->district->code:'' }}'
-
-                        if(district.code == district_2){
-                            $('option[data-old-1="old-'+district.code+'"]').prop('selected',true);
-                        }
-                });
-            });
-
-            var district_code_2 = '{{ $pi->contact_address()->exists() ? $pi->contact_address->district->code :'' }}';
-            $.get('{{route('res.wards')}}' + '?district_code=' + district_code_2,
-            function(data) {
-                $('#ward_2').empty();
-                $('#ward_2').append('<option value="" disabled>Chọn phường/xã</option>');
-                $.each(data, function(index, ward) {
-                    $('#ward_2').append('<option data-old-2="old-'+ward.code+'"  value="' + ward.code + '">' + ward.name_with_type + '</option>')
-                    var ward_2 = '{{ $pi->contact_address()->exists() ? $pi->contact_address->ward->code :'' }}';
-
-                        if(ward.code == ward_2){
-                            $('option[data-old-2="old-'+ward.code+'"]').prop('selected',true);
-                        }
-                });
-            });
-    }
-
-
+        
     });
-        $('#province_1').on('change', function(e) {
-            var province_code = e.target.value;
-            $.get('{{route('res.districts')}}' + '?province_code=' + province_code,
-                function(data) {
-                    $('#district_1').empty();
-                    $('#district_1').append('<option value="" disabled selected>Chọn quận/huyện</option>');
-                    $.each(data, function(index, district) {
-                        $('#district_1').append('<option data-old-1="old-'+district.code+'" value="' + district.code + '">' + district.name_with_type + '</option>');
-
-
-                    });
-                });
-        });
-        $('#district_1').on('change', function(e) {
-            var district_code = e.target.value;
-            $.get('{{route('res.wards')}}' + '?district_code=' + district_code,
-                function(data) {
-                    $('#ward_1').empty();
-                    $('#ward_1').append('<option value="" disabled selected>Chọn phường/xã</option>');
-                    $.each(data, function(index, ward) {
-                        $('#ward_1').append('<option data-old-1="old-'+ward.code+'" value="' + ward.code + '">' + ward.name_with_type + '</option>');
-
-                    });
-                });
-        });
-        $('#province_2').on('change', function(e) {
-            var province_code = e.target.value;
-            $.get('{{route('res.districts')}}' + '?province_code=' + province_code,
-                function(data) {
-                    $('#district_2').empty();
-                    $('#district_2').append('<option value="" disabled selected>Chọn quận/huyện</option>');
-                    $.each(data, function(index, district) {
-                        $('#district_2').append('<option value="' + district.code + '">' + district.name_with_type + '</option>')
-                    });
-                });
-
-
-        });
-
-
-        $('#district_2').on('change', function(e) {
-            var district_code = e.target.value;
-            $.get('{{route('res.wards')}}' + '?district_code=' + district_code,
-                function(data) {
-                    $('#ward_2').empty();
-                    $('#ward_2').append('<option value="" disabled selected>Chọn phường/xã</option>');
-                    $.each(data, function(index, ward) {
-                        $('#ward_2').append('<option value="' + ward.code + '">' + ward.name_with_type + '</option>')
-                    });
-                });
-        });
-
-
 </script>
+
     @endsection

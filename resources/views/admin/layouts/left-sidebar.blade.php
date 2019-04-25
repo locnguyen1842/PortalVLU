@@ -10,9 +10,11 @@
                 <li class="{{url()->current() == route('admin.pi.index') ? 'active':''}}">
                             <a href="{{route('admin.pi.index')}}" class="md-contacts">Danh sách nhân viên</a>
                         </li>
+                        @can('cud', App\PI::first())
                         <li class="{{url()->current() == route('admin.pi.add') ? 'active':''}}">
                             <a href="{{route('admin.pi.add')}}" class=" sf-sign-add">Thêm mới nhân viên</a>
                         </li>
+                        @endcan
                     {{-- <li class="cm-submenu {{(url()->current() == route('admin.pi.index')||url()->current() == route('admin.pi.add')) ? 'open':''}}">
                         <a class=" sf-profile-group">
                             Quản lý nhân viên
@@ -33,16 +35,19 @@
                     <li class="{{url()->current() == route('admin.workload.index') ? 'active':''}}">
                         <a href="{{route('admin.workload.index')}}" class="md-assignment">Danh sách khối lượng GD</a>
                     </li>
+                    @can('cud', App\PI::first())
                     <li class="{{url()->current() == route('admin.workload.add') ? 'active':''}}">
                         <a href="{{route('admin.workload.add')}}" class=" sf-sign-add">Thêm mới khối lượng GD</a>
                     </li>
+                    @endcan
                     <li class="{{url()->current() == route('admin.srworkload.index') ? 'active':''}}">
                         <a href="{{route('admin.srworkload.index')}}" class=" md-work">Danh sách khối lượng NCKH</a>
                     </li>
+                    @can('cud', App\PI::first())
                     <li class="{{url()->current() == route('admin.srworkload.add') ? 'active':''}}">
                         <a href="{{route('admin.srworkload.add')}}" class=" sf-sign-add">Thêm mới khối lượng NCKH</a>
                     </li>
-
+                    @endcan
                     <li class="{{url()->current() == route('admin.confirmation.index') ? 'active':''}}">
                             <a href="{{route('admin.confirmation.index')}}" class="md-assignment-turned-in">Danh sách đơn yêu cầu</a>
                         </li>

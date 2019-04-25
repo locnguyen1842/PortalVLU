@@ -48,7 +48,7 @@
                     @if($crs->count() >0)
                     @foreach ($crs as $item)
                     <tr>
-                        <td>{{$item->reason}}
+                        <td>{{$item->confirmation}}
                                 <a href="{{route('employee.confirmation.send',$item->id)}}" data-toggle="tooltip" data-placement="top"
                                         title="" data-original-title="Xem trước" href="javascript:" class="preview_cr tooltip-test ml-10">
                                         <span class=""><i class="fa fa-lg fa-sign-out"></i>
@@ -82,16 +82,11 @@
                         </td>
 
                         <td>{{date('d-m-Y', strtotime($item->created_at))}}</td>
-                        <td class="font-weight-bold {{$item->status == 0 ? 'text-warning':'text-success'}}">{{$item->status == 0 ? 'Chưa gửi': 'Đã gửi'}}</td>
+                        <td class="font-weight-bold {{$item->status == 0 ? 'text-primary':'text-success'}}">{{$item->status == 0 ? 'Đã gửi': 'Đã xử lý'}}</td>
 
                         @if($item->status == 0)
                         <td>
-                            <a href="{{route('employee.confirmation.send',$item->id)}}" data-toggle="tooltip" data-placement="top"
-                                    title="" data-original-title="Gửi yêu cầu" href="javascript:" class="tooltip-test">
-                                    <span class=""><i class="fa fa-lg fa-send-o text-success"></i>
-                                        <span class="mdi mdi-close"></span>
-                                    </span>
-                                </a>
+                           
 
                             <a href="{{route('employee.confirmation.update',$item->id)}}" data-toggle="tooltip" data-placement="top"
                                 title="" data-original-title="Cập nhật" href="javascript:" class="tooltip-test ml-10">

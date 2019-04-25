@@ -47,8 +47,8 @@
                             <span class="help-block">
                                     <div class="checkbox">
                                             <label>
-                                                <input {{$show_printed != null ? 'checked' : ''}} type="checkbox" name="show_printed">
-                                                Chỉ hiện thị đơn chưa in
+                                                <input {{$status != null ? 'checked' : ''}} type="checkbox" name="status">
+                                                Chỉ hiện thị đơn chưa xử lý
                                             </label>
                                         </div>
                             </span>
@@ -91,6 +91,7 @@
                         <th>Họ tên</th>
                         <th>Lý do</th>
                         <th>Ngày yêu cầu</th>
+                        <th>Xác nhận thu nhập</th>
                         <th>Trạng thái</th>
 
                         <th></th>
@@ -102,10 +103,11 @@
                     <tr>
                         <td>{{$item->pi->employee_code}}</td>
                         <td>{{$item->pi->full_name}}</td>
-                        <td>{{$item->reason}}</td>
+                        <td>{{$item->confirmation}}</td>
                         <td>{{date('d-m-Y',strtotime($item->date_of_request))}}</td>
-                        <td class="font-weight-bold {{$item->is_printed == 0 ? 'text-danger':'text-success'}}">{{$item->is_printed == 0 ? 'Chưa in':'Đã in'}}</td>
-
+                        <td>{{$item->is_confirm_income == 1 ? 'Có' : 'Không'}}</td>
+                        <td class="font-weight-bold {{$item->status == 0 ? 'text-danger':'text-success'}}">{{$item->status == 0 ? 'Chưa xử lý':'Đã xử lý'}}</td>
+                        @can('cud', App\PI::first())
                         <td>
                             <a href="{{route('admin.confirmation.print',$item->id)}}" data-toggle="tooltip" target="_blank" data-placement="top"
                                     title="" data-original-title="Xem trước" href="javascript:" class="preview_cr tooltip-test ml-10">
@@ -150,6 +152,7 @@
                                 </span>
                             </a> --}}
                         </td>
+                        @endcan
                         <td></td>
 
                     </tr>
@@ -197,9 +200,9 @@
 
         $(".search_tag").on('click', function() {
             var url = {!!json_encode(route('admin.confirmation.index'), JSON_UNESCAPED_SLASHES) !!};
-            var show_printed = $("input[name='show_printed']:checked").val();
+            var status = $("input[name='status']:checked").val();
             var search = "";
-            window.location.href = url + '?&show_printed='+show_printed;
+            window.location.href = url + '?&status='+status;
         });
 
         $(".preview_cr").on('click',function (e) {

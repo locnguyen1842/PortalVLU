@@ -23,7 +23,9 @@ class Address extends Model
     public function ward(){
         return $this->belongsTo('App\Ward','ward_code','code');
     }
-
+    public function crs(){
+        return $this->hasOne('App\ConfirmationRequest','address_id','id');
+    }
 
     public function pi_permanent_addresses(){
         return $this->hasMany('App\PI','permanent_address_id','id');

@@ -42,7 +42,7 @@
           <div class="col-sm-1">&nbsp;</div>
           <div class="col-sm-10" style="margin-top:2rem">
                <div class="form-group col-sm-12">
-               <label for="">Xác nhận: {{$cr->reason}}</label>
+               <label for="">Xác nhận: {{$cr->confirmation}}</label>
 
                </div>
                <div class="form-group col-sm-12">
@@ -67,7 +67,7 @@
                     </div>
                </div>
                <div class="form-group col-sm-12">
-                    <label for="">Địa chỉ: {{$cr->address}}</label>
+                    <label for="">Địa chỉ: {{$cr->address->address_content.', '.$cr->address->ward->path_with_type}}</label>
 
                </div>
                <div class="form-group col-sm-12">
@@ -89,7 +89,7 @@
 
                </div>
                <div class="form-group col-sm-12">
-                    <label for="">Nhà trường cấp giấy xác nhận để {{$pi->gender == 1 ? 'bà' : 'ông'}} {{$pi->full_name}} bổ túc hồ sơ cá nhân.</label>
+                    <label for="">Nhà trường cấp giấy xác nhận để {{$pi->gender == 1 ? 'bà' : 'ông'}} {{$pi->full_name}} {{$cr->confirmation}}.</label>
 
                </div>
                <div class="form-group col-sm-12" style="margin-top:1rem">
