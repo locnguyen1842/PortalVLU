@@ -89,6 +89,29 @@
 
                </div>
                <div class="form-group col-sm-12">
+                @if($cr->incomes()->exists())
+                <table class="table-content" cellspacing="0px">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Tháng</th>
+                            <th>Thu nhập (VNĐ)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($cr->incomes as $item)
+                        <tr>
+                        <td>{{$loop->iteration}}</td>
+                        <td>{{$item->month_of_income .'/'.$item->year_of_income}}</td>
+                        <td>{{number_format($item->amount_of_income)}} đồng</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                @endif
+
+            </div>
+               <div class="form-group col-sm-12">
                     <label for="">Nhà trường cấp giấy xác nhận để {{$pi->gender == 1 ? 'bà' : 'ông'}} {{$pi->full_name}} {{$cr->confirmation}}.</label>
 
                </div>
@@ -130,6 +153,22 @@
 
 
 <style>
+    table{
+    page-break-inside: avoid;
+    border-collapse : collapse;
+    }
+
+
+    table td, table th{
+        border: 1px solid black;
+        text-align: center;
+    }
+    table > tbody > tr > td {
+        height: 30px;
+    }
+    .table-content{
+        width: 90%;
+    }
      body {
           font-family: 'Times New Roman', Times, serif;
      }

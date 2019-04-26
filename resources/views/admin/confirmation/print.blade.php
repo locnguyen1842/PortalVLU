@@ -13,11 +13,11 @@
                <div class="form-group-header">
                     <strong>TRƯỜNG ĐẠI HỌC VĂN LANG
                          <hr style="width: 180px">
-                         <label
-                              style="font-weight:normal">Số:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/GXN-ĐHVL</label>
+
 
                     </strong>
-
+                    <label
+                    style="font-weight:normal">Số:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/GXN-ĐHVL</label>
                </div>
           </div>
           <div class="col-sm-6 text-center">
@@ -89,10 +89,33 @@
 
                 </div>
                 <div class="form-group col-sm-12">
+                    @if($cr->incomes()->exists())
+                    <table class="table-content" cellspacing="0px">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Tháng</th>
+                                <th>Thu nhập (VNĐ)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($cr->incomes as $item)
+                            <tr>
+                            <td>{{$loop->iteration}}</td>
+                            <td>{{$item->month_of_income .'/'.$item->year_of_income}}</td>
+                            <td>{{number_format($item->amount_of_income)}} đồng</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    @endif
+
+                </div>
+                <div class="form-group col-sm-12">
                      <label for="">Nhà trường cấp giấy xác nhận để {{$cr->pi->gender == 1 ? 'bà' : 'ông'}} {{$cr->pi->full_name}} {{$cr->confirmation}}.</label>
 
                 </div>
-                <div class="form-group col-sm-12" style="margin-top:1rem">
+                <div class="col-sm-12" style="margin-top:1rem">
                      <div class="col-sm-4">&nbsp;</div>
                      <div class="col-sm-8 text-center">
                           <label style="font-style:italic" for=""> Tp. Hồ Chí Minh,
@@ -102,7 +125,7 @@
                      </div>
 
                 </div>
-                <div class="form-group col-sm-12">
+                <div class="col-sm-12">
                      <div class="col-sm-4">&nbsp;</div>
                      <div class="col-sm-8 text-center">
                         <h4 for="" class="text-uppercase">{{$cr->first_signer == null ? 'KT. HIỆU TRƯỞNG': $cr->first_signer}}</h4>
@@ -130,6 +153,22 @@
 
 
 <style>
+    table{
+    page-break-inside: avoid;
+    border-collapse : collapse;
+    }
+
+
+    table td, table th{
+        border: 1px solid black;
+        text-align: center;
+    }
+    table > tbody > tr > td {
+        height: 30px;
+    }
+    .table-content{
+        width: 90%;
+    }
      body {
           font-family: 'Times New Roman', Times, serif;
      }
@@ -244,7 +283,9 @@
      }
 
      @media print {
-
+          .form-group{
+            margin-bottom: 0.8rem;
+          }
           .col-sm-1,
           .col-sm-2,
           .col-sm-3,

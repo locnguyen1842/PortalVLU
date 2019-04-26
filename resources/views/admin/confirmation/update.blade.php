@@ -32,7 +32,7 @@
                                 <div class="form-group text-center">
                                     <div class="col-sm-12">
                                     <p style="font-size:24px">Xác nhận thu nhập trong <b>{{$cr->number_of_month_income}}</b> gần nhất</p>
-                                        
+
                                     </div>
                                 </div>
                                 <div class="table-responsive">
@@ -46,20 +46,20 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="confirmation_incomes_repeater">
-                                                
+
                                                 <tr>
                                                     <td colspan="3">
                                                         <button type="button" class="btn btn-sm btn-success btn-block r-add-income">Thêm
                                                             mới</button>
-        
+
                                                     </td>
                                                 </tr>
-                                                
+
                                                 <tr class="group-confirmation-incomes form-horizontal">
                                                         <td class="col-sm-1 td-center">
                                                                 <label for="date_of_income" data-pattern-text="+=1">1</label>
                                                                 <input type="hidden">
-                
+
                                                             </td>
                                                     <td class="col-sm-2">
                                                         <div class="col-sm-5">
@@ -68,44 +68,44 @@
                                                         </div>
                                                         <div class="col-sm-7">
                                                                 <input type="number" class="form-control" name="year_of_income[]">
-                                                                
+
                                                         </div>
-        
+
                                                     </td>
                                                     <td class="col-sm-4">
-                                                        <input type="number" class="form-control money-input" name="amount_of_income[]">
-                                                        
+                                                        <input autocomplete="off" type="number" class="form-control money-input" name="amount_of_income[]">
+
                                                         <span data-pattern-name="help-block[++]" name="help-block[]" class="help-block money" style="margin-left:13px"></span>
                                                     </td>
                                                     <td class="col-sm-1">
                                                         <button type="button" class="btn btn-danger r-delete-income">Xóa</button>
-        
+
                                                     </td>
-        
+
                                                 </tr>
-        
+
                                             </tbody>
                                         </table>
-        
+
                                     </div>
-                                
+
                                 <div class="modal fade cr-preview-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="cr-preview-modal">
-    
+
                                         <div class="modal-dialog modal-lg">
                                             <div class="modal-content">
-    
+
                                                 <div class="modal-body">
                                                   <div class="preview-confirmation">
                                                         <iframe frameborder="0" style="width:100%;height:400px" src="{{route('admin.confirmation.preview',$cr->id)}}"></iframe>
                                                   </div>
-    
+
                                                 </div>
-    
+
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-default btn-preview-no" id="btn-preview-no">Quay lại</button>
                                                     <button type="button" class="btn btn-warning btn-preview-yes" id="btn-preview-yes">Xuất pdf</button>
-    
-    
+
+
                                                 </div>
                                             </div>
                                         </div>
@@ -114,7 +114,7 @@
                         </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">Thông tin đơn xác nhận yêu cầu<br>
-                           
+
                         </div>
                         <div class="panel-body">
                                 <div class="form-group">
@@ -143,7 +143,7 @@
                             </div>
                             <div class="form-group" style="margin-bottom:0">
                                 <div class="col-sm-offset-2 col-sm-10 text-right">
-                                    <button type="reset" class="btn btn-default">Hủy Bỏ</button>
+                                    <button type="button" class="btn btn-default btn-back">Quay lại</button>
                                     <button type="button" class="btn btn-turquoise btn-preview">Xem trước</button>
                                     <button type="submit" class="btn btn-primary">Cập nhật</button>
                                 </div>
@@ -178,7 +178,12 @@
 
 <script type="text/javascript">
     $(document).ready(function(){
-        
+        $('.btn-back').on('click',function(){
+            window.open(
+                        '{{route('admin.confirmation.index')}}',
+                        '_self'
+                    );
+        })
         $('.btn-preview').on('click',function(e){
             e.preventDefault();
             var modal = $('.cr-preview-modal');
@@ -212,7 +217,7 @@
                 }
             });
         });
-        
+
         // 4
 
         var list4 = '{!!json_encode($cr->incomes->toArray())!!}';
@@ -240,8 +245,8 @@
             if(array_confirmation_incomes[index][amount_of_income] == "null"){
                 array_confirmation_incomes[index][amount_of_income]= null;
             }
-           
-            
+
+
 
         });
         $('#confirmation_incomes_repeater').repeater({
@@ -259,17 +264,21 @@
             animationEasing: 'swing',
             clearValues: true
         },array_confirmation_incomes);
-        
+
         function numberWithCommas(num) {
             var num_parts = num.toString().split(".");
             num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             return num_parts.join(".");
         }
-        var help =$('.help-block').closest('td').find('.help');
-        
-        
 
-        
+        $(document).on('input','.money-input',function(){
+            $('.money-input').on('input',function(e){
+            $(this).closest('td').find('.help-block').text(numberWithCommas($(this).val()+ ' đồng'));
+        })
+        })
+
+
+
     });
 </script>
 @endsection
