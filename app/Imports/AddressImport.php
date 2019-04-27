@@ -22,6 +22,12 @@ class AddressImport implements ToCollection,WithStartRow
     public function collection(Collection $rows)
     {
 
+
+        $province= Province::all();
+        $province_name = [];
+        foreach ($province as $item) {
+            array_push($province_name, strtolower($item->name));
+        }
         $data = $rows->toArray();
         $change_index_data = array();
         $changed_index_data = array();
@@ -34,8 +40,15 @@ class AddressImport implements ToCollection,WithStartRow
         foreach ($data_to_validate as &$item) {
             $item = array_map('trim', $item);
             $item = array_map('strtolower', $item);
+
+            //validate rule
+
+
         }
         // dd($data_to_validate);
+
+
+
         Validator::make(
             $data_to_validate,
             [
@@ -47,9 +60,12 @@ class AddressImport implements ToCollection,WithStartRow
                             'nullable',
                         ],
                 '*.4' => 'required',
-                '*.5'=>'required',
+                '*.5'=> [
+                            'required',
+                        ],
                 '*.6'=> [
                             'required',
+                            Rule::in($province_name),
                         ],
                 '*.7'=>[
                     'nullable',
@@ -58,6 +74,7 @@ class AddressImport implements ToCollection,WithStartRow
                 '*.9'=>'required',
                 '*.10' => [
                     'required',
+                    Rule::in($province_name),
                 ],
             ],
             [
@@ -68,25 +85,44 @@ class AddressImport implements ToCollection,WithStartRow
                 '*.4.required' => 'Phường xã ( địa chỉ thường trú ) không được bỏ trống ( vị trí::attribute|sheet :4 )',
                 '*.5.required'=>'Quận huyện ( địa chỉ thường trú ) không được bỏ trống ( vị trí: :attribute|sheet :4 )',
                 '*.6.required' => 'Tỉnh thành ( địa chỉ thường trú ) không được bỏ trống ( vị trí: :attribute|sheet :4 )',
+                '*.6.in' => 'Tỉnh thành ( địa chỉ thường trú ) không hợp lệ ( vị trí: :attribute|sheet :4 )',
                 '*.8.required' => 'Phường xã ( địa chỉ tạm trú ) không được bỏ trống ( vị trí: :attribute|sheet :4 )',
                 '*.9.required' => 'Quận huyện ( địa chỉ tạm trú ) không được bỏ trống ( vị trí: :attribute|sheet :4 )',
                 '*.10.required' => 'Tỉnh thành ( địa chỉ tạm trú ) không được bỏ trống ( vị trí: :attribute|sheet :4 )',
+                '*.10.in' => 'Tỉnh thành ( địa chỉ tạm trú ) không hợp lệ ( vị trí: :attribute|sheet :4 )',
 
             ]
         )->validate();
-
         foreach($rows as $row){
             $row = array_map('trim',$row->toArray());
             $pi = PI::where('employee_code',$row[0])->firstOrFail();
-            $province_permanent = Province::where('name_with_type','like','%'.$row[5].'%')->firstOrFail();
-            $district_permanent = District::where('parent_code',$province_permanent->code)->where('name_with_type','like','%'.$row[4].'%')->firstOrFail();
-            $ward_permanent = Ward::where('parent_code',$district_permanent->code)->where('name_with_type','like','%'.$row[3].'%')->firstOrFail();
+            $province_permanent = Province::where('name_with_type','like','%'.$row[5].'%')->first();
+            if($province_permanent == null){
+                $province_permanent = Province::firstOrFail();
 
+            }
 
-            $province_contact = Province::where('name_with_type','like','%'.$row[9].'%')->firstOrFail();
-            $district_contact = District::where('parent_code',$province_contact->code)->where('name_with_type','like','%'.$row[8].'%')->firstOrFail();
-            $ward_contact = Ward::where('parent_code',$district_contact->code)->where('name_with_type','like','%'.$row[7].'%')->firstOrFail();
+            $district_permanent = District::where('parent_code',$province_permanent->code)->where('name_with_type','like','%'.$row[4].'%')->first();
+            if($district_permanent == null){
+                $district_permanent = District::where('parent_code',$province_permanent->code)->first();
+            }
+            $ward_permanent = Ward::where('parent_code',$district_permanent->code)->where('name_with_type','like','%'.$row[3].'%')->first();
+            if($ward_permanent == null){
+                $ward_permanent = Ward::where('parent_code',$district_permanent->code)->first();
+            }
+            $province_contact = Province::where('name_with_type','like','%'.$row[9].'%')->first();
+            if($province_contact == null){
+                $province_contact = Province::firstOrFail();
 
+            }
+            $district_contact = District::where('parent_code',$province_contact->code)->where('name_with_type','like','%'.$row[8].'%')->first();
+            if($district_contact == null){
+                $district_contact = District::where('parent_code',$province_contact->code)->first();
+            }
+            $ward_contact = Ward::where('parent_code',$district_contact->code)->where('name_with_type','like','%'.$row[7].'%')->first();
+            if($ward_contact == null){
+                $ward_contact = Ward::where('parent_code',$district_contact->code)->first();
+            }
 
             if($pi->permanent_address()->exists() && $pi->contact_address()->exists()){
                 // permanent

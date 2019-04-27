@@ -615,11 +615,11 @@ class PIController extends Controller
             } elseif ($pi->admin =='') {
                 if ($request->role_employee == 0) {
                     $pi->employee->is_leader = 0;
-                    $pi->employee->save();
                 } else {
                     $pi->employee->is_leader = 1;
-                    $pi->employee->save();
+
                 }
+                $pi->employee->save();
                 return redirect()->back()->with('message', 'Thay đổi vai trò tài khoản thành công');
             }
         } elseif ($request->role == 1) {
@@ -671,7 +671,7 @@ class PIController extends Controller
                 $import_file = $request->file('import_file');
                 $arr_pi  = (new GetPIImport)->toArray($import_file);
                 $number_of_sheet = 4;
-                $excel_column_length_sheet_1 = 25;
+                $excel_column_length_sheet_1 = 26;
                 $excel_column_length_sheet_2 = 8;
                 $excel_column_length_sheet_3 = 5;
                 $excel_column_length_sheet_4 = 10;

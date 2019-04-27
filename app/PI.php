@@ -34,6 +34,7 @@ class PI extends Model
       'is_activity',
       'contract_type_id',
       'religion_id',
+      'leader_type_id',
     ];
 
     public function degreedetails()
@@ -74,6 +75,10 @@ class PI extends Model
     }
     public function contract_type(){
         return $this->belongsTo('App\ContractType','contract_type_id','id');
+    }
+
+    public function leader_type(){
+        return $this->belongsTo('App\LeaderType','leader_type_id','id');
     }
 
     public function academic_rank()

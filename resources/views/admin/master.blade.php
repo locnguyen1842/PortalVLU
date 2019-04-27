@@ -69,7 +69,7 @@
         <div class="container-fluid">
             @yield('content')
         </div>
-        <footer class="cm-footer"><span class="pull-left">Trang Cổng Tông Tin - Trường Đại Học Văn Lang</span></footer>
+        <footer class="cm-footer"><span class="pull-left">Trang Cổng Thông Tin - Trường Đại Học Văn Lang</span></footer>
     </div>
     <script src="{{asset('js/jquery.mousewheel.min.js')}}"></script>
     <script src="{{asset('js/jquery.cookie.min.js')}}"></script>

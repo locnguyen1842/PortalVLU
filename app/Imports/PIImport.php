@@ -18,6 +18,7 @@ use App\AcademicRank;
 use App\Teacher;
 use App\TeacherTitle;
 use App\TeacherType;
+use App\LeaderType;
 use App\ScientificBackground;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
@@ -78,6 +79,11 @@ class PIImport implements ToCollection, WithStartRow
         $teacher_types_name = [];
         foreach ($teacher_types as $type) {
             array_push($teacher_types_name, strtolower($type->name));
+        }
+        $leader_types = LeaderType::all();
+        $leader_types_name = [];
+        foreach ($leader_types as $type) {
+            array_push($leader_types_name, strtolower($type->name));
         }
 
         //xu ly thay doi index cho array
@@ -179,6 +185,10 @@ class PIImport implements ToCollection, WithStartRow
             '*.23'=> 'nullable',
             '*.24'=> 'nullable',
             '*.25'=> 'nullable',
+            '*.26'=>    [
+                'nullable',
+                Rule::in($leader_types_name),
+            ],
 
         ],
             [
@@ -209,27 +219,41 @@ class PIImport implements ToCollection, WithStartRow
           '*.15.in' => 'Đơn vị không hợp lệ ( vị trí: :attribute|sheet :1 ) ',
           '*.16.required' => 'Loại cán bộ không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
           '*.16.required_if' => 'Loại cán bộ không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
-          '*.16.in' => 'Loại cán bộ không hợp lệ ( vị trí: :attribute|sheet :1 ) ',
+          '*.16.in' => 'Loại cán bộ không hợp lệ. Chỉ được nhập : '.implode(", ", $officer_types_name).' ( vị trí: :attribute|sheet :1 )',
+
         //   '*.17.required' => 'Chức vụ không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
-          '*.17.in' => 'Chức vụ không hợp lệ ( vị trí: :attribute|sheet :1 ) ',
+          '*.17.in' => 'Chức vụ không hợp lệ. Chỉ được nhập : '.implode(", ", $position_types_name).' ( vị trí: :attribute|sheet :1 )',
+
           '*.18.required' => 'Kiêm nhiệm giảng dạy không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
         //   '*.19.required' => 'Loại giảng viên không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
-          '*.19.in' => 'Loại giảng viên không hợp lệ ( vị trí: :attribute|sheet :1 ) ',
+          '*.19.in' => 'Loại giảng viên không hợp lệ. Chỉ được nhập : '.implode(", ", $teacher_types_name).' ( vị trí: :attribute|sheet :1 )',
+
         //   '*.20.required' => 'Chức danh nghề nghiệp không được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
-          '*.20.in' => 'Chức danh nghề nghiệp không hợp lệ ( vị trí: :attribute|sheet :1 ) ',
+          '*.20.in' => 'Chức danh nghề nghiệp không hợp lệ. Chỉ được nhập : '.implode(", ", $teacher_titles_name).' ( vị trí: :attribute|sheet :1 )',
+
           '*.22.required_if' => 'Ngày nghỉ hưu được bỏ trống ( vị trí: :attribute|sheet :1 ) ',
           '*.22.date' => 'Ngày nghỉ hưu không hợp lệ ( vị trí: :attribute|sheet :1 ) ',
+          '*.26.in' => 'Ban cán sự không hợp lệ. Chỉ được nhập : '.implode(", ", $leader_types_name).' ( vị trí: :attribute|sheet :1 )',
+
 
 
         ]
         )->validate();
         foreach ($rows as $row) {
-            // dd($rows);
+            if($row[25] == null ){
+                // dd('a');
+                $leader_type_id = null;
+
+            }else{
+
+                $leader_type_id = LeaderType::where('name','like','%'.$row[25].'%')->firstOrFail()->id;
+
+            }
             $row = array_map('trim',$row->toArray());
             //split first name
-
             $split = explode(" ", $row[1]);
             $first_name =$split[sizeof($split)-1];
+
             //import to db
             $pi = PI::updateOrCreate(
                 [
@@ -255,6 +279,7 @@ class PIImport implements ToCollection, WithStartRow
                     'new' =>0,
                     'unit_id' => Unit::where('unit_code', $row[14])->firstOrFail()->id,
                     'is_activity' => ($row[24] == 'x') ? 0:1,
+                    'leader_type_id' =>  $leader_type_id,
                 ]
             );
 
@@ -319,6 +344,10 @@ class PIImport implements ToCollection, WithStartRow
                     ]
                 );
             }
+            $is_leader = 0;
+            if($leader_type_id == 1 || $leader_type_id == 2){
+                $is_leader = 1;
+            }
 
             $employee = Employee::updateOrCreate(
                 [
@@ -329,6 +358,7 @@ class PIImport implements ToCollection, WithStartRow
                 'personalinformation_id'=> $pi->id,
                 'email' => $pi->email_address,
                 'password' => Hash::make($row[13]),
+                'is_leader' => $is_leader
                 ]
             );
             ScientificBackground::updateOrCreate(
