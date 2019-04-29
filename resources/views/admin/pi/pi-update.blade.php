@@ -288,6 +288,15 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-6">
+                        <label>Loại cán sự</label>
+                        <select required class="form-control" name="leader_type" data-dependent>
+                            <option value="">Chọn loại cán sự</option>
+                            @foreach($leader_types as $leader_type)
+                            <option {{$pi->leader_type_id == $leader_type->id ? 'selected' : ''}} value="{{$leader_type->id}}">{{$leader_type->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-sm-6">
                         <label>Loại cán bộ</label>
                         <select required class="form-control" name="officer_type" data-dependent>
                             <option value="">Chọn loại cán bộ</option>
@@ -302,6 +311,10 @@
                             @endforeach
                         </select>
                     </div>
+                    
+                </div>
+
+                <div class="form-group">
                     <div class="col-sm-6">
                         <label>Chức vụ</label>
                         <select required class="form-control" name="position_type" data-dependent>
@@ -316,10 +329,6 @@
                             @endforeach
                         </select>
                     </div>
-                </div>
-
-                <div class="form-group">
-
                     <div class="col-sm-6">
                         <label>Kiêm nhiệm giảng dạy</label>
                         <div class="radio">
@@ -341,6 +350,8 @@
 
                         </div>
                     </div>
+                </div>
+                <div class="form-group">
                     <div class="col-sm-6">
                         <label>Loại giảng viên</label>
                         <select required class="form-control" name="teacher_type" data-dependent>
@@ -360,9 +371,6 @@
                             @endif
                         </select>
                     </div>
-                </div>
-                <div class="form-group">
-
                     <div class="col-sm-6 dependent-on-teacher">
                         <label>Chức danh nghề nghiệp</label>
                         <select required class="form-control" name="teacher_title" data-dependent>
@@ -378,6 +386,9 @@
                             @endif
                         </select>
                     </div>
+                    
+                </div>
+                <div class="form-group">
                     <div class="col-sm-6 dependent-on-teacher">
                         <label>Danh hiệu</label>
                         @if($pi->teacher()->exists())
@@ -401,58 +412,54 @@
                         @endif
 
                     </div>
-                </div>
-                <div class="form-group">
-
-                        <div class="col-sm-6">
-                                <label>Nghỉ việc</label>
-                                    <div class="radio">
-                                        <label class="col-sm-4">
-                                            <input required type="radio" name="is_activity" value="1" {{$pi->is_activity==1 ? 'checked':''}}>Chưa nghỉ việc
-                                        </label>
-                                        <label class="col-sm-4">
-                                            <input required type="radio" name="is_activity" value="0" {{$pi->is_activity==0  ? 'checked':''}}>Đã nghỉ việc
-                                        </label>
-                                    </div>
-                            </div>
-                            <div class="col-sm-6 dependent-on-teacher">
-                                <label>Nghỉ hưu</label>
+                    <div class="col-sm-6">
+                            <label>Nghỉ việc</label>
                                 <div class="radio">
-                                    @if($pi->teacher()->exists())
-                                        <label class="col-sm-4">
-                                                <input required type="radio" name="is_retired" value="1" {{$pi->teacher->is_retired==1 ? 'checked':''}}>Đã nghỉ hưu
-                                        </label>
                                     <label class="col-sm-4">
-                                        <input required type="radio" name="is_retired" value="0" {{$pi->teacher->is_retired==0 ? 'checked':''}}>Chưa nghỉ hưu
+                                        <input required type="radio" name="is_activity" value="1" {{$pi->is_activity==1 ? 'checked':''}}>Chưa nghỉ việc
                                     </label>
-                                    @else
-                                     <label class="col-sm-4">
-                                                <input required type="radio" name="is_retired" value="1" {{old('is_retired')==1 ? 'checked':''}}>Đã nghỉ hưu
-                                        </label>
                                     <label class="col-sm-4">
-                                        <input required type="radio" name="is_retired" value="0" {{old('is_retired')==0 ? 'checked':''}}>Chưa nghỉ hưu
+                                        <input required type="radio" name="is_activity" value="0" {{$pi->is_activity==0  ? 'checked':''}}>Đã nghỉ việc
                                     </label>
-                                    @endif
-
                                 </div>
                     </div>
-
+                            
 
 
 
 
                     </div>
                     <div class="form-group dependent-on-teacher">
-                        <div class="col-sm-6">
-                            <label>Ngày nghỉ hưu</label>
-                            @if($pi->teacher()->exists())
-                            <input required disabled type="date" min="1900-01-01" class="form-control" name="date_of_retirement" value="{{$pi->teacher->date_of_retirement}}">
-                            @else
-                            <input required disabled type="date" min="1900-01-01" class="form-control" name="date_of_retirement" value="{{old('date_of_retirement')}}">
-
-                            @endif
+                        <div class="col-sm-6 dependent-on-teacher">
+                            <label>Nghỉ hưu</label>
+                            <div class="radio">
+                                @if($pi->teacher()->exists())
+                                    <label class="col-sm-4">
+                                            <input required type="radio" name="is_retired" value="1" {{$pi->teacher->is_retired==1 ? 'checked':''}}>Đã nghỉ hưu
+                                    </label>
+                                <label class="col-sm-4">
+                                    <input required type="radio" name="is_retired" value="0" {{$pi->teacher->is_retired==0 ? 'checked':''}}>Chưa nghỉ hưu
+                                </label>
+                                @else
+                                    <label class="col-sm-4">
+                                            <input required type="radio" name="is_retired" value="1" {{old('is_retired')==1 ? 'checked':''}}>Đã nghỉ hưu
+                                    </label>
+                                <label class="col-sm-4">
+                                    <input required type="radio" name="is_retired" value="0" {{old('is_retired')==0 ? 'checked':''}}>Chưa nghỉ hưu
+                                </label>
+                                @endif
                         </div>
-                    </div>
+                        </div>
+                            <div class="col-sm-6">
+                                <label>Ngày nghỉ hưu</label>
+                                @if($pi->teacher()->exists())
+                                <input required disabled type="date" min="1900-01-01" class="form-control" name="date_of_retirement" value="{{$pi->teacher->date_of_retirement}}">
+                                @else
+                                <input required disabled type="date" min="1900-01-01" class="form-control" name="date_of_retirement" value="{{old('date_of_retirement')}}">
+
+                                @endif
+                            </div>
+                        </div>
                 <div class="form-group" style="margin-bottom:0">
                     <div class="col-sm-offset-2 col-sm-10 text-right">
                         <button type="reset" class="btn btn-default">Hủy Bỏ</button>

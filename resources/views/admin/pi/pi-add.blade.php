@@ -220,7 +220,15 @@
                 </div>
             </div>
             <div class="form-group">
-
+                <div class="col-sm-6">
+                    <label>Loại cán sự</label>
+                    <select required class="form-control" name="leader_type" data-dependent>
+                        <option value="">Chọn loại cán sự</option>
+                        @foreach($leader_types as $leader_type)
+                        <option {{$leader_type->id == old('leader_type') ? 'selected':''}} value="{{$leader_type->id}}">{{$leader_type->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
                 <div class="col-sm-6">
                     <label>Loại cán bộ</label>
                     <select required class="form-control" name="officer_type" data-dependent>
@@ -230,6 +238,9 @@
                         @endforeach
                     </select>
                 </div>
+                
+            </div>
+            <div class="form-group">
                 <div class="col-sm-6">
                     <label>Chức vụ</label>
                     <select required class="form-control" name="position_type" data-dependent>
@@ -239,9 +250,6 @@
                         @endforeach
                     </select>
                 </div>
-            </div>
-            <div class="form-group">
-
                 <div class="col-sm-6">
                     <label>Kiêm nhiệm giảng dạy</label>
                     <div class="radio">
@@ -253,6 +261,9 @@
                         </label>
                     </div>
                 </div>
+                
+            </div>
+            <div class="form-group">
                 <div class="col-sm-6">
                     <label>Loại giảng viên</label>
                     <select required class="form-control" name="teacher_type" data-dependent>
@@ -263,9 +274,6 @@
                         <option value="0">Không có</option>
                     </select>
                 </div>
-            </div>
-            <div class="form-group">
-
                 <div class="col-sm-6 dependent-on-teacher">
                     <label>Chức danh nghề nghiệp</label>
                     <select required class="form-control" name="teacher_title" data-dependent>
@@ -275,6 +283,9 @@
                         @endforeach
                     </select>
                 </div>
+                
+            </div>
+            <div class="form-group">
                 <div class="col-sm-6 dependent-on-teacher">
                     <label>Danh hiệu</label>
                     <div class="checkbox">
@@ -286,9 +297,6 @@
                         </label>
                     </div>
                 </div>
-            </div>
-            <div class="form-group">
-
                 <div class="col-sm-6">
                         <label>Nghỉ việc</label>
                             <div class="radio">
@@ -300,7 +308,11 @@
                                 </label>
                             </div>
                     </div>
-                    <div class="col-sm-6 dependent-on-teacher">
+                    
+            </div>
+
+            <div class="form-group dependent-on-teacher">
+                <div class="col-sm-6 dependent-on-teacher">
                         <label>Nghỉ hưu</label>
                         <div class="radio">
                             <label class="col-sm-4">
@@ -311,10 +323,6 @@
                             </label>
                         </div>
                     </div>
-            </div>
-
-            <div class="form-group dependent-on-teacher">
-
                 <div class="col-sm-6">
                     <label>Ngày nghỉ hưu</label>
                     <input required type="date" min="1900-01-01" class="form-control" name="date_of_retirement" value="{{old('date_of_retirement')}}">

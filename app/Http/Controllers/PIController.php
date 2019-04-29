@@ -34,6 +34,7 @@ use App\TeacherType;
 use App\Teacher;
 use App\ContractType;
 use App\Religion;
+use App\LeaderType;
 
 class PIController extends Controller
 {
@@ -74,10 +75,11 @@ class PIController extends Controller
         $teacher_titles = TeacherTitle::all();
         $contract_types = ContractType::all();
         $religions = Religion::all();
+        $leader_types = LeaderType::all();
 
         // $wards = Ward::all('name_with_type','code');
         $provinces = Province::all('name_with_type', 'code');
-        return view('admin.pi.pi-add', compact('nations', 'units', 'provinces', 'officer_types', 'position_types', 'teacher_types', 'teacher_titles', 'contract_types','religions'));
+        return view('admin.pi.pi-add', compact('nations', 'units', 'provinces', 'officer_types', 'position_types', 'teacher_types', 'teacher_titles', 'contract_types','religions','leader_types'));
     }
 
     public function getDistricts()
@@ -132,6 +134,7 @@ class PIController extends Controller
             'home_town'=> 'required',
             'contract_type'=> 'required',
             'religion'=> 'required',
+            'leader_type'=> 'required',
           ],
           [
             'employee_code.required'=> 'Mã giảng viên không được bỏ trống',
@@ -181,6 +184,7 @@ class PIController extends Controller
             'home_town.required' =>'Quê quán không được bỏ trống',
             'contract_type.required' =>'Loại hợp đồng không được bỏ trống',
             'religion.required' =>'Tôn giáo không được bỏ trống',
+            'leader_type.required' =>'Loại cán sự không được bỏ trống',
 
           ]
       );
@@ -208,6 +212,10 @@ class PIController extends Controller
         $pi->identity_card= $request->identity_card;
         $pi->date_of_issue= $request->date_of_issue;
         $pi->place_of_issue= $request->place_of_issue;
+        $pi->leader_type_id= $request->leader_type;
+        if($request->leader_type = 1 || $request->leader_type = 2){
+            $pi->employee->is_leader = 1;
+        }
         $pi->show = 1;
         $pi->new = 0;
         $pi->unit_id = $request->unit;
@@ -293,6 +301,7 @@ class PIController extends Controller
             }
             $teacher->save();
         }
+        
 
         return redirect()->back()->with('message', 'Thêm thành công');
     }
@@ -309,8 +318,9 @@ class PIController extends Controller
         $teacher_titles = TeacherTitle::all();
         $religions = Religion::all();
         $contract_types = ContractType::all();
+        $leader_types = LeaderType::all();
         $provinces = Province::all('name_with_type','code');
-        return view('admin.pi.pi-update', compact('pi', 'nations', 'units', 'provinces','officer_types','position_types','teacher_types','teacher_titles','religions','contract_types'));
+        return view('admin.pi.pi-update', compact('pi', 'nations', 'units', 'provinces','officer_types','position_types','teacher_types','teacher_titles','religions','contract_types','leader_types'));
     }
     //post date update information
     public function postupdate(Request $request, $id)
@@ -352,6 +362,8 @@ class PIController extends Controller
               'home_town'=> 'required',
               'contract_type'=> 'required',
               'religion'=> 'required',
+              'leader_type'=> 'required',
+
           ],
           [
 
@@ -399,7 +411,9 @@ class PIController extends Controller
               'home_town.required' =>'Quê quán không được bỏ trống',
               'contract_type.required' =>'Loại hợp đồng không được bỏ trống',
               'religion.required' =>'Tôn giáo không được bỏ trống',
-          ]
+              'leader_type.required' =>'Loại cán sự không được bỏ trống',
+          
+            ]
         );
         //post data
         $pi->full_name= $request->full_name;
@@ -420,6 +434,10 @@ class PIController extends Controller
         $pi->identity_card= $request->identity_card;
         $pi->date_of_issue= $request->date_of_issue;
         $pi->place_of_issue= $request->place_of_issue;
+        $pi->leader_type_id= $request->leader_type;
+        if($request->leader_type = 1 || $request->leader_type = 2){
+            $pi->employee->is_leader =1;
+        }
         $pi->unit_id = $request->unit;
         $pi->is_activity = $request->is_activity;
 

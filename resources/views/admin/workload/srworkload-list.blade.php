@@ -303,7 +303,7 @@
                                     <span class="mdi mdi-close"></span>
                                 </span>
                             </a>
-                            <a href="{{route('admin.workload.delete',$item->id)}}" data-toggle="tooltip" data-placement="top"
+                            <a href="{{route('admin.srworkload.delete',$item->id)}}" data-toggle="tooltip" data-placement="top"
                                 title="" data-original-title="Xóa" class="delete_workload tooltip-test ml-10">
                                 <span class=""><i class="fa fa-lg fa-trash text-danger"></i>
                                     <span class="mdi mdi-close"></span>
