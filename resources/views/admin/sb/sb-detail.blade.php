@@ -118,10 +118,18 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                @if($sb->pi->contact_address()->exists())
                                 <div class="col-sm-6">
-                                    <label for="inputEmail3" class="col-sm-4">Chỗ ở riêng hoặc địa chỉ liên lạc</label>
-                                    <span for="" class="col-sm-8 text-truncate">{{$sb->pi->contact_address->address_content}}, {{$sb->pi->contact_address->ward->path_with_type}}</span>
-                                </div>
+                                        <label for="inputEmail3" class="col-sm-4">Chỗ ở riêng hoặc địa chỉ liên lạc</label>
+                                        <span for="" class="col-sm-8 text-truncate">{{$sb->pi->contact_address->address_content}}, {{$sb->pi->contact_address->ward->path_with_type}}</span>
+                                    </div>
+                                @else
+                                <div class="col-sm-6">
+                                        <label for="inputEmail3" class="col-sm-4">Chỗ ở riêng hoặc địa chỉ liên lạc</label>
+                                        <span for="" class="col-sm-8 text-truncate"></span>
+                                    </div>
+                                @endif
+
                                 <div class="col-sm-6">
                                     <label for="inputEmail3" class="col-sm-4">Email</label>
                                     <span for="" class="col-sm-8 text-truncate">{{$sb->pi->email_address}}</span>

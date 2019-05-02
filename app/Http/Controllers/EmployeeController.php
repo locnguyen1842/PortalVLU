@@ -387,6 +387,7 @@ class EmployeeController extends Controller
     {
         $pi = PI::findOrFail($id);
         $this->authorize('actAsFacultyLeader', $pi);
+        $this->authorize('onlyAccessWithSameFaculty', $pi);
 
         $dh_count = $pi->degreedetails->where('degree_id', 1)->count();
         $ths_count = $pi->degreedetails->where('degree_id', 2)->count();
@@ -399,6 +400,7 @@ class EmployeeController extends Controller
     {
         $pi = PI::findOrFail($id);
         $this->authorize('actAsFacultyLeader', $pi);
+        $this->authorize('onlyAccessWithSameFaculty', $pi);
 
         $workloads_own_user = Workload::where('personalinformation_id', $id);
         $max_year = WorkloadSession::max('end_year');
@@ -447,6 +449,7 @@ class EmployeeController extends Controller
 
         $pi = PI::findOrFail($id);
         $this->authorize('actAsFacultyLeader', $pi);
+        $this->authorize('onlyAccessWithSameFaculty', $pi);
 
         $sb = ScientificBackground::where('personalinformation_id', $pi->id)->firstOrFail();
         return view('employee.faculty.fa-sb-detail', compact('id', 'sb','pi'));
@@ -454,6 +457,7 @@ class EmployeeController extends Controller
     public function getfacultydegreelist($id){
         $pi = PI::findOrFail($id);
         $this->authorize('actAsFacultyLeader', $pi);
+        $this->authorize('onlyAccessWithSameFaculty', $pi);
         $degrees = DegreeDetail::where('personalinformation_id',$pi->id)->get();
 
 
@@ -538,6 +542,8 @@ class EmployeeController extends Controller
 
     public function getFaSRWorkload($pi_id){
         $pi = PI::findOrFail($pi_id);
+        $this->authorize('actAsFacultyLeader', $pi);
+        $this->authorize('onlyAccessWithSameFaculty', $pi);
         $workloads_own_user = ScientificResearchWorkload::where('personalinformation_id', $pi->id);
         $max_year = WorkloadSession::max('end_year');
         $workload_session = WorkloadSession::orderBy('start_year', 'desc')->get();
@@ -560,5 +566,5 @@ class EmployeeController extends Controller
 
         return view('employee.faculty.fa-srworkload-list', compact('workload_session', 'workload_session_current', 'workloads', 'year_workload', 'pi'));
     }
-    
+
 }

@@ -13,11 +13,11 @@
 <div class="panel panel-default mt-20">
     <div class="panel-heading">
         <div class="panel-heading">Thống kê - Báo cáo<br>
-            @can('cud', $pis->first())
+            
             <a href="{{route('admin.statistic.download')}}">
                 <button type="button" name="button" class="btn btn-xs btn-success">Xuất Excel</button>
             </a>
-            @endcan
+            
         </div>
     </div>
     <div class="panel-body">

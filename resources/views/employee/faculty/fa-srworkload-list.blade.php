@@ -6,7 +6,7 @@
         <ol class="breadcrumb">
             {{-- <li><a href="#">Home</a></li> --}}
                 <li class=""><a href="{{route('employee.faculty.index')}}">Quản lý khoa</a></li>
-             <li class=""><a href="{{route('admin.pi.detail',$pi->id)}}">Thông tin cá nhân - {{App\PI::find($pi->id)->employee_code}}</a></li>
+             <li class=""><a href="{{route('employee.faculty.detail',$pi->id)}}">Thông tin cá nhân - {{App\PI::find($pi->id)->employee_code}}</a></li>
             <li class="active">Danh sách khối lượng NCKH</li>
         </ol>
     </div>

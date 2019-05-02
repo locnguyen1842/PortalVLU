@@ -29,5 +29,13 @@ class PIPolicy
         }
     }
 
+    public function onlyAccessWithSameFaculty($employee , PI $pi){
+        if($employee->pi->unit_id == $pi->unit_id){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 
 }

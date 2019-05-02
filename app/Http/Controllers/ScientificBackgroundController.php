@@ -535,7 +535,20 @@ class ScientificBackgroundController extends Controller
 
     //   return view('admin.sb.sb-print', compact('pi_id', 'sb', 'nations', 'units', 'topic_levels'));
         $pdf = PDF::loadView('admin.sb.sb-print', compact('pi_id', 'sb', 'nations', 'units', 'topic_levels'));
-        return $pdf->stream('ly-lich-khoa-hoc.pdf');
+        return $pdf->stream('ly-lich-khoa-hoc-'.$pi_id.'.pdf');
+    }
+    public function indexPrintFaculty($pi_id)
+    {
+        $pi = PI::findOrFail(Auth::guard('employee')->user()->personalinformation_id);
+        $this->authorize('actAsFacultyLeader', $pi);
+        $sb = ScientificBackground::where('personalinformation_id', $pi_id)->firstOrFail();
+        $nations = Nation::all();
+        $units = Unit::all();
+        $topic_levels = SBTopicLevel::all();
+
+    //   return view('admin.sb.sb-print', compact('pi_id', 'sb', 'nations', 'units', 'topic_levels'));
+        $pdf = PDF::loadView('employee.faculty.fa-sb-print', compact('pi_id', 'sb', 'nations', 'units', 'topic_levels'));
+        return $pdf->stream('ly-lich-khoa-hoc-'.$pi_id.'.pdf');
     }
     public function indexPrint()
     {

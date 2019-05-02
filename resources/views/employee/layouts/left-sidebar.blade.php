@@ -24,7 +24,7 @@
                             <a href="{{route('employee.confirmation.index')}}" class=" sf-notepad">Yêu cầu xác nhận</a>
                         </li>
 
-                    @can('actAsFacultyLeader',App\PI::first())
+                    @can('actAsFacultyLeader',Auth::guard('employee')->user()->pi)
                     <li class="{{url()->current() == route('employee.faculty.index') ? 'active':''}}">
                         <a href="{{route('employee.faculty.index')}}" class="sf-profile-group">Quản lý khoa</a>
                     </li>
