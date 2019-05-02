@@ -32,13 +32,13 @@
                         <input required type="text" class="form-control" name="employee_code" placeholder="Nhập mã nhân viên" value="{{$pi->employee_code}}" readonly="readonly">
                     </div>
                     <div class="col-sm-6">
-                        <label>Họ và tên</label>
+                        <label>Họ và tên<span style="color: red">*</span></label>
                         <input required type="text" maxlength="60" class="form-control" name="full_name" placeholder="Nhập họ và tên" value="{{$pi->full_name}}">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-6">
-                      <label>Dân tộc</label>
+                      <label>Dân tộc<span style="color: red">*</span></label>
                       <select required class="form-control" name="nation">
                           <option value="">Chọn dân tộc</option>
                           @foreach($nations as $nation)
@@ -47,7 +47,7 @@
                       </select>
                     </div>
                     <div class="col-sm-6">
-                      <label>Tôn giáo</label>
+                      <label>Tôn giáo<span style="color: red">*</span></label>
                       <select required class="form-control" name="religion">
                           <option value="">Chọn tôn giáo</option>
                           @foreach($religions as $religion)
@@ -59,7 +59,7 @@
                 </div>
                 <div class="form-group">
                   <div class="col-sm-6">
-                      <label>Giới tính</label>
+                      <label>Giới tính<span style="color: red">*</span></label>
                       <div class="radio">
                           <label class="col-sm-4">
                               <input required type="radio" name="gender" value="0" {{$pi->gender ==0 ? "checked":""}}>Nam
@@ -70,7 +70,7 @@
                       </div>
                   </div>
                     <div class="col-sm-6">
-                        <label>Ngày sinh</label>
+                        <label>Ngày sinh<span style="color: red">*</span></label>
                         <input required required type="date" min="1900-01-01"  class="form-control" name="date_of_birth" value="{{$pi->date_of_birth}}">
                     </div>
 
@@ -78,11 +78,11 @@
 
                 <div class="form-group">
                   <div class="col-sm-6">
-                      <label>Nơi sinh</label>
+                      <label>Nơi sinh<span style="color: red">*</span></label>
                       <input required type="text" maxlength="100" class="form-control" name="place_of_birth" placeholder="Nhập nơi sinh" value="{{$pi->place_of_birth}}">
                   </div>
                     <div class="col-sm-6">
-                        <label>Số điện thoại</label>
+                        <label>Số điện thoại<span style="color: red">*</span></label>
                         <input required type="text" class="form-control" name="phone_number" placeholder="Nhập số điện thoại" value="{{$pi->phone_number}}">
                     </div>
                 </div>
@@ -97,7 +97,7 @@
                           </div>
                           <div class="form-group">
                               <div class="col-sm-4">
-                                  <label for="">Tỉnh/Thành phố </label>
+                                  <label for="">Tỉnh/Thành phố <span style="color: red">*</span></label>
                                   <select required class="form-control" id="province_1" name="province_1">
                                       <option value="">Chọn tỉnh/thành phố</option>
                                       @foreach($provinces as $item)
@@ -106,13 +106,13 @@
                                   </select>
                               </div>
                               <div class="col-sm-4">
-                                  <label for="">Quận/huyện</label>
+                                  <label for="">Quận/huyện<span style="color: red">*</span></label>
                                   <select required class="form-control" id="district_1" name="district_1">
                                       <option value="">Vui lòng chọn tỉnh/thành phố</option>
                                   </select>
                               </div>
                               <div class="col-sm-4">
-                                  <label for="">Phường/xã</label>
+                                  <label for="">Phường/xã<span style="color: red">*</span></label>
                                   <select required class="form-control" id="ward_1" name="ward_1">
                                       <option value="">Vui lòng chọn quận/huyện</option>
                                   </select>
@@ -127,7 +127,7 @@
                           </div>
                           <div class="form-group">
                               <div class="col-sm-4">
-                                  <label for="">Tỉnh/Thành phố </label>
+                                  <label for="">Tỉnh/Thành phố<span style="color: red">*</span> </label>
                                   <select required class="form-control" id="province_1" name="province_1">
                                       <option value="">Chọn tỉnh/thành phố</option>
                                       @foreach($provinces as $item)
@@ -136,13 +136,13 @@
                                   </select>
                               </div>
                               <div class="col-sm-4">
-                                  <label for="">Quận/huyện</label>
+                                  <label for="">Quận/huyện<span style="color: red">*</span></label>
                                   <select required class="form-control" id="district_1" name="district_1">
                                       <option value="">Vui lòng chọn tỉnh/thành phố</option>
                                   </select>
                               </div>
                               <div class="col-sm-4">
-                                  <label for="">Phường/xã</label>
+                                  <label for="">Phường/xã<span style="color: red">*</span></label>
                                   <select required class="form-control" id="ward_1" name="ward_1">
                                       <option value="">Vui lòng chọn quận/huyện</option>
                                   </select>
@@ -164,22 +164,22 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-4">
-                                    <label for="">Tỉnh/Thành phố </label>
+                                    <label for="">Tỉnh/Thành phố<span style="color: red">*</span></label>
                                     <select required class="form-control" id="province_2" name="province_2">
-                                        <option value="">Chọn tỉnh/thành phố</option>
+                                        <option value="">Chọn tỉnh/thành phố<span style="color: red">*</span></option>
                                         @foreach($provinces as $item)
                                         <option {{ $item->code == $pi->contact_address->province->code ? 'selected':'' }} value="{{$item->code}}">{{$item->name_with_type}}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="col-sm-4">
-                                    <label for="">Quận/huyện</label>
+                                    <label for="">Quận/huyện<span style="color: red">*</span></label>
                                     <select required class="form-control" id="district_2" name="district_2">
                                         <option value="">Vui lòng chọn tỉnh/thành phố</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-4">
-                                    <label for="">Phường/xã</label>
+                                    <label for="">Phường/xã<span style="color: red">*</span></label>
                                     <select required class="form-control" id="ward_2" name="ward_2">
                                         <option value="">Vui lòng chọn quận/huyện</option>
                                     </select>
@@ -194,22 +194,22 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-4">
-                                <label for="">Tỉnh/Thành phố </label>
+                                <label for="">Tỉnh/Thành phố<span style="color: red">*</span> </label>
                                 <select required class="form-control" id="province_2" name="province_2">
-                                    <option value="">Chọn tỉnh/thành phố</option>
+                                    <option value="">Chọn tỉnh/thành phố<span style="color: red">*</span></option>
                                     @foreach($provinces as $item)
                                     <option value="{{$item->code}}">{{$item->name_with_type}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-sm-4">
-                                <label for="">Quận/huyện</label>
+                                <label for="">Quận/huyện<span style="color: red">*</span></label>
                                 <select required class="form-control" id="district_2" name="district_2">
                                     <option value="">Vui lòng chọn tỉnh/thành phố</option>
                                 </select>
                             </div>
                             <div class="col-sm-4">
-                                <label for="">Phường/xã</label>
+                                <label for="">Phường/xã<span style="color: red">*</span></label>
                                 <select required class="form-control" id="ward_2" name="ward_2">
                                     <option value="">Vui lòng chọn quận/huyện</option>
                                 </select>
@@ -222,11 +222,11 @@
 
                 <div class="form-group">
                     <div class="col-sm-6">
-                        <label>Địa chỉ Email</label>
+                        <label>Địa chỉ Email<span style="color: red">*</span></label>
                         <input required type="text" class="form-control" name="email_address" placeholder="Nhập địa chỉ Email" value="{{$pi->email_address}}">
                     </div>
                     <div class="col-sm-6">
-                        <label>Quê quán</label>
+                        <label>Quê quán<span style="color: red">*</span></label>
                         <input required type="text" class="form-control" name="home_town" placeholder="Nhập quê quán" value="{{$pi->home_town}}">
                     </div>
                 </div>
@@ -234,16 +234,16 @@
                 <div class="form-group">
 
                     <div class="col-sm-6">
-                        <label>Loại hợp đồng</label>
+                        <label>Loại hợp đồng<span style="color: red">*</span></label>
                         <select required class="form-control" name="contract_type" data-dependent>
-                            <option value="">Chọn loại hợp đồng</option>
+                            <option value="">Chọn loại hợp đồng<span style="color: red">*</span></option>
                             @foreach($contract_types as $contract_type)
                             <option {{$pi->contract_type_id == $contract_type->id?'selected':'' }} value="{{$contract_type->id}}">{{$contract_type->name}}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="col-sm-6">
-                        <label>Chức vụ</label>
+                        <label>Chức vụ<span style="color: red">*</span></label>
                         <input required type="text" class="form-control" name="position" placeholder="Nhập chức vụ" value="{{$pi->position}}">
                     </div>
                 </div>
@@ -251,18 +251,18 @@
                 <div class="form-group">
 
                     <div class="col-sm-6">
-                        <label>Ngày tuyển dụng</label>
+                        <label>Ngày tuyển dụng<span style="color: red">*</span></label>
                         <input required required type="date" min="1900-01-01"  class="form-control" name="date_of_recruitment" value="{{$pi->date_of_recruitment}}">
                     </div>
                     <div class="col-sm-6">
-                        <label>Chức danh chuyên môn</label>
+                        <label>Chức danh chuyên môn<span style="color: red">*</span></label>
                         <input required type="text" class="form-control" name="professional_title" placeholder="Nhập chức danh chuyên môn" value="{{$pi->professional_title}}">
                     </div>
                 </div>
                 <div class="form-group">
 
                     <div class="col-sm-6">
-                        <label>Đơn vị</label>
+                        <label>Đơn vị<span style="color: red">*</span></label>
                         <select required class="form-control" name="unit">
                             <option value="">Chọn đơn vị</option>
                             @foreach($units as $unit)
@@ -271,24 +271,24 @@
                         </select>
                     </div>
                     <div class="col-sm-6">
-                        <label>Chứng minh nhân dân</label>
+                        <label>Chứng minh nhân dân<span style="color: red">*</span></label>
                         <input required type="text" class="form-control" name="identity_card" placeholder="Nhập chứng minh nhân dân" value="{{$pi->identity_card}}">
                     </div>
                 </div>
                 <div class="form-group">
 
                   <div class="col-sm-6">
-                      <label>Ngày cấp</label>
+                      <label>Ngày cấp<span style="color: red">*</span></label>
                       <input required required type="date" min="1900-01-01"  class="form-control" name="date_of_issue" value="{{$pi->date_of_issue}}">
                   </div>
                   <div class="col-sm-6">
-                      <label>Nơi cấp</label>
+                      <label>Nơi cấp<span style="color: red">*</span></label>
                       <input required type="text" maxlength="100" class="form-control" name="place_of_issue" placeholder="Nhập nơi cấp" value="{{$pi->place_of_issue   }}">
                   </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-6">
-                        <label>Loại cán sự</label>
+                        <label>Loại cán sự<span style="color: red">*</span></label>
                         <select required class="form-control" name="leader_type" data-dependent>
                             <option value="">Chọn loại cán sự</option>
                             @foreach($leader_types as $leader_type)
@@ -297,7 +297,7 @@
                         </select>
                     </div>
                     <div class="col-sm-6">
-                        <label>Loại cán bộ</label>
+                        <label>Loại cán bộ<span style="color: red">*</span></label>
                         <select required class="form-control" name="officer_type" data-dependent>
                             <option value="">Chọn loại cán bộ</option>
 
@@ -316,7 +316,7 @@
 
                 <div class="form-group">
                     <div class="col-sm-6">
-                        <label>Chức vụ</label>
+                        <label>Chức vụ<span style="color: red">*</span></label>
                         <select required class="form-control" name="position_type" data-dependent>
                             <option value="">Chọn chức vụ</option>
                             @foreach($position_types as $position_type)
@@ -330,7 +330,7 @@
                         </select>
                     </div>
                     <div class="col-sm-6">
-                        <label>Kiêm nhiệm giảng dạy</label>
+                        <label>Kiêm nhiệm giảng dạy<span style="color: red">*</span></label>
                         <div class="radio">
                             @if($pi->officer()->exists())
                             <label class="col-sm-4">
@@ -353,7 +353,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-6">
-                        <label>Loại giảng viên</label>
+                        <label>Loại giảng viên<span style="color: red">*</span></label>
                         <select required class="form-control" name="teacher_type" data-dependent>
                             <option value="">Chọn loại giảng viên</option>
                             @if($pi->teacher()->exists())
@@ -372,7 +372,7 @@
                         </select>
                     </div>
                     <div class="col-sm-6 dependent-on-teacher">
-                        <label>Chức danh nghề nghiệp</label>
+                        <label>Chức danh nghề nghiệp<span style="color: red">*</span></label>
                         <select required class="form-control" name="teacher_title" data-dependent>
                             <option value="">Chọn chức danh</option>
                             @if($pi->teacher()->exists())
@@ -413,7 +413,7 @@
 
                     </div>
                     <div class="col-sm-6">
-                            <label>Nghỉ việc</label>
+                            <label>Nghỉ việc<span style="color: red">*</span></label>
                                 <div class="radio">
                                     <label class="col-sm-4">
                                         <input required type="radio" name="is_activity" value="1" {{$pi->is_activity==1 ? 'checked':''}}>Chưa nghỉ việc
@@ -431,7 +431,7 @@
                     </div>
                     <div class="form-group dependent-on-teacher">
                         <div class="col-sm-6 dependent-on-teacher">
-                            <label>Nghỉ hưu</label>
+                            <label>Nghỉ hưu<span style="color: red">*</span></label>
                             <div class="radio">
                                 @if($pi->teacher()->exists())
                                     <label class="col-sm-4">
@@ -451,7 +451,7 @@
                         </div>
                         </div>
                             <div class="col-sm-6">
-                                <label>Ngày nghỉ hưu</label>
+                                <label>Ngày nghỉ hưu<span style="color: red">*</span></label>
                                 @if($pi->teacher()->exists())
                                 <input required disabled type="date" min="1900-01-01" class="form-control" name="date_of_retirement" value="{{$pi->teacher->date_of_retirement}}">
                                 @else

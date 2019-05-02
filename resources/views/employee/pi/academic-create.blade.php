@@ -26,7 +26,7 @@
                 {{csrf_field()}}
                 <div class="form-group">
                     <div class="col-sm-6">
-                        <label>Bằng cấp</label>
+                        <label>Bằng cấp<span style="color: red">*</span></label>
                         <select required class="form-control" name="academic_rank_type">
                           <option value="">Chọn học hàm</option>
                             @foreach($academic_rank_types as $item)
@@ -36,14 +36,14 @@
                         </select>
                     </div>
                     <div class="col-sm-6">
-                        <label>Chuyên ngành</label>
+                        <label>Chuyên ngành<span style="color: red">*</span></label>
                         <input required type="text" maxlength="100" class="form-control" name="specialized" value="{{old('specialized')}}" placeholder="Nhập chuyên ngành">
 
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-6 pull-right">
-                        <label>Ngày công nhận</label>
+                        <label>Ngày công nhận<span style="color: red">*</span></label>
                     <input required type="date" min="1900-01-01" class="form-control" name="date_of_recognition" value="{{old('date_of_recognition')}}">
                     </div>
                 </div>

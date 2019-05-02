@@ -32,7 +32,7 @@
                         <input type="text" readonly class="form-control" name="Mã nhân viên" value="{{$pi->employee_code}}">
                     </div>
                     <div class="col-sm-6">
-                        <label>Bằng cấp</label>
+                        <label>Bằng cấp<span style="color: red">*</span></label>
                         <select required class="form-control" name="degree">
                             <option value="">Chọn bằng cấp</option>
                             @foreach($degrees as $d)
@@ -43,11 +43,11 @@
                 </div>
                 <div class="form-group">
                   <div class="col-sm-6">
-                      <label>Chuyên ngành</label>
+                      <label>Chuyên ngành<span style="color: red">*</span></label>
                       <input required type="text" maxlength="100" class="form-control" name="specialized" value="{{old('specialized')}}" placeholder="Nhập chuyên ngành">
                   </div>
                     <div class="col-sm-6">
-                        <label>Khối ngành</label>
+                        <label>Khối ngành<span style="color: red">*</span></label>
                         <select required class="form-control" name="industry">
                             <option value="">Chọn khối ngành</option>
                             @foreach($industries as $i)
@@ -58,23 +58,23 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-6">
-                        <label>Ngày cấp</label>
+                        <label>Ngày cấp<span style="color: red">*</span></label>
                         <input required type="date" min="1900-01-01" class="form-control" name="date_of_issue" value="{{old('date_of_issue')}}">
                     </div>
 
                     <div class="col-sm-6">
-                            <label>Nước cấp</label>
+                            <label>Nước cấp<span style="color: red">*</span></label>
                             <input required type="text" maxlength="100" class="form-control" name="nation_of_issue_id" placeholder="Nhập nước cấp" value="{{old('nation_of_issue_id')}}">
 
                         </div>
                 </div>
                 <div class="form-group">
                         <div class="col-sm-6">
-                                <label>Nơi cấp</label>
+                                <label>Nơi cấp<span style="color: red">*</span></label>
                                 <input required type="text" maxlength="100" class="form-control" name="place_of_issue" placeholder="Nhập nơi cấp" value="{{old('place_of_issue')}}">
                             </div>
                     <div class="col-sm-6">
-                        <label>Loại bằng</label>
+                        <label>Loại bằng<span style="color: red">*</span></label>
                         <input required type="text" maxlength="100" class="form-control" name="degree_type" placeholder="Nhập loại bằng" value="{{old('degree_type')}}">
                     </div>
                 </div>

@@ -93,7 +93,14 @@
                                 @if($workloads->count() >0)
                                 <tr>
                                     @foreach ($workloads as $item)
-                                    <td>{{$item->name_of_work}}</td>
+                                    <td>
+
+                                        <a href="{{route('employee.srworkload.detail',$item->id)}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="Chi tiết" href="javascript:" class="search_tag tooltip-test">
+                                            <span class="badge badge-danger">{{$item->name_of_work}}
+                                                <span class="mdi mdi-close"></span>
+                                            </span>
+                                        </a>
+                                    </td>
                                     <td>{{$item->detail_of_work}}</td>
                                     <td>{{$item->explain_of_work}}</td>
                                     <td>{{$item->unit_of_work}}</td>

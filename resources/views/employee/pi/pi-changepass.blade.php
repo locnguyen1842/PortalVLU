@@ -29,17 +29,17 @@
                         <input readonly type="text" class="form-control" name="username" value="{{$employee->username}}">
                     </div>
                     <div class="col-sm-6">
-                        <label>Mật khẩu hiện tại</label>
+                        <label>Mật khẩu hiện tại<span style="color: red">*</span></label>
                         <input type="password" maxlength="50" class="form-control" name="password" placeholder="nhập mật khẩu hiện tại" >
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-6">
-                        <label>Mật khẩu mới</label>
+                        <label>Mật khẩu mới<span style="color: red">*</span></label>
                         <input type="password" maxlength="50" class="form-control" name="newpassword" placeholder="nhập mật khẩu mới" >
                     </div>
                     <div class="col-sm-6">
-                        <label>Xác nhận mật khẩu mới</label>
+                        <label>Xác nhận mật khẩu mới<span style="color: red">*</span></label>
                         <input type="password" maxlength="50" class="form-control" name="comfirmpassword" placeholder="nhập lại mật khẩu mới" >
                     </div>
                 </div>

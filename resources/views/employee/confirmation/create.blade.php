@@ -67,7 +67,7 @@
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     @if($pi->permanent_address()->exists() && $pi->contact_address()->exists())
-                                    <label for="">Địa chỉ (sẽ in ra trong giấy xác nhận)</label>
+                                    <label for="">Địa chỉ<span style="color: red">*</span> (sẽ in ra trong giấy xác nhận)</label>
                                     <select required class="form-control" name="address" id="">
                                         <option value="">Chọn địa chỉ</option>
                                         <option {{ $pi->contact_address->id == old('address') ? 'selected':'' }}

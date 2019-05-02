@@ -5,8 +5,8 @@
     <div class="cm-breadcrumb-container">
         <ol class="breadcrumb">
             {{-- <li><a href="#">Home</a></li> --}}
-            <li class=""><a href="{{route('employee.workload.index')}}">Quản lý khối lượng NCKH</a></li>
-            <li class="active">Chi tiết khối lượng NCKH - {{$srworkload->pi->employee_code}}</li>
+            <li class=""><a href="{{route('employee.srworkload.index')}}">danh sách khối lượng NCKH</a></li>
+            <li class="active">Chi tiết khối lượng NCKH - {{ $srworkload->pi->employee_code}}</li>
         </ol>
     </div>
 </div>
@@ -19,12 +19,9 @@
                 <div class="col-sm-12 form-horizontal">
                     <div class="panel panel-default">
                         <div class="panel-heading">Thông tin nghiên cứu khoa học<br>
-                            @can('cud',App\PI::first())
-
-                            <a href="{{route('employee.srworkload.update',$srworkload->id)}}">
+                            {{--  <a href="{{route('employee.srworkload.update',$srworkload->id)}}">
                                 <button type="button" name="button" class="btn btn-xs btn-primary">Cập nhật</button>
-                            </a>
-                            @endcan
+                            </a>  --}}
                         </div>
                         <div class="panel-body">
                             <div class="form-group">
