@@ -134,7 +134,6 @@ class PIController extends Controller
             'home_town'=> 'required',
             'contract_type'=> 'required',
             'religion'=> 'required',
-            'leader_type'=> 'required',
           ],
           [
             'employee_code.required'=> 'Mã giảng viên không được bỏ trống',
@@ -184,11 +183,9 @@ class PIController extends Controller
             'home_town.required' =>'Quê quán không được bỏ trống',
             'contract_type.required' =>'Loại hợp đồng không được bỏ trống',
             'religion.required' =>'Tôn giáo không được bỏ trống',
-            'leader_type.required' =>'Loại cán sự không được bỏ trống',
-
           ]
       );
-        //add data
+        //add data 
         $pi = new PI;
         $pi->employee_code= strtoupper($request->employee_code);
 
@@ -362,7 +359,6 @@ class PIController extends Controller
               'home_town'=> 'required',
               'contract_type'=> 'required',
               'religion'=> 'required',
-              'leader_type'=> 'required',
 
           ],
           [
@@ -411,7 +407,6 @@ class PIController extends Controller
               'home_town.required' =>'Quê quán không được bỏ trống',
               'contract_type.required' =>'Loại hợp đồng không được bỏ trống',
               'religion.required' =>'Tôn giáo không được bỏ trống',
-              'leader_type.required' =>'Loại cán sự không được bỏ trống',
           
             ]
         );

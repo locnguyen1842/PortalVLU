@@ -237,14 +237,7 @@
                       <label>Nơi cấp<span style="color: red">*</span></label>
                       <input required type="text" class="form-control" name="place_of_issue" placeholder="Nhập nơi cấp" value="{{$pi->place_of_issue   }}">
                   </div>
-                    <div class="col-sm-6">
-                        <label>Ngày cấp<span style="color: red">*</span></label>
-                        <input required required type="date" min="1900-01-01" class="form-control" name="date_of_issue" value="{{$pi->date_of_issue}}">
-                    </div>
-
                 </div>
-
-
                 <div class="form-group">
                     <div class="col-sm-6">
                         <label>Ngày cấp<span style="color: red">*</span></label>

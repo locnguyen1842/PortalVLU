@@ -294,6 +294,7 @@
                             @foreach($leader_types as $leader_type)
                             <option {{$pi->leader_type_id == $leader_type->id ? 'selected' : ''}} value="{{$leader_type->id}}">{{$leader_type->name}}</option>
                             @endforeach
+                            <option value="">Không</option>
                         </select>
                     </div>
                     <div class="col-sm-6">
