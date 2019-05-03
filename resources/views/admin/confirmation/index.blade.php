@@ -105,7 +105,12 @@
                         <td>{{$item->pi->full_name}}</td>
                         <td>{{$item->confirmation}}</td>
                         <td>{{date('d-m-Y',strtotime($item->date_of_request))}}</td>
-                        <td>{{$item->is_confirm_income == 1 ? 'Có' : 'Không'}}</td>
+                        @if($item->is_confirm_income == 1)
+                        <td><i class="fa fa-fw fa-check text-success"></i></td>
+                        @else
+                        <td><i class="fa fa-fw fa-close text-danger"></i></td>
+
+                        @endif
                         <td class="font-weight-bold {{$item->status == 0 ? 'text-danger':'text-success'}}">{{$item->status == 0 ? 'Chưa xử lý':'Đã xử lý'}}</td>
                         @can('cud', App\PI::first())
                         <td>

@@ -24,7 +24,7 @@
                 @endif
                 <form class="form-horizontal" action="{{route('admin.confirmation.update',$cr->id)}}" method="post">
                     {{csrf_field()}}
-
+                    @if($cr->is_confirm_income == 1)
                     <div class="panel panel-default">
                             <div class="panel-heading">Thông tin đơn xác nhận thu nhập
                             </div>
@@ -39,9 +39,9 @@
                                         <table class="table table-hover" style="margin-bottom:0">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-center">STT</th>
-                                                    <th>Tháng / Năm thu nhập</th>
-                                                    <th>Thu nhập (VNĐ)</th>
+                                                    <th class="text-center">STT <span style="color: red">*</span> </th>
+                                                    <th>Tháng / Năm thu nhập <span style="color: red">*</span> </th>
+                                                    <th>Thu nhập (VNĐ) <span style="color: red">*</span> </th>
                                                     <th></th>
                                                 </tr>
                                             </thead>
@@ -61,19 +61,19 @@
                                                                 <input type="hidden">
 
                                                             </td>
-                                                    <td class="col-sm-2">
+                                                    <td class="col-sm-3">
                                                         <div class="col-sm-5">
-                                                                <input type="number" min="1" max="12"  class="form-control" name="month_of_income[]">
+                                                                <input required placeholder="Tháng" type="number" min="1" max="12"  class="form-control" name="month_of_income[]">
 
                                                         </div>
                                                         <div class="col-sm-7">
-                                                                <input type="number" class="form-control" name="year_of_income[]">
+                                                                <input required placeholder="Năm" min="1980" type="number" class="form-control" name="year_of_income[]">
 
                                                         </div>
 
                                                     </td>
                                                     <td class="col-sm-4">
-                                                        <input autocomplete="off" type="number" class="form-control money-input" name="amount_of_income[]">
+                                                        <input required autocomplete="off" type="number" class="form-control money-input" name="amount_of_income[]">
 
                                                         <span data-pattern-name="help-block[++]" name="help-block[]" class="help-block money" style="margin-left:13px"></span>
                                                     </td>
@@ -112,6 +112,7 @@
                                     </div>
                             </div>
                         </div>
+                        @endif
                     <div class="panel panel-default">
                         <div class="panel-heading">Thông tin đơn xác nhận yêu cầu<br>
 
@@ -119,21 +120,21 @@
                         <div class="panel-body">
                                 <div class="form-group">
                                         <div class="col-sm-12">
-                                            <label for="">Lý do</label>
+                                            <label for="">Lý do <span style="color: red">*</span> </label>
                                             <input required type="text" class="form-control" name="confirmation" value="{{$cr->confirmation}}">
                                         </div>
                                     </div>
                             <div class="form-group">
                                 <div class="col-sm-4">
-                                    <label for="">Người ký cấp I</label>
+                                    <label for="">Người ký cấp I <span style="color: red">*</span> </label>
                                     <input required type="text" class="form-control" name="first_signer" value="{{$cr->first_signer == null ? 'KT. HIỆU TRƯỞNG': $cr->first_signer}}">
                                 </div>
                                 <div class="col-sm-4">
-                                    <label for="">Người ký cấp II</label>
+                                    <label for="">Người ký cấp II <span style="color: red">*</span> </label>
                                     <input required type="text" class="form-control" name="second_signer" value="{{$cr->second_signer == null ? 'PHÓ HIỆU TRƯỞNG': $cr->second_signer}}">
                                 </div>
                                 <div class="col-sm-4">
-                                        <label for="">Họ tên người ký</label>
+                                        <label for="">Họ tên người ký <span style="color: red">*</span> </label>
                                         <input required type="text" class="form-control" name="name_of_signer" value="{{$cr->name_of_signer}}">
                                     </div>
                             </div>
@@ -219,8 +220,8 @@
         });
 
         // 4
-
-        var list4 = '{!!json_encode($cr->incomes->toArray())!!}';
+        if('{{$cr->is_confirm_income}}' == true){
+            var list4 = '{!!json_encode($cr->incomes->toArray())!!}';
 
         var list_confirmation_incomes = JSON.parse(list4);
         var text;
@@ -276,6 +277,8 @@
             $(this).closest('td').find('.help-block').text(numberWithCommas($(this).val()+ ' đồng'));
         })
         })
+        }
+
 
 
 

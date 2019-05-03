@@ -42,54 +42,77 @@
           <div class="col-sm-1">&nbsp;</div>
           <div class="col-sm-10" style="margin-top:2rem">
                 <div class="form-group col-sm-12">
-                <label for="">Xác nhận: {{$cr->confirmation}}</label>
+                <label class="content" for="">Xác nhận: {{$cr->confirmation}}</label>
 
                 </div>
                 <div class="form-group col-sm-12">
                      <div class="col-sm-6">
-                         <label for="">Sinh ngày: {{date('d/m/Y', strtotime($cr->pi->date_of_birth))}}</label>
+                         <label class="content" for="">Sinh ngày: {{date('d/m/Y', strtotime($cr->pi->date_of_birth))}}</label>
 
                      </div>
                      <div class="col-sm-6">
-                          <label for="">tại {{$cr->pi->place_of_birth}}</label>
+                          <label class="content" for="">tại {{$cr->pi->place_of_birth}}</label>
 
                      </div>
 
                 </div>
                 <div class="form-group col-sm-12">
                      <div class="col-sm-6">
-                          <label for="">CMND: {{$cr->pi->identity_card}}</label>
+                          <label class="content" for="">CMND: {{$cr->pi->identity_card}}</label>
 
                      </div>
                      <div class="col-sm-6">
-                          <label for="">Ngày cấp: {{date('d/m/Y', strtotime($cr->pi->date_of_issue))}}</label>
+                          <label class="content" for="">Ngày cấp: {{date('d/m/Y', strtotime($cr->pi->date_of_issue))}}</label>
 
                      </div>
                 </div>
                 <div class="form-group col-sm-12">
-                     <label for="">Địa chỉ: {{$cr->address->address_content.', '.$cr->address->ward->path_with_type}}</label>
+                     <label class="content" for="">Địa chỉ: {{$cr->address->address_content.', '.$cr->address->ward->path_with_type}}.</label>
 
                 </div>
                 <div class="form-group col-sm-12">
                     @if($cr->pi->officer->type_id == 4)
-                     <label for="">Là <span>{{$cr->pi->teacher->type->note}}</span> <span>{{$cr->pi->unit->name}}</span>, Trường Đại học Văn Lang từ {{date('d/m/Y', strtotime($cr->date_of_recruitment))}}
-                                 đến nay.</label>
+                    @if($cr->pi->leader_type()->exists())
+                        @if($cr->pi->leader_type_id == 1 || $cr->pi->leader_type_id == 2)
+                        <label class="content" for="">Là <span>{{$cr->pi->leader_type->name}}</span> <span>{{$cr->pi->unit->name}}</span>, Trường Đại học Văn Lang từ {{date('d/m/Y', strtotime($cr->date_of_recruitment))}}
+                            đến nay.</label>
+                        @else
+                        <label class="content" for="">Là <span>{{$cr->pi->teacher->type->note}}</span> <span>{{$cr->pi->unit->name}}</span>, Trường Đại học Văn Lang từ {{date('d/m/Y', strtotime($cr->date_of_recruitment))}}
+                            đến nay.</label>
+                        @endif
+
+                    @endif
+
                      @elseif($cr->pi->officer->type_id == 3)
-                     <label for="">Là <span>{{$cr->pi->officer->position->name}}</span> <span>{{$cr->pi->unit->name}}</span>, Trường Đại học Văn Lang từ {{date('d/m/Y', strtotime($cr->date_of_recruitment))}}
-                         đến nay.</label>
+                     @if($cr->pi->leader_type()->exists())
+                        @if($cr->pi->leader_type_id == 1 || $cr->pi->leader_type_id == 2)
+                        <label class="content" for="">Là <span>{{$cr->pi->leader_type->name}}</span> <span>{{$cr->pi->unit->name}}</span>, Trường Đại học Văn Lang từ {{date('d/m/Y', strtotime($cr->date_of_recruitment))}}
+                            đến nay.</label>
+                        @else
+
+                            <label class="content" for="">Là <span>{{$cr->pi->officer->position->name}}</span> <span>{{$cr->pi->unit->name}}</span>, Trường Đại học Văn Lang từ {{date('d/m/Y', strtotime($cr->date_of_recruitment))}}
+                                đến nay.</label>
+                        @endif
+
+                    @endif
+
 
                      @elseif($cr->pi->officer->type_id == 2)
-                     <label for="">Là <span>{{$cr->pi->officer->position->note}}</span> <span>{{$cr->pi->unit->name}}</span>, Trường Đại học Văn Lang từ {{date('d/m/Y', strtotime($cr->date_of_recruitment))}}
+                     <label class="content" for="">Là <span>{{$cr->pi->officer->position->note}}</span> <span>{{$cr->pi->unit->name}}</span>, Trường Đại học Văn Lang từ {{date('d/m/Y', strtotime($cr->date_of_recruitment))}}
                          đến nay.</label>
 
                      @elseif($cr->pi->officer->type_id == 1)
-                     <label for="">Là <span>{{$cr->pi->officer->position->name}}</span>, Trường Đại học Văn Lang từ {{date('d/m/Y', strtotime($cr->pi->date_of_recruitment))}}
+                     <label class="content" for="">Là <span>{{$cr->pi->officer->position->name}}</span>, Trường Đại học Văn Lang từ {{date('d/m/Y', strtotime($cr->pi->date_of_recruitment))}}
                          đến nay.</label>
                      @endif
 
                 </div>
-                <div class="form-group col-sm-12">
-                    @if($cr->incomes()->exists())
+                @if($cr->incomes()->exists())
+                <div class="form-group-header col-sm-12">
+                <label class="content" for="">Thu nhập {{$cr->incomes->count()}} tháng gần nhất:</label>
+                </div>
+                <div class="form-group-header col-sm-12">
+
                     <table class="table-content" cellspacing="0px">
                         <thead>
                             <tr>
@@ -108,17 +131,18 @@
                             @endforeach
                         </tbody>
                     </table>
-                    @endif
+
 
                 </div>
+                @endif
                 <div class="form-group col-sm-12">
-                     <label for="">Nhà trường cấp giấy xác nhận để {{$cr->pi->gender == 1 ? 'bà' : 'ông'}} {{$cr->pi->full_name}} {{$cr->confirmation}}.</label>
+                     <label class="content" for="">Nhà trường cấp giấy xác nhận để {{$cr->pi->gender == 1 ? 'bà' : 'ông'}} {{$cr->pi->full_name}} {{$cr->confirmation}}.</label>
 
                 </div>
                 <div class="col-sm-12" style="margin-top:1rem">
                      <div class="col-sm-4">&nbsp;</div>
                      <div class="col-sm-8 text-center">
-                          <label style="font-style:italic" for=""> Tp. Hồ Chí Minh,
+                          <label class="content" style="font-style:italic" for=""> Tp. Hồ Chí Minh,
                              ngày {{Carbon\Carbon::now()->day}} tháng {{Carbon\Carbon::now()->month}} năm
                              {{Carbon\Carbon::now()->year}} </label>
 
@@ -158,6 +182,9 @@
     border-collapse : collapse;
     }
 
+    label.content{
+        line-height: 1.5rem;
+    }
 
     table td, table th{
         border: 1px solid black;
@@ -208,7 +235,7 @@
      }
 
      .form-group {
-          margin-bottom: 1rem;
+          /* margin-bottom: 1rem; */
      }
 
      .form-group-header {
@@ -283,9 +310,12 @@
      }
 
      @media print {
-          .form-group{
-            margin-bottom: 0.8rem;
-          }
+        .form-group-header {
+          margin-bottom: 0.5rem;
+        }
+        label.content{
+            line-height: 2rem;
+        }
           .col-sm-1,
           .col-sm-2,
           .col-sm-3,

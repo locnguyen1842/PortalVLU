@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\ConfirmationRequest;
 use App\ConfirmationIncome;
-
+use App\Notifications\ConfirmationRequestNotify;
 use App\PI;
 use App\Address;
+use App\Notification;
 use Auth;
 use Carbon\Carbon;
 use PDF;
@@ -37,12 +38,16 @@ class ConfirmationRequestController extends Controller
             };
         })->orderBy('date_of_request', 'desc')->paginate(10)->appends(['search'=>$search,'status'=>$status]);
         // $crs = ConfirmationRequest::where('status',1)->orderBy('date_of_request','desc')->paginate(10);
-
+        $unread_noti = Notification::where('read_at',null)->get();
+        foreach($unread_noti as $item){
+            $item->read_at = Carbon::now();
+            $item->save();
+        }
         return view('admin.confirmation.index', compact('crs','search','status'));
 
     }
     public function indexEmployee(){
-        
+
         $crs = ConfirmationRequest::where('personalinformation_id',Auth::guard('employee')->user()->personalinformation_id)->orderBy('created_at','desc')->paginate(10);
         return view('employee.confirmation.index', compact('crs'));
 
@@ -71,27 +76,29 @@ class ConfirmationRequestController extends Controller
         $cr->confirmation = $request->confirmation;
         $cr->address_id = $request->address;
         $cr->date_of_request = Carbon::now();
+        $cr->status = 0;
         if($request->has('is_confirm_income')){
             $cr->is_confirm_income = 1;
             $cr->number_of_month_income = $request->number_of_month_income;
-            
 
+            $cr->save();
+
+            for($i= 0 ; $i < $cr->number_of_month_income;$i++){
+                if($i >= 12){
+                    break;
+                }
+                $income = new ConfirmationIncome;
+                $income->confirmation_request_id = $cr->id;
+                $income->save();
+            }
 
         }else{
             $cr->is_confirm_income = 0;
-            
+            $cr->save();
         }
 
-        $cr->status = 0;
-        $cr->save();
-        for($i= 0 ; $i < $cr->number_of_month_income;$i++){
-            if($i >= 6){
-                break;
-            }
-            $income = new ConfirmationIncome;
-            $income->confirmation_request_id = $cr->id;
-            $income->save();
-        }
+        $cr->notify(new ConfirmationRequestNotify($cr));
+
         return redirect()->route('employee.confirmation.index')->with('message', 'Gửi đơn thành công');
     }
 
@@ -130,17 +137,36 @@ class ConfirmationRequestController extends Controller
                 'number_of_month_income.required_if' => 'Số tháng không được bỏ trống khi chọn xác nhận thu nhập',
             ]
         );
-        
+
         $cr->confirmation = $request->confirmation;
         $cr->address_id = $request->address;
         if($request->has('is_confirm_income')){
             $cr->is_confirm_income = 1;
             $cr->number_of_month_income = $request->number_of_month_income;
+            $cr->save();
+            if($cr->incomes()->exists()){
+                foreach($cr->incomes as $item){
+                    $item->delete();
+                }
+            }
+            for($i= 0 ; $i < $cr->number_of_month_income;$i++){
+                if($i >= 12){
+                    break;
+                }
+                $income = new ConfirmationIncome;
+                $income->confirmation_request_id = $cr->id;
+                $income->save();
+            }
         }else{
+            if($cr->incomes()->exists()){
+                foreach($cr->incomes as $item){
+                    $item->delete();
+                }
+            }
             $cr->is_confirm_income = 0;
-            
+            $cr->save();
         }
-        $cr->save();
+
         return redirect()->back()->with('message', 'Cập nhật đơn thành công');
     }
 
@@ -178,7 +204,7 @@ class ConfirmationRequestController extends Controller
                 'month_of_income.*'=> 'required|integer|max:12|min:0',
                 'year_of_income.*'=> 'required|integer|digits:4',
                 'amount_of_income.*'=> 'required|numeric',
-                
+
             ],
             [
                 'confirmation.required' => 'Lý do không được bỏ trống',

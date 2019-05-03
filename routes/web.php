@@ -140,6 +140,10 @@ Route::prefix('admin')->group(function () {
         // delete scientific research workload
          Route::get('/scientific-research-workload-delete/{srworkload_id}','ScientificResearhWorkloadController@delete')->name('admin.srworkload.delete');
 
+
+        //  notification
+        Route::get('/notifications-read','NotificationController@read')->name('admin.notification.read');
+
     });
 });
 

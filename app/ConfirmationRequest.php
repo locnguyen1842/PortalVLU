@@ -3,9 +3,10 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Notifications\Notifiable;
 class ConfirmationRequest extends Model
 {
+    use Notifiable;
     protected $table = 'confirmation_requests';
 
     protected $fillable = [

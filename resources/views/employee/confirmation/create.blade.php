@@ -60,14 +60,14 @@
                         <div class="panel-body">
                             <div class="form-group">
                                 <div class="col-sm-12">
-                                    <label for="">Lý do</label>
+                                    <label for="">Lý do <span style="color: red">*</span></label>
                                     <input required type="text" class="form-control" name="confirmation" value="{{ old('confirmation') }}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     @if($pi->permanent_address()->exists() && $pi->contact_address()->exists())
-                                    <label for="">Địa chỉ<span style="color: red">*</span> (sẽ in ra trong giấy xác nhận)</label>
+                                    <label for="">Địa chỉ (sẽ in ra trong giấy xác nhận) <span style="color: red">*</span> </label>
                                     <select required class="form-control" name="address" id="">
                                         <option value="">Chọn địa chỉ</option>
                                         <option {{ $pi->contact_address->id == old('address') ? 'selected':'' }}
@@ -86,11 +86,11 @@
                                     <label for="">Địa chỉ</label><br>
                                     <label for="" class="text-danger">Không tìm thấy bất cứ địa chỉ cá nhân nào ( vui lòng cập nhật <a href="{{route('employee.pi.update')}}">tại đây</a> )</label>
                                     @endif
-                                    
-                                    
+
+
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <div class="checkbox">
@@ -135,7 +135,7 @@
 
         }
         }
-        
+
     });
 </script>
 

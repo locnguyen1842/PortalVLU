@@ -171,13 +171,13 @@ ol.breadcrumb >.active {
     cursor: pointer;
 
 }
-.list-group-item{
+/* .list-group-item{
     border: 1px solid #66afe9 !important;
 }
 .list-group-item:hover{
     background: #f3f2f2 !important;
 
-}
+} */
 
 .help-text{
     display: block;

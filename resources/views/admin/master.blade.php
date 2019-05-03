@@ -24,20 +24,47 @@
             @yield('breadcrumb')
             {{-- header right --}}
             <div class="dropdown pull-right">
-                <button class="btn btn-danger md-notifications-white" data-toggle="dropdown"> <span class="label label-success"></span> </button>
+            @if(App\ConfirmationRequest::where('status',0)->count() == 0 &&App\Notification::where('read_at',null)->count() == 0)
+            <button class="btn btn-danger md-notifications-white" data-toggle="dropdown"> <span class="label label-primary number-of-noti"></span> </button>
+            @else
+            <button class="btn btn-danger md-notifications-white" data-toggle="dropdown"> <span class="label label-primary number-of-noti">{{App\Notification::where('read_at',null)->count() + App\ConfirmationRequest::where('status',0)->count()}}</span> </button>
+
+            @endif
                 <div class="popover cm-popover bottom">
                     <div class="arrow"></div>
                     <div class="popover-content">
-                        <div class="list-group">
-                            <a href="#" class="list-group-item">
-                                <h4 class="list-group-item-heading text-overflow">
-                                    <i class="fa fa-fw fa-envelope"></i> Thông báo
+                        <div class="list-group list-noti">
+                            @if(App\Notification::where('read_at',null)->count() > 0)
+                            <a href="{{route('admin.confirmation.index')}}" class="list-group-item item-noti-none" id="item-noti-none">
+                                <h4 class="list-group-item-heading text-overflow heading-noti">
+                                    <span class="label label-success">{{App\Notification::where('read_at',null)->count()}}</span> Đơn yêu cầu mới
                                 </h4>
-                                <p class="list-group-item-text text-overflow">Chức năng sẽ được phát triển trong tương lai</p>
+                                <p class="list-group-item-text text-overflow content-noti">Hiện có {{App\Notification::where('read_at',null)->count()}} đơn yêu cầu xác nhận mới.</p>
                             </a>
+                            @endif
+                            @if(App\ConfirmationRequest::where('status',0)->count() > 0)
+                            <a href="{{route('admin.confirmation.index',['status' =>'on'])}}" class="list-group-item item-noti-none" id="item-noti-none">
+                                <h4 class="list-group-item-heading text-overflow heading-noti">
+                                    <span class="label label-warning">{{App\ConfirmationRequest::where('status',0)->count()}}</span> Đơn yêu cầu chờ xử lý
+                                </h4>
+                                <p class="list-group-item-text text-overflow content-noti">Hiện có {{App\ConfirmationRequest::where('status',0)->count()}} đơn yêu cầu xác nhận chờ xử lý.</p>
+                            </a>
+                            @endif
+                            @if(App\ConfirmationRequest::where('status',0)->count() == 0 &&App\Notification::where('read_at',null)->count() == 0)
+                            <a href="{{route('admin.confirmation.index',['status' =>'on'])}}" class="list-group-item item-noti-none" id="item-noti-none">
+                                    <h4 class="list-group-item-heading text-overflow heading-noti">
+                                        <i class="fa fa-fw fa-envelope"></i>
+                                        Thông báo
+                                    </h4>
+                                    <p class="list-group-item-text text-overflow content-noti">Hiện không có thông báo nào.</p>
+                                </a>
+                            @endif
 
                         </div>
-                        <div style="padding:10px"><a class="btn btn-success btn-block" href="#">Xem thêm</a></div>
+                        @if(App\ConfirmationRequest::where('status',0)->count() == 0 &&App\Notification::where('read_at',null)->count() == 0)
+                        @else
+                        <div style="padding:10px"><a class="btn btn-primary btn-block" href="{{route('admin.confirmation.index')}}">Xem thêm</a></div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -77,6 +104,7 @@
     <script src="{{asset('js/bootstrap.min.js')}}"></script>
     <script src="{{asset('js/clearmin.min.js')}}"></script>
     <script src="{{asset('js/demo/popovers-tooltips.js')}}"></script>
+
 </body>
 
 </html>

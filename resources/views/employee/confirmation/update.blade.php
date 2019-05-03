@@ -60,17 +60,17 @@
                         <div class="panel-body">
                             <div class="form-group">
                                 <div class="col-sm-12">
-                                    <label for="">Lý do</label>
+                                    <label for="">Lý do <span style="color: red">*</span></label>
                                     <input required type="text" class="form-control" name="confirmation" value="{{$cr->confirmation}}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     @if($pi->permanent_address()->exists() && $pi->contact_address()->exists())
-                                    <label for="">Địa chỉ<span style="color: red">*</span> (sẽ in ra trong giấy xác nhận)</label>
+                                    <label for="">Địa chỉ (sẽ in ra trong giấy xác nhận) <span style="color: red">*</span></label>
                                     <select required class="form-control" name="address" id="">
                                         <option value="" >Chọn địa chỉ</option>
-                                       
+
                                         <option {{ $pi->contact_address->id == $cr->address_id ? 'selected':'' }}
                                             value="{{ $pi->contact_address->id }}">
                                             Địa chỉ tạm trú:
@@ -117,12 +117,12 @@
 
         <script>
                 $(document).ready(function(){
-            
+
                     checkedInput();
                     $('input[name=is_confirm_income]').on('click',function(){
                         checkedInput();
                     })
-            
+
                     function checkedInput(){
                         if($('input[name=is_confirm_income]:checked').val() == 'on'){
                         $('input[name=number_of_month_income]').prop('required',true);
@@ -131,10 +131,10 @@
                         $('input[name=number_of_month_income]').prop('disabled',true);
                         $('input[name=number_of_month_income]').prop('required',false);
                         $('input[name=number_of_month_income]').val('');
-            
+
                     }
                     }
-                    
+
                 });
             </script>
     @endsection
