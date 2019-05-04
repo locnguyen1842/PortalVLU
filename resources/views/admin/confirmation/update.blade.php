@@ -31,7 +31,7 @@
                             <div class="panel-body">
                                 <div class="form-group text-center">
                                     <div class="col-sm-12">
-                                    <p style="font-size:24px">Xác nhận thu nhập trong <b>{{$cr->number_of_month_income}}</b> gần nhất</p>
+                                    <p style="font-size:24px">Xác nhận thu nhập trong <b>{{$cr->number_of_month_income}}</b> tháng gần nhất</p>
 
                                     </div>
                                 </div>

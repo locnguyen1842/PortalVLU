@@ -182,6 +182,7 @@ class ConfirmationRequestController extends Controller
     public function delete($cr_id){
         $cr = ConfirmationRequest::findOrFail($cr_id);
         $this->authorize('access', $cr);
+        ConfirmationIncome::where('confirmation_request_id',$cr->id)->delete();
         $cr->delete();
         return redirect()->back()->with('message', 'Xóa đơn thành công');
     }

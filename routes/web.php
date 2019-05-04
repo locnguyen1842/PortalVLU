@@ -214,7 +214,6 @@ Route::prefix('')->group(function () {
         //
         Route::get('/confirmation-request/index','ConfirmationRequestController@indexEmployee')->name('employee.confirmation.index');
         Route::get('/confirmation-request/preview/{cr_id}','ConfirmationRequestController@previewEmployee')->name('employee.confirmation.preview');
-        Route::get('/confirmation-request/send/{cr_id}','ConfirmationRequestController@sendRequest')->name('employee.confirmation.send');
         Route::get('/confirmation-request/create','ConfirmationRequestController@getCreate')->name('employee.confirmation.create');
         Route::post('/confirmation-request/create','ConfirmationRequestController@postCreate')->name('employee.confirmation.create');
         Route::get('/confirmation-request/update/{cr_id}','ConfirmationRequestController@getUpdate')->name('employee.confirmation.update');

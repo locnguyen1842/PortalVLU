@@ -49,7 +49,7 @@
                     @foreach ($crs as $item)
                     <tr>
                         <td>{{$item->confirmation}}
-                                <a href="{{route('employee.confirmation.send',$item->id)}}" data-toggle="tooltip" data-placement="top"
+                                <a href="{{route('employee.confirmation.preview',$item->id)}}" data-toggle="tooltip" data-placement="top"
                                         title="" data-original-title="Xem trước" href="javascript:" class="preview_cr tooltip-test ml-10">
                                         <span class=""><i class="fa fa-lg fa-sign-out"></i>
                                             <span class="mdi mdi-close"></span>
@@ -72,7 +72,6 @@
                                                         @if($item->status== 0)
                                                         <button type="button" data-src="{{route('employee.confirmation.update',$item->id)}}" name="button" class="btn btn-primary btn-preview-update" id="btn-preview-update">Cập nhật</button>
 
-                                                        <button type="button" class="btn btn-success btn-preview-yes" id="btn-preview-yes">Gửi yêu cầu</button>
                                                         @endif
 
                                                     </div>
@@ -86,7 +85,7 @@
 
                         @if($item->status == 0)
                         <td>
-                           
+
 
                             <a href="{{route('employee.confirmation.update',$item->id)}}" data-toggle="tooltip" data-placement="top"
                                 title="" data-original-title="Cập nhật" href="javascript:" class="tooltip-test ml-10">
