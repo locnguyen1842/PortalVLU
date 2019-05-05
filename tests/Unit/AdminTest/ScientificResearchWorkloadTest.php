@@ -20,14 +20,24 @@ class ScientificResearchWorkloadTest extends TestCase
      *
      * @return void
      */
+
+
      public function test_Add_Scientific_Research_Workload()
      {
         $admin = Admin::first();
         $this->actingAs($admin, 'admin');
         $data = $this->data();
         $response = $this->post('/admin/scientific-research-workload-add', $data);
+        // dd($response);
         $response->assertSessionHas('message', 'Thêm thành công');
 
+     }
+
+     public function test_search_Scientific_Research_Workload(){
+        $admin = Admin::first();
+        $this->actingAs($admin, 'admin');
+        $response = $this->post('/admin/scientific-research-workload-list?search=T154725&year_workload=39');
+        $response->assertSee('Lê Thanh Sơn 10');
      }
 
      public function test_Update_Scientific_Research_Workload()
@@ -56,12 +66,17 @@ class ScientificResearchWorkloadTest extends TestCase
          $actual = [
           'employee_code' =>'T154725',
           'name_of_work' => 'ABCD',
-          'session' =>33,
+          'session_id' =>33,
+          'session_new' => 0,
+          'start_year' => 1999,
+          'end_year' => 2000,
           'detail_of_work' => 'Khong co gi',
+          'explain_of_work' => 'Khong co gi',
+          'unit_of_work' => 'Khong co gi',
           'quantity_of_work' => 20,
           'converted_standard_time' => 20,
           'converted_time' => 20,
-          'note' => ''
+          'note' => 'a'
         ];
         return $actual;
      }

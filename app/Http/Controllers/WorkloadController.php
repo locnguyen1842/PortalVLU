@@ -413,18 +413,6 @@ class WorkloadController extends Controller
 
         //query if $search have a value
         $workloads = $workloads_own_user->where(function ($query) use ($search,$year_workload,$workload_session_current_id,$semester_filter) {
-            if ($search != null) {
-                $query->where(function ($q) use ($search) {
-                    $q->where('subject_code', 'like', '%'.$search.'%')
-                        ->orWhere('subject_name', 'like', '%'.$search.'%')
-                        ->orWhere(function ($q2) use ($search) {
-                            $q2->whereHas('unit', function ($q3) use ($search) {
-                                $q3->where('name', 'like', '%'.$search.'%')
-                                    ->orWhere('unit_code', 'like', '%'.$search.'%');
-                            });
-                        });
-                });
-            }
             if ($semester_filter != null) {
                 if ($semester_filter !=4) {
                     $query->whereHas('semester', function ($q) use ($semester_filter) {
@@ -436,7 +424,7 @@ class WorkloadController extends Controller
                 $query->where(function ($q) use ($year_workload) {
                     $q->where('session_id', $year_workload);
                 });
-            } elseif ($search ==null && $year_workload==null && $semester_filter ==null) {
+            } elseif ($year_workload==null && $semester_filter ==null) {
                 $query->where('session_id', $workload_session_current_id);
             }
         })->orderBy('updated_at', 'desc')->get();
@@ -702,5 +690,5 @@ class WorkloadController extends Controller
     }
 
 
-  
+
 }

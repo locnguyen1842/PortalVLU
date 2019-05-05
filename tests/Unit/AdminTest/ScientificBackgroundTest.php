@@ -29,16 +29,20 @@ class ScientificBackgroundTest extends TestCase
        $scientific_background = $this->data();
        $pi = PI::find(1);
        $update_scientific_background = $this->post('admin/scientific-background/update/'.$pi->id, $scientific_background);
+    //    dd($update_scientific_background);
        $update_scientific_background->assertSessionHas('message', 'Cập nhật thành công');
      }
 
-    //  public function test_download_SB(){
-    //     $admin = Admin::where('is_supervisor',0)->first();
-    //     $this->actingAs($admin, 'admin');
-    //     $pi_id = PI::whereHas('scientificbackgrounds')->first()->id;
-    //     $response = $this->get('admin/scientific-background/print/'.$pi_id);
-    //     $response->assertHas();
-    //  }
+
+
+     public function test_download_SB(){
+        $admin = Admin::where('is_supervisor',0)->first();
+        $this->actingAs($admin, 'admin');
+        $pi_id = PI::whereHas('scientificbackgrounds')->first()->id;
+        $response = $this->get('admin/scientific-background/print/'.$pi_id);
+        // dd($response);
+        $response->assertSee('Data has already been sent to output');
+     }
 
      public function data()
      {
@@ -51,7 +55,7 @@ class ScientificBackgroundTest extends TestCase
              "nation" => "1",
              "highest_scientific_title" => "Phó Giáo sư - Tiến Sĩ Công Nghệ Thông Tin",
              "year_of_appointment" => "2018",
-             "position" => "Nhân viên",
+             "position" => "1",
              "unit" => "3",
              "address" => "793 Trần Xuân Soạn",
              "email_address" => "taolao024@gmail.com",

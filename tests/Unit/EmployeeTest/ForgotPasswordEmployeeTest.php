@@ -74,7 +74,7 @@ class ForgotPasswordEmployeeTest extends TestCase
         $admin = Employee::where('username', $data['employee_code'])->first();
         $forgot_password = $this->post('/password/email', $data);
         $forgot_password->assertSessionHas([
-          'error' => 'Tài khoản không tồn tại.'
+          'error' => 'Tài khoản không tồn tại!'
         ]);
     }
 }

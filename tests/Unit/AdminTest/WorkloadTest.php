@@ -139,9 +139,18 @@ class WorkloadTest extends TestCase
     {
         $admin = Admin::first();
         $this->actingAs($admin, 'admin');
-        $response = $this->get('/admin/pi-detail/'.$admin->pi->id.'/job-workload?search=&year_workload=35&semester=4');
+        $response = $this->get('/admin/pi-detail/1/job-workload?search=Điều&year_workload=35&semester=4');
         $response->assertSuccessful();
         $response->assertSee('1'); // see name of T154725 code when search successful
         $response->assertSee('T');
+    }
+    public function test_search_srworkload_on_list_of_a_specific_pi()
+    {
+        $admin = Admin::first();
+        $this->actingAs($admin, 'admin');
+        $response = $this->get('/admin/pi-detail/1/scientific-research-workload?year_workload=39');
+        $response->assertSuccessful();
+        $response->assertSee('1'); // see name of T154725 code when search successful
+        $response->assertSee('T154725');
     }
 }

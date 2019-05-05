@@ -27,15 +27,15 @@ class ViewFacultyLeaderTest extends TestCase
      */
     public function login_faculty_leader()
     {
-        $faculty_leader = Employee::where('username', 'T154725')->first();
+        $faculty_leader = Employee::where('is_leader',1)->first();
         $this->actingAs($faculty_leader, 'employee');
         $pi = $faculty_leader->pi;
         return $pi;
     }
     public function test_view_Detail_Scientific_Background_Employee()
     {
-        $this->login_faculty_leader();
-        $pi = PI::where('unit_id', '2')->first()->id;
+        $leader = $this->login_faculty_leader();
+        $pi = PI::where('unit_id', $leader->unit_id)->first()->id;
         $response = $this->get('faculty-sb-detail/'.$pi);
         $response->assertViewHas('id');
         $response->assertViewHas('sb');
@@ -43,9 +43,9 @@ class ViewFacultyLeaderTest extends TestCase
     }
     public function test_view_Detail_Job_Workload_Employee()
       {
-          $this->login_faculty_leader();
-          $pi = PI::where('unit_id', '2')->first()->id;
-          $response = $this->get('faculty-job-workload/'.$pi);
+          $leader = $this->login_faculty_leader();
+          $pi = PI::where('unit_id', $leader->unit_id)->first()->id;
+          $response = $this->get('faculty-job-workload/'.$pi.'?year_workload=40&semester=2');
           $response->assertViewHas('semester_filter');
           $response->assertViewHas('pi');
           $response->assertViewHas('semester');
@@ -57,20 +57,44 @@ class ViewFacultyLeaderTest extends TestCase
       }
       public function test_view_Detail_Imformation_Employee()
       {
-          $this->login_faculty_leader();
-          $pi = PI::where('unit_id', '2')->first()->id;
+          $leader = $this->login_faculty_leader();
+          $pi = PI::where('unit_id', $leader->unit_id)->first()->id;
           $response = $this->get('faculty-degree-list/'.$pi);
-          $response->assertViewHas('dh_count');
-          $response->assertViewHas('ths_count');
           $response->assertViewHas('pi');
-          $response->assertViewHas('ts_count');
       }
       public function test_view_List_Employees_By_Faculty()
       {
-          $this->login_faculty_leader();
+          $leader = $this->login_faculty_leader();
           $response = $this->get('faculty-index/');
           $response->assertViewHas('pis');
           $response->assertViewHas('search');
       }
+
+      public function test_search_sr_workload(){
+        $leader = $this->login_faculty_leader();
+        $pi = PI::where('unit_id', $leader->unit_id)->first();
+
+        $response = $this->get('faculty-scientific-research-workload/'.$pi->id.'?year_workload=39');
+        $response->assertSuccessful();
+
+      }
+
+      public function test_view_fa_pi_detail(){
+        $leader = $this->login_faculty_leader();
+        $pi = PI::where('unit_id', $leader->unit_id)->first();
+
+        $response = $this->get('faculty-pi-detail/'.$pi->id);
+        $response->assertSuccessful();
+
+      }
+
+      public function test_download_SB_leader_faculty(){
+        $leader = $this->login_faculty_leader();
+        $pi = PI::where('unit_id', $leader->unit_id)->first();
+        $response = $this->get('faculty-print-sb/'.$pi->id);
+        $response->assertSee('Data has already been sent to output');
+     }
+
+
 
 }

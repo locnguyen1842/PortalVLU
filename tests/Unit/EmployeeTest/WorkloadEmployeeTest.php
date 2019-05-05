@@ -26,8 +26,8 @@ class WorkloadEmployeeTest extends TestCase
     public function test_search_workload(){
         $employee = Employee::where('username','T154725')->first();
         $this->actingAs($employee,'employee');
-        $response = $this->get('/job-workload-list?year_workload=35&semester=4');
+        $response = $this->get('/job-workload-list?year_workload=35&semester=1');
         $response->assertSuccessful();
-        $response->assertSee('K19T1,2');
+        $response->assertSee('HK I');
       }
 }

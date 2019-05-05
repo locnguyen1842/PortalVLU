@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Session;
 use App\PI;
 use App\Admin;
 use App\Employee;
+use App\ConfirmationRequest;
 
 class ConfirmtaionEmoloyeeTest extends TestCase
 {
@@ -36,6 +37,17 @@ class ConfirmtaionEmoloyeeTest extends TestCase
        $add_cr = $this->post('/confirmation-request/update/'.$employee->pi->confirmation_requests->first()->id, $cr);
        $add_cr->assertSessionHas('message', 'Cập nhật đơn thành công');
      }
+
+     public function test_Delete_Confirmation_Request(){
+        $employee = Employee::where('username', 'T154725')->first();
+        $this->actingAs($employee, 'employee');
+        $cr = $employee->pi->confirmation_requests->first();
+        $cr->status=0;
+        $cr->save();
+
+        $delete = $this->get('/confirmation-request/delete/'.$cr->id);
+        $delete->assertSessionHas('message', 'Xóa đơn thành công');
+      }
 
      public function data()
      {

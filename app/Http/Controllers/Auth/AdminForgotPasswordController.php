@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Password;
 use App\PI;
+use App\Admin;
 
 
 class AdminForgotPasswordController extends Controller
@@ -37,11 +38,11 @@ class AdminForgotPasswordController extends Controller
     public function sendResetLinkEmail(Request $request)
     {
 
-        $pi = PI::where('employee_code',$request->employee_code)->first();
-        if($pi != null && $pi->show == 1 ){
-          $email = ['email'=>$pi->email_address];
-          $response = $this->broker()->sendResetLink($email);
-        
+        $admin = Admin::where('username',$request->employee_code)->first();
+
+        if($admin != null && $admin->pi->show == 1 ){
+          $username = ['username'=>$admin->username];
+          $response = $this->broker()->sendResetLink($username);
           return $response == Password::RESET_LINK_SENT
                       ? $this->sendResetLinkResponse($request, $response)
                       : $this->sendResetLinkFailedResponse($request, $response);
@@ -70,6 +71,6 @@ class AdminForgotPasswordController extends Controller
     }
     protected function sendResetLinkFailedResponse($response)
     {
-        return back()->with('error', 'Tài khoản không tồn tại.');
+        return back()->with('error', 'Tài khoản không tồn tại!');
     }
 }

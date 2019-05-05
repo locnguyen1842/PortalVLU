@@ -142,7 +142,6 @@ Route::prefix('admin')->group(function () {
 
 
         //  notification
-        Route::get('/notifications-read','NotificationController@read')->name('admin.notification.read');
 
     });
 });

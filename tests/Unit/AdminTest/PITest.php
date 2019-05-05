@@ -32,8 +32,11 @@ class PITest extends TestCase
     public function test_add_PI_correct_data()
     {
         $actual = $this->data();
+        $actual['identity_card'] = '569485214';
+        $actual['email_address'] = 'caisodiosa@gmail.com';
+        $actual['employee_code'] = 'P152436';
         $addPI = $this->post('/admin/pi-add', $actual);
-        // dd($addPI);
+
         $pi = PI::where('employee_code', $actual['employee_code'])->first();//
         // dd($actual);
         $this->assertEquals($pi->employee_code, $actual['employee_code']);
@@ -99,8 +102,8 @@ class PITest extends TestCase
         $actual = $this->data();
         $addPI = $this->post('/admin/pi-add', $actual);
         $actual1 = $this->data();
-        $actual1['email_address']= 'taolao024@gmail.com';
-        $actual1['employee_code']= 'T123899';
+        $actual1['email_address']= 'haimuoibon026@gmail.com';
+        $actual1['employee_code']= 'T321999';
         $duplicate_emailaddress = $this->post('/admin/pi-add', $actual1);
         $duplicate_emailaddress->assertSessionHasErrors([
           'email_address'=> 'Email đã được sử dụng'
@@ -116,15 +119,19 @@ class PITest extends TestCase
         $pi = PI::where('employee_code', $data['employee_code'])->first();//
 
         $updatePI = $this->post('/admin/pi-update/'.$pi->id, $data);
+
         $this->assertEquals($pi->employee_code, $data['employee_code']);
         $this->assertEquals($pi->identity_card, $data['identity_card']);
         $this->assertEquals($pi->email_address, $data['email_address']);
     }
+
     public function test_update_PI_correct_data_new_address()
     {
         $data = $this->data();
+        $data['employee_code'] = 'T155450';
+        $data['email_address'] = 'haimuoibon026@gmail.com';
+        $data['identity_card'] = '352363655';
         $pi = PI::where('employee_code', $data['employee_code'])->first();//
-        $pi->teacher->delete();
 
 
         $updatePI = $this->post('/admin/pi-update/'.$pi->id, $data);
@@ -132,7 +139,21 @@ class PITest extends TestCase
         $this->assertEquals($pi->identity_card, $data['identity_card']);
         $this->assertEquals($pi->email_address, $data['email_address']);
     }
+    public function test_update_PI_correct_data_old_address()
+    {
+        $data = $this->data();
+        $data['employee_code'] = 'T154725';
+        $data['email_address'] = 'huynhnguyenmylinh@gmail.com';
+        $data['identity_card'] = '352390125';
 
+        $pi = PI::where('employee_code', $data['employee_code'])->first();//
+        $pi->teacher->delete();
+        $updatePI = $this->post('/admin/pi-update/'.$pi->id, $data);
+
+        $pi = PI::where('employee_code', $data['employee_code'])->first();//
+        $this->assertEquals($pi->employee_code, $data['employee_code']);
+        $this->assertEquals($pi->email_address, $data['email_address']);
+    }
 
     public function test_update_PI_with_incorrect_format_email()
     {
@@ -211,23 +232,39 @@ class PITest extends TestCase
     }
 
     public function test_change_role_from_employee_to_admin(){
-      $pi = PI::where('employee_code','T155444')->first(); //role employee
+      $pi = PI::where('employee_code','T123333')->first(); //role employee
+
       //role = 1 is admin
       $response = $this->post('/admin/pi-role/'.$pi->id,[
-        'role' => 1
+        'role' => 1,
+        'role_admin' =>1
       ]);
-      $pi = PI::where('employee_code','T155444')->first();//get pi after change roles
+      $pi = PI::where('employee_code','T123333')->first();//get pi after change roles
       $response->assertSessionHas('message','Thay đổi vai trò tài khoản thành công');
       $this->assertTrue($pi->admin !=''); //check in admin table on db as added record
 
     }
+    public function test_change_role_from_employee_to_admin_2(){
+        $pi = PI::where('employee_code','T123333')->first(); //role employee
+
+        //role = 1 is admin
+        $response = $this->post('/admin/pi-role/'.$pi->id,[
+          'role' => 1,
+          'role_admin' =>0
+        ]);
+        $pi = PI::where('employee_code','T123333')->first();//get pi after change roles
+        $response->assertSessionHas('message','Thay đổi vai trò tài khoản thành công');
+        $this->assertTrue($pi->admin !=''); //check in admin table on db as added record
+
+      }
 
     public function test_change_role_from_admin_to_employee(){
       $pi = PI::where('employee_code','T155444')->first(); //role admin
       //role = 0 is employee
 
       $response = $this->post('/admin/pi-role/'.$pi->id,[
-        'role' => 0
+        'role' => 0,
+        'role_employee'=> 0
       ]);
       $pi = PI::where('employee_code','T155444')->first();//get pi after change roles
 
@@ -236,6 +273,21 @@ class PITest extends TestCase
       $this->assertTrue($pi->admin ==''); //check in admin table on db hasnt any record of this pi
 
     }
+    public function test_change_role_from_admin_to_employee_2(){
+        $pi = PI::where('employee_code','T155444')->first(); //role admin
+        //role = 0 is employee
+
+        $response = $this->post('/admin/pi-role/'.$pi->id,[
+          'role' => 0,
+          'role_employee'=> 1
+        ]);
+        $pi = PI::where('employee_code','T155444')->first();//get pi after change roles
+
+        $response->assertSessionHas('message','Thay đổi vai trò tài khoản thành công');
+
+        $this->assertTrue($pi->admin ==''); //check in admin table on db hasnt any record of this pi
+
+      }
 
     public function data()
     {

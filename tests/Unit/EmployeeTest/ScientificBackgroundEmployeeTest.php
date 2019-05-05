@@ -32,6 +32,13 @@ class ScientificBackgroundEmployeeTest extends TestCase
         $update_scientific_background->assertSessionHas('message', 'Cập nhật thành công');
     }
 
+    public function test_download_SB_employee(){
+        $employee = Employee::where('username', 'T154725')->first();
+        $this->actingAs($employee, 'employee');
+        $pi_id = PI::whereHas('scientificbackgrounds')->first()->id;
+        $response = $this->get('/scientific-background/print/');
+        $response->assertSee('Data has already been sent to output');
+     }
 
     public function data()
     {
