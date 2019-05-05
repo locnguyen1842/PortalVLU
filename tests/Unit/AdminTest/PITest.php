@@ -123,7 +123,6 @@ class PITest extends TestCase
     public function test_update_PI_correct_data_new_address()
     {
         $data = $this->data();
-        $data['employee_code'] = 'T155450';
         $pi = PI::where('employee_code', $data['employee_code'])->first();//
         $pi->teacher->delete();
 

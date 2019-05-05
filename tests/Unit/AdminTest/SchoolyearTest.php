@@ -33,7 +33,6 @@ class SchoolyearTest extends TestCase
         $this->login_admin();
         $workloadsession = WorkloadSession::first();
         $response = $this->get('/admin/year-delete/'.$workloadsession->id);
-
         $response->assertSessionHas('message','Xóa năm học thành công');
       }
       public function test_Schooolyear_Update()

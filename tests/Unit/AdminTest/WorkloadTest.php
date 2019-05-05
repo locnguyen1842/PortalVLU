@@ -130,18 +130,18 @@ class WorkloadTest extends TestCase
     {
         $admin = Admin::first();
         $this->actingAs($admin, 'admin');
-        $response = $this->get('/admin/workload-list?search=T154725');
+        $response = $this->get('/admin/job-workload-list?search=T154725&year_workload=32');
         $response->assertSuccessful();
         $response->assertSee('T154725'); // see name of T154725 code when search successful
-        // $response->assertSee('T');
+        $response->assertSee('T');
     }
     public function test_search_workload_on_list_of_a_specific_pi()
     {
         $admin = Admin::first();
         $this->actingAs($admin, 'admin');
-        $response = $this->get('/admin/pi-detail/'.$admin->pi->id.'/workload?search=CNTT&year_workload=20&semester=1');
+        $response = $this->get('/admin/pi-detail/'.$admin->pi->id.'/job-workload?search=&year_workload=35&semester=4');
         $response->assertSuccessful();
         $response->assertSee('1'); // see name of T154725 code when search successful
-        $response->assertSee('CNTT');
+        $response->assertSee('T');
     }
 }

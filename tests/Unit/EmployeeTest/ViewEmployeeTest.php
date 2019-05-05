@@ -12,6 +12,7 @@ use App\PI;
 use Illuminate\Support\Facades\Hash;
 use App\Employee;
 use App\DegreeDetail;
+use App\ScientificResearchWorkload;
 
 class ViewEmployeeTest extends TestCase
 {
@@ -90,7 +91,7 @@ class ViewEmployeeTest extends TestCase
     public function test_view_Workload_List_Employee()
     {
       $this->login_employee();
-      $response = $this->get('/workload-list');
+      $response = $this->get('/job-workload-list');
       $this->assertEquals(200, $response->status());
       $response->assertViewHas('semester_filter');
       $response->assertViewHas('semester');
@@ -105,7 +106,6 @@ class ViewEmployeeTest extends TestCase
     public function test_view_Workload_Details_Employee()
     {
       $pi= $this->login_employee();
-
       $id_workload = $pi->workloads->first()->id;
       $response = $this->get('/workload-details/'.$id_workload);
       $response->assertViewHas('workload');
@@ -166,4 +166,57 @@ class ViewEmployeeTest extends TestCase
         $response = $this->get('academic-rank/update/');
         $response->assertSuccessful();
     }
+
+    public function test_View_Add_Confirmation_Request(){
+      $pi = $this->login_employee();
+      $response = $this->get('/confirmation-request/create');
+      $this->assertEquals(200, $response->status());
+      $response->assertViewHas('pi');
+    }
+
+    public function test_View_Update_Confirmation_Request(){
+      $pi = $this->login_employee();
+      $cr = $pi->confirmation_requests->first()->id;
+      $response = $this->get('/confirmation-request/update/'.$cr);
+      $this->assertEquals(200, $response->status());
+      $response->assertViewHas('pi');
+    }
+
+    public function test_View_List_Confirmation_Request(){
+      $pi = $this->login_employee();
+      $response = $this->get('/confirmation-request/index');
+      $this->assertEquals(200, $response->status());
+      $response->assertViewHas('crs');
+    }
+
+    public function test_View_Detail_Confirmation_Request(){
+      $pi = $this->login_employee();
+      $cr = $pi->confirmation_requests->first()->id;
+      $response = $this->get('/confirmation-request/preview/'.$cr);
+      $this->assertEquals(200, $response->status());
+      $response->assertViewHas('cr');
+    }
+
+    public function test_View_List_Scientific_Workload(){
+      $pi = $this->login_employee();
+      $response = $this->get('/scientific-research-workload-list');
+      $this->assertEquals(200, $response->status());
+      $response->assertViewHas('workload_session');
+      $response->assertViewHas('workload_session_current');
+      $response->assertViewHas('workloads');
+      $response->assertViewHas('year_workload');
+      $response->assertViewHas('pi');
+    }
+
+    public function test_View_Detail_Scientific_Workload(){
+      $pi = $this->login_employee();
+      $sr = $pi->scientific_research_workloads->first()->id;
+      $response = $this->get('/scientific-research-workload/'.$sr);
+      $this->assertEquals(200, $response->status());
+      $response->assertViewHas('srworkload');
+      $response->assertViewHas('workload_session');
+      $response->assertViewHas('pi');
+    }
+
+
 }
