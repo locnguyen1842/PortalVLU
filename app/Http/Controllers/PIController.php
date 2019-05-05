@@ -64,6 +64,19 @@ class PIController extends Controller
 
         return view('admin.pi.pi-list', compact('pis', 'search'));
     }
+
+    public function getDistricts()
+    {
+        $province_code = Input::get('province_code');
+        $districts = District::where('parent_code', $province_code)->get(['name_with_type','code']);
+        return response()->json($districts);
+    }
+    public function getWards()
+    {
+        $district_code = Input::get('district_code');
+        $wards = Ward::where('parent_code', $district_code)->get(['name_with_type','code']);
+        return response()->json($wards);
+    }
     public function getAdd()
     {
         $this->authorize('cud', PI::firstOrFail());
@@ -82,18 +95,6 @@ class PIController extends Controller
         return view('admin.pi.pi-add', compact('nations', 'units', 'provinces', 'officer_types', 'position_types', 'teacher_types', 'teacher_titles', 'contract_types','religions','leader_types'));
     }
 
-    public function getDistricts()
-    {
-        $province_code = Input::get('province_code');
-        $districts = District::where('parent_code', $province_code)->get(['name_with_type','code']);
-        return response()->json($districts);
-    }
-    public function getWards()
-    {
-        $district_code = Input::get('district_code');
-        $wards = Ward::where('parent_code', $district_code)->get(['name_with_type','code']);
-        return response()->json($wards);
-    }
 
     public function postAdd(Request $request)
     {
@@ -117,9 +118,8 @@ class PIController extends Controller
             'ward_2'=> 'required',
             'phone_number'=> 'required',
             'email_address'=> 'required|email|unique:personalinformations,email_address',
-            'position'=> 'required',
+
             'date_of_recruitment' => 'required|date',
-            'professional_title'=> 'required',
             'identity_card'=> 'required|min:9|max:12|unique:personalinformations,identity_card',
             'date_of_issue' => 'required|date',
             'place_of_issue'=> 'required',
@@ -185,7 +185,7 @@ class PIController extends Controller
             'religion.required' =>'Tôn giáo không được bỏ trống',
           ]
       );
-        //add data 
+        //add data
         $pi = new PI;
         $pi->employee_code= strtoupper($request->employee_code);
 
@@ -203,16 +203,12 @@ class PIController extends Controller
         $pi->email_address= $request->email_address;
         $pi->home_town= $request->home_town;
         $pi->contract_type_id= $request->contract_type;
-        $pi->position= $request->position;
         $pi->date_of_recruitment= $request->date_of_recruitment;
-        $pi->professional_title= $request->professional_title;
         $pi->identity_card= $request->identity_card;
         $pi->date_of_issue= $request->date_of_issue;
         $pi->place_of_issue= $request->place_of_issue;
         $pi->leader_type_id= $request->leader_type;
-        if($request->leader_type = 1 || $request->leader_type = 2){
-            $pi->employee->is_leader = 1;
-        }
+
         $pi->show = 1;
         $pi->new = 0;
         $pi->unit_id = $request->unit;
@@ -243,7 +239,11 @@ class PIController extends Controller
         $employee->username= $pi->employee_code;
         $employee->password = Hash::make($pi->employee_code);
         $employee->email = $pi->email_address;
-        $employee->is_leader = 0 ;
+        if($request->leader_type == 1 || $request->leader_type == 2){
+            $employee->is_leader = 1;
+        }else{
+            $employee->is_leader = 0 ;
+        }
         $employee->save();
 
 
@@ -298,7 +298,7 @@ class PIController extends Controller
             }
             $teacher->save();
         }
-        
+
 
         return redirect()->back()->with('message', 'Thêm thành công');
     }
@@ -342,9 +342,8 @@ class PIController extends Controller
               'ward_2'=> 'required',
               'phone_number'=> 'required',
               'email_address'=> 'required|email|unique:personalinformations,email_address,'.$pi->id,
-              'position'=> 'required',
+
               'date_of_recruitment' => 'required|date',
-              'professional_title'=> 'required',
               'identity_card'=> 'required|min:9|max:12|unique:personalinformations,identity_card,'.$pi->id,
               'date_of_issue' => 'required|date',
               'place_of_issue'=> 'required',
@@ -407,7 +406,7 @@ class PIController extends Controller
               'home_town.required' =>'Quê quán không được bỏ trống',
               'contract_type.required' =>'Loại hợp đồng không được bỏ trống',
               'religion.required' =>'Tôn giáo không được bỏ trống',
-          
+
             ]
         );
         //post data
@@ -423,16 +422,17 @@ class PIController extends Controller
         $pi->email_address= $request->email_address;
         $pi->home_town= $request->home_town;
         $pi->contract_type_id= $request->contract_type;
-        $pi->position= $request->position;
         $pi->date_of_recruitment= $request->date_of_recruitment;
-        $pi->professional_title= $request->professional_title;
         $pi->identity_card= $request->identity_card;
         $pi->date_of_issue= $request->date_of_issue;
         $pi->place_of_issue= $request->place_of_issue;
         $pi->leader_type_id= $request->leader_type;
-        if($request->leader_type = 1 || $request->leader_type = 2){
+        if($request->leader_type == 1 || $request->leader_type == 2){
             $pi->employee->is_leader =1;
+        }else{
+            $pi->employee->is_leader =0;
         }
+        $pi->employee->save();
         $pi->unit_id = $request->unit;
         $pi->is_activity = $request->is_activity;
 
