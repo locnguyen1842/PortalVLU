@@ -45,7 +45,7 @@ class ViewFacultyLeaderTest extends TestCase
       {
           $this->login_faculty_leader();
           $pi = PI::where('unit_id', '2')->first()->id;
-          $response = $this->get('faculty-workload-detail/'.$pi);
+          $response = $this->get('faculty-job-workload/'.$pi);
           $response->assertViewHas('semester_filter');
           $response->assertViewHas('pi');
           $response->assertViewHas('semester');
@@ -59,10 +59,8 @@ class ViewFacultyLeaderTest extends TestCase
       {
           $this->login_faculty_leader();
           $pi = PI::where('unit_id', '2')->first()->id;
-          $response = $this->get('faculty-pi-detail/'.$pi);
+          $response = $this->get('faculty-degree-list/'.$pi);
           $response->assertViewHas('dh_count');
-
-
           $response->assertViewHas('ths_count');
           $response->assertViewHas('pi');
           $response->assertViewHas('ts_count');

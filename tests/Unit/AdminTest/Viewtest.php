@@ -7,6 +7,7 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Auth;
+use App\ConfirmationRequest;
 use App\DegreeDetail;
 use Illuminate\Support\Facades\Session;
 use App\PI;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Admin;
 use App\Workload;
 use App\WorkloadSession;
+use App\ScientificResearchWorkload;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ViewTest extends TestCase
@@ -118,7 +120,7 @@ class ViewTest extends TestCase
     public function test_view_Workload_List()
     {
         $this->login_admin();
-        $response = $this->get('/admin/workload-list');
+        $response = $this->get('/admin/job-workload-list');
         $this->assertEquals(200, $response->status());
         $response->assertViewHas('workload_session');
         $response->assertViewHas('workload_session_current');
@@ -193,7 +195,7 @@ class ViewTest extends TestCase
     {
         $this->login_admin();
         $pi = PI::first()->id;
-        $response = $this->get('/admin/pi-detail/'.$pi.'/workload');
+        $response = $this->get('/admin/pi-detail/'.$pi.'/job-workload');
         $this->assertEquals(200, $response->status());
         $response->assertViewHas('semester_filter');
         $response->assertViewHas('semester');
@@ -238,7 +240,6 @@ class ViewTest extends TestCase
         $this->login_admin();
         $response = $this->get('admin/schoolyear-add');
         $response->assertSuccessful();
-
     }
 
     public function test_view_update_school_year(){
@@ -247,8 +248,6 @@ class ViewTest extends TestCase
         $response = $this->get('admin/schoolyear-update/'.$workloadsession->id);
         $response->assertSuccessful();
         $response->assertViewHas('yearlist');
-
-
     }
 
     public function test_view_statistical(){
@@ -272,6 +271,62 @@ class ViewTest extends TestCase
         $pi = PI::find(16);
         $response = $this->get('admin/academic-rank/update/'.$pi->id);
         $response->assertSuccessful();
+    }
+
+    public function test_View_Update_Confirmation_Request(){
+      $this->login_admin();
+      $cr = ConfirmationRequest::first();
+      $response = $this->get('/admin/confirmation-request/update/'.$cr->id);
+      $response->assertViewHas('pi');
+      $response->assertViewHas('cr');
+    }
+
+    public function test_View_List_Confirmation_Request(){
+      $this->login_admin();
+      $response = $this->get('/admin/confirmation-request/index');
+      $response->assertViewHas('search');
+      $response->assertViewHas('crs');
+      $response->assertViewHas('status');
+    }
+
+    public function test_View_Detail_Confirmation_Request(){
+      $this->login_admin();
+      $cr = ConfirmationRequest::first();
+      $response = $this->get('/admin/confirmation-request/preview/'.$cr->id);
+      $response->assertViewHas('cr');
+    }
+
+    public function test_Add_Scientific_Research_Workload(){
+      $this->login_admin();
+      $response = $this->get('/admin/scientific-research-workload-add');
+      $response->assertViewHas('pi');
+      $response->assertViewHas('ws');
+    }
+
+    public function test_Update_Scientific_Research_Workload(){
+      $this->login_admin();
+      $sr = ScientificResearchWorkload::first();
+      $response = $this->get('/admin/scientific-research-workload-update/'.$sr->id);
+      $response->assertViewHas('pi');
+      $response->assertViewHas('ws');
+      $response->assertViewHas('srworkload');
+    }
+
+    public function test_View_List_Scientific_Research_Workload(){
+      $this->login_admin();
+      $response = $this->get('/admin/scientific-research-workload-list');
+      $response->assertViewHas('workload_session');
+      $response->assertViewHas('workload_session_current');
+      $response->assertViewHas('workloads');
+      $response->assertViewHas('year_workload');
+    }
+
+    public function test_View_Detail_Scientific_Research_Workload(){
+      $this->login_admin();
+      $sr = ScientificResearchWorkload::first();
+      $response = $this->get('/admin/scientific-research-workload-details/'.$sr->id);
+      $response->assertViewHas('srworkload');
+      $response->assertViewHas('pi');
     }
 
 }
