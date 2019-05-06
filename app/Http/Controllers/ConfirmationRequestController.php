@@ -202,7 +202,7 @@ class ConfirmationRequestController extends Controller
                 'first_signer'=> 'required',
                 'second_signer'=> 'required',
                 'name_of_signer'=> 'required',
-                'month_of_income.*'=> 'required|integer|max:12|min:0',
+                'month_of_income.*'=> 'required|integer|max:12|min:1',
                 'year_of_income.*'=> 'required|integer|digits:4',
                 'amount_of_income.*'=> 'required|numeric',
 
@@ -213,14 +213,14 @@ class ConfirmationRequestController extends Controller
                 'second_signer.required' => 'Người ký cấp II không được bỏ trống',
                 'name_of_signer.required' => 'Họ tên người ký không được bỏ trống',
                 'month_of_income.*.required' => 'Tháng thu nhập không được bỏ trống',
-                'month_of_income.*.integer' => 'Tháng thu nhập không hợp lệ',
+                'month_of_income.*.integer' => 'Tháng thu nhập chỉ được nhập số nguyên',
                 'month_of_income.*.max' => 'Tháng thu nhập không hợp lệ',
                 'month_of_income.*.min' => 'Tháng thu nhập không hợp lệ',
                 'year_of_income.*.required' => 'Năm thu nhập không được bỏ trống',
-                'year_of_income.*.integer' => 'Năm thu nhập không hợp lệ',
-                'year_of_income.*.digits' => 'Năm thu nhập không hợp lệ',
+                'year_of_income.*.integer' => 'Năm thu nhập chỉ được nhập số nguyên',
+                'year_of_income.*.digits' => 'Năm thu nhập chỉ được nhập số nguyên',
                 'amount_of_income.*.required' => 'Thu nhập không được bỏ trống',
-                'amount_of_income.*.numeric' => 'Thu nhập không hợp lệ',
+                'amount_of_income.*.numeric' => 'Thu nhập chỉ được nhập số',
 
             ]
         );

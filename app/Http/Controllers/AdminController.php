@@ -37,13 +37,13 @@ class AdminController extends Controller
                 'comfirmpassword'=> 'required|same:newpassword'
             ],
             [
-                'password.required' => 'Chưa xác nhận mật khẩu cũ',
+                'password.required' => 'Mật khẩu cũ không được bỏ trống',
                 'newpassword.required' => 'Mật khẩu mới không được bỏ trống',
                 'newpassword.min' => 'Mật khẩu mới phải có độ dài từ 5-50 kí tự',
                 'newpassword.max' => 'Mật khẩu mới phải có độ dài từ 5-50 kí tự',
                 'newpassword.alpha_num' => 'Mật khẩu mới chỉ được chứa kí tự và số',
                 'comfirmpassword.required' => 'Xác nhận mật khẩu mới không được bỏ trống',
-                'comfirmpassword.same' =>'Xác nhận mật khẩu mới không chính xác',
+                'comfirmpassword.same' =>'Xác nhận mật khẩu mới không trùng khớp với mật khẩu mới',
 
             ]
         );
