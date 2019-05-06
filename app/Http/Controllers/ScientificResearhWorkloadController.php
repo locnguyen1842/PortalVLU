@@ -217,7 +217,7 @@ class ScientificResearhWorkloadController extends Controller
         $this->authorize('cud', PI::firstOrFail());
         $srworkload = ScientificResearchWorkload::findOrFail($id_srworkload);
         $srworkload->delete();
-        return redirect()->back()->with('message', 'Xóa thành công');
+        return redirect()->back()->with('message', 'Xóa khối lượng nghiên cứu khoa học thành công');
     }
 
 

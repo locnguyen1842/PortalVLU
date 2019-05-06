@@ -273,7 +273,7 @@
                                     </div>
                                     @if($pi->academic_rank()->exists())
                                     <div class="panel-footer text-center">
-                                        <label><a class="text-danger" href="{{ route('admin.academic.delete',$pi->id)}}">Xóa</a> </label>
+                                        <label><a class="text-danger delete_academic_rank" href="{{ route('admin.academic.delete',$pi->id)}}">Xóa</a> </label>
 
                                     </div>
                                     @endif
@@ -430,7 +430,27 @@
                                                     </div>
                                                 </div>
                                             </form>
+                                            {{-- modal delete academic rank --}}
+                                            <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"
+                                                id="pi-delete-modal">
+
+                                                <div class="modal-dialog modal-sm">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                                                    aria-hidden="true">&times;</span></button>
+                                                            <h4 class="modal-title" id="myModalLabel">Bạn thực sự muốn xóa thông tin học hàm này ?</h4>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-danger" id="btn-pd-yes">Có</button>
+                                                            <button type="button" class="btn btn-default" id="btn-pd-no">Không</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             @endcan
+
+
                                             {{-- Modal Reset Password --}}
                                             @can('cud', $pi)
                                             <form id="recovery_password" action="{{route('admin.pi.password.recovery',$pi->id)}}"
@@ -478,6 +498,32 @@
 
 <script>
     $(document).ready(function() {
+
+        $(".delete_academic_rank").on('click',function (e) {
+            e.preventDefault();
+            $("#pi-delete-modal").modal('show');
+            var delete_academic_rank_form = $(this).attr('href');
+            var modalConfirm = function(callback){
+
+                $("#btn-pd-yes").on("click", function(){
+                    callback(true);
+                    $("#pi-delete-modal").modal('hide');
+                });
+
+                $("#btn-pd-no").on("click", function(){
+                    callback(false);
+                    $("#pi-delete-modal").modal('hide');
+                });
+            };
+            modalConfirm(function(confirm){
+                if(confirm){
+                    window.location.href = delete_academic_rank_form;
+
+                }else{
+
+                }
+            });
+        });
         $("#submit_recovery_password").on('click', function(e) {
 
             e.preventDefault();

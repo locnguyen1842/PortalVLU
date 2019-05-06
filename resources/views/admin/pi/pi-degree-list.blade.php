@@ -25,7 +25,7 @@
         <table class="table table-hover" action="{{route('admin.pi.degree.index',$pi->id)}}" method="get" style="margin-bottom:0">
             <thead>
                 <tr>
-                    <th>Loại</th>
+                    <th>Bằng cấp</th>
                     <th>Khối ngành</th>
                     <th>Chuyên ngành</th>
                     <th>Ngày cấp </th>

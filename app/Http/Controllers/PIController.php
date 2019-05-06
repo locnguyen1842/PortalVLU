@@ -561,8 +561,8 @@ class PIController extends Controller
         $pi->new = 0;
         $pi->save();
         $dh_count = $pi->degreedetails->where('degree_id', 1)->count();
-        $ths_count = $pi->degreedetails->where('degree_id', 2)->count();
-        $ts_count = $pi->degreedetails->where('degree_id', 3)->count();
+        $ths_count = $pi->degreedetails->where('degree_id', 2)->count() +$pi->degreedetails->where('degree_id', 4)->count();
+        $ts_count = $pi->degreedetails->where('degree_id', 3)->count() + $pi->degreedetails->where('degree_id', 5)->count();
 
 
         return view('admin.pi.pi-detail', compact('pi', 'dh_count', 'ths_count', 'ts_count'));
@@ -757,9 +757,14 @@ class PIController extends Controller
 
     public function getCreateAcademicRank($pi_id)
     {
+
+        $pi = PI::findOrFail($pi_id);
+        if($pi->academic_rank()->exists()){
+            return abort(404);
+        }
         $industries = Industry::all();
         $academic_rank_types = AcademicRankType::all();
-        $pi = PI::findOrFail($pi_id);
+
         return view('admin.pi.academic-create', compact('pi', 'academic_rank_types', 'industries'));
     }
     public function postCreateAcademicRank($pi_id, Request $request)
@@ -781,6 +786,9 @@ class PIController extends Controller
             ]
         );
         $pi = PI::findOrFail($pi_id);
+        if($pi->academic_rank()->exists()){
+            return abort(404);
+        }
         $academic_rank = new AcademicRank;
         $academic_rank->personalinformation_id = $pi->id;
         $academic_rank->type_id = $request->academic_rank_type;

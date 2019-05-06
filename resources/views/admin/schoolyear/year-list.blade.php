@@ -93,7 +93,10 @@
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                             aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel">Bạn thực sự muốn xóa năm học này ?</h4>
+                                    <h4 class="modal-title" id="myModalLabel">Bạn thực sự muốn xóa năm học này ? </h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p for="" class="text-danger">Ghi chú: Việc xóa năm học này sẽ xóa cả các khối lượng công việc liên quan.</p>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-danger" id="btn-pd-yes">Có</button>

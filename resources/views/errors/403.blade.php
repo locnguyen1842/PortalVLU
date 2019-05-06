@@ -8,4 +8,4 @@
 </div>
 @endsection
 
-@section('message', 'Không có quyền thực hiện thao tác này.')
+@section('message', 'Bạn không có quyền thực hiện thao tác này!')

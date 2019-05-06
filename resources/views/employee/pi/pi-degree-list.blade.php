@@ -26,7 +26,7 @@
         <table class="table table-hover" action="{{route('employee.pi.degree.index')}}" method="get" style="margin-bottom:0">
             <thead>
                 <tr>
-                    <th>Loại</th>
+                    <th>Bằng cấp</th>
                     <th>Chuyên ngành</th>
                     <th>Ngày cấp </th>
                     <th>Nơi cấp</th>
@@ -82,7 +82,12 @@
             </tr>
           @endif
             </tbody>
+
         </table>
+        <div class="panel-footer">
+
+            {{$degrees->links()}}
+          </div>
     </div>
     <script type="text/javascript">
         $(document).ready(function() {

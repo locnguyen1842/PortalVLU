@@ -45,8 +45,8 @@ class EmployeeController extends Controller
         $units = Unit::all();
         $provinces = Province::all('name_with_type','code');
         $dh_count = $pi->degreedetails->where('degree_id', 1)->count();
-        $ths_count = $pi->degreedetails->where('degree_id', 2)->count();
-        $ts_count = $pi->degreedetails->where('degree_id', 3)->count();
+        $ths_count = $pi->degreedetails->where('degree_id', 2)->count() +  $pi->degreedetails->where('degree_id', 4)->count();
+        $ts_count = $pi->degreedetails->where('degree_id', 3)->count()+  $pi->degreedetails->where('degree_id', 5)->count();
         return view('employee.pi.pi-detail', compact('pi','provinces', 'employee', 'dh_count', 'ths_count', 'ts_count'));
     }
     public function getupdate()
@@ -290,7 +290,7 @@ class EmployeeController extends Controller
 
         $pi = Auth::guard('employee')->user()->pi;
 
-        $degrees = DegreeDetail::where('personalinformation_id',$pi->id)->get();
+        $degrees = DegreeDetail::where('personalinformation_id',$pi->id)->paginate(10);
 
 
         $degree = Degree::where('id');
@@ -479,8 +479,12 @@ class EmployeeController extends Controller
         return view('employee.faculty.degree.list', compact('id', 'sb','pi'));
     }
     public function getCreateAcademicRank(){
-        $academic_rank_types = AcademicRankType::all();
+
         $pi = PI::findOrFail(Auth::guard('employee')->user()->personalinformation_id);
+        if($pi->academic_rank()->exists()){
+            return abort(404);
+        }
+        $academic_rank_types = AcademicRankType::all();
         return view('employee.pi.academic-create',compact('pi','academic_rank_types'));
 
     }
@@ -499,6 +503,9 @@ class EmployeeController extends Controller
             ]
         );
         $pi = PI::findOrFail(Auth::guard('employee')->user()->personalinformation_id);
+        if($pi->academic_rank()->exists()){
+            return abort(404);
+        }
         $academic_rank = new AcademicRank;
         $academic_rank->personalinformation_id = $pi->id;
         $academic_rank->type_id = $request->academic_rank_type;

@@ -474,7 +474,7 @@ class WorkloadController extends Controller
 
         $workload = Workload::findOrFail($workload_id);
         $workload->delete();
-        return redirect()->back()->with('message', 'Xóa thông tin nhân viên thành công');
+        return redirect()->back()->with('message', 'Xóa thông tin khối lượng giảng dạy thành công');
     }
 
     public function import(Request $request)
@@ -697,6 +697,7 @@ class WorkloadController extends Controller
 
         $school_year = WorkloadSession::findOrFail($id);
         Workload::where('session_id', $school_year->id)->delete();
+        ScientificResearchWorkload::where('session_id', $school_year->id)->delete();
         $school_year->delete();
         return redirect()->back()->with('message', 'Xóa năm học thành công');
     }
