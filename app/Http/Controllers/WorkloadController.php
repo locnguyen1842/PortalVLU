@@ -494,7 +494,7 @@ class WorkloadController extends Controller
         if ($request->has('import_file')) {
             $file = $request->file('import_file');
             $session_year = explode('-', $request->session_year);
-            $workload_session = WorkloadSession::where('start_year', $session_year[0])->where('end_year', $session_year[1])->firstOrFail();
+            $workload_session = WorkloadSession::where('start_year', $session_year[0])->where('end_year', $session_year[1])->first();
 
             if ($workload_session!=null) {
                 $session_id = $workload_session->id;
@@ -694,7 +694,6 @@ class WorkloadController extends Controller
     public function deleteschoolyear($id)
     {
         $this->authorize('cud', PI::firstOrFail());
-
         $school_year = WorkloadSession::findOrFail($id);
         Workload::where('session_id', $school_year->id)->delete();
         ScientificResearchWorkload::where('session_id', $school_year->id)->delete();
