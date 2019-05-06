@@ -91,8 +91,9 @@
 
                             <tbody>
                                 @if($workloads->count() >0)
+                                @foreach ($workloads as $item)
                                 <tr>
-                                    @foreach ($workloads as $item)
+
                                     <td>
 
                                         <a href="{{route('employee.srworkload.detail',$item->id)}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="Chi tiết" href="javascript:" class="search_tag tooltip-test">
@@ -108,9 +109,10 @@
                                     <td>{{$item->converted_standard_time}}</td>
                                     <td>{{$item->converted_time}}</td>
                                     <td>{{$item->note}}</td>
-                                    @endforeach
 
                                 </tr>
+                                @endforeach
+
                                 @else
                                 <tr>
                                         <td colspan="8" class="text-center">Không có bất kỳ dữ liệu nào được tìm thấy</td>

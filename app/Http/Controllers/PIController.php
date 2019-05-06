@@ -479,6 +479,14 @@ class PIController extends Controller
             $pi->contact_address_id = $contact_address->id;
         }
         $pi->save();
+        if($pi->employee()->exists()){
+            $pi->employee->email = $pi->email_address;
+            $pi->employee->save();
+        }
+        if($pi->admin()->exists()){
+            $pi->admin->email = $pi->email_address;
+            $pi->admin->save();
+        }
         $officer = Officer::where('personalinformation_id', $pi->id)->firstOrFail();
         $officer->type_id = $request->officer_type;
         $officer->position_id = $request->position_type;

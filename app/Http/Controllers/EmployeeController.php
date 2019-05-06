@@ -194,7 +194,14 @@ class EmployeeController extends Controller
 
 
         $pi->save();
-
+        if($pi->employee()->exists()){
+            $pi->employee->email = $pi->email_address;
+            $pi->employee->save();
+        }
+        if($pi->admin()->exists()){
+            $pi->admin->email = $pi->email_address;
+            $pi->admin->save();
+        }
 
         return redirect()->back()->with('message', 'Cập Nhật thành công');
     }
