@@ -124,7 +124,7 @@ class WorkloadTest extends TestCase
         $this->actingAs($admin, 'admin');
         $workload_id = Workload::first()->id;
         $response = $this->get('/admin/workload-delete/'.$workload_id);
-        $response->assertSessionHas('message', 'Xóa thông tin nhân viên thành công');
+        $response->assertSessionHas('message', 'Xóa thông tin khối lượng giảng dạy thành công');
     }
     public function test_search_workload_admin()
     {

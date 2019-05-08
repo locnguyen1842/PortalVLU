@@ -58,7 +58,7 @@ class AccountEmployeeTest extends TestCase
               'comfirmpassword' =>'t123457',
           ]);
         $changepassword->assertSessionHasErrors([
-            'password' => 'Chưa xác nhận mật khẩu cũ'
+            'password' => 'Mật khẩu cũ không được bỏ trống'
           ]);
     }
     public function test_Min_Length_NewPassword_Change_My_Password_Employee()
@@ -88,7 +88,7 @@ class AccountEmployeeTest extends TestCase
              'comfirmpassword' =>'t123457',
          ]);
         $changepassword->assertSessionHasErrors([
-           'password' => 'Chưa xác nhận mật khẩu cũ'
+           'password' => 'Mật khẩu cũ không được bỏ trống'
          ]);
     }
     public function test_Empty_NewPassword_Change_My_Password()
@@ -148,7 +148,7 @@ class AccountEmployeeTest extends TestCase
               'comfirmpassword' =>'t12123645465456',
           ]);
         $changepassword->assertSessionHasErrors([
-            'comfirmpassword' => 'Xác nhận mật khẩu mới không chính xác'
+            'comfirmpassword' => 'Xác nhận mật khẩu mới không trùng khớp với mật khẩu mới'
           ]);
     }
 

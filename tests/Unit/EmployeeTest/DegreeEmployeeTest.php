@@ -102,7 +102,7 @@ class DegreeEmployeeTest extends TestCase
         $employee = Employee::where('username', 'T155444')->first();
         $this->actingAs($employee, 'employee');
         $pi = $employee->pi;
-
+        $pi->academic_rank->delete();
         $academic_rank = [
           "academic_rank_type" => "1",
           "specialized" => "Công Nghệ Thông Tin",
@@ -110,7 +110,7 @@ class DegreeEmployeeTest extends TestCase
 
         ];
         //
-        $pi = PI::find(1);
+        $pi = PI::where('employee_code','T155444')->first();
         $addde = $this->post('/academic-rank/create/',$academic_rank);
         $addde->assertSessionHas('message','Thêm mới thành công');
 

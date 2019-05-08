@@ -56,7 +56,7 @@ class ScientificResearchWorkloadTest extends TestCase
         $this->actingAs($admin, 'admin');
         $sr = ScientificResearchWorkload::first()->id;
         $response = $this->get('/admin/scientific-research-workload-delete/'.$sr);
-        $response->assertSessionHas('message', 'Xóa thành công');
+        $response->assertSessionHas('message', 'Xóa khối lượng nghiên cứu khoa học thành công');
      }
 
 
