@@ -302,7 +302,7 @@
 
                                                     @if($pi->admin()->exists())
                                                         <span for="" class="col-sm-4 text-nowrap">
-                                                            {{$pi->admin->is_supervisor == 1 ? 'Ban quản trị':'Phòng tổng hợp' }}
+                                                            {{$pi->admin->is_supervisor == 1 ? 'Ban giám hiệu':'Phòng tổng hợp' }}
                                                         </span>
 
                                                     @else

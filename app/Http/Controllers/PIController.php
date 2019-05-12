@@ -52,6 +52,7 @@ class PIController extends Controller
         $search =  \Request::get('search');
         //query if $search have a value
         $pis = PI::where(function ($query) use ($search) {
+            $query->where('show',1);
             if ($search != null) {
                 $query->where(function ($q) use ($search) {
                     $q->where('employee_code', 'like', '%'.$search.'%')
@@ -129,7 +130,7 @@ class PIController extends Controller
             'teacher_type'=> 'required',
             'teacher_title'=> 'required_unless:teacher_type,0',
             'is_retired'=> 'required_unless:teacher_type,0',
-            'date_of_retirement'=> 'required_if:is_retired,1',
+            'date_of_retirement'=> 'required_if:is_retired,1|date',
             'is_concurrently'=> 'required',
             'home_town'=> 'required',
             'contract_type'=> 'required',
@@ -177,6 +178,7 @@ class PIController extends Controller
             'teacher_title.required_unless' =>'Chức danh nghề nghiệp không được bỏ trống',
             'is_retired.required_unless' =>'Nghỉ hưu không được bỏ trống',
             'date_of_retirement.required_if' =>'Ngày nghỉ hưu không được bỏ trống',
+            'date_of_retirement.date' =>'Ngày nghỉ hưu không hợp lệ',
             'officer_type.required' =>'Loại cán bộ không được bỏ trống',
             'position_type.required' =>'Chức vụ không được bỏ trống',
             'is_concurrently.required' =>'Kiêm nhiệm giảng dạy không được bỏ trống',
@@ -223,7 +225,7 @@ class PIController extends Controller
         $pi->permanent_address_id = $permanent_address->id;
 
         $contact_address = new Address;
-        $contact_address->address_content = $request->$contact_address;
+        $contact_address->address_content = $request->contact_address;
         $contact_address->province_code = $request->province_2;
         $contact_address->district_code = $request->district_2;
         $contact_address->ward_code = $request->ward_2;
@@ -231,7 +233,10 @@ class PIController extends Controller
         $pi->contact_address_id = $contact_address->id;
         $pi->save();
 
-
+        $permanent_address->personalinformation_id = $pi->id;
+        $contact_address->personalinformation_id = $pi->id;
+        $permanent_address->save();
+        $contact_address->save();
         //check is Admin ?
         //add acoount for employee role
         $employee = new Employee;
@@ -353,7 +358,7 @@ class PIController extends Controller
               'teacher_type'=> 'required',
               'teacher_title'=> 'required_unless:teacher_type,0',
               'is_retired'=> 'required_unless:teacher_type,0',
-              'date_of_retirement'=> 'required_if:is_retired,1',
+              'date_of_retirement'=> 'required_if:is_retired,1|date',
               'is_concurrently'=> 'required',
               'home_town'=> 'required',
               'contract_type'=> 'required',
@@ -400,6 +405,7 @@ class PIController extends Controller
               'teacher_title.required_unless' =>'Chức danh nghề nghiệp không được bỏ trống',
               'is_retired.required_unless' =>'Nghỉ hưu không được bỏ trống',
               'date_of_retirement.required_if' =>'Ngày nghỉ hưu không được bỏ trống',
+              'date_of_retirement.date' =>'Ngày nghỉ hưu không hợp lệ',
               'officer_type.required' =>'Loại cán bộ không được bỏ trống',
               'position_type.required' =>'Chức vụ không được bỏ trống',
               'is_concurrently.required' =>'Kiêm nhiệm giảng dạy không được bỏ trống',
@@ -463,6 +469,7 @@ class PIController extends Controller
             $permanent_address->province_code = $request->province_1;
             $permanent_address->district_code = $request->district_1;
             $permanent_address->ward_code = $request->ward_1;
+            $permanent_address->personalinformation_id = $pi->id;
             $permanent_address->save();
             $pi->permanent_address_id = $permanent_address->id;
 
@@ -475,6 +482,7 @@ class PIController extends Controller
             $contact_address->province_code = $request->province_2;
             $contact_address->district_code = $request->district_2;
             $contact_address->ward_code = $request->ward_2;
+            $contact_address->personalinformation_id = $pi->id;
             $contact_address->save();
             $pi->contact_address_id = $contact_address->id;
         }
@@ -612,10 +620,13 @@ class PIController extends Controller
     public function delete($pi_id)
     {
         $this->authorize('cud', PI::firstOrFail());
-
         $pi = PI::findOrFail($pi_id);
-        $pi->show = 0;
-        $pi->save();
+        $pi_id = $pi->id;
+        $pi->delete();
+        Address::where('personalinformation_id',$pi_id)->delete();
+
+
+
         return redirect()->back()->with('message', 'Xóa thông tin nhân viên thành công');
     }
 //    public function getdegreedetail($id){

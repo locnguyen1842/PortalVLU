@@ -63,12 +63,13 @@ class ConfirmationRequestController extends Controller
             [
                 'address'=> 'required',
                 'confirmation'=> 'required',
-                'number_of_month_income' =>'required_if:is_confirm_income,on',
+                'number_of_month_income' =>'required_if:is_confirm_income,on|integer',
             ],
             [
                 'address.required' => 'Địa chỉ không được bỏ trống',
                 'confirmation.required' => 'Lý do không được bỏ trống',
                 'number_of_month_income.required_if' => 'Số tháng không được bỏ trống khi chọn xác nhận thu nhập',
+                'number_of_month_income.integer' => 'Số tháng chỉ được nhập số nguyên',
             ]
         );
         $cr = new ConfirmationRequest;
@@ -171,6 +172,7 @@ class ConfirmationRequestController extends Controller
     }
 
     public function print($cr_id){
+        $this->authorize('cud', PI::firstOrFail());
         $cr = ConfirmationRequest::findOrFail($cr_id);
         $cr->status = 1 ;
         $cr->save();
@@ -182,17 +184,22 @@ class ConfirmationRequestController extends Controller
     public function delete($cr_id){
         $cr = ConfirmationRequest::findOrFail($cr_id);
         $this->authorize('access', $cr);
-        ConfirmationIncome::where('confirmation_request_id',$cr->id)->delete();
         $cr->delete();
         return redirect()->back()->with('message', 'Xóa đơn thành công');
     }
-
+    public function getdeleteAdmin($cr_id){
+        $this->authorize('cud', PI::firstOrFail());
+        $cr= ConfirmationRequest::findOrFail($cr_id);
+        $cr->delete();
+        return redirect()->back()->with('message', 'Xóa đơn thành công');
+    }
     public function getUpdateAdmin($cr_id){
         $this->authorize('cud', PI::firstOrFail());
         $cr= ConfirmationRequest::findOrFail($cr_id);
         $pi = PI::findOrFail($cr->pi->id);
         return view('admin.confirmation.update', compact('pi','cr'));
     }
+
     public function postUpdateAdmin(Request $request,$cr_id){
         $this->authorize('cud', PI::firstOrFail());
         $cr= ConfirmationRequest::findOrFail($cr_id);
@@ -200,9 +207,8 @@ class ConfirmationRequestController extends Controller
             [
                 'confirmation'=> 'required',
                 'first_signer'=> 'required',
-                'second_signer'=> 'required',
                 'name_of_signer'=> 'required',
-                'month_of_income.*'=> 'required|integer|max:12|min:1',
+                'month_of_income.*'=> 'required|numeric|max:12|min:1',
                 'year_of_income.*'=> 'required|integer|digits:4',
                 'amount_of_income.*'=> 'required|numeric',
 
@@ -210,15 +216,14 @@ class ConfirmationRequestController extends Controller
             [
                 'confirmation.required' => 'Lý do không được bỏ trống',
                 'first_signer.required' => 'Người ký cấp I không được bỏ trống',
-                'second_signer.required' => 'Người ký cấp II không được bỏ trống',
                 'name_of_signer.required' => 'Họ tên người ký không được bỏ trống',
                 'month_of_income.*.required' => 'Tháng thu nhập không được bỏ trống',
-                'month_of_income.*.integer' => 'Tháng thu nhập chỉ được nhập số nguyên',
+                'month_of_income.*.numeric' => 'Tháng thu nhập chỉ được nhập số',
                 'month_of_income.*.max' => 'Tháng thu nhập không hợp lệ',
                 'month_of_income.*.min' => 'Tháng thu nhập không hợp lệ',
                 'year_of_income.*.required' => 'Năm thu nhập không được bỏ trống',
-                'year_of_income.*.integer' => 'Năm thu nhập chỉ được nhập số nguyên',
-                'year_of_income.*.digits' => 'Năm thu nhập chỉ được nhập số nguyên',
+                'year_of_income.*.integer' => 'Năm thu nhập chỉ được nhập số',
+                'year_of_income.*.digits' => 'Năm thu nhập chỉ được nhập 4 ký tự',
                 'amount_of_income.*.required' => 'Thu nhập không được bỏ trống',
                 'amount_of_income.*.numeric' => 'Thu nhập chỉ được nhập số',
 
@@ -230,8 +235,7 @@ class ConfirmationRequestController extends Controller
             for ($i = 0 ; $i < count($request->month_of_income) ; $i++) {
                 $ci = new ConfirmationIncome;
                 $ci->confirmation_request_id = $cr->id;
-
-                $ci->month_of_income = $request->month_of_income[$i];
+                $ci->month_of_income =sprintf("%02d", $request->month_of_income[$i]);
                 $ci->year_of_income = $request->year_of_income[$i];
                 $ci->amount_of_income = $request->amount_of_income[$i];
                 $ci ->save();

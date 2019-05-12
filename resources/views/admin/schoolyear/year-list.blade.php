@@ -59,9 +59,9 @@
                     @if($yearlist->count() >0)
                     @foreach ($yearlist as $item)
                     <tr>
-                        <td class="col-sm-6">{{$item->start_year}}</td>
-                        <td class="col-sm-5">{{$item->end_year}}</td>
-            @can('cud',App\PI::first())
+                        <td class="col-sm-1">{{$item->start_year}}</td>
+                        <td class="col-sm-1">{{$item->end_year}}</td>
+                        @can('cud',App\PI::first())
 
                         <td class="col-sm-1">
                             <a href="{{route('admin.schoolyear.update',$item->id)}}" data-toggle="tooltip" data-placement="top"

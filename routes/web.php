@@ -126,6 +126,8 @@ Route::prefix('admin')->group(function () {
         Route::get('/confirmation-request/update/{cr_id}','ConfirmationRequestController@getupdateAdmin')->name('admin.confirmation.update');
         Route::post('/confirmation-request/update/{cr_id}','ConfirmationRequestController@postupdateAdmin')->name('admin.confirmation.update');
 
+        Route::get('/confirmation-request/delete/{cr_id}','ConfirmationRequestController@getdeleteAdmin')->name('admin.confirmation.delete');
+
         // add scientific research workload
         Route::get('/scientific-research-workload-add','ScientificResearhWorkloadController@getAdd')->name('admin.srworkload.add');
         Route::post('/scientific-research-workload-add','ScientificResearhWorkloadController@postAdd')->name('admin.srworkload.add');

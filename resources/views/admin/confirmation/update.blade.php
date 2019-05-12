@@ -130,8 +130,8 @@
                                     <input required type="text" class="form-control" name="first_signer" value="{{$cr->first_signer == null ? 'KT. HIỆU TRƯỞNG': $cr->first_signer}}">
                                 </div>
                                 <div class="col-sm-4">
-                                    <label for="">Người ký cấp II <span style="color: red">*</span> </label>
-                                    <input required type="text" class="form-control" name="second_signer" value="{{$cr->second_signer == null ? 'PHÓ HIỆU TRƯỞNG': $cr->second_signer}}">
+                                    <label for="">Người ký cấp II</label>
+                                    <input type="text" class="form-control" name="second_signer" value="{{$cr->second_signer}}">
                                 </div>
                                 <div class="col-sm-4">
                                         <label for="">Họ tên người ký <span style="color: red">*</span> </label>
@@ -145,7 +145,7 @@
                             <div class="form-group" style="margin-bottom:0">
                                 <div class="col-sm-offset-2 col-sm-10 text-right">
                                     <button type="button" class="btn btn-default btn-back">Quay lại</button>
-                                    <button type="button" class="btn btn-turquoise btn-preview">Xem trước</button>
+                                <button data-src="{{route('admin.confirmation.print',$cr->id)}}" type="button" class="btn btn-turquoise btn-preview">Xem trước</button>
                                     <button type="submit" class="btn btn-primary">Cập nhật</button>
                                 </div>
                             </div>
@@ -192,13 +192,11 @@
             var btn_no = modal.find('.btn-preview-no');
             var btn_update = modal.find('.btn-preview-update');
             modal.modal('show');
-
-            var send_form = $(this).attr('href');
+            var send_form = $(this).attr('data-src');
             var modalConfirm = function(callback){
 
                 btn_yes.on("click", function(){
                     callback(true);
-                    modal.modal('hide');
                 });
 
                 btn_no.on("click", function(){
@@ -206,12 +204,15 @@
                     modal.modal('hide');
                 });
             };
+
             modalConfirm(function(confirm){
+                console.log(confirm)
                 if(confirm){
                     window.open(
                         send_form,
                         '_blank' // <- This is what makes it open in a new window.
                     );
+
 
                 }else{
 

@@ -68,11 +68,30 @@
                                                     </div>
 
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-default btn-preview-no" id="btn-preview-no">Quay lại</button>
-                                                        @if($item->status== 0)
-                                                        <button type="button" data-src="{{route('employee.confirmation.update',$item->id)}}" name="button" class="btn btn-primary btn-preview-update" id="btn-preview-update">Cập nhật</button>
+                                                        <div class="col-sm-12">
+                                                            <div class="col-sm-6 text-al text-warning">
+                                                                    @if($item->status== 0)
+                                                                <ul>
+                                                                    <li>Xác nhận thu nhập sẽ được Phòng Tổng hợp cập nhật</li>
 
-                                                        @endif
+                                                                    <li>Nếu muốn thay đối thông tin trong đơn yêu cầu vui lòng nhấn nút cập nhật</li>
+
+                                                                </ul>
+                                                                @else
+                                                                <ul>
+                                                                    <li>Đơn yêu cầu đã được Phòng Tổng hợp xử lý nên không thể cập nhật</li>
+                                                                </ul>
+                                                                @endif
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                    <button type="button" class="btn btn-default btn-preview-no" id="btn-preview-no">Đóng</button>
+                                                                    @if($item->status== 0)
+                                                                    <button type="button" data-src="{{route('employee.confirmation.update',$item->id)}}" name="button" class="btn btn-primary btn-preview-update" id="btn-preview-update">Cập nhật</button>
+                                                                    @endif
+
+                                                            </div>
+                                                        </div>
+
 
                                                     </div>
                                                 </div>

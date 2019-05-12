@@ -12,7 +12,7 @@
                </div>
                <div class="form-group-header">
                     <strong>TRƯỜNG ĐẠI HỌC VĂN LANG
-                         <hr style="width: 180px">
+                         <hr style="width:180px;height:2px;border:none;color:#333;background-color:#333;">
                          <label
                               style="font-weight:normal">Số:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/GXN-ĐHVL</label>
 
@@ -26,7 +26,7 @@
                </div>
                <div class="form-group-header">
                     <strong style="font-size:1.06rem">Độc lập – Tự do – Hạnh phúc
-                         <hr style="width: 200px">
+                         <hr style="width:210px;height:2px;border:none;color:#333;background-color:#333;">
                     </strong>
                </div>
           </div>
@@ -42,7 +42,7 @@
           <div class="col-sm-1">&nbsp;</div>
           <div class="col-sm-10" style="margin-top:2rem">
                <div class="form-group col-sm-12">
-               <label class="content" for="">Xác nhận: {{$cr->confirmation}}</label>
+               <label class="content" for="">Xác nhận: {{$cr->pi->gender == 1 ? 'Bà' : 'Ông'}} <span class=" text-uppercase">{{$cr->pi->full_name}}</span></label>
 
                </div>
                <div class="form-group col-sm-12">
@@ -74,10 +74,10 @@
                    @if($pi->officer->type_id == 4)
                    @if($cr->pi->leader_type()->exists())
                         @if($cr->pi->leader_type_id == 1 || $cr->pi->leader_type_id == 2)
-                        <label class="content" for="">Là <span>{{$cr->pi->leader_type->name}}</span> <span>{{$cr->pi->unit->name}}</span>, Trường Đại học Văn Lang từ {{date('d/m/Y', strtotime($cr->date_of_recruitment))}}
+                        <label class="content" for="">Là <span>{{$cr->pi->leader_type->name}}</span> <span>{{$cr->pi->unit->name}}</span>, Trường Đại học Văn Lang từ {{date('d/m/Y', strtotime($cr->pi->date_of_recruitment))}}
                             đến nay.</label>
                         @else
-                        <label class="content" for="">Là <span>{{$cr->pi->teacher->type->note}}</span> <span>{{$cr->pi->unit->name}}</span>, Trường Đại học Văn Lang từ {{date('d/m/Y', strtotime($cr->date_of_recruitment))}}
+                        <label class="content" for="">Là <span>{{$cr->pi->teacher->type->note}}</span> <span>{{$cr->pi->unit->name}}</span>, Trường Đại học Văn Lang từ {{date('d/m/Y', strtotime($cr->pi->date_of_recruitment))}}
                             đến nay.</label>
                         @endif
 
@@ -85,11 +85,11 @@
                     @elseif($pi->officer->type_id == 3)
                     @if($cr->pi->leader_type()->exists())
                         @if($cr->pi->leader_type_id == 1 || $cr->pi->leader_type_id == 2)
-                        <label class="content" for="">Là <span>{{$cr->pi->leader_type->name}}</span> <span>{{$cr->pi->unit->name}}</span>, Trường Đại học Văn Lang từ {{date('d/m/Y', strtotime($cr->date_of_recruitment))}}
+                        <label class="content" for="">Là <span>{{$cr->pi->leader_type->name}}</span> <span>{{$cr->pi->unit->name}}</span>, Trường Đại học Văn Lang từ {{date('d/m/Y', strtotime($cr->pi->date_of_recruitment))}}
                             đến nay.</label>
                         @else
 
-                            <label class="content" for="">Là <span>{{$pi->officer->position->name}}</span> <span>{{$pi->unit->name}}</span>, Trường Đại học Văn Lang từ {{date('d/m/Y', strtotime($pi->date_of_recruitment))}}
+                            <label class="content" for="">Là <span>{{$pi->officer->position->name}}</span> <span>{{$pi->unit->name}}</span>, Trường Đại học Văn Lang từ {{date('d/m/Y', strtotime($cr->pi->date_of_recruitment))}}
                                 đến nay.</label>
                         @endif
 
@@ -109,7 +109,7 @@
                </div>
                @if($cr->incomes()->exists())
                <div class="form-group-header col-sm-12">
-                    <label class="content" for="">Thu nhập {{$cr->incomes->count()}} tháng gần nhất:</label>
+                    <label class="content" for="">Thu nhập {{$cr->number_of_month_income}} tháng gần nhất:</label>
                     </div>
                <div class="form-group-header col-sm-12">
 
@@ -142,9 +142,9 @@
                <div class="form-group col-sm-12" style="margin-top:1rem">
                     <div class="col-sm-4">&nbsp;</div>
                     <div class="col-sm-8 text-center">
-                         <label class="content" style="font-style:italic" for=""> Tp. Hồ Chí Minh,
-                            ngày {{Carbon\Carbon::now()->day}} tháng {{Carbon\Carbon::now()->month}} năm
-                            {{Carbon\Carbon::now()->year}} </label>
+                         <label class="content" style="font-style:italic" for=""> Thành Phố Hồ Chí Minh,
+                            ngày &nbsp;&nbsp;&nbsp;&nbsp; tháng &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; năm
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </label>
 
                     </div>
 
@@ -153,8 +153,9 @@
                     <div class="col-sm-4">&nbsp;</div>
                     <div class="col-sm-8 text-center">
                          <h4 class="text-upper" for="">{{$cr->first_signer != null ? $cr->first_signer : 'KT.HIỆU TRƯỞNG'}}</h4>
+                         @if($cr->second_signer != null)
                          <h4 class="text-upper" for="">{{$cr->second_signer != null ? $cr->second_signer : 'PHÓ HIỆU TRƯỞNG'}}</h4>
-
+                        @endif
                     </div>
 
 
@@ -189,6 +190,9 @@
         border: 1px solid black;
         text-align: center;
     }
+    .text-uppercase{
+        text-transform:uppercase!important;
+     }
     table > tbody > tr > td {
         height: 30px;
     }

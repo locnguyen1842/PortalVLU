@@ -137,10 +137,10 @@
                                         </a>
                                     </td>
                                     <td>{{$item->pi->full_name}}</td>
-                                    <td>{{$item->name_of_work}}</td>
-                                    <td>{{$item->detail_of_work}}</td>
-                                    <td>{{$item->explain_of_work}}</td>
-                                    <td>{{$item->unit_of_work}}</td>
+                                    <td>{{str_limit($item->name_of_work,50)}}</td>
+                                    <td>{{str_limit($item->detail_of_work,50)}}</td>
+                                    <td>{{str_limit($item->explain_of_work,50)}}</td>
+                                    <td>{{str_limit($item->unit_of_work,50)}}</td>
                                     <td>{{$item->quantity_of_work}}</td>
                                     <td>{{$item->converted_standard_time}}</td>
                                     <td>{{$item->converted_time}}</td>

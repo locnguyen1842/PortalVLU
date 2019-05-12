@@ -5,7 +5,7 @@
     <div class="cm-breadcrumb-container">
         <ol class="breadcrumb">
             {{-- <li><a href="#">Home</a></li> --}}
-            <li class=""><a href="{{route('admin.workload.index')}}">Quản lý khối lượng NCKH</a></li>
+            <li class=""><a href="{{route('admin.srworkload.index')}}">Quản lý khối lượng NCKH</a></li>
             <li class="active">Chi tiết khối lượng NCKH - {{$srworkload->pi->employee_code}}</li>
         </ol>
     </div>

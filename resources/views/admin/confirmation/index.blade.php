@@ -112,7 +112,7 @@
 
                         @endif
                         <td class="font-weight-bold {{$item->status == 0 ? 'text-danger':'text-success'}}">{{$item->status == 0 ? 'Chưa xử lý':'Đã xử lý'}}</td>
-                        @can('cud', App\PI::first())
+
                         <td>
                             <a href="{{route('admin.confirmation.print',$item->id)}}" data-toggle="tooltip" target="_blank" data-placement="top"
                                     title="" data-original-title="Xem trước" href="javascript:" class="preview_cr tooltip-test ml-10">
@@ -133,49 +133,51 @@
                                                 </div>
 
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-default btn-preview-no" id="btn-preview-no">Quay lại</button>
-
+                                                    <button type="button" class="btn btn-default btn-preview-no" id="btn-preview-no">Đóng</button>
+                                                    @can('cud', App\PI::first())
                                                     <button type="button" data-src="{{route('admin.confirmation.update',$item->id)}}" name="button" class="btn btn-primary btn-preview-update" id="btn-preview-update">Cập nhật</button>
 
                                                     <button type="button" class="btn btn-warning btn-preview-yes" id="btn-preview-yes">Xuất pdf</button>
-
+                                                    @endcan
 
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    @can('cud', App\PI::first())
                             <a href="{{route('admin.confirmation.update',$item->id)}}" data-toggle="tooltip" data-placement="top"
                                 title="" data-original-title="Cập nhật" href="javascript:" class="tooltip-test ml-10">
                                 <span class=""><i class="fa fa-lg fa-edit text-primary"></i>
                                     <span class="mdi mdi-close"></span>
                                 </span>
                             </a>
-                            {{-- <a href="{{route('admin.confirmation.delete',$item->id)}}" data-toggle="tooltip" data-placement="top"
-                                title="" data-original-title="Xóa" class="delete_workload tooltip-test ml-10">
+                            <a href="{{route('admin.confirmation.delete',$item->id)}}" data-toggle="tooltip" data-placement="top"
+                                title="" data-original-title="Xóa" class="delete_cr tooltip-test ml-10">
                                 <span class=""><i class="fa fa-lg fa-trash text-danger"></i>
                                     <span class="mdi mdi-close"></span>
                                 </span>
-                            </a> --}}
+                            </a>
+                            @endcan
                         </td>
-                        @endcan
+
                         <td></td>
 
                     </tr>
-                    {{--modal delete workload--}}
+                    {{--modal delete confirmation--}}
 
                     <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"
-                        id="pi-delete-modal">
+                        id="cr-delete-modal">
 
                         <div class="modal-dialog modal-sm">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                             aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel">Bạn thực sự muốn xóa năm học này ?</h4>
+                                    <h4 class="modal-title" id="myModalLabel">Bạn thực sự muốn xóa đơn yêu cầu này ?</h4>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" id="btn-pd-yes">Có</button>
-                                    <button type="button" class="btn btn-default" id="btn-pd-no">Không</button>
+                                    <button type="button" class="btn btn-danger" id="btn-cr-yes">Có</button>
+                                    <button type="button" class="btn btn-default" id="btn-cr-no">Không</button>
                                 </div>
                             </div>
                         </div>
@@ -209,7 +211,31 @@
             var search = "";
             window.location.href = url + '?&status='+status;
         });
+        $(".delete_cr").on('click',function (e) {
+            e.preventDefault();
+            $("#cr-delete-modal").modal('show');
+            var delete_cr_form = $(this).attr('href');
+            var modalConfirm = function(callback){
 
+                $("#btn-cr-yes").on("click", function(){
+                    callback(true);
+                    $("#cr-delete-modal").modal('hide');
+                });
+
+                $("#btn-cr-no").on("click", function(){
+                    callback(false);
+                    $("#cr-delete-modal").modal('hide');
+                });
+            };
+            modalConfirm(function(confirm){
+                if(confirm){
+                    window.location.href = delete_cr_form;
+
+                }else{
+
+                }
+            });
+        });
         $(".preview_cr").on('click',function (e) {
             e.preventDefault();
             var modal = $(this).closest('tr').find('.cr-preview-modal');
@@ -223,7 +249,6 @@
 
                 btn_yes.on("click", function(){
                     callback(true);
-                    modal.modal('hide');
                 });
 
                 btn_no.on("click", function(){
