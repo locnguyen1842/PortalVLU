@@ -156,7 +156,8 @@ class ViewEmployeeTest extends TestCase
     // }
     public function test_view_create_academic_rank(){
         $pi = $this->login_employee();
-        $pi = PI::find(29);
+        
+        $pi->academic_rank->delete();
         $response = $this->get('academic-rank/create/');
         $response->assertSuccessful();
     }

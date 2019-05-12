@@ -105,7 +105,7 @@ class DegreeTest extends TestCase
     {
         $admin = Admin::where('is_supervisor',0)->first();
         $this->actingAs($admin,'admin');
-
+    
         $academic_rank = [
           "academic_rank_type" => "1",
           "specialized" => "Công Nghệ Thông Tin",
@@ -114,8 +114,10 @@ class DegreeTest extends TestCase
 
         ];
         //
-        $pi = PI::find(1);
+        $pi = PI::find(34);
+
         $addde = $this->post('/admin/academic-rank/create/'.$pi->id,$academic_rank);
+        
         $addde->assertSessionHas('message','Thêm mới thành công');
 
     }

@@ -270,7 +270,7 @@ class EmployeeController extends Controller
                 'newpassword.max' => 'Mật khẩu mới phải có độ dài từ 5-50 kí tự',
                 'newpassword.alpha_num' => 'Mật khẩu mới chỉ được chứa kí tự và số',
                 'comfirmpassword.required' => 'Xác nhận mật khẩu mới không được bỏ trống',
-                'comfirmpassword.same' =>'Xác nhận mật khẩu mới không trùng khơp với mật khẩu mới',
+                'comfirmpassword.same' =>'Xác nhận mật khẩu mới không trùng khớp với mật khẩu mới',
 
             ]
         );
