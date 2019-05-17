@@ -313,7 +313,7 @@
                             <option {{$pi->leader_type_id == $leader_type->id ? 'selected' : ''}}
                                 value="{{$leader_type->id}}">{{$leader_type->name}}</option>
                             @endforeach
-                            <option value="">Không có</option>
+                            <option {{$pi->leader_type_id == null ? 'selected' : ''}} value="">Không có</option>
                         </select>
                     </div>
                     <div class="col-sm-6">
@@ -360,21 +360,21 @@
                         <div class="radio">
                             @if($pi->officer()->exists())
                             <label class="col-sm-4">
-                                <input required type="radio" name="is_concurrently" value="0"
-                                    {{$pi->officer->is_concurrently ==0 ? "checked":""}}>Có
+                                <input required type="radio" name="is_concurrently" value="1"
+                                    {{$pi->officer->is_concurrently ==1 ? "checked":""}}>Có
                             </label>
                             <label class="col-sm-4">
-                                <input required type="radio" name="is_concurrently" value="1"
-                                    {{$pi->officer->is_concurrently ==1 ? "checked":""}}>Không
+                                <input required type="radio" name="is_concurrently" value="0"
+                                    {{$pi->officer->is_concurrently ==0 ? "checked":""}}>Không
                             </label>
                             @else
                             <label class="col-sm-4">
-                                <input required type="radio" name="is_concurrently" value="0"
-                                    {{old('is_concurrently') ==0 ? "checked":""}}>Có
+                                <input required type="radio" name="is_concurrently" value="1"
+                                    {{old('is_concurrently') ==1 ? "checked":""}}>Có
                             </label>
                             <label class="col-sm-4">
-                                <input required type="radio" name="is_concurrently" value="1"
-                                    {{old('is_concurrently') ==1 ? "checked":""}}>Không
+                                <input required type="radio" name="is_concurrently" value="0"
+                                    {{old('is_concurrently') ==0 ? "checked":""}}>Không
                             </label>
                             @endif
 
@@ -594,12 +594,12 @@
                         var district_2 = '{{ $pi->contact_address()->exists() ? $pi->contact_address->district->code:'' }}'
 
                         if(district.code == district_2){
-                            $('option[data-old-1="old-'+district.code+'"]').prop('selected',true);
+                            $('option[data-old-2="old-'+district.code+'"]').prop('selected',true);
                         }
                 });
             });
 
-            var district_code_2 = '{{ $pi->contact_address()->exists() ? $pi->contact_address->district->code :'' }}';
+            var district_code_2 = '{{ $pi->contact_address()->exists() ? $pi->contact_address->district->code:'' }}';
             $.get('{{route('res.wards')}}' + '?district_code=' + district_code_2,
             function(data) {
                 $('#ward_2').empty();

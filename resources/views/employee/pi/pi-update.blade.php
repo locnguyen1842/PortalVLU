@@ -299,7 +299,7 @@
                             var district_2 = '{{ $pi->contact_address()->exists() ? $pi->contact_address->district->code:'' }}'
 
                             if(district.code == district_2){
-                                $('option[data-old-1="old-'+district.code+'"]').prop('selected',true);
+                                $('option[data-old-2="old-'+district.code+'"]').prop('selected',true);
                             }
                     });
                 });

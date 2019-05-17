@@ -123,8 +123,8 @@
                 <div class="col-sm-12">
                     <div class="form-group">
                         <div class="col-sm-12">
-                            <label for="">Địa chỉ thường trú <span style="color: red">*</span></label>
-                            <input required type="text" maxlength="100" class="form-control" name="permanent_address" placeholder="Nhập địa chỉ thường trú" value="{{old('permanent_address')}}">
+                            <label for="">Địa chỉ thường trú</label>
+                            <input type="text" maxlength="100" class="form-control" name="permanent_address" placeholder="Nhập địa chỉ thường trú" value="{{old('permanent_address')}}">
                         </div>
                     </div>
                     <div class="form-group">
@@ -157,8 +157,8 @@
                 <div class="col-sm-12">
                     <div class="form-group">
                         <div class="col-sm-12">
-                            <label for="">Địa chỉ tạm trú <span style="color: red">*</span></label>
-                            <input required type="text" maxlength="100" class="form-control" name="contact_address" placeholder="Nhập địa chỉ tạm trú" value="{{old('contact_address')}}">
+                            <label for="">Địa chỉ tạm trú</label>
+                            <input type="text" maxlength="100" class="form-control" name="contact_address" placeholder="Nhập địa chỉ tạm trú" value="{{old('contact_address')}}">
                         </div>
                     </div>
                     <div class="form-group">
@@ -246,10 +246,10 @@
                     <label>Kiêm nhiệm giảng dạy <span style="color: red">*</span></label>
                     <div class="radio">
                         <label class="col-sm-4">
-                            <input required type="radio" name="is_concurrently" value="0" checked>Có
+                            <input required type="radio" name="is_concurrently" value="1" checked>Có
                         </label>
                         <label class="col-sm-4">
-                            <input required type="radio" name="is_concurrently" value="1">Không
+                            <input required type="radio" name="is_concurrently" value="0">Không
                         </label>
                     </div>
                 </div>

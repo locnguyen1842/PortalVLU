@@ -451,8 +451,6 @@ class PIController extends Controller
             $permanent_address->ward_code = $request->ward_1;
             $permanent_address->save();
             $pi->permanent_address_id = $permanent_address->id;
-
-
             $contact_address = Address::where('id', $pi->contact_address_id)->firstOrFail();
             // luu cac thong tin update ve address o day
             $contact_address->address_content = $request->contact_address;
