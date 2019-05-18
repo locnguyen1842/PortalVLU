@@ -394,6 +394,8 @@
                {
                 $('.row-table-import-tr').remove();
                 $('.heading-table-import-tr').remove();
+                $('.row-table-import-tr-1').remove();
+                $('.heading-table-import-tr-1').remove();
 
                  if($.isEmptyObject(datas.error)){
                      console.log(datas);
@@ -480,8 +482,10 @@
                             form.append(session_input);
                             form.submit();
                          }else{
-                           $('.row-table-import-tr').remove();
+                            $('.row-table-import-tr').remove();
                            $('.heading-table-import-tr').remove();
+                           $('.row-table-import-tr-1').remove();
+                           $('.heading-table-import-tr-1').remove();
                          }
                      });
 	                }else{

@@ -141,11 +141,13 @@ class AddressImport implements ToCollection,WithStartRow
             $address_permanent->province_code = $province_permanent->code;
             $address_permanent->district_code = $district_permanent->code;
             $address_permanent->ward_code = $ward_permanent->code;
+            $address_permanent->personalinformation_id = $pi->id;
             // contact
             $address_contact->address_content = $row[6];
             $address_contact->province_code = $province_contact->code;
             $address_contact->district_code = $district_contact->code;
             $address_contact->ward_code = $ward_contact->code;
+            $address_contact->personalinformation_id = $pi->id;
             $address_permanent->save();
             $address_contact->save();
 

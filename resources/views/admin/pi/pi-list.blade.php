@@ -321,8 +321,7 @@
                contentType:  false,
                data: new FormData($('#pi-import-form')[0]), // serializes the form's elements.
                success: function(datas)
-               {
-
+                {
                 $('#header-modal').empty();
                 $('.row-table-import-tr').remove();
                 $('.heading-table-import-tr').remove();
@@ -330,6 +329,8 @@
                 $('.heading-table-import-tr-1').remove();
                 $('.row-table-import-tr-2').remove();
                 $('.heading-table-import-tr-2').remove();
+                $('.row-table-import-tr-3').remove();
+                $('.heading-table-import-tr-3').remove();
                  if($.isEmptyObject(datas.error)){
                      $('#header-modal').text('Xem Trước : Thông tin nhân viên');
 
@@ -471,6 +472,8 @@
                            $('.heading-table-import-tr-1').remove();
                            $('.row-table-import-tr-2').remove();
                            $('.heading-table-import-tr-2').remove();
+                           $('.row-table-import-tr-3').remove();
+                           $('.heading-table-import-tr-3').remove();
                          }
                      });
 	                }else{
