@@ -109,19 +109,21 @@
 
                             <tbody>
                                 @if($workloads->count() >0)
+                                @foreach ($workloads as $item)
                                 <tr>
-                                    @foreach ($workloads as $item)
-                                    <td>{{$item->name_of_work}}</td>
-                                    <td>{{$item->detail_of_work}}</td>
-                                    <td>{{$item->explain_of_work}}</td>
-                                    <td>{{$item->unit_of_work}}</td>
+
+                                <td>{{str_limit($item->name_of_work,50)}} <br> <a href="{{route('employee.faculty.srworkload.detail',$item->id)}}">(chi tiết)</a></td>
+                                    <td>{{str_limit($item->detail_of_work,50)}}</td>
+                                    <td>{{str_limit($item->explain_of_work,50)}}</td>
+                                    <td>{{str_limit($item->unit_of_work,50)}}</td>
                                     <td>{{$item->quantity_of_work}}</td>
                                     <td>{{$item->converted_standard_time}}</td>
                                     <td>{{$item->converted_time}}</td>
-                                    <td>{{$item->note}}</td>
-                                    @endforeach
+                                    <td>{{str_limit($item->note,50)}}</td>
+
 
                                 </tr>
+                                @endforeach
                                 @else
                                 <tr>
                                         <td colspan="8" class="text-center">Không có bất kỳ dữ liệu nào được tìm thấy</td>

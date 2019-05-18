@@ -95,20 +95,16 @@
                                 <tr>
 
                                     <td>
+                                        {{str_limit($item->name_of_work,50)}} <br> <a href="{{route('employee.srworkload.detail',$item->id)}}">(chi tiết)</a>
 
-                                        <a href="{{route('employee.srworkload.detail',$item->id)}}" data-toggle="tooltip" data-placement="right" title="" data-original-title="Chi tiết" href="javascript:" class="search_tag tooltip-test">
-                                            <span class="badge badge-danger">{{$item->name_of_work}}
-                                                <span class="mdi mdi-close"></span>
-                                            </span>
-                                        </a>
                                     </td>
-                                    <td>{{$item->detail_of_work}}</td>
-                                    <td>{{$item->explain_of_work}}</td>
-                                    <td>{{$item->unit_of_work}}</td>
+                                    <td>{{str_limit($item->detail_of_work,50)}}</td>
+                                    <td>{{str_limit($item->explain_of_work,50)}}</td>
+                                    <td>{{str_limit($item->unit_of_work,50)}}</td>
                                     <td>{{$item->quantity_of_work}}</td>
                                     <td>{{$item->converted_standard_time}}</td>
                                     <td>{{$item->converted_time}}</td>
-                                    <td>{{$item->note}}</td>
+                                    <td>{{str_limit($item->note,50)}}</td>
 
                                 </tr>
                                 @endforeach

@@ -293,7 +293,7 @@
                         <td>{{$item->quantity_of_work}}</td>
                         <td>{{$item->converted_standard_time}}</td>
                         <td>{{$item->converted_time}}</td>
-                        <td>{{$item->note}}</td>
+                        <td>{{str_limit($item->note,50)}}</td>
             @can('cud',App\PI::first())
 
                         <td class="col-sm-1">

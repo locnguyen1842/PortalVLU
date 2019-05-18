@@ -197,7 +197,8 @@ Route::prefix('')->group(function () {
         Route::get('/faculty-pi-detail/{id}', 'EmployeeController@getFacultydetail')->name('employee.faculty.detail');
         Route::get('/faculty-job-workload/{id}', 'EmployeeController@getfaWorkload')->name('employee.faculty.workload');
         Route::get('/faculty-scientific-research-workload/{id}', 'EmployeeController@getFaSRWorkload')->name('employee.faculty.srworkload.index');
-        Route::get('/scientific-research-workload/{sr_id}', 'EmployeeController@getFaSRWorkloaddetail')->name('employee.srworkload.detail');
+        Route::get('/faculty-scientific-research-workload-detail/{sr_id}', 'EmployeeController@getFaSRWorkloadDetail')->name('employee.faculty.srworkload.detail');
+        Route::get('/scientific-research-workload-detail/{sr_id}', 'EmployeeController@getSRWorkloadDetail')->name('employee.srworkload.detail');
         Route::get('/faculty-sb-detail/{id}', 'EmployeeController@getfacultysb')->name('employee.faculty.sb');
         Route::get('/faculty-degree-list/{id}', 'EmployeeController@getfacultydegreelist')->name('employee.faculty.degree.list');
         Route::get('/faculty-print-sb/{id}', 'ScientificBackgroundController@indexPrintFaculty')->name('employee.faculty.sb.print');

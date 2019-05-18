@@ -580,12 +580,20 @@ class EmployeeController extends Controller
 
         return view('employee.faculty.fa-srworkload-list', compact('workload_session', 'workload_session_current', 'workloads', 'year_workload', 'pi'));
     }
-    public function getFaSRWorkloaddetail($sr_id){
+    public function getSRWorkloadDetail($sr_id){
         $pi = PI::findOrFail(Auth::guard('employee')->user()->personalinformation_id);
         $srworkload = ScientificResearchWorkload::findOrFail($sr_id);
         $workload_session = WorkloadSession::all();
 
         return view('employee.scientific.srworkload-details', compact('srworkload','workload_session', 'pi'));
+    }
+
+    public function getFaSRWorkloadDetail($sr_id){
+
+        $srworkload = ScientificResearchWorkload::findOrFail($sr_id);
+        $this->authorize('actAsFacultyLeader', $srworkload->pi);
+        $this->authorize('onlyAccessWithSameFaculty', $srworkload->pi);
+        return view('employee.faculty.fa-srworkload-detail', compact('srworkload'));
     }
 
 }
