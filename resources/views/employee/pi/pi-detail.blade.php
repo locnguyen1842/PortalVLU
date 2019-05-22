@@ -132,7 +132,24 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="inputPassword3" class="col-sm-5  ">Chức vụ</label>
+                                        @if($pi->officer->type_id == 3 || $pi->officer->type_id == 4)
+                                        <span for="" class="col-sm-7 text-nowrap">{{$pi->leader_type()->exists() ? $pi->leader_type->name:$pi->officer->position->name}}</span>
+                                        @else
                                         <span for="" class="col-sm-7 text-nowrap">{{$pi->officer->position->name}}</span>
+
+                                        @endif
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-5  ">Đơn vị</label>
+                                        <span for="" class="col-sm-7 text-truncate">{{$pi->unit->name}}</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-5  ">Ngày tuyển dụng </label>
+                                        <span for="" class="col-sm-7 text-nowrap">{{date('d-m-Y',strtotime($pi->date_of_recruitment))}}</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-5  ">Loại hợp đồng </label>
+                                        <span for="" class="col-sm-7 text-nowrap">{{($pi->contract_type->name)}}</span>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputPassword3" class="col-sm-5  ">Kiêm nhiệm giảng dạy</label>
@@ -172,18 +189,7 @@
                                     @endif
                                     @endif
 
-                                    <div class="form-group">
-                                        <label for="inputPassword3" class="col-sm-5  ">Đơn vị</label>
-                                        <span for="" class="col-sm-7 text-truncate">{{$pi->unit->name}}</span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputPassword3" class="col-sm-5  ">Ngày tuyển dụng </label>
-                                        <span for="" class="col-sm-7 text-nowrap">{{date('d-m-Y',strtotime($pi->date_of_recruitment))}}</span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputPassword3" class="col-sm-5  ">Loại hợp đồng </label>
-                                        <span for="" class="col-sm-7 text-nowrap">{{($pi->contract_type->name)}}</span>
-                                    </div>
+
                                 </form>
                             </div>
                         </div>

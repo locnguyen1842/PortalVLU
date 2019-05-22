@@ -69,10 +69,10 @@
 
                                                     <div class="modal-footer">
                                                         <div class="col-sm-12">
-                                                            <div class="col-sm-6 text-al text-warning">
+                                                            <div class="col-sm-8 text-al text-warning">
                                                                     @if($item->status== 0)
                                                                 <ul>
-                                                                    <li>Xác nhận thu nhập sẽ được Phòng Tổng hợp cập nhật</li>
+                                                                    <li>Xác nhận thu nhập (nếu có) sẽ được Phòng Tổng hợp cập nhật</li>
 
                                                                     <li>Nếu muốn thay đối thông tin trong đơn yêu cầu vui lòng nhấn nút cập nhật</li>
 
@@ -83,7 +83,7 @@
                                                                 </ul>
                                                                 @endif
                                                             </div>
-                                                            <div class="col-sm-6">
+                                                            <div class="col-sm-4">
                                                                     <button type="button" class="btn btn-default btn-preview-no" id="btn-preview-no">Đóng</button>
                                                                     @if($item->status== 0)
                                                                     <button type="button" data-src="{{route('employee.confirmation.update',$item->id)}}" name="button" class="btn btn-primary btn-preview-update" id="btn-preview-update">Cập nhật</button>
