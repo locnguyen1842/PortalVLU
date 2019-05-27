@@ -98,7 +98,7 @@
                                             <input {{old('is_confirm_income') == 'on' ? 'checked':''}} type="checkbox" name="is_confirm_income">
                                             Xác nhận thu nhập trong
                                         </label>
-                                        <input min="0" class="input-on-checkbox" oninput="this.value = Math.abs(this.value)" type="number" name="number_of_month_income"> tháng gần nhất
+                                        <input min="0" max="48" class="input-on-checkbox" oninput="this.value = Math.abs(this.value)" type="number" name="number_of_month_income"> tháng gần nhất
                                     </div>
                                 </div>
                             </div>

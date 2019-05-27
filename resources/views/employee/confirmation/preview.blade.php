@@ -107,10 +107,12 @@
                     @endif
 
                </div>
-               @if($cr->incomes()->exists())
+               @if($cr->is_confirm_income == 1)
                <div class="form-group-header col-sm-12">
                     <label class="content" for="">Thu nhập {{$cr->number_of_month_income}} tháng gần nhất:</label>
-                    </div>
+               </div>
+               @if($cr->incomes()->exists())
+               
                <div class="form-group-header col-sm-12">
 
                 <table class="table-content" cellspacing="0px">
@@ -135,6 +137,8 @@
 
             </div>
             @endif
+               @endif
+               
                <div class="form-group col-sm-12">
                     <label class="content" for="">Nhà trường cấp giấy xác nhận để {{$pi->gender == 1 ? 'bà' : 'ông'}} {{$pi->full_name}} {{$cr->confirmation}}.</label>
 

@@ -102,7 +102,7 @@
                                                 </div>
 
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-default btn-preview-no" id="btn-preview-no">Quay lại</button>
+                                                    <button type="button" class="btn btn-default btn-preview-no" id="btn-preview-no">Đóng</button>
                                                     <button type="button" class="btn btn-warning btn-preview-yes" id="btn-preview-yes">Xuất pdf</button>
 
 

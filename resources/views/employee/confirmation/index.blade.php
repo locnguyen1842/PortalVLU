@@ -40,6 +40,7 @@
 
                         <th>Lý do</th>
                         <th>Ngày tạo</th>
+                        <th>Xác nhận thu nhập</th>
                         <th>Trạng thái</th>
                         <th></th>
                     </tr>
@@ -100,6 +101,13 @@
                         </td>
 
                         <td>{{date('d-m-Y', strtotime($item->created_at))}}</td>
+                        @if($item->is_confirm_income == 1)
+                        <td><i class="fa fa-fw fa-check text-success"></i></td>
+                        @else
+                        <td><i class="fa fa-fw fa-close text-danger"></i></td>
+
+                        @endif
+                        
                         <td class="font-weight-bold {{$item->status == 0 ? 'text-primary':'text-success'}}">{{$item->status == 0 ? 'Đã gửi': 'Đã xử lý'}}</td>
 
                         @if($item->status == 0)

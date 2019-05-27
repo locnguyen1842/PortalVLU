@@ -22,7 +22,7 @@
                 {{-- breadcrumb --}}
                 @yield('breadcrumb')
                 {{-- header right --}}
-                <div class="dropdown pull-right">
+                <!-- <div class="dropdown pull-right">
                     <button class="btn btn-primary md-notifications-white" data-toggle="dropdown"> <span class="label label-danger"></span> </button>
                     <div class="popover cm-popover bottom">
                         <div class="arrow"></div>
@@ -39,7 +39,7 @@
                           <div style="padding:10px"><a class="btn btn-success btn-block" href="#">Xem thêm</a></div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="dropdown pull-right">
                     <button class="btn btn-primary md-account-circle-white" data-toggle="dropdown"></button>
                     <ul class="dropdown-menu">
