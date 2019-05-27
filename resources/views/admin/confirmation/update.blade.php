@@ -89,27 +89,6 @@
 
                                     </div>
 
-                                <div class="modal fade cr-preview-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="cr-preview-modal">
-
-                                        <div class="modal-dialog modal-lg">
-                                            <div class="modal-content">
-
-                                                <div class="modal-body">
-                                                  <div class="preview-confirmation">
-                                                        <iframe frameborder="0" style="width:100%;height:400px" src="{{route('admin.confirmation.preview',$cr->id)}}"></iframe>
-                                                  </div>
-
-                                                </div>
-
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-default btn-preview-no" id="btn-preview-no">Đóng</button>
-                                                    <button type="button" class="btn btn-warning btn-preview-yes" id="btn-preview-yes">Xuất pdf</button>
-
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                             </div>
                         </div>
                         @endif
@@ -162,7 +141,7 @@
                                             </div>
 
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-default btn-preview-no" id="btn-preview-no">Quay lại</button>
+                                                <button type="button" class="btn btn-default btn-preview-no" id="btn-preview-no">Đóng</button>
                                                 <button type="button" class="btn btn-warning btn-preview-yes" id="btn-preview-yes">Xuất pdf</button>
 
 
