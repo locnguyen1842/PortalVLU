@@ -183,7 +183,7 @@
 
                             <ul id="myTab" class="nav nav-tabs" role="tablist">
                                 <li role="presentation" class="active"><a href="#sheet1" id="sheet1-tab" role="tab" data-toggle="tab" aria-controls="sheet1" aria-expanded="false">Khối lượng giảng dạy</a></li>
-                                <li role="presentation"><a href="#sheet2" id="sheet2-tab" role="tab" data-toggle="tab" aria-controls="sheet2" aria-expanded="false">Khối lượng giảng dạy</a></li>
+                                <li role="presentation"><a href="#sheet2" id="sheet2-tab" role="tab" data-toggle="tab" aria-controls="sheet2" aria-expanded="false">Khối lượng NCKH</a></li>
                             </ul>
 
                         </div>
