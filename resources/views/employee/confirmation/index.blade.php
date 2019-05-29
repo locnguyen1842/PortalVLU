@@ -162,7 +162,7 @@
                     @endforeach
                     @else
                     <tr>
-                        <td colspan="4" class="text-center">Không có bất kỳ dữ liệu nào được tìm thấy</td>
+                        <td colspan="5" class="text-center">Không có bất kỳ dữ liệu nào được tìm thấy</td>
                     </tr>
                     @endif
 
