@@ -701,7 +701,7 @@ class PIController extends Controller
                 $import_file = $request->file('import_file');
                 $arr_pi  = (new GetPIImport)->toArray($import_file);
                 $number_of_sheet = 4;
-                $excel_column_length_sheet_1 = 26;
+                $excel_column_length_sheet_1 = 27;
                 $excel_column_length_sheet_2 = 8;
                 $excel_column_length_sheet_3 = 5;
                 $excel_column_length_sheet_4 = 10;

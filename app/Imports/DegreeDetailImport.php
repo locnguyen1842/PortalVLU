@@ -17,7 +17,9 @@ class DegreeDetailImport implements ToCollection, WithStartRow
 {
     public function collection(Collection $rows)
     {
-        //Rule data for loai bang
+       if(count($rows) > 1){
+        $rows->splice(0,1);
+          //Rule data for loai bang
         $degrees = Degree::all();
         $degrees_name = array();
         foreach ($degrees as $item) {
@@ -47,7 +49,7 @@ class DegreeDetailImport implements ToCollection, WithStartRow
         foreach ($data_to_validate as &$item) {
             $item = array_map('trim', $item);
             $item = array_map('strtolower', $item);
-            $item[4] = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($item[4]);
+            $item[4] !=null ?$item[4]=  \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($item[4]):$item[4]= null;
         }
         //   dd($countries_code);
 
@@ -126,9 +128,12 @@ class DegreeDetailImport implements ToCollection, WithStartRow
           ]
         );
         }
+       }else{
+         return null;
+       }
     }
     public function startRow():int
     {
-        return 2;
+        return 1;
     }
 }
