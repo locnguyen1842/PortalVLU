@@ -80,7 +80,7 @@ class PIController extends Controller
     }
     public function getAdd()
     {
-        $this->authorize('cud', PI::firstOrFail());
+        $this->authorize('cud', PI::first());
         $nations = Nation::all();
         $units = Unit::all();
         $officer_types = OfficerType::all();
@@ -99,7 +99,7 @@ class PIController extends Controller
 
     public function postAdd(Request $request)
     {
-        $this->authorize('cud', PI::firstOrFail());
+        $this->authorize('cud', PI::first());
 
 
         $request->validate(
@@ -310,7 +310,7 @@ class PIController extends Controller
     //get data personal information
     public function getupdate($id)
     {
-        $this->authorize('cud', PI::firstOrFail());
+        $this->authorize('cud', PI::first());
         $pi = PI::Find($id);
         $nations = Nation::all();
         $units = Unit::all();
@@ -563,7 +563,7 @@ class PIController extends Controller
     }
     public function getdetail($id)
     {
-        $pi = PI::findOrFail($id);
+        $pi = PI::find($id);
         $pi->new = 0;
         $pi->save();
         $dh_count = $pi->degreedetails->where('degree_id', 1)->count();
@@ -576,7 +576,7 @@ class PIController extends Controller
 
     public function recoverypassword($pi_id)
     {
-        $pi = PI::findOrFail($pi_id);
+        $pi = PI::find($pi_id);
         $this->authorize('cud', $pi);
         //strtoupper cho nó in hoa khi gõ pass
         //chỉ cần thay đổi trường pwd la dc
@@ -596,7 +596,7 @@ class PIController extends Controller
     public function import(Request $request)
     {
 
-        $this->authorize('cud', PI::firstOrFail());
+        $this->authorize('cud', PI::first());
 
         $request->validate(
         [
@@ -617,8 +617,8 @@ class PIController extends Controller
 
     public function delete($pi_id)
     {
-        $this->authorize('cud', PI::firstOrFail());
-        $pi = PI::findOrFail($pi_id);
+        $this->authorize('cud', PI::first());
+        $pi = PI::find($pi_id);
         $pi_id = $pi->id;
         $pi->delete();
         Address::where('personalinformation_id',$pi_id)->delete();
@@ -628,13 +628,13 @@ class PIController extends Controller
         return redirect()->back()->with('message', 'Xóa thông tin nhân viên thành công');
     }
 //    public function getdegreedetail($id){
-//        $dedeatail = DegreeDetail::findOrFail($id);
+//        $dedeatail = DegreeDetail::find($id);
 //        return view('admin.pi.pi-detail',compact('dedeatail'));
 //    }
 
     public function rolechange(Request $request, $pi_id)
     {
-        $pi = PI::findOrFail($pi_id);
+        $pi = PI::find($pi_id);
         $this->authorize('cud', $pi);
         if ($request->role == 0) {
             //check if is admin
@@ -683,7 +683,7 @@ class PIController extends Controller
     }
     public function getdataimport(Request $request)
     {
-        // $this->authorize('cud', PI::firstOrFail());
+        // $this->authorize('cud', PI::first());
         // dd('a');
         $validator = Validator::make(
           $request->all(),
@@ -767,7 +767,7 @@ class PIController extends Controller
     public function getCreateAcademicRank($pi_id)
     {
 
-        $pi = PI::findOrFail($pi_id);
+        $pi = PI::find($pi_id);
         if($pi->academic_rank()->exists()){
             return abort(404);
         }
@@ -794,7 +794,7 @@ class PIController extends Controller
                 'industry.required' => 'Vui lòng chọn khối ngành',
             ]
         );
-        $pi = PI::findOrFail($pi_id);
+        $pi = PI::find($pi_id);
         if($pi->academic_rank()->exists()){
             return abort(404);
         }
@@ -811,7 +811,7 @@ class PIController extends Controller
     public function getUpdateAcademicRank($pi_id)
     {
         $industries = Industry::all();
-        $pi = PI::findOrFail($pi_id);
+        $pi = PI::find($pi_id);
         $academic_rank_types = AcademicRankType::all();
         return view('admin.pi.academic-update', compact('pi', 'academic_rank_types', 'industries'));
     }
@@ -834,7 +834,7 @@ class PIController extends Controller
                 'industry.required' => 'Vui lòng chọn khối ngành',
             ]
         );
-        $pi = PI::findOrFail($pi_id);
+        $pi = PI::find($pi_id);
         $academic_rank = AcademicRank::where('personalinformation_id', $pi->id)->firstOrFail();
         $academic_rank->type_id = $request->academic_rank_type;
         $academic_rank->specialized = $request->specialized;
@@ -846,7 +846,7 @@ class PIController extends Controller
 
     public function getDeleteAcademicRank($pi_id)
     {
-        $pi = PI::findOrFail($pi_id);
+        $pi = PI::find($pi_id);
         $academic_rank = AcademicRank::where('personalinformation_id', $pi->id)->firstOrFail();
         $academic_rank->delete();
         return redirect()->back()->with('message', 'Xóa học hàm thành công');

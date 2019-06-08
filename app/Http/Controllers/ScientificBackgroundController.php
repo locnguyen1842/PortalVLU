@@ -30,7 +30,7 @@ class ScientificBackgroundController extends Controller
 
     public function getupdateAdmin($pi_id)
     {
-        $this->authorize('cud', PI::firstOrFail());
+        $this->authorize('cud', PI::first());
         $positions = PositionType::all();
         $sb = ScientificBackground::where('personalinformation_id', $pi_id)->firstOrFail();
         $nations = Nation::all();
@@ -41,9 +41,8 @@ class ScientificBackgroundController extends Controller
 
     public function postupdateAdmin($pi_id, Request $request)
     {
-        $this->authorize('cud', PI::firstOrFail());
-
-        $pi = PI::findOrFail($pi_id);
+        $this->authorize('cud', PI::first());
+        $pi = PI::find($pi_id);
         $request->validate(
             [
                 'full_name' => 'required',
@@ -61,9 +60,9 @@ class ScientificBackgroundController extends Controller
                 'place_of_training' => 'required',
                 'field_of_study' => 'required',
                 'nation_of_training' => 'required',
-                'year_of_graduation_first' => 'required',
+                'year_of_graduation_first' => 'required|digits:4|integer',
                 'industry.*' => 'required_with:year_of_graduation.*',
-                'year_of_graduation.*' => 'required_with:industry.*',
+                'year_of_graduation.*' => 'required_with:industry.*|digits:4|integer|nullable',
                 'master_field_of_study.*' => 'required_with:master_year_of_issue.*,master_place_of_training.*|nullable',
                 'master_year_of_issue.*' => 'required_with:master_field_of_study.*,master_place_of_training.*|digits:4|integer|nullable',
                 'master_place_of_training.*'=>'required_with:master_year_of_issue.*,master_field_of_study.*|nullable',
@@ -93,8 +92,8 @@ class ScientificBackgroundController extends Controller
               'nation.required' => 'Dân tộc không được bỏ trống',
               'highest_degree.required' => 'Học vị cao nhất không được bỏ trống',
               'highest_scientific_title.required' => 'Chức danh khoa học cao nhất không được bỏ trống',
-              'year_of_appointment.digits' => 'Năm bổ nhiệm không đúng định dạng',
-              'year_of_appointment.integer' => 'Năm bổ nhiệm không đúng định dạng',
+              'year_of_appointment.digits' => 'Năm bổ nhiệm chỉ được nhập 4 ký tự',
+              'year_of_appointment.integer' => 'Năm bổ nhiệm không đúng định dạng số nguyên',
               'position.required' => 'Chức vụ không được bỏ trống',
               'unit.required' => 'Đơn vị   không được bỏ trống',
               'email_address.required' => 'Email không được bỏ trống',
@@ -105,21 +104,22 @@ class ScientificBackgroundController extends Controller
               'field_of_study.required' => 'Ngành học không được bỏ trống',
               'nation_of_training.required' => 'Nước đào tạo không được bỏ trống',
               'year_of_graduation_first.required' => 'Năm tốt nghiệp không được bỏ trống',
+              'year_of_graduation_first.digits' => 'Năm tốt nghiệp chỉ được nhập 4 ký tự',
+              'year_of_graduation_first.integer' => 'Năm tốt nghiệp không đúng định dạng số nguyên',
               'industry.*.required_with' => 'Hệ đào tạo không được bỏ trống',
-              'year_of_graduation.0.required' => 'Năm tốt nghiệp không được bỏ trống',
               'year_of_graduation.*.required_with' => 'Năm tốt nghiệp không được bỏ trống',
-              'year_of_graduation.digits' => 'Năm tốt nghiệp không đúng định dạng',
-              'year_of_graduation.integer' => 'Năm tốt nghiệp không đúng định dạng',
+              'year_of_graduation.*.digits' => 'Năm tốt nghiệp chỉ được nhập 4 ký tự',
+              'year_of_graduation.*.integer' => 'Năm tốt nghiệp không đúng định dạng số nguyên',
               'master_field_of_study.*.required_with' => 'Thạc sĩ chuyên ngành không được bỏ trống',
               'master_year_of_issue.*.required_with' => 'Năm cấp bằng thạc sĩ không được bỏ trống',
-              'master_year_of_issue.*.digits' => 'Năm cấp bằng thạc sĩ không đúng định dạng',
-              'master_year_of_issue.*.integer' => 'Năm cấp bằng thạc sĩ không đúng định dạng',
+              'master_year_of_issue.*.digits' => 'Năm cấp bằng thạc sĩ chỉ được nhập 4 ký tự',
+              'master_year_of_issue.*.integer' => 'Năm cấp bằng thạc sĩ không đúng định dạng số nguyên',
               'master_place_of_training.*.required_with' => 'Nơi đào tạo thạc sĩ không được bỏ trống',
               'doctor_field_of_study.*.required_with' => 'Tiến sĩ chuyên ngành không được bỏ trống',
               'doctor_place_of_training.*.required_with' => 'Nơi cấp bằng tiến sĩ không được bỏ trống',
               'doctor_year_of_issue.*.required_with' => 'Năm cấp bằng tiến sĩ không được bỏ trống',
-              'doctor_year_of_issue.*.digits' => 'Năm cấp bằng tiến sĩ không đúng định dạng',
-              'doctor_year_of_issue.*.integer' => 'Năm cấp bằng tiến sĩ không đúng định dạng',
+              'doctor_year_of_issue.*.digits' => 'Năm cấp bằng tiến sĩ chỉ được nhập 4 ký tự',
+              'doctor_year_of_issue.*.integer' => 'Năm cấp bằng tiến sĩ không đúng định dạng số nguyên',
               'thesis_title.*.required_with' => 'Tên luận án không được bỏ trống',
               'language.*.required_with' => 'Ngoại ngữ không được bỏ trống',
               'usage_level.*.required_with' => 'Mức độ sử dụng ngoại ngữ không được bỏ trống',
@@ -128,17 +128,17 @@ class ScientificBackgroundController extends Controller
               'work_of_undertake.*.required_with' => 'Công việc đảm nhiệm không được bỏ trống',
               'name_of_topic.*.required_with' => 'Tên đề tài nghiên cứu không được bỏ trống',
               'start_year.*.required_with' => 'Năm bắt đầu đề tài nghiên cứu không được bỏ trống',
-              'start_year.*.digits' => 'Năm bắt đầu đề tài nghiên cứu không đúng định dạng',
-              'start_year.*.integer' => 'Năm bắt đầu đề tài nghiên cứu không đúng định dạng',
+              'start_year.*.digits' => 'Năm bắt đầu đề tài nghiên cứu chỉ được nhập 4 ký tự',
+              'start_year.*.integer' => 'Năm bắt đầu đề tài nghiên cứu không đúng định dạng số nguyên',
               'end_year.*.required_with' => 'Năm kết thúc đề tài nghiên cứu không được bỏ trống',
-              'end_year.*.digits' => 'Năm kết thúc đề tài nghiên cứu không đúng định dạng',
-              'end_year.*.integer' => 'Năm kết thúc đề tài nghiên cứu không đúng định dạng',
+              'end_year.*.digits' => 'Năm kết thúc đề tài nghiên cứu chỉ được nhập 4 ký tự',
+              'end_year.*.integer' => 'Năm kết thúc đề tài nghiên cứu không đúng định dạng số nguyên',
               'topic_level.*.required_with' => 'đề tài cấp không được bỏ trống',
               'responsibility.*.required_with' => 'Trách nhiệm tham gia trong đề tài nghiên cứu không được bỏ trống',
               'name_of_works.*.required_with' => 'Tên công trình khoa học không được bỏ trống',
               'year_of_publication.*.required_with' => 'Năm công bố công trình khoa học không được bỏ trống',
-              'year_of_publication.*.digits' => 'Năm công bố công trình khoa học không đúng định dạng',
-              'year_of_publication.*.integer' => 'Năm công bố công trình khoa học không đúng định dạng',
+              'year_of_publication.*.digits' => 'Năm công bố công trình khoa học chỉ được nhập 4 ký tự',
+              'year_of_publication.*.integer' => 'Năm công bố công trình khoa học không đúng định dạng số nguyên',
               'name_of_journal.*.required_with' => 'Tên tạp chí không được bỏ trống',
 
             ]
@@ -278,7 +278,7 @@ class ScientificBackgroundController extends Controller
 
     public function getupdateEmployeeSB()
     {
-        $pi_id = PI::findOrFail(Auth::guard('employee')->user()->personalinformation_id)->id;
+        $pi_id = PI::find(Auth::guard('employee')->user()->personalinformation_id)->id;
         $sb = ScientificBackground::where('personalinformation_id', $pi_id)->firstOrFail();
         $nations = Nation::all();
         $units = Unit::all();
@@ -290,7 +290,7 @@ class ScientificBackgroundController extends Controller
 
     public function postupdateEmployeeSB(Request $request)
     {
-        $pi = PI::findOrFail(Auth::guard('employee')->user()->personalinformation_id);
+        $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
         // dd(array_filter($request->industry) != null ? 'true':'false');
         // dd($request);
         $request->validate(
@@ -308,9 +308,9 @@ class ScientificBackgroundController extends Controller
                 'place_of_training' => 'required',
                 'field_of_study' => 'required',
                 'nation_of_training' => 'required',
-                'year_of_graduation_first' => 'required',
+                'year_of_graduation_first' => 'required|digits:4|integer',
                 'industry.*' => 'required_with:year_of_graduation.*',
-                'year_of_graduation.*' => 'required_with:industry.*',
+                'year_of_graduation.*' => 'digits:4|integer|required_with:industry.*|nullable',
                 'master_field_of_study.*' => 'required_with:master_year_of_issue.*,master_place_of_training.*|nullable',
                 'master_year_of_issue.*' => 'required_with:master_field_of_study.*,master_place_of_training.*|digits:4|integer|nullable',
                 'master_place_of_training.*'=>'required_with:master_year_of_issue.*,master_field_of_study.*|nullable',
@@ -340,8 +340,8 @@ class ScientificBackgroundController extends Controller
               'nation.required' => 'Dân tộc không được bỏ trống',
               'highest_degree.required' => 'Học vị cao nhất không được bỏ trống',
               'highest_scientific_title.required' => 'Chức danh khoa học cao nhất không được bỏ trống',
-              'year_of_appointment.digits' => 'Năm bổ nhiệm không đúng định dạng',
-              'year_of_appointment.integer' => 'Năm bổ nhiệm không đúng định dạng',
+              'year_of_appointment.digits' => 'Năm bổ nhiệm chỉ được nhập 4 ký tự',
+              'year_of_appointment.integer' => 'Năm bổ nhiệm không đúng định dạng số nguyên',
               'position.required' => 'Chức vụ không được bỏ trống',
               'unit.required' => 'Đơn vị   không được bỏ trống',
               'email_address.required' => 'Email không được bỏ trống',
@@ -352,21 +352,22 @@ class ScientificBackgroundController extends Controller
               'field_of_study.required' => 'Ngành học không được bỏ trống',
               'nation_of_training.required' => 'Nước đào tạo không được bỏ trống',
               'year_of_graduation_first.required' => 'Năm tốt nghiệp không được bỏ trống',
-
+              'year_of_graduation_first.digits' => 'Năm tốt nghiệp chỉ được nhập 4 ký tự',
+              'year_of_graduation_first.integer' => 'Năm tốt nghiệp đúng định dạng số nguyên',
               'industry.*.required_with' => 'Hệ đào tạo không được bỏ trống',
               'year_of_graduation.*.required_with' => 'Năm tốt nghiệp không được bỏ trống',
-              'year_of_graduation.digits' => 'Năm tốt nghiệp không đúng định dạng',
-              'year_of_graduation.integer' => 'Năm tốt nghiệp không đúng định dạng',
+              'year_of_graduation.*.digits' => 'Năm tốt nghiệp chỉ được nhập 4 ký tự',
+              'year_of_graduation.*.integer' => 'Năm tốt nghiệp không đúng định dạng số nguyên',
               'master_field_of_study.*.required_with' => 'Thạc sĩ chuyên ngành không được bỏ trống',
               'master_year_of_issue.*.required_with' => 'Năm cấp bằng thạc sĩ không được bỏ trống',
-              'master_year_of_issue.*.digits' => 'Năm cấp bằng thạc sĩ không đúng định dạng',
-              'master_year_of_issue.*.integer' => 'Năm cấp bằng thạc sĩ không đúng định dạng',
+              'master_year_of_issue.*.digits' => 'Năm cấp bằng thạc sĩ chỉ được nhập 4 ký tự',
+              'master_year_of_issue.*.integer' => 'Năm cấp bằng thạc sĩ không đúng định dạng số nguyên',
               'master_place_of_training.*.required_with' => 'Nơi đào tạo thạc sĩ không được bỏ trống',
               'doctor_field_of_study.*.required_with' => 'Tiến sĩ chuyên ngành không được bỏ trống',
               'doctor_place_of_training.*.required_with' => 'Nơi cấp bằng tiến sĩ không được bỏ trống',
               'doctor_year_of_issue.*.required_with' => 'Năm cấp bằng tiến sĩ không được bỏ trống',
-              'doctor_year_of_issue.*.digits' => 'Năm cấp bằng tiến sĩ không đúng định dạng',
-              'doctor_year_of_issue.*.integer' => 'Năm cấp bằng tiến sĩ không đúng định dạng',
+              'doctor_year_of_issue.*.digits' => 'Năm cấp bằng tiến sĩ chỉ được nhập 4 ký tự',
+              'doctor_year_of_issue.*.integer' => 'Năm cấp bằng tiến sĩ không đúng định dạng số nguyên',
               'thesis_title.*.required_with' => 'Tên luận án không được bỏ trống',
               'language.*.required_with' => 'Ngoại ngữ không được bỏ trống',
               'usage_level.*.required_with' => 'Mức độ sử dụng ngoại ngữ không được bỏ trống',
@@ -375,17 +376,17 @@ class ScientificBackgroundController extends Controller
               'work_of_undertake.*.required_with' => 'Công việc đảm nhiệm không được bỏ trống',
               'name_of_topic.*.required_with' => 'Tên đề tài nghiên cứu không được bỏ trống',
               'start_year.*.required_with' => 'Năm bắt đầu đề tài nghiên cứu không được bỏ trống',
-              'start_year.*.digits' => 'Năm bắt đầu đề tài nghiên cứu không đúng định dạng',
-              'start_year.*.integer' => 'Năm bắt đầu đề tài nghiên cứu không đúng định dạng',
+              'start_year.*.digits' => 'Năm bắt đầu đề tài nghiên cứu chỉ được nhập 4 ký tự',
+              'start_year.*.integer' => 'Năm bắt đầu đề tài nghiên cứu không đúng định dạng số nguyên',
               'end_year.*.required_with' => 'Năm kết thúc đề tài nghiên cứu không được bỏ trống',
-              'end_year.*.digits' => 'Năm kết thúc đề tài nghiên cứu không đúng định dạng',
-              'end_year.*.integer' => 'Năm kết thúc đề tài nghiên cứu không đúng định dạng',
+              'end_year.*.digits' => 'Năm kết thúc đề tài nghiên cứu chỉ được nhập 4 ký tự',
+              'end_year.*.integer' => 'Năm kết thúc đề tài nghiên cứu không đúng định dạng số nguyên',
               'topic_level.*.required_with' => 'đề tài cấp không được bỏ trống',
               'responsibility.*.required_with' => 'Trách nhiệm tham gia trong đề tài nghiên cứu không được bỏ trống',
               'name_of_works.*.required_with' => 'Tên công trình khoa học không được bỏ trống',
               'year_of_publication.*.required_with' => 'Năm công bố công trình khoa học không được bỏ trống',
-              'year_of_publication.*.digits' => 'Năm công bố công trình khoa học không đúng định dạng',
-              'year_of_publication.*.integer' => 'Năm công bố công trình khoa học không đúng định dạng',
+              'year_of_publication.*.digits' => 'Năm công bố công trình khoa học chỉ được nhập 4 ký tự',
+              'year_of_publication.*.integer' => 'Năm công bố công trình khoa học không đúng định dạng số nguyên',
               'name_of_journal.*.required_with' => 'Tên tạp chí không được bỏ trống',
 
             ]
@@ -522,7 +523,7 @@ class ScientificBackgroundController extends Controller
 
     public function getdetailEmployeeSB()
     {
-        $pi_id = PI::findOrFail(Auth::guard('employee')->user()->personalinformation_id)->id;
+        $pi_id = PI::find(Auth::guard('employee')->user()->personalinformation_id)->id;
         $sb = ScientificBackground::where('personalinformation_id', $pi_id)->firstOrFail();
         return view('employee.sb.employee-sb-detail', compact('pi_id', 'sb'));
     }
@@ -539,7 +540,7 @@ class ScientificBackgroundController extends Controller
     }
     public function indexPrintFaculty($pi_id)
     {
-        $pi = PI::findOrFail(Auth::guard('employee')->user()->personalinformation_id);
+        $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
         $this->authorize('actAsFacultyLeader', $pi);
         $sb = ScientificBackground::where('personalinformation_id', $pi_id)->firstOrFail();
         $nations = Nation::all();
@@ -552,7 +553,7 @@ class ScientificBackgroundController extends Controller
     }
     public function indexPrint()
     {
-        $pi_id = PI::findOrFail(Auth::guard('employee')->user()->personalinformation_id)->id;
+        $pi_id = PI::find(Auth::guard('employee')->user()->personalinformation_id)->id;
         $sb = ScientificBackground::where('personalinformation_id', $pi_id)->firstOrFail();
         $nations = Nation::all();
         $units = Unit::all();

@@ -12,12 +12,12 @@ use App\Workload;
 class ScientificResearhWorkloadController extends Controller
 {
     public function getAdd(){
-        $this->authorize('cud', PI::firstOrFail());
+        $this->authorize('cud', PI::first());
         $id = \Request::get('pi_id');
         $data_append = \Request::get('data_html');
         $ws = WorkloadSession::orderBy('start_year', 'desc')->get();
         if ($id != null) {
-            $pi = PI::findOrFail($id);
+            $pi = PI::find($id);
         } else {
             $pi = null;
         }
@@ -25,7 +25,7 @@ class ScientificResearhWorkloadController extends Controller
         return view('admin.scientific.scientific-add', compact('pi', 'ws'));
     }
     public function postAdd(Request $request){
-        $this->authorize('cud', PI::firstOrFail());
+        $this->authorize('cud', PI::first());
         $value_start_year = (int)\Request::get('start_year');
         $request->validate(
             [
@@ -112,21 +112,21 @@ class ScientificResearhWorkloadController extends Controller
 
     public function getSRWorkloadDetail($id_srworkload)
     {
-        $srworkload = ScientificResearchWorkload::findOrFail($id_srworkload);
-        $pi = PI::findOrFail($srworkload->personalinformation_id);
+        $srworkload = ScientificResearchWorkload::find($id_srworkload);
+        $pi = PI::find($srworkload->personalinformation_id);
         return view('admin.scientific.srworkload-details', compact('srworkload', 'pi'));
     }
 
     public function getUpdate($id_srworkload){
-        $this->authorize('cud', PI::firstOrFail());
-        $srworkload = ScientificResearchWorkload::findOrFail($id_srworkload);
-        $pi = PI::findOrFail($srworkload->pi->id);
+        $this->authorize('cud', PI::first());
+        $srworkload = ScientificResearchWorkload::find($id_srworkload);
+        $pi = PI::find($srworkload->pi->id);
         $ws = WorkloadSession::orderBy('start_year', 'desc')->get();
         return view('admin.scientific.scientific-update', compact('srworkload', 'pi','ws'));
     }
 
     public function postUpdate(Request $request, $id_srworkload){
-        $this->authorize('cud', PI::firstOrFail());
+        $this->authorize('cud', PI::first());
         $value_start_year = (int)\Request::get('start_year');
         $request->validate(
             [
@@ -185,7 +185,7 @@ class ScientificResearhWorkloadController extends Controller
                 'end_year.digits'=> 'Năm học kết thúc phải đúng 4 ký tự',
             ]
                         );
-        $srworkload = ScientificResearchWorkload::findOrFail($id_srworkload);
+        $srworkload = ScientificResearchWorkload::find($id_srworkload);
         $pp = strtoupper($request->employee_code);
         $pi = PI::where('employee_code', $pp)->firstOrFail();
         $srworkload->personalinformation_id = $pi->id;
@@ -214,8 +214,8 @@ class ScientificResearhWorkloadController extends Controller
 
     public function delete($id_srworkload)
     {
-        $this->authorize('cud', PI::firstOrFail());
-        $srworkload = ScientificResearchWorkload::findOrFail($id_srworkload);
+        $this->authorize('cud', PI::first());
+        $srworkload = ScientificResearchWorkload::find($id_srworkload);
         $srworkload->delete();
         return redirect()->back()->with('message', 'Xóa khối lượng nghiên cứu khoa học thành công');
     }

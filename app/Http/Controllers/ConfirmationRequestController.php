@@ -53,12 +53,12 @@ class ConfirmationRequestController extends Controller
 
     }
     public function getCreate(){
-        // $this->authorize('cud', PI::firstOrFail());
-        $pi = PI::findOrFail(Auth::guard('employee')->user()->personalinformation_id);
+        // $this->authorize('cud', PI::first());
+        $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
         return view('employee.confirmation.create', compact('pi'));
     }
     public function postCreate(Request $request){
-        $pi = PI::findOrFail(Auth::guard('employee')->user()->personalinformation_id);
+        $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
         $request->validate(
             [
                 'address'=> 'required',
@@ -105,26 +105,26 @@ class ConfirmationRequestController extends Controller
 
 
     public function previewEmployee($cr_id){
-        $pi = PI::findOrFail(Auth::guard('employee')->user()->personalinformation_id);
-        $cr = ConfirmationRequest::findOrFail($cr_id);
+        $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
+        $cr = ConfirmationRequest::find($cr_id);
         $this->authorize('preview', $cr);
         return view('employee.confirmation.preview',compact('pi','cr'));
     }
 
     public function previewAdmin($cr_id){
-        $cr = ConfirmationRequest::findOrFail($cr_id);
+        $cr = ConfirmationRequest::find($cr_id);
         return view('admin.confirmation.print',compact('cr'));
     }
     public function getUpdate($cr_id){
-        // $this->authorize('cud', PI::firstOrFail());
-        $pi = PI::findOrFail(Auth::guard('employee')->user()->personalinformation_id);
-        $cr= ConfirmationRequest::findOrFail($cr_id);
+        // $this->authorize('cud', PI::first());
+        $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
+        $cr= ConfirmationRequest::find($cr_id);
         $this->authorize('access', $cr);
         return view('employee.confirmation.update', compact('pi','cr'));
     }
     public function postUpdate(Request $request,$cr_id){
-        $pi = PI::findOrFail(Auth::guard('employee')->user()->personalinformation_id);
-        $cr= ConfirmationRequest::findOrFail($cr_id);
+        $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
+        $cr= ConfirmationRequest::find($cr_id);
         $this->authorize('access', $cr);
         $request->validate(
             [
@@ -145,19 +145,17 @@ class ConfirmationRequestController extends Controller
             $cr->is_confirm_income = 1;
             $cr->number_of_month_income = $request->number_of_month_income;
             $cr->save();
-            if($cr->incomes()->exists()){
-                foreach($cr->incomes as $item){
-                    $item->delete();
+            if(!$cr->incomes()->exists()){
+                for($i= 0 ; $i < $cr->number_of_month_income;$i++){
+                    if($i >= 12){
+                        break;
+                    }
+                    $income = new ConfirmationIncome;
+                    $income->confirmation_request_id = $cr->id;
+                    $income->save();
                 }
             }
-            for($i= 0 ; $i < $cr->number_of_month_income;$i++){
-                if($i >= 12){
-                    break;
-                }
-                $income = new ConfirmationIncome;
-                $income->confirmation_request_id = $cr->id;
-                $income->save();
-            }
+            
         }else{
             if($cr->incomes()->exists()){
                 foreach($cr->incomes as $item){
@@ -172,8 +170,8 @@ class ConfirmationRequestController extends Controller
     }
 
     public function print($cr_id){
-        $this->authorize('cud', PI::firstOrFail());
-        $cr = ConfirmationRequest::findOrFail($cr_id);
+        $this->authorize('cud', PI::first());
+        $cr = ConfirmationRequest::find($cr_id);
         $cr->status = 1 ;
         $cr->save();
         $pdf = PDF::loadView('admin.confirmation.print', compact('cr'));
@@ -182,27 +180,27 @@ class ConfirmationRequestController extends Controller
     }
 
     public function delete($cr_id){
-        $cr = ConfirmationRequest::findOrFail($cr_id);
+        $cr = ConfirmationRequest::find($cr_id);
         $this->authorize('access', $cr);
         $cr->delete();
         return redirect()->back()->with('message', 'Xóa đơn thành công');
     }
     public function getdeleteAdmin($cr_id){
-        $this->authorize('cud', PI::firstOrFail());
-        $cr= ConfirmationRequest::findOrFail($cr_id);
+        $this->authorize('cud', PI::first());
+        $cr= ConfirmationRequest::find($cr_id);
         $cr->delete();
         return redirect()->back()->with('message', 'Xóa đơn thành công');
     }
     public function getUpdateAdmin($cr_id){
-        $this->authorize('cud', PI::firstOrFail());
-        $cr= ConfirmationRequest::findOrFail($cr_id);
-        $pi = PI::findOrFail($cr->pi->id);
+        $this->authorize('cud', PI::first());
+        $cr= ConfirmationRequest::find($cr_id);
+        $pi = PI::find($cr->pi->id);
         return view('admin.confirmation.update', compact('pi','cr'));
     }
 
     public function postUpdateAdmin(Request $request,$cr_id){
-        $this->authorize('cud', PI::firstOrFail());
-        $cr= ConfirmationRequest::findOrFail($cr_id);
+        $this->authorize('cud', PI::first());
+        $cr= ConfirmationRequest::find($cr_id);
         $request->validate(
             [
                 'confirmation'=> 'required',

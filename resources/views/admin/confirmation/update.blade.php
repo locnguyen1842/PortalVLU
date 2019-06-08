@@ -67,7 +67,7 @@
 
                                                         </div>
                                                         <div class="col-sm-7">
-                                                                <input required placeholder="Năm" min="1980" type="number" class="form-control" name="year_of_income[]">
+                                                                <input required placeholder="Năm" max="9999" type="number" class="form-control year-digits" name="year_of_income[]">
 
                                                         </div>
 
@@ -198,65 +198,56 @@
                 }
             });
         });
-
+        $(document).on('input','.year-digits',function(){
+        
+                if($(this).val().length > 4){
+                    $(this).val($(this).val().slice(0,4))
+                }
+        })
         // 4
         if('{{$cr->is_confirm_income}}' == true){
             var list4 = '{!!json_encode($cr->incomes->toArray())!!}';
 
-        var list_confirmation_incomes = JSON.parse(list4);
-        var text;
-        var array_confirmation_incomes = new Array();
-        var month_of_income = "month_of_income[]";
-        var year_of_income = "year_of_income[]";
-        var help_block = "help-block[]";
-        var amount_of_income = "amount_of_income[]";
+            var list_confirmation_incomes = JSON.parse(list4);
+            var array_confirmation_incomes = new Array();
 
-        list_confirmation_incomes.forEach(function(item,key){
-            text = '{'+'"'+ month_of_income+'"'+':'+'"'+item['month_of_income']+'"'+','+'"'+year_of_income+'"'+':'+'"'+item['year_of_income'] +'"'+','+'"'+help_block+'"'+':'+'"'+item['amount_of_income'] +'"'+','+'"'+amount_of_income+'"'+':'+'"'+item['amount_of_income'] +'"'+'}';
+            list_confirmation_incomes.forEach(function(item,key){
+                
+                let data = {
+                    "month_of_income[]" : item['month_of_income'],
+                    "year_of_income[]" : item['year_of_income'],
+                    "help-block[]" : item['amount_of_income'],
+                    "amount_of_income[]" : item['amount_of_income'] ,
+                }
+                array_confirmation_incomes.push(data);
+            })
+            $('#confirmation_incomes_repeater').repeater({
+                btnAddClass: 'r-add-income',
+                btnRemoveClass: 'r-delete-income',
+                groupClass: 'group-confirmation-incomes',
+                minItems: 1,
+                maxItems: 0,
+                startingIndex: 0,
+                showMinItemsOnLoad: true,
+                reindexOnDelete: true,
+                repeatMode: 'append',
+                animation: 'fade',
+                animationSpeed: 400,
+                animationEasing: 'swing',
+                clearValues: true
+            },array_confirmation_incomes);
 
-            array_confirmation_incomes.push($.parseJSON(text));
-        })
-        $(array_confirmation_incomes).each(function (index, element) {
-            if(array_confirmation_incomes[index][month_of_income] == "null"){
-                array_confirmation_incomes[index][month_of_income]= null;
+            function numberWithCommas(num) {
+                var num_parts = num.toString().split(".");
+                num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                return num_parts.join(".");
             }
-            if(array_confirmation_incomes[index][year_of_income] == "null"){
-                array_confirmation_incomes[index][year_of_income]= null;
-            }
-            if(array_confirmation_incomes[index][amount_of_income] == "null"){
-                array_confirmation_incomes[index][amount_of_income]= null;
-            }
 
-
-
-        });
-        $('#confirmation_incomes_repeater').repeater({
-            btnAddClass: 'r-add-income',
-            btnRemoveClass: 'r-delete-income',
-            groupClass: 'group-confirmation-incomes',
-            minItems: 1,
-            maxItems: 0,
-            startingIndex: 0,
-            showMinItemsOnLoad: true,
-            reindexOnDelete: true,
-            repeatMode: 'append',
-            animation: 'fade',
-            animationSpeed: 400,
-            animationEasing: 'swing',
-            clearValues: true
-        },array_confirmation_incomes);
-
-        function numberWithCommas(num) {
-            var num_parts = num.toString().split(".");
-            num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            return num_parts.join(".");
-        }
-
-        $(document).on('input','.money-input',function(){
-            $('.money-input').on('input',function(e){
-            $(this).closest('td').find('.help-block').text(numberWithCommas($(this).val()+ ' đồng'));
-        })
-        })
+            $(document).on('input','.money-input',function(){
+            
+                    $(this).closest('td').find('.help-block').text(numberWithCommas($(this).val()+ ' đồng'));
+                
+            })
         }
 
 

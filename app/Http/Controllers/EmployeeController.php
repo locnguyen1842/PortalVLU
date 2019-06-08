@@ -40,8 +40,8 @@ class EmployeeController extends Controller
 
     public function getdetail()
     {
-        $pi = PI::findOrFail(Auth::guard('employee')->user()->personalinformation_id);
-        $employee = Employee::findOrFail(Auth::guard('employee')->user()->id);
+        $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
+        $employee = Employee::find(Auth::guard('employee')->user()->id);
         $units = Unit::all();
         $provinces = Province::all('name_with_type','code');
         $dh_count = $pi->degreedetails->where('degree_id', 1)->count();
@@ -53,7 +53,7 @@ class EmployeeController extends Controller
     {
 
         $nations = Nation::all();
-        $pi = PI::findOrFail(Auth::guard('employee')->user()->personalinformation_id);
+        $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
         $provinces = Province::all('name_with_type','code');
         $units = Unit::all();
         $officer_types = OfficerType::all();
@@ -66,7 +66,7 @@ class EmployeeController extends Controller
     }
     public function postupdate(Request $request)
     {
-        $pi = PI::findOrFail(Auth::guard('employee')->user()->personalinformation_id);
+        $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
 
         //post data
         $request->validate(
@@ -211,13 +211,13 @@ class EmployeeController extends Controller
         $specializes = Specialized::all();
         $degrees = Degree::all();
         $countries = Country::all();
-        $pi = PI::findOrFail(Auth::guard('employee')->user()->personalinformation_id);
+        $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
 
         return view('employee.pi.pi-createdegreedetail', compact('degrees', 'pi','specializes','countries'));
     }
     public function postcreatedegree(Request $request)
     {
-        $pi = PI::findOrFail(Auth::guard('employee')->user()->personalinformation_id);
+        $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
         $request->validate(
             [
                 'date_of_issue'=> 'required|date',
@@ -250,13 +250,13 @@ class EmployeeController extends Controller
     public function getchangepass()
     {
         //$employee = Employee::all();
-        $employee = Employee::findOrFail(Auth::guard('employee')->user()->id);
+        $employee = Employee::find(Auth::guard('employee')->user()->id);
         return view('employee.pi.pi-changepass', compact('employee'));
     }
     public function postchangepass(Request $request)
     {
-        $employee = Employee::findOrFail(Auth::guard('employee')->user()->id);
-        $pi = PI::findOrFail(Auth::guard('employee')->user()->personalinformation_id);
+        $employee = Employee::find(Auth::guard('employee')->user()->id);
+        $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
         $request->validate(
             [
                 'password'=> 'required',
@@ -302,7 +302,7 @@ class EmployeeController extends Controller
     }
     public function getupdatedegreedetail($b)
     {
-        $degree = DegreeDetail::findOrFail($b);
+        $degree = DegreeDetail::find($b);
         $employee = Auth::guard('employee')->user();
         if($this->checkIsOwnerCanUpdate($employee,$degree)){
             $pi = Auth::guard('employee')->user()->pi;
@@ -315,7 +315,7 @@ class EmployeeController extends Controller
     }
     public function postupdatedegreedetail(Request $request,$b)
     {
-        $degree = DegreeDetail::findOrFail($b);
+        $degree = DegreeDetail::find($b);
         $employee = Auth::guard('employee')->user();
         if($this->checkIsOwnerCanUpdate($employee,$degree)){
             $request->validate(
@@ -350,10 +350,10 @@ class EmployeeController extends Controller
     }
     public function delete($degreedetail_id){
 
-        $degree = DegreeDetail::findOrFail($degreedetail_id);
+        $degree = DegreeDetail::find($degreedetail_id);
         $employee = Auth::guard('employee')->user();
         if($this->checkIsOwnerCanUpdate($employee,$degree)){
-            $degree = DegreeDetail::findOrFail($degreedetail_id);
+            $degree = DegreeDetail::find($degreedetail_id);
             $degree->delete();
             return redirect()->back()->with('message', 'Xóa thành công');
         }
@@ -368,7 +368,7 @@ class EmployeeController extends Controller
     }
     public function getFaculty()
     {
-        $this->authorize('actAsFacultyLeader', PI::firstOrFail());
+        $this->authorize('actAsFacultyLeader', PI::first());
         $current_user_pi = Auth::guard('employee')->user()->pi;
 
         // $pis = PI::all();
@@ -392,7 +392,7 @@ class EmployeeController extends Controller
     }
     public function getFacultydetail($id)
     {
-        $pi = PI::findOrFail($id);
+        $pi = PI::find($id);
         $this->authorize('actAsFacultyLeader', $pi);
         $this->authorize('onlyAccessWithSameFaculty', $pi);
 
@@ -405,7 +405,7 @@ class EmployeeController extends Controller
     }
     public function getfaWorkload($id)
     {
-        $pi = PI::findOrFail($id);
+        $pi = PI::find($id);
         $this->authorize('actAsFacultyLeader', $pi);
         $this->authorize('onlyAccessWithSameFaculty', $pi);
 
@@ -454,7 +454,7 @@ class EmployeeController extends Controller
     public function getfacultysb($id)
     {
 
-        $pi = PI::findOrFail($id);
+        $pi = PI::find($id);
         $this->authorize('actAsFacultyLeader', $pi);
         $this->authorize('onlyAccessWithSameFaculty', $pi);
 
@@ -462,7 +462,7 @@ class EmployeeController extends Controller
         return view('employee.faculty.fa-sb-detail', compact('id', 'sb','pi'));
     }
     public function getfacultydegreelist($id){
-        $pi = PI::findOrFail($id);
+        $pi = PI::find($id);
         $this->authorize('actAsFacultyLeader', $pi);
         $this->authorize('onlyAccessWithSameFaculty', $pi);
         $degrees = DegreeDetail::where('personalinformation_id',$pi->id)->get();
@@ -480,7 +480,7 @@ class EmployeeController extends Controller
     }
     public function getCreateAcademicRank(){
 
-        $pi = PI::findOrFail(Auth::guard('employee')->user()->personalinformation_id);
+        $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
         if($pi->academic_rank()->exists()){
             return abort(404);
         }
@@ -502,7 +502,7 @@ class EmployeeController extends Controller
                 'date_of_recognition.date' => 'Ngày công nhận không hợp lệ',
             ]
         );
-        $pi = PI::findOrFail(Auth::guard('employee')->user()->personalinformation_id);
+        $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
         if($pi->academic_rank()->exists()){
             return abort(404);
         }
@@ -518,7 +518,7 @@ class EmployeeController extends Controller
     public function getUpdateAcademicRank(){
 
         $academic_rank_types = AcademicRankType::all();
-        $pi = PI::findOrFail(Auth::guard('employee')->user()->personalinformation_id);
+        $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
         return view('employee.pi.academic-update',compact('pi','academic_rank_types'));
 
     }
@@ -537,7 +537,7 @@ class EmployeeController extends Controller
                 'date_of_recognition.date' => 'Ngày công nhận không hợp lệ',
             ]
         );
-        $pi = PI::findOrFail(Auth::guard('employee')->user()->personalinformation_id);
+        $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
         $academic_rank = AcademicRank::where('personalinformation_id',$pi->id)->firstOrFail();
         $academic_rank->type_id = $request->academic_rank_type;
         $academic_rank->specialized = $request->specialized;
@@ -548,14 +548,14 @@ class EmployeeController extends Controller
 
 
     public function getDeleteAcademicRank(){
-        $pi = PI::findOrFail(Auth::guard('employee')->user()->personalinformation_id);
+        $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
         $academic_rank = AcademicRank::where('personalinformation_id',$pi->id)->firstOrFail();
         $academic_rank->delete();
         return redirect()->back()->with('message','Xóa học hàm thành công');
     }
 
     public function getFaSRWorkload($pi_id){
-        $pi = PI::findOrFail($pi_id);
+        $pi = PI::find($pi_id);
         $this->authorize('actAsFacultyLeader', $pi);
         $this->authorize('onlyAccessWithSameFaculty', $pi);
         $workloads_own_user = ScientificResearchWorkload::where('personalinformation_id', $pi->id);
@@ -581,8 +581,8 @@ class EmployeeController extends Controller
         return view('employee.faculty.fa-srworkload-list', compact('workload_session', 'workload_session_current', 'workloads', 'year_workload', 'pi'));
     }
     public function getSRWorkloadDetail($sr_id){
-        $pi = PI::findOrFail(Auth::guard('employee')->user()->personalinformation_id);
-        $srworkload = ScientificResearchWorkload::findOrFail($sr_id);
+        $pi = PI::find(Auth::guard('employee')->user()->personalinformation_id);
+        $srworkload = ScientificResearchWorkload::find($sr_id);
         $workload_session = WorkloadSession::all();
 
         return view('employee.scientific.srworkload-details', compact('srworkload','workload_session', 'pi'));
@@ -590,7 +590,7 @@ class EmployeeController extends Controller
 
     public function getFaSRWorkloadDetail($sr_id){
 
-        $srworkload = ScientificResearchWorkload::findOrFail($sr_id);
+        $srworkload = ScientificResearchWorkload::find($sr_id);
         $this->authorize('actAsFacultyLeader', $srworkload->pi);
         $this->authorize('onlyAccessWithSameFaculty', $srworkload->pi);
         return view('employee.faculty.fa-srworkload-detail', compact('srworkload'));

@@ -159,7 +159,7 @@ class WorkloadController extends Controller
     //get
     public function getadd()
     {
-        $this->authorize('cud', PI::firstOrFail());
+        $this->authorize('cud', PI::first());
 
         $workload = Workload::all();
         $id = \Request::get('pi_id');
@@ -169,7 +169,7 @@ class WorkloadController extends Controller
         $unit = Unit::all();
 
         if ($id != null) {
-            $pi = PI::findOrFail($id);
+            $pi = PI::find($id);
         } else {
             $pi = null;
         }
@@ -179,7 +179,7 @@ class WorkloadController extends Controller
     //post workload
     public function postadd(Request $request)
     {
-        $this->authorize('cud', PI::firstOrFail());
+        $this->authorize('cud', PI::first());
 
         $value_start_year = (int)\Request::get('start_year');
         $validator=Validator::make(
@@ -300,11 +300,11 @@ class WorkloadController extends Controller
     //
     public function getUpdateWorkload($workload_id)
     {
-        $this->authorize('cud', PI::firstOrFail());
+        $this->authorize('cud', PI::first());
 
         $se = Semester::all();
-        $workload = Workload::findOrFail($workload_id);
-        $pi = PI::findOrFail($workload->pi->id);
+        $workload = Workload::find($workload_id);
+        $pi = PI::find($workload->pi->id);
         $ws = WorkloadSession::orderBy('start_year', 'desc')->get();
         $unit = Unit::all();
 
@@ -313,7 +313,7 @@ class WorkloadController extends Controller
 
     public function postUpdateWorkload(Request $request, $workload_id)
     {
-        $this->authorize('cud', PI::firstOrFail());
+        $this->authorize('cud', PI::first());
 
         $value_start_year = (int)\Request::get('start_year');
         $request->validate(
@@ -379,7 +379,7 @@ class WorkloadController extends Controller
         ]
     );
 
-        $workload = Workload::findOrFail($workload_id);
+        $workload = Workload::find($workload_id);
         $workload->subject_code= mb_strtoupper($request->subject_code);
         $workload->subject_name= $request->subject_name;
         $workload->number_of_lessons= $request->number_of_lessons;
@@ -405,8 +405,8 @@ class WorkloadController extends Controller
     }
     public function getWorkloadDetail($id_workload)
     {
-        $workload = Workload::findOrFail($id_workload);
-        $pi = PI::findOrFail($workload->personalinformation_id);
+        $workload = Workload::find($id_workload);
+        $pi = PI::find($workload->personalinformation_id);
         return view('admin.workload.workload-details', compact('workload', 'pi'));
     }
 
@@ -470,16 +470,16 @@ class WorkloadController extends Controller
     }
     public function delete($workload_id)
     {
-        $this->authorize('cud', PI::firstOrFail());
+        $this->authorize('cud', PI::first());
 
-        $workload = Workload::findOrFail($workload_id);
+        $workload = Workload::find($workload_id);
         $workload->delete();
         return redirect()->back()->with('message', 'Xóa thông tin khối lượng giảng dạy thành công');
     }
 
     public function import(Request $request)
     {
-        $this->authorize('cud', PI::firstOrFail());
+        $this->authorize('cud', PI::first());
         $request->validate(
             [
               'import_file' => 'required|mimetypes:application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|file'
@@ -514,7 +514,7 @@ class WorkloadController extends Controller
     public function getWorkloadDetail_Employee($id_workload)
     {
         $pi = Auth::guard('employee')->user();
-        $workload = Workload::findOrFail($id_workload);
+        $workload = Workload::find($id_workload);
         if ($this->checkIsOwnerPermisson($pi, $workload)) {
             return view('employee.workload.workload-details', compact('workload', 'pi'));
         } else {
@@ -594,13 +594,13 @@ class WorkloadController extends Controller
     }
     public function getaddyear()
     {
-        $this->authorize('cud', PI::firstOrFail());
+        $this->authorize('cud', PI::first());
 
         return view('admin.schoolyear.schoolyear-add');
     }
     public function postaddyear(Request $request)
     {
-        $this->authorize('cud', PI::firstOrFail());
+        $this->authorize('cud', PI::first());
 
         $value_start_year = (int)\Request::get('start_year');
         $request->validate(
@@ -643,14 +643,14 @@ class WorkloadController extends Controller
     }
     public function getupdateyear($id)
     {
-        $this->authorize('cud', PI::firstOrFail());
+        $this->authorize('cud', PI::first());
 
         $yearlist = WorkloadSession::Find($id);
         return view('admin.schoolyear.schoolyear-update', compact('yearlist'));
     }
     public function postupdateyear(Request $request, $id)
     {
-        $this->authorize('cud', PI::firstOrFail());
+        $this->authorize('cud', PI::first());
 
         $value_start_year = (int)\Request::get('start_year');
         $request->validate(
@@ -693,8 +693,8 @@ class WorkloadController extends Controller
     }
     public function deleteschoolyear($id)
     {
-        $this->authorize('cud', PI::firstOrFail());
-        $school_year = WorkloadSession::findOrFail($id);
+        $this->authorize('cud', PI::first());
+        $school_year = WorkloadSession::find($id);
         Workload::where('session_id', $school_year->id)->delete();
         ScientificResearchWorkload::where('session_id', $school_year->id)->delete();
         $school_year->delete();

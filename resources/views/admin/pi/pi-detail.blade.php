@@ -471,8 +471,14 @@
                                                             <div class="modal-header">
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                                                         aria-hidden="true">&times;</span></button>
-                                                                <h4 class="modal-title" id="myModalLabel">Bạn thực sự muốn khôi
-                                                                    phục mật khẩu cho tài khoản này ?</h4>
+                                                                <h4 class="modal-title" id="myModalLabel">
+                                                                    Bạn thực sự muốn khôi phục mật khẩu cho tài khoản này ?
+                                                                    
+                                                                </h4>
+                                                                
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                    <p  class="text-center">Mật khẩu sau khi khôi phục sẽ là<br><strong>{{$pi->employee_code}}</strong> </p>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-danger" id="btn-pr-yes">Có</button>

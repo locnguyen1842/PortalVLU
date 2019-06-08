@@ -40,6 +40,7 @@
                     {{ session()->get('message') }}
                 </div>
                 @endif
+                
                 <form class="form-horizontal" action="{{route('admin.sb.update',$pi_id)}}" method="post">
                     {{csrf_field()}}
                     <div class="panel panel-default">
@@ -50,12 +51,23 @@
                                 <div class="col-sm-6">
                                     <label>Họ và tên <span style="color: red">*</span></label>
                                     <input required type="text" class="form-control" name="full_name" placeholder="Nhập mã nhân viên"
-                                        value="{{$sb->pi->full_name}}">
+                                        value="{{old('full_name',$sb->pi->full_name)}}">
 
                                 </div>
                                 <div class="col-sm-6">
                                     <label>Giới tính <span style="color: red">*</span></label>
                                     <div class="radio">
+                                            
+                                        @if(!is_null(old('gender')))
+                                        <label class="col-sm-4">
+                                            <input required type="radio" name="gender" value="0"
+                                                {{ old('gender') ==0 ? "checked":""}}>Nam
+                                        </label>
+                                        <label class="col-sm-4">
+                                            <input required type="radio" name="gender" value="1"
+                                                {{ old('gender') ==1 ? "checked":""}}>Nữ
+                                        </label>
+                                        @else
                                         <label class="col-sm-4">
                                             <input required type="radio" name="gender" value="0"
                                                 {{$sb->pi->gender ==0 ? "checked":""}}>Nam
@@ -64,6 +76,7 @@
                                             <input required type="radio" name="gender" value="1"
                                                 {{$sb->pi->gender ==1 ? "checked":""}}>Nữ
                                         </label>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -71,25 +84,30 @@
                                 <div class="col-sm-6">
                                     <label>Ngày, tháng ,năm sinh <span style="color: red">*</span></label>
                                     <input required type="date" class="form-control" name="date_of_birth" placeholder="Nhập ngày, tháng ,năm sinh"
-                                        value="{{$sb->pi->date_of_birth}}">
+                                        value="{{old('date_of_birth',$sb->pi->date_of_birth)}}">
                                 </div>
                                 <div class="col-sm-6">
                                     <label>Nơi sinh <span style="color: red">*</span></label>
                                     <input required type="text" class="form-control" name="place_of_birth" placeholder="Nhập nơi sinh"
-                                        value="{{$sb->pi->place_of_birth}}">
+                                        value="{{old('place_of_birth',$sb->pi->place_of_birth)}}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-6">
                                     <label>Quê quán <span style="color: red">*</span></label>
-                                    <input required class="form-control" name="home_town" value="{{$sb->pi->home_town}}">
+                                    <input required class="form-control" name="home_town" value="{{old('home_town',$sb->pi->home_town)}}">
                                 </div>
                                 <div class="col-sm-6">
                                     <label>Dân tộc <span style="color: red">*</span></label>
                                     <select required class="form-control" name="nation">
                                         <option value="">Chọn dân tộc</option>
                                         @foreach($nations as $nation)
+                                        @if(old('nation'))
+                                        <option {{ old('nation') == $nation->id ? 'selected' : ''}} value="{{$nation->id}}">{{$nation->name}}</option>
+
+                                        @else
                                         <option {{$sb->pi->nation_id == $nation->id ? 'selected' : ''}} value="{{$nation->id}}">{{$nation->name}}</option>
+                                        @endif
                                         @endforeach
                                     </select>
                                 </div>
@@ -116,11 +134,11 @@
                             <div class="form-group">
                                 <div class="col-sm-6">
                                     <label>Chức danh khoa học cao nhất </label>
-                                    <input class="form-control" name="highest_scientific_title" value="{{$sb->highest_scientific_title}}">
+                                    <input class="form-control" name="highest_scientific_title" value="{{old('highest_scientific_title', $sb->highest_scientific_title)}}">
                                 </div>
                                 <div class="col-sm-6">
                                     <label>Năm bổ nhiệm</label>
-                                    <input class="form-control" name="year_of_appointment" value="{{$sb->year_of_appointment}}">
+                                    <input type="number" class="form-control year-digits" name="year_of_appointment" value="{{old('year_of_appointment',$sb->year_of_appointment)}}">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -129,7 +147,11 @@
                                     <select required class="form-control" name="position">
                                         <option value="">Chọn chức vụ</option>
                                         @foreach($positions as $position)
+                                        @if(old('position'))
+                                        <option {{old('position') == $position->id ? 'selected' : ''}} value="{{$position->id}}">{{$position->name}}</option>
+                                        @else
                                         <option {{$sb->pi->officer->position_id == $position->id ? 'selected' : ''}} value="{{$position->id}}">{{$position->name}}</option>
+                                        @endif
                                         @endforeach
                                     </select>
 
@@ -139,7 +161,12 @@
                                     <select required class="form-control" name="unit">
                                         <option value="">Chọn đơn vị</option>
                                         @foreach($units as $unit)
+                                        @if(old('unit'))
+                                        <option {{old('unit') == $unit->id ? 'selected' : ''}} value="{{$unit->id}}">{{$unit->name}}</option>
+                                        @else
                                         <option {{$sb->pi->unit_id == $unit->id ? 'selected' : ''}} value="{{$unit->id}}">{{$unit->name}}</option>
+                                        @endif
+
                                         @endforeach
                                     </select>
                                 </div>
@@ -151,7 +178,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label>Email <span style="color: red">*</span></label>
-                                    <input required class="form-control" name="email_address" value="{{$sb->pi->email_address}}">
+                                    <input required class="form-control" name="email_address" value="{{old('email_address',$sb->pi->email_address)}}">
                                 </div>
                             </div>
 
@@ -161,22 +188,22 @@
 
                                 <div class="col-sm-3">
                                     <label for="">Cơ quan</label>
-                                    <input class="form-control" name="orga_phone_number" value="{{$sb->orga_phone_number}}">
+                                    <input class="form-control" name="orga_phone_number" value="{{old('orga_phone_number',$sb->orga_phone_number)}}">
 
                                 </div>
                                 <div class="col-sm-3">
                                     <label for="">Nhà riêng</label>
-                                    <input class="form-control" name="home_phone_number" value="{{$sb->home_phone_number}}">
+                                    <input class="form-control" name="home_phone_number" value="{{old('home_phone_number',$sb->home_phone_number)}}">
 
                                 </div>
                                 <div class="col-sm-3">
                                     <label for="">Di động <span style="color: red">*</span></label>
-                                    <input required class="form-control" name="mobile_phone_number" value="{{$sb->mobile_phone_number}}">
+                                    <input required class="form-control" name="mobile_phone_number" value="{{old('mobile_phone_number',$sb->mobile_phone_number)}}">
 
                                 </div>
                                 <div class="col-sm-3">
                                     <label>Fax</label>
-                                    <input class="form-control" name="fax" value="{{$sb->pi->fax}}">
+                                    <input class="form-control" name="fax" value="{{old('fax',$sb->pi->fax)}}">
                                 </div>
 
 
@@ -192,28 +219,53 @@
                             <div class="form-group">
                                 <div class="col-sm-6">
                                     <label>Hệ đào tạo <span style="color: red">*</span></label>
+                                    @if(old('type_of_training'))
+                                    <input required class="form-control" name="type_of_training" value="{{old('type_of_training')}}">
+                                    @else
                                     <input required class="form-control" name="type_of_training" value="{{$sb->tp_graduates->isEmpty() ? '' : $sb->tp_graduates->first()->type_of_training}}">
+                                    @endif
                                 </div>
                                 <div class="col-sm-6">
                                     <label>Nơi đào tạo <span style="color: red">*</span></label>
+                                    @if(old('place_of_training'))
+                                    <input required class="form-control" name="place_of_training" value="{{old('place_of_training')}}">
+                                    
+                                    @else
                                     <input required class="form-control" name="place_of_training" value="{{$sb->tp_graduates->isEmpty() ? '' : $sb->tp_graduates->first()->place_of_training}}">
+                                    
+                                    @endif
+
 
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-6">
                                     <label>Ngành học <span style="color: red">*</span></label>
+                                    @if(old('field_of_study'))
+                                    <input required class="form-control" name="field_of_study" value="{{old('field_of_study')}}">
+                                    
+                                    @else
                                     <input required class="form-control" name="field_of_study" value="{{$sb->tp_graduates->isEmpty() ? '' : $sb->tp_graduates->first()->field_of_study}}">
+                                    
+                                    @endif
                                 </div>
                                 <div class="col-sm-6">
                                     <label>Nước đào tạo <span style="color: red">*</span></label>
+                                    @if(old('nation_of_training'))
+                                    <input required class="form-control" name="nation_of_training" value="{{old('nation_of_training')}}">
+                                    @else
                                     <input required class="form-control" name="nation_of_training" value="{{$sb->tp_graduates->isEmpty() ? '' : $sb->tp_graduates->first()->nation_of_training}}">
+                                    @endif
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-6">
                                     <label>Năm tốt nghiệp <span style="color: red">*</span></label>
-                                    <input required class="form-control" name="year_of_graduation_first" value="{{$sb->tp_graduates->isEmpty() ? '' : $sb->tp_graduates->first()->year_of_graduation}}">
+                                    @if(old('year_of_graduation_first'))
+                                    <input type="number"  required class="form-control year-digits" name="year_of_graduation_first" value="{{old('year_of_graduation_first')}}">
+                                    @else
+                                    <input type="number" required class="form-control year-digits" name="year_of_graduation_first" value="{{$sb->tp_graduates->isEmpty() ? '' : $sb->tp_graduates->first()->year_of_graduation}}">
+                                    @endif
                                 </div>
                             </div>
 
@@ -229,11 +281,11 @@
                                 <div class="form-group group-graduate">
                                     <div class="col-sm-6">
                                         <label data-pattern-text="Bằng đại học +=2">Bằng đại học 2 </label>
-                                        <input   class="form-control" name="industry[]">
+                                        <input class="form-control industry" name="industry[]">
                                     </div>
                                     <div class="col-sm-5">
                                         <label>Năm tốt nghiệp </label>
-                                        <input  class="form-control" name="year_of_graduation[]">
+                                        <input type="number"  class="form-control year-digits" name="year_of_graduation[]">
 
                                     </div>
                                     <div class="col-sm-1">
@@ -261,7 +313,7 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <label>Năm cấp bằng</label>
-                                            <input class="form-control" name="master_year_of_issue[]">
+                                            <input type="number" class="form-control year-digits" name="master_year_of_issue[]">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -297,7 +349,7 @@
                                         </div>
                                         <div class="col-sm-5">
                                             <label>Năm cấp bằng</label>
-                                            <input class="form-control" name="doctor_year_of_issue[]">
+                                            <input type="number" class="form-control year-digits" name="doctor_year_of_issue[]">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -449,12 +501,12 @@
                                             </td>
                                             <td class="col-sm-3" style="padding-left:0px">
                                                 <div class="col-sm-6">
-                                                    <input  class="form-control" name="start_year[]"
+                                                    <input type="number" class="form-control year-digits" name="start_year[]"
                                                         placeholder="Bắt đầu">
 
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <input  class="form-control" name="end_year[]" placeholder="Kết thúc">
+                                                    <input type="number" class="form-control year-digits" name="end_year[]" placeholder="Kết thúc">
 
                                                 </div>
 
@@ -512,7 +564,7 @@
 
                                             </td>
                                             <td class="col-sm-2">
-                                                <input  class="form-control" name="year_of_publication[]">
+                                                <input type="number" class="form-control year-digits" name="year_of_publication[]">
 
                                             </td>
                                             <td class="col-sm-3">
@@ -541,39 +593,39 @@
                     </div>
                 </form>
 
-
             </div>
         </div>
     </div>
 </div>
 <script src="{{asset('js/jquery.form-repeater.js')}}"></script>
 <script type="text/javascript">
+    $(document).on('input','.year-digits',function(){
+        
+            if($(this).val().length > 4){
+                $(this).val($(this).val().slice(0,4))
+            }
+    })
 
     $(document).ready(function(){
+        
+          // var x = '{!!json_encode(old('industry'),JSON_UNESCAPED_UNICODE)!!}'
+        // let b = x.replace('[','').replace(']','').replace('"','').replace('"','').replace('"','').replace('"','');
+        // let array = b.split(',');
+        // console.log(array);
         var list1 = '{!!json_encode($sb->tp_graduates->count() > 1  ? $sb->tp_graduates->slice(1)->flatten()->toArray() :$sb->tp_graduates->slice(1)->toArray() )!!}';
-
         var list_graduate = JSON.parse(list1);
-        var text;
         var array_graduate = new Array();
-
-        var industry = "industry[]";
-        var year_of_graduation = "year_of_graduation[]";
-
-
+      
         list_graduate.forEach(function(item,key){
-
-            text = '{'+'"'+ industry+'"'+':'+'"'+item['field_of_study']+'"'+','+'"'+year_of_graduation+'"'+':'+'"'+item['year_of_graduation'] +'"' +'}';
-            array_graduate.push($.parseJSON(text));
-        });
-        $(array_graduate).each(function (index, element) {
-            if(array_graduate[index][industry] == "null"){
-                array_graduate[index][industry]= null;
+            
+            let data = {
+                'industry[]': item['field_of_study'] , 
+                'year_of_graduation[]' : item['year_of_graduation']
             }
-            if(array_graduate[index][year_of_graduation] == "null"){
-                array_graduate[index][year_of_graduation]= null;
-            }
+            array_graduate.push(data)
 
         });
+        
         $('#graduate_repeater').repeater({
             btnAddClass: 'r-add-graduate',
             btnRemoveClass: 'r-delete-graduate',
@@ -587,36 +639,24 @@
             animation: 'fade',
             animationSpeed: 400,
             animationEasing: 'swing',
-            clearValues: true
+            clearValues: true,
         },array_graduate);
 
         // 2
 
         var list2 = '{!!json_encode($sb->wp_professionals->toArray())!!}';
         var list_wp_professionals = JSON.parse(list2);
-        var text;
         var array_wp_professionals = new Array();
-
-        var period_time = "period_time[]";
-        var place_of_work = "place_of_work[]";
-        var work_of_undertake = "work_of_undertake[]";
-
+       
+        
         list_wp_professionals.forEach(function(item,key){
-
-            text = '{'+'"'+ period_time+'"'+':'+'"'+item['period_time']+'"'+','+'"'+place_of_work+'"'+':'+'"'+item['place_of_work'] +'"'+','+'"'+work_of_undertake+'"'+':'+'"'+item['work_of_undertake'] +'"' +'}';
-            array_wp_professionals.push($.parseJSON(text));
-        });
-        $(array_wp_professionals).each(function (index, element) {
-            if(array_wp_professionals[index][period_time] == "null"){
-                array_wp_professionals[index][period_time]= null;
+            
+            let data =  {
+                'period_time[]': item['period_time'], 
+                'place_of_work[]': item['place_of_work'], 
+                'work_of_undertake[]': item['work_of_undertake']
             }
-            if(array_wp_professionals[index][place_of_work] == "null"){
-                array_wp_professionals[index][place_of_work]= null;
-            }
-            if(array_wp_professionals[index][work_of_undertake] == "null"){
-                array_wp_professionals[index][work_of_undertake]= null;
-            }
-
+            array_wp_professionals.push(data);
         });
         $('#wp_professionals_repeater').repeater({
             btnAddClass: 'r-add-wp-professionals',
@@ -638,37 +678,17 @@
 
         var list3 = '{!!json_encode($sb->research_topics->toArray())!!}';
         var list_research_topics = JSON.parse(list3);
-        var text;
         var array_research_topics = new Array();
-
-        var name_of_topic = "name_of_topic[]";
-        var start_year = "start_year[]";
-        var end_year = "end_year[]";
-        var topic_level = "topic_level[]";
-        var responsibility = "responsibility[]";
-
         list_research_topics.forEach(function(item,key){
 
-            text = '{'+'"'+ name_of_topic+'"'+':'+'"'+item['name_of_topic']+'"'+','+'"'+start_year+'"'+':'+'"'+item['start_year'] +'"'+','+'"'+end_year+'"'+':'+'"'+item['end_year'] +'"'+','+'"'+topic_level+'"'+':'+'"'+item['topic_level_id'] +'"'+','+'"'+responsibility+'"'+':'+'"'+item['responsibility'] +'"' +'}';
-            array_research_topics.push($.parseJSON(text));
-        });
-        $(array_research_topics).each(function (index, element) {
-            if(array_research_topics[index][name_of_topic] == "null"){
-                array_research_topics[index][name_of_topic]= null;
+            let data = {
+                'name_of_topic[]': item['name_of_topic'], 
+                'start_year[]': item['start_year'], 'end_year[]': item['end_year'], 
+                'topic_level[]': item['topic_level_id'], 
+                'responsibility[]': item['responsibility']
             }
-            if(array_research_topics[index][start_year] == "null"){
-                array_research_topics[index][start_year]= null;
-            }
-            if(array_research_topics[index][end_year] == "null"){
-                array_research_topics[index][end_year]= null;
-            }
-            if(array_research_topics[index][topic_level] == "null"){
-                array_research_topics[index][topic_level]= null;
-            }
-            if(array_research_topics[index][responsibility] == "null"){
-                array_research_topics[index][responsibility]= null;
-            }
-
+            array_research_topics.push(data);
+            
         });
         $('#research_topics_repeater').repeater({
             btnAddClass: 'r-add-research-topics',
@@ -689,31 +709,16 @@
         // 4
 
         var list4 = '{!!json_encode($sb->research_process_works->toArray())!!}';
-
         var list_research_process_works = JSON.parse(list4);
-        var text;
         var array_research_process_works = new Array();
-
-        var name_of_works = "name_of_works[]";
-        var year_of_publication = "year_of_publication[]";
-        var name_of_journal = "name_of_journal[]";
-
         list_research_process_works.forEach(function(item,key){
 
-            text = '{'+'"'+ name_of_works+'"'+':'+'"'+item['name_of_works']+'"'+','+'"'+year_of_publication+'"'+':'+'"'+item['year_of_publication'] +'"'+','+'"'+name_of_journal+'"'+':'+'"'+item['name_of_journal'] +'"'+'}';
-            array_research_process_works.push($.parseJSON(text));
-        });
-        $(array_research_process_works).each(function (index, element) {
-            if(array_research_process_works[index][name_of_works] == "null"){
-                array_research_process_works[index][name_of_works]= null;
+            let data = {
+                "name_of_works[]": item['name_of_works'] , 
+                "year_of_publication[]" : item['year_of_publication'] , 
+                "name_of_journal[]" : item['name_of_journal'] 
             }
-            if(array_research_process_works[index][year_of_publication] == "null"){
-                array_research_process_works[index][year_of_publication]= null;
-            }
-            if(array_research_process_works[index][name_of_journal] == "null"){
-                array_research_process_works[index][name_of_journal]= null;
-            }
-
+            array_research_process_works.push(data);
         });
         $('#research_process_works_repeater').repeater({
             btnAddClass: 'r-add-research-process-works',
@@ -735,34 +740,14 @@
 
         var list5 = '{!!json_encode($sb->tp_postgraduate_masters->toArray())!!}';
         var list_tp_masters = JSON.parse(list5);
-        var text;
         var array_tp_masters = new Array();
-
-        var master_field_of_study = "master_field_of_study[]";
-        var master_year_of_issue = "master_year_of_issue[]";
-        var master_place_of_training = "master_place_of_training[]";
-
-
-
         list_tp_masters.forEach(function(item,key){
-
-            text = '{'+'"'+ master_field_of_study+'"'+':'+'"'+item['field_of_study']+'"'+','+'"'+master_year_of_issue+'"'+':'+'"'+item['year_of_issue'] +'"'+','+'"'+master_place_of_training+'"'+':'+'"'+item['place_of_training'] +'"'+'}';
-
-            array_tp_masters.push($.parseJSON(text));
-        });
-
-
-        $(array_tp_masters).each(function (index, element) {
-            if(array_tp_masters[index][master_field_of_study] == "null"){
-                array_tp_masters[index][master_field_of_study]= null;
-            }
-            if(array_tp_masters[index][master_year_of_issue] == "null"){
-                array_tp_masters[index][master_year_of_issue]= null;
-            }
-            if(array_tp_masters[index][master_place_of_training] == "null"){
-                array_tp_masters[index][master_place_of_training]= null;
-            }
-
+            data = {
+                        "master_field_of_study[]" : item['field_of_study'],
+                        "master_year_of_issue[]" : item['year_of_issue'] ,
+                        "master_place_of_training[]" : item['place_of_training'],
+                    }
+            array_tp_masters.push(data);
         });
         $('#master_repeater').repeater({
             btnAddClass: 'r-add-master',
@@ -783,35 +768,15 @@
 
         var list5 = '{!!json_encode($sb->tp_postgraduate_doctors->toArray())!!}';
         var list_tp_doctors = JSON.parse(list5);
-        var text;
         var array_tp_doctors = new Array();
-
-        var doctor_field_of_study = "doctor_field_of_study[]";
-        var doctor_year_of_issue = "doctor_year_of_issue[]";
-        var thesis_title = "thesis_title[]";
-        var doctor_place_of_training = "doctor_place_of_training[]";
-
-
-
         list_tp_doctors.forEach(function(item,key){
-
-            text = '{'+'"'+ doctor_field_of_study+'"'+':'+'"'+item['field_of_study']+'"'+','+'"'+doctor_year_of_issue+'"'+':'+'"'+item['year_of_issue'] +'"'+','+'"'+thesis_title+'"'+':'+'"'+item['thesis_title'] +'"'+','+'"'+doctor_place_of_training+'"'+':'+'"'+item['place_of_training'] +'"'+'}';
-            array_tp_doctors.push($.parseJSON(text));
-        });
-        $(array_tp_doctors).each(function (index, element) {
-            if(array_tp_doctors[index][doctor_field_of_study] == "null"){
-                array_tp_doctors[index][doctor_field_of_study]= null;
+            let data = {
+                "doctor_field_of_study[]" : item['field_of_study'],
+                "doctor_year_of_issue[]" : item['year_of_issue'],
+                "thesis_title[]" : item['thesis_title'] ,
+                "doctor_place_of_training[]" : item['place_of_training'] 
             }
-            if(array_tp_doctors[index][doctor_year_of_issue] == "null"){
-                array_tp_doctors[index][doctor_year_of_issue]= null;
-            }
-            if(array_tp_doctors[index][thesis_title] == "null"){
-                array_tp_doctors[index][thesis_title]= null;
-            }
-            if(array_tp_doctors[index][doctor_place_of_training] == "null"){
-                array_tp_doctors[index][doctor_place_of_training]= null;
-            }
-
+            array_tp_doctors.push(data);
         });
         $('#doctor_repeater').repeater({
             btnAddClass: 'r-add-doctor',
