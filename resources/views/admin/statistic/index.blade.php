@@ -75,25 +75,25 @@
                         <td class="bold">Tổng số</td>
                         <td>người</td>
                         <td>105</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$pis->first()->getPI()->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                                 {{$pis->first()->getPI(1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                                 {{$pis->first()->getPI(2)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                                 {{$pis->first()->getPI(3)->count()}}
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                                 {{$pis->first()->getPI(999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                                 {{$pis->first()->getPI(999,999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                                 {{$pis->first()->getPI(999,1,1)->count()}}
                         </td>
 
@@ -103,27 +103,27 @@
                         <td class="left bold">Cán bộ quản lý</td>
                         <td>người</td>
                         <td>106</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                                 {{$officers->first()->getOfficerByAcademicRankType(1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{$officers->first()->getOfficerByAcademicRankType(1,999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                                 {{$officers->first()->getOfficerByAcademicRankType(1,999,2)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                                 {{$officers->first()->getOfficerByAcademicRankType(1,999,3)->count()}}
 
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                             {{($officers->first()->getOfficerByAcademicRankType(1,999,999,1)->count())}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                                 {{($officers->first()->getOfficerByAcademicRankType(1,999,999,999,1)->count())}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                             {{($officers->first()->getOfficerByAcademicRankType(1,999,999,1,1)->count())}}
                         </td>
 
@@ -147,25 +147,25 @@
                         <td class="left">Hiệu trưởng</td>
                         <td>người</td>
                         <td>107</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$officers->first()->getOfficerByPosition(1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                                 {{$officers->first()->getOfficerByPosition(1,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                                 {{$officers->first()->getOfficerByPosition(1,2)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                                 {{$officers->first()->getOfficerByPosition(1,3)->count()}}
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                             {{{($officers->first()->getOfficerByPosition(1,999,1)->count())}}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                                 {{{($officers->first()->getOfficerByPosition(1,999,999,1)->count())}}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                                 {{{($officers->first()->getOfficerByPosition(1,999,1,1)->count())}}}
 
                         </td>
@@ -176,25 +176,25 @@
                         <td class="left">Phó hiệu trưởng</td>
                         <td>người</td>
                         <td>108</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$officers->first()->getOfficerByPosition(2)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                                 {{$officers->first()->getOfficerByPosition(2,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                                 {{$officers->first()->getOfficerByPosition(2,2)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                                 {{$officers->first()->getOfficerByPosition(2,3)->count()}}
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                                 {{{($officers->first()->getOfficerByPosition(2,999,1)->count())}}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                                 {{{($officers->first()->getOfficerByPosition(2,999,999,1)->count())}}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                                 {{{($officers->first()->getOfficerByPosition(2,999,1,1)->count())}}}
                         </td>
 
@@ -218,25 +218,25 @@
                         <td class="left">Giáo sư</td>
                         <td>người</td>
                         <td>109</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$officers->first()->getOfficerByAcademicRankType(1,2)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{$officers->first()->getOfficerByAcademicRankType(1,2,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{$officers->first()->getOfficerByAcademicRankType(1,2,2)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             {{$officers->first()->getOfficerByAcademicRankType(1,2,3)->count()}}
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                             {{($officers->first()->getOfficerByAcademicRankType(1,2,999,1)->count())}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                                 {{($officers->first()->getOfficerByAcademicRankType(1,2,999,999,1)->count())}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                                 {{($officers->first()->getOfficerByAcademicRankType(1,2,999,1,999)->count())}}
                         </td>
 
@@ -246,27 +246,27 @@
                         <td class="left">Phó giáo sư</td>
                         <td>người</td>
                         <td>110</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$officers->first()->getOfficerByAcademicRankType(1,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{$officers->first()->getOfficerByAcademicRankType(1,1,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{$officers->first()->getOfficerByAcademicRankType(1,1,2)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             {{$officers->first()->getOfficerByAcademicRankType(1,1,3)->count()}}
 
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                                 {{($officers->first()->getOfficerByAcademicRankType(1,1,999,1)->count())}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                                 {{($officers->first()->getOfficerByAcademicRankType(1,1,999,999,1)->count())}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                                 {{($officers->first()->getOfficerByAcademicRankType(1,1,999,1,1)->count())}}
                         </td>
 
@@ -276,28 +276,28 @@
                         <td class="left">Kiêm nhiệm giảng dạy</td>
                         <td>người</td>
                         <td>111</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                                 {{$officers->first()->getOfficerByAcademicRankType(1)->where('is_concurrently',1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{$officers->first()->getOfficerByAcademicRankType(1,999,1)->where('is_concurrently',1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{$officers->first()->getOfficerByAcademicRankType(1,999,2)->where('is_concurrently',1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             {{$officers->first()->getOfficerByAcademicRankType(1,999,3)->where('is_concurrently',1)->count()}}
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                                 {{$officers->first()->getOfficerByAcademicRankType(1,999,999,1)->where('is_concurrently',1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                                 {{$officers->first()->getOfficerByAcademicRankType(1,999,999,999,1)->where('is_concurrently',1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                                 {{$officers->first()->getOfficerByAcademicRankType(1,999,999,1,1)->where('is_concurrently',1)->count()}}
 
                         </td>
@@ -322,25 +322,25 @@
                         <td class="left">Đại học</td>
                         <td>người</td>
                         <td>112</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$officers->first()->getOfficerByDegreeType(1,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{$officers->first()->getOfficerByDegreeType(1,1,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                                 {{$officers->first()->getOfficerByDegreeType(1,1,2)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                                 {{$officers->first()->getOfficerByDegreeType(1,1,3)->count()}}
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                                 {{($officers->first()->getOfficerByDegreeType(1,1,999,1)->count())}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                                 {{($officers->first()->getOfficerByDegreeType(1,1,999,999,1)->count())}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                                 {{($officers->first()->getOfficerByDegreeType(1,1,999,1,1)->count())}}
                         </td>
 
@@ -350,26 +350,26 @@
                         <td class="left">Thạc sĩ</td>
                         <td>người</td>
                         <td>113</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{($officers->first()->getOfficerByDegreeType(1,2)->count())+($officers->first()->getOfficerByDegreeType(1,4)->count())}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                                 {{($officers->first()->getOfficerByDegreeType(1,2,1)->count())+($officers->first()->getOfficerByDegreeType(1,4,1)->count())}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                                 {{($officers->first()->getOfficerByDegreeType(1,2,2)->count())+($officers->first()->getOfficerByDegreeType(1,4,2)->count())}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                                 {{($officers->first()->getOfficerByDegreeType(1,2,3)->count())+($officers->first()->getOfficerByDegreeType(1,4,3)->count())}}
 
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                                 {{($officers->first()->getOfficerByDegreeType(1,2,999,1)->count())+($officers->first()->getOfficerByDegreeType(1,4,999,1)->count())}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                                 {{($officers->first()->getOfficerByDegreeType(1,2,999,999,1)->count())+($officers->first()->getOfficerByDegreeType(1,4,999,999,1)->count())}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                                 {{($officers->first()->getOfficerByDegreeType(1,2,999,1,1)->count())+($officers->first()->getOfficerByDegreeType(1,4,999,1,1)->count())}}
                         </td>
 
@@ -379,29 +379,29 @@
                         <td class="left">Tiến sĩ và TSKH</td>
                         <td>người</td>
                         <td>114</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{($officers->first()->getOfficerByDegreeType(1,3)->count())+($officers->first()->getOfficerByDegreeType(1,5)->count())}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                                 {{($officers->first()->getOfficerByDegreeType(1,3,1)->count())+($officers->first()->getOfficerByDegreeType(1,5,1)->count())}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                                 {{($officers->first()->getOfficerByDegreeType(1,3,2)->count())+($officers->first()->getOfficerByDegreeType(1,5,2)->count())}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                                 {{($officers->first()->getOfficerByDegreeType(1,3,3)->count())+($officers->first()->getOfficerByDegreeType(1,5,3)->count())}}
 
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                                 {{($officers->first()->getOfficerByDegreeType(1,3,999,1)->count())+($officers->first()->getOfficerByDegreeType(1,5,999,1)->count())}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                                 {{($officers->first()->getOfficerByDegreeType(1,3,999,999,1)->count())+($officers->first()->getOfficerByDegreeType(1,5,999,999,1)->count())}}
 
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                                 {{($officers->first()->getOfficerByDegreeType(1,3,999,1,1)->count())+($officers->first()->getOfficerByDegreeType(1,5,999,1,1)->count())}}
 
                         </td>
@@ -412,26 +412,26 @@
                         <td class="left">Khác</td>
                         <td>người</td>
                         <td>115</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$officers->first()->getOfficerByDegreeType(1,9)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                                 {{$officers->first()->getOfficerByDegreeType(1,9,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                                 {{$officers->first()->getOfficerByDegreeType(1,9,2)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                                 {{$officers->first()->getOfficerByDegreeType(1,9,3)->count()}}
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                                 {{($officers->first()->getOfficerByDegreeType(1,9,999,1)->count())}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                                 {{($officers->first()->getOfficerByDegreeType(1,9,999,999,1)->count())}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                                 {{($officers->first()->getOfficerByDegreeType(1,9,999,1,1)->count())}}
 
                         </td>
@@ -442,25 +442,25 @@
                         <td class="bold left">Cán bộ hành chính, nghiệp vụ</td>
                         <td>người</td>
                         <td>116</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$officers->first()->getOfficerByAcademicRankType(2)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{$officers->first()->getOfficerByAcademicRankType(2,999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{$officers->first()->getOfficerByAcademicRankType(2,999,2)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             {{$officers->first()->getOfficerByAcademicRankType(2,999,3)->count()}}
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                             {{$officers->first()->getOfficerByAcademicRankType(2,999,999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                             {{$officers->first()->getOfficerByAcademicRankType(2,999,999,999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                             {{$officers->first()->getOfficerByAcademicRankType(2,999,999,1,1)->count()}}
                         </td>
 
@@ -484,26 +484,26 @@
                         <td class="left">Giáo sư</td>
                         <td>người</td>
                         <td>117</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$officers->first()->getOfficerByAcademicRankType(2,2)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{$officers->first()->getOfficerByAcademicRankType(2,2,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{$officers->first()->getOfficerByAcademicRankType(2,2,2)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             {{$officers->first()->getOfficerByAcademicRankType(2,2,3)->count()}}
 
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                             {{$officers->first()->getOfficerByAcademicRankType(2,2,999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                             {{$officers->first()->getOfficerByAcademicRankType(2,2,999,999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                             {{$officers->first()->getOfficerByAcademicRankType(2,2,999,1,1)->count()}}
                         </td>
 
@@ -513,25 +513,25 @@
                         <td class="left">Phó giáo sư</td>
                         <td>người</td>
                         <td>118</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$officers->first()->getOfficerByAcademicRankType(2,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{$officers->first()->getOfficerByAcademicRankType(2,1,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{$officers->first()->getOfficerByAcademicRankType(2,1,2)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             {{$officers->first()->getOfficerByAcademicRankType(2,1,3)->count()}}
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                             {{$officers->first()->getOfficerByAcademicRankType(2,1,999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                             {{$officers->first()->getOfficerByAcademicRankType(2,1,999,999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                             {{$officers->first()->getOfficerByAcademicRankType(2,1,999,1,1)->count()}}
                         </td>
 
@@ -541,29 +541,29 @@
                         <td class="left">Kiêm nhiệm giảng dạy</td>
                         <td>người</td>
                         <td>119</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$officers->first()->getOfficerByAcademicRankType(2)->where('is_concurrently',1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{$officers->first()->getOfficerByAcademicRankType(2,999,1)->where('is_concurrently',1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{$officers->first()->getOfficerByAcademicRankType(2,999,2)->where('is_concurrently',1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             {{$officers->first()->getOfficerByAcademicRankType(2,999,3)->where('is_concurrently',1)->count()}}
 
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                             {{$officers->first()->getOfficerByAcademicRankType(2,999,999,1)->where('is_concurrently',1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                             {{$officers->first()->getOfficerByAcademicRankType(2,999,999,999,1)->where('is_concurrently',1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                             {{$officers->first()->getOfficerByAcademicRankType(2,999,999,1,1)->where('is_concurrently',1)->count()}}
                         </td>
 
@@ -587,25 +587,25 @@
                         <td class="left">Cao đẳng</td>
                         <td>người</td>
                         <td>120</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             0
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             0
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             0
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             0
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                             0
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                             0
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                             0
                         </td>
 
@@ -615,29 +615,29 @@
                         <td class="left">Đại học</td>
                         <td>người</td>
                         <td>121</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$officers->first()->getOfficerByDegreeType(2,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{$officers->first()->getOfficerByDegreeType(2,1,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{$officers->first()->getOfficerByDegreeType(2,1,2)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             {{$officers->first()->getOfficerByDegreeType(2,1,3)->count()}}
 
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                             {{$officers->first()->getOfficerByDegreeType(2,1,999,1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                             {{$officers->first()->getOfficerByDegreeType(2,1,999,999,1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                             {{$officers->first()->getOfficerByDegreeType(2,1,999,1,1)->count()}}
 
                         </td>
@@ -648,25 +648,25 @@
                         <td class="left">Thạc sĩ</td>
                         <td>người</td>
                         <td>122</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{($officers->first()->getOfficerByDegreeType(2,2)->count())+($officers->first()->getOfficerByDegreeType(2,4)->count())}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{($officers->first()->getOfficerByDegreeType(2,2,1)->count())+($officers->first()->getOfficerByDegreeType(2,4,1)->count())}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{($officers->first()->getOfficerByDegreeType(2,2,2)->count())+($officers->first()->getOfficerByDegreeType(2,4,2)->count())}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             {{($officers->first()->getOfficerByDegreeType(2,2,3)->count())+($officers->first()->getOfficerByDegreeType(2,4,3)->count())}}
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                             {{($officers->first()->getOfficerByDegreeType(2,2,999,1)->count())+($officers->first()->getOfficerByDegreeType(2,4,999,1)->count())}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                             {{($officers->first()->getOfficerByDegreeType(2,2,999,999,1)->count())+($officers->first()->getOfficerByDegreeType(2,4,999,999,1)->count())}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                             {{($officers->first()->getOfficerByDegreeType(2,2,999,1,1)->count())+($officers->first()->getOfficerByDegreeType(2,4,999,1,1)->count())}}
                         </td>
 
@@ -676,26 +676,26 @@
                         <td class="left">Tiến sĩ và TSKH</td>
                         <td>người</td>
                         <td>123</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{($officers->first()->getOfficerByDegreeType(2,3)->count())+($officers->first()->getOfficerByDegreeType(2,5)->count())}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{($officers->first()->getOfficerByDegreeType(2,3,1)->count())+($officers->first()->getOfficerByDegreeType(2,5,1)->count())}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{($officers->first()->getOfficerByDegreeType(2,3,2)->count())+($officers->first()->getOfficerByDegreeType(2,5,2)->count())}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             {{($officers->first()->getOfficerByDegreeType(2,3,3)->count())+($officers->first()->getOfficerByDegreeType(2,5,3)->count())}}
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                             {{($officers->first()->getOfficerByDegreeType(2,3,999,1)->count())+($officers->first()->getOfficerByDegreeType(2,5,999,1)->count())}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                             {{($officers->first()->getOfficerByDegreeType(2,3,999,999,1)->count())+($officers->first()->getOfficerByDegreeType(2,5,999,999,1)->count())}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                             {{($officers->first()->getOfficerByDegreeType(2,3,999,1,1)->count())+($officers->first()->getOfficerByDegreeType(2,5,999,1,1)->count())}}
 
                         </td>
@@ -706,25 +706,25 @@
                         <td class="left">Khác</td>
                         <td>người</td>
                         <td>124</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$officers->first()->getOfficerByDegreeType(2,9)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{$officers->first()->getOfficerByDegreeType(2,9,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{$officers->first()->getOfficerByDegreeType(2,9,2)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             {{$officers->first()->getOfficerByDegreeType(2,9,3)->count()}}
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                             {{$officers->first()->getOfficerByDegreeType(2,9,999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                             {{$officers->first()->getOfficerByDegreeType(2,9,999,999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                             {{$officers->first()->getOfficerByDegreeType(2,9,999,1,1)->count()}}
                         </td>
 
@@ -734,25 +734,25 @@
                         <td class="bold left">Nhân viên</td>
                         <td>người</td>
                         <td>125</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$officers->first()->getOfficerByDegreeType(3)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{$officers->first()->getOfficerByDegreeType(3,999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{$officers->first()->getOfficerByDegreeType(3,999,2)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             {{$officers->first()->getOfficerByDegreeType(3,999,3)->count()}}
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                             {{$officers->first()->getOfficerByDegreeType(3,999,999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                             {{$officers->first()->getOfficerByDegreeType(3,999,999,999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                             {{$officers->first()->getOfficerByDegreeType(3,999,999,1,1)->count()}}
 
                         </td>
@@ -777,26 +777,26 @@
                         <td class="left">Nhân viên thư viện</td>
                         <td>người</td>
                         <td>126</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$officers->first()->getOfficerByPosition(3)->count() }}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{$officers->first()->getOfficerByPosition(3,1)->count() }}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{$officers->first()->getOfficerByPosition(3,2)->count() }}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             {{$officers->first()->getOfficerByPosition(3,3)->count() }}
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                             {{$officers->first()->getOfficerByPosition(3,999,1)->count() }}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                             {{$officers->first()->getOfficerByPosition(3,999,999,1)->count() }}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                             {{$officers->first()->getOfficerByPosition(3,999,1,1)->count() }}
 
                         </td>
@@ -807,25 +807,25 @@
                         <td class="left">Nhân viên thiết bị, thí nghiệm</td>
                         <td>người</td>
                         <td>127</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$officers->first()->getOfficerByPosition(4)->count() }}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{$officers->first()->getOfficerByPosition(4,1)->count() }}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{$officers->first()->getOfficerByPosition(4,2)->count() }}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             {{$officers->first()->getOfficerByPosition(4,3)->count() }}
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                             {{$officers->first()->getOfficerByPosition(4,999,1)->count() }}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                             {{$officers->first()->getOfficerByPosition(4,999,999,1)->count() }}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                             {{$officers->first()->getOfficerByPosition(4,999,1,1)->count() }}
 
                         </td>
@@ -836,30 +836,30 @@
                         <td class="left">Nhân viên y tế</td>
                         <td>người</td>
                         <td>128</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$officers->first()->getOfficerByPosition(5)->count() }}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{$officers->first()->getOfficerByPosition(5,1)->count() }}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{$officers->first()->getOfficerByPosition(5,2)->count() }}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             {{$officers->first()->getOfficerByPosition(5,3)->count() }}
 
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                             {{$officers->first()->getOfficerByPosition(5,999,1)->count() }}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                             {{$officers->first()->getOfficerByPosition(5,999,999,1)->count() }}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                             {{$officers->first()->getOfficerByPosition(5,999,1,1)->count() }}
 
                         </td>
@@ -870,29 +870,29 @@
                         <td class="left">Nhân viên khác</td>
                         <td>người</td>
                         <td>129</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$officers->first()->getOfficerByPosition(6)->count() }}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{$officers->first()->getOfficerByPosition(6,1)->count() }}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{$officers->first()->getOfficerByPosition(6,2)->count() }}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             {{$officers->first()->getOfficerByPosition(6,3)->count() }}
 
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                             {{$officers->first()->getOfficerByPosition(6,999,1)->count() }}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                             {{$officers->first()->getOfficerByPosition(6,999,999,1)->count() }}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                             {{$officers->first()->getOfficerByPosition(6,999,1,1)->count() }}
 
                         </td>
@@ -903,30 +903,30 @@
                         <td class="bold left">Giảng viên cơ hữu</td>
                         <td>người</td>
                         <td>130</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$teachers->first()->getTeacherByAcademicRankType(1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{$teachers->first()->getTeacherByAcademicRankType(1,999,1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{$teachers->first()->getTeacherByAcademicRankType(1,999,2)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             {{$teachers->first()->getTeacherByAcademicRankType(1,999,3)->count()}}
 
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                             {{$teachers->first()->getTeacherByAcademicRankType(1,999,999,1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                             {{$teachers->first()->getTeacherByAcademicRankType(1,999,999,999,1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                             {{$teachers->first()->getTeacherByAcademicRankType(1,999,999,1,1)->count()}}
 
                         </td>
@@ -951,30 +951,30 @@
                         <td class="left">Giáo sư</td>
                         <td>người</td>
                         <td>131</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$teachers->first()->getTeacherByAcademicRankType(1,2)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{$teachers->first()->getTeacherByAcademicRankType(1,2,1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{$teachers->first()->getTeacherByAcademicRankType(1,2,2)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             {{$teachers->first()->getTeacherByAcademicRankType(1,2,3)->count()}}
 
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                             {{$teachers->first()->getTeacherByAcademicRankType(1,2,999,1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                             {{$teachers->first()->getTeacherByAcademicRankType(1,2,999,999,1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                             {{$teachers->first()->getTeacherByAcademicRankType(1,2,999,1,1)->count()}}
 
                         </td>
@@ -985,30 +985,30 @@
                         <td class="left">Phó giáo sư</td>
                         <td>người</td>
                         <td>132</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$teachers->first()->getTeacherByAcademicRankType(1,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{$teachers->first()->getTeacherByAcademicRankType(1,1,1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{$teachers->first()->getTeacherByAcademicRankType(1,1,2)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             {{$teachers->first()->getTeacherByAcademicRankType(1,1,3)->count()}}
 
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                             {{$teachers->first()->getTeacherByAcademicRankType(1,1,999,1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                             {{$teachers->first()->getTeacherByAcademicRankType(1,1,999,999,1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                             {{$teachers->first()->getTeacherByAcademicRankType(1,1,999,1,1)->count()}}
 
                         </td>
@@ -1034,25 +1034,25 @@
                         <td class="left">Đại học</td>
                         <td>người</td>
                         <td>133</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$teachers->first()->getTeacherByDegreeType(1,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{$teachers->first()->getTeacherByDegreeType(1,1,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{$teachers->first()->getTeacherByDegreeType(1,1,2)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             {{$teachers->first()->getTeacherByDegreeType(1,1,3)->count()}}
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                             {{$teachers->first()->getTeacherByDegreeType(1,1,999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                             {{$teachers->first()->getTeacherByDegreeType(1,1,999,999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                             {{$teachers->first()->getTeacherByDegreeType(1,1,999,1,1)->count()}}
                         </td>
 
@@ -1062,25 +1062,25 @@
                         <td class="left">Thạc sĩ</td>
                         <td>người</td>
                         <td>134</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{($teachers->first()->getTeacherByDegreeType(1,2)->count())+($teachers->first()->getTeacherByDegreeType(1,4)->count())}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{($teachers->first()->getTeacherByDegreeType(1,2,1)->count())+($teachers->first()->getTeacherByDegreeType(1,4,1)->count())}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{($teachers->first()->getTeacherByDegreeType(1,2,2)->count())+($teachers->first()->getTeacherByDegreeType(1,4,2)->count())}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             {{($teachers->first()->getTeacherByDegreeType(1,2,3)->count())+($teachers->first()->getTeacherByDegreeType(1,4,3)->count())}}
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                             {{($teachers->first()->getTeacherByDegreeType(1,2,999,1)->count())+($teachers->first()->getTeacherByDegreeType(1,4,999,1)->count())}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                             {{($teachers->first()->getTeacherByDegreeType(1,2,999,999,1)->count())+($teachers->first()->getTeacherByDegreeType(1,4,999,999,1)->count())}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                             {{($teachers->first()->getTeacherByDegreeType(1,2,999,1,1)->count())+($teachers->first()->getTeacherByDegreeType(1,4,999,1,1)->count())}}
 
                         </td>
@@ -1091,26 +1091,26 @@
                         <td class="left">Tiến sĩ và TSKH</td>
                         <td>người</td>
                         <td>135</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{($teachers->first()->getTeacherByDegreeType(1,3)->count())+($teachers->first()->getTeacherByDegreeType(1,5)->count())}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{($teachers->first()->getTeacherByDegreeType(1,3,1)->count())+($teachers->first()->getTeacherByDegreeType(1,5,1)->count())}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{($teachers->first()->getTeacherByDegreeType(1,3,2)->count())+($teachers->first()->getTeacherByDegreeType(1,5,2)->count())}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             {{($teachers->first()->getTeacherByDegreeType(1,3,3)->count())+($teachers->first()->getTeacherByDegreeType(1,5,3)->count())}}
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                             {{($teachers->first()->getTeacherByDegreeType(1,3,999,1)->count())+($teachers->first()->getTeacherByDegreeType(1,5,999,1)->count())}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                             {{($teachers->first()->getTeacherByDegreeType(1,3,999,999,1)->count())+($teachers->first()->getTeacherByDegreeType(1,5,999,999,1)->count())}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                             {{($teachers->first()->getTeacherByDegreeType(1,3,999,1,1)->count())+($teachers->first()->getTeacherByDegreeType(1,5,999,1,1)->count())}}
 
                         </td>
@@ -1121,25 +1121,25 @@
                         <td class="left">Khác</td>
                         <td>người</td>
                         <td>136</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$teachers->first()->getTeacherByDegreeType(1,9)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{$teachers->first()->getTeacherByDegreeType(1,9,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{$teachers->first()->getTeacherByDegreeType(1,9,2)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             {{$teachers->first()->getTeacherByDegreeType(1,9,3)->count()}}
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                             {{$teachers->first()->getTeacherByDegreeType(1,9,999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                             {{$teachers->first()->getTeacherByDegreeType(1,9,999,999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                             {{$teachers->first()->getTeacherByDegreeType(1,9,999,1,1)->count()}}
                         </td>
 
@@ -1163,31 +1163,31 @@
                         <td class="left">Giảng viên cao cấp (hạng I)</td>
                         <td>người</td>
                         <td>137</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$teachers->first()->getTeacherByDegreeType(1)->where('title_id',1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{$teachers->first()->getTeacherByDegreeType(1,999,1)->where('title_id',1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{$teachers->first()->getTeacherByDegreeType(1,999,2)->where('title_id',1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             {{$teachers->first()->getTeacherByDegreeType(1,999,3)->where('title_id',1)->count()}}
 
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                             {{$teachers->first()->getTeacherByDegreeType(1,999,999,1)->where('title_id',1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                             {{$teachers->first()->getTeacherByDegreeType(1,999,999,999,1)->where('title_id',1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                             {{$teachers->first()->getTeacherByDegreeType(1,999,999,1,1)->where('title_id',1)->count()}}
 
                         </td>
@@ -1198,25 +1198,25 @@
                         <td class="left">Giảng viên chính (hạng II)</td>
                         <td>người</td>
                         <td>138</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$teachers->first()->getTeacherByDegreeType(1)->where('title_id',2)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{$teachers->first()->getTeacherByDegreeType(1,999,1)->where('title_id',2)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{$teachers->first()->getTeacherByDegreeType(1,999,2)->where('title_id',2)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             {{$teachers->first()->getTeacherByDegreeType(1,999,3)->where('title_id',2)->count()}}
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                             {{$teachers->first()->getTeacherByDegreeType(1,999,999,1)->where('title_id',2)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                             {{$teachers->first()->getTeacherByDegreeType(1,999,999,999,1)->where('title_id',2)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                             {{$teachers->first()->getTeacherByDegreeType(1,999,999,1,1)->where('title_id',2)->count()}}
 
                         </td>
@@ -1227,28 +1227,28 @@
                         <td class="left">Giảng viên (hạng III)</td>
                         <td>người</td>
                         <td>139</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$teachers->first()->getTeacherByDegreeType(1)->where('title_id',3)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{$teachers->first()->getTeacherByDegreeType(1,999,1)->where('title_id',3)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{$teachers->first()->getTeacherByDegreeType(1,999,2)->where('title_id',3)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                                 {{$teachers->first()->getTeacherByDegreeType(1,999,3)->where('title_id',3)->count()}}
 
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                                 {{$teachers->first()->getTeacherByDegreeType(1,999,999,1)->where('title_id',3)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                                 {{$teachers->first()->getTeacherByDegreeType(1,999,999,999,1)->where('title_id',3)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                                 {{$teachers->first()->getTeacherByDegreeType(1,999,999,1,1)->where('title_id',3)->count()}}
 
                         </td>
@@ -1259,25 +1259,25 @@
                         <td class="left">Trợ giảng</td>
                         <td>người</td>
                         <td>140</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                                 {{$teachers->first()->getTeacherByDegreeType(1)->where('title_id',4)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{$teachers->first()->getTeacherByDegreeType(1,999,1)->where('title_id',4)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{$teachers->first()->getTeacherByDegreeType(1,999,2)->where('title_id',4)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                                 {{$teachers->first()->getTeacherByDegreeType(1,999,3)->where('title_id',4)->count()}}
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                                 {{$teachers->first()->getTeacherByDegreeType(1,999,999,1)->where('title_id',4)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                                 {{$teachers->first()->getTeacherByDegreeType(1,999,999,999,1)->where('title_id',4)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                                 {{$teachers->first()->getTeacherByDegreeType(1,999,999,1,1)->where('title_id',4)->count()}}
                         </td>
 
@@ -1302,25 +1302,25 @@
                             < 30 tuổi</td> <td>người
                         </td>
                         <td>141</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$teachers->first()->getTeacherByAge(1,0,30)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                                 {{$teachers->first()->getTeacherByAge(1,0,30,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                                 {{$teachers->first()->getTeacherByAge(1,0,30,2)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                                 {{$teachers->first()->getTeacherByAge(1,0,30,3)->count()}}
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                                 {{$teachers->first()->getTeacherByAge(1,0,30,999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                                 {{$teachers->first()->getTeacherByAge(1,0,30,999,999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                                 {{$teachers->first()->getTeacherByAge(1,0,30,999,1,1)->count()}}
                         </td>
 
@@ -1330,25 +1330,25 @@
                         <td class="left">Từ 30 - 39 tuổi</td>
                         <td>người</td>
                         <td>142</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$teachers->first()->getTeacherByAge(1,30,40)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{$teachers->first()->getTeacherByAge(1,30,40,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{$teachers->first()->getTeacherByAge(1,30,40,2)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             {{$teachers->first()->getTeacherByAge(1,30,40,3)->count()}}
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                             {{$teachers->first()->getTeacherByAge(1,30,40,999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                             {{$teachers->first()->getTeacherByAge(1,30,40,999,999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                             {{$teachers->first()->getTeacherByAge(1,30,40,999,1,1)->count()}}
                         </td>
 
@@ -1358,25 +1358,25 @@
                         <td class="left">Từ 40 - 49 tuổi</td>
                         <td>người</td>
                         <td>143</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$teachers->first()->getTeacherByAge(1,40,50)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{$teachers->first()->getTeacherByAge(1,40,50,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{$teachers->first()->getTeacherByAge(1,40,50,2)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             {{$teachers->first()->getTeacherByAge(1,40,50,3)->count()}}
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                             {{$teachers->first()->getTeacherByAge(1,40,50,999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                             {{$teachers->first()->getTeacherByAge(1,40,50,999,999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                             {{$teachers->first()->getTeacherByAge(1,40,50,999,1,1)->count()}}
                         </td>
 
@@ -1386,25 +1386,25 @@
                         <td class="left">Từ 50 - 54 tuổi</td>
                         <td>người</td>
                         <td>144</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$teachers->first()->getTeacherByAge(1,50,55)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{$teachers->first()->getTeacherByAge(1,50,55,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{$teachers->first()->getTeacherByAge(1,50,55,2)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             {{$teachers->first()->getTeacherByAge(1,50,55,3)->count()}}
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                                 {{$teachers->first()->getTeacherByAge(1,50,55,999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                             {{$teachers->first()->getTeacherByAge(1,50,55,999,999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                             {{$teachers->first()->getTeacherByAge(1,50,55,999,1,1)->count()}}
                         </td>
 
@@ -1414,25 +1414,25 @@
                         <td class="left">Từ 55 - 59 tuổi</td>
                         <td>người</td>
                         <td>145</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$teachers->first()->getTeacherByAge(1,55,60)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{$teachers->first()->getTeacherByAge(1,55,60,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{$teachers->first()->getTeacherByAge(1,55,60,2)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             {{$teachers->first()->getTeacherByAge(1,55,60,3)->count()}}
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                             {{$teachers->first()->getTeacherByAge(1,55,60,999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                             {{$teachers->first()->getTeacherByAge(1,55,60,999,999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                             {{$teachers->first()->getTeacherByAge(1,55,60,999,1,1)->count()}}
                         </td>
 
@@ -1442,25 +1442,25 @@
                         <td class="left"> >= 60 tuổi</td>
                         <td>người</td>
                         <td>146</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$teachers->first()->getTeacherByAge(1,60,150)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{$teachers->first()->getTeacherByAge(1,60,150,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{$teachers->first()->getTeacherByAge(1,60,150,2)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             {{$teachers->first()->getTeacherByAge(1,60,150,3)->count()}}
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                             {{$teachers->first()->getTeacherByAge(1,60,150,999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                             {{$teachers->first()->getTeacherByAge(1,60,150,999,999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                             {{$teachers->first()->getTeacherByAge(1,60,150,999,1,1)->count()}}
                         </td>
 
@@ -1470,27 +1470,27 @@
                         <td class="left"> Giảng viên nghỉ hưu trong năm</td>
                         <td>người</td>
                         <td>147</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$teachers->first()->getTeacherByRetirementInYear(1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{$teachers->first()->getTeacherByRetirementInYear(1,1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{$teachers->first()->getTeacherByRetirementInYear(1,2)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             {{$teachers->first()->getTeacherByRetirementInYear(1,3)->count()}}
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                             {{$teachers->first()->getTeacherByRetirementInYear(1,999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                             {{$teachers->first()->getTeacherByRetirementInYear(1,999,999,1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                             {{$teachers->first()->getTeacherByRetirementInYear(1,999,1,1)->count()}}
 
                         </td>
@@ -1501,25 +1501,25 @@
                         <td class="left"> Giảng viên tuyển mới trong năm</td>
                         <td>người</td>
                         <td>148</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$teachers->first()->getTeacherByRecruimentInYear(1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                                 {{$teachers->first()->getTeacherByRecruimentInYear(1,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{$teachers->first()->getTeacherByRecruimentInYear(1,2)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             {{$teachers->first()->getTeacherByRecruimentInYear(1,3)->count()}}
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                             {{$teachers->first()->getTeacherByRecruimentInYear(1,999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                                 {{$teachers->first()->getTeacherByRecruimentInYear(1,999,999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                                 {{$teachers->first()->getTeacherByRecruimentInYear(1,999,1,1)->count()}}
                         </td>
 
@@ -1531,30 +1531,30 @@
                         <td class="bold left">Giảng viên thỉnh giảng</td>
                         <td>người</td>
                         <td>149</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$teachers->first()->getTeacherByAcademicRankType(2)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{$teachers->first()->getTeacherByAcademicRankType(2,999,1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{$teachers->first()->getTeacherByAcademicRankType(2,999,2)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             {{$teachers->first()->getTeacherByAcademicRankType(2,999,3)->count()}}
 
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                             {{$teachers->first()->getTeacherByAcademicRankType(2,999,999,1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                             {{$teachers->first()->getTeacherByAcademicRankType(2,999,999,999,1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                             {{$teachers->first()->getTeacherByAcademicRankType(2,999,999,1,1)->count()}}
 
                         </td>
@@ -1579,26 +1579,26 @@
                         <td class="left">Giáo sư</td>
                         <td>người</td>
                         <td>150</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$teachers->first()->getTeacherByAcademicRankType(2,2)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{$teachers->first()->getTeacherByAcademicRankType(2,2,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{$teachers->first()->getTeacherByAcademicRankType(2,2,2)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             {{$teachers->first()->getTeacherByAcademicRankType(2,2,3)->count()}}
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                             {{$teachers->first()->getTeacherByAcademicRankType(2,2,999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                             {{$teachers->first()->getTeacherByAcademicRankType(2,2,999,999,1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                             {{$teachers->first()->getTeacherByAcademicRankType(2,2,999,1,1)->count()}}
 
                         </td>
@@ -1609,25 +1609,25 @@
                         <td class="left">Phó giáo sư</td>
                         <td>người</td>
                         <td>151</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$teachers->first()->getTeacherByAcademicRankType(2,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{$teachers->first()->getTeacherByAcademicRankType(2,1,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{$teachers->first()->getTeacherByAcademicRankType(2,1,2)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             {{$teachers->first()->getTeacherByAcademicRankType(2,1,3)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ">
+                        <td  title="Tổng số Nữ">
                             {{$teachers->first()->getTeacherByAcademicRankType(2,1,999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                             {{$teachers->first()->getTeacherByAcademicRankType(2,1,999,999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                             {{$teachers->first()->getTeacherByAcademicRankType(2,1,999,1,1)->count()}}
                         </td>
 
@@ -1651,25 +1651,25 @@
                         <td class="left">Đại học</td>
                         <td>người</td>
                         <td>152</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$teachers->first()->getTeacherByDegreeType(2,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{$teachers->first()->getTeacherByDegreeType(2,1,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{$teachers->first()->getTeacherByDegreeType(2,1,2)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             {{$teachers->first()->getTeacherByDegreeType(2,1,3)->count()}}
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                             {{$teachers->first()->getTeacherByDegreeType(2,1,999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                             {{$teachers->first()->getTeacherByDegreeType(2,1,999,999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                                 {{$teachers->first()->getTeacherByDegreeType(2,1,999,1,1)->count()}}
                         </td>
 
@@ -1679,29 +1679,29 @@
                         <td class="left">Thạc sĩ</td>
                         <td>người</td>
                         <td>153</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{($teachers->first()->getTeacherByDegreeType(2,2)->count())+($teachers->first()->getTeacherByDegreeType(2,4)->count())}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                                 {{($teachers->first()->getTeacherByDegreeType(2,2,1)->count())+($teachers->first()->getTeacherByDegreeType(2,4,1)->count())}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                                 {{($teachers->first()->getTeacherByDegreeType(2,2,2)->count())+($teachers->first()->getTeacherByDegreeType(2,4,2)->count())}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                                 {{($teachers->first()->getTeacherByDegreeType(2,2,3)->count())+($teachers->first()->getTeacherByDegreeType(2,4,3)->count())}}
 
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                                 {{($teachers->first()->getTeacherByDegreeType(2,2,999,1)->count())+($teachers->first()->getTeacherByDegreeType(2,4,999,1)->count())}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                                 {{($teachers->first()->getTeacherByDegreeType(2,2,999,999,1)->count())+($teachers->first()->getTeacherByDegreeType(2,4,999,999,1)->count())}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                                 {{($teachers->first()->getTeacherByDegreeType(2,2,999,1,1)->count())+($teachers->first()->getTeacherByDegreeType(2,4,999,1,1)->count())}}
 
                         </td>
@@ -1711,29 +1711,29 @@
                         <td class="left">Tiến sĩ và TSKH</td>
                         <td>người</td>
                         <td>154</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{($teachers->first()->getTeacherByDegreeType(2,3)->count())+($teachers->first()->getTeacherByDegreeType(2,5)->count())}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                                 {{($teachers->first()->getTeacherByDegreeType(2,3,1)->count())+($teachers->first()->getTeacherByDegreeType(2,5,1)->count())}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                                 {{($teachers->first()->getTeacherByDegreeType(2,3,2)->count())+($teachers->first()->getTeacherByDegreeType(2,5,2)->count())}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                                 {{($teachers->first()->getTeacherByDegreeType(2,3,3)->count())+($teachers->first()->getTeacherByDegreeType(2,5,3)->count())}}
 
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                                 {{($teachers->first()->getTeacherByDegreeType(2,3,999,1)->count())+($teachers->first()->getTeacherByDegreeType(2,5,999,1)->count())}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                                 {{($teachers->first()->getTeacherByDegreeType(2,3,999,999,1)->count())+($teachers->first()->getTeacherByDegreeType(2,5,999,999,1)->count())}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                                 {{($teachers->first()->getTeacherByDegreeType(2,3,999,1,1)->count())+($teachers->first()->getTeacherByDegreeType(2,5,999,1,1)->count())}}
 
                         </td>
@@ -1744,26 +1744,26 @@
                         <td class="left">Khác</td>
                         <td>người</td>
                         <td>155</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$teachers->first()->getTeacherByDegreeType(2,9)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                                 {{$teachers->first()->getTeacherByDegreeType(2,9,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{$teachers->first()->getTeacherByDegreeType(2,9,2)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             {{$teachers->first()->getTeacherByDegreeType(2,9,3)->count()}}
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                             {{$teachers->first()->getTeacherByDegreeType(2,9,999,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                             {{$teachers->first()->getTeacherByDegreeType(2,9,999,999,1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                             {{$teachers->first()->getTeacherByDegreeType(2,9,999,1,1)->count()}}
 
                         </td>
@@ -1788,30 +1788,30 @@
                         <td class="left">Giảng viên cao cấp (hạng I)</td>
                         <td>người</td>
                         <td>156</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$teachers->first()->getTeacherByDegreeType(2)->where('title_id',1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                             {{$teachers->first()->getTeacherByDegreeType(2,999,1)->where('title_id',1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{$teachers->first()->getTeacherByDegreeType(2,999,2)->where('title_id',1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             {{$teachers->first()->getTeacherByDegreeType(2,999,3)->where('title_id',1)->count()}}
 
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                             {{$teachers->first()->getTeacherByDegreeType(2,999,999,1)->where('title_id',1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                             {{$teachers->first()->getTeacherByDegreeType(2,999,999,999,1)->where('title_id',1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                             {{$teachers->first()->getTeacherByDegreeType(2,999,999,1,1)->where('title_id',1)->count()}}
 
                         </td>
@@ -1822,29 +1822,29 @@
                         <td class="left">Giảng viên chính (hạng II)</td>
                         <td>người</td>
                         <td>157</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$teachers->first()->getTeacherByDegreeType(2)->where('title_id',2)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                                 {{$teachers->first()->getTeacherByDegreeType(2,999,1)->where('title_id',2)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                                 {{$teachers->first()->getTeacherByDegreeType(2,999,2)->where('title_id',2)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                                 {{$teachers->first()->getTeacherByDegreeType(2,999,3)->where('title_id',2)->count()}}
 
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                                 {{$teachers->first()->getTeacherByDegreeType(2,999,999,1)->where('title_id',2)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                                 {{$teachers->first()->getTeacherByDegreeType(2,999,999,999,1)->where('title_id',2)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                                 {{$teachers->first()->getTeacherByDegreeType(2,999,999,1,1)->where('title_id',2)->count()}}
 
                         </td>
@@ -1855,31 +1855,31 @@
                         <td class="left">Giảng viên (hạng III)</td>
                         <td>người</td>
                         <td>158</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$teachers->first()->getTeacherByDegreeType(2)->where('title_id',3)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                                 {{$teachers->first()->getTeacherByDegreeType(2,999,1)->where('title_id',3)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                                 {{$teachers->first()->getTeacherByDegreeType(2,999,2)->where('title_id',3)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                                 {{$teachers->first()->getTeacherByDegreeType(2,999,3)->where('title_id',3)->count()}}
 
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                                 {{$teachers->first()->getTeacherByDegreeType(2,999,999,1)->where('title_id',3)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                                 {{$teachers->first()->getTeacherByDegreeType(2,999,999,999,1)->where('title_id',3)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                                 {{$teachers->first()->getTeacherByDegreeType(2,999,999,1,1)->where('title_id',3)->count()}}
 
                         </td>
@@ -1890,31 +1890,31 @@
                         <td class="left">Các chức danh nghề nghiệp khác</td>
                         <td>người</td>
                         <td>159</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$teachers->first()->getTeacherByDegreeType(2)->where('title_id',5)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                                 {{$teachers->first()->getTeacherByDegreeType(2,999,1)->where('title_id',5)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                                 {{$teachers->first()->getTeacherByDegreeType(2,999,2)->where('title_id',5)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                                 {{$teachers->first()->getTeacherByDegreeType(2,999,3)->where('title_id',5)->count()}}
 
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                                 {{$teachers->first()->getTeacherByDegreeType(2,999,999,1)->where('title_id',5)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                                 {{$teachers->first()->getTeacherByDegreeType(2,999,999,999,1)->where('title_id',5)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                                 {{$teachers->first()->getTeacherByDegreeType(2,999,999,1,1)->where('title_id',5)->count()}}
 
                         </td>
@@ -1940,29 +1940,29 @@
                             < 30 tuổi</td> <td>người
                         </td>
                         <td>160</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$teachers->first()->getTeacherByAge(2,0,30)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                                 {{$teachers->first()->getTeacherByAge(2,0,30,1)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                                 {{$teachers->first()->getTeacherByAge(2,0,30,2)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                                 {{$teachers->first()->getTeacherByAge(2,0,30,3)->count()}}
 
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                                 {{$teachers->first()->getTeacherByAge(2,0,30,999,1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                                 {{$teachers->first()->getTeacherByAge(2,0,30,999,999,1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                                 {{$teachers->first()->getTeacherByAge(2,0,30,999,1,1)->count()}}
 
                         </td>
@@ -1973,30 +1973,30 @@
                         <td class="left">Từ 30 - 39 tuổi</td>
                         <td>người</td>
                         <td>161</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$teachers->first()->getTeacherByAge(2,30,40)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                                 {{$teachers->first()->getTeacherByAge(2,30,40,1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                                 {{$teachers->first()->getTeacherByAge(2,30,40,2)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                                 {{$teachers->first()->getTeacherByAge(2,30,40,3)->count()}}
 
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                                 {{$teachers->first()->getTeacherByAge(2,30,40,999,1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                                 {{$teachers->first()->getTeacherByAge(2,30,40,999,999,1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                                 {{$teachers->first()->getTeacherByAge(2,30,40,999,1,1)->count()}}
 
                         </td>
@@ -2007,30 +2007,30 @@
                         <td class="left">Từ 40 - 49 tuổi</td>
                         <td>người</td>
                         <td>162</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$teachers->first()->getTeacherByAge(2,40,50)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                                 {{$teachers->first()->getTeacherByAge(2,40,50,1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                                 {{$teachers->first()->getTeacherByAge(2,40,50,2)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                                 {{$teachers->first()->getTeacherByAge(2,40,50,3)->count()}}
 
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                                 {{$teachers->first()->getTeacherByAge(2,40,50,999,1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                                 {{$teachers->first()->getTeacherByAge(2,40,50,999,999,1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                                 {{$teachers->first()->getTeacherByAge(2,40,50,999,1,1)->count()}}
 
                         </td>
@@ -2041,30 +2041,30 @@
                         <td class="left">Từ 50 - 59 tuổi</td>
                         <td>người</td>
                         <td>163</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$teachers->first()->getTeacherByAge(2,50,60)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                                 {{$teachers->first()->getTeacherByAge(2,50,60,1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                             {{$teachers->first()->getTeacherByAge(2,50,60,2)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                             {{$teachers->first()->getTeacherByAge(2,50,60,3)->count()}}
 
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                             {{$teachers->first()->getTeacherByAge(2,50,60,999,1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                             {{$teachers->first()->getTeacherByAge(2,50,60,999,999,1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                             {{$teachers->first()->getTeacherByAge(2,50,60,999,1,1)->count()}}
 
                         </td>
@@ -2076,30 +2076,30 @@
                         <td class="left"> >= 60 tuổi</td>
                         <td>người</td>
                         <td>164</td>
-                        <td data-toggle="tooltip" title="Tổng số">
+                        <td  title="Tổng số">
                             {{$teachers->first()->getTeacherByAge(2,60,150)->count()}}
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc không xác định thời hạn">
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
                                 {{$teachers->first()->getTeacherByAge(2,60,150,1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng làm việc xác định thời hạn">
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
                                 {{$teachers->first()->getTeacherByAge(2,60,150,2)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Hợp đồng lao động">
+                        <td  title="Hợp đồng lao động">
                                 {{$teachers->first()->getTeacherByAge(2,60,150,3)->count()}}
 
                         </td>
-                        <td  data-toggle="tooltip" title="Tổng số Nữ">
+                        <td   title="Tổng số Nữ">
                                 {{$teachers->first()->getTeacherByAge(2,60,150,999,1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số dân tộc thiểu số">
+                        <td  title="Tổng số dân tộc thiểu số">
                                 {{$teachers->first()->getTeacherByAge(2,60,150,999,999,1)->count()}}
 
                         </td>
-                        <td data-toggle="tooltip" title="Tổng số Nữ dân tộc thiểu số">
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
                                 {{$teachers->first()->getTeacherByAge(2,60,150,999,1,1)->count()}}
 
                         </td>

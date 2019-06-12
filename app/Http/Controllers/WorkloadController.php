@@ -22,7 +22,7 @@ class WorkloadController extends Controller
     {
         $max_year = WorkloadSession::max('end_year');
         $workload_session = WorkloadSession::orderBy('start_year', 'desc')->get();
-        $workload_session_current = WorkloadSession::where('end_year', $max_year)->firstOrFail();//get current workload year study
+        $workload_session_current = WorkloadSession::where('end_year', $max_year)->first();//get current workload year study
         $year_workload = \Request::get('year_workload');
         $search =  \Request::get('search');
         $workload_session_current_id = $workload_session_current->id;
@@ -60,7 +60,7 @@ class WorkloadController extends Controller
     {
         $max_year = WorkloadSession::max('end_year');
         $workload_session = WorkloadSession::orderBy('start_year', 'desc')->get();
-        $workload_session_current = WorkloadSession::where('end_year', $max_year)->firstOrFail();//get current workload year study
+        $workload_session_current = WorkloadSession::where('end_year', $max_year)->first();//get current workload year study
         $year_workload = \Request::get('year_workload');
         $search =  \Request::get('search');
         $workload_session_current_id = $workload_session_current->id;
@@ -93,7 +93,7 @@ class WorkloadController extends Controller
         $max_year = WorkloadSession::max('end_year');
         $workload_session = WorkloadSession::orderBy('start_year', 'desc')->get();
         $semester = Semester::all();
-        $workload_session_current = WorkloadSession::where('end_year', $max_year)->firstOrFail();//get current workload year study
+        $workload_session_current = WorkloadSession::where('end_year', $max_year)->first();//get current workload year study
         $year_workload = \Request::get('year_workload');
         $workload_session_current_id = $workload_session_current->id;
         $search =  \Request::get('search');
@@ -138,7 +138,7 @@ class WorkloadController extends Controller
         $workloads_own_user = ScientificResearchWorkload::where('personalinformation_id', $pi_id);
         $max_year = WorkloadSession::max('end_year');
         $workload_session = WorkloadSession::orderBy('start_year', 'desc')->get();
-        $workload_session_current = WorkloadSession::where('end_year', $max_year)->firstOrFail();//get current workload year study
+        $workload_session_current = WorkloadSession::where('end_year', $max_year)->first();//get current workload year study
         $year_workload = \Request::get('year_workload');
         $workload_session_current_id = $workload_session_current->id;
 
@@ -203,7 +203,7 @@ class WorkloadController extends Controller
                                     }
                                 ],
 
-                'subject_code.*'=>'required|string|alpha_num',
+                'subject_code.*'=>'required|alpha_num',
                 'subject_name.*'=> 'required|string',
                 'number_of_lessons.*'=> 'required|integer|max:10000000',
                 'number_of_students.*'=> 'required|integer|max:10000000',
@@ -235,8 +235,7 @@ class WorkloadController extends Controller
                 'employee_code.min' =>'Họ và tên phải lớn hơn 4 kí tự',
                 'employee_code.max' =>'Họ và tên phải nhỏ hơn 60 kí tự',
                 'subject_code.*.required' =>'Mã môn học không được bỏ trống',
-                'subject_code.*.string' =>'Mã môn học chỉ được nhập ký tự',
-                'subject_code.*.alpha_num' =>'Mã môn học không có ký tự đặc biệt',
+                'subject_code.*.alpha_num' =>'Mã môn học không được nhập ký tự đặc biệt',
                 'subject_name.*.string' =>'Tên môn học chỉ được nhập ký tự',
                 'class_code.*.string' =>'Mã lớp học chỉ được nhập ký tự',
                 'subject_name.*.required' =>'Tên môn học không được bỏ trống',
@@ -259,25 +258,26 @@ class WorkloadController extends Controller
             //get id employee
 
             $pp = strtoupper($request->employee_code);
-            $pi = PI::where('employee_code', $pp)->firstOrFail();
+            $pi = PI::where('employee_code', $pp)->first();
             //add data
-
-            //
+            if ($request->session_new == 1) {
+                $workload_session = new WorkloadSession();
+                $workload_session->start_year = $request->start_year;
+                $workload_session->end_year = $request->end_year;
+                $workload_session->save();
+                $workload_session_id = $workload_session->id;
+            } 
             for ($i = 0 ; $i< count($request->subject_code);$i++) {
                 //dynamic data
                 $workload = new Workload();
                 $workload->personalinformation_id = $pi->id;
                 $workload->unit_id= $pi->unit->id;
-                if ($request->session_new == 0) {
-                    $workload->session_id= $request->session_id;
-                } else {
-                    $workload_session = new WorkloadSession();
-                    $workload_session->start_year = $request->start_year;
-                    $workload_session->end_year = $request->end_year;
-                    $workload_session->save();
-                    $workload->session_id = $workload_session->id;
-                }
+                if($request->session_new == 0){
+                    $workload->session_id = $request->session_id;
 
+                }else{
+                    $workload->session_id = $workload_session_id;
+                }
                 //array data
                 $workload->subject_code= strtoupper(($request->subject_code)[$i]);
                 $workload->subject_name= ($request->subject_name)[$i];
@@ -287,11 +287,13 @@ class WorkloadController extends Controller
                 $workload->total_workload= ($request->total_workload)[$i];
                 $workload->theoretical_hours= ($request->theoretical_hours)[$i];
                 $workload->practice_hours= ($request->practice_hours)[$i];
-
+                $workload->unit_id = ($request->unit_id)[$i];
                 $workload->note= ($request->note)[$i];
                 $workload->semester_id= ($request->semester)[$i];
                 $workload->save();
             }
+            
+
             return redirect()->back()->with('message', 'Thêm thành công');
         } else {
             return redirect()->back()->withErrors($validator)->withInput();
@@ -348,7 +350,7 @@ class WorkloadController extends Controller
         ],
         [
           'subject_code.required'=> 'Mã môn học không được bỏ trống',
-          'subject_code.alpha_num'=> 'Mã môn học không có tự đặc biệt',
+          'subject_code.alpha_num'=> 'Mã môn học không được nhập ký tự đặc biệt',
           'subject_name.required'=> 'Tên môn học không được bỏ trống',
           'number_of_lessons.required'=> 'Số tiết học không được bỏ trống',
           'number_of_lessons.integer'=> 'Số tiết học chi được nhập số nguyên',
@@ -366,7 +368,7 @@ class WorkloadController extends Controller
           'practice_hours.required'=> 'Giờ thực hành không được bỏ trống',
           'practice_hours.numeric'=> 'Giờ thực hành chỉ được nhập số',
           'practice_hours.max'=> 'Giờ thực hành không hợp lệ',
-          'unit.required'=> 'Đơn vị không được bỏ trống',
+          'unit_id.required'=> 'Đơn vị không được bỏ trống',
           'semester.required'=> 'Học kì không được bỏ trống',
           'session_id.required'=> 'Năm học không được bỏ trống',
           'start_year.required_if'=> 'Năm học bắt đầu không được bỏ trống',
@@ -417,7 +419,7 @@ class WorkloadController extends Controller
         $max_year = WorkloadSession::max('end_year');
         $workload_session = WorkloadSession::orderBy('start_year', 'desc')->get();
         $semester = Semester::all();
-        $workload_session_current = WorkloadSession::where('end_year', $max_year)->firstOrFail();//get current workload year study
+        $workload_session_current = WorkloadSession::where('end_year', $max_year)->first();//get current workload year study
         $year_workload = \Request::get('year_workload');
         $workload_session_current_id = $workload_session_current->id;
         $search =  \Request::get('search');
@@ -449,7 +451,7 @@ class WorkloadController extends Controller
         $workloads_own_user = ScientificResearchWorkload::where('personalinformation_id', $pi->personalinformation_id);
         $max_year = WorkloadSession::max('end_year');
         $workload_session = WorkloadSession::orderBy('start_year', 'desc')->get();
-        $workload_session_current = WorkloadSession::where('end_year', $max_year)->firstOrFail();//get current workload year study
+        $workload_session_current = WorkloadSession::where('end_year', $max_year)->first();//get current workload year study
         $year_workload = \Request::get('year_workload');
         $workload_session_current_id = $workload_session_current->id;
 

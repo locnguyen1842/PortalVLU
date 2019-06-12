@@ -261,9 +261,9 @@
 
                         <th>Mã NV</th>
                         <th>Họ Tên</th>
-                        <th>Khoa</th>
+                        <th>Mã Khoa</th>
                         <th>Mã - Tên môn học</th>
-                        <th>Số tiết</th>
+                        <th>Số tiết/giờ</th>
                         <th>Quy đổi giờ chuẩn</th>
                         <th>Lý thuyết</th>
                         <th>Thực hành</th>
@@ -285,7 +285,7 @@
                             </a>
                         </td>
                         <td class="col-sm-2">{{$item->pi->full_name}}</td>
-                        <td class="col-sm-1">{{$item->unit->unit_code}}</td>
+                        <td class="col-sm-1" title="{{$item->unit->name}}">{{$item->unit->unit_code}}</td>
                         <td class="col-sm-2">{{$item->subject_code}} - {{$item->subject_name }}</td>
                         <td class="col-sm-1">{{$item->number_of_lessons}}</td>
                         <td class="col-sm-1">{{$item->total_workload}}</td>

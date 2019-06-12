@@ -106,19 +106,19 @@
                         <div class="form-group">
                             <div class="col-sm-6">
                                 <label>Số lượng <span style="color: red">*</span> </label>
-                                <input required type="number" step="0.1" class="form-control" name="quantity_of_work"
+                                <input required type="number" step="0.1" min="0" max="100000" class="form-control" name="quantity_of_work"
                                     placeholder="Nhập số lượng" value="{{old('quantity_of_work')}}">
                             </div>
                             <div class="col-sm-6">
                                 <label>Quy đổi giờ chuẩn <span style="color: red">*</span></label>
-                                <input required type="number" step="0.1" class="form-control" name="converted_standard_time"
+                                <input required type="number" step="0.1" min="0" max="100000" class="form-control" name="converted_standard_time"
                                     placeholder="Nhập quy đổi giờ chuẩn" value="{{old('converted_standard_time')}}">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-6">
                                 <label>Số tiết/giờ quy đổi <span style="color: red">*</span></label>
-                                <input required type="number" step="0.1" class="form-control" name="converted_time"
+                                <input required type="number" step="1" min="0" max="100000" class="form-control" name="converted_time"
                                     placeholder="Nhập số tiết/giờ quy đổi" value="{{old('converted_time')}}">
                             </div>
                             <div class="col-sm-6">

@@ -59,10 +59,10 @@
                       <label>Giới tính<span style="color: red">*</span></label>
                       <div class="radio">
                           <label class="col-sm-4">
-                              <input required type="radio" name="gender" value="0"{{$pi->gender ==0 ? "checked":""}}>Male
+                              <input required type="radio" name="gender" value="0"{{$pi->gender ==0 ? "checked":""}}>Nam
                           </label>
                           <label class="col-sm-4">
-                              <input required type="radio" name="gender" value="1"{{$pi->gender ==1 ? "checked":""}}>Female
+                              <input required type="radio" name="gender" value="1"{{$pi->gender ==1 ? "checked":""}}>Nữ
                           </label>
                       </div>
                   </div>
