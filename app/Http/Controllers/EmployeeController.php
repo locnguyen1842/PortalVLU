@@ -290,7 +290,7 @@ class EmployeeController extends Controller
 
         $pi = Auth::guard('employee')->user()->pi;
 
-        $degrees = DegreeDetail::where('personalinformation_id',$pi->id)->paginate(10);
+        $degrees = DegreeDetail::where('personalinformation_id',$pi->id)->orderBy('degree_id','asc')->paginate(10);
 
 
         $degree = Degree::where('id');
