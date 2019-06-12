@@ -68,7 +68,7 @@
                   </div>
                     <div class="col-sm-6">
                         <label>Ngày sinh<span style="color: red">*</span></label>
-                        <input required required type="date" min="1900-01-01" class="form-control" name="date_of_birth" value="{{$pi->date_of_birth}}">
+                        <input required required type="date" min="1900-01-01" max="{{date('Y-m-d')}}" class="form-control" name="date_of_birth" value="{{$pi->date_of_birth}}">
                     </div>
 
 

@@ -83,7 +83,7 @@
                             <div class="form-group">
                                 <div class="col-sm-6">
                                     <label>Ngày, tháng ,năm sinh <span style="color: red">*</span></label>
-                                    <input required type="date" class="form-control" name="date_of_birth" placeholder="Nhập ngày, tháng ,năm sinh"
+                                    <input required type="date" max="{{date('Y-m-d')}}" class="form-control" name="date_of_birth" placeholder="Nhập ngày, tháng ,năm sinh"
                                         value="{{old('date_of_birth',$sb->pi->date_of_birth)}}">
                                 </div>
                                 <div class="col-sm-6">

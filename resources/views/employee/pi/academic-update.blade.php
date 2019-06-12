@@ -44,7 +44,7 @@
                 <div class="form-group">
                     <div class="col-sm-6 pull-right">
                         <label>Ngày công nhận<span style="color: red">*</span></label>
-                    <input required type="date" min="1900-01-01" class="form-control" name="date_of_recognition" value="{{$pi->academic_rank->date_of_recognition}}">
+                    <input required type="date" min="1900-01-01" max="{{date('Y-m-d')}}" class="form-control" name="date_of_recognition" value="{{$pi->academic_rank->date_of_recognition}}">
                     </div>
                 </div>
                 <div class="form-group" style="margin-bottom:0">
