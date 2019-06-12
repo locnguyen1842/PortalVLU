@@ -375,10 +375,10 @@
                                                                                         <label class="col-sm-6">
                                                                                             @if($pi->admin != '')
                                                                                             <input {{$pi->admin->is_supervisor == '1' ? 'checked' : ''}} required type="radio"
-                                                                                                name="role_admin" value="0">Ban quản trị
+                                                                                                name="role_admin" value="0">Ban giám hiệu
                                                                                             @else
                                                                                             <input required type="radio"
-                                                                                                name="role_admin" value="0">Ban quản trị
+                                                                                                name="role_admin" value="0">Ban giám hiệu
                                                                                             @endif
 
                                                                                         </label>

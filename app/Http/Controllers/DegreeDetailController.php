@@ -64,7 +64,7 @@ class DegreeDetailController extends Controller
         $degree->nation_of_issue_id = $request->nation_of_issue_id;
         $degree->degree_type = $request->degree_type;
         $degree->save();
-        return redirect()->back()->with('message', 'Cập nhật thành công');
+        return redirect()->back()->with('message', 'Cập nhật bằng cấp thành công');
     }
     public function getcreatedegree($id)
     {
@@ -113,12 +113,12 @@ class DegreeDetailController extends Controller
         $degree_detail->nation_of_issue_id = $request->nation_of_issue_id;
         $degree_detail->degree_type = $request->degree_type;
         $degree_detail->save();
-        return redirect()->back()->with('message', 'Thêm thành công');
+        return redirect()->back()->with('message', 'Thêm bằng cấp thành công');
     }
     public function delete($degreedetail_id)
     {
         $degree = DegreeDetail::find($degreedetail_id);
         $degree->delete();
-        return redirect()->back()->with('message', 'Xóa thông tin nhân viên thành công');
+        return redirect()->back()->with('message', 'Xóa bằng cấp thành công');
     }
 }

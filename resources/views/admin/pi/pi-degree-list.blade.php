@@ -13,6 +13,11 @@
     </div>
 @endsection
 @section('content')
+@if(session()->has('message'))
+<div class="alert alert-success mt-10">
+    {{ session()->get('message') }}
+</div>
+@endif
 <div class="panel panel-default">
     <div class="panel-heading">Danh sách bằng cấp<br>
         @can('cud', $pi)

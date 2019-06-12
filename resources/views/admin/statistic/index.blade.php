@@ -904,30 +904,30 @@
                         <td>người</td>
                         <td>130</td>
                         <td  title="Tổng số">
-                            {{$teachers->first()->getTeacherByAcademicRankType(1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAcademicRankType(1)->count() : 0}}
                         </td>
                         <td  title="Hợp đồng làm việc không xác định thời hạn">
-                            {{$teachers->first()->getTeacherByAcademicRankType(1,999,1)->count()}}
+                            {{$teachers->first() != null ?$teachers->first()->getTeacherByAcademicRankType(1,999,1)->count() : 0}}
 
                         </td>
                         <td  title="Hợp đồng làm việc xác định thời hạn">
-                            {{$teachers->first()->getTeacherByAcademicRankType(1,999,2)->count()}}
+                            {{$teachers->first() != null ?$teachers->first()->getTeacherByAcademicRankType(1,999,2)->count() : 0}}
 
                         </td>
                         <td  title="Hợp đồng lao động">
-                            {{$teachers->first()->getTeacherByAcademicRankType(1,999,3)->count()}}
+                            {{$teachers->first() != null ?$teachers->first()->getTeacherByAcademicRankType(1,999,3)->count() : 0}}
 
                         </td>
                         <td   title="Tổng số Nữ">
-                            {{$teachers->first()->getTeacherByAcademicRankType(1,999,999,1)->count()}}
+                            {{$teachers->first() != null ?$teachers->first()->getTeacherByAcademicRankType(1,999,999,1)->count() : 0}}
 
                         </td>
                         <td  title="Tổng số dân tộc thiểu số">
-                            {{$teachers->first()->getTeacherByAcademicRankType(1,999,999,999,1)->count()}}
+                            {{$teachers->first() != null ?$teachers->first()->getTeacherByAcademicRankType(1,999,999,999,1)->count() : 0}}
 
                         </td>
                         <td  title="Tổng số Nữ dân tộc thiểu số">
-                            {{$teachers->first()->getTeacherByAcademicRankType(1,999,999,1,1)->count()}}
+                            {{$teachers->first() != null ?$teachers->first()->getTeacherByAcademicRankType(1,999,999,1,1)->count() : 0}}
 
                         </td>
 
@@ -952,30 +952,30 @@
                         <td>người</td>
                         <td>131</td>
                         <td  title="Tổng số">
-                            {{$teachers->first()->getTeacherByAcademicRankType(1,2)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAcademicRankType(1,2)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc không xác định thời hạn">
-                            {{$teachers->first()->getTeacherByAcademicRankType(1,2,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAcademicRankType(1,2,1)->count():0}}
 
                         </td>
                         <td  title="Hợp đồng làm việc xác định thời hạn">
-                            {{$teachers->first()->getTeacherByAcademicRankType(1,2,2)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAcademicRankType(1,2,2)->count():0}}
 
                         </td>
                         <td  title="Hợp đồng lao động">
-                            {{$teachers->first()->getTeacherByAcademicRankType(1,2,3)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAcademicRankType(1,2,3)->count():0}}
 
                         </td>
                         <td   title="Tổng số Nữ">
-                            {{$teachers->first()->getTeacherByAcademicRankType(1,2,999,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAcademicRankType(1,2,999,1)->count():0}}
 
                         </td>
                         <td  title="Tổng số dân tộc thiểu số">
-                            {{$teachers->first()->getTeacherByAcademicRankType(1,2,999,999,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAcademicRankType(1,2,999,999,1)->count():0}}
 
                         </td>
                         <td  title="Tổng số Nữ dân tộc thiểu số">
-                            {{$teachers->first()->getTeacherByAcademicRankType(1,2,999,1,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAcademicRankType(1,2,999,1,1)->count():0}}
 
                         </td>
 
@@ -986,30 +986,30 @@
                         <td>người</td>
                         <td>132</td>
                         <td  title="Tổng số">
-                            {{$teachers->first()->getTeacherByAcademicRankType(1,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAcademicRankType(1,1)->count() : 0}}
                         </td>
                         <td  title="Hợp đồng làm việc không xác định thời hạn">
-                            {{$teachers->first()->getTeacherByAcademicRankType(1,1,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAcademicRankType(1,1,1)->count() : 0}}
 
                         </td>
                         <td  title="Hợp đồng làm việc xác định thời hạn">
-                            {{$teachers->first()->getTeacherByAcademicRankType(1,1,2)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAcademicRankType(1,1,2)->count() : 0}}
 
                         </td>
                         <td  title="Hợp đồng lao động">
-                            {{$teachers->first()->getTeacherByAcademicRankType(1,1,3)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAcademicRankType(1,1,3)->count() : 0}}
 
                         </td>
                         <td   title="Tổng số Nữ">
-                            {{$teachers->first()->getTeacherByAcademicRankType(1,1,999,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAcademicRankType(1,1,999,1)->count() : 0}}
 
                         </td>
                         <td  title="Tổng số dân tộc thiểu số">
-                            {{$teachers->first()->getTeacherByAcademicRankType(1,1,999,999,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAcademicRankType(1,1,999,999,1)->count() : 0}}
 
                         </td>
                         <td  title="Tổng số Nữ dân tộc thiểu số">
-                            {{$teachers->first()->getTeacherByAcademicRankType(1,1,999,1,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAcademicRankType(1,1,999,1,1)->count() : 0}}
 
                         </td>
 
@@ -1035,28 +1035,29 @@
                         <td>người</td>
                         <td>133</td>
                         <td  title="Tổng số">
-                            {{$teachers->first()->getTeacherByDegreeType(1,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1,1)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc không xác định thời hạn">
-                            {{$teachers->first()->getTeacherByDegreeType(1,1,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1,1,1)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc xác định thời hạn">
-                            {{$teachers->first()->getTeacherByDegreeType(1,1,2)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1,1,2)->count():0}}
                         </td>
                         <td  title="Hợp đồng lao động">
-                            {{$teachers->first()->getTeacherByDegreeType(1,1,3)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1,1,3)->count():0}}
                         </td>
                         <td   title="Tổng số Nữ">
-                            {{$teachers->first()->getTeacherByDegreeType(1,1,999,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1,1,999,1)->count():0}}
                         </td>
                         <td  title="Tổng số dân tộc thiểu số">
-                            {{$teachers->first()->getTeacherByDegreeType(1,1,999,999,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1,1,999,999,1)->count():0}}
                         </td>
                         <td  title="Tổng số Nữ dân tộc thiểu số">
-                            {{$teachers->first()->getTeacherByDegreeType(1,1,999,1,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1,1,999,1,1)->count():0}}
                         </td>
 
                     </tr>
+                    @if($teachers->first() != null)
                     <tr>
                         <td></td>
                         <td class="left">Thạc sĩ</td>
@@ -1116,31 +1117,92 @@
                         </td>
 
                     </tr>
+                    @else
+                    <tr>
+                        <td></td>
+                        <td class="left">Thạc sĩ</td>
+                        <td>người</td>
+                        <td>134</td>
+                        <td  title="Tổng số">
+                            0
+                        </td>
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
+                            0
+                        </td>
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
+                            0
+                        </td>
+                        <td  title="Hợp đồng lao động">
+                            0
+                        </td>
+                        <td   title="Tổng số Nữ">
+                            0
+                        </td>
+                        <td  title="Tổng số dân tộc thiểu số">
+                            0
+                        </td>
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
+                            0
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="left">Tiến sĩ và TSKH</td>
+                        <td>người</td>
+                        <td>135</td>
+                        <td  title="Tổng số">
+                            0
+                        </td>
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
+                            0
+                        </td>
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
+                            0
+                        </td>
+                        <td  title="Hợp đồng lao động">
+                            0
+                        </td>
+                        <td   title="Tổng số Nữ">
+                            0
+                        </td>
+                        <td  title="Tổng số dân tộc thiểu số">
+                            0
+
+                        </td>
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
+                            0
+
+                        </td>
+
+                    </tr>
+                    @endif
+                    
                     <tr>
                         <td></td>
                         <td class="left">Khác</td>
                         <td>người</td>
                         <td>136</td>
                         <td  title="Tổng số">
-                            {{$teachers->first()->getTeacherByDegreeType(1,9)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1,9)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc không xác định thời hạn">
-                            {{$teachers->first()->getTeacherByDegreeType(1,9,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1,9,1)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc xác định thời hạn">
-                            {{$teachers->first()->getTeacherByDegreeType(1,9,2)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1,9,2)->count():0}}
                         </td>
                         <td  title="Hợp đồng lao động">
-                            {{$teachers->first()->getTeacherByDegreeType(1,9,3)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1,9,3)->count():0}}
                         </td>
                         <td   title="Tổng số Nữ">
-                            {{$teachers->first()->getTeacherByDegreeType(1,9,999,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1,9,999,1)->count():0}}
                         </td>
                         <td  title="Tổng số dân tộc thiểu số">
-                            {{$teachers->first()->getTeacherByDegreeType(1,9,999,999,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1,9,999,999,1)->count():0}}
                         </td>
                         <td  title="Tổng số Nữ dân tộc thiểu số">
-                            {{$teachers->first()->getTeacherByDegreeType(1,9,999,1,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1,9,999,1,1)->count():0}}
                         </td>
 
                     </tr>
@@ -1164,31 +1226,31 @@
                         <td>người</td>
                         <td>137</td>
                         <td  title="Tổng số">
-                            {{$teachers->first()->getTeacherByDegreeType(1)->where('title_id',1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1)->where('title_id',1)->count():0}}
 
                         </td>
                         <td  title="Hợp đồng làm việc không xác định thời hạn">
-                            {{$teachers->first()->getTeacherByDegreeType(1,999,1)->where('title_id',1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1,999,1)->where('title_id',1)->count():0}}
 
                         </td>
                         <td  title="Hợp đồng làm việc xác định thời hạn">
-                            {{$teachers->first()->getTeacherByDegreeType(1,999,2)->where('title_id',1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1,999,2)->where('title_id',1)->count():0}}
 
                         </td>
                         <td  title="Hợp đồng lao động">
-                            {{$teachers->first()->getTeacherByDegreeType(1,999,3)->where('title_id',1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1,999,3)->where('title_id',1)->count():0}}
 
                         </td>
                         <td   title="Tổng số Nữ">
-                            {{$teachers->first()->getTeacherByDegreeType(1,999,999,1)->where('title_id',1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1,999,999,1)->where('title_id',1)->count():0}}
 
                         </td>
                         <td  title="Tổng số dân tộc thiểu số">
-                            {{$teachers->first()->getTeacherByDegreeType(1,999,999,999,1)->where('title_id',1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1,999,999,999,1)->where('title_id',1)->count():0}}
 
                         </td>
                         <td  title="Tổng số Nữ dân tộc thiểu số">
-                            {{$teachers->first()->getTeacherByDegreeType(1,999,999,1,1)->where('title_id',1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1,999,999,1,1)->where('title_id',1)->count():0}}
 
                         </td>
 
@@ -1199,25 +1261,25 @@
                         <td>người</td>
                         <td>138</td>
                         <td  title="Tổng số">
-                            {{$teachers->first()->getTeacherByDegreeType(1)->where('title_id',2)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1)->where('title_id',2)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc không xác định thời hạn">
-                            {{$teachers->first()->getTeacherByDegreeType(1,999,1)->where('title_id',2)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1,999,1)->where('title_id',2)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc xác định thời hạn">
-                            {{$teachers->first()->getTeacherByDegreeType(1,999,2)->where('title_id',2)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1,999,2)->where('title_id',2)->count():0}}
                         </td>
                         <td  title="Hợp đồng lao động">
-                            {{$teachers->first()->getTeacherByDegreeType(1,999,3)->where('title_id',2)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1,999,3)->where('title_id',2)->count():0}}
                         </td>
                         <td   title="Tổng số Nữ">
-                            {{$teachers->first()->getTeacherByDegreeType(1,999,999,1)->where('title_id',2)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1,999,999,1)->where('title_id',2)->count():0}}
                         </td>
                         <td  title="Tổng số dân tộc thiểu số">
-                            {{$teachers->first()->getTeacherByDegreeType(1,999,999,999,1)->where('title_id',2)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1,999,999,999,1)->where('title_id',2)->count():0}}
                         </td>
                         <td  title="Tổng số Nữ dân tộc thiểu số">
-                            {{$teachers->first()->getTeacherByDegreeType(1,999,999,1,1)->where('title_id',2)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1,999,999,1,1)->where('title_id',2)->count():0}}
 
                         </td>
 
@@ -1228,28 +1290,28 @@
                         <td>người</td>
                         <td>139</td>
                         <td  title="Tổng số">
-                            {{$teachers->first()->getTeacherByDegreeType(1)->where('title_id',3)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1)->where('title_id',3)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc không xác định thời hạn">
-                            {{$teachers->first()->getTeacherByDegreeType(1,999,1)->where('title_id',3)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1,999,1)->where('title_id',3)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc xác định thời hạn">
-                            {{$teachers->first()->getTeacherByDegreeType(1,999,2)->where('title_id',3)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1,999,2)->where('title_id',3)->count():0}}
                         </td>
                         <td  title="Hợp đồng lao động">
-                                {{$teachers->first()->getTeacherByDegreeType(1,999,3)->where('title_id',3)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1,999,3)->where('title_id',3)->count():0}}
 
                         </td>
                         <td   title="Tổng số Nữ">
-                                {{$teachers->first()->getTeacherByDegreeType(1,999,999,1)->where('title_id',3)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1,999,999,1)->where('title_id',3)->count():0}}
 
                         </td>
                         <td  title="Tổng số dân tộc thiểu số">
-                                {{$teachers->first()->getTeacherByDegreeType(1,999,999,999,1)->where('title_id',3)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1,999,999,999,1)->where('title_id',3)->count():0}}
 
                         </td>
                         <td  title="Tổng số Nữ dân tộc thiểu số">
-                                {{$teachers->first()->getTeacherByDegreeType(1,999,999,1,1)->where('title_id',3)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1,999,999,1,1)->where('title_id',3)->count():0}}
 
                         </td>
 
@@ -1260,25 +1322,25 @@
                         <td>người</td>
                         <td>140</td>
                         <td  title="Tổng số">
-                                {{$teachers->first()->getTeacherByDegreeType(1)->where('title_id',4)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1)->where('title_id',4)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc không xác định thời hạn">
-                            {{$teachers->first()->getTeacherByDegreeType(1,999,1)->where('title_id',4)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1,999,1)->where('title_id',4)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc xác định thời hạn">
-                            {{$teachers->first()->getTeacherByDegreeType(1,999,2)->where('title_id',4)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1,999,2)->where('title_id',4)->count():0}}
                         </td>
                         <td  title="Hợp đồng lao động">
-                                {{$teachers->first()->getTeacherByDegreeType(1,999,3)->where('title_id',4)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1,999,3)->where('title_id',4)->count():0}}
                         </td>
                         <td   title="Tổng số Nữ">
-                                {{$teachers->first()->getTeacherByDegreeType(1,999,999,1)->where('title_id',4)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1,999,999,1)->where('title_id',4)->count():0}}
                         </td>
                         <td  title="Tổng số dân tộc thiểu số">
-                                {{$teachers->first()->getTeacherByDegreeType(1,999,999,999,1)->where('title_id',4)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1,999,999,999,1)->where('title_id',4)->count():0}}
                         </td>
                         <td  title="Tổng số Nữ dân tộc thiểu số">
-                                {{$teachers->first()->getTeacherByDegreeType(1,999,999,1,1)->where('title_id',4)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(1,999,999,1,1)->where('title_id',4)->count():0}}
                         </td>
 
                     </tr>
@@ -1303,25 +1365,25 @@
                         </td>
                         <td>141</td>
                         <td  title="Tổng số">
-                            {{$teachers->first()->getTeacherByAge(1,0,30)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,0,30)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc không xác định thời hạn">
-                                {{$teachers->first()->getTeacherByAge(1,0,30,1)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,0,30,1)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc xác định thời hạn">
-                                {{$teachers->first()->getTeacherByAge(1,0,30,2)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,0,30,2)->count():0}}
                         </td>
                         <td  title="Hợp đồng lao động">
-                                {{$teachers->first()->getTeacherByAge(1,0,30,3)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,0,30,3)->count():0}}
                         </td>
                         <td   title="Tổng số Nữ">
-                                {{$teachers->first()->getTeacherByAge(1,0,30,999,1)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,0,30,999,1)->count():0}}
                         </td>
                         <td  title="Tổng số dân tộc thiểu số">
-                                {{$teachers->first()->getTeacherByAge(1,0,30,999,999,1)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,0,30,999,999,1)->count():0}}
                         </td>
                         <td  title="Tổng số Nữ dân tộc thiểu số">
-                                {{$teachers->first()->getTeacherByAge(1,0,30,999,1,1)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,0,30,999,1,1)->count():0}}
                         </td>
 
                     </tr>
@@ -1331,25 +1393,25 @@
                         <td>người</td>
                         <td>142</td>
                         <td  title="Tổng số">
-                            {{$teachers->first()->getTeacherByAge(1,30,40)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,30,40)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc không xác định thời hạn">
-                            {{$teachers->first()->getTeacherByAge(1,30,40,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,30,40,1)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc xác định thời hạn">
-                            {{$teachers->first()->getTeacherByAge(1,30,40,2)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,30,40,2)->count():0}}
                         </td>
                         <td  title="Hợp đồng lao động">
-                            {{$teachers->first()->getTeacherByAge(1,30,40,3)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,30,40,3)->count():0}}
                         </td>
                         <td   title="Tổng số Nữ">
-                            {{$teachers->first()->getTeacherByAge(1,30,40,999,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,30,40,999,1)->count():0}}
                         </td>
                         <td  title="Tổng số dân tộc thiểu số">
-                            {{$teachers->first()->getTeacherByAge(1,30,40,999,999,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,30,40,999,999,1)->count():0}}
                         </td>
                         <td  title="Tổng số Nữ dân tộc thiểu số">
-                            {{$teachers->first()->getTeacherByAge(1,30,40,999,1,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,30,40,999,1,1)->count():0}}
                         </td>
 
                     </tr>
@@ -1359,25 +1421,25 @@
                         <td>người</td>
                         <td>143</td>
                         <td  title="Tổng số">
-                            {{$teachers->first()->getTeacherByAge(1,40,50)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,40,50)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc không xác định thời hạn">
-                            {{$teachers->first()->getTeacherByAge(1,40,50,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,40,50,1)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc xác định thời hạn">
-                            {{$teachers->first()->getTeacherByAge(1,40,50,2)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,40,50,2)->count():0}}
                         </td>
                         <td  title="Hợp đồng lao động">
-                            {{$teachers->first()->getTeacherByAge(1,40,50,3)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,40,50,3)->count():0}}
                         </td>
                         <td   title="Tổng số Nữ">
-                            {{$teachers->first()->getTeacherByAge(1,40,50,999,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,40,50,999,1)->count():0}}
                         </td>
                         <td  title="Tổng số dân tộc thiểu số">
-                            {{$teachers->first()->getTeacherByAge(1,40,50,999,999,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,40,50,999,999,1)->count():0}}
                         </td>
                         <td  title="Tổng số Nữ dân tộc thiểu số">
-                            {{$teachers->first()->getTeacherByAge(1,40,50,999,1,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,40,50,999,1,1)->count():0}}
                         </td>
 
                     </tr>
@@ -1387,25 +1449,25 @@
                         <td>người</td>
                         <td>144</td>
                         <td  title="Tổng số">
-                            {{$teachers->first()->getTeacherByAge(1,50,55)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,50,55)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc không xác định thời hạn">
-                            {{$teachers->first()->getTeacherByAge(1,50,55,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,50,55,1)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc xác định thời hạn">
-                            {{$teachers->first()->getTeacherByAge(1,50,55,2)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,50,55,2)->count():0}}
                         </td>
                         <td  title="Hợp đồng lao động">
-                            {{$teachers->first()->getTeacherByAge(1,50,55,3)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,50,55,3)->count():0}}
                         </td>
                         <td   title="Tổng số Nữ">
-                                {{$teachers->first()->getTeacherByAge(1,50,55,999,1)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,50,55,999,1)->count():0}}
                         </td>
                         <td  title="Tổng số dân tộc thiểu số">
-                            {{$teachers->first()->getTeacherByAge(1,50,55,999,999,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,50,55,999,999,1)->count():0}}
                         </td>
                         <td  title="Tổng số Nữ dân tộc thiểu số">
-                            {{$teachers->first()->getTeacherByAge(1,50,55,999,1,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,50,55,999,1,1)->count():0}}
                         </td>
 
                     </tr>
@@ -1415,25 +1477,25 @@
                         <td>người</td>
                         <td>145</td>
                         <td  title="Tổng số">
-                            {{$teachers->first()->getTeacherByAge(1,55,60)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,55,60)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc không xác định thời hạn">
-                            {{$teachers->first()->getTeacherByAge(1,55,60,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,55,60,1)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc xác định thời hạn">
-                            {{$teachers->first()->getTeacherByAge(1,55,60,2)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,55,60,2)->count():0}}
                         </td>
                         <td  title="Hợp đồng lao động">
-                            {{$teachers->first()->getTeacherByAge(1,55,60,3)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,55,60,3)->count():0}}
                         </td>
                         <td   title="Tổng số Nữ">
-                            {{$teachers->first()->getTeacherByAge(1,55,60,999,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,55,60,999,1)->count():0}}
                         </td>
                         <td  title="Tổng số dân tộc thiểu số">
-                            {{$teachers->first()->getTeacherByAge(1,55,60,999,999,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,55,60,999,999,1)->count():0}}
                         </td>
                         <td  title="Tổng số Nữ dân tộc thiểu số">
-                            {{$teachers->first()->getTeacherByAge(1,55,60,999,1,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,55,60,999,1,1)->count():0}}
                         </td>
 
                     </tr>
@@ -1443,25 +1505,25 @@
                         <td>người</td>
                         <td>146</td>
                         <td  title="Tổng số">
-                            {{$teachers->first()->getTeacherByAge(1,60,150)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,60,150)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc không xác định thời hạn">
-                            {{$teachers->first()->getTeacherByAge(1,60,150,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,60,150,1)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc xác định thời hạn">
-                            {{$teachers->first()->getTeacherByAge(1,60,150,2)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,60,150,2)->count():0}}
                         </td>
                         <td  title="Hợp đồng lao động">
-                            {{$teachers->first()->getTeacherByAge(1,60,150,3)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,60,150,3)->count():0}}
                         </td>
                         <td   title="Tổng số Nữ">
-                            {{$teachers->first()->getTeacherByAge(1,60,150,999,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,60,150,999,1)->count():0}}
                         </td>
                         <td  title="Tổng số dân tộc thiểu số">
-                            {{$teachers->first()->getTeacherByAge(1,60,150,999,999,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,60,150,999,999,1)->count():0}}
                         </td>
                         <td  title="Tổng số Nữ dân tộc thiểu số">
-                            {{$teachers->first()->getTeacherByAge(1,60,150,999,1,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(1,60,150,999,1,1)->count():0}}
                         </td>
 
                     </tr>
@@ -1471,27 +1533,27 @@
                         <td>người</td>
                         <td>147</td>
                         <td  title="Tổng số">
-                            {{$teachers->first()->getTeacherByRetirementInYear(1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByRetirementInYear(1)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc không xác định thời hạn">
-                            {{$teachers->first()->getTeacherByRetirementInYear(1,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByRetirementInYear(1,1)->count():0}}
 
                         </td>
                         <td  title="Hợp đồng làm việc xác định thời hạn">
-                            {{$teachers->first()->getTeacherByRetirementInYear(1,2)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByRetirementInYear(1,2)->count():0}}
                         </td>
                         <td  title="Hợp đồng lao động">
-                            {{$teachers->first()->getTeacherByRetirementInYear(1,3)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByRetirementInYear(1,3)->count():0}}
                         </td>
                         <td   title="Tổng số Nữ">
-                            {{$teachers->first()->getTeacherByRetirementInYear(1,999,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByRetirementInYear(1,999,1)->count():0}}
                         </td>
                         <td  title="Tổng số dân tộc thiểu số">
-                            {{$teachers->first()->getTeacherByRetirementInYear(1,999,999,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByRetirementInYear(1,999,999,1)->count():0}}
 
                         </td>
                         <td  title="Tổng số Nữ dân tộc thiểu số">
-                            {{$teachers->first()->getTeacherByRetirementInYear(1,999,1,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByRetirementInYear(1,999,1,1)->count():0}}
 
                         </td>
 
@@ -1502,25 +1564,25 @@
                         <td>người</td>
                         <td>148</td>
                         <td  title="Tổng số">
-                            {{$teachers->first()->getTeacherByRecruimentInYear(1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByRecruimentInYear(1)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc không xác định thời hạn">
-                                {{$teachers->first()->getTeacherByRecruimentInYear(1,1)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByRecruimentInYear(1,1)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc xác định thời hạn">
-                            {{$teachers->first()->getTeacherByRecruimentInYear(1,2)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByRecruimentInYear(1,2)->count():0}}
                         </td>
                         <td  title="Hợp đồng lao động">
-                            {{$teachers->first()->getTeacherByRecruimentInYear(1,3)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByRecruimentInYear(1,3)->count():0}}
                         </td>
                         <td   title="Tổng số Nữ">
-                            {{$teachers->first()->getTeacherByRecruimentInYear(1,999,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByRecruimentInYear(1,999,1)->count():0}}
                         </td>
                         <td  title="Tổng số dân tộc thiểu số">
-                                {{$teachers->first()->getTeacherByRecruimentInYear(1,999,999,1)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByRecruimentInYear(1,999,999,1)->count():0}}
                         </td>
                         <td  title="Tổng số Nữ dân tộc thiểu số">
-                                {{$teachers->first()->getTeacherByRecruimentInYear(1,999,1,1)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByRecruimentInYear(1,999,1,1)->count():0}}
                         </td>
 
                     </tr>
@@ -1532,30 +1594,30 @@
                         <td>người</td>
                         <td>149</td>
                         <td  title="Tổng số">
-                            {{$teachers->first()->getTeacherByAcademicRankType(2)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAcademicRankType(2)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc không xác định thời hạn">
-                            {{$teachers->first()->getTeacherByAcademicRankType(2,999,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAcademicRankType(2,999,1)->count():0}}
 
                         </td>
                         <td  title="Hợp đồng làm việc xác định thời hạn">
-                            {{$teachers->first()->getTeacherByAcademicRankType(2,999,2)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAcademicRankType(2,999,2)->count():0}}
 
                         </td>
                         <td  title="Hợp đồng lao động">
-                            {{$teachers->first()->getTeacherByAcademicRankType(2,999,3)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAcademicRankType(2,999,3)->count():0}}
 
                         </td>
                         <td   title="Tổng số Nữ">
-                            {{$teachers->first()->getTeacherByAcademicRankType(2,999,999,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAcademicRankType(2,999,999,1)->count():0}}
 
                         </td>
                         <td  title="Tổng số dân tộc thiểu số">
-                            {{$teachers->first()->getTeacherByAcademicRankType(2,999,999,999,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAcademicRankType(2,999,999,999,1)->count():0}}
 
                         </td>
                         <td  title="Tổng số Nữ dân tộc thiểu số">
-                            {{$teachers->first()->getTeacherByAcademicRankType(2,999,999,1,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAcademicRankType(2,999,999,1,1)->count():0}}
 
                         </td>
 
@@ -1580,26 +1642,26 @@
                         <td>người</td>
                         <td>150</td>
                         <td  title="Tổng số">
-                            {{$teachers->first()->getTeacherByAcademicRankType(2,2)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAcademicRankType(2,2)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc không xác định thời hạn">
-                            {{$teachers->first()->getTeacherByAcademicRankType(2,2,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAcademicRankType(2,2,1)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc xác định thời hạn">
-                            {{$teachers->first()->getTeacherByAcademicRankType(2,2,2)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAcademicRankType(2,2,2)->count():0}}
                         </td>
                         <td  title="Hợp đồng lao động">
-                            {{$teachers->first()->getTeacherByAcademicRankType(2,2,3)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAcademicRankType(2,2,3)->count():0}}
                         </td>
                         <td   title="Tổng số Nữ">
-                            {{$teachers->first()->getTeacherByAcademicRankType(2,2,999,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAcademicRankType(2,2,999,1)->count():0}}
                         </td>
                         <td  title="Tổng số dân tộc thiểu số">
-                            {{$teachers->first()->getTeacherByAcademicRankType(2,2,999,999,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAcademicRankType(2,2,999,999,1)->count():0}}
 
                         </td>
                         <td  title="Tổng số Nữ dân tộc thiểu số">
-                            {{$teachers->first()->getTeacherByAcademicRankType(2,2,999,1,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAcademicRankType(2,2,999,1,1)->count():0}}
 
                         </td>
 
@@ -1610,25 +1672,25 @@
                         <td>người</td>
                         <td>151</td>
                         <td  title="Tổng số">
-                            {{$teachers->first()->getTeacherByAcademicRankType(2,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAcademicRankType(2,1)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc không xác định thời hạn">
-                            {{$teachers->first()->getTeacherByAcademicRankType(2,1,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAcademicRankType(2,1,1)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc xác định thời hạn">
-                            {{$teachers->first()->getTeacherByAcademicRankType(2,1,2)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAcademicRankType(2,1,2)->count():0}}
                         </td>
                         <td  title="Hợp đồng lao động">
-                            {{$teachers->first()->getTeacherByAcademicRankType(2,1,3)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAcademicRankType(2,1,3)->count():0}}
                         </td>
                         <td  title="Tổng số Nữ">
-                            {{$teachers->first()->getTeacherByAcademicRankType(2,1,999,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAcademicRankType(2,1,999,1)->count():0}}
                         </td>
                         <td  title="Tổng số dân tộc thiểu số">
-                            {{$teachers->first()->getTeacherByAcademicRankType(2,1,999,999,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAcademicRankType(2,1,999,999,1)->count():0}}
                         </td>
                         <td  title="Tổng số Nữ dân tộc thiểu số">
-                            {{$teachers->first()->getTeacherByAcademicRankType(2,1,999,1,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAcademicRankType(2,1,999,1,1)->count():0}}
                         </td>
 
                     </tr>
@@ -1652,28 +1714,29 @@
                         <td>người</td>
                         <td>152</td>
                         <td  title="Tổng số">
-                            {{$teachers->first()->getTeacherByDegreeType(2,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2,1)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc không xác định thời hạn">
-                            {{$teachers->first()->getTeacherByDegreeType(2,1,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2,1,1)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc xác định thời hạn">
-                            {{$teachers->first()->getTeacherByDegreeType(2,1,2)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2,1,2)->count():0}}
                         </td>
                         <td  title="Hợp đồng lao động">
-                            {{$teachers->first()->getTeacherByDegreeType(2,1,3)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2,1,3)->count():0}}
                         </td>
                         <td   title="Tổng số Nữ">
-                            {{$teachers->first()->getTeacherByDegreeType(2,1,999,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2,1,999,1)->count():0}}
                         </td>
                         <td  title="Tổng số dân tộc thiểu số">
-                            {{$teachers->first()->getTeacherByDegreeType(2,1,999,999,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2,1,999,999,1)->count():0}}
                         </td>
                         <td  title="Tổng số Nữ dân tộc thiểu số">
-                                {{$teachers->first()->getTeacherByDegreeType(2,1,999,1,1)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2,1,999,1,1)->count():0}}
                         </td>
 
                     </tr>
+                    @if($teachers->first() != null)
                     <tr>
                         <td></td>
                         <td class="left">Thạc sĩ</td>
@@ -1739,32 +1802,101 @@
                         </td>
 
                     </tr>
+                    @else
+                    <tr>
+                        <td></td>
+                        <td class="left">Thạc sĩ</td>
+                        <td>người</td>
+                        <td>153</td>
+                        <td  title="Tổng số">
+                            0
+                        </td>
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
+                                0
+                        </td>
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
+                                0
+
+                        </td>
+                        <td  title="Hợp đồng lao động">
+                                0
+
+                        </td>
+                        <td   title="Tổng số Nữ">
+                                0
+
+                        </td>
+                        <td  title="Tổng số dân tộc thiểu số">
+                                0
+
+                        </td>
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
+                                0
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="left">Tiến sĩ và TSKH</td>
+                        <td>người</td>
+                        <td>154</td>
+                        <td  title="Tổng số">
+                            0
+                        </td>
+                        <td  title="Hợp đồng làm việc không xác định thời hạn">
+                                0
+                        </td>
+                        <td  title="Hợp đồng làm việc xác định thời hạn">
+                                0
+
+                        </td>
+                        <td  title="Hợp đồng lao động">
+                                0
+
+                        </td>
+                        <td   title="Tổng số Nữ">
+                                0
+
+                        </td>
+                        <td  title="Tổng số dân tộc thiểu số">
+                                0
+
+                        </td>
+                        <td  title="Tổng số Nữ dân tộc thiểu số">
+                                0
+
+                        </td>
+
+                    </tr>
+                    @endif
+                    
+                   
                     <tr>
                         <td></td>
                         <td class="left">Khác</td>
                         <td>người</td>
                         <td>155</td>
                         <td  title="Tổng số">
-                            {{$teachers->first()->getTeacherByDegreeType(2,9)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2,9)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc không xác định thời hạn">
-                                {{$teachers->first()->getTeacherByDegreeType(2,9,1)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2,9,1)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc xác định thời hạn">
-                            {{$teachers->first()->getTeacherByDegreeType(2,9,2)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2,9,2)->count():0}}
                         </td>
                         <td  title="Hợp đồng lao động">
-                            {{$teachers->first()->getTeacherByDegreeType(2,9,3)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2,9,3)->count():0}}
                         </td>
                         <td   title="Tổng số Nữ">
-                            {{$teachers->first()->getTeacherByDegreeType(2,9,999,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2,9,999,1)->count():0}}
                         </td>
                         <td  title="Tổng số dân tộc thiểu số">
-                            {{$teachers->first()->getTeacherByDegreeType(2,9,999,999,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2,9,999,999,1)->count():0}}
 
                         </td>
                         <td  title="Tổng số Nữ dân tộc thiểu số">
-                            {{$teachers->first()->getTeacherByDegreeType(2,9,999,1,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2,9,999,1,1)->count():0}}
 
                         </td>
 
@@ -1789,30 +1921,30 @@
                         <td>người</td>
                         <td>156</td>
                         <td  title="Tổng số">
-                            {{$teachers->first()->getTeacherByDegreeType(2)->where('title_id',1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2)->where('title_id',1)->count():0}}
 
                         </td>
                         <td  title="Hợp đồng làm việc không xác định thời hạn">
-                            {{$teachers->first()->getTeacherByDegreeType(2,999,1)->where('title_id',1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2,999,1)->where('title_id',1)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc xác định thời hạn">
-                            {{$teachers->first()->getTeacherByDegreeType(2,999,2)->where('title_id',1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2,999,2)->where('title_id',1)->count():0}}
 
                         </td>
                         <td  title="Hợp đồng lao động">
-                            {{$teachers->first()->getTeacherByDegreeType(2,999,3)->where('title_id',1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2,999,3)->where('title_id',1)->count():0}}
 
                         </td>
                         <td   title="Tổng số Nữ">
-                            {{$teachers->first()->getTeacherByDegreeType(2,999,999,1)->where('title_id',1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2,999,999,1)->where('title_id',1)->count():0}}
 
                         </td>
                         <td  title="Tổng số dân tộc thiểu số">
-                            {{$teachers->first()->getTeacherByDegreeType(2,999,999,999,1)->where('title_id',1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2,999,999,999,1)->where('title_id',1)->count():0}}
 
                         </td>
                         <td  title="Tổng số Nữ dân tộc thiểu số">
-                            {{$teachers->first()->getTeacherByDegreeType(2,999,999,1,1)->where('title_id',1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2,999,999,1,1)->where('title_id',1)->count():0}}
 
                         </td>
 
@@ -1823,29 +1955,29 @@
                         <td>người</td>
                         <td>157</td>
                         <td  title="Tổng số">
-                            {{$teachers->first()->getTeacherByDegreeType(2)->where('title_id',2)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2)->where('title_id',2)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc không xác định thời hạn">
-                                {{$teachers->first()->getTeacherByDegreeType(2,999,1)->where('title_id',2)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2,999,1)->where('title_id',2)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc xác định thời hạn">
-                                {{$teachers->first()->getTeacherByDegreeType(2,999,2)->where('title_id',2)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2,999,2)->where('title_id',2)->count():0}}
 
                         </td>
                         <td  title="Hợp đồng lao động">
-                                {{$teachers->first()->getTeacherByDegreeType(2,999,3)->where('title_id',2)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2,999,3)->where('title_id',2)->count():0}}
 
                         </td>
                         <td   title="Tổng số Nữ">
-                                {{$teachers->first()->getTeacherByDegreeType(2,999,999,1)->where('title_id',2)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2,999,999,1)->where('title_id',2)->count():0}}
 
                         </td>
                         <td  title="Tổng số dân tộc thiểu số">
-                                {{$teachers->first()->getTeacherByDegreeType(2,999,999,999,1)->where('title_id',2)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2,999,999,999,1)->where('title_id',2)->count():0}}
 
                         </td>
                         <td  title="Tổng số Nữ dân tộc thiểu số">
-                                {{$teachers->first()->getTeacherByDegreeType(2,999,999,1,1)->where('title_id',2)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2,999,999,1,1)->where('title_id',2)->count():0}}
 
                         </td>
 
@@ -1856,31 +1988,31 @@
                         <td>người</td>
                         <td>158</td>
                         <td  title="Tổng số">
-                            {{$teachers->first()->getTeacherByDegreeType(2)->where('title_id',3)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2)->where('title_id',3)->count():0}}
 
                         </td>
                         <td  title="Hợp đồng làm việc không xác định thời hạn">
-                                {{$teachers->first()->getTeacherByDegreeType(2,999,1)->where('title_id',3)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2,999,1)->where('title_id',3)->count():0}}
 
                         </td>
                         <td  title="Hợp đồng làm việc xác định thời hạn">
-                                {{$teachers->first()->getTeacherByDegreeType(2,999,2)->where('title_id',3)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2,999,2)->where('title_id',3)->count():0}}
 
                         </td>
                         <td  title="Hợp đồng lao động">
-                                {{$teachers->first()->getTeacherByDegreeType(2,999,3)->where('title_id',3)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2,999,3)->where('title_id',3)->count():0}}
 
                         </td>
                         <td   title="Tổng số Nữ">
-                                {{$teachers->first()->getTeacherByDegreeType(2,999,999,1)->where('title_id',3)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2,999,999,1)->where('title_id',3)->count():0}}
 
                         </td>
                         <td  title="Tổng số dân tộc thiểu số">
-                                {{$teachers->first()->getTeacherByDegreeType(2,999,999,999,1)->where('title_id',3)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2,999,999,999,1)->where('title_id',3)->count():0}}
 
                         </td>
                         <td  title="Tổng số Nữ dân tộc thiểu số">
-                                {{$teachers->first()->getTeacherByDegreeType(2,999,999,1,1)->where('title_id',3)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2,999,999,1,1)->where('title_id',3)->count():0}}
 
                         </td>
 
@@ -1891,31 +2023,31 @@
                         <td>người</td>
                         <td>159</td>
                         <td  title="Tổng số">
-                            {{$teachers->first()->getTeacherByDegreeType(2)->where('title_id',5)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2)->where('title_id',5)->count():0}}
 
                         </td>
                         <td  title="Hợp đồng làm việc không xác định thời hạn">
-                                {{$teachers->first()->getTeacherByDegreeType(2,999,1)->where('title_id',5)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2,999,1)->where('title_id',5)->count():0}}
 
                         </td>
                         <td  title="Hợp đồng làm việc xác định thời hạn">
-                                {{$teachers->first()->getTeacherByDegreeType(2,999,2)->where('title_id',5)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2,999,2)->where('title_id',5)->count():0}}
 
                         </td>
                         <td  title="Hợp đồng lao động">
-                                {{$teachers->first()->getTeacherByDegreeType(2,999,3)->where('title_id',5)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2,999,3)->where('title_id',5)->count():0}}
 
                         </td>
                         <td   title="Tổng số Nữ">
-                                {{$teachers->first()->getTeacherByDegreeType(2,999,999,1)->where('title_id',5)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2,999,999,1)->where('title_id',5)->count():0}}
 
                         </td>
                         <td  title="Tổng số dân tộc thiểu số">
-                                {{$teachers->first()->getTeacherByDegreeType(2,999,999,999,1)->where('title_id',5)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2,999,999,999,1)->where('title_id',5)->count():0}}
 
                         </td>
                         <td  title="Tổng số Nữ dân tộc thiểu số">
-                                {{$teachers->first()->getTeacherByDegreeType(2,999,999,1,1)->where('title_id',5)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByDegreeType(2,999,999,1,1)->where('title_id',5)->count():0}}
 
                         </td>
 
@@ -1941,29 +2073,29 @@
                         </td>
                         <td>160</td>
                         <td  title="Tổng số">
-                            {{$teachers->first()->getTeacherByAge(2,0,30)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(2,0,30)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc không xác định thời hạn">
-                                {{$teachers->first()->getTeacherByAge(2,0,30,1)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(2,0,30,1)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc xác định thời hạn">
-                                {{$teachers->first()->getTeacherByAge(2,0,30,2)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(2,0,30,2)->count():0}}
 
                         </td>
                         <td  title="Hợp đồng lao động">
-                                {{$teachers->first()->getTeacherByAge(2,0,30,3)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(2,0,30,3)->count():0}}
 
                         </td>
                         <td   title="Tổng số Nữ">
-                                {{$teachers->first()->getTeacherByAge(2,0,30,999,1)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(2,0,30,999,1)->count():0}}
 
                         </td>
                         <td  title="Tổng số dân tộc thiểu số">
-                                {{$teachers->first()->getTeacherByAge(2,0,30,999,999,1)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(2,0,30,999,999,1)->count():0}}
 
                         </td>
                         <td  title="Tổng số Nữ dân tộc thiểu số">
-                                {{$teachers->first()->getTeacherByAge(2,0,30,999,1,1)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(2,0,30,999,1,1)->count():0}}
 
                         </td>
 
@@ -1974,30 +2106,30 @@
                         <td>người</td>
                         <td>161</td>
                         <td  title="Tổng số">
-                            {{$teachers->first()->getTeacherByAge(2,30,40)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(2,30,40)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc không xác định thời hạn">
-                                {{$teachers->first()->getTeacherByAge(2,30,40,1)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(2,30,40,1)->count():0}}
 
                         </td>
                         <td  title="Hợp đồng làm việc xác định thời hạn">
-                                {{$teachers->first()->getTeacherByAge(2,30,40,2)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(2,30,40,2)->count():0}}
 
                         </td>
                         <td  title="Hợp đồng lao động">
-                                {{$teachers->first()->getTeacherByAge(2,30,40,3)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(2,30,40,3)->count():0}}
 
                         </td>
                         <td   title="Tổng số Nữ">
-                                {{$teachers->first()->getTeacherByAge(2,30,40,999,1)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(2,30,40,999,1)->count():0}}
 
                         </td>
                         <td  title="Tổng số dân tộc thiểu số">
-                                {{$teachers->first()->getTeacherByAge(2,30,40,999,999,1)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(2,30,40,999,999,1)->count():0}}
 
                         </td>
                         <td  title="Tổng số Nữ dân tộc thiểu số">
-                                {{$teachers->first()->getTeacherByAge(2,30,40,999,1,1)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(2,30,40,999,1,1)->count():0}}
 
                         </td>
 
@@ -2008,30 +2140,30 @@
                         <td>người</td>
                         <td>162</td>
                         <td  title="Tổng số">
-                            {{$teachers->first()->getTeacherByAge(2,40,50)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(2,40,50)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc không xác định thời hạn">
-                                {{$teachers->first()->getTeacherByAge(2,40,50,1)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(2,40,50,1)->count():0}}
 
                         </td>
                         <td  title="Hợp đồng làm việc xác định thời hạn">
-                                {{$teachers->first()->getTeacherByAge(2,40,50,2)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(2,40,50,2)->count():0}}
 
                         </td>
                         <td  title="Hợp đồng lao động">
-                                {{$teachers->first()->getTeacherByAge(2,40,50,3)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(2,40,50,3)->count():0}}
 
                         </td>
                         <td   title="Tổng số Nữ">
-                                {{$teachers->first()->getTeacherByAge(2,40,50,999,1)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(2,40,50,999,1)->count():0}}
 
                         </td>
                         <td  title="Tổng số dân tộc thiểu số">
-                                {{$teachers->first()->getTeacherByAge(2,40,50,999,999,1)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(2,40,50,999,999,1)->count():0}}
 
                         </td>
                         <td  title="Tổng số Nữ dân tộc thiểu số">
-                                {{$teachers->first()->getTeacherByAge(2,40,50,999,1,1)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(2,40,50,999,1,1)->count():0}}
 
                         </td>
 
@@ -2042,30 +2174,30 @@
                         <td>người</td>
                         <td>163</td>
                         <td  title="Tổng số">
-                            {{$teachers->first()->getTeacherByAge(2,50,60)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(2,50,60)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc không xác định thời hạn">
-                                {{$teachers->first()->getTeacherByAge(2,50,60,1)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(2,50,60,1)->count():0}}
 
                         </td>
                         <td  title="Hợp đồng làm việc xác định thời hạn">
-                            {{$teachers->first()->getTeacherByAge(2,50,60,2)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(2,50,60,2)->count():0}}
 
                         </td>
                         <td  title="Hợp đồng lao động">
-                            {{$teachers->first()->getTeacherByAge(2,50,60,3)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(2,50,60,3)->count():0}}
 
                         </td>
                         <td   title="Tổng số Nữ">
-                            {{$teachers->first()->getTeacherByAge(2,50,60,999,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(2,50,60,999,1)->count():0}}
 
                         </td>
                         <td  title="Tổng số dân tộc thiểu số">
-                            {{$teachers->first()->getTeacherByAge(2,50,60,999,999,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(2,50,60,999,999,1)->count():0}}
 
                         </td>
                         <td  title="Tổng số Nữ dân tộc thiểu số">
-                            {{$teachers->first()->getTeacherByAge(2,50,60,999,1,1)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(2,50,60,999,1,1)->count():0}}
 
                         </td>
 
@@ -2077,30 +2209,30 @@
                         <td>người</td>
                         <td>164</td>
                         <td  title="Tổng số">
-                            {{$teachers->first()->getTeacherByAge(2,60,150)->count()}}
+                            {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(2,60,150)->count():0}}
                         </td>
                         <td  title="Hợp đồng làm việc không xác định thời hạn">
-                                {{$teachers->first()->getTeacherByAge(2,60,150,1)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(2,60,150,1)->count():0}}
 
                         </td>
                         <td  title="Hợp đồng làm việc xác định thời hạn">
-                                {{$teachers->first()->getTeacherByAge(2,60,150,2)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(2,60,150,2)->count():0}}
 
                         </td>
                         <td  title="Hợp đồng lao động">
-                                {{$teachers->first()->getTeacherByAge(2,60,150,3)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(2,60,150,3)->count():0}}
 
                         </td>
                         <td   title="Tổng số Nữ">
-                                {{$teachers->first()->getTeacherByAge(2,60,150,999,1)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(2,60,150,999,1)->count():0}}
 
                         </td>
                         <td  title="Tổng số dân tộc thiểu số">
-                                {{$teachers->first()->getTeacherByAge(2,60,150,999,999,1)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(2,60,150,999,999,1)->count():0}}
 
                         </td>
                         <td  title="Tổng số Nữ dân tộc thiểu số">
-                                {{$teachers->first()->getTeacherByAge(2,60,150,999,1,1)->count()}}
+                                {{$teachers->first() != null ? $teachers->first()->getTeacherByAge(2,60,150,999,1,1)->count():0}}
 
                         </td>
 
